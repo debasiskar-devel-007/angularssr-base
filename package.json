@@ -38,6 +38,7 @@
     "rxjs": "~6.3.3",
     "ts-loader": "^6.0.4",
     "tslib": "^1.9.0",
+    "webpack": "^4.35.3",
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
