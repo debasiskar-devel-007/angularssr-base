@@ -1,3 +1,96 @@
-<p>
-  contactus works!
-</p>
+<mat-card class="topbannerblock contactbannerwrapper">
+  <app-header></app-header>
+  <mat-card-content class="maincontainer bannertextwrapper">
+    <h1>Contact us</h1>
+
+  </mat-card-content>
+</mat-card>
+
+
+<mat-card class=" contact_body">
+
+  <mat-card-content class="contact_wrapper">
+    <h2>Contact us</h2>
+    <form [formGroup]="myform" (submit)="doSubmit()">
+      <mat-card-subtitle>
+        <p>Name<span>*</span></p>
+        <mat-form-field>
+          <input matInput placeholder="First Name"  [formControl]="myform.controls['firstname']" (blur)="inputUntouch(myform,'firstname')">
+          <mat-error  *ngIf="!myform.controls['firstname'].valid && myform.controls['firstname'].touched" class="errortext">First Name is required</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="Last Name"  [formControl]="myform.controls['lastname']" (blur)="inputUntouch(myform,'lastname')">
+          <mat-error  *ngIf="!myform.controls['lastname'].valid && myform.controls['lastname'].touched" class="errortext">Last Name is required</mat-error>
+        </mat-form-field>
+      </mat-card-subtitle>
+      <mat-card-subtitle>
+        <p>Address<span>*</span></p>
+        <mat-form-field >
+          <textarea matInput placeholder="Line 1"  [formControl]="myform.controls['address']" (blur)="inputUntouch(myform,'address')"></textarea>
+          <mat-error  *ngIf="!myform.controls['address'].valid && myform.controls['address'].touched" class="errortext">Address is required</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+          <input matInput placeholder="City"  [formControl]="myform.controls['city']" (blur)="inputUntouch(myform,'city')">
+          <mat-error  *ngIf="!myform.controls['city'].valid && myform.controls['city'].touched" class="errortext">City is required</mat-error>
+        </mat-form-field>
+
+        <!-- <mat-form-field>
+
+
+          <input matInput placeholder="State"  [formControl]="myform.controls['state']" (blur)="inputUntouch(myform,'state')">
+          <mat-error  *ngIf="!myform.controls['state'].valid && myform.controls['state'].touched" class="errortext">State is required</mat-error>
+
+        </mat-form-field> -->
+        <mat-form-field>
+          <mat-label>State</mat-label>
+          <mat-select  placeholder="Select State"  [formControl]="myform.controls['state']" >
+            <mat-option *ngFor="let item of stateslist" value="{{item.abbreviation}}">{{item.name}}</mat-option>
+          </mat-select>
+          <mat-error  *ngIf="!myform.controls['state'].valid && myform.controls['state'].touched">State is required</mat-error>
+        </mat-form-field>
+
+        <mat-form-field>
+          <input matInput placeholder="Zip Code"  [formControl]="myform.controls['zipcode']" (blur)="inputUntouch(myform,'zipcode')">
+          <mat-error  *ngIf="!myform.controls['zipcode'].valid && myform.controls['zipcode'].touched" class="errortext">Zip Code is required</mat-error>
+        </mat-form-field>
+        <mat-form-field>
+
+          <input matInput placeholder="Country"  [formControl]="myform.controls['country']" (blur)="inputUntouch(myform,'country')">
+          <mat-error  *ngIf="!myform.controls['country'].valid && myform.controls['country'].touched" class="errortext">Country is required</mat-error>
+        </mat-form-field>
+
+      </mat-card-subtitle>
+
+      <mat-card-subtitle>
+        <p>Phone Number<span>*</span>
+        <mat-form-field>
+          <input matInput   [formControl]="myform.controls['telephone']" (blur)="inputUntouch(myform,'telephone')" placeholder="Phone Number">
+          <mat-error  *ngIf="!myform.controls['telephone'].valid && myform.controls['telephone'].touched" class="errortext">Phone Number is required</mat-error>
+        </mat-form-field>
+      </mat-card-subtitle>
+
+      <mat-card-subtitle>
+        <p>Email<span>*</span></p>
+        <mat-form-field>
+          <input matInput   [formControl]="myform.controls['email']" (blur)="inputUntouch(myform,'email')" placeholder="Email">
+          <mat-error  *ngIf="!myform.controls['email'].valid && myform.controls['email'].touched" class="errortext">Email Number is required</mat-error>
+        </mat-form-field>
+      </mat-card-subtitle>
+
+
+      <mat-card-subtitle class="commentsubtitle">
+        <p>Comment<span>*</span></p>
+        <mat-form-field >
+          <textarea matInput [formControl]="myform.controls['message']" (blur)="inputUntouch(myform,'message')"  placeholder="Message"></textarea>
+          <mat-error  *ngIf="!myform.controls['message'].valid && myform.controls['message'].touched" class="errortext">Message is required</mat-error>
+        </mat-form-field>
+      </mat-card-subtitle>
+
+
+      <button mat-button class="contactsubbtn">Submit</button>
+    </form>
+
+  </mat-card-content>
+</mat-card>
+
+<app-footer></app-footer>

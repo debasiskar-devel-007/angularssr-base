@@ -1,29 +1,25 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { MetaGuard } from '@ngx-meta/core';
+import {HomeComponent} from "./home/home.component";
+import {FooterComponent} from "./footer/footer.component";
+import {PortfolioComponent} from "./portfolio/portfolio.component";
+import {InvestorsComponent} from "./investors/investors.component";
+import {ContactusComponent} from "./contactus/contactus.component";
+import {AboutComponent} from "./about/about.component";
+import {RepresentationComponent} from "./representation/representation.component";
 
-
-import { AboutusComponent } from './aboutus/aboutus.component';
-import { ContactusComponent } from './contactus/contactus.component';
-
-const appRoutes: Routes = [
-  { path: 'about', component: AboutusComponent,data: {
-      meta: {
-          title: 'About US',
-          description: 'Have you seen my rubber duckie?'
-      }
-  } },
-  { path: 'contact',      component: ContactusComponent,
-      data: {
-          meta: {
-              title: 'Contact Us',
-              description: 'Have you seen my rubber duckie?'
-          }
-      }}
+const routes: Routes = [
+  {path:'', component: HomeComponent},
+  {path:'footer', component: FooterComponent},
+  {path:'portfolio', component: PortfolioComponent},
+  {path:'investors', component: InvestorsComponent},
+  {path:'contactus', component: ContactusComponent},
+  {path:'aboutus', component: AboutComponent},
+  {path:'representation', component: RepresentationComponent}
 ];
 
 @NgModule({
-  imports: [RouterModule.forRoot(appRoutes)],
+  imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
 export class AppRoutingModule { }

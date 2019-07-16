@@ -1,0 +1,44 @@
+
+<mat-card class="footer">
+  <mat-card-content class="maincontainer-fluid">
+    <mat-list class="footerlistwrapper">
+      <mat-list-item class="footersubblock footersubblock1 ">
+        <img src="../../assets/images/logo.png">
+      </mat-list-item>
+      <mat-list-item class="footersubblock footersubblock2 ">
+        <mat-card-title>Uta </mat-card-title>
+        <mat-list class="footermenu">
+          <mat-list-item [ngClass]="router.url === '/' ? 'active' : ''" ><a [routerLink]="['/']">Home</a></mat-list-item>
+          <mat-list-item [ngClass]="router.url === '/aboutus' ? 'active' : ''" ><a [routerLink]="['/aboutus']">About Wirthlin</a></mat-list-item>
+          <mat-list-item [ngClass]="router.url === '/portfolio' ? 'active' : ''" ><a [routerLink]="['/portfolio']">Prospects</a></mat-list-item>
+          <!--<mat-list-item [ngClass]="router.url === '/investors' ? 'active' : ''" ><a [routerLink]="['/investors']">Investors</a></mat-list-item>-->
+          <mat-list-item [ngClass]="router.url === '/representation' ? 'active' : ''" ><a [routerLink]="['/representation']">Representation</a></mat-list-item>
+          <mat-list-item [ngClass]="router.url === '/contactus' ? 'active' : ''" ><a [routerLink]="['/contactus']">Contact</a></mat-list-item>
+        </mat-list>
+      </mat-list-item>
+     <!-- <mat-list-item class="footersubblock footersubblock3">
+        <mat-card-title>Custmor  Help</mat-card-title>
+        <mat-list class="footermenu">
+          <mat-list-item><a href="">Support</a></mat-list-item>
+          <mat-list-item><a href="">Exchanges and Returns</a></mat-list-item>
+          <mat-list-item><a href="">Trms</a></mat-list-item>
+          <mat-list-item><a href="">FAQs</a></mat-list-item>
+          <mat-list-item><a href="">Privacy Policy</a></mat-list-item>
+          <mat-list-item><a href="">Shipping</a></mat-list-item>
+        </mat-list>
+      </mat-list-item>-->
+      <!--<mat-list-item class="footersubblock footersubblock4">
+        <mat-card-title>Contact us <a href="javascript:void(0)"><img src="../../assets/images/ficon.png"> </a> <a href="javascript:void(0)"> <img src="../../assets/images/ticon.png"> </a> </mat-card-title>
+        <mat-list class="footermenu">
+          <mat-list-item><strong><a href="">You can email Support.</a></strong></mat-list-item>
+          <mat-list-item><a href="">Subscribe to our newsletter</a></mat-list-item>
+          <a href="mailto:email@address.com"  class="blackbrnwrapper"><button class="blackbtn">email@address.com</button></a>
+        </mat-list>
+      </mat-list-item>-->
+      <mat-list-item class="footersubblock footersubblock5"  *ngIf="isShow" (click)="gotoTop()">
+        <a href="javascript:void(0)"><img src="../../assets/images/backtotop.png"></a>
+      </mat-list-item>
+    </mat-list>
+
+  </mat-card-content>
+</mat-card>
