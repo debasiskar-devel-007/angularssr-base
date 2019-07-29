@@ -6,6 +6,7 @@ import { AppComponent } from './app.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import { ContactusComponent } from './contactus/contactus.component';
 import { MetaModule } from '@ngx-meta/core';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,7 @@ import { MetaModule } from '@ngx-meta/core';
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
-    AppRoutingModule,MetaModule.forRoot()
+    AppRoutingModule,MetaModule.forRoot(), BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
