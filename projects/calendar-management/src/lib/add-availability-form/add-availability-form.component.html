@@ -1,0 +1,107 @@
+<mat-card>
+  <mat-card-header>
+    <h2 color="primary">Add/Edit Availability</h2>
+  </mat-card-header>
+  <span class="formspan">
+    <mat-card-content class="example-container">
+      <form class="example-form" #form="ngForm" [formGroup]="addAvailiabiltyForm" >
+
+        <mat-form-field class="example-full-width">
+
+          <input matInput placeholder="Event Title" formControlName="event_title" id="event_title"
+            (blur)="inputUntouch(addAvailiabiltyForm,'event_title')">
+          <!-- <mat-hint align="end">Not more then 60 characters long.</mat-hint> -->
+          <mat-error
+            *ngIf="!addAvailiabiltyForm.controls['event_title'].valid && addAvailiabiltyForm.controls['event_title'].touched  && addAvailiabiltyForm.controls['event_title'].errors && addAvailiabiltyForm.controls['event_title'].errors.required">
+            Event Name is required</mat-error>
+          <!-- <p>{{addAvailiabiltyForm.controls['event_title'].errors.required}}</p>
+          <mat-error *ngIf="addAvailiabiltyForm.controls['event_title'].touched  addAvailiabiltyForm.controls['event_title'].required">Name is required</mat-error>
+          <mat-error *ngIf="addAvailiabiltyForm.controls['event_title'].touched && addAvailiabiltyForm.controls['event_title'].maxLength">You have more than 60 characters</mat-error> -->
+        </mat-form-field>
+        <mat-form-field>
+          <!-- <p>Start Date</p> -->
+          <input matInput [matDatepicker]="picker1" placeholder="Choose a Start Date of Availability"
+            formControlName="start_date" id="start_date" readonly (click)="picker1.open()"
+            (blur)="inputUntouch(addAvailiabiltyForm,'start_date')">
+          <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+          <mat-datepicker #picker1></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field>
+          <!-- <p>End Date</p> -->
+          <input matInput [matDatepicker]="picker2" placeholder="Choose a End Date of Availability"
+            formControlName="end_date" id="start_date" readonly (click)="picker2.open()"
+            (blur)="inputUntouch(addAvailiabiltyForm,'end_date')">
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+
+        <!-- <mat-form-field> -->
+        <div class="form-field-span">
+          <p>Available Week Days</p>
+          <mat-checkbox formControlName="Sun"(change)="checkboxErrorChange('Sun')" (blur)="inputUntouch(addAvailiabiltyForm,'Sun')">Sun</mat-checkbox>
+          <mat-checkbox formControlName="Mon" (blur)="inputUntouch(addAvailiabiltyForm,'Mon')">Mon</mat-checkbox>
+          <mat-checkbox formControlName="Tues" (blur)="inputUntouch(addAvailiabiltyForm,'Tues')">Tues</mat-checkbox>
+          <mat-checkbox formControlName="Wed" (blur)="inputUntouch(addAvailiabiltyForm,'Wed')">Wed</mat-checkbox>
+          <mat-checkbox formControlName="Thurs" (blur)="inputUntouch(addAvailiabiltyForm,'Thurs')">Thurs</mat-checkbox>
+          <mat-checkbox formControlName="Fri" (blur)="inputUntouch(addAvailiabiltyForm,'Fri')">Fri</mat-checkbox>
+          <mat-checkbox formControlName="Sat" (blur)="inputUntouch(addAvailiabiltyForm,'Sat')">Sat</mat-checkbox>
+          <mat-error *ngIf="weekdaysErrorText==true">Week days are required!</mat-error>
+        </div>
+        <!-- </mat-form-field> -->
+        <!-- <mat-form-field> -->
+        <div class="form-field-span">
+          <p>Time Span</p>
+          <mat-radio-group formControlName="timespan" aria-label="Select an Time Span">
+            <mat-radio-button value="30">30 Minutes</mat-radio-button>
+            <mat-radio-button value="60">60 Minutes</mat-radio-button>
+            <mat-error
+              *ngIf="!addAvailiabiltyForm.controls['timespan'].valid  && addAvailiabiltyForm.controls['timespan'].touched && addAvailiabiltyForm.controls['timespan'].errors && addAvailiabiltyForm.controls['timespan'].errors.required">
+              Time Span is required!</mat-error>
+          </mat-radio-group>
+        </div>
+        <!-- </mat-form-field> -->
+        <mat-form-field>
+          <p>Time zone</p>
+          <mat-select formControlName="timezone" (blur)="inputUntouch(addAvailiabiltyForm,'timezone')">
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let item of timezone_arr" [value]="item.value">
+              {{item.name}}
+            </mat-option>
+            <!-- <mat-option [value]="timezone1">
+                          timezone1
+                      </mat-option>
+                      <mat-option [value]="timezone2">
+                          timezone2
+                      </mat-option>
+                      <mat-option [value]="timezone3">
+                          timezone3
+                      </mat-option> -->
+          </mat-select>
+          <mat-error>Please choose an timezone!</mat-error>
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <textarea matInput formControlName="event_details" id="event_details" placeholder="Event Details"
+            (blur)="inputUntouch(addAvailiabiltyForm,'event_details')"></textarea>
+          <mat-hint align="end">Not more then 60 characters long.</mat-hint>
+          <mat-error>Event Details is required!</mat-error>
+        </mat-form-field>
+        <div class="form-field-span">
+        <material-timepicker color="primary" label="Start Time" [userTime]="exportTime1"
+          (change)="onChangeHour1($event)" revertLabel="Remove" submitLabel="Ok"></material-timepicker>
+        <mat-error *ngIf="addAvailiabiltyForm.controls['start_time'].value==false">Start Time is required!</mat-error>
+        </div>
+        <div class="form-field-span">
+        <material-timepicker color="primary" label="End Time" [userTime]="exportTime2" (change)="onChangeHour2($event)"
+          revertLabel="Remove" submitLabel="Ok"></material-timepicker>
+        <mat-error *ngIf="addAvailiabiltyForm.controls['end_time'].value==false">End Time is required!</mat-error>
+      </div>
+        
+          <button mat-raised-button color="primary" (click)="createEvent(addAvailiabiltyForm.value)">Submit</button>
+          <button mat-raised-button color="primary" (click)="demoApiserviceCall()">Test </button>
+          <button mat-raised-button color="primary" (click)="resetForm()">Reset</button>
+        
+      </form>
+    </mat-card-content>
+  </span>
+</mat-card>

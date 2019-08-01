@@ -1,0 +1,30 @@
+<mat-card >
+  <mat-toolbar color="primary">
+  <h2 class="headerSpan">Manage Availability</h2>
+</mat-toolbar>
+<!-- <mat-card-content class="gridListWrapper">
+<mat-grid-list cols="2" rowHeight="10px">
+<mat-grid-tile [colspan]="cols" [rowspan]="rows">1</mat-grid-tile>
+<mat-grid-tile [colspan]="cols" [rowspan]="rows">2</mat-grid-tile>
+</mat-grid-list>
+</mat-card-content> -->
+<mat-toolbar class="buttonsetToolbar" >
+<button class="singleButton" mat-raised-button color="primary"> Sync with Google Calendar </button>
+<button class="singleButton" mat-raised-button color="primary"> Add or update calendar settings </button>
+<button class="singleButton" mat-raised-button color="primary"> Slot View </button> 
+<button class="singleButton" mat-raised-button color="primary" (click)="gotoAvailability()"> Add Availability </button> 
+</mat-toolbar>
+<mat-card-content>
+  <!-- <lib-listing class="formfilterdiv formfilterdivnew" *ngIf="(slotlist.length>0)"
+    [datasource]="slotlist"
+    [skip]="slotlist_skip"
+    [modify_header_array]="slotlist_modify_header"
+    [sourcedata]="slotlist_collection"
+    [statusarr]="slotlist_status_array"
+    [apiurl]="apiurl"
+    [updateendpoint]="updateurl"
+    [editroute]="editroute1"
+    [deleteendpoint]="deleteval"></lib-listing> -->
+
+</mat-card-content>
+</mat-card>

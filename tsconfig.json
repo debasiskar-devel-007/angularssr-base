@@ -17,6 +17,26 @@
     "lib": [
       "es2018",
       "dom"
-    ]
+    ],
+    "paths": {
+      "calenderlib": [
+        "dist/calenderlib"
+      ],
+      "calenderlib/*": [
+        "dist/calenderlib/*"
+      ],
+      "calender-manage-lib": [
+        "dist/calender-manage-lib"
+      ],
+      "calender-manage-lib/*": [
+        "dist/calender-manage-lib/*"
+      ],
+      "calendar-management": [
+        "dist/calendar-management"
+      ],
+      "calendar-management/*": [
+        "dist/calendar-management/*"
+      ]
+    }
   }
 }

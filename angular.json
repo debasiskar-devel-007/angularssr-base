@@ -155,6 +155,369 @@
           }
         }
       }
+    },
+    "calenderlib": {
+      "root": "projects/calenderlib",
+      "sourceRoot": "projects/calenderlib/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/calenderlib/tsconfig.lib.json",
+            "project": "projects/calenderlib/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/calenderlib/src/test.ts",
+            "tsConfig": "projects/calenderlib/tsconfig.spec.json",
+            "karmaConfig": "projects/calenderlib/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/calenderlib/tsconfig.lib.json",
+              "projects/calenderlib/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "calendertestapp": {
+      "root": "projects/calendertestapp/",
+      "sourceRoot": "projects/calendertestapp/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/calendertestapp",
+            "index": "projects/calendertestapp/src/index.html",
+            "main": "projects/calendertestapp/src/main.ts",
+            "polyfills": "projects/calendertestapp/src/polyfills.ts",
+            "tsConfig": "projects/calendertestapp/tsconfig.app.json",
+            "assets": [
+              "projects/calendertestapp/src/favicon.ico",
+              "projects/calendertestapp/src/assets"
+            ],
+            "styles": [
+              "projects/calendertestapp/src/styles.css"
+            ],
+            "scripts": [],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/calendertestapp/src/environments/environment.ts",
+                  "with": "projects/calendertestapp/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "calendertestapp:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "calendertestapp:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "calendertestapp:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/calendertestapp/src/test.ts",
+            "polyfills": "projects/calendertestapp/src/polyfills.ts",
+            "tsConfig": "projects/calendertestapp/tsconfig.spec.json",
+            "karmaConfig": "projects/calendertestapp/karma.conf.js",
+            "styles": [
+              "projects/calendertestapp/src/styles.css"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/calendertestapp/src/favicon.ico",
+              "projects/calendertestapp/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/calendertestapp/tsconfig.app.json",
+              "projects/calendertestapp/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "calendertestapp-e2e": {
+      "root": "projects/calendertestapp-e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/calendertestapp-e2e/protractor.conf.js",
+            "devServerTarget": "calendertestapp:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "calendertestapp:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "projects/calendertestapp-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "calender-manage-lib": {
+      "root": "projects/calender-manage-lib",
+      "sourceRoot": "projects/calender-manage-lib/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/calender-manage-lib/tsconfig.lib.json",
+            "project": "projects/calender-manage-lib/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/calender-manage-lib/src/test.ts",
+            "tsConfig": "projects/calender-manage-lib/tsconfig.spec.json",
+            "karmaConfig": "projects/calender-manage-lib/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/calender-manage-lib/tsconfig.lib.json",
+              "projects/calender-manage-lib/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "demoApp": {
+      "root": "projects/demoApp/",
+      "sourceRoot": "projects/demoApp/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/demoApp",
+            "index": "projects/demoApp/src/index.html",
+            "main": "projects/demoApp/src/main.ts",
+            "polyfills": "projects/demoApp/src/polyfills.ts",
+            "tsConfig": "projects/demoApp/tsconfig.app.json",
+            "assets": [
+              "projects/demoApp/src/favicon.ico",
+              "projects/demoApp/src/assets"
+            ],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "projects/demoApp/src/styles.css"
+            ],
+            "scripts": [],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/demoApp/src/environments/environment.ts",
+                  "with": "projects/demoApp/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "demoApp:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "demoApp:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "demoApp:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/demoApp/src/test.ts",
+            "polyfills": "projects/demoApp/src/polyfills.ts",
+            "tsConfig": "projects/demoApp/tsconfig.spec.json",
+            "karmaConfig": "projects/demoApp/karma.conf.js",
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
+              "projects/demoApp/src/styles.css"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/demoApp/src/favicon.ico",
+              "projects/demoApp/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/demoApp/tsconfig.app.json",
+              "projects/demoApp/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "demoApp-e2e": {
+      "root": "projects/demoApp-e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/demoApp-e2e/protractor.conf.js",
+            "devServerTarget": "demoApp:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "demoApp:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "projects/demoApp-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "calendar-management": {
+      "root": "projects/calendar-management",
+      "sourceRoot": "projects/calendar-management/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/calendar-management/tsconfig.lib.json",
+            "project": "projects/calendar-management/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/calendar-management/src/test.ts",
+            "tsConfig": "projects/calendar-management/tsconfig.spec.json",
+            "karmaConfig": "projects/calendar-management/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/calendar-management/tsconfig.lib.json",
+              "projects/calendar-management/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "angularssr"
