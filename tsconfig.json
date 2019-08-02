@@ -24,6 +24,12 @@
       ],
       "on-page-editor/*": [
         "dist/on-page-editor/*"
+      ],
+      "myteam": [
+        "dist/myteam"
+      ],
+      "myteam/*": [
+        "dist/myteam/*"
       ]
     }
   }

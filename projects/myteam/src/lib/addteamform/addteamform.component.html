@@ -1,0 +1,65 @@
+<mat-card>
+  <mat-toolbar color="primary" style="justify-content: center; align-items: center;">
+    <h2 class="headerSpan">Add Team Member</h2>
+  </mat-toolbar>
+</mat-card>
+
+<form class="main-class" novalidate [formGroup]="teamForm">
+  <div class="example-container">
+
+    <mat-form-field>
+      <input matInput type="text" placeholder="Category/Role" [formControl]="teamForm.controls['category']" (blur)="inputUntouch(teamForm,'category')">
+      <mat-error *ngIf="teamForm.controls['category'].touched && !teamForm.controls['category'].valid && teamForm.controls['category'].errors.required">
+        Category/Role field can not be blank</mat-error>
+    </mat-form-field>
+
+  
+      <mat-form-field>
+         <textarea matInput placeholder="image"></textarea>
+       </mat-form-field>
+
+    <mat-form-field> 
+      <textarea matInput placeholder="Description" [formControl]="teamForm.controls['description']" (blur)="inputUntouch(teamForm,'description')">
+             </textarea>
+      <mat-error *ngIf="teamForm.controls['description'].touched && !teamForm.controls['description'].valid && teamForm.controls['description'].errors.required">
+        Description field can not be blank</mat-error>
+    </mat-form-field>
+
+    <span formArrayName="mutiplephone">
+    <mat-form-field *ngFor="let item of mutiplephone.controls; let i=index" [formGroupName]="i">
+        <input matInput placeholder="Phone"  [formControl]="teamForm.controls['phone']"
+        (blur)="inputUntouch(teamForm,'phone')">
+    
+      <mat-error *ngIf="teamForm.controls['phone'].touched  &&!teamForm.controls['phone'].valid && teamForm.controls['phone'].errors.required">
+        Phone field can not be blank</mat-error>
+        <span matSuffix>
+            <i class="material-icons" (click)="addphone()"  >add</i>
+            <i *ngIf="i>0" class="material-icons" (click)="removephone(i)" >remove</i>
+          </span>   
+    </mat-form-field><br>
+  </span>
+
+
+  <span formArrayName="multipleemail">
+    <mat-form-field *ngFor="let item of multipleemail.controls; let i=index" [formGroupName]="i">
+      <input matInput placeholder="E-mail" [formControl]="teamForm.controls['email']"
+        (blur)="inputUntouch(teamForm,'email')">
+        <mat-error
+        *ngIf="teamForm.controls['email'].touched && !teamForm.controls['email'].valid && teamForm.controls['email'].errors.required">
+        E-mail field can not be blank</mat-error>
+      <mat-error
+        *ngIf="!teamForm.controls['email'].valid && !teamForm.controls['email'].errors.required">
+        E-mail is not valid</mat-error>
+        <span matSuffix>
+            <i class="material-icons"  (click)="addemail()"  >add</i>
+            <i *ngIf="i>0" class="material-icons" (click)="removeemail(i)">remove</i>
+          </span>      
+    </mat-form-field>
+  </span>
+
+
+
+  </div>
+  <button mat-button class="submitbtn" type="submit">Submit</button>
+
+</form>
