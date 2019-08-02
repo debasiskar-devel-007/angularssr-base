@@ -7,6 +7,7 @@ import { ManageAvailabiltyComponent } from './manage-availabilty/manage-availabi
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { HomepageComponent } from './homepage/homepage.component';
+import { ListingModule } from 'listing-angular7';
 @NgModule({
   declarations: [
     AppComponent,
@@ -18,7 +19,8 @@ import { HomepageComponent } from './homepage/homepage.component';
     CalendarManagementModule,
     DemoMaterialModule,
     BrowserAnimationsModule,
-    AppRoutingModule
+    AppRoutingModule,
+    ListingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

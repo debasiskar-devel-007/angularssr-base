@@ -21,6 +21,13 @@ export class CalendarManagementComponent implements OnInit {
   rows: number=1;
   public slotlist:any= [];
   public serverUrlData:any;
+  public addEndpointData:any;
+  public updateEndpointData:any;
+  public deleteSingleEndpointData:any;
+  public deleteMultipleEndpointData:any;
+  public statusSingleUpdateEndpointData:any;
+  public statusMultipleUpdateEndpointData:any;
+  
   public addAvailURL:any='';      // url variable to fetch the add availability form page
   @Input()          //setting the add form url from project
   set addAvailData(addAvailurlval: any) {
@@ -34,6 +41,36 @@ export class CalendarManagementComponent implements OnInit {
     console.log('serverUrlval');
     console.log(serverUrlval);
 
+  }
+  @Input()          //setting the server url from project
+  set addEndpoint(endpointUrlval: any) {
+    this.addEndpointData = (endpointUrlval) || '<no name set>';
+    this.addEndpointData = endpointUrlval;
+  }
+  @Input()          //setting the server url from project
+  set updateEndpoint(endpointUrlval: any) {
+    this.updateEndpointData = (endpointUrlval) || '<no name set>';
+    this.updateEndpointData = endpointUrlval;
+  }
+  @Input()          //setting the server url from project
+  set deleteSingleEndpoint(endpointUrlval: any) {
+    this.deleteSingleEndpointData = (endpointUrlval) || '<no name set>';
+    this.deleteSingleEndpointData = endpointUrlval;
+  }
+  @Input()          //setting the server url from project
+  set deleteMultipleEndpoint(endpointUrlval: any) {
+    this.deleteMultipleEndpointData = (endpointUrlval) || '<no name set>';
+    this.deleteMultipleEndpointData = endpointUrlval;
+  }
+  @Input()          //setting the server url from project
+  set statusSingleUpdateEndpoint(endpointUrlval: any) {
+    this.statusSingleUpdateEndpointData = (endpointUrlval) || '<no name set>';
+    this.statusSingleUpdateEndpointData = endpointUrlval;
+  }
+  @Input()          //setting the server url from project
+  set statusMultipleUpdateEndpoint(endpointUrlval: any) {
+    this.statusMultipleUpdateEndpointData = (endpointUrlval) || '<no name set>';
+    this.statusMultipleUpdateEndpointData = endpointUrlval;
   }
 
   slotlist_skip:any=["_id", "phone", "username", "password", "address", "address2", "city", "state", "zip", "rsvp", "signupaffiliate","admin", "agreement", "noofclick", "mediaid", "gender", "ambassador", "dancer", "model", "musicians", "fan", "accesscode", "lastactivetime", "agreement_time", "sign", "commission","unixtime","fullname","children"];
@@ -49,44 +86,6 @@ export class CalendarManagementComponent implements OnInit {
 
   constructor(public dialog: MatDialog, public router:Router , public apiservice: ApiService) {
     
-  //   this.slotlist= [
-  //     {
-  //     "id": 1,
-  //     "description": "Test Event 1",
-  //     "end_date": "2019-07-19",
-  //     "end_time": "14:00",
-  //     "meetingwith": "Meeting with T",
-  //     "start_date": "2019-07-01",
-  //     "start_time": "10:00",
-  //     "timespan": "30",
-  //     "timezone": "-08:00|America/Los_Angeles",
-  //     "userid": "5c9b05bed69f4b52413626cf"
-  //     },
-  //     {
-  //     "id": 2,
-  //     "description": "Test Event 2",
-  //     "end_date": "2019-07-20",
-  //     "end_time": "14:00",
-  //     "meetingwith": "Meeting with T",
-  //     "start_date": "2019-07-08",
-  //     "start_time": "10:00",
-  //     "timespan": "60",
-  //     "timezone": "-07:00|America/Los_Angeles",
-  //     "userid": "5c9b05bed69f4b52413626cf"
-  //     },
-  //     {
-  //     "id": 3,
-  //     "description": "Test Event 3",
-  //     "end_date": "2019-08-01",
-  //     "end_time": "14:00",
-  //     "meetingwith": "Meeting with T",
-  //     "start_date": "2019-07-05",
-  //     "start_time": "10:00",
-  //     "timespan": "60",
-  //     "timezone": "-07:00|America/Los_Angeles",
-  //     "userid": "5c9b05bed69f4b52413626cf"
-  //     }
-  //     ]
    }
 
   ngOnInit() {
@@ -96,6 +95,27 @@ export class CalendarManagementComponent implements OnInit {
     setTimeout(() => {
       this.apiservice.setServerUrl(this.serverUrlData);
     }, 50);
+    this.apiservice.clearServerUrl();
+    setTimeout(() => {
+      this.apiservice.setServerUrl(this.serverUrlData);
+    }, 50);
+    this.apiservice.clearServerUrl();
+    setTimeout(() => {
+      this.apiservice.setServerUrl(this.serverUrlData);
+    }, 50);
+    this.apiservice.clearServerUrl();
+    setTimeout(() => {
+      this.apiservice.setServerUrl(this.serverUrlData);
+    }, 50);
+    this.apiservice.clearServerUrl();
+    setTimeout(() => {
+      this.apiservice.setServerUrl(this.serverUrlData);
+    }, 50);
+    this.apiservice.clearServerUrl();
+    setTimeout(() => {
+      this.apiservice.setServerUrl(this.serverUrlData);
+    }, 50);
+    
     setTimeout(()=>{
       this.getSlotList();
     },100);

@@ -12,6 +12,7 @@ import {DemoMaterialModule} from './material-module';
 
 import {  ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { ListingModule } from 'listing-angular7';
 
 @NgModule({
   declarations: [
@@ -25,6 +26,7 @@ import { HttpClientModule } from '@angular/common/http';
     DemoMaterialModule,
     ReactiveFormsModule,
     HttpClientModule,
+    ListingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

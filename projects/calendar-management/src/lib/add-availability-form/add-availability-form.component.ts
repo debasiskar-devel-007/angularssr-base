@@ -68,7 +68,8 @@ export class AddAvailabilityFormComponent implements OnInit {
       timezone: ["", Validators.required],
       event_details: ["", Validators.required],
       start_time: [null],
-      end_time: [null]
+      end_time: [null],
+      status: [1],
 
     });
     console.log(this.serverUrlData);
@@ -195,6 +196,9 @@ export class AddAvailabilityFormComponent implements OnInit {
     let data: any = {};
     let data2: any = {};
     let data3: any = {};
+    let data4: any = {};
+    let data5: any = {};
+    let data6: any = {};
     data = {
       "source": "events",
       "data": {
@@ -224,6 +228,28 @@ export class AddAvailabilityFormComponent implements OnInit {
       "source": "events",
       "id":"5d4292f3f2b9d895194cb496"
     };
+    data4 = {
+      "source":"events",
+      "ids":["5d4164aaf2b9d895194cb492",
+      "5d416ab9f2b9d895194cb495"]
+    };
+    data5 = {
+      "source": "events",
+      "data": {
+          "id": "5d42b2a4d6e714834032bdbe",
+          "status": 0
+      }
+  };
+data6 ={
+  "source": "events",
+  "data": {
+      "ids": [
+          "5d43d1ef130477c404332914",
+          "5d43ce38130477c404332913"
+      ],
+      "val":0
+  }
+};
     // this.apiservice.addOrEditData(data).subscribe(res => {
     //   console.log(res);
     //   let resp :any;
@@ -238,14 +264,31 @@ export class AddAvailabilityFormComponent implements OnInit {
     //   console.log('result in getDataFunction');
     //   console.log(resp);
     // });
-    this.apiservice.deleteSingleData(data3).subscribe(res => {
-      console.log(res);
-      let resp: any;
-      resp = res;
-      console.log('result in deleteSingleData');
-      console.log(resp);
-    });
-  }
+    // this.apiservice.deleteSingleData(data3).subscribe(res => {
+    //   console.log(res);
+    //   let resp: any;
+    //   resp = res;
+    //   console.log('result in deleteSingleData');
+    //   console.log(resp);
+    // });
+  //   this.apiservice.deleteMultipleData(data4).subscribe(res => {
+  //     console.log(res);
+  //     let resp: any;
+  //     resp = res;
+  //     console.log('result in deleteSingleData');
+  //     console.log(resp);
+  //   });
+  // }
+  this.apiservice.UpdateStatusForMultipleData(data5).subscribe(res => {
+    console.log(res);
+    let resp: any;
+    resp = res;
+    console.log('result in deleteSingleData');
+    console.log(resp);
+  });
+}
+  
+  
 
 
 
