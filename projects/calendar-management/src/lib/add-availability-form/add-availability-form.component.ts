@@ -17,7 +17,9 @@ export class AddAvailabilityFormComponent implements OnInit {
   public eventHour1: any;
   public eventHour2: any;
   public serverUrlData: any;
-  public endpointUrlData: any;
+  public timespan1: any;
+  public timespan2: any;
+
   public weekdaysErrorText: boolean = false;
   // set input of server url and endpoint url
   @Input()          //setting the server url from project
@@ -26,6 +28,17 @@ export class AddAvailabilityFormComponent implements OnInit {
     this.serverUrlData = serverUrlval;
 
   }
+  @Input()
+  set timespanOpt1(val:any){
+    this.timespan1 = (val) || '<no name set>';
+    this.timespan1 = val;
+  }
+  @Input()
+  set timespanOpt2(val:any){
+    this.timespan2 = (val) || '<no name set>';
+    this.timespan2 = val;
+  }
+
   constructor(public fb: FormBuilder, public _http: HttpClient, public apiservice: ApiService) {
     // time zone lists
     this.timezone_arr = [
@@ -38,7 +51,6 @@ export class AddAvailabilityFormComponent implements OnInit {
       { name: 'Hawaii Standard Time', value: '-10:00|Pacific/Honolulu' },
     ];
     //declaring the server urls in api.service
-
 
   }
 
@@ -68,6 +80,9 @@ export class AddAvailabilityFormComponent implements OnInit {
 
     });
     console.log(this.serverUrlData);
+    console.log(this.timespan1);
+console.log(this.timespan2);
+
     this.apiservice.clearServerUrl();
     setTimeout(() => {
       this.apiservice.setServerUrl(this.serverUrlData);

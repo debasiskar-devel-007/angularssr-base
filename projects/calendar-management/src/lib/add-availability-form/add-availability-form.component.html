@@ -53,8 +53,8 @@
         <div class="form-field-span">
           <p>Time Span</p>
           <mat-radio-group formControlName="timespan" aria-label="Select an Time Span">
-            <mat-radio-button value="30">30 Minutes</mat-radio-button>
-            <mat-radio-button value="60">60 Minutes</mat-radio-button>
+            <mat-radio-button value="{{timespan1}}">{{timespan1}} Minutes</mat-radio-button> 
+            <mat-radio-button value="{{timespan2}}">{{timespan2}} Minutes</mat-radio-button>
             <mat-error
               *ngIf="!addAvailiabiltyForm.controls['timespan'].valid  && addAvailiabiltyForm.controls['timespan'].touched && addAvailiabiltyForm.controls['timespan'].errors && addAvailiabiltyForm.controls['timespan'].errors.required">
               Time Span is required!</mat-error>

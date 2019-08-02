@@ -7,7 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ManageAvailabiltyComponent implements OnInit {
   public server:any = 'http://166.62.39.137:5009/';
-  public endpoint:any = 'addorupdatedata';
+  public timespan1:any = '30';
+  public timespan2:any = '60';
 
   constructor() { }
 
