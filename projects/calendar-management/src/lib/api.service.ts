@@ -31,16 +31,12 @@ export class ApiService {
   private subjectForupdateEndpointUrl = new Subject<any>();
   private subjectFordeletesingleEndpointUrl = new Subject<any>();
   private subjectForupdatestatusSingleEndpointUrl = new Subject<any>();
-  private subjectFordeletemultipleEndpointUrl = new Subject<any>();
-  private subjectForupdatestatusMultipleEndpointUrl = new Subject<any>();
   private subjectForGetdataEndpointUrl = new Subject<any>();
   public subscriptionServer: Subscription;
   public subscriptionaddEndpoint: Subscription;
   public subscriptionupdateEndpoint: Subscription;
   public subscriptiondeletesingleEndpoint: Subscription;
   public subscriptionupdatestatusSingleEndpoint: Subscription;
-  public subscriptiondeletemultipleEndpoint: Subscription;
-  public subscriptionupdatestatusMultipleEndpoint: Subscription;
   public subscriptionGetdataEndpoint: Subscription;
 
   constructor(private _http: HttpClient,
@@ -93,26 +89,6 @@ export class ApiService {
         console.log('this.getEndpoint ----- ' + this.updatestatus_single_endpointUrl);
       } else {
         this.updatestatus_single_endpointUrl = null;
-      }
-    });
-    this.subscriptiondeletemultipleEndpoint = this.getdeletemultipleEndpoint().subscribe(message => {
-      let result: any;
-      result = message;
-      if (result != null) {
-        this.deletemultiple_endpointUrl = result;
-        console.log('this.getEndpoint ----- ' + this.deletemultiple_endpointUrl);
-      } else {
-        this.deletemultiple_endpointUrl = null;
-      }
-    });
-    this.subscriptionupdatestatusMultipleEndpoint = this.getupdatestatus_multipleEndpoint().subscribe(message => {
-      let result: any;
-      result = message;
-      if (result != null) {
-        this.updatestatus_multiple_endpointUrl = result;
-        console.log('this.getEndpoint ----- ' + this.updatestatus_multiple_endpointUrl);
-      } else {
-        this.updatestatus_multiple_endpointUrl = null;
       }
     });
     this.subscriptionGetdataEndpoint = this.getdataEndpoint().subscribe(message => {
@@ -174,26 +150,6 @@ export class ApiService {
   }
   public getupdatestatus_singleEndpoint(): Observable<any> {
     return this.subjectForupdatestatusSingleEndpointUrl.asObservable();
-  }
-
-  setdeletemultipleEndpoint(value: any) {
-    this.subjectFordeletemultipleEndpointUrl.next(value);
-  }
-  public cleardeletemultipleEndpoint() {
-    this.subjectFordeletemultipleEndpointUrl.next(null);
-  }
-  public getdeletemultipleEndpoint(): Observable<any> {
-    return this.subjectFordeletemultipleEndpointUrl.asObservable();
-  }
-
-  setupdatestatus_multipleEndpoint(value: any) {
-    this.subjectForupdatestatusMultipleEndpointUrl.next(value);
-  }
-  public clearupdatestatus_multipleEndpoint() {
-    this.subjectForupdatestatusMultipleEndpointUrl.next(null);
-  }
-  public getupdatestatus_multipleEndpoint(): Observable<any> {
-    return this.subjectForupdatestatusMultipleEndpointUrl.asObservable();
   }
 
   setgetdataEndpoint(value: any) {
@@ -272,7 +228,7 @@ export class ApiService {
         'access-token': this.accesstoken
       })
     };
-    var result = this._http.post(this.serverUrl + this.deletemultiple_endpointUrl, JSON.stringify(requestdata), httpOptions).pipe(map(res => res));
+    var result = this._http.post(this.serverUrl + this.deletesingle_endpointUrl+'many', JSON.stringify(requestdata), httpOptions).pipe(map(res => res));
     return result;
   }
 
@@ -294,7 +250,7 @@ export class ApiService {
         'access-token': this.accesstoken
       })
     };
-    var result = this._http.post(this.serverUrl + this.updatestatus_multiple_endpointUrl, JSON.stringify(requestdata), httpOptions).pipe(map(res => res));
+    var result = this._http.post(this.serverUrl + this.updatestatus_single_endpointUrl+'many', JSON.stringify(requestdata), httpOptions).pipe(map(res => res));
     return result;
   }
 

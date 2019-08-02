@@ -26,11 +26,6 @@ export class AddAvailabilityFormComponent implements OnInit {
     this.serverUrlData = serverUrlval;
 
   }
-  @Input()          //setting the server url from project
-  set endpointUrl(endpointUrlval: any) {
-    this.endpointUrlData = (endpointUrlval) || '<no name set>';
-    this.endpointUrlData = endpointUrlval;
-  }
   constructor(public fb: FormBuilder, public _http: HttpClient, public apiservice: ApiService) {
     // time zone lists
     this.timezone_arr = [
@@ -76,10 +71,6 @@ export class AddAvailabilityFormComponent implements OnInit {
     this.apiservice.clearServerUrl();
     setTimeout(() => {
       this.apiservice.setServerUrl(this.serverUrlData);
-    }, 50);
-    this.apiservice.clearEndpoint();
-    setTimeout(() => {
-      this.apiservice.setEndpoint(this.endpointUrlData);
     }, 50);
     // this.apiservice.serverUrl = this.serverUrlData;
     // this.apiservice.endpointUrl = this.endpointUrlData;
@@ -153,7 +144,7 @@ export class AddAvailabilityFormComponent implements OnInit {
     if (this.addAvailiabiltyForm.valid) {
       let data: any = {};
       data = { "source": "events", "data": this.addAvailiabiltyForm.value };
-      this.apiservice.addOrEditData(data).subscribe(res => {
+      this.apiservice.addData(data).subscribe(res => {
         let resp: any;
         resp = res;
         console.log('result in democall');
@@ -250,7 +241,7 @@ data6 ={
       "val":0
   }
 };
-    // this.apiservice.addOrEditData(data).subscribe(res => {
+    // this.apiservice.addData(data).subscribe(res => {
     //   console.log(res);
     //   let resp :any;
     //   resp = res;

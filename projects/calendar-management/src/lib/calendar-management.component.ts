@@ -24,9 +24,8 @@ export class CalendarManagementComponent implements OnInit {
   public addEndpointData:any;
   public updateEndpointData:any;
   public deleteSingleEndpointData:any;
-  public deleteMultipleEndpointData:any;
   public statusSingleUpdateEndpointData:any;
-  public statusMultipleUpdateEndpointData:any;
+  public getDataEndpointData:any;
   
   public addAvailURL:any='';      // url variable to fetch the add availability form page
   @Input()          //setting the add form url from project
@@ -58,21 +57,15 @@ export class CalendarManagementComponent implements OnInit {
     this.deleteSingleEndpointData = endpointUrlval;
   }
   @Input()          //setting the server url from project
-  set deleteMultipleEndpoint(endpointUrlval: any) {
-    this.deleteMultipleEndpointData = (endpointUrlval) || '<no name set>';
-    this.deleteMultipleEndpointData = endpointUrlval;
-  }
-  @Input()          //setting the server url from project
   set statusSingleUpdateEndpoint(endpointUrlval: any) {
     this.statusSingleUpdateEndpointData = (endpointUrlval) || '<no name set>';
     this.statusSingleUpdateEndpointData = endpointUrlval;
   }
   @Input()          //setting the server url from project
-  set statusMultipleUpdateEndpoint(endpointUrlval: any) {
-    this.statusMultipleUpdateEndpointData = (endpointUrlval) || '<no name set>';
-    this.statusMultipleUpdateEndpointData = endpointUrlval;
+  set getDataEndpoint(endpointUrlval: any) {
+    this.getDataEndpointData = (endpointUrlval) || '<no name set>';
+    this.getDataEndpointData = endpointUrlval;
   }
-
   slotlist_skip:any=["_id", "phone", "username", "password", "address", "address2", "city", "state", "zip", "rsvp", "signupaffiliate","admin", "agreement", "noofclick", "mediaid", "gender", "ambassador", "dancer", "model", "musicians", "fan", "accesscode", "lastactivetime", "agreement_time", "sign", "commission","unixtime","fullname","children"];
   slotlist_modify_header:any={'added time':"Date Added",'firstname':"First Name",'lastname':"Last Name",'email':"Email",'parent':"Enroller"};
   slotlist_collection:any="events";
@@ -95,27 +88,26 @@ export class CalendarManagementComponent implements OnInit {
     setTimeout(() => {
       this.apiservice.setServerUrl(this.serverUrlData);
     }, 50);
-    this.apiservice.clearServerUrl();
+    this.apiservice.clearaddEndpoint();
     setTimeout(() => {
-      this.apiservice.setServerUrl(this.serverUrlData);
+      this.apiservice.setaddEndpoint(this.addEndpointData);
     }, 50);
-    this.apiservice.clearServerUrl();
+    this.apiservice.clearupdateEndpoint();
     setTimeout(() => {
-      this.apiservice.setServerUrl(this.serverUrlData);
+      this.apiservice.setupdateEndpoint(this.updateEndpointData);
     }, 50);
-    this.apiservice.clearServerUrl();
+    this.apiservice.cleardeletesingleEndpoint();
     setTimeout(() => {
-      this.apiservice.setServerUrl(this.serverUrlData);
+      this.apiservice.setdeletesingleEndpoint(this.deleteSingleEndpointData);
     }, 50);
-    this.apiservice.clearServerUrl();
+    this.apiservice.clearupdatestatus_singleEndpoint();
     setTimeout(() => {
-      this.apiservice.setServerUrl(this.serverUrlData);
+      this.apiservice.setupdatestatus_singleEndpoint(this.statusSingleUpdateEndpointData);
     }, 50);
-    this.apiservice.clearServerUrl();
+    this.apiservice.cleargetdataEndpoint();
     setTimeout(() => {
-      this.apiservice.setServerUrl(this.serverUrlData);
+      this.apiservice.setgetdataEndpoint(this.getDataEndpointData);
     }, 50);
-    
     setTimeout(()=>{
       this.getSlotList();
     },100);
