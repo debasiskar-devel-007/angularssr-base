@@ -46,7 +46,6 @@ export class ApiService {
       result = message;
       if (result != null) {
         this.serverUrl = result;
-        console.log('this.serverUrl ----- ' + this.serverUrl);
       } else {
         this.serverUrl = null;
       }
@@ -56,7 +55,6 @@ export class ApiService {
       result = message;
       if (result != null) {
         this.addendpointUrl = result;
-        console.log('this.getEndpoint ----- ' + this.addendpointUrl);
       } else {
         this.addendpointUrl = null;
       }
@@ -66,7 +64,6 @@ export class ApiService {
       result = message;
       if (result != null) {
         this.updateendpointUrl = result;
-        console.log('this.getEndpoint ----- ' + this.updateendpointUrl);
       } else {
         this.updateendpointUrl = null;
       }
@@ -76,7 +73,6 @@ export class ApiService {
       result = message;
       if (result != null) {
         this.deletesingle_endpointUrl = result;
-        console.log('this.getEndpoint ----- ' + this.deletesingle_endpointUrl);
       } else {
         this.deletesingle_endpointUrl = null;
       }
@@ -86,7 +82,6 @@ export class ApiService {
       result = message;
       if (result != null) {
         this.updatestatus_single_endpointUrl = result;
-        console.log('this.getEndpoint ----- ' + this.updatestatus_single_endpointUrl);
       } else {
         this.updatestatus_single_endpointUrl = null;
       }
@@ -96,7 +91,6 @@ export class ApiService {
       result = message;
       if (result != null) {
         this.getdata_endpointUrl = result;
-        console.log('this.getEndpoint ----- ' + this.getdata_endpointUrl);
       } else {
         this.getdata_endpointUrl = null;
       }

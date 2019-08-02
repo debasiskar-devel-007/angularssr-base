@@ -8,9 +8,9 @@ import { ReactiveFormsModule,FormsModule } from '@angular/forms';
 import { MaterialTimePickerModule } from '@candidosales/material-time-picker';
 import { HttpClientModule } from '@angular/common/http';
 import { ApiService } from './api.service';
-
+import { ListingModule } from 'listing-angular7';
 @NgModule({
-  declarations: [
+  declarations: [ 
     CalendarManagementComponent,
      AddAvailabilityComponent,
      AddAvailabilityFormComponent
@@ -23,7 +23,8 @@ import { ApiService } from './api.service';
     CommonModule,
     BrowserModule,
     MaterialTimePickerModule,
-    HttpClientModule
+    HttpClientModule,
+    ListingModule
   ],
   exports: [CalendarManagementComponent,AddAvailabilityComponent,AddAvailabilityFormComponent],
   providers: [ApiService],
