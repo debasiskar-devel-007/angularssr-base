@@ -1,0 +1,148 @@
+<!-- <div class="example-container"> -->
+
+
+<mat-card>
+  <!--  <mat-calendar-header>-->
+ <!-- <mat-label>Address:</mat-label>
+  &lt;!&ndash;  </mat-calendar-header>&ndash;&gt;
+  <mat-radio-group
+    aria-labelledby="example-radio-group-label"
+    class="example-radio-group" [(ngModel)]="favoriteSeason">
+    <mat-radio-button class="example-radio-button" *ngFor="let item of addressType" [value]="item">
+      {{item}}
+    </mat-radio-button>
+  </mat-radio-group>
+-->
+
+<!--  <mat-checkbox class="example-margin" [(ngModel)]="mapEnable" (change)="mapEnableChecking()">Enable Map:</mat-checkbox>-->
+
+  <agm-map [latitude]='latitude' [longitude]='longitude'
+           [mapTypeId]='mapType'>
+  </agm-map>
+
+</mat-card>
+
+
+<mat-card >
+<form class="example-container" [formGroup]="contactUsForm" (ngSubmit)="contactUsFormSubmit()" novalidate>
+  <!--<form class="example-container">-->
+
+  <!--       <label id="example-radio-group-label">Pick your favorite season</label>-->
+
+
+
+  <!-- Location Name field start hear-->
+  <mat-form-field>
+    <input matInput placeholder="Location Name " formControlName="locationname" (blur)="inputblur('locationname')" >
+    <mat-error *ngIf="!contactUsForm.controls['locationname'].valid && contactUsForm.controls['locationname'].errors.required">Location Name field can not be blank</mat-error>
+  </mat-form-field>
+  <!-- Location Name field end hear-->
+
+  <!-- Email field start hear-->
+ <!-- <mat-form-field >
+    <input matInput placeholder="Email " formControlName="email" (blur)="inputblur('email')">
+    <mat-error  *ngIf="!contactUsForm.controls['email'].valid && !contactUsForm.controls['email'].errors.required">Email is not valid</mat-error>
+    <mat-error *ngIf="!contactUsForm.controls['email'].valid && contactUsForm.controls['email'].errors.required">Email field can not be blank</mat-error>
+  </mat-form-field>-->
+  <!-- Email field end hear-->
+
+  <!-- Phone field start hear-->
+<!--  <mat-form-field>
+    <input matInput placeholder="Phone " formControlName="phone" (blur)="inputblur('phone')">
+&lt;!&ndash;    <mat-error  *ngIf="!contactUsForm.controls['phone'].valid && !contactUsForm.controls['phone'].errors.required">Email is not valid</mat-error>&ndash;&gt;
+    <mat-error *ngIf="!contactUsForm.controls['phone'].valid && contactUsForm.controls['phone'].errors.required">Phone field can not be blank</mat-error>
+  </mat-form-field>-->
+  <!-- Phone field end hear-->
+
+  <!--  multiple emails fields added start hear-->
+<div formArrayName="multipleemails" class="fromClass" >
+
+
+  <mat-form-field *ngFor="let item of multipleemails.controls; let pointIndex=index" [formGroupName]="pointIndex">
+
+
+
+    <input matInput placeholder="Email "  formControlName="emails" >
+    <span matSuffix>
+      <i class="material-icons"  (click)="addEmail()">add</i>
+      <i *ngIf="pointIndex != 0" class="material-icons"  (click)="removeEmail(pointIndex)">remove</i>
+
+    </span>
+<!--    <mat-error  *ngIf="!item.valid && !item.errors.required">Email is not valid</mat-error>-->
+    <mat-error *ngIf="!item.valid ">Email field can not be blank</mat-error>
+  </mat-form-field>
+</div>
+  <!--  multiple emails fields added end hear-->
+
+<!--  multiple Phone fields added start hear-->
+<div formArrayName="phones" class="fromClass">
+
+
+  <mat-form-field *ngFor="let item of phones.controls; let pointIndex=index" [formGroupName]="pointIndex">
+
+
+    <input matInput placeholder="Phone "  formControlName="phone1" >
+
+    <span matSuffix>
+      <i class="material-icons"  (click)="addPhone()">add</i>
+      <i *ngIf="pointIndex != 0"  class="material-icons"  (click)="removePhone(pointIndex)">remove</i>
+
+    </span>
+
+
+    <mat-error *ngIf="item.valid && item.markAsUntouched">Phone field can not be blank</mat-error>
+  </mat-form-field>
+
+</div>
+
+  <!--  multiple Phone fields added end hear-->
+
+<!--  multiple Addresses fields added start hear-->
+<div formArrayName="addresses" class="fromClass">
+
+
+  <mat-form-field *ngFor="let item of addresses.controls; let pointIndex=index" [formGroupName]="pointIndex">
+
+    <textarea  matInput placeholder="Address {{pointIndex + 1}} "  formControlName="addresses1" ></textarea>
+
+    <span matSuffix>
+      <i class="material-icons"  (click)="addAddress()">add</i>
+      <i *ngIf="pointIndex != 0" class="material-icons"  (click)="removeAddress(pointIndex)">remove</i>
+
+    </span>
+
+<!--    <mat-error  *ngIf="!contactUsForm.controls['email'].valid && !contactUsForm.controls['email'].errors.required">Email is not valid</mat-error>-->
+    <mat-error *ngIf="!item.valid">Address field can not be blank</mat-error>
+
+  </mat-form-field>
+</div>
+  <!--  multiple Addresses fields added end hear-->
+
+  <!-- Address field start hear-->
+  <!--<mat-form-field>
+    <textarea matInput placeholder="Address" formControlName="address" (blur)="inputblur('address')"></textarea>
+    <mat-error *ngIf="!contactUsForm.controls['address'].valid && contactUsForm.controls['address'].errors.required">Address field can not be blank</mat-error>
+  </mat-form-field>-->
+  <!-- Address field end hear-->
+
+
+  <mat-form-field>
+    <textarea matInput placeholder="Message" formControlName="message" (blur)="inputblur('message')"></textarea>
+<!--    <mat-error *ngIf="!contactUsForm.controls['message'].valid && contactUsForm.controls['message'].errors.required">Message field can not be blank</mat-error>-->
+  </mat-form-field>
+
+
+  <button mat-raised-button color="primary">Primary</button>
+</form>
+
+</mat-card>
+
+<!-- </div> -->
+
+<lib-listing class="formfilterdiv formfilterdivnew" *ngIf="contactUsAllData.length>0 && contactUsAllData != null"
+             [datasource]="contactUsAllData"
+             [skip]="contactUsAllData_skip"
+             [modify_header_array]="contactUsAllData_modify_header"
+             [sourcedata]="contactUsAllData_collection">
+</lib-listing>
+

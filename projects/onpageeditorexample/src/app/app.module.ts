@@ -6,6 +6,9 @@ import { AppComponent } from './app.component';
 import {OnPageEditorModule} from 'on-page-editor';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import { ContactusComponent } from './contactus/contactus.component';
+import { ContactusModule } from 'contactus';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -14,7 +17,13 @@ import { ContactusComponent } from './contactus/contactus.component';
     ContactusComponent
   ],
   imports: [
-    BrowserModule,OnPageEditorModule,AppRoutingModule
+    BrowserModule,
+    OnPageEditorModule,
+    AppRoutingModule,
+    ContactusModule,
+    BrowserAnimationsModule,
+    HttpClientModule,
+    ContactusModule
   ],
   providers: [],
   bootstrap: [AppComponent]

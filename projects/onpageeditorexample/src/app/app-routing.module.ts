@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-//import { MetaGuard } from '@ngx-meta/core';
 
 
 import { AboutusComponent } from './aboutus/aboutus.component';
@@ -34,5 +33,5 @@ const appRoutes: Routes = [
   exports: [RouterModule]
 })
 export class AppRoutingModule {
-    //console.log('dddd');
+    // console.log('dddd');
 }
