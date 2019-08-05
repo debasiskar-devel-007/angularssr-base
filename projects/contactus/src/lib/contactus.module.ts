@@ -8,8 +8,9 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ApiService } from './api.service';
 import { AgmCoreModule} from '@agm/core';
 import { ListingModule } from 'listing-angular7';
+import { ContactusListingComponent } from './contactus-listing/contactus-listing.component';
 @NgModule({
-  declarations: [ContactusComponent],
+  declarations: [ContactusComponent, ContactusListingComponent],
   imports: [
     DemoMaterialModule,
     BrowserAnimationsModule,
