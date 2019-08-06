@@ -4,6 +4,7 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AboutusComponent } from './aboutus/aboutus.component';
 import { ContactusComponent } from './contactus/contactus.component';
+import {HomeComponent} from './home/home.component';
 
 const appRoutes: Routes = [
   { path: 'about2', component: AboutusComponent,data: {
@@ -23,6 +24,14 @@ const appRoutes: Routes = [
       data: {
           meta: {
               title: 'Contact Us',
+              description: 'Have you seen my rubber duckie?'
+          }
+      }},
+
+  { path: 'home',      component: HomeComponent,
+      data: {
+          meta: {
+              title: 'Home',
               description: 'Have you seen my rubber duckie?'
           }
       }}

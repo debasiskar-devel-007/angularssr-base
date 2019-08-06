@@ -9,12 +9,14 @@ import { ContactusComponent } from './contactus/contactus.component';
 import { ContactusModule } from 'contactus';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { HomeComponent } from './home/home.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     AboutusComponent,
-    ContactusComponent
+    ContactusComponent,
+    HomeComponent
   ],
   imports: [
     BrowserModule,

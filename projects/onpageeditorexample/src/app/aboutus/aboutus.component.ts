@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-//import { MetaService } from '@ngx-meta/core';
 
 @Component({
   selector: 'app-aboutus',
@@ -7,6 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./aboutus.component.css']
 })
 export class AboutusComponent implements OnInit {
+  public serverUrl: any = 'http://166.62.39.137:5001/';
+  public addEndpoint: any = 'demoappemailsend';
+  public getDataUrl: any = 'datalist';
 
   constructor() {
     /*this.meta.setTitle('About us dynamic');

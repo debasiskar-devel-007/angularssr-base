@@ -2,6 +2,7 @@ import {Component, Input, OnInit} from '@angular/core';
 import {FormArray, FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { ApiService } from './api.service';
 import {HttpClient} from '@angular/common/http';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'lib-contactus',
@@ -12,18 +13,11 @@ import {HttpClient} from '@angular/common/http';
 
 export class ContactusComponent implements OnInit {
 
-  public contactUsAllData: any = [];
-  // tslint:disable-next-line:variable-name
-  contactUsAllData_skip: any = ['_id'];
-  // tslint:disable-next-line:variable-name
-  contactUsAllData_modify_header: any = {};
 
-  // tslint:disable-next-line:variable-name
-  contactUsAllData_collection: any = 'events';
 
   public serverURL: any = '';      // url variable to fetch the add availability form page
   public addEndpointData: any = '';
-  public getDataEndpointData: any = '';
+  public addAvailURL: any = '';
   @Input()     // setting the server url from project
 
   set serverUrl(serverUrlval: any) {
@@ -33,18 +27,18 @@ export class ContactusComponent implements OnInit {
 
   }
 
+
   @Input()          // setting the server url from project
   set addEndpoint(endpointUrlval: any) {
     this.addEndpointData = (endpointUrlval) || '<no name set>';
     this.addEndpointData = endpointUrlval;
   }
 
-  @Input()          // setting the server url from project
-  set getDataEndpoint(endpointUrlval: any) {
-    this.getDataEndpointData = (endpointUrlval) || '<no name set>';
-    this.getDataEndpointData = endpointUrlval;
-    console.log('this.getDataEndpoint');
-    console.log(this.getDataEndpoint);
+  @Input()          // setting the add form url from project
+  set addAvailData(addAvailurlval: any) {
+    this.addAvailURL = (addAvailurlval) || '<no name set>';
+    this.addAvailURL = addAvailurlval;
+    console.log(this.addAvailURL);
   }
 
   /*Using for google map start ----*/
@@ -55,7 +49,7 @@ export class ContactusComponent implements OnInit {
 
 
   public contactUsForm: FormGroup;
-  constructor(public fb: FormBuilder, public apiService: ApiService, public http: HttpClient) {
+  constructor(public fb: FormBuilder, public apiService: ApiService, public http: HttpClient, public router: Router) {
     this.contactUsForm = this.fb.group({
       locationname: ['', Validators.required],
       message: ['', Validators.required],
@@ -75,12 +69,6 @@ this.apiService.setServerUrl(this.serverURL);
     }, 50);
     console.log(this.serverURL);
 
-    this.apiService.cleargetdataEndpoint();
-    setTimeout(() => {
-      this.apiService.setgetdataEndpoint(this.getDataEndpointData);
-    }, 50);
-
-
 
     this.apiService.clearaddEndpoint();
     setTimeout(() => {
@@ -88,9 +76,6 @@ this.apiService.setServerUrl(this.serverURL);
     }, 50);
     console.log(this.addEndpointData);
 
-    setTimeout(() => {
-      this.getAllData();
-    },100);
   }
 /* Multiple emails created start hear*/
   get multipleemails() {
@@ -221,19 +206,12 @@ this.apiService.setServerUrl(this.serverURL);
     this.contactUsForm.controls[val].markAsUntouched();
   }
 
-  getAllData() {
-    let data: any;
-    data = {
-      "source" : 'demoappcontactdetails'
-    };
-    this.apiService.getData(data).subscribe( res => {
-      let result: any = [];
 
-      result = res;
-      console.log('resurt');
-      console.log(result.res);
-      this.contactUsAllData = result.res;
-    });
+
+  goToListing() {
+    // console.log('______');
+
+    this.router.navigateByUrl('/' + this.addAvailURL);
   }
 
 }

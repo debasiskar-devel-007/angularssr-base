@@ -26,7 +26,7 @@ import { ContactusListingComponent } from './contactus-listing/contactus-listing
       */
     })
   ],
-  exports: [ContactusComponent],
+  exports: [ContactusComponent, ContactusListingComponent],
   providers: [ApiService],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
