@@ -2,21 +2,12 @@ import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { MetaGuard } from '@ngx-meta/core';
 import{AddteamformComponent} from './lib/addteamform/addteamform.component';
+import{ EditComponent } from './lib/edit/edit.component';
+import { from } from 'rxjs';
 const appRoutes: Routes = [
-  {path:'add-team',component:AddteamformComponent}
-//   { path: 'about', component: AboutusComponent,data: {
-//       meta: {
-//           title: 'About US',
-//           description: 'Have you seen my rubber duckie?'
-//       }
-//   } },
-//   { path: 'contact',      component: ContactusComponent,
-//       data: {
-//           meta: {
-//               title: 'Contact Us',
-//               description: 'Have you seen my rubber duckie?'
-//           }
-//       }}
+  {path:'add-team',component:AddteamformComponent},
+  {path:'edit',component:EditComponent}
+
 ];
 
 @NgModule({

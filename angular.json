@@ -609,6 +609,204 @@
           }
         }
       }
+    },
+    "demoLib": {
+      "root": "projects/demo-lib",
+      "sourceRoot": "projects/demo-lib/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/demo-lib/tsconfig.lib.json",
+            "project": "projects/demo-lib/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/demo-lib/src/test.ts",
+            "tsConfig": "projects/demo-lib/tsconfig.spec.json",
+            "karmaConfig": "projects/demo-lib/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/demo-lib/tsconfig.lib.json",
+              "projects/demo-lib/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "uploadfile": {
+      "root": "projects/uploadfile",
+      "sourceRoot": "projects/uploadfile/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/uploadfile/tsconfig.lib.json",
+            "project": "projects/uploadfile/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/uploadfile/src/test.ts",
+            "tsConfig": "projects/uploadfile/tsconfig.spec.json",
+            "karmaConfig": "projects/uploadfile/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/uploadfile/tsconfig.lib.json",
+              "projects/uploadfile/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "testupload": {
+      "root": "projects/testupload/",
+      "sourceRoot": "projects/testupload/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/testupload",
+            "index": "projects/testupload/src/index.html",
+            "main": "projects/testupload/src/main.ts",
+            "polyfills": "projects/testupload/src/polyfills.ts",
+            "tsConfig": "projects/testupload/tsconfig.app.json",
+            "assets": [
+              "projects/testupload/src/favicon.ico",
+              "projects/testupload/src/assets"
+            ],
+            "styles": [
+              "projects/testupload/src/styles.css"
+            ],
+            "scripts": [],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/testupload/src/environments/environment.ts",
+                  "with": "projects/testupload/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "testupload:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "testupload:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "testupload:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/testupload/src/test.ts",
+            "polyfills": "projects/testupload/src/polyfills.ts",
+            "tsConfig": "projects/testupload/tsconfig.spec.json",
+            "karmaConfig": "projects/testupload/karma.conf.js",
+            "styles": [
+              "projects/testupload/src/styles.css"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/testupload/src/favicon.ico",
+              "projects/testupload/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/testupload/tsconfig.app.json",
+              "projects/testupload/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "testupload-e2e": {
+      "root": "projects/testupload-e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/testupload-e2e/protractor.conf.js",
+            "devServerTarget": "testupload:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "testupload:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "projects/testupload-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "angularssr"

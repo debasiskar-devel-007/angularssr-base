@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormBuilder, FormControl,FormArray, FormGroup, Validators} from '@angular/forms';
+import {ActivatedRoute, Router} from '@angular/router';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'lib-addteamform',
@@ -8,9 +10,15 @@ import {FormBuilder, FormControl,FormArray, FormGroup, Validators} from '@angula
 })
 export class AddteamformComponent implements OnInit {
   public teamForm: FormGroup;
-  // public mutiplephone:any=[];
-  // public multipleemail:any=[];
-  constructor(public fb: FormBuilder,) { 
+  public params_id:any;
+
+  constructor(public fb: FormBuilder,public activeroute: ActivatedRoute,public apiservice:ApiService) { 
+    this.activeroute.params.subscribe(params=>{
+      this.params_id=params['_id'];
+      console.log("params iddddddddd");
+      console.log(this.params_id);
+    })
+
 
   }
   
@@ -33,7 +41,7 @@ export class AddteamformComponent implements OnInit {
  }
  get mutiplephone() {
   return this.teamForm.get('mutiplephone') as FormArray;
-}
+ }
  addphone(){
   this.mutiplephone.push(this.fb.group({phone: ['', Validators.required]}))
  }
@@ -54,5 +62,13 @@ export class AddteamformComponent implements OnInit {
  removeemail(index:any){
   this.multipleemail.removeAt(index);
  }
+ setEditvalue(){
+  
+
+
+  
+}
+    
+        
 
 }

@@ -14,9 +14,9 @@
     </mat-form-field>
 
   
-      <mat-form-field>
-         <textarea matInput placeholder="image"></textarea>
-       </mat-form-field>
+   <mat-label>Image</mat-label>
+     <input class="ng-hide" id="input-file-id" multiple type="file" />
+        <label for="input-file-id" class="md-button md-raised md-primary"></label>
 
     <mat-form-field> 
       <textarea matInput placeholder="Description" [formControl]="teamForm.controls['description']" (blur)="inputUntouch(teamForm,'description')">

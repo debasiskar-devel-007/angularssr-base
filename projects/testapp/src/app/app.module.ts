@@ -8,12 +8,14 @@ import { HttpClientModule } from "@angular/common/http";
 import { AppRoutingModule } from './app-routing.module';
 import { TeamlistComponent } from './teamlist/teamlist.component';
 import { AddmyteamComponent } from './addmyteam/addmyteam.component';
+import { EditappComponent } from './editapp/editapp.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     TeamlistComponent,
-    AddmyteamComponent
+    AddmyteamComponent,
+    EditappComponent
   ],
   imports: [
     BrowserModule,

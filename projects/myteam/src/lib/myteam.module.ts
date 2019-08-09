@@ -6,9 +6,10 @@ import { HttpClientModule } from "@angular/common/http";
 import { BrowserModule } from '@angular/platform-browser';
 import { AddteamformComponent } from './addteamform/addteamform.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { EditComponent } from './edit/edit.component';
 // import { AppRoutingModule } from '../app-routing.module';
 @NgModule({
-  declarations: [MyteamComponent, AddteamformComponent],
+  declarations: [MyteamComponent, AddteamformComponent, EditComponent],
   imports: [
     DemoMaterialModule,
     ListingModule,

@@ -30,6 +30,18 @@
       ],
       "myteam/*": [
         "dist/myteam/*"
+      ],
+      "demo-lib": [
+        "dist/demo-lib"
+      ],
+      "demo-lib/*": [
+        "dist/demo-lib/*"
+      ],
+      "uploadfile": [
+        "dist/uploadfile"
+      ],
+      "uploadfile/*": [
+        "dist/uploadfile/*"
       ]
     }
   }

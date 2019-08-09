@@ -4,14 +4,18 @@
     </mat-toolbar>
 </mat-card>
 <mat-card-content>
-        <button mat-button color="primary" (click)="addButton()">Add Team Member</button>
+    <span class="btnwrapper">
+        <button class="addbtn" mat-button color="primary" (click)="addButton()">Add Team Member</button>
+    </span>
     <lib-listing *ngIf="teamarray.length>0"
         [datasource]="teamarray"
         [skip]="teamlist_skip" 
         [modify_header_array]="teamlist_modify_header"
         [sourcedata]="teamtablename"
         [statusarr]="teamstatus"
-        [editroute]="editteam">
+        [editroute]="editteam"
+        [apiurl]="apiUrl"
+        [jwttoken]="token"
+        [deleteendpoint]="deleteendpoint">
     </lib-listing>
-    
 </mat-card-content>
