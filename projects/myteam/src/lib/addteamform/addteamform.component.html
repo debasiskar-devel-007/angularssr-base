@@ -4,22 +4,23 @@
   </mat-toolbar>
 </mat-card>
 
-<form class="main-class" novalidate [formGroup]="teamForm">
+<form class="main-class" novalidate [formGroup]="teamForm" name="teamForm"
+ (ngSubmit)="onSubmit()" autocomplete="off">
   <div class="example-container">
 
     <mat-form-field>
-      <input matInput type="text" placeholder="Category/Role" [formControl]="teamForm.controls['category']" (blur)="inputUntouch(teamForm,'category')">
-      <mat-error *ngIf="teamForm.controls['category'].touched && !teamForm.controls['category'].valid && teamForm.controls['category'].errors.required">
+      <input matInput type="text" placeholder="Category/Role" [formControl]="teamForm.controls['role']" (blur)="inputUntouch(teamForm,'role')">
+      <mat-error *ngIf="teamForm.controls['role'].touched && !teamForm.controls['role'].valid && teamForm.controls['role'].errors.required">
         Category/Role field can not be blank</mat-error>
     </mat-form-field>
 
   
    <mat-label>Image</mat-label>
-     <input class="ng-hide" id="input-file-id" multiple type="file" />
+     <input class="ng-hide" id="input-file-id" name="upload" multiple type="file" (change)="onFileChange($event)" />
         <label for="input-file-id" class="md-button md-raised md-primary"></label>
 
     <mat-form-field> 
-      <textarea matInput placeholder="Description" [formControl]="teamForm.controls['description']" (blur)="inputUntouch(teamForm,'description')">
+      <textarea matInput placeholder="Description"  [formControl]="teamForm.controls['description']" (blur)="inputUntouch(teamForm,'description')">
              </textarea>
       <mat-error *ngIf="teamForm.controls['description'].touched && !teamForm.controls['description'].valid && teamForm.controls['description'].errors.required">
         Description field can not be blank</mat-error>
@@ -27,10 +28,10 @@
 
     <span formArrayName="mutiplephone">
     <mat-form-field *ngFor="let item of mutiplephone.controls; let i=index" [formGroupName]="i">
-        <input matInput placeholder="Phone"  [formControl]="teamForm.controls['phone']"
-        (blur)="inputUntouch(teamForm,'phone')">
+        <input matInput placeholder="Phone"  [formControl]="teamForm.controls['contactphone']"
+        (blur)="inputUntouch(teamForm,'contactphone')">
     
-      <mat-error *ngIf="teamForm.controls['phone'].touched  &&!teamForm.controls['phone'].valid && teamForm.controls['phone'].errors.required">
+      <mat-error *ngIf="teamForm.controls['contactphone'].touched  &&!teamForm.controls['contactphone'].valid && teamForm.controls['contactphone'].errors.required">
         Phone field can not be blank</mat-error>
         <span matSuffix>
             <i class="material-icons" (click)="addphone()"  >add</i>
@@ -42,13 +43,13 @@
 
   <span formArrayName="multipleemail">
     <mat-form-field *ngFor="let item of multipleemail.controls; let i=index" [formGroupName]="i">
-      <input matInput placeholder="E-mail" [formControl]="teamForm.controls['email']"
-        (blur)="inputUntouch(teamForm,'email')">
+      <input matInput placeholder="E-mail" [formControl]="teamForm.controls['contactemail']"
+        (blur)="inputUntouch(teamForm,'contactemail')">
         <mat-error
-        *ngIf="teamForm.controls['email'].touched && !teamForm.controls['email'].valid && teamForm.controls['email'].errors.required">
+        *ngIf="teamForm.controls['contactemail'].touched && !teamForm.controls['contactemail'].valid && teamForm.controls['contactemail'].errors.required">
         E-mail field can not be blank</mat-error>
       <mat-error
-        *ngIf="!teamForm.controls['email'].valid && !teamForm.controls['email'].errors.required">
+        *ngIf="!teamForm.controls['contactemail'].valid && !teamForm.controls['contactemail'].errors.required">
         E-mail is not valid</mat-error>
         <span matSuffix>
             <i class="material-icons"  (click)="addemail()"  >add</i>
@@ -57,9 +58,8 @@
     </mat-form-field>
   </span>
 
-
-
   </div>
   <button mat-button class="submitbtn" type="submit">Submit</button>
+  <!-- <button mat-button class="submitbtn" type="submit">Submit</button> -->
 
 </form>

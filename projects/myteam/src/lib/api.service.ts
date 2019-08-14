@@ -16,10 +16,11 @@ export class ApiService {
   public progress: any = [];
   public uploadtype;
   public uploaderror: any = '';
-  public accesstoken:any='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJleHAiOjE1NjU0MTQ5NDQsImlhdCI6MTU2NTMyODU0NH0.ewcF3t-3bQIMqC2mB4Jfvtv4xF6yMbMCs2i4FQGV4Uw';
+  public accesstoken:any='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJleHAiOjE1NjU4NDcyNjYsImlhdCI6MTU2NTc2MDg2Nn0.r1kg7-y0p_hevZldS0j4bY7uqiGqFMonURYyWAIKK68';
   fileservername: any = [];
   serverUrl: any;
   addendpointUrl: any;
+  uploadEndpointUrl:any; //souresh
   updateendpointUrl: any;
   deletesingle_endpointUrl: any;
   updatestatus_single_endpointUrl: any;
@@ -28,12 +29,14 @@ export class ApiService {
   getdata_endpointUrl: any;
   private subjectForServerUrl = new Subject<any>();
   private subjectForaddEndpointUrl = new Subject<any>();
+  private subjectForuploadEndpointUrl = new Subject<any>();  //added by souresh
   private subjectForupdateEndpointUrl = new Subject<any>();
   private subjectFordeletesingleEndpointUrl = new Subject<any>();
   private subjectForupdatestatusSingleEndpointUrl = new Subject<any>();
   private subjectForGetdataEndpointUrl = new Subject<any>();
   public subscriptionServer: Subscription;
   public subscriptionaddEndpoint: Subscription;
+  public subscriptionuploadEndpoint: Subscription;   //added by souresh
   public subscriptionupdateEndpoint: Subscription;
   public subscriptiondeletesingleEndpoint: Subscription;
   public subscriptionupdatestatusSingleEndpoint: Subscription;
@@ -59,6 +62,17 @@ export class ApiService {
         this.addendpointUrl = null;
       }
     });
+    /*********added by souresh***********/
+    this.subscriptionuploadEndpoint=this.getuploadEndpoint().subscribe(message=>{
+      let result:any;
+      result=message;
+        if(result!=null){
+          this.uploadEndpointUrl = result;
+        } else{
+          this.uploadEndpointUrl = null;
+        }
+    })
+    /************souresh end here**************/
     this.subscriptionupdateEndpoint = this.getupdateEndpoint().subscribe(message => {
       let result: any;
       result = message;
@@ -116,6 +130,19 @@ export class ApiService {
   public getaddEndpoint(): Observable<any> {
     return this.subjectForaddEndpointUrl.asObservable();
   }
+/*****added by souresh******/
+  setuploadEndpont(value:any){
+    this.subjectForuploadEndpointUrl.next(value);
+  }
+  public clearuploadEndpoint(){
+    this.subjectForuploadEndpointUrl.next(null);
+  }
+  public getuploadEndpoint(): Observable <any> {
+    return this.subjectForuploadEndpointUrl.asObservable();
+  }
+   /********souresh end here********/
+
+
   setupdateEndpoint(value: any) {
     this.subjectForupdateEndpointUrl.next(value);
   }
@@ -182,6 +209,18 @@ export class ApiService {
     var result = this._http.post(this.serverUrl + this.addendpointUrl, JSON.stringify(requestdata), httpOptions).pipe(map(res => res));
     return result;
   }
+  /*******added by souresh************/
+  uploadFile(requestdata:any){
+    const httpOptions={
+        headers: new HttpHeaders({
+          'Content-Type':'application/json',
+          'access-token':this.accesstoken          //hard code written access-token(temp)
+        })
+    };
+    var result=this._http.post(this.serverUrl + this.uploadEndpointUrl,JSON.stringify(requestdata),httpOptions).pipe(map(res=>res));
+    return result;
+  }
+  /*******souresh end here********/
   UpdateData(requestdata: any) {
     const httpOptions = {
       headers: new HttpHeaders({
