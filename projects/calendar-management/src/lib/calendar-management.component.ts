@@ -26,7 +26,7 @@ export class CalendarManagementComponent implements OnInit {
   public deleteSingleEndpointData:any;
   public statusSingleUpdateEndpointData:any;
   public getDataEndpointData:any;
-  public jwttoken:any = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJleHAiOjE1NjQ3NTA1NDYsImlhdCI6MTU2NDY2NDE0Nn0.xUNvhOYyyItjJQkx8ofQNoppvIH5wqT4WNb7TlrnXTs';
+  public jwttoken:any = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJleHAiOjE1NjYwMzU4NTUsImlhdCI6MTU2NTk0OTQ1NX0.dYvUFuvdsRrvkAOsBd4Jm77OxvkDy2pTKmMaNGIBw9E';
   
   public addAvailURL:any='';      // url variable to fetch the add availability form page
   @Input()          //setting the add form url from project
@@ -68,7 +68,7 @@ export class CalendarManagementComponent implements OnInit {
     this.getDataEndpointData = endpointUrlval;
   }
   slotlist_skip:any=["_id","Fri","Mon","Sat","Sun","Tues","Thurs","Wed","timespan","status","created_at","event_details"];
-  slotlist_modify_header:any={'event title':"Event Title",'start date':"Start Date",'end date':"End Date",'start time':"Start Time",'end time':"End Time"};
+  slotlist_modify_header:any={'event title':"Event Title",'start date':"Start Date",'end date':"End Date",'start time':"Start Time",'end time':"End Time","eventtype":"Type"};
   slotlist_collection:any="events";
 
     deleteval:any= 'deletesingledata';

@@ -9,11 +9,13 @@ import { MaterialTimePickerModule } from '@candidosales/material-time-picker';
 import { HttpClientModule } from '@angular/common/http';
 import { ApiService } from './api.service';
 import { ListingModule } from 'listing-angular7';
+import { AvailableslotsComponent } from './availableslots/availableslots.component';
 @NgModule({
   declarations: [ 
     CalendarManagementComponent,
      AddAvailabilityComponent,
-     AddAvailabilityFormComponent
+     AddAvailabilityFormComponent,
+     AvailableslotsComponent
     ],
     schemas: [ CUSTOM_ELEMENTS_SCHEMA ],
   imports: [

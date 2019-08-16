@@ -36,6 +36,17 @@
           <mat-datepicker #picker2></mat-datepicker>
         </mat-form-field>
 
+        <mat-form-field>
+          <p>Type Of Event</p>
+          <mat-select formControlName="eventtype" (blur)="inputUntouch(addAvailiabiltyForm,'eventtype')">
+            <mat-option>--</mat-option>
+            <mat-option *ngFor="let item of eventType_arr" [value]="item">
+              {{item}}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="addAvailiabiltyForm.controls['eventtype'].touched  && addAvailiabiltyForm.controls['eventtype'].errors && addAvailiabiltyForm.controls['eventtype'].errors.required">Please choose a type of event!</mat-error>
+        </mat-form-field>
+
         <!-- <mat-form-field> -->
         <div class="form-field-span">
           <p>Available Week Days</p>

@@ -8,11 +8,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
 import { HomepageComponent } from './homepage/homepage.component';
 import { ListingModule } from 'listing-angular7';
+import { SlotsComponent } from './slots/slots.component';
 @NgModule({
   declarations: [
     AppComponent,
     ManageAvailabiltyComponent,
-    HomepageComponent
+    HomepageComponent,
+    SlotsComponent
   ],
   imports: [
     BrowserModule,

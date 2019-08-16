@@ -12,6 +12,7 @@ export class AddAvailabilityFormComponent implements OnInit {
   // @ViewChild('form', { static: false }) form: { resetForm: () => void; };
   public addAvailiabiltyForm: FormGroup;
   timezone_arr: any = [];
+  eventType_arr :any = [];
   public exportTime1: any = { hour: 12, minute: 0, meriden: 'AM', format: 12 };
   public exportTime2: any = { hour: 12, minute: 0, meriden: 'AM', format: 12 };
   public eventHour1: any;
@@ -51,7 +52,7 @@ export class AddAvailabilityFormComponent implements OnInit {
       { name: 'Hawaii Standard Time', value: '-10:00|Pacific/Honolulu' },
     ];
     //declaring the server urls in api.service
-
+    this.eventType_arr = ["Type 0","Type 1","Type 2","Type 3","Type 4","Type 5"];
   }
 
   ngOnInit() {
@@ -74,6 +75,7 @@ export class AddAvailabilityFormComponent implements OnInit {
       timespan: ["", Validators.required],
       timezone: ["", Validators.required],
       event_details: ["", Validators.required],
+      eventtype: ["", Validators.required],
       start_time: [null],
       end_time: [null],
       status: [1],
@@ -92,6 +94,7 @@ console.log(this.timespan2);
   }
   inputUntouch(form: any, val: any) {
     console.log('hit');
+    form.controls[val].clearValidators();
     form.controls[val].markAsUntouched();
   }
   checkboxErrorChange(day: any) {
@@ -193,9 +196,11 @@ console.log(this.timespan2);
     // }
     this.weekdaysErrorText = false;
     this.addAvailiabiltyForm.reset();
-    // this.form.resetForm();
-    this.addAvailiabiltyForm.markAsPristine();
     this.addAvailiabiltyForm.markAsUntouched();
+    this.addAvailiabiltyForm.clearValidators();
+    // this.form.resetForm();
+    // this.addAvailiabiltyForm.markAsPristine();
+    
 
   }
   demoApiserviceCall() {
