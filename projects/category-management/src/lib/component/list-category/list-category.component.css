@@ -1,0 +1,30 @@
+table {
+    width: 100%;
+  }
+
+.data-list {
+  width: 95%;
+  margin: auto;
+}
+
+.add-new-button {
+  float: right;
+  margin-top: 4px;
+  margin-right: 4px;
+  border: 1px black solid;
+}
+
+.div-header {
+  width: 95%;
+  margin: auto;
+}
+
+.title {
+  width: 75%;
+  float: left;
+}
+
+.option {
+  width: 25%;
+  float: right;
+}

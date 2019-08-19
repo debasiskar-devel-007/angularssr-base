@@ -1,0 +1,51 @@
+<mat-card>
+  <mat-toolbar color="primary">
+      <h2 class="headerSpan"> New Category</h2>
+  </mat-toolbar>
+
+  <form class="example-form" [formGroup]="categoryForm" autocomplete="off">
+    <div class="example-container">
+      <mat-form-field>
+        <input matInput formControlName="title" placeholder="Title">
+
+        <!-- error message start -->
+        <mat-error *ngIf="categoryFormValidate.title.touched && categoryFormValidate.title.errors && categoryFormValidate.title.errors.required">Title is required.</mat-error>
+        <mat-error *ngIf="categoryFormValidate.title.touched && categoryFormValidate.title.errors && categoryFormValidate.title.errors.maxlength">Title is not more then 150 charector.</mat-error>
+        <!-- error message start -->
+      </mat-form-field>
+    
+      <mat-form-field hintLabel="Max 1000 characters">
+        <textarea matInput formControlName="description" #description maxlength="1000" placeholder="Description"></textarea>
+        <mat-hint align="end">{{ description.value?.length || 0 }}/1000</mat-hint>
+
+        <!-- error message start -->
+        <mat-error *ngIf="categoryFormValidate.description.touched && categoryFormValidate.description.errors && categoryFormValidate.description.errors.required">Title is required.</mat-error>
+        <mat-error *ngIf="categoryFormValidate.description.touched && categoryFormValidate.description.errors && categoryFormValidate.description.errors.maxlength">Title is not more then 1000 charector.</mat-error>
+        <!-- error message start -->
+      </mat-form-field>
+    
+      <mat-form-field>
+        <input matInput formControlName="priority" placeholder="Priority" type="number">
+
+        <!-- error message start -->
+        <mat-error *ngIf="categoryFormValidate.priority.touched && categoryFormValidate.priority.errors && categoryFormValidate.priority.errors.required">Title is required.</mat-error>
+        <mat-error *ngIf="categoryFormValidate.priority.touched && categoryFormValidate.priority.errors && categoryFormValidate.priority.errors.max">Title is not more then 100.</mat-error>
+        <!-- error message start -->
+      </mat-form-field>
+    
+      <mat-form-field>
+        <mat-select formControlName="roll" placeholder="Select me">
+          <mat-option value="public">Public</mat-option>
+          <mat-option value="private">Private</mat-option>
+        </mat-select>
+        <mat-hint align="end">Here's the dropdown arrow ^</mat-hint>
+      </mat-form-field>
+
+      <mat-checkbox formControlName="status">Active</mat-checkbox>
+    </div>
+  </form>
+
+  <br />
+  <button (click)="categoryFormSubmit();" mat-button [disabled]="!categoryForm.valid">{{ buttonText }}</button>
+  <button mat-button (click)="resetForm();">Reset</button>
+</mat-card>

@@ -24,6 +24,12 @@
       ],
       "on-page-editor/*": [
         "dist/on-page-editor/*"
+      ],
+      "category-management": [
+        "dist/category-management"
+      ],
+      "category-management/*": [
+        "dist/category-management/*"
       ]
     }
   }

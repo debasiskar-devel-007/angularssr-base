@@ -1,0 +1,35 @@
+.example-card {
+  max-width: 400px;
+}
+
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+  border: 2px solid rgb(224, 218, 218);
+}
+.headerSpan{
+  text-align: center;
+  display: block;
+  margin: auto;
+}
+.darkToolbar{
+  background-color: black;
+}
+.gridListWrapper{
+  padding: 30px;
+}
+.buttonsetToolbar{
+  background-color: #f4f3f8;
+  text-align: center;
+  display: block;
+  padding-top: 10px;
+}
+.singleButton{
+  margin: 5px;
+  display: inline-block;
+}
+
+.add-edit-form {
+  width: 50%;
+  margin: auto;
+}

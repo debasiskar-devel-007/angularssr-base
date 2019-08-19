@@ -318,6 +318,169 @@
           }
         }
       }
+    },
+    "category-management": {
+      "projectType": "library",
+      "root": "projects/category-management",
+      "sourceRoot": "projects/category-management/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/category-management/tsconfig.lib.json",
+            "project": "projects/category-management/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/category-management/src/test.ts",
+            "tsConfig": "projects/category-management/tsconfig.spec.json",
+            "karmaConfig": "projects/category-management/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/category-management/tsconfig.lib.json",
+              "projects/category-management/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "healthApp": {
+      "root": "projects/healthApp/",
+      "sourceRoot": "projects/healthApp/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/healthApp",
+            "index": "projects/healthApp/src/index.html",
+            "main": "projects/healthApp/src/main.ts",
+            "polyfills": "projects/healthApp/src/polyfills.ts",
+            "tsConfig": "projects/healthApp/tsconfig.app.json",
+            "assets": [
+              "projects/healthApp/src/favicon.ico",
+              "projects/healthApp/src/assets"
+            ],
+            "styles": [
+              "projects/healthApp/src/styles.css"
+            ],
+            "scripts": [],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/healthApp/src/environments/environment.ts",
+                  "with": "projects/healthApp/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "healthApp:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "healthApp:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "healthApp:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/healthApp/src/test.ts",
+            "polyfills": "projects/healthApp/src/polyfills.ts",
+            "tsConfig": "projects/healthApp/tsconfig.spec.json",
+            "karmaConfig": "projects/healthApp/karma.conf.js",
+            "styles": [
+              "projects/healthApp/src/styles.css"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/healthApp/src/favicon.ico",
+              "projects/healthApp/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/healthApp/tsconfig.app.json",
+              "projects/healthApp/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "healthApp-e2e": {
+      "root": "projects/healthApp-e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/healthApp-e2e/protractor.conf.js",
+            "devServerTarget": "healthApp:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "healthApp:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "projects/healthApp-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "angularssr"
