@@ -6,8 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./slots.component.css']
 })
 export class SlotsComponent implements OnInit {
+  public condition :any = {};
+  public source:any = "eventdayarr_view";
 
-  constructor() { }
+
+  constructor() {
+    // this.condition = {$lte: moment(this.filterval5[1]).format('YYYY-MM-DD')};
+   }
 
   ngOnInit() {
   }

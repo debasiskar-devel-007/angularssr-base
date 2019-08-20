@@ -85,6 +85,7 @@ export class AddAvailabilityFormComponent implements OnInit {
       start_time: [null],
       end_time: [null],
       status: [1],
+      created_by: ["5d429eb2ba5a7f4f357b5563"]
 
     });
     console.log(this.serverUrlData);
@@ -168,7 +169,7 @@ console.log(this.timespan2);
     console.log(this.addAvailiabiltyForm.value);
     if (this.addAvailiabiltyForm.valid) {
       let data: any = {};
-      data = { "source": "events", "data": this.addAvailiabiltyForm.value };
+      data = { "source": "events", "data": this.addAvailiabiltyForm.value ,"sourceobj": ["created_by"]};
       this.apiservice.addData(data).subscribe(res => {
         let resp: any;
         resp = res;

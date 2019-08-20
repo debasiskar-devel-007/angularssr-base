@@ -77,14 +77,14 @@ export class CalendarManagementComponent implements OnInit {
     this.getDataEndpointData = (endpointUrlval) || '<no name set>';
     this.getDataEndpointData = endpointUrlval;
   }
-  slotlist_skip:any=["_id","Fri","Mon","Sat","Sun","Tues","Thurs","Wed","timespan","status","created_at","event_details"];
-  slotlist_modify_header:any={'event title':"Event Title",'start date':"Start Date",'end date':"End Date",'start time':"Start Time",'end time':"End Time","eventtype":"Type"};
-  slotlist_collection:any="events";
+  slotlist_skip:any=["_id","Fri","Mon","Sat","Sun","Tues","Thurs","Wed","status","created_at","event_details","description","created_by"];
+  slotlist_modify_header:any={'meetingwith':"Event Title",'start date':"Start Date",'end date':"End Date",'start time':"Start Time",'end time':"End Time","eventtype":"Type","timespan":'Duration',"fullname":'Created By'};
+  slotlist_collection:any="events_view";
 
     deleteval:any= 'deletesingledata';
     slotlist_status_array:any=[{val:1,name:"Active"},{val:0,name:"Inactive"}];
     updateurl:any = 'addorupdatedata';
-    public editroute1:any="edit-availability/";
+    public editroute1:any="edit-avai lability/";
     public apiurl:any="http://166.62.39.137:5009/";
 
 
@@ -128,7 +128,7 @@ export class CalendarManagementComponent implements OnInit {
   getSlotList(){
     let data: any = {};
     data= {
-      "source": "events"
+      "source": "events_view"
     };
     this.apiservice.getData(data).subscribe(res => {
         console.log(res);
