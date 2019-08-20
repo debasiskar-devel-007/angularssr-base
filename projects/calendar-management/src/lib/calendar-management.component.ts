@@ -22,6 +22,7 @@ export class CalendarManagementComponent implements OnInit {
   public slotlist:any= [];
   public serverUrlData:any;
   public addEndpointData:any;
+  public slotUrl:any;
   public updateEndpointData:any;
   public deleteSingleEndpointData:any;
   public statusSingleUpdateEndpointData:any;
@@ -34,6 +35,15 @@ export class CalendarManagementComponent implements OnInit {
     this.addAvailURL = (addAvailurlval) || '<no name set>';
     this.addAvailURL = addAvailurlval;
   }
+  
+@Input()          //setting the add form url from project
+  set sloturl(val: any) {
+    this.slotUrl = (val) || '<no name set>';
+    this.slotUrl = val;
+  }
+
+
+
   @Input()          //setting the server url from project
   set serverUrl(serverUrlval: any) {
     this.serverUrlData = (serverUrlval) || '<no name set>';
@@ -74,7 +84,7 @@ export class CalendarManagementComponent implements OnInit {
     deleteval:any= 'deletesingledata';
     slotlist_status_array:any=[{val:1,name:"Active"},{val:0,name:"Inactive"}];
     updateurl:any = 'addorupdatedata';
-    public editroute1:any="";
+    public editroute1:any="edit-availability/";
     public apiurl:any="http://166.62.39.137:5009/";
 
 
@@ -131,6 +141,9 @@ export class CalendarManagementComponent implements OnInit {
   }
   gotoAvailability() {              //for rendering the project in the add form
     this.router.navigateByUrl('/'+this.addAvailURL);
+  }
+  gotoRoute(route:any){
+    this.router.navigateByUrl('/'+route);
   }
 
 }

@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { FormControl, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { ApiService } from '../api.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'lib-add-availability-form',
   templateUrl: './add-availability-form.component.html',
@@ -39,8 +40,13 @@ export class AddAvailabilityFormComponent implements OnInit {
     this.timespan2 = (val) || '<no name set>';
     this.timespan2 = val;
   }
+  @Input()
+  set eventtype(val:any){
+    this.eventType_arr = (val) || '<no name set>';
+    this.eventType_arr = val;
+  }
 
-  constructor(public fb: FormBuilder, public _http: HttpClient, public apiservice: ApiService) {
+  constructor(public fb: FormBuilder, public _http: HttpClient, public apiservice: ApiService, public router:Router) {
     // time zone lists
     this.timezone_arr = [
       { name: 'Alaska Standard Time', value: '-08:00|America/Anchorage' },
@@ -52,7 +58,7 @@ export class AddAvailabilityFormComponent implements OnInit {
       { name: 'Hawaii Standard Time', value: '-10:00|Pacific/Honolulu' },
     ];
     //declaring the server urls in api.service
-    this.eventType_arr = ["Type 0","Type 1","Type 2","Type 3","Type 4","Type 5"];
+    //this.eventType_arr = ["Type 0","Type 1","Type 2","Type 3","Type 4","Type 5"];
   }
 
   ngOnInit() {
@@ -62,7 +68,7 @@ export class AddAvailabilityFormComponent implements OnInit {
     //   // address: new FormControl('', [Validators.required, Validators.maxLength(100)])
     // });
     this.addAvailiabiltyForm = this.fb.group({
-      event_title: ["", Validators.required],
+      meetingwith: ["", Validators.required],
       start_date: [new Date()],
       end_date: [new Date()],
       Fri: [false],
@@ -74,7 +80,7 @@ export class AddAvailabilityFormComponent implements OnInit {
       Wed: [false],
       timespan: ["", Validators.required],
       timezone: ["", Validators.required],
-      event_details: ["", Validators.required],
+      description: ["", Validators.required],
       eventtype: ["", Validators.required],
       start_time: [null],
       end_time: [null],
@@ -94,7 +100,7 @@ console.log(this.timespan2);
   }
   inputUntouch(form: any, val: any) {
     console.log('hit');
-    form.controls[val].clearValidators();
+    // form.controls[val].clearValidators();
     form.controls[val].markAsUntouched();
   }
   checkboxErrorChange(day: any) {
@@ -159,6 +165,7 @@ console.log(this.timespan2);
 
     // console.log(this.addAvailiabiltyForm.controls['start_date'].value);
     console.log(this.addAvailiabiltyForm.valid);
+    console.log(this.addAvailiabiltyForm.value);
     if (this.addAvailiabiltyForm.valid) {
       let data: any = {};
       data = { "source": "events", "data": this.addAvailiabiltyForm.value };
@@ -169,7 +176,8 @@ console.log(this.timespan2);
         console.log(resp);
         if (resp.status == 'success') {
           this.resetForm();
-          alert('Success!');
+         // alert('Success!');
+          this.router.navigateByUrl('/');
         }
       });
 
@@ -194,8 +202,19 @@ console.log(this.timespan2);
     //   // this.addAvailiabiltyForm.controls[x].markAsUntouched;
     //   this.inputUntouch(this.addAvailiabiltyForm, x);
     // }
-    this.weekdaysErrorText = false;
+    
     this.addAvailiabiltyForm.reset();
+    this.weekdaysErrorText = false;
+    this.addAvailiabiltyForm.controls['Fri'].setValue(false);
+    this.addAvailiabiltyForm.controls['Mon'].setValue(false);
+    this.addAvailiabiltyForm.controls['Sat'].setValue(false);
+    this.addAvailiabiltyForm.controls['Sun'].setValue(false);
+    this.addAvailiabiltyForm.controls['Tues'].setValue(false);
+    this.addAvailiabiltyForm.controls['Thurs'].setValue(false);
+    this.addAvailiabiltyForm.controls['Thurs'].setValue(false);
+    this.addAvailiabiltyForm.controls['status'].setValue(1);
+    this.exportTime1 ={ hour: 12, minute: 0, meriden: 'AM', format: 12 };
+    this.exportTime2 ={ hour: 12, minute: 0, meriden: 'AM', format: 12 };
     this.addAvailiabiltyForm.markAsUntouched();
     this.addAvailiabiltyForm.clearValidators();
     // this.form.resetForm();
@@ -223,8 +242,8 @@ console.log(this.timespan2);
         "Sat": false,
         "end_date": "Wed Jul 31 2019 13:25:58 GMT+0530 (India Standard Time)",
         "end_time": "2:45",
-        "event_details": "Event details 2",
-        "event_title": "Event 2",
+        "description": "Event details 2",
+        "meetingwith": "Event 2",
         "start_date": "Wed Jul 31 2019 13:25:58 GMT+0530 (India Standard Time)",
         "start_time": "8:10",
         "timespan": "30",

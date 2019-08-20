@@ -8,15 +8,15 @@
 
         <mat-form-field class="example-full-width">
 
-          <input matInput placeholder="Event Title" formControlName="event_title" id="event_title"
-            (blur)="inputUntouch(addAvailiabiltyForm,'event_title')">
+          <input matInput placeholder="Event Title" formControlName="meetingwith" id="meetingwith"
+            (blur)="inputUntouch(addAvailiabiltyForm,'meetingwith')">
           <!-- <mat-hint align="end">Not more then 60 characters long.</mat-hint> -->
           <mat-error
-            *ngIf="!addAvailiabiltyForm.controls['event_title'].valid && addAvailiabiltyForm.controls['event_title'].touched  && addAvailiabiltyForm.controls['event_title'].errors && addAvailiabiltyForm.controls['event_title'].errors.required">
+            *ngIf="!addAvailiabiltyForm.controls['meetingwith'].valid && addAvailiabiltyForm.controls['meetingwith'].touched  && addAvailiabiltyForm.controls['meetingwith'].errors && addAvailiabiltyForm.controls['meetingwith'].errors.required">
             Event Name is required</mat-error>
-          <!-- <p>{{addAvailiabiltyForm.controls['event_title'].errors.required}}</p>
-          <mat-error *ngIf="addAvailiabiltyForm.controls['event_title'].touched  addAvailiabiltyForm.controls['event_title'].required">Name is required</mat-error>
-          <mat-error *ngIf="addAvailiabiltyForm.controls['event_title'].touched && addAvailiabiltyForm.controls['event_title'].maxLength">You have more than 60 characters</mat-error> -->
+          <!-- <p>{{addAvailiabiltyForm.controls['meetingwith'].errors.required}}</p>
+          <mat-error *ngIf="addAvailiabiltyForm.controls['meetingwith'].touched  addAvailiabiltyForm.controls['meetingwith'].required">Name is required</mat-error>
+          <mat-error *ngIf="addAvailiabiltyForm.controls['meetingwith'].touched && addAvailiabiltyForm.controls['meetingwith'].maxLength">You have more than 60 characters</mat-error> -->
         </mat-form-field>
         <mat-form-field>
           <!-- <p>Start Date</p> -->
@@ -40,8 +40,8 @@
           <p>Type Of Event</p>
           <mat-select formControlName="eventtype" (blur)="inputUntouch(addAvailiabiltyForm,'eventtype')">
             <mat-option>--</mat-option>
-            <mat-option *ngFor="let item of eventType_arr" [value]="item">
-              {{item}}
+            <mat-option *ngFor="let item of eventType_arr" [value]="item.value">
+              {{item.name}}
             </mat-option>
           </mat-select>
           <mat-error *ngIf="addAvailiabiltyForm.controls['eventtype'].touched  && addAvailiabiltyForm.controls['eventtype'].errors && addAvailiabiltyForm.controls['eventtype'].errors.required">Please choose a type of event!</mat-error>
@@ -92,8 +92,8 @@
           <mat-error>Please choose an timezone!</mat-error>
         </mat-form-field>
         <mat-form-field class="example-full-width">
-          <textarea matInput formControlName="event_details" id="event_details" placeholder="Event Details"
-            (blur)="inputUntouch(addAvailiabiltyForm,'event_details')"></textarea>
+          <textarea matInput formControlName="description" id="description" placeholder="Event Details"
+            (blur)="inputUntouch(addAvailiabiltyForm,'description')"></textarea>
           <mat-hint align="end">Not more then 60 characters long.</mat-hint>
           <mat-error>Event Details is required!</mat-error>
         </mat-form-field>
@@ -108,9 +108,9 @@
         <mat-error *ngIf="addAvailiabiltyForm.controls['end_time'].value==false">End Time is required!</mat-error>
       </div>
         
-          <button mat-raised-button color="primary" (click)="createEvent(addAvailiabiltyForm.value)">Submit</button>
-          <button mat-raised-button color="primary" (click)="demoApiserviceCall()">Test </button>
-          <button mat-raised-button color="primary" (click)="resetForm()">Reset</button>
+          <button class="submitbtn" mat-raised-button color="primary" (click)="createEvent(addAvailiabiltyForm.value)">Submit</button>
+          <!-- <button mat-raised-button color="primary" (click)="demoApiserviceCall()">Test </button> -->
+          <button class="resetbtn" mat-raised-button color="primary" (click)="resetForm()">Reset</button>
         
       </form>
     </mat-card-content>

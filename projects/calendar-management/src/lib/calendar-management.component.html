@@ -11,7 +11,7 @@
 <mat-toolbar class="buttonsetToolbar" >
 <button class="singleButton" mat-raised-button color="primary"> Sync with Google Calendar </button>
 <button class="singleButton" mat-raised-button color="primary"> Add or update calendar settings </button>
-<button class="singleButton" mat-raised-button color="primary"> Slot View </button> 
+<button class="singleButton" mat-raised-button color="primary" (click)="gotoRoute(slotUrl)"> Slot View </button> 
 <button class="singleButton" mat-raised-button color="primary" (click)="gotoAvailability()"> Add Availability </button> 
 </mat-toolbar>
 <mat-card-content>
@@ -22,6 +22,7 @@
     [sourcedata]="slotlist_collection"
     [statusarr]="slotlist_status_array"
     [apiurl]="apiurl"
+    [jwttoken]="apiservice.accesstoken"
     [updateendpoint]="updateurl"
     [editroute]="editroute1"
     [deleteendpoint]="deleteval"

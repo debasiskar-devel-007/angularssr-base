@@ -28,9 +28,9 @@ import { AvailableslotsComponent } from './availableslots/availableslots.compone
     HttpClientModule,
     ListingModule
   ],
-  exports: [CalendarManagementComponent,AddAvailabilityComponent,AddAvailabilityFormComponent],
+  exports: [CalendarManagementComponent,AddAvailabilityComponent,AddAvailabilityFormComponent,AvailableslotsComponent],
   providers: [ApiService],
-  entryComponents:[AddAvailabilityComponent]
+  entryComponents:[AddAvailabilityComponent,AvailableslotsComponent]
 })
 
 export class CalendarManagementModule { }
