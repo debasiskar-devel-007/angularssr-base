@@ -31,7 +31,7 @@ export class AddEditCategoryComponent implements OnInit {
         extraField: {}
       }
     },
-    authToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJleHAiOjE1NjYzMDI2NjAsImlhdCI6MTU2NjIxNjI2MH0.RpfUGqdg5DEvze3b1sHPTzJL0Q6hfP6igz7ReOAdQzc",
+    authToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJleHAiOjE1NjYzOTA1MTMsImlhdCI6MTU2NjMwNDExM30.6Ru7ugaJDfp_tZWWBSJuuMeJp-vb3LSt-DUU0nhiU68",
     callBack: "category-management",
     buttonText: "Create"
   }
@@ -43,7 +43,6 @@ export class AddEditCategoryComponent implements OnInit {
     this.activateRoute.params.subscribe(params => {
       if(params._id) {
         this.editConfig(params._id);
-        console.log(params._id);
       }
     });
   }

@@ -1,30 +1,27 @@
-table {
-    width: 100%;
-  }
-
-.data-list {
-  width: 95%;
+h2 {
   margin: auto;
+}
+
+mat-card {
+  background-color: #E3E2E1;
+}
+
+.example-card {
+  max-width: 400px;
+}
+
+.example-header-image {
+  background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+  background-size: cover;
+  border: 2px solid rgb(224, 218, 218);
 }
 
 .add-new-button {
   float: right;
-  margin-top: 4px;
-  margin-right: 4px;
-  border: 1px black solid;
 }
 
-.div-header {
-  width: 95%;
+.spinner {
+  text-align: center;
   margin: auto;
-}
-
-.title {
-  width: 75%;
-  float: left;
-}
-
-.option {
-  width: 25%;
-  float: right;
+  height: 100px;
 }

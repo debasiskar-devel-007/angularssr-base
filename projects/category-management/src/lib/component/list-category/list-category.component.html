@@ -1,25 +1,22 @@
-<div class="data-list">
-  <div class="mat-elevation-z8">
-    <div class="div-header">
-      <div class="title">
-        <!-- Header title start -->
-        <h1>Category List</h1>
-        <!-- Header title end -->
-      </div>
+<mat-card>
+    <mat-toolbar color="primary">
+        <h2>Manage Category</h2>
+    </mat-toolbar>
+</mat-card>
 
-      <div class="option">
-        <!-- Add New Button Start -->
-        <h1><button class="add-new-button" (click)="addNewCategory()" mat-raised-button matTooltip="Create new category." aria-label="Button that displays a tooltip when focused or hovered over">Add New</button></h1>
-        <!-- Add New Button End -->
-      </div>
-    </div>
+<br />
 
-    <br />
-    <br />
-    <br />
-    <br />
+<mat-card *ngIf="loader==true">
+  <mat-spinner class="spinner"></mat-spinner>
+</mat-card>
 
-    <lib-listing class="formfilterdiv" *ngIf="categoryData !=null && categoryData.length > 0"
+<mat-card *ngIf="loader==false">
+  <mat-toolbar>
+    Category List
+    <button class="add-new-button" (click)="addNewCategory()" mat-raised-button matTooltip="Create new category." aria-label="Button that displays a tooltip when focused or hovered over">Add New</button>
+  </mat-toolbar>
+
+  <lib-listing class="formfilterdiv" *ngIf="categoryData !=null && categoryData.length > 0"
       [datasource]="categoryData"
       [skip]="categoryListingConfig.listArray_skip"
       [modify_header_array]="categoryListingConfig.listArray_modify_header"
@@ -29,7 +26,5 @@
       [apiurl]="categoryListingConfig.apiUrl"
       [editroute]="categoryListingConfig.editUrl"
       [deleteendpoint]="categoryListingConfig.deleteEndPoint">
-    </lib-listing>
-
-  </div>
-</div>
+  </lib-listing>
+</mat-card>

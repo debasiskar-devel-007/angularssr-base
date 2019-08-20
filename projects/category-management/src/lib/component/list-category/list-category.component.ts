@@ -13,6 +13,7 @@ export class ListCategoryComponent implements OnInit {
 
   public categoryData: any;
   public categoryListingConfig: any;
+  public loader: boolean = true;
 
   @Input()
   set config(receivedCategoryData: any) {
@@ -31,8 +32,8 @@ export class ListCategoryComponent implements OnInit {
     let postData: any = { "source": "category", "condition": {}, "token": this.categoryListingConfig.jwtToken };
     let endPoint: any = this.categoryListingConfig.apiUrl + this.categoryListingConfig.listEndPoint;
     this.httpRequest.submitRequest(endPoint, postData, 'post').subscribe((response) => {
-      console.log(response);
       this.categoryData = response.res;
+      this.loader = false;
     }, (error) => {
       console.log("Some error occord. Please try angain.");
     });

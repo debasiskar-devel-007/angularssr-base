@@ -12,30 +12,30 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 export class AddEditCategoryComponent implements OnInit {
 
-  categoryForm: FormGroup;
-  categoryFormSubmited: boolean = false;
-  usersData: any = null;
+  public categoryForm: FormGroup;
+  public usersData: any = null;
+  public formHeaderText: string = "Create New Category";
   public buttonText: any = null;
-
   public configData: any;
+  public loader: boolean = false;
   
   @Input()
   set config(getConfig: any) {
     this.configData = getConfig;
-    console.log(this.configData);
   }
 
   constructor(private formBuilder: FormBuilder, private httpRequest: CategoryManagementService,
     private ActivatedRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
+    this.loader = false;
     /* Generate form */
     this.generateForm();
 
     /* Button text */
     this.buttonText = this.configData.buttonText;
 
-    /*  */
+    /* Checking */
     switch(this.configData.action) {
       case 'add':
         break;
@@ -52,19 +52,15 @@ export class AddEditCategoryComponent implements OnInit {
       title:        [ null, [ Validators.required, Validators.maxLength(150) ] ],
       description:  [ null, [ Validators.required, Validators.maxLength(1000) ] ],
       priority:     [ 1, [ Validators.required, Validators.max(100) ] ],
-      roll:         [ 'public', null ],
+      role:         [ 'public', null ],
       status:       [ null, null ],
       userId:       [ this.configData.userData.id, null ]
     });
   }
 
-  /* Chacking validate in angular */
-  get categoryFormValidate() { return this.categoryForm.controls; }
-
   /* Category form submit */
   categoryFormSubmit() {
-    this.categoryFormSubmited = true;
-    this.markFormGroupTouched(this.categoryForm);
+    this.loader = true;
 
     /* stop here if form is invalid */
     if (this.categoryForm.invalid) {
@@ -93,26 +89,14 @@ export class AddEditCategoryComponent implements OnInit {
     }
   }
 
-  /* Category form make field touch */
-  private markFormGroupTouched(formGroup: FormGroup) {
-    (<any>Object).values(formGroup.controls).forEach(control => {
-      control.markAsTouched();
-
-      if (control.controls) {
-        this.markFormGroupTouched(control);
-      }
-    });
-  }
-
   /* reset Category form */
   resetCategoryForm() {
-    this.categoryFormSubmited = false;
     this.categoryForm.reset();
   }
 
-  /* Category form submit */
+  /* Set default category form value */
   setDefaultValue(configData) {
-    /* start process to submited data */
+    this.formHeaderText = "Update Category";
     let postData: any = { 
                           source: configData.dataListConfig.data.source,
                           condition: configData.dataListConfig.condition,
@@ -125,17 +109,13 @@ export class AddEditCategoryComponent implements OnInit {
         title:        defaultValue.title,
         description:  defaultValue.description,
         priority:     defaultValue.priority,
-        roll:         defaultValue.roll,
+        role:         defaultValue.role,
         status:       defaultValue.status,
         userId:       null
       });
     }, (error) => {
       console.log("Some error occord. Please try angain.");
     });
-  }
-
-  resetForm() {
-    alert('okk');
   }
 
 }

@@ -14,12 +14,12 @@ export class ListCategoryComponent implements OnInit {
     listEndPoint: "datalist",
     datasource: "",
     tableName: "category",
-    listArray_skip: [ "_id", "status", "userId", "created_at", "id", "updated_at" ],
+    listArray_skip: [ "_id", "userId", "created_at", "id", "updated_at" ],
     listArray_modify_header: { "title": "Title", "description": "Description", "priority": "Priority", "roll": "Roll", "status": "Status" },
     admintablenameTableName: "admin",
     updateurl: "addorupdatedata",
     editUrl: "category-management/edit",
-    jwtToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJleHAiOjE1NjYzMDI2NjAsImlhdCI6MTU2NjIxNjI2MH0.RpfUGqdg5DEvze3b1sHPTzJL0Q6hfP6igz7ReOAdQzc",
+    jwtToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJleHAiOjE1NjYzOTA1MTMsImlhdCI6MTU2NjMwNDExM30.6Ru7ugaJDfp_tZWWBSJuuMeJp-vb3LSt-DUU0nhiU68",
     deleteEndPoint: "deletesingledata",
   }
   /************** lib list setup end here *************/
