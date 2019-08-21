@@ -29,6 +29,7 @@ export class AddEditCategoryComponent implements OnInit {
 
   ngOnInit() {
     this.loader = false;
+    
     /* Generate form */
     this.generateForm();
 

@@ -17,7 +17,7 @@ mat-card {
 }
 
 .add-new-button {
-  float: right;
+  margin: auto;
 }
 
 .spinner {

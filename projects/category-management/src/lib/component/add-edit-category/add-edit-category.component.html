@@ -19,7 +19,7 @@
         <!-- error message start -->
         <mat-error *ngIf="categoryForm.controls['title']?.touched && categoryForm.controls['title'].errors && categoryForm.controls['title'].errors.required">Title is required.</mat-error>
         <mat-error *ngIf="categoryForm.controls['title']?.touched && categoryForm.controls['title'].errors && categoryForm.controls['title'].errors.maxlength">Title is not more then 150 charector.</mat-error>
-        <!-- error message start -->
+        <!-- error message end -->
       </mat-form-field>
     
       <mat-form-field hintLabel="Max 1000 characters">
@@ -29,7 +29,7 @@
         <!-- error message start -->
         <mat-error *ngIf="categoryForm.controls['description']?.touched && categoryForm.controls['description'].errors && categoryForm.controls['description'].errors.required">Title is required.</mat-error>
         <mat-error *ngIf="categoryForm.controls['description']?.touched && categoryForm.controls['description'].errors && categoryForm.controls['description'].errors.maxlength">Title is not more then 1000 charector.</mat-error>
-        <!-- error message start -->
+        <!-- error message end -->
       </mat-form-field>
     
       <mat-form-field>
@@ -54,6 +54,7 @@
   </form>
 
   <br />
+  
   <button (click)="categoryFormSubmit();" mat-button [disabled]="!categoryForm.valid">{{ buttonText }}</button>
   <button mat-button (click)="resetCategoryForm();">Reset</button>
 </mat-card>

@@ -9,6 +9,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class ListCategoryComponent implements OnInit {
 
   /************** lib list setup start here *************/
+  public categoryData: any;
   public categoryListingConfig:any = {
     apiUrl: "http://166.62.39.137:5009/",
     listEndPoint: "datalist",
@@ -19,12 +20,17 @@ export class ListCategoryComponent implements OnInit {
     admintablenameTableName: "admin",
     updateurl: "addorupdatedata",
     editUrl: "category-management/edit",
-    jwtToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJleHAiOjE1NjYzOTA1MTMsImlhdCI6MTU2NjMwNDExM30.6Ru7ugaJDfp_tZWWBSJuuMeJp-vb3LSt-DUU0nhiU68",
+    jwtToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJleHAiOjE1NjY0Nzg5MzcsImlhdCI6MTU2NjM5MjUzN30.PpPJaIm_fK_HFB3y2A3zba-51k-JrNVgJpspp-k4Q2E",
     deleteEndPoint: "deletesingledata",
+    categoryList: ""
   }
   /************** lib list setup end here *************/
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private ActivatedRoute: ActivatedRoute) {
+    this.ActivatedRoute.data.subscribe(resolveData => {
+      this.categoryListingConfig.categoryList = resolveData.categoryListData;
+    });
+  }
 
   ngOnInit() {
   }

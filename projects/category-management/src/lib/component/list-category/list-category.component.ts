@@ -18,7 +18,7 @@ export class ListCategoryComponent implements OnInit {
   @Input()
   set config(receivedCategoryData: any) {
     this.categoryListingConfig = receivedCategoryData;
-    this.getCategoryData();
+    this.loader = false;
   }
 
   constructor(private httpRequest: CategoryManagementService, private router: Router) { }

@@ -31,7 +31,7 @@ export class AddEditCategoryComponent implements OnInit {
         extraField: {}
       }
     },
-    authToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJleHAiOjE1NjYzOTA1MTMsImlhdCI6MTU2NjMwNDExM30.6Ru7ugaJDfp_tZWWBSJuuMeJp-vb3LSt-DUU0nhiU68",
+    authToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJleHAiOjE1NjY0Nzg5MzcsImlhdCI6MTU2NjM5MjUzN30.PpPJaIm_fK_HFB3y2A3zba-51k-JrNVgJpspp-k4Q2E",
     callBack: "category-management",
     buttonText: "Create"
   }

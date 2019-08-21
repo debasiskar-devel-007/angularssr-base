@@ -7,6 +7,7 @@ import { AddEditCategoryComponent } from './Component/add-edit-category/add-edit
 import { ListCategoryComponent } from './Component/list-category/list-category.component';
 import { AppRoutingModule } from './Route/app-routing.module';
 import 'hammerjs';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,7 @@ import 'hammerjs';
     CategoryManagementModule,
     AppRoutingModule,
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
