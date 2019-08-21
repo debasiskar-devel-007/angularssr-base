@@ -27,6 +27,7 @@ export class CalendarManagementComponent implements OnInit {
   public deleteSingleEndpointData:any;
   public statusSingleUpdateEndpointData:any;
   public getDataEndpointData:any;
+  public edit_availabilty_url:any="";
   public jwttoken:any = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJleHAiOjE1NjYwMzU4NTUsImlhdCI6MTU2NTk0OTQ1NX0.dYvUFuvdsRrvkAOsBd4Jm77OxvkDy2pTKmMaNGIBw9E';
   
   public addAvailURL:any='';      // url variable to fetch the add availability form page
@@ -36,13 +37,25 @@ export class CalendarManagementComponent implements OnInit {
     this.addAvailURL = addAvailurlval;
   }
   
+  @Input()          //setting the add form url from project
+  set editAvailData(val: any) {
+    this.edit_availabilty_url = (val) || '<no name set>';
+    this.edit_availabilty_url = val;
+  }
+  
 @Input()          //setting the add form url from project
   set sloturl(val: any) {
     this.slotUrl = (val) || '<no name set>';
     this.slotUrl = val;
   }
 
+  
+  @Input()          //setting the server url from project
+  set eventlistarray(array: any) {
+    this.slotlist = (array) || '<no name set>';
+    this.slotlist = array;
 
+  }
 
   @Input()          //setting the server url from project
   set serverUrl(serverUrlval: any) {
@@ -84,7 +97,7 @@ export class CalendarManagementComponent implements OnInit {
     deleteval:any= 'deletesingledata';
     slotlist_status_array:any=[{val:1,name:"Active"},{val:0,name:"Inactive"}];
     updateurl:any = 'addorupdatedata';
-    public editroute1:any="edit-avai lability/";
+   
     public apiurl:any="http://166.62.39.137:5009/";
 
 
@@ -119,9 +132,9 @@ export class CalendarManagementComponent implements OnInit {
     setTimeout(() => {
       this.apiservice.setgetdataEndpoint(this.getDataEndpointData);
     }, 50);
-    setTimeout(()=>{
-      this.getSlotList();
-    },100);
+    // setTimeout(()=>{
+    //   this.getSlotList();
+    // },100);
     
     
   }

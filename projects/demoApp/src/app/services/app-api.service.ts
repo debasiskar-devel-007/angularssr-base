@@ -18,143 +18,20 @@ export class ApiService {
   public uploaderror: any = '';
   public accesstoken:any='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJleHAiOjE1NjY0NzI4NDcsImlhdCI6MTU2NjM4NjQ0N30.cpiGHuAcmmRJ8kZDEuW4IARUCoB-Hk3Kbft7taJcFEg';
   fileservername: any = [];
-  serverUrl: any;
+  serverUrl: any = 'http://166.62.39.137:5009/';
   addendpointUrl: any;
   updateendpointUrl: any;
   deletesingle_endpointUrl: any;
   updatestatus_single_endpointUrl: any;
   deletemultiple_endpointUrl: any;
   updatestatus_multiple_endpointUrl: any;
-  getdata_endpointUrl: any;
-  private subjectForServerUrl = new Subject<any>();
-  private subjectForaddEndpointUrl = new Subject<any>();
-  private subjectForupdateEndpointUrl = new Subject<any>();
-  private subjectFordeletesingleEndpointUrl = new Subject<any>();
-  private subjectForupdatestatusSingleEndpointUrl = new Subject<any>();
-  private subjectForGetdataEndpointUrl = new Subject<any>();
-  public subscriptionServer: Subscription;
-  public subscriptionaddEndpoint: Subscription;
-  public subscriptionupdateEndpoint: Subscription;
-  public subscriptiondeletesingleEndpoint: Subscription;
-  public subscriptionupdatestatusSingleEndpoint: Subscription;
-  public subscriptionGetdataEndpoint: Subscription;
+  getdata_endpointUrl: any = 'datalist';
 
   constructor(private _http: HttpClient,
     private _authHttp: HttpClient) {
-    this.subscriptionServer = this.getServerUrl().subscribe(message => {
-     let result: any;
-      result = message;
-      if (result != null) {
-        this.serverUrl = result;
-      } else {
-        this.serverUrl = null;
-      }
-    });
-    this.subscriptionaddEndpoint = this.getaddEndpoint().subscribe(message => {
-      let result: any;
-      result = message;
-      if (result != null) {
-        this.addendpointUrl = result;
-      } else {
-        this.addendpointUrl = null;
-      }
-    });
-    this.subscriptionupdateEndpoint = this.getupdateEndpoint().subscribe(message => {
-      let result: any;
-      result = message;
-      if (result != null) {
-        this.updateendpointUrl = result;
-      } else {
-        this.updateendpointUrl = null;
-      }
-    });
-    this.subscriptiondeletesingleEndpoint = this.getdeletesingleEndpoint().subscribe(message => {
-      let result: any;
-      result = message;
-      if (result != null) {
-        this.deletesingle_endpointUrl = result;
-      } else {
-        this.deletesingle_endpointUrl = null;
-      }
-    });
-    this.subscriptionupdatestatusSingleEndpoint = this.getupdatestatus_singleEndpoint().subscribe(message => {
-      let result: any;
-      result = message;
-      if (result != null) {
-        this.updatestatus_single_endpointUrl = result;
-      } else {
-        this.updatestatus_single_endpointUrl = null;
-      }
-    });
-    this.subscriptionGetdataEndpoint = this.getdataEndpoint().subscribe(message => {
-      let result: any;
-      result = message;
-      if (result != null) {
-        this.getdata_endpointUrl = result;
-      } else {
-        this.getdata_endpointUrl = null;
-      }
-    });
+    
   }
 
-  setServerUrl(value: any) {
-    this.subjectForServerUrl.next(value);
-  }
-  public clearServerUrl() {
-    this.subjectForServerUrl.next(null);
-  }
-  public getServerUrl(): Observable<any> {
-    return this.subjectForServerUrl.asObservable();
-  }
-
-  setaddEndpoint(value: any) {
-    this.subjectForaddEndpointUrl.next(value);
-  }
-  public clearaddEndpoint() {
-    this.subjectForaddEndpointUrl.next(null);
-  }
-  public getaddEndpoint(): Observable<any> {
-    return this.subjectForaddEndpointUrl.asObservable();
-  }
-  setupdateEndpoint(value: any) {
-    this.subjectForupdateEndpointUrl.next(value);
-  }
-  public clearupdateEndpoint() {
-    this.subjectForupdateEndpointUrl.next(null);
-  }
-  public getupdateEndpoint(): Observable<any> {
-    return this.subjectForupdateEndpointUrl.asObservable();
-  }
-
-  setdeletesingleEndpoint(value: any) {
-    this.subjectFordeletesingleEndpointUrl.next(value);
-  }
-  public cleardeletesingleEndpoint() {
-    this.subjectFordeletesingleEndpointUrl.next(null);
-  }
-  public getdeletesingleEndpoint(): Observable<any> {
-    return this.subjectFordeletesingleEndpointUrl.asObservable();
-  }
-
-  setupdatestatus_singleEndpoint(value: any) {
-    this.subjectForupdatestatusSingleEndpointUrl.next(value);
-  }
-  public clearupdatestatus_singleEndpoint() {
-    this.subjectForupdatestatusSingleEndpointUrl.next(null);
-  }
-  public getupdatestatus_singleEndpoint(): Observable<any> {
-    return this.subjectForupdatestatusSingleEndpointUrl.asObservable();
-  }
-
-  setgetdataEndpoint(value: any) {
-    this.subjectForGetdataEndpointUrl.next(value);
-  }
-  public cleargetdataEndpoint() {
-    this.subjectForGetdataEndpointUrl.next(null);
-  }
-  public getdataEndpoint(): Observable<any> {
-    return this.subjectForGetdataEndpointUrl.asObservable();
-  }
 
 
 
@@ -200,6 +77,8 @@ export class ApiService {
         'access-token': this.accesstoken
       })
     };
+    console.log('get data ');
+    console.log(this.getdata_endpointUrl);
     var result = this._http.post(this.serverUrl + this.getdata_endpointUrl, JSON.stringify(requestdata), httpOptions).pipe(map(res => res));
     return result;
   }

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-
+import {ApiService} from '../../services/app-api.service';
+import { Router,ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
@@ -12,9 +13,19 @@ export class HomepageComponent implements OnInit {
   public deleteUrl:any = 'deletesingledata';
   public statusUpdateUrl:any = 'statusupdate';
   public getDataUrl:any = 'datalist';
-  constructor() { }
+  public getDataEndpointData:any = 'datalist';
+  public eventList:any = [];
+  constructor(public apiservice:ApiService, public activatedroute: ActivatedRoute) {
+    
+    
+   }
 
   ngOnInit() {
+    this.activatedroute.data.forEach((data) => {
+      // PRE LOAD DATA PRIOR
+      this.eventList = data['results'].res;
+      
+  });
   }
 
 }

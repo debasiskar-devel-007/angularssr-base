@@ -3,12 +3,13 @@ import { NgModule } from '@angular/core';
 import {CalendarManagementModule} from 'calendar-management';
 import { AppComponent } from './app.component';
 import {DemoMaterialModule} from '../material-module';
-import { ManageAvailabiltyComponent } from './manage-availabilty/manage-availabilty.component';
+import { ManageAvailabiltyComponent } from './components/manage-availabilty/manage-availabilty.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AppRoutingModule } from './app-routing.module';
-import { HomepageComponent } from './homepage/homepage.component';
+import { HomepageComponent } from './components/homepage/homepage.component';
 import { ListingModule } from 'listing-angular7';
-import { SlotsComponent } from './slots/slots.component';
+import { SlotsComponent } from './components/slots/slots.component';
+import {Resolveservice} from './services/route-resolve.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -24,7 +25,7 @@ import { SlotsComponent } from './slots/slots.component';
     AppRoutingModule,
     ListingModule
   ],
-  providers: [],
+  providers: [Resolveservice],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

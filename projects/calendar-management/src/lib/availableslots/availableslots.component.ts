@@ -6,38 +6,34 @@ import { ApiService } from '../api.service';
   styleUrls: ['./availableslots.component.css']
 })
 export class AvailableslotsComponent implements OnInit {
-  public slot_source:any='';
-  public slot_cond:any = {};
-  public slotarray:any = [];
-  @Input()          //setting the slot source
-  set slotdata_source(val: any) {
-    this.slot_source = (val) || '<no name set>';
-    this.slot_source = val;
-    console.log(val);
-  }
-  @Input()          //setting the slot source
-  set slotdata_cond(val: any) {
-    this.slot_cond = (val) || '<no name set>';
-    this.slot_cond = val;
-    console.log(val);
-  }
+  public slotarray: any = [];
+  // @Input()          //setting the slot array from slot page
+  // set slotListarray(array: any) {
+  //   console.log(array);
+  //   this.slotarray = (array) || '<no name set>';
+  //   this.slotarray = array;
+  //   console.log('array list from resolve'); 
+  //   console.log(array);
+  //  // console.log(this.slotarray);
+
+  // }
 
   constructor(public apiservice: ApiService) {
-this.getSlots();
-   }
-   getSlots(){
+    this.getSlots();
+  }
+  getSlots() {
     let data: any = {};
-    data= {
-      "source": "eventdayarr_view","condition":this.slot_cond
+    data = {
+      "source": "eventdayarr_view", "condition": {}
     };
     this.apiservice.getData(data).subscribe(res => {
-        console.log(res);
-        let resp: any;
-        resp = res;
-        console.log('result in getDataFunction');
-        console.log(resp);
-        this.slotarray = resp.res;
-      });
+      console.log(res);
+      let resp: any;
+      resp = res;
+      console.log('result in getDataFunction');
+      console.log(resp);
+      this.slotarray = resp.res;
+    });
   }
 
   ngOnInit() {
