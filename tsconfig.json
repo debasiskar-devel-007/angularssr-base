@@ -42,6 +42,12 @@
       ],
       "uploadfile/*": [
         "dist/uploadfile/*"
+      ],
+      "blog": [
+        "dist/blog"
+      ],
+      "blog/*": [
+        "dist/blog/*"
       ]
     }
   }

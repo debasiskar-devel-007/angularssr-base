@@ -25,22 +25,20 @@ export class AddteamformComponent implements OnInit {
     set serverUrl(serverUrlval: any) {
     this.serverUrlData = (serverUrlval) || '<no name set>';
     this.serverUrlData = serverUrlval;
-    console.log('serverUrlval');
-    console.log(this.serverUrlData);
-​
+    
   } 
 
   @Input()          //setting the server url from project
     set getDataEndpoint(endpointUrlval: any) {
     this.getDataEndpointData = (endpointUrlval) || '<no name set>';
     this.getDataEndpointData = endpointUrlval;
-    console.log('okkkkk'+this.getDataEndpointData);
+    
   }
   @Input()          //setting the server url from project
     set addEndpoint(endpointUrlval: any) {
     this.addEndpointData = (endpointUrlval) || '<no name set>';
     this.addEndpointData = endpointUrlval;
-    console.log(this.addEndpointData);
+    
   }
 
   constructor(public fb: FormBuilder,public activeroute: ActivatedRoute,
@@ -82,8 +80,8 @@ export class AddteamformComponent implements OnInit {
     
   }
   inputUntouch(form:any,val:any){
-    // console.log('on blur .....');
-    // console.log(form.controls[val].value);
+     console.log('on blur .....');
+     console.log(form.controls[val].value);
      form.controls[val].markAsUntouched();
  }
  get mutiplephone() {
@@ -139,9 +137,14 @@ export class AddteamformComponent implements OnInit {
 /***********************file upload*************************/
 onFileChange(event) {
   if (event.target.files.length > 0) {
-    const file = event.target.files[0];
-    console.log(file);
-    this.teamForm.get('upload').setValue(file);
+    for(let val:any=0;val<=event.target.files.length;val++){
+
+      const file = event.target.files[0];
+      console.log(file);
+      this.teamForm.get('upload').setValue(file);
+      
+    }
+    
   }
 }
 

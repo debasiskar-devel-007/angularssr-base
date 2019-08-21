@@ -104,16 +104,7 @@ export class MyteamComponent implements OnInit {
         this.teamarray = result.res;
         
     })
-    // let link = "http://166.62.39.137:5009/datalist";
-    // let data = { "source": "demoteam" };
-    // this.httpRequest.submitRequest(link, data, 'post')
-    //   .subscribe(response => {
-    //     let result:any;
-    //     result = response;
-    //     this.teamarray = result.res;
-    //     console.log(this.teamarray);
-    //   }
-    //   );    
+    
   }
   addButton(){
     this.router.navigateByUrl('/'+this.addMemberviaUrl);

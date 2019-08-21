@@ -9,14 +9,13 @@ import { Observable, Subject, Subscription } from 'rxjs';
 })
 export class ApiService {
 
-
   public lengthis;
   public percentageis;
   public inprogress;
   public progress: any = [];
   public uploadtype;
   public uploaderror: any = '';
-  public accesstoken:any='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJleHAiOjE1NjYzNjI1NTgsImlhdCI6MTU2NjI3NjE1OH0.dKJTwmrmR-vWqzHCUiqK8S0TC5sWuiu9de4lmuJYXuM  ';
+  public accesstoken:any='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJleHAiOjE1NjY0NDkwMTUsImlhdCI6MTU2NjM2MjYxNX0.Fchllx2Zz7xDZMv7uaOjF26HlsgRv3x8EUKceltiTnI';
   fileservername: any = [];
   serverUrl: any;
   addendpointUrl: any;
