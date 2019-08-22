@@ -8,9 +8,9 @@ const routes: Routes = [
   // { path: "", component: HomepageComponent},
   { path: "manage-availability", component: ManageAvailabiltyComponent},
   { path: "edit-availability/:id", component: ManageAvailabiltyComponent},
-  { path: "slots", component: SlotsComponent},
+  // { path: "slots", component: SlotsComponent},
   { path: "", component: HomepageComponent,resolve: {results: Resolveservice}, data: { source: 'events_view', condition: {} }},
-  { path: "test", component: SlotsComponent,resolve: {results: Resolveservice}, data: { source: 'eventdayarr_view', condition: {} }},
+  { path: "slots", component: SlotsComponent,resolve: {results: Resolveservice}, data: { source: 'eventdayarr_view', condition: {} }},
 ];
 
 @NgModule({

@@ -7,19 +7,19 @@ import { ApiService } from '../api.service';
 })
 export class AvailableslotsComponent implements OnInit {
   public slotarray: any = [];
-  // @Input()          //setting the slot array from slot page
-  // set slotListarray(array: any) {
-  //   console.log(array);
-  //   this.slotarray = (array) || '<no name set>';
-  //   this.slotarray = array;
-  //   console.log('array list from resolve'); 
-  //   console.log(array);
-  //  // console.log(this.slotarray);
+  @Input()          //setting the slot array from slot page
+  set slotListarray(arrayval: any) {
+    console.log(arrayval);
+    this.slotarray = (arrayval) || '<no name set>';
+    this.slotarray = arrayval;
+    console.log('array list from resolve'); 
+    console.log(arrayval);
+   console.log(this.slotarray);
 
-  // }
+  }
 
   constructor(public apiservice: ApiService) {
-    this.getSlots();
+    // this.getSlots();
   }
   getSlots() {
     let data: any = {};
