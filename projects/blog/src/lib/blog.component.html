@@ -4,18 +4,19 @@
     <mat-toolbar color="primary" style="justify-content: center; align-items: center;">
         <h2 class="headerSpan" >Blog</h2>
     </mat-toolbar>
-</mat-card>
+
 <!-- header part end here -->
 
-<mat-card-content>
     <!-- add button start here -->
-     <span class="btnwrapper">
-         <button class="addbtn" mat-button color="primary"  (click)="addButton()">Add Team Member</button>
-    </span>
+    <mat-toolbar class="buttonsetToolbar" >
+        <button class="singleButton" mat-raised-button color="primary" (click)="addButton()">Add Team Member</button>
+    </mat-toolbar>
+     
     <!-- adding button end here -->
 
     <!-- applying lib-listing start here -->
-    <lib-listing *ngIf="temparray.length>0"
+    <mat-card-content class="listing-content-admin">
+    <lib-listing class="formfilterdiv formfilterdivnew" *ngIf="temparray.length>0"
         [datasource]="temparray"
         [skip]="teamlist_skip" 
         [modify_header_array]="teamlist_modify_header"
@@ -29,3 +30,4 @@
     <!-- applying lib-listing end here -->
 
 </mat-card-content>
+</mat-card>

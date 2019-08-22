@@ -20,5 +20,6 @@ import { BloglistComponent } from './bloglist/bloglist.component';
   ],
   providers: [],
   bootstrap: [AppComponent]
+  
 })
 export class AppModule { }

@@ -1,11 +1,11 @@
-import { Component, OnInit, Input,Inject } from '@angular/core';
+import { Component, OnInit, Input, Inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../api.service';
 import { HttpClient } from '@angular/common/http';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from "@angular/material";
 export interface DialogData {
-  msg: string;
+  message: string;
 }
 @Component({
   selector: 'lib-add-blog',
@@ -15,6 +15,7 @@ export interface DialogData {
 export class AddBlogComponent implements OnInit {
 
   /**blog varibles declaration start here**/
+  public dialogRef: any;
   public getDataEndpointData: any;
   public addEndpointData: any;
   public serverUrlData: any;
@@ -98,6 +99,21 @@ export class AddBlogComponent implements OnInit {
 
 
   }
+  /*modal start here*/
+  openDialog(x: any): void {
+    this.dialogRef = this.dialog.open(Dialogtest, {
+      width: '250px',
+
+      data: { message: x }
+    });
+
+    this.dialogRef.afterClosed().subscribe(result => {
+      // console.log('The dialog was closed');
+
+    });
+  }
+  /**modal end here */
+
   /**validation untouch purpose **/
   inputUntouch(form: any, val: any) {
     console.log('on blur .....');
@@ -124,30 +140,35 @@ export class AddBlogComponent implements OnInit {
   /**add & update* blogs submitting form start here**/
   blogAddEditFormSubmit() {
     this.isSubmitted = true;
-    var data: any;
+    let x: any;
+    for (x in this.blogAddEditForm.controls) {
+      this.blogAddEditForm.controls[x].markAsTouched();
+    }
+    if (this.blogAddEditForm.valid) {
+      var data: any;
+      if (this.activeroute.snapshot.params.id != null) {   //update part
+        data = {
+          "source": "blog_category",
+          "data": {
+            "id": this.params_id,
+            "parent_id": this.blogAddEditForm.value.parent_id,
+            'title': this.blogAddEditForm.value.title,
+            'description': this.blogAddEditForm.value.description
+          },
+          "sourceobj": ["parent_id"]
+        };
+      } else {
+        data = {                                         //add part
+          "source": "blog_category",
+          "data": {
+            "parent_id": this.blogAddEditForm.value.parent_id,
+            'title': this.blogAddEditForm.value.title,
+            'description': this.blogAddEditForm.value.description
 
-    if (this.activeroute.snapshot.params.id != null) {   //update part
-      data = {
-        "source": "blog_category",
-        "data": {
-          "id": this.params_id,
-          "parent_id": this.blogAddEditForm.value.parent_id,
-          'title': this.blogAddEditForm.value.title,
-          'description': this.blogAddEditForm.value.description
-        },
-        "sourceobj": ["parent_id"]
-      };
-    } else {
-      data = {                                         //add part
-        "source": "blog_category",
-        "data": {
-          "parent_id": this.blogAddEditForm.value.parent_id,
-          'title': this.blogAddEditForm.value.title,
-          'description': this.blogAddEditForm.value.description
-
-        },
-        "sourceobj": ["parent_id"]
-      };
+          },
+          "sourceobj": ["parent_id"]
+        };
+      }
     }
     this.apiservice.addData(data).subscribe(response => {
       let result: any;
@@ -155,6 +176,11 @@ export class AddBlogComponent implements OnInit {
       this.statusarray = result.status;
       console.log("this.statusarray");
       console.log(this.statusarray);
+
+      this.openDialog(result.status);
+      setTimeout(() => {
+        this.dialogRef.close();
+      }, 2000);
 
       setTimeout(() => {
         this.router.navigateByUrl('/' + this.listUrl);
@@ -192,15 +218,15 @@ export class AddBlogComponent implements OnInit {
   /**Edit Blog End Here**/
 
 }
-// @Component({
-//   selector: 'dialogtest',
-//   templateUrl: 'modal.html',
-// })
-// export class Dialogtest {
-//   public is_error: any;
+@Component({
+  selector: 'dialogtest',
+  templateUrl: 'modal.html',
+})
+export class Dialogtest {
+  public is_error: any;
 
-//   constructor(public dialogRef: MatDialogRef<Dialogtest>,
-//      @Inject(MAT_DIALOG_DATA) public data: DialogData) {
-//         this.is_error = data.msg;
-//   }
-// }
+  constructor(public dialogRef: MatDialogRef<Dialogtest>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {
+    this.is_error = data.message;
+  }
+}

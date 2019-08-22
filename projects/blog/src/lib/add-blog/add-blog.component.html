@@ -2,17 +2,16 @@
 <mat-card>
   <mat-toolbar color="primary" style="justify-content: center; align-items: center;">
     <h2 class="headerSpan">Add Blog</h2>
-  </mat-toolbar>
-</mat-card>
-
-<br>
+  </mat-toolbar> 
 
 <!-- Blog Add or Edit Form Start Here -->
-<form class="main-class" autocomplete="off" name="blogAddEditForm" (ngSubmit)="blogAddEditFormSubmit()"
+<span class="formspan">
+    <mat-card-content class="example-container">
+<form class="example-form" autocomplete="off" name="blogAddEditForm" (ngSubmit)="blogAddEditFormSubmit()"
   [formGroup]="blogAddEditForm">
-  <div class="example-container">
 
-    <mat-form-field>
+
+    <mat-form-field class="example-full-width">
       <input matInput type="text" placeholder="Category Name" [formControl]="blogAddEditForm.controls['title']"
         (blur)="inputUntouch(blogAddEditForm,'title')">
       <mat-error
@@ -40,8 +39,11 @@
       </mat-select>
     </mat-form-field>
 
-  </div>
 
-  <button mat-button class="submitbtn" type="submit">Submit</button>
+
+  <button class="submitbtn" mat-raised-button color="primary" type="submit">Submit</button>
 </form>
+</mat-card-content>
+</span>
+</mat-card>
 <!-- Blog Add or Edit Form End Here -->

@@ -5,7 +5,7 @@ import { DemoMaterialModule } from './material-module'
 import { from } from 'rxjs';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
-import { AddBlogComponent } from './add-blog/add-blog.component';
+import { AddBlogComponent,Dialogtest } from './add-blog/add-blog.component';
 import { ListingModule } from 'listing-angular7';
 import { HttpClientModule } from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -14,7 +14,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 @NgModule({
   declarations: [
     BlogComponent, 
-    AddBlogComponent
+    AddBlogComponent,
+    Dialogtest
   ],
   imports: [
     DemoMaterialModule,
@@ -27,6 +28,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     BrowserModule
   ],
   exports: [BlogComponent, AddBlogComponent],
+  entryComponents:[Dialogtest],
+  
   //schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class BlogModule { }
