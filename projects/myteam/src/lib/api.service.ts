@@ -16,7 +16,7 @@ export class ApiService {
   public progress: any = [];
   public uploadtype;
   public uploaderror: any = '';
-  public accesstoken:any='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJleHAiOjE1NjYzNjI1NTgsImlhdCI6MTU2NjI3NjE1OH0.dKJTwmrmR-vWqzHCUiqK8S0TC5sWuiu9de4lmuJYXuM  ';
+  public accesstoken:any='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJleHAiOjE1NjY2MjMxNjYsImlhdCI6MTU2NjUzNjc2Nn0._YxNic0jq-AecruYFJ7jMKGxSLVMEZDKrfGpEsf6GZ0';
   fileservername: any = [];
   serverUrl: any;
   addendpointUrl: any;

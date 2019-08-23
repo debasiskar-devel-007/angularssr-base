@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import {ActivatedRoute,Router} from '@angular/router';
 
 @Component({
   selector: 'app-bloglist',
@@ -13,10 +14,13 @@ export class BloglistComponent implements OnInit {
   public statusUpdateUrl:any = 'statusupdate';
   public getDataUrl:any = 'datalist';
   public getSourceUrl:any = 'demoteam';
+  public BlogList:any;
 
-  constructor() { }
+  constructor(private activatedRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
+  
+    this.BlogList = this.activatedRoute.snapshot.data['BlogList'];
   }
 
 }

@@ -6,6 +6,7 @@ import { BlogModule } from 'blog'
 import { AppRoutingModule } from './app-routing.module';
 import { AddComponent } from './add/add.component';
 import { BloglistComponent } from './bloglist/bloglist.component';
+//import {ResolveService} from './resolve.service';
 @NgModule({
   declarations: [
     AppComponent,
@@ -16,7 +17,8 @@ import { BloglistComponent } from './bloglist/bloglist.component';
     BrowserModule,
     BlogModule,
     RouterModule,
-    AppRoutingModule
+    AppRoutingModule,
+    //ResolveService
   ],
   providers: [],
   bootstrap: [AppComponent]
