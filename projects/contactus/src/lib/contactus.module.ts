@@ -4,13 +4,15 @@ import {DemoMaterialModule} from './material-module';
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
-// import { AgmCoreModule } from '@agm/core';
 import { ApiService } from './api.service';
-import { AgmCoreModule} from '@agm/core';
+// import { AgmCoreModule} from '@agm/core';
 import { ListingModule } from 'listing-angular7';
 import { ContactusListingComponent } from './contactus-listing/contactus-listing.component';
+import { LoadingComponent } from './loading/loading.component';
+import { HttpClientModule } from '@angular/common/http';
+
 @NgModule({
-  declarations: [ContactusComponent, ContactusListingComponent],
+  declarations: [ContactusComponent, ContactusListingComponent, LoadingComponent],
   imports: [
     DemoMaterialModule,
     BrowserAnimationsModule,
@@ -18,16 +20,18 @@ import { ContactusListingComponent } from './contactus-listing/contactus-listing
     FormsModule,
     ReactiveFormsModule,
     ListingModule,
-    AgmCoreModule.forRoot({
+    HttpClientModule,
+  /*  AgmCoreModule.forRoot({
       apiKey: 'AIzaSyBlOhz19g-XWMWhLpfcxTvIFxX3EMY-U4Y'
-      /* apiKey is required, unless you are a
+      /!* apiKey is required, unless you are a
       premium customer, in which case you can
       use clientId
-      */
-    })
+      *!/
+    })*/
   ],
   exports: [ContactusComponent, ContactusListingComponent],
-  providers: [ApiService],
+  providers: [ApiService, LoadingComponent],
+  bootstrap: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class ContactusModule { }

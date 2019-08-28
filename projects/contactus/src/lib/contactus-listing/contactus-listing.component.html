@@ -1,8 +1,8 @@
 
 <lib-listing class="formfilterdiv formfilterdivnew" *ngIf="contactUsAllData.length>0 && contactUsAllData != null"
              [datasource]="contactUsAllData"
-             [skip]="contactUsAllData_skip"
-             [modify_header_array]="contactUsAllData_modify_header"
+             [skip]="contactUsAllDataHeaderSkipValue"
+             [modify_header_array]="contactUsAllDataModifyHeaderValue"
              [sourcedata]="contactUsAllData_collection">
 </lib-listing>
 

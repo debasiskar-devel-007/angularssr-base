@@ -1,6 +1,7 @@
 import {Component, Input, OnInit} from '@angular/core';
 import {ApiService} from '../api.service';
 import {HttpClient} from '@angular/common/http';
+import { LoadingComponent } from '../loading/loading.component';
 
 @Component({
   selector: 'lib-contactus-listing',
@@ -10,10 +11,8 @@ import {HttpClient} from '@angular/common/http';
 export class ContactusListingComponent implements OnInit {
 
   public contactUsAllData: any = [];
-  // tslint:disable-next-line:variable-name
-  // contactUsAllData_skip: any = ['_id'];
-  // tslint:disable-next-line:variable-name
-  contactUsAllData_modify_header: any = {};
+  contactUsAllDataHeaderSkipValue: any = [];
+  contactUsAllDataModifyHeaderValue: any = {};
 
   // tslint:disable-next-line:variable-name
   contactUsAllData_collection: any = 'events';
@@ -22,7 +21,7 @@ export class ContactusListingComponent implements OnInit {
   public addEndpointData: any = '';
   public getDataEndpointData: any = '';
 
-  @Input()
+  @Input()     // setting the server url from project
 
   set serverUrl(serverUrlval: any) {
     this.serverURL = (serverUrlval) || '<no name set>';
@@ -32,10 +31,19 @@ export class ContactusListingComponent implements OnInit {
   }
   @Input()     // setting the server url from project
 
-  set contactUsAllData_skip(contactUsAllData_skipval: any) {
-    this.serverURL = (contactUsAllData_skipval) || '<no name set>';
-    this.serverURL = contactUsAllData_skipval;
-    console.log(this.serverURL);
+  set contactUsAllDataHeader_skip(contactUsAllDataHeaderSkipval: any) {
+    this.contactUsAllDataHeaderSkipValue = (contactUsAllDataHeaderSkipval) || '<no name set>';
+    this.contactUsAllDataHeaderSkipValue = contactUsAllDataHeaderSkipval;
+    console.log(this.contactUsAllDataHeaderSkipValue);
+
+  }
+  @Input()     // setting the server url from project
+
+  set contactUsAllDataModify_header(contactUsAllDataModifyHeaderval: any) {
+    this.contactUsAllDataModifyHeaderValue = (contactUsAllDataModifyHeaderval) || '<no name set>';
+    this.contactUsAllDataModifyHeaderValue = contactUsAllDataModifyHeaderval;
+    console.log('this.contactUsAllDataModifyHeaderValue');
+    console.log(this.contactUsAllDataModifyHeaderValue);
 
   }
 
@@ -54,7 +62,9 @@ export class ContactusListingComponent implements OnInit {
   }
 
 
-  constructor(public apiService: ApiService, public http: HttpClient) { }
+  constructor(public apiService: ApiService, public http: HttpClient,
+     public loadingComponent: LoadingComponent
+     ) { }
 
   ngOnInit() {
     this.apiService.clearServerUrl();
@@ -82,17 +92,22 @@ export class ContactusListingComponent implements OnInit {
     }, 100);
   }
   getAllData() {
+    this.loadingComponent.loading = false;
     let data: any;
     data = {
       "source" : 'demoappcontactdetails'
     };
     this.apiService.getData(data).subscribe( res => {
+      this.loadingComponent.loading = true;
       let result: any = [];
 
       result = res;
+      if (result.resc != 0) {
       console.log('resurt');
-      console.log(result.res);
+      console.log(result);
       this.contactUsAllData = result.res;
+      } else 
+      console.log('oppes');
     });
   }
 

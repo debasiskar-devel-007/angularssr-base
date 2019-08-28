@@ -30,6 +30,18 @@
       ],
       "contactus/*": [
         "dist/contactus/*"
+      ],
+      "auto-share": [
+        "dist/auto-share"
+      ],
+      "auto-share/*": [
+        "dist/auto-share/*"
+      ],
+      "login": [
+        "dist/login"
+      ],
+      "login/*": [
+        "dist/login/*"
       ]
     }
   }
