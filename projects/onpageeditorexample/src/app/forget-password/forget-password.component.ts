@@ -9,7 +9,7 @@ export class ForgetPasswordComponent implements OnInit {
 
   public signUpRouteingUrl: any = 'sign-up';
   public projectName: any = 'Forget Password';
-  public fullUrl:any = 'http://166.62.39.137:5009/signup';
+  public fullUrl:any = 'http://18.224.6.140:5009/forgetpassword';
   constructor() { }
 
   ngOnInit() {

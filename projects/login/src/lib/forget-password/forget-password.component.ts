@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 
@@ -9,6 +9,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./forget-password.component.css']
 })
 export class ForgetPasswordComponent implements OnInit {
+  public message: any = '';
+
+//   FormGroupDirective: It is a directive that binds an existing FormGroup to a DOM element.
+  @ViewChild(FormGroupDirective) formDirective: FormGroupDirective; 
+  
   public forgetPasswordForm: FormGroup;
   public projectNameValue: any = '';
   public fullUrlValue: any = '';
@@ -19,7 +24,6 @@ export class ForgetPasswordComponent implements OnInit {
   set projectName(projectNameVal: any) {
     this.projectNameValue = (projectNameVal) || '<no name set>';
     this.projectNameValue = projectNameVal;
-    console.log(this.projectNameValue);
 
   }
 
@@ -27,7 +31,6 @@ export class ForgetPasswordComponent implements OnInit {
   set fullUrl(fullUrlVal: any) {
     this.fullUrlValue = (fullUrlVal) || '<no name set>';
     this.fullUrlValue = fullUrlVal;
-    console.log(this.fullUrlValue);
 
   }
 
@@ -35,7 +38,6 @@ export class ForgetPasswordComponent implements OnInit {
   set signUpRouteingUrl(routeingUrlval: any) {
     this.signUpRouteingUrlValue = (routeingUrlval) || '<no name set>';
     this.signUpRouteingUrlValue = routeingUrlval;
-    console.log(this.signUpRouteingUrlValue);
   }
 
   constructor(public fb: FormBuilder, public http: HttpClient, public router: Router) {
@@ -50,13 +52,24 @@ export class ForgetPasswordComponent implements OnInit {
 
   
   forgetPasswordSubmit() {
-    console.log(this.forgetPasswordForm.value);
     let x: any;
     for(x in this.forgetPasswordForm.controls) {
       this.forgetPasswordForm.controls[x].markAsTouched();
     }
     if (this.forgetPasswordForm.valid) {
-      
+      let link: any = this.fullUrl;
+      let data: any = this.forgetPasswordForm.value;
+      this.http.post(link, data).subscribe((response) =>{
+        let result: any = {};
+        result = response;
+
+        this.message = result.status;
+
+        if (result.status == "success") {
+          // this is use for reset the from
+          this.formDirective.resetForm();
+        }
+      })
     }
   }
 

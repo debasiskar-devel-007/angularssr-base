@@ -4,9 +4,8 @@
 
         <h2 *ngIf="projectNameValue != ''"> {{projectNameValue}}</h2>
 
-
         <form class="example-container" [formGroup]="loginForm" (ngSubmit)="loginFormSubmit()" novalidate>
-
+<mat-error class="error" *ngIf="message !=''">{{message}}</mat-error>
 
             <mat-form-field>
                 <input matInput placeholder="Username" formControlName="username" (blur)="inputUntouched('username')">
@@ -17,7 +16,7 @@
 
 
             <mat-form-field>
-                <input matInput placeholder="Password" formControlName="password" (blur)="inputUntouched('password')">
+                <input matInput placeholder="Password" type="password" formControlName="password" (blur)="inputUntouched('password')">
                 <mat-error
                     *ngIf="!loginForm.controls['password'].valid && loginForm.controls['password'].errors.required && loginForm.controls['password'].touched">
                     Password field can not be blank</mat-error>

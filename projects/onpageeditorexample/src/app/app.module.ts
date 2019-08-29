@@ -18,6 +18,7 @@ import { LoginComponent } from './login/login.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { from } from 'rxjs';
+import { ResetFromComponent } from './reset-from/reset-from.component';
 
 @NgModule({
   declarations: [
@@ -28,7 +29,8 @@ import { from } from 'rxjs';
     SocialMediaComponent,
     LoginComponent,
     ForgetPasswordComponent,
-    SignUpComponent
+    SignUpComponent,
+    ResetFromComponent
   ],
   imports: [
     BrowserModule,

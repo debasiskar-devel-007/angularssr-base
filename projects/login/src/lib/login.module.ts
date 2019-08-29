@@ -5,11 +5,12 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
-import { SignUpComponent } from './sign-up/sign-up.component';
+import { SignUpComponent, commonModalComponent } from './sign-up/sign-up.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
 
 @NgModule({
-  declarations: [LoginComponent, SignUpComponent, ForgetPasswordComponent],
+  declarations: [LoginComponent, SignUpComponent, ForgetPasswordComponent, ResetPasswordComponent, commonModalComponent],
   imports: [
     DemoMaterialModule,
     FormsModule,
@@ -18,9 +19,10 @@ import { ForgetPasswordComponent } from './forget-password/forget-password.compo
      CommonModule,
      HttpClientModule
   ],
-  exports: [LoginComponent, SignUpComponent, ForgetPasswordComponent],
+  exports: [LoginComponent, SignUpComponent, ForgetPasswordComponent, ResetPasswordComponent],
   providers: [],
   bootstrap: [],
-  schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  entryComponents: [commonModalComponent]
 })
 export class LoginModule { }
