@@ -14,8 +14,7 @@ export class AddEditCategoryComponent implements OnInit {
 
   public categoryForm: FormGroup;
   public usersData: any = null;
-  public formHeaderText: string = "Create New Category";
-  public buttonText: any = null;
+  public buttonText: any = 'Create';
   public configData: any;
   public loader: boolean = false;
   
@@ -33,15 +32,16 @@ export class AddEditCategoryComponent implements OnInit {
     /* Generate form */
     this.generateForm();
 
-    /* Button text */
-    this.buttonText = this.configData.buttonText;
-
     /* Checking */
     switch(this.configData.action) {
       case 'add':
+        /* Button text */
+        this.buttonText = "Create";
         break;
       case 'edit':
-        this.setDefaultValue(this.configData);
+        /* Button text */
+        this.buttonText = "Update";
+        this.setDefaultValue(this.configData.defaultData);
         break;
     }
   }
@@ -54,7 +54,7 @@ export class AddEditCategoryComponent implements OnInit {
       description:  [ null, [ Validators.required, Validators.maxLength(1000) ] ],
       priority:     [ 1, [ Validators.required, Validators.max(100) ] ],
       role:         [ 'public', null ],
-      status:       [ null, null ],
+      status:       [ false, null ],
       userId:       [ this.configData.userData.id, null ]
     });
   }
@@ -67,17 +67,19 @@ export class AddEditCategoryComponent implements OnInit {
     if (this.categoryForm.invalid) {
       return;
     } else {
+      if(this.categoryForm.value.status) {
+        this.categoryForm.value.status = 1;
+      } else {
+        this.categoryForm.value.status = 0;
+      }
+
       /* start process to submited data */
-      let newData: any = Object.assign(this.categoryForm.value, this.configData.formConfig.data.extraField);
       let postData: any = { 
-                            source: this.configData.formConfig.data.source,
-                            condition: this.configData.formConfig.condition,
-                            data: newData
+                            source: this.configData.source,
+                            data: Object.assign(this.categoryForm.value, this.configData.condition)
                           };
-      let endPoint: any = this.configData.apiUrl + this.configData.formConfig.endpoint;
-      this.httpRequest.submitRequest(endPoint, postData, this.configData.formConfig.methord).subscribe((response) => {
+      this.httpRequest.addData(this.configData.endpoint, postData).subscribe((response: any) => {
         if(response.status == "success") {
-          this.usersData = response.data; 
           this.resetCategoryForm();
 
           this.router.navigate([this.configData.callBack]);
@@ -96,26 +98,14 @@ export class AddEditCategoryComponent implements OnInit {
   }
 
   /* Set default category form value */
-  setDefaultValue(configData) {
-    this.formHeaderText = "Update Category";
-    let postData: any = { 
-                          source: configData.dataListConfig.data.source,
-                          condition: configData.dataListConfig.condition,
-                          token: configData.authToken 
-                        };
-    let endPoint: any = configData.apiUrl + configData.dataListConfig.endpoint;
-    this.httpRequest.submitRequest(endPoint, postData, 'post').subscribe((response) => {
-      let defaultValue: any = response.res[0];
-      this.categoryForm.setValue({  
-        title:        defaultValue.title,
-        description:  defaultValue.description,
-        priority:     defaultValue.priority,
-        role:         defaultValue.role,
-        status:       defaultValue.status,
-        userId:       null
-      });
-    }, (error) => {
-      console.log("Some error occord. Please try angain.");
+  setDefaultValue(defaultValue) {
+    this.categoryForm.setValue({  
+      title:        defaultValue.title,
+      description:  defaultValue.description,
+      priority:     defaultValue.priority,
+      role:         defaultValue.role,
+      status:       defaultValue.status,
+      userId:       null
     });
   }
 

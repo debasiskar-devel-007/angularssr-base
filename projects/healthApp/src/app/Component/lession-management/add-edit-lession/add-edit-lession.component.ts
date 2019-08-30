@@ -1,12 +1,13 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
-  selector: 'app-add-edit-category',
-  templateUrl: './add-edit-category.component.html',
-  styleUrls: ['./add-edit-category.component.css']
+  selector: 'app-add-edit-lession',
+  templateUrl: './add-edit-lession.component.html',
+  styleUrls: ['./add-edit-lession.component.css']
 })
-export class AddEditCategoryComponent implements OnInit {
+export class AddEditLessionComponent implements OnInit {
 
   /* Config for add and edit start */
   public configAddEdit: any = {
@@ -22,26 +23,22 @@ export class AddEditCategoryComponent implements OnInit {
         extraField: {}
       }
     },
-    dataListConfig: {
-      endpoint: "datalist",
-      methord: "post",
-      data: { 
-        source: "category",
-        condition: {},
-        extraField: {}
-      }
-    },
-    authToken: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJleHAiOjE1NjY0Nzg5MzcsImlhdCI6MTU2NjM5MjUzN30.PpPJaIm_fK_HFB3y2A3zba-51k-JrNVgJpspp-k4Q2E",
+    defaultData: null,
+    jwtToken: this.cookieService.get('jwtToken'),
     callBack: "category-management",
     buttonText: "Create"
   }
   /* Config for add and edit end */
 
-  constructor(private router: Router, private activateRoute: ActivatedRoute) { }
+  constructor(private router: Router, private activateRoute: ActivatedRoute, private cookieService: CookieService) {
+  }
 
   ngOnInit() {
     this.activateRoute.params.subscribe(params => {
       if(params._id) {
+        this.activateRoute.data.subscribe(resolveData => {
+          this.configAddEdit.defaultData = resolveData.categoryData[0];
+        });
         this.editConfig(params._id);
       }
     });
@@ -51,7 +48,7 @@ export class AddEditCategoryComponent implements OnInit {
     /* start process to submited data */
     this.configAddEdit.action = "edit";
     this.configAddEdit.formConfig.data.extraField = { "id": objectId };
-    this.configAddEdit.dataListConfig.condition = { "_id": objectId };
+    this.configAddEdit.formConfig.data.condition = { "_id": objectId };
     this.configAddEdit.buttonText = "Update";
   }
 

@@ -30,6 +30,24 @@
       ],
       "category-management/*": [
         "dist/category-management/*"
+      ],
+      "lesson-management": [
+        "dist/lesson-management"
+      ],
+      "lesson-management/*": [
+        "dist/lesson-management/*"
+      ],
+      "lession-management": [
+        "dist/lession-management"
+      ],
+      "lession-management/*": [
+        "dist/lession-management/*"
+      ],
+      "file-upload": [
+        "dist/file-upload"
+      ],
+      "file-upload/*": [
+        "dist/file-upload/*"
       ]
     }
   }

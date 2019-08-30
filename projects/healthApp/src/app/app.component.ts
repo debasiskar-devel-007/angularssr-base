@@ -1,4 +1,5 @@
 import { OnInit, Input, Component } from '@angular/core';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-root',
@@ -6,6 +7,12 @@ import { OnInit, Input, Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+
   title = 'healthApp';
   public testJsonData: any = { "data": "test", "others": "others test" };
+
+  constructor(private cookieService: CookieService) {
+    
+  }
+
 }

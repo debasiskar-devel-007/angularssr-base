@@ -16,7 +16,9 @@ export class CategoryManagementComponent implements OnInit {
     this.categoryData = receivedCategoryData;
   }
 
-  constructor() { }
+  constructor() { 
+    console.log('Step 3 =================================== Component LIB');
+  }
 
   ngOnInit() {
   }

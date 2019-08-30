@@ -1,0 +1,16 @@
+<mat-card>
+    <mat-toolbar color="primary">
+        <h2>Manage Category</h2>
+    </mat-toolbar>
+</mat-card>
+
+<br />
+
+<mat-card>
+    <button [routerLink]="['/category-management/create-new']" class="add-new-button" mat-raised-button matTooltip="Create New Category." aria-label="Button that displays a tooltip when focused or hovered over">Create New</button>
+</mat-card>
+
+<br />
+
+<!-- Category Management Lib -->
+<lib-category-management [config]="categoryListingConfig"></lib-category-management>

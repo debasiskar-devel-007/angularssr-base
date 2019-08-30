@@ -1,0 +1,26 @@
+<!-- File Upload -->
+<div class="uploadfilecontainer" (click)="fileInput.click()" libDragDrop (onFileDropped)="selectFiles($event)">
+    <input hidden type="file" #fileInput (change)="selectFiles($event.target.files)" multiple>
+    <h2>Drag and Drop Files</h2>
+</div>
+
+<div class="files-view">
+    <!-- View Files -->
+    <mat-card class="example-card" *ngFor="let file of files; let i = index">
+        <mat-card-header>
+            <mat-card-title>{{ file.name }}</mat-card-title>
+            <mat-card-subtitle>{{ file.type }}</mat-card-subtitle>
+            <mat-card-subtitle class="error" *ngIf="file.error">{{ file.errorMessage }}</mat-card-subtitle>
+        </mat-card-header>
+
+        <mat-card-content>
+            <mat-progress-bar mode="determinate" *ngIf="filesProcess[i].status == 'progress'" value="{{ filesProcess[i].data.percentage }}"></mat-progress-bar>
+            <mat-progress-bar mode="indeterminate" *ngIf="filesProcess[i].status == 'waiting'"></mat-progress-bar>
+        </mat-card-content>
+        
+        <mat-card-actions>
+            <button mat-raised-button color="primary" *ngIf="file.error == false" matTooltip="Upload" aria-label="Upload" (click)="startUploadProcess(i);">Upload</button>
+            <button mat-raised-button color="warn" matTooltip="Remove" aria-label="Remove" (click)="removeFiles(i);">Remove</button>
+        </mat-card-actions>
+    </mat-card>
+</div>

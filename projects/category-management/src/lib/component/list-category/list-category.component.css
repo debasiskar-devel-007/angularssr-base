@@ -17,11 +17,15 @@ mat-card {
 }
 
 .add-new-button {
-  margin: auto;
+  float: right;
 }
 
 .spinner {
   text-align: center;
   margin: auto;
   height: 100px;
+}
+
+mat-toolbar {
+  width: 100%;
 }
