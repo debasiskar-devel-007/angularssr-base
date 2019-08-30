@@ -17,7 +17,7 @@ export class ApiService {
   public uploaderror: any = '';
   public accesstoken:any='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJleHAiOjE1NjcyMjc1NzcsImlhdCI6MTU2NzE0MTE3N30.Dt2aUQE9XnLeqRC9Na7gwc4bISdLg8Xnyc6el_djzK4';
   fileservername: any = [];
-  serverUrl: any;
+  serverUrl: any='http://166.62.39.137:5009/';
   addendpointUrl: any;
   uploadEndpointUrl:any; //souresh
   updateendpointUrl: any;
@@ -108,8 +108,6 @@ export class ApiService {
         this.getdata_endpointUrl = null;
       }
     });
-
-    
   }
 
   setServerUrl(value: any) {
@@ -294,6 +292,7 @@ export class ApiService {
         'access-token': this.accesstoken
       })
     };
+
     var result = this._http.post(this.serverUrl +endpoint, JSON.stringify(requestdata), httpOptions).pipe(map(res => res));
     return result;
   }

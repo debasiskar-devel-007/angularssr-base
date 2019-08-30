@@ -1,34 +1,22 @@
-
-<!-- header part start here -->
+<!-- header start here -->
 <mat-card>
     <mat-toolbar color="primary" style="justify-content: center; align-items: center;">
-        <h2 class="headerSpan" >Blog</h2>
+        <h2 class="headerSpan">Blog</h2>
     </mat-toolbar>
-
-<!-- header part end here -->
-
+    <!-- header end here -->
     <!-- add button start here -->
-    <mat-toolbar class="buttonsetToolbar" >
+    <mat-toolbar class="buttonsetToolbar">
         <button class="singleButton" mat-raised-button color="primary" (click)="addButton()">Add Team Member</button>
     </mat-toolbar>
-     
     <!-- adding button end here -->
-
     <!-- applying lib-listing start here -->
     <mat-card-content class="listing-content-admin">
-    <lib-listing class="formfilterdiv formfilterdivnew" *ngIf="temparray.length>0"
-        [datasource]="temparray"
-        [skip]="teamlist_skip" 
-        [modify_header_array]="teamlist_modify_header"
-        [sourcedata]="tablename"
-        [statusarr]="status"
-        [editroute]="editRouteUrl"
-        [apiurl]="apiUrl"
-        [jwttoken]="token"
-        [deleteendpoint]="deleteRouteUrl"
-        [updateendpoint]="updateUrl">
-    </lib-listing>
-    <!-- applying lib-listing end here -->
+        <lib-listing class="formfilterdiv formfilterdivnew" *ngIf="blogDataarray.length>0" [datasource]="blogDataarray"
+            [skip]="teamlist_skip" [modify_header_array]="teamlist_modify_header" [sourcedata]="Blogtablename"
+            [statusarr]="status" [editroute]="editRouteUrl" [apiurl]="serverUrlData" [jwttoken]="tokenViapp"
+            [deleteendpoint]="deleteRouteUrl" [updateendpoint]="addupdateRouteUrl">
+        </lib-listing>
+        <!-- applying lib-listing end here -->
 
-</mat-card-content>
+    </mat-card-content>
 </mat-card>

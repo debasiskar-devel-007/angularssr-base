@@ -71,4 +71,6 @@ margin-bottom: 0;
 button.submitbtn.mat-raised-button.mat-primary {
   margin-right: 15px;
 }
-
+:host ::ng-deep .ck-editor__editable_inline {
+  min-height: 50px;
+}

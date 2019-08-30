@@ -9,8 +9,7 @@ import { AddBlogComponent,Dialogtest } from './add-blog/add-blog.component';
 import { ListingModule } from 'listing-angular7';
 import { HttpClientModule } from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-
-//import {AddBlogComponent }
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 @NgModule({
   declarations: [
     BlogComponent, 
@@ -25,11 +24,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
     HttpClientModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserModule
+    BrowserModule,
+    CKEditorModule
   ],
   exports: [BlogComponent, AddBlogComponent],
   entryComponents:[Dialogtest],
   
-  //schemas: [ CUSTOM_ELEMENTS_SCHEMA ]
 })
 export class BlogModule { }

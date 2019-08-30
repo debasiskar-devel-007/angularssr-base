@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../api.service';
 import { HttpClient } from '@angular/common/http';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from "@angular/material";
+import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
 export interface DialogData {
   message: string;
 }
@@ -13,6 +15,16 @@ export interface DialogData {
   styleUrls: ['./add-blog.component.css']
 })
 export class AddBlogComponent implements OnInit {
+
+  /**ckeditor start here*/
+  public Editor = ClassicEditor;  //for ckeditor
+  editorConfig = {
+    placeholder: 'Type the content here!',
+  };
+  public model = {
+    editorData: ''
+};
+  /**ckeditor end here*/
 
   /**blog varibles declaration start here**/
   public dialogRef: any;
@@ -27,6 +39,7 @@ export class AddBlogComponent implements OnInit {
   public editarray: any = [];
   public statusarray: any = [];
   /**blog varibles declaration end here**/
+  public headerText: any = 'Add Blogs';
 
   @Input()         //setting the listing url form the application
   set listRoute(listval: any) {
@@ -60,11 +73,7 @@ export class AddBlogComponent implements OnInit {
     , public dialog: MatDialog) {
 
     /**catch the parameter id***/
-    if (this.activeroute.snapshot.params.id != null) {
-      this.params_id = this.activeroute.snapshot.params.id;
-      this.editBlog();
-
-    }
+    
     /*catch parameter id end here**/
 
     /**Formgroup create start here**/
@@ -77,6 +86,23 @@ export class AddBlogComponent implements OnInit {
   }
 
   ngOnInit() {
+// 
+
+
+console.log('this.activeroute.snapshot.params.id        ==== oninit');
+    // console.log(this.activeroute.snapshot.params.id);
+      this.params_id = this.activeroute.snapshot.params.id;
+    if (this.params_id != null ) {
+      console.log('ok')
+      console.log(this.params_id);
+      this.headerText = 'Edit Blogs';
+      this.editBlog();
+
+    }
+
+// 
+
+
     /**Observable start here**/
     this.apiservice.clearServerUrl();
     setTimeout(() => {
@@ -139,6 +165,12 @@ export class AddBlogComponent implements OnInit {
 
   /**add & update* blogs submitting form start here**/
   blogAddEditFormSubmit() {
+  
+    this.blogAddEditForm.patchValue({
+      description: this.model.editorData
+    });
+    console.log(this.blogAddEditForm.value);
+  
     this.isSubmitted = true;
     let x: any;
     for (x in this.blogAddEditForm.controls) {
@@ -169,31 +201,35 @@ export class AddBlogComponent implements OnInit {
           "sourceobj": ["parent_id"]
         };
       }
+      this.apiservice.addData(data).subscribe(response => {
+        let result: any;
+        result = response;
+        this.statusarray = result.status;
+        console.log("this.statusarray");
+        console.log(this.statusarray);
+
+        this.openDialog(result.status);
+        setTimeout(() => {
+          this.dialogRef.close();
+        }, 2000);
+
+        setTimeout(() => {
+          this.router.navigateByUrl('/' + this.listUrl);
+        }, 3000);
+
+
+
+      });
+
+
     }
-    this.apiservice.addData(data).subscribe(response => {
-      let result: any;
-      result = response;
-      this.statusarray = result.status;
-      console.log("this.statusarray");
-      console.log(this.statusarray);
 
-      this.openDialog(result.status);
-      setTimeout(() => {
-        this.dialogRef.close();
-      }, 2000);
-
-      setTimeout(() => {
-        this.router.navigateByUrl('/' + this.listUrl);
-      }, 3000);
-
-
-
-    });
   }
   /**add & update* blogs submitting form end here**/
 
   /***Edit Blog Start Here ***/
   editBlog() {
+    
     let data: any = {
       "source": "blog_category",
       "condition": {
@@ -203,17 +239,15 @@ export class AddBlogComponent implements OnInit {
     this.apiservice.getData(data).subscribe(response => {
       let result: any = response;
       let tempvar = result.res;
-      console.log(tempvar);
       this.editarray = result.res;
-      console.log("okkkkkkkkkkkk");
-      console.log(this.editarray);
-
-      this.blogAddEditForm.controls['title'].setValue(tempvar[0].title);
-      this.blogAddEditForm.controls['description'].setValue(tempvar[0].description);
-      this.blogAddEditForm.controls['parent_id'].setValue(tempvar[0].parent_id);
+      this.blogAddEditForm.controls['title'].patchValue(tempvar[0].title);
+      this.blogAddEditForm.controls['description'].patchValue(tempvar[0].description);
+      this.model.editorData = tempvar[0].description;
+      this.blogAddEditForm.controls['parent_id'].patchValue(tempvar[0].parent_id);
     }, error => {
       console.log("Ooops");
     })
+
   }
   /**Edit Blog End Here**/
 

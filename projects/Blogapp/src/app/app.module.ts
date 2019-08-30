@@ -6,6 +6,8 @@ import { BlogModule } from 'blog'
 import { AppRoutingModule } from './app-routing.module';
 import { AddComponent } from './add/add.component';
 import { BloglistComponent } from './bloglist/bloglist.component';
+import { DemoMaterialModule } from './material-module'
+
 //import {ResolveService} from './resolve.service';
 @NgModule({
   declarations: [
@@ -18,6 +20,7 @@ import { BloglistComponent } from './bloglist/bloglist.component';
     BlogModule,
     RouterModule,
     AppRoutingModule,
+    DemoMaterialModule
     //ResolveService
   ],
   providers: [],

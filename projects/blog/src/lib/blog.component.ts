@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-
 import { RouterModule, Routes, Router, ActivatedRoute } from '@angular/router';
 import { ApiService } from './api.service';
 
@@ -9,32 +8,46 @@ import { ApiService } from './api.service';
   styleUrls: ['style.css']
 })
 export class BlogComponent implements OnInit {
+  /**blog variables declaration**/
   public addMemberviaUrl: any;
-  public ResolveLIstData:any=[];
+  public ResolveLIstData: any = [];
   public editRouteUrl: any = '';
-  public deleteRouteUrl:any='';
-  public addupdateRouteUrl:any='';
+  public Blogtablename: any = '';
+  public deleteRouteUrl: any = '';
+  public addupdateRouteUrl: any = '';
   public serverUrlData: any;
   public getDataEndpointData: any;
   public getDataSourceData: any;
   public addEndpointData: any;
-  public temparray: any = [];
-  public tablename: any = 'blog_category';
+  public apiUrlviaApp: any = '';
+  public tokenViapp:any=''
+  /**lib-listing start here**/
+  public blogDataarray: any = [];
   public teamlist_skip: any = ["_id"];
   public teamlist_modify_header: any = { 'title': "Title", 'description': "Description", 'parentcategoryname': "Parent Category" };
   public status: any = [{ val: 1, 'name': 'Active' }, { val: 0, 'name': 'Inactive' }];
+  /**lib-listing end here**/
 
-  public apiUrl: any = "http://166.62.39.137:5009/";
-  public token: any = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJleHAiOjE1NjY2MjMxNjYsImlhdCI6MTU2NjUzNjc2Nn0._YxNic0jq-AecruYFJ7jMKGxSLVMEZDKrfGpEsf6GZ0  ";
-  //public deleteendpoint: any = 'deletesingledata';
-  public updateUrl: any = 'addorupdatedata';
-
-
+  @Input()  //for apiUrl via application
+  set BlogapiUrl(apivalue: any) {
+    this.apiUrlviaApp = (apivalue) || '<no name set>';
+    this.apiUrlviaApp = apivalue;
+  }
+  @Input()  //for token via application
+  set BlogToken(token: any) {
+    this.tokenViapp = (token) || '<no name set>';
+    this.tokenViapp = token;
+  }
 
   @Input()  //for add button
   set addTeammember(addvalue: any) {
     this.addMemberviaUrl = (addvalue) || '<no name set>';
     this.addMemberviaUrl = addvalue;
+  }
+  @Input()   //Tablename from application
+  set Blogtable(value: any) {
+    this.Blogtablename = (value) || '<no name set>';
+    this.Blogtablename = value;
   }
 
   @Input() //for edit route
@@ -43,47 +56,45 @@ export class BlogComponent implements OnInit {
     this.editRouteUrl = value;
   }
   @Input()  //for add or update endpoint
-  set AddEditBlog(addeditvalue:any){
-    this.addupdateRouteUrl =(addeditvalue) || '<no name set>';
-    this.addupdateRouteUrl= addeditvalue
+  set AddEditBlog(addeditvalue: any) {
+    this.addupdateRouteUrl = (addeditvalue) || '<no name set>';
+    this.addupdateRouteUrl = addeditvalue
   }
   @Input()     //for deleteEndpoint
-  set deleteBlog(delValue:any){
+  set deleteBlog(delValue: any) {
     this.deleteRouteUrl = (delValue) || '<no name set>';
-    this.deleteRouteUrl= delValue
+    this.deleteRouteUrl = delValue
   }
 
   @Input()          //setting the server url from project
   set getDataEndpoint(endpointUrlval: any) {
     this.getDataEndpointData = (endpointUrlval) || '<no name set>';
     this.getDataEndpointData = endpointUrlval;
-    console.log('okkkkk' + this.getDataEndpointData);
+
   }
   @Input()          //setting the server url from project
   set getDataSource(serverUrlval: any) {
     this.getDataSourceData = (serverUrlval) || '<no name set>';
     this.getDataSourceData = serverUrlval;
-    console.log('okkkkk' + this.getDataSourceData);
+
   }
   @Input()          //setting the server url from project
   set serverUrl(serverUrlval: any) {
     this.serverUrlData = (serverUrlval) || '<no name set>';
     this.serverUrlData = serverUrlval;
-    console.log('serverUrlval');
-    console.log(this.serverUrlData);
+
 
   }
   @Input()          //setting the server url from project
   set addEndpoint(endpointUrlval: any) {
     this.addEndpointData = (endpointUrlval) || '<no name set>';
     this.addEndpointData = endpointUrlval;
-    console.log(this.addEndpointData);
+
   }
   @Input()          //resolve list
   set listResolve(listresolveUrlval: any) {
-    this.temparray=listresolveUrlval
-    console.log("this.ResolveLIstData"+this.ResolveLIstData);
-    
+    this.blogDataarray = (listresolveUrlval) || '<no name set>';
+    this.blogDataarray = listresolveUrlval;
   }
 
   constructor(public router: Router,
@@ -92,6 +103,7 @@ export class BlogComponent implements OnInit {
   }
 
   ngOnInit() {
+    /**observable start here**/
     this.apiService.clearServerUrl();
     setTimeout(() => {
       this.apiService.setServerUrl(this.serverUrlData);
@@ -105,11 +117,9 @@ export class BlogComponent implements OnInit {
     setTimeout(() => {
       this.apiService.setgetdataEndpoint(this.getDataEndpointData);
     }, 50);
-
-    setTimeout(() => {
-      this.getData();
-    }, 100);
+    /**observable end here**/
   }
+  /***getting all the blog data function start here**/
 
   getData() {
 
@@ -118,21 +128,16 @@ export class BlogComponent implements OnInit {
       "source": "blog_category_view"
     }
     this.apiService.getData(data).subscribe(response => {
-      //console.log(response);
       let result: any;
       result = response;
-      this.temparray = result.res;
-      console.log(this.temparray);
+      this.blogDataarray = result.res;
 
     })
 
   }
-  addButton() {
-    this.router.navigateByUrl('/' + this.addMemberviaUrl);
+  addButton(){
+    this.router.navigateByUrl('/'+this.addMemberviaUrl);
   }
-
-
-
-
-
+  /**function end here**/
+ 
 }

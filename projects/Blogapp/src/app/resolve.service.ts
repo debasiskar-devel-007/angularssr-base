@@ -1,35 +1,40 @@
 import { Injectable } from '@angular/core';
-import { Resolve } from '@angular/router';
+import { Router, Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
-import { catchError, map } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
+import { ApiService } from './app-api.service'
 
 @Injectable({
   providedIn: 'root'
 })
 export class ResolveService {
 
-  constructor(private http: HttpClient) {
+  constructor(private apiService: ApiService, private router: Router) {
 
-   }
-   resolve(): Observable<any> {
-    let apiUrl = "http://166.62.39.137:5009/datalist";
-    let postData: any = {
-      source: "blog_category_view",
-      token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJleHAiOjE1NjY2MjMxNjYsImlhdCI6MTU2NjUzNjc2Nn0._YxNic0jq-AecruYFJ7jMKGxSLVMEZDKrfGpEsf6GZ0"
-    };
-
-    return this.http.post(apiUrl, postData).pipe(
-      map( (response) => {
-        let result: any = response;
-        console.log("response");
-        console.log(response);
-        return result.res;
-       
-      }),
-      catchError( (err) => Observable.throw(err.json().error) )
-    )
   }
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
+   
+    console.log('resolve route data');
+    console.log(route.data.requestcondition);
+    console.log(route.data.endpoint);
+    console.log(state);
+   
+    console.log('endpoint!!!!!');
+   
+    return new Promise((resolve) => {
+      this.apiService.CustomRequest(route.data.requestcondition, route.data.endpoint).subscribe(api_object => {
+        console.log('api_object  !!!!');
+        console.log(api_object);
+        if (api_object) {
+          return resolve(api_object);
+        } else { 
+          
+          return true;
+        }
+      });
+
+    });
+  }
+
 }
 
 
