@@ -5,6 +5,9 @@ import { MetaGuard } from '@ngx-meta/core';
 
 import { AboutusComponent } from './aboutus/aboutus.component';
 import { ContactusComponent } from './contactus/contactus.component';
+import { SetCookieComponent } from './set-cookie/set-cookie.component';
+
+
 
 const appRoutes: Routes = [
   { path: 'about', component: AboutusComponent,data: {
@@ -19,7 +22,12 @@ const appRoutes: Routes = [
               title: 'Contact Us',
               description: 'Have you seen my rubber duckie?'
           }
-      }}
+      }},
+          // Set Token Rotes 
+    { path:'' , component: SetCookieComponent},
+    { path:'setcookie' , component :SetCookieComponent},
+    
+
 ];
 
 @NgModule({

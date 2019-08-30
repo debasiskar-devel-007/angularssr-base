@@ -1,0 +1,33 @@
+.example-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.example-container > * {
+    width: 100%;
+}
+
+mat-card {
+    background-color: #E3E2E1;
+}
+  
+.example-card {
+    max-width: 400px;
+}
+  
+.example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+    border: 2px solid rgb(224, 218, 218);
+}
+
+.spinner {
+    text-align: center;
+    margin: auto;
+}
+
+.input-field {
+    background-color: white;
+    width: 100%;
+}
+

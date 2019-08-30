@@ -1,0 +1,52 @@
+<mat-card *ngIf="loader==true">
+  <mat-spinner class="spinner"></mat-spinner>
+</mat-card>
+
+<mat-card *ngIf="loader==false">
+  <form class="example-form" [formGroup]="categoryForm" autocomplete="off">
+    <div class="example-container">
+      <mat-form-field>
+        <input matInput formControlName="title" placeholder="Title">
+
+        <!-- error message start -->
+        <mat-error *ngIf="categoryForm.controls['title']?.touched && categoryForm.controls['title'].errors && categoryForm.controls['title'].errors.required">Title is required.</mat-error>
+        <mat-error *ngIf="categoryForm.controls['title']?.touched && categoryForm.controls['title'].errors && categoryForm.controls['title'].errors.maxlength">Title is not more then 150 charector.</mat-error>
+        <!-- error message end -->
+      </mat-form-field>
+    
+      <mat-form-field hintLabel="Max 1000 characters">
+        <textarea matInput formControlName="description" #description maxlength="1000" placeholder="Description"></textarea>
+        <mat-hint align="end">{{ description.value?.length || 0 }}/1000</mat-hint>
+
+        <!-- error message start -->
+        <mat-error *ngIf="categoryForm.controls['description']?.touched && categoryForm.controls['description'].errors && categoryForm.controls['description'].errors.required">Title is required.</mat-error>
+        <mat-error *ngIf="categoryForm.controls['description']?.touched && categoryForm.controls['description'].errors && categoryForm.controls['description'].errors.maxlength">Title is not more then 1000 charector.</mat-error>
+        <!-- error message end -->
+      </mat-form-field>
+    
+      <mat-form-field>
+        <input matInput formControlName="priority" placeholder="Priority" type="number">
+
+        <!-- error message start -->
+        <mat-error *ngIf="categoryForm.controls['priority']?.touched && categoryForm.controls['priority'].errors && categoryForm.controls['priority'].errors.required">Title is required.</mat-error>
+        <mat-error *ngIf="categoryForm.controls['priority']?.touched && categoryForm.controls['priority'].errors && categoryForm.controls['priority'].errors.max">Title is not more then 100.</mat-error>
+        <!-- error message start -->
+      </mat-form-field>
+    
+      <mat-form-field>
+        <mat-select formControlName="role" placeholder="Role">
+          <mat-option value="public">Public</mat-option>
+          <mat-option value="private">Private</mat-option>
+        </mat-select>
+        <mat-hint align="end">Here's the dropdown arrow ^</mat-hint>
+      </mat-form-field>
+
+      <mat-checkbox formControlName="status">Active</mat-checkbox>
+    </div>
+  </form>
+
+  <br />
+  
+  <button (click)="categoryFormSubmit();" mat-button [disabled]="!categoryForm.valid">{{ buttonText }}</button>
+  <button mat-button (click)="resetCategoryForm();">Reset</button>
+</mat-card>

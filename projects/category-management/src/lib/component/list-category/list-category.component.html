@@ -1,0 +1,34 @@
+
+<mat-card>
+  <mat-toolbar color="primary">
+      <h2>Manage Category</h2>
+  </mat-toolbar>
+</mat-card>
+
+<br />
+
+<mat-card>
+  <button (click)="gotoUrl(categoryListingConfig.addLink);" class="add-new-button" mat-raised-button matTooltip="Create New Category." aria-label="Button that displays a tooltip when focused or hovered over">Create New</button>
+
+</mat-card>
+<br />
+
+<mat-card *ngIf="loader==true">
+<mat-spinner class="spinner"></mat-spinner>
+</mat-card>
+<mat-card *ngIf="loader==false">
+  <lib-listing class="formfilterdiv" *ngIf="categoryListingConfig.datasource !=null && categoryListingConfig.datasource.length > 0"
+      [datasource]="categoryListingConfig.datasource"
+      [skip]="categoryListingConfig.listArray_skip"
+      [modify_header_array]="categoryListingConfig.listArray_modify_header"
+      [sourcedata]="categoryListingConfig.tableName"
+      [statusarr]="categoryListingConfig.statusarray"
+      [jwttoken]="categoryListingConfig.jwtToken" 
+      [apiurl]="categoryListingConfig.apiUrl"
+      [editroute]="categoryListingConfig.editUrl"
+      [deleteendpoint]="categoryListingConfig.deleteEndPoint">
+  </lib-listing>
+
+  <h2 *ngIf="categoryListingConfig.datasource.length == 0">No record found.</h2>
+  </mat-card>
+

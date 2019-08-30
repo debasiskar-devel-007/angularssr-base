@@ -23,7 +23,7 @@
               "src/assets"
             ],
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css"
             ],
             "scripts": [],
@@ -81,7 +81,7 @@
             "tsConfig": "src/tsconfig.spec.json",
             "karmaConfig": "src/karma.conf.js",
             "styles": [
-              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "./node_modules/@angular/material/prebuilt-themes/indigo-pink.css",
               "src/styles.css"
             ],
             "scripts": [],
@@ -312,6 +312,530 @@
           "builder": "@angular-devkit/build-angular:tslint",
           "options": {
             "tsConfig": "projects/onpageeditorexample-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "rolemanagementlib": {
+      "projectType": "library",
+      "root": "projects/rolemanagementlib",
+      "sourceRoot": "projects/rolemanagementlib/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/rolemanagementlib/tsconfig.lib.json",
+            "project": "projects/rolemanagementlib/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/rolemanagementlib/src/test.ts",
+            "tsConfig": "projects/rolemanagementlib/tsconfig.spec.json",
+            "karmaConfig": "projects/rolemanagementlib/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/rolemanagementlib/tsconfig.lib.json",
+              "projects/rolemanagementlib/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "RoleManagementApp": {
+      "root": "projects/RoleManagementApp/",
+      "sourceRoot": "projects/RoleManagementApp/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/RoleManagementApp",
+            "index": "projects/RoleManagementApp/src/index.html",
+            "main": "projects/RoleManagementApp/src/main.ts",
+            "polyfills": "projects/RoleManagementApp/src/polyfills.ts",
+            "tsConfig": "projects/RoleManagementApp/tsconfig.app.json",
+            "assets": [
+              "projects/RoleManagementApp/src/favicon.ico",
+              "projects/RoleManagementApp/src/assets"
+            ],
+            "styles": [
+              "projects/RoleManagementApp/src/styles.css"
+            ],
+            "scripts": [],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/RoleManagementApp/src/environments/environment.ts",
+                  "with": "projects/RoleManagementApp/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "RoleManagementApp:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "RoleManagementApp:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "RoleManagementApp:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/RoleManagementApp/src/test.ts",
+            "polyfills": "projects/RoleManagementApp/src/polyfills.ts",
+            "tsConfig": "projects/RoleManagementApp/tsconfig.spec.json",
+            "karmaConfig": "projects/RoleManagementApp/karma.conf.js",
+            "styles": [
+              "projects/RoleManagementApp/src/styles.css"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/RoleManagementApp/src/favicon.ico",
+              "projects/RoleManagementApp/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/RoleManagementApp/tsconfig.app.json",
+              "projects/RoleManagementApp/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "RoleManagementApp-e2e": {
+      "root": "projects/RoleManagementApp-e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/RoleManagementApp-e2e/protractor.conf.js",
+            "devServerTarget": "RoleManagementApp:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "RoleManagementApp:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "projects/RoleManagementApp-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "category-management": {
+      "root": "projects/category-management",
+      "sourceRoot": "projects/category-management/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/category-management/tsconfig.lib.json",
+            "project": "projects/category-management/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/category-management/src/test.ts",
+            "tsConfig": "projects/category-management/tsconfig.spec.json",
+            "karmaConfig": "projects/category-management/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/category-management/tsconfig.lib.json",
+              "projects/category-management/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "healthApp": {
+      "root": "projects/healthApp/",
+      "sourceRoot": "projects/healthApp/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/healthApp",
+            "index": "projects/healthApp/src/index.html",
+            "main": "projects/healthApp/src/main.ts",
+            "polyfills": "projects/healthApp/src/polyfills.ts",
+            "tsConfig": "projects/healthApp/tsconfig.app.json",
+            "assets": [
+              "projects/healthApp/src/favicon.ico",
+              "projects/healthApp/src/assets"
+            ],
+            "styles": [
+              "projects/healthApp/src/styles.css"
+            ],
+            "scripts": [],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/healthApp/src/environments/environment.ts",
+                  "with": "projects/healthApp/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "healthApp:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "healthApp:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "healthApp:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/healthApp/src/test.ts",
+            "polyfills": "projects/healthApp/src/polyfills.ts",
+            "tsConfig": "projects/healthApp/tsconfig.spec.json",
+            "karmaConfig": "projects/healthApp/karma.conf.js",
+            "styles": [
+              "projects/healthApp/src/styles.css"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/healthApp/src/favicon.ico",
+              "projects/healthApp/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/healthApp/tsconfig.app.json",
+              "projects/healthApp/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "healthApp-e2e": {
+      "root": "projects/healthApp-e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/healthApp-e2e/protractor.conf.js",
+            "devServerTarget": "healthApp:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "healthApp:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "projects/healthApp-e2e/tsconfig.e2e.json",
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "lession-management": {
+      "root": "projects/lession-management",
+      "sourceRoot": "projects/lession-management/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/lession-management/tsconfig.lib.json",
+            "project": "projects/lession-management/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/lession-management/src/test.ts",
+            "tsConfig": "projects/lession-management/tsconfig.spec.json",
+            "karmaConfig": "projects/lession-management/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/lession-management/tsconfig.lib.json",
+              "projects/lession-management/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "formmanagerlib": {
+      "root": "projects/formmanagerlib",
+      "sourceRoot": "projects/formmanagerlib/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/formmanagerlib/tsconfig.lib.json",
+            "project": "projects/formmanagerlib/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/formmanagerlib/src/test.ts",
+            "tsConfig": "projects/formmanagerlib/tsconfig.spec.json",
+            "karmaConfig": "projects/formmanagerlib/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/formmanagerlib/tsconfig.lib.json",
+              "projects/formmanagerlib/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "FormManagerApp": {
+      "root": "projects/FormManagerApp/",
+      "sourceRoot": "projects/FormManagerApp/src",
+      "projectType": "application",
+      "prefix": "app",
+      "schematics": {},
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/FormManagerApp",
+            "index": "projects/FormManagerApp/src/index.html",
+            "main": "projects/FormManagerApp/src/main.ts",
+            "polyfills": "projects/FormManagerApp/src/polyfills.ts",
+            "tsConfig": "projects/FormManagerApp/tsconfig.app.json",
+            "assets": [
+              "projects/FormManagerApp/src/favicon.ico",
+              "projects/FormManagerApp/src/assets"
+            ],
+            "styles": [
+              "projects/FormManagerApp/src/styles.css"
+            ],
+            "scripts": [],
+            "es5BrowserSupport": true
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/FormManagerApp/src/environments/environment.ts",
+                  "with": "projects/FormManagerApp/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "FormManagerApp:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "FormManagerApp:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "FormManagerApp:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/FormManagerApp/src/test.ts",
+            "polyfills": "projects/FormManagerApp/src/polyfills.ts",
+            "tsConfig": "projects/FormManagerApp/tsconfig.spec.json",
+            "karmaConfig": "projects/FormManagerApp/karma.conf.js",
+            "styles": [
+              "projects/FormManagerApp/src/styles.css"
+            ],
+            "scripts": [],
+            "assets": [
+              "projects/FormManagerApp/src/favicon.ico",
+              "projects/FormManagerApp/src/assets"
+            ]
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/FormManagerApp/tsconfig.app.json",
+              "projects/FormManagerApp/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "FormManagerApp-e2e": {
+      "root": "projects/FormManagerApp-e2e/",
+      "projectType": "application",
+      "prefix": "",
+      "architect": {
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/FormManagerApp-e2e/protractor.conf.js",
+            "devServerTarget": "FormManagerApp:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "FormManagerApp:serve:production"
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": "projects/FormManagerApp-e2e/tsconfig.e2e.json",
             "exclude": [
               "**/node_modules/**"
             ]

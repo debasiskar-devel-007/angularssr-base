@@ -1,0 +1,37 @@
+<mat-card *ngIf="loader==true">
+  <mat-spinner class="spinner"></mat-spinner>
+</mat-card>
+
+<mat-card *ngIf="loader==false">
+  <form class="example-form" [formGroup]="lessionForm" autocomplete="off">
+    <div class="example-container">
+      <mat-form-field>
+        <input matInput formControlName="title" placeholder="Title">
+
+        <!-- error message start -->
+        <mat-error *ngIf="lessionForm.controls['title']?.touched && lessionForm.controls['title'].errors && lessionForm.controls['title'].errors.required">Title is required.</mat-error>
+        <mat-error *ngIf="lessionForm.controls['title']?.touched && lessionForm.controls['title'].errors && lessionForm.controls['title'].errors.maxlength">Title is not more then 150 charector.</mat-error>
+        <!-- error message end -->
+      </mat-form-field>
+    
+
+
+
+      <mat-form-field hintLabel="Max 1000 characters">
+        <textarea matInput formControlName="description" #description maxlength="1000" placeholder="Description"></textarea>
+        <mat-hint align="end">{{ description.value?.length || 0 }}/1000</mat-hint>
+
+        <!-- error message start -->
+        <mat-error *ngIf="lessionForm.controls['description']?.touched && lessionForm.controls['description'].errors && lessionForm.controls['description'].errors.required">Title is required.</mat-error>
+        <mat-error *ngIf="lessionForm.controls['description']?.touched && lessionForm.controls['description'].errors && lessionForm.controls['description'].errors.maxlength">Title is not more then 1000 charector.</mat-error>
+        <!-- error message end -->
+      </mat-form-field>
+    
+      </div>
+  </form>
+
+  <br />
+  
+  <button (click)="lessionFormSubmit();" mat-button [disabled]="!lessionForm.valid">{{ buttonText }}</button>
+  <button mat-button (click)="resetlessionForm();">Reset</button>
+</mat-card>

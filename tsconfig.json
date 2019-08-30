@@ -24,6 +24,30 @@
       ],
       "on-page-editor/*": [
         "dist/on-page-editor/*"
+      ],
+      "rolemanagementlib": [
+        "dist/rolemanagementlib"
+      ],
+      "rolemanagementlib/*": [
+        "dist/rolemanagementlib/*"
+      ],
+      "category-management": [
+        "dist/category-management"
+      ],
+      "category-management/*": [
+        "dist/category-management/*"
+      ],
+      "lession-management": [
+        "dist/lession-management"
+      ],
+      "lession-management/*": [
+        "dist/lession-management/*"
+      ],
+      "formmanagerlib": [
+        "dist/formmanagerlib"
+      ],
+      "formmanagerlib/*": [
+        "dist/formmanagerlib/*"
       ]
     }
   }

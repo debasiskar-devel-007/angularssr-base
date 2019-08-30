@@ -1,0 +1,68 @@
+<form>
+
+    <!-- text input  -->
+
+    <mat-form-field>
+        <mat-label>Text</mat-label>
+        <input matInput>
+    </mat-form-field>
+    <br>
+
+    <!-- text area  -->
+
+    <mat-form-field>
+        <mat-label>Text Area</mat-label>
+        <textarea matInput></textarea>
+    </mat-form-field>
+    <br>
+
+
+    <!-- select dropdown  -->
+    <mat-form-field>
+        <mat-label>Cars</mat-label>
+        <select matNativeControl required>
+            <option value="volvo">Volvo</option>
+            <option value="saab">Saab</option>
+            <option value="mercedes">Mercedes</option>
+            <option value="audi">Audi</option>
+        </select>
+    </mat-form-field>
+    <br>
+
+
+    <!-- email  -->
+
+    <mat-form-field>
+        <mat-label>Email</mat-label>
+        <input type="email" matInput>
+    </mat-form-field>
+    <br>
+
+    <!-- number  -->
+
+    <mat-form-field>
+        <mat-label>Number</mat-label>
+        <input type="number" matInput>
+    </mat-form-field>
+
+    <br>
+
+    <!-- checkbox  -->
+    <mat-checkbox>CheckBox</mat-checkbox>
+    <br>
+
+    <!-- radio -->
+    <mat-radio-group aria-label="Select an option">
+            <mat-radio-button value="1">Option 1</mat-radio-button>
+            <mat-radio-button value="2">Option 2</mat-radio-button>
+    </mat-radio-group>
+    <br>
+
+    <!-- date picker -->
+    <mat-form-field>
+            <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </mat-form-field>
+          
+</form>

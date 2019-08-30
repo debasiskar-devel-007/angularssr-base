@@ -8,17 +8,30 @@ import { ContactusComponent } from './contactus/contactus.component';
 import { MetaModule } from '@ngx-meta/core';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+/* Cookie Service */
+import { CookieService } from 'ngx-cookie-service';
+import { SetCookieComponent } from './set-cookie/set-cookie.component';
+
+// Forms Module 
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+
+
 @NgModule({
   declarations: [
     AppComponent,
     AboutusComponent,
-    ContactusComponent
+    ContactusComponent,
+    SetCookieComponent,
+   
+    
   ],
   imports: [
     BrowserModule.withServerTransition({ appId: 'serverApp' }),
-    AppRoutingModule,MetaModule.forRoot(), BrowserAnimationsModule
+    AppRoutingModule, MetaModule.forRoot(), BrowserAnimationsModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
-  providers: [],
+  providers: [CookieService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

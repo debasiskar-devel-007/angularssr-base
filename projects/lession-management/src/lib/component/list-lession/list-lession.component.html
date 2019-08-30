@@ -1,0 +1,31 @@
+<mat-card *ngIf="loader==true">
+  <mat-spinner class="spinner"></mat-spinner>
+</mat-card>
+
+<!-- <mat-card *ngIf="loader==false">
+  <lib-listing class="formfilterdiv" *ngIf="lessionListingConfig.datasource !=null && lessionListingConfig.datasource.length > 0"
+    [datasource]="lessionListingConfig.datasource"
+    [skip]="lessionListingConfig.listArray_skip"
+    [modify_header_array]="lessionListingConfig.listArray_modify_header"
+    [sourcedata]="lessionListingConfig.tableName"
+    [statusarr]="lessionListingConfig.statusArray"
+    [jwttoken]="lessionListingConfig.jwtToken" 
+    [apiurl]="lessionListingConfig.apiUrl"
+    [editroute]="lessionListingConfig.editUrl"
+    [deleteendpoint]="lessionListingConfig.deleteEndPoint">
+  </lib-listing> -->
+
+
+
+<mat-card *ngIf="loader==false">
+  <lib-listing class="formfilterdiv"
+      *ngIf="lessionListingConfig.datasource != null && lessionListingConfig.datasource.length > 0"
+      [datasource]="lessionListingConfig.datasource" [skip]="lessionListingConfig.listArray_skip"
+      [modify_header_array]="lessionListingConfig.listArray_modify_header" [sourcedata]="lessionListingConfig.tableName"
+      [statusarr]="lessionListingConfig.statusarr" [jwttoken]="lessionListingConfig.jwtToken"
+      [apiurl]="lessionListingConfig.apiUrl" [editroute]="lessionListingConfig.editUrl"
+      [deleteendpoint]="lessionListingConfig.deleteEndPoint">
+  </lib-listing>
+
+  <h2 *ngIf="lessionListingConfig.datasource.length == 0">No record found.</h2>
+</mat-card>
