@@ -12,6 +12,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 
 export class ResetPasswordComponent implements OnInit {
+  //   FormGroupDirective: It is a directive that binds an existing FormGroup to a DOM element.
   @ViewChild(FormGroupDirective) formDirective: FormGroupDirective;
   public resetPasswordForm: FormGroup;
   public fromTitleNameValue: any = '';
@@ -65,6 +66,7 @@ export class ResetPasswordComponent implements OnInit {
   ngOnInit() {
   }
 //  this function is use for mach password and confirm Password 
+
   machpassword(passwordkye: string, confirmpasswordkye: string) {
     return (group: FormGroup) => {
       let passwordInput = group.controls[passwordkye],
@@ -97,7 +99,7 @@ export class ResetPasswordComponent implements OnInit {
         result = response;
         console.log(result);
         if (result.status == "success") {
-          this.formDirective.resetForm();
+          this.formDirective.resetForm();       // Use for reset the form
         } else {
           this.message = result.msg;
         }
