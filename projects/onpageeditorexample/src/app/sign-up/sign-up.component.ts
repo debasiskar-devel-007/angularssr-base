@@ -11,7 +11,7 @@ export class SignUpComponent implements OnInit {
   public loginRouteingUrl: any = 'login';
 
   public projectName: any = 'Sign Up';
-  public fullUrl: any = 'http://166.62.39.137:5009/signup';
+  public fullUrl: any = 'http://166.62.39.137:5050/addorupdatedata';
   constructor() { }
 
   ngOnInit() {

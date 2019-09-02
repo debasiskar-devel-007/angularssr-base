@@ -16,8 +16,7 @@
     "start-build": "ng build contactus --watch",
     "start-serve": "ng serve onpageeditorexample",
     "start-buildAutoShare": "ng build autoShare --watch",
-    "start-buildlogin": "ng build login --watch",
-    "start-serveAutoShare": "ng serve onpageeditorexample"
+    "start-buildlogin": "ng build login --watch"
   },
   "private": true,
   "dependencies": {

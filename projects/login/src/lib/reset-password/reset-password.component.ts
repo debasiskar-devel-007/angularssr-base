@@ -1,18 +1,22 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, Inject } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormGroupDirective } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'lib-reset-password',
   templateUrl: './reset-password.component.html',
   styleUrls: ['./reset-password.component.css']
 })
+
+
+
 export class ResetPasswordComponent implements OnInit {
   @ViewChild(FormGroupDirective) formDirective: FormGroupDirective;
   public resetPasswordForm: FormGroup;
   public fromTitleNameValue: any = '';
   public fullUrlValue: any = '';
+  public message: any = '';
   // public signUpRouteingUrlValue: any = '';
 
 
@@ -23,6 +27,7 @@ export class ResetPasswordComponent implements OnInit {
     console.log(this.fromTitleNameValue);
 
   }
+
 
   @Input()        // setting the server url from project
   set fullUrl(fullUrlVal: any) {
@@ -38,11 +43,20 @@ export class ResetPasswordComponent implements OnInit {
   //   this.signUpRouteingUrlValue = routeingUrlval;
   //   console.log(this.signUpRouteingUrlValue);
   // }
+  public accesscode: string;
 
-  constructor(public fb: FormBuilder, public http: HttpClient, public router: Router) {
+  constructor(public fb: FormBuilder, public http: HttpClient, public router: Router, public route: ActivatedRoute) {
+
+    this.route.params.subscribe(params =>{
+     
+      this.accesscode = params['token'];
+      console.log(this.accesscode);
+    })
+
     this.resetPasswordForm = this.fb.group({
-      password: ['', Validators.required],
-      confirmPassword: ['',  Validators.compose([Validators.required, Validators.minLength(4)])],
+      // password: ['',  Validators.compose([Validators.required, Validators.minLength(4)])],
+      password: ['',  Validators.required],
+      confirmPassword: ['', Validators.required],
     }, {
       validator: this.machpassword('password', 'confirmPassword')
     })
@@ -72,11 +86,21 @@ export class ResetPasswordComponent implements OnInit {
       this.resetPasswordForm.controls[x].markAsTouched();
     }
     if (this.resetPasswordForm.valid) {
-      let data: any = this.resetPasswordForm.value;
+      let data : any = {"password":this.resetPasswordForm.value.password,"accesscode":this.accesscode}
+      // data.accesscode = this.accesscode;
+
         let link: any = this.fullUrlValue;
+        console.log(data)
+        console.log(link)
       this.http.post(link, data).subscribe((response) => {
         let result: any = {};
         result = response;
+        console.log(result);
+        if (result.status == "success") {
+          this.formDirective.resetForm();
+        } else {
+          this.message = result.msg;
+        }
         
       })
     }

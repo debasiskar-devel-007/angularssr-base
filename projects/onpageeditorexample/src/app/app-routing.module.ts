@@ -73,7 +73,7 @@ const appRoutes: Routes = [
                               }
                           }},
 
-                          { path: 'reset-password',      component: ResetFromComponent,
+                          { path: 'reset-password/:token',      component: ResetFromComponent,
                               data: {
                                   meta: {
                                       title: 'Home',
