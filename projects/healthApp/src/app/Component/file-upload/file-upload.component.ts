@@ -10,8 +10,10 @@ import { CookieService } from 'ngx-cookie-service';
 export class FileUploadComponent implements OnInit {
 
   public configData: any = {
-    size: "2048",
-    format: ["jpg", "png"]
+    baseUrl: "http://3.15.236.141:5005/",
+    endpoint: "uploads",
+    size: "20480", // kb
+    format: ["jpg", "jpeg", "png", "bmp", "zip"]
   }
 
   constructor() { }

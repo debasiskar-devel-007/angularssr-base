@@ -7,7 +7,7 @@ import { map } from 'rxjs/operators';
 })
 export class FileUploadService {
 
-  public BASE_URL: string = "http://3.15.236.141:5005/uploads?path=files&prefix=xlx";
+  public BASE_URL: string = "http://3.15.236.141:5005/uploads";
   public httpOptions = {
     headers: new HttpHeaders({
       "Content-Type": "application/x-www-form-urlencoded",
@@ -18,10 +18,14 @@ export class FileUploadService {
   constructor(private httpClient: HttpClient) { }
 
   /* Upload Function */
-  public upload(data) {
-    let uploadURL = this.BASE_URL;
+  public upload(uploadURL, data) {
+    const formData = new FormData();
+    formData.append('file', data.file);
+    formData.append('type', data.type);
+    formData.append('path', data.path);
+    formData.append('prefix', data.prefix);
 
-    return this.httpClient.post<any>(uploadURL, data, {
+    return this.httpClient.post<any>(uploadURL, formData, {
       reportProgress: true,
       observe: 'events'
     }).pipe(map((event) => {

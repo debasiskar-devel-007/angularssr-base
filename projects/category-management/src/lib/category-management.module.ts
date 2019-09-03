@@ -5,9 +5,7 @@ import { MaterialModule } from './Module/material-module';
 import { CategoryManagementComponent } from './category-management.component';
 import { ListCategoryComponent } from './component/list-category/list-category.component';
 import { AddEditCategoryComponent } from './component/add-edit-category/add-edit-category.component';
-
 import { HttpClientModule } from '@angular/common/http';
-
 import { ListingModule } from "listing-angular7";
 
 @NgModule({

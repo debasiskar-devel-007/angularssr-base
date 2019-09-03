@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, Input, Pipe } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
 import { FileUploadService } from './file-upload.service';
@@ -17,6 +17,7 @@ import { from } from 'rxjs';
 
 export class FileUploadComponent implements OnInit {
 
+  public formData = new FormData();
   public files: any = [];
   public filesProcess: any = [];
   public configData: any;
@@ -39,46 +40,77 @@ export class FileUploadComponent implements OnInit {
   selectFiles(event) {
     for (let index = 0; index < event.length; index++) {
       const element = event[index];
-      if(element.size / 1000 <= this.configData.size) {
-        element.error = false;
+      /* Checking Validation */
+      let validate: any = this.checkingValidation(element);
+      if (validate.status) {
+        element.valid = { status: true };
+        element.upload = { status: 'selected' };
         this.files.push(element);
-        this.filesProcess.push({ status: 'pending' });
       } else {
-        element.error = true;
-        element.errorMessage = "File not supported.";
+        element.valid = { status: false, message: validate.message };
+        element.upload = { status: 'selected' };
         this.files.push(element);
-        this.filesProcess.push({ status: 'pending' });
       }
     }
   }
 
+  /* Checking Validation */
+  checkingValidation(element) {
+    let valid: any = { status: true, message: null };
+
+    /* Checking File Format */
+    let format = element.type.split("/");
+    let check = this.configData.format.includes(format[1]);
+    if (check == false) {
+      valid.status = false;
+      valid.message = format[1] + " format not supported.";
+      return valid;
+    }
+
+    /* Checking File size */
+    if (element.size / 1000 > this.configData.size) {
+      valid.status = false;
+      valid.message = "File size too large. Maximum file size limit: " + this.configData.size + " KB.";
+      return valid;
+    }
+
+    if (valid.status == true) {
+      return valid;
+    }
+  }
+
   /* File Upload Process */
-  startUploadProcess(getIndex: any = null) {
-    if (getIndex == null) {
-      for (let index = 0; index < this.files.length; index++) {
+  uploadAll(getIndex: any = null) {
+    for (let index = 0; index < this.files.length; index++) {
+      if(this.files[index].valid.status == true && this.files[index].upload.status != 'complete') {
         this.uploading(index);
       }
-    } else {
-      this.uploading(getIndex);
     }
   }
 
   /* Upload */
   uploading(index) {
-    this.fileUploadService.upload(this.files[index]).subscribe(
+    let postData: any = {
+      file: this.files[index],
+      type: "bulk-upload",
+      path: "files",
+      prefix: "image_"
+    }
+
+    this.fileUploadService.upload(this.configData.baseUrl + this.configData.endpoint, postData).subscribe(
       (response) => {
         let result: any = response;
-        switch(result.status) {
+        switch (result.status) {
           case 'complete':
-            this.filesProcess[index] = result;
+            this.files[index].upload = result;
             this.openSnackBar('Successfully Uploaded !!', 'Undo');
             break;
           default:
-            this.filesProcess[index] = result;
+            this.files[index].upload = result;
             break;
         }
       }, (err) => {
-        this.filesProcess[index] = { status: 'error' };
+        this.files[index] = { status: 'error' };
         this.openSnackBar('An error occurred !!', 'Retry');
       }
     );
@@ -88,9 +120,9 @@ export class FileUploadComponent implements OnInit {
   removeFiles(index: any = null) {
     this.openDialog();
     this.dialogRef.afterClosed().subscribe(result => {
-      if(result) {
+      if (result) {
         this.files.splice(index, 1);
-        this.openSnackBar('Successfully Remove !!', 'Undo');
+        this.openSnackBar('Successfully Remove !!', '');
       }
     });
   }
@@ -108,6 +140,11 @@ export class FileUploadComponent implements OnInit {
       width: '250px',
       data: { message: "Message" }
     });
+  }
+
+  /* Delete all selected files */
+  deleteAll() {
+    this.files.splice(0, this.files.length);
   }
 
 }
