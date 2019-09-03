@@ -23,8 +23,8 @@ export class BlogComponent implements OnInit {
   public tokenViapp:any=''
   /**lib-listing start here**/
   public blogDataarray: any = [];
-  public teamlist_skip: any = ["_id"];
-  public teamlist_modify_header: any = { 'title': "Title", 'description': "Description", 'parentcategoryname': "Parent Category" };
+  public Bloglist_skip: any = ["_id","description"];
+  public Bloglist_modify_header: any = { 'title': "Title", 'description': "Description", 'parentcategoryname': "Parent Category" };
   public status: any = [{ val: 1, 'name': 'Active' }, { val: 0, 'name': 'Inactive' }];
   /**lib-listing end here**/
 

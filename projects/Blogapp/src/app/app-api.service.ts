@@ -15,9 +15,9 @@ export class ApiService {
   public progress: any = [];
   public uploadtype;
   public uploaderror: any = '';
-  public accesstoken:any='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJleHAiOjE1NjcyMjc1NzcsImlhdCI6MTU2NzE0MTE3N30.Dt2aUQE9XnLeqRC9Na7gwc4bISdLg8Xnyc6el_djzK4';
+  public accesstoken:any='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJleHAiOjE1Njc1MDUxMTEsImlhdCI6MTU2NzQxODcxMX0.PwcteDraTnwzlt-4QfHZOX8tIhgiGgbMvlElhR3cnnI';
   fileservername: any = [];
-  serverUrl: any='http://166.62.39.137:5009/';
+  serverUrl: any='http://18.191.148.255:5009/';
   addendpointUrl: any;
   uploadEndpointUrl:any; //souresh
   updateendpointUrl: any;
@@ -286,6 +286,7 @@ export class ApiService {
     return result;
   }
   CustomRequest(requestdata: any, endpoint:any ) {
+    console.log('resolve data',requestdata);
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',

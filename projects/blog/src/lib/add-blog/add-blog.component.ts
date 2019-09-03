@@ -5,6 +5,7 @@ import { ApiService } from '../api.service';
 import { HttpClient } from '@angular/common/http';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from "@angular/material";
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { CookieService } from 'ngx-cookie-service';
 
 export interface DialogData {
   message: string;
@@ -23,7 +24,7 @@ export class AddBlogComponent implements OnInit {
   };
   public model = {
     editorData: ''
-};
+  };
   /**ckeditor end here*/
 
   /**blog varibles declaration start here**/
@@ -38,6 +39,7 @@ export class AddBlogComponent implements OnInit {
   public params_id: any;
   public editarray: any = [];
   public statusarray: any = [];
+  public allData: any = [];
   /**blog varibles declaration end here**/
   public headerText: any = 'Add Blogs';
 
@@ -45,63 +47,54 @@ export class AddBlogComponent implements OnInit {
   set listRoute(listval: any) {
     this.listUrl = (listval) || '<no name set>';
     this.listUrl = listval;
-
   }
 
   @Input()          //setting the server url from project
   set serverUrl(serverUrlval: any) {
     this.serverUrlData = (serverUrlval) || '<no name set>';
     this.serverUrlData = serverUrlval;
-
   }
 
   @Input()          //setting the server url from project
   set getDataEndpoint(endpointUrlval: any) {
     this.getDataEndpointData = (endpointUrlval) || '<no name set>';
     this.getDataEndpointData = endpointUrlval;
-
   }
   @Input()          //setting the server url from project
   set addEndpoint(endpointUrlval: any) {
     this.addEndpointData = (endpointUrlval) || '<no name set>';
     this.addEndpointData = endpointUrlval;
-
   }
+
+  @Input()          //resolve data and set the value for edit
+  set dataList(allData: any) {
+    this.allData = allData;
+    if (this.activeroute.snapshot.params.id) {
+      this.headerText = "Edit Blogs";
+      this.blogAddEditForm.controls['title'].patchValue(allData[0].title);
+      this.blogAddEditForm.controls['description'].patchValue(allData[0].description);
+      this.model.editorData = allData[0].description;
+      this.blogAddEditForm.controls['parent_id'].patchValue(allData[0].parent_id);
+    }
+  }
+
 
   constructor(public fb: FormBuilder, public activeroute: ActivatedRoute,
     public apiservice: ApiService, public _http: HttpClient, public router: Router
-    , public dialog: MatDialog) {
-
+    , public dialog: MatDialog, private cookieService: CookieService) {
     /**catch the parameter id***/
-    
-    /*catch parameter id end here**/
 
     /**Formgroup create start here**/
     this.blogAddEditForm = this.fb.group({
-      title: ['', Validators.required],
+      title:       ['', Validators.required],
       description: ['', Validators.required],
-      parent_id: []
+      parent_id:   []
     })
     /**Formgroup create end here**/
   }
 
   ngOnInit() {
-// 
-
-
-console.log('this.activeroute.snapshot.params.id        ==== oninit');
-    // console.log(this.activeroute.snapshot.params.id);
-      this.params_id = this.activeroute.snapshot.params.id;
-    if (this.params_id != null ) {
-      console.log('ok')
-      console.log(this.params_id);
-      this.headerText = 'Edit Blogs';
-      this.editBlog();
-
-    }
-
-// 
-
+    this.params_id = this.activeroute.snapshot.params.id;
 
     /**Observable start here**/
     this.apiservice.clearServerUrl();
@@ -122,31 +115,23 @@ console.log('this.activeroute.snapshot.params.id        ==== oninit');
     setTimeout(() => {
       this.getBlogData();
     }, 100);
-
-
   }
+
   /*modal start here*/
   openDialog(x: any): void {
     this.dialogRef = this.dialog.open(Dialogtest, {
       width: '250px',
-
       data: { message: x }
     });
 
     this.dialogRef.afterClosed().subscribe(result => {
-      // console.log('The dialog was closed');
-
     });
   }
-  /**modal end here */
 
   /**validation untouch purpose **/
   inputUntouch(form: any, val: any) {
-    console.log('on blur .....');
-    console.log(form.controls[val].value);
     form.controls[val].markAsUntouched();
   }
-  /*validation untouch purpose*/
 
   /** getting all blogs data start here **/
   getBlogData() {
@@ -161,16 +146,14 @@ console.log('this.activeroute.snapshot.params.id        ==== oninit');
       this.blogarray = result.res;
     })
   }
-  /**getting all blogs data end here**/
 
   /**add & update* blogs submitting form start here**/
   blogAddEditFormSubmit() {
-  
+
     this.blogAddEditForm.patchValue({
       description: this.model.editorData
     });
-    console.log(this.blogAddEditForm.value);
-  
+
     this.isSubmitted = true;
     let x: any;
     for (x in this.blogAddEditForm.controls) {
@@ -205,8 +188,6 @@ console.log('this.activeroute.snapshot.params.id        ==== oninit');
         let result: any;
         result = response;
         this.statusarray = result.status;
-        console.log("this.statusarray");
-        console.log(this.statusarray);
 
         this.openDialog(result.status);
         setTimeout(() => {
@@ -216,42 +197,11 @@ console.log('this.activeroute.snapshot.params.id        ==== oninit');
         setTimeout(() => {
           this.router.navigateByUrl('/' + this.listUrl);
         }, 3000);
-
-
-
       });
-
-
     }
-
   }
-  /**add & update* blogs submitting form end here**/
-
-  /***Edit Blog Start Here ***/
-  editBlog() {
-    
-    let data: any = {
-      "source": "blog_category",
-      "condition": {
-        "_id": this.params_id
-      }
-    }
-    this.apiservice.getData(data).subscribe(response => {
-      let result: any = response;
-      let tempvar = result.res;
-      this.editarray = result.res;
-      this.blogAddEditForm.controls['title'].patchValue(tempvar[0].title);
-      this.blogAddEditForm.controls['description'].patchValue(tempvar[0].description);
-      this.model.editorData = tempvar[0].description;
-      this.blogAddEditForm.controls['parent_id'].patchValue(tempvar[0].parent_id);
-    }, error => {
-      console.log("Ooops");
-    })
-
-  }
-  /**Edit Blog End Here**/
-
 }
+
 @Component({
   selector: 'dialogtest',
   templateUrl: 'modal.html',

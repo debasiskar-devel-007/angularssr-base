@@ -3,19 +3,20 @@ import { switchMap, map, takeWhile } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 // for setting observables to get serverurl and endpointurl from app
 import { Observable, Subject, Subscription } from 'rxjs';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({   
   providedIn: 'root'
 })
 export class ApiService {
-
+  public jwtToken:string=''; //jwtToken variable declaration
   public lengthis;
   public percentageis;
   public inprogress;
   public progress: any = [];
   public uploadtype;
   public uploaderror: any = '';
-  public accesstoken:any='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJleHAiOjE1NjcyMjc1NzcsImlhdCI6MTU2NzE0MTE3N30.Dt2aUQE9XnLeqRC9Na7gwc4bISdLg8Xnyc6el_djzK4';
+  public accesstoken:any='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJleHAiOjE1Njc1MDUxMTEsImlhdCI6MTU2NzQxODcxMX0.PwcteDraTnwzlt-4QfHZOX8tIhgiGgbMvlElhR3cnnI';
   fileservername: any = [];
   serverUrl: any;
   addendpointUrl: any;
@@ -42,7 +43,7 @@ export class ApiService {
   public subscriptionGetdataEndpoint: Subscription;
 
   constructor(private _http: HttpClient,
-    private _authHttp: HttpClient) {
+    private _authHttp: HttpClient,private cookieService:CookieService) {
     this.subscriptionServer = this.getServerUrl().subscribe(message => {
      let result: any;
       result = message;
@@ -51,12 +52,15 @@ export class ApiService {
       } else {
         this.serverUrl = null;
       }
+     
     });
+    this.cookieService.set('jwtToken',this.jwtToken); //set the cookie service by souresh
     this.subscriptionaddEndpoint = this.getaddEndpoint().subscribe(message => {
       let result: any;
       result = message;
       if (result != null) {
         this.addendpointUrl = result;
+        this.cookieService.set('addendpointUrl',this.addendpointUrl); //Souresh
       } else {
         this.addendpointUrl = null;
       }
@@ -67,6 +71,7 @@ export class ApiService {
       result=message;
         if(result!=null){
           this.uploadEndpointUrl = result;
+          this.cookieService.set('uploadEndpointUrl',this.uploadEndpointUrl); //Souresh
         } else{
           this.uploadEndpointUrl = null;
         }
@@ -77,6 +82,7 @@ export class ApiService {
       result = message;
       if (result != null) {
         this.updateendpointUrl = result;
+        this.cookieService.set('updateendpointUrl', this.updateendpointUrl); //Souresh
       } else {
         this.updateendpointUrl = null;
       }
@@ -86,6 +92,7 @@ export class ApiService {
       result = message;
       if (result != null) {
         this.deletesingle_endpointUrl = result;
+        this.cookieService.set('deletesingle_endpointUrl',this.deletesingle_endpointUrl); //Souresh
       } else {
         this.deletesingle_endpointUrl = null;
       }
@@ -95,6 +102,7 @@ export class ApiService {
       result = message;
       if (result != null) {
         this.updatestatus_single_endpointUrl = result;
+        this.cookieService.set('updatestatus_single_endpointUrl',this.updatestatus_single_endpointUrl); //Souresh
       } else {
         this.updatestatus_single_endpointUrl = null;
       }
@@ -104,6 +112,7 @@ export class ApiService {
       result = message;
       if (result != null) {
         this.getdata_endpointUrl = result;
+        this.cookieService.set('getdata_endpointUrl',this.getdata_endpointUrl); //Souresh
       } else {
         this.getdata_endpointUrl = null;
       }

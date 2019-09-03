@@ -7,7 +7,7 @@ import {ActivatedRoute,Router} from '@angular/router';
   styleUrls: ['./bloglist.component.css']
 })
 export class BloglistComponent implements OnInit {
-  public server:any = 'http://166.62.39.137:5009/';
+  public server:any = 'http://18.191.148.255:5009/';
   public addUrl:any = 'addorupdatedata';
   public updateUrl:any = 'addorupdatedata';
   public deleteUrl:any = 'deletesingledata';
@@ -17,15 +17,17 @@ export class BloglistComponent implements OnInit {
   public listingTablename:any='blog_category';
   public getSourceUrl:any = 'demoteam';
   public BlogList:any;
-  public token:any='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJleHAiOjE1NjcxNDA2MTEsImlhdCI6MTU2NzA1NDIxMX0.amPaYfVE36jTSJeVNZFXK-VZPP52y3k0lMch6OXk6Cs';
+  public token:any='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJleHAiOjE1Njc1MDUxMTEsImlhdCI6MTU2NzQxODcxMX0.PwcteDraTnwzlt-4QfHZOX8tIhgiGgbMvlElhR3cnnI';
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
+    /**getting alll blog data by resolve call **/
     this.activatedRoute.data.forEach(data=>{
       let result:any;
       result=data.results.res;
       this.BlogList=result;
+      
     })
   }
 

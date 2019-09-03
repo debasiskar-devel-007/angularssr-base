@@ -10,6 +10,9 @@ import { ListingModule } from 'listing-angular7';
 import { HttpClientModule } from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { CookieService } from 'ngx-cookie-service';
+import { ApiService } from './api.service';
+
 @NgModule({
   declarations: [
     BlogComponent, 
@@ -25,8 +28,11 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     FormsModule,
     ReactiveFormsModule,
     BrowserModule,
-    CKEditorModule
+    CKEditorModule,
   ],
+    
+    
+  providers: [ ApiService,CookieService],
   exports: [BlogComponent, AddBlogComponent],
   entryComponents:[Dialogtest],
   

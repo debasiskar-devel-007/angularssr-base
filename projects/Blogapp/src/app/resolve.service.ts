@@ -12,22 +12,18 @@ export class ResolveService {
 
   }
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
+  
+    if (route.data.requestcondition.condition.key_id != null && route.data.requestcondition.condition.key_id == '') {
+      delete route.data.requestcondition.condition.key_id;
+      route.data.requestcondition.condition._id = route.params.id;
+    }
    
-    console.log('resolve route data');
-    console.log(route.data.requestcondition);
-    console.log(route.data.endpoint);
-    console.log(state);
-   
-    console.log('endpoint!!!!!');
-   
+
     return new Promise((resolve) => {
       this.apiService.CustomRequest(route.data.requestcondition, route.data.endpoint).subscribe(api_object => {
-        console.log('api_object  !!!!');
-        console.log(api_object);
         if (api_object) {
           return resolve(api_object);
-        } else { 
-          
+        } else {
           return true;
         }
       });
