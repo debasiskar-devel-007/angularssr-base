@@ -30,7 +30,7 @@ export class RolemanagementlibComponent implements OnInit {
       datasource: receivedCategoryData.datasource,
       tableName: receivedCategoryData.tableName,
       listArray_skip: [ "_id", "userId", "created_at", "id", "updated_at" ],
-      listArray_modify_header: { "rolename": "Role Name","roledesc":"Role Description" },
+      listArray_modify_header: { "rolename": "Role Name","roledesc":"Role Description","status":"Status"},
       admintablenameTableName: "admin",
       statusarr: [{ val: 1, name: "Active"}, { val: 0, name:'Inactive' }],
       updateurl: receivedCategoryData.updateEndpoint,

@@ -21,9 +21,6 @@ export class AddEditLessionComponent implements OnInit {
   @Input()
   set config(getConfig: any) {
     this.configData = getConfig;
-    console.log("//////////////////", getConfig.defaultData.title);
-
-    console.log("//////////////////", getConfig.defaultData.description);
   }
 
   constructor(private formBuilder: FormBuilder, private httpRequest: LessionManagementService,
@@ -33,7 +30,7 @@ export class AddEditLessionComponent implements OnInit {
 
   ngOnInit() {
 
-    // console.log("Ekhane asche");
+   
     this.loader = false;
 
     /* Generate form */
@@ -86,7 +83,7 @@ export class AddEditLessionComponent implements OnInit {
       }, (error) => {
         alert("Some error occurred. Please try angain.");
       });
-    }
+    } // console.log("Ekhane asche");
   
 
   /* reset Category form */

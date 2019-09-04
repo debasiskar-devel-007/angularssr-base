@@ -48,6 +48,12 @@
       ],
       "formmanagerlib/*": [
         "dist/formmanagerlib/*"
+      ],
+      "blog": [
+        "dist/blog"
+      ],
+      "blog/*": [
+        "dist/blog/*"
       ]
     }
   }

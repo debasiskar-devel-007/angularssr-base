@@ -16,9 +16,9 @@ export class ApiService {
   public progress: any = [];
   public uploadtype;
   public uploaderror: any = '';
-  public accesstoken: any = '';
+  public accesstoken: any = this.cookieService.get('jwtToken');;
   public fileservername: any = [];
-  public serverUrl: any = 'http://166.62.39.137:5009/';
+  public serverUrl: any = 'http://18.191.148.255:5009/';
   public addendpointUrl: any;
   public updateendpointUrl: any;
   public deletesingle_endpointUrl: any;
@@ -29,7 +29,7 @@ export class ApiService {
 
   constructor(private _http: HttpClient, private authHttp: HttpClient , private cookieService : CookieService) 
   {
-     this.accesstoken = cookieService.get('jwtToken');
+     
    }
 
   isTokenExpired() {

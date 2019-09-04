@@ -36,24 +36,7 @@ export class ListLessionComponent implements OnInit {
     this.loader = false;
   }
 
-  // @Input()
-  // set config(receivedCategoryData: any) {
-  //   this.roleListingConfig = {
-  //     apiUrl: receivedCategoryData.apiBaseUrl,
-  //     listEndPoint: "datalist",
-  //     datasource: receivedCategoryData.datasource,
-  //     tableName: receivedCategoryData.tableName,
-  //     listArray_skip: [ "_id", "userId", "created_at", "id", "updated_at" ],
-  //     listArray_modify_header: { "title": "Title", "description": "Description", "priority": "Priority", "roll": "Roll", "status": "Status" },
-  //     admintablenameTableName: "admin",
-  //     statusarr: [{ val: 1, name: "Active"}, { val: 0, name:'Inactive' }],
-  //     updateurl: receivedCategoryData.updateEndpoint,
-  //     editUrl: receivedCategoryData.editUrl,
-  //     jwtToken: receivedCategoryData.jwtToken,
-  //     deleteEndPoint: receivedCategoryData.deleteEndPoint
-  //   }
-  //   this.loader = false; 
-  // }
+ 
 
 
   constructor(private httpRequest: LessionManagementService, private router: Router) { }
@@ -62,3 +45,4 @@ export class ListLessionComponent implements OnInit {
   }
 
 }
+ 

@@ -11,7 +11,7 @@ export class ListCategoryComponent implements OnInit {
 
   /************** lib list setup start here *************/
   public categoryListingConfig:any = {
-    apiBaseUrl: "http://166.62.39.137:5009/",
+    apiBaseUrl: "http://18.191.148.255:5009/",
     listEndPoint: "datalist",
     datasource: "",
     tableName: "category",

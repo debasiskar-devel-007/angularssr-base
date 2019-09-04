@@ -12,7 +12,7 @@ export class AddEditCategoryComponent implements OnInit {
   /* Config for add and edit start */
   public configAddEdit: any = {
     action: "add",
-    endpoint: "http://166.62.39.137:5009/addorupdatedata",
+    endpoint: "http://18.191.148.255:5009/addorupdatedata",
     source: "category",
     condition: {},
     defaultData: null,

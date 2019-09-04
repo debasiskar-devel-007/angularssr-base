@@ -12,7 +12,7 @@ export class ListLessionComponent implements OnInit {
 
   /************** lib list setup start here *************/
   public lessionListingConfig:any = {
-    apiBaseUrl: "http://166.62.39.137:5009/",
+    apiBaseUrl: "http://18.191.148.255:5009/",
     listEndPoint: "datalist",
     datasource: "",
     tableName: "lession",   

@@ -1,6 +1,6 @@
 import { Component, OnInit ,Input} from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-// import { CookieService } from 'ngx-cookie-service';
+import { CookieService } from 'ngx-cookie-service';
 
 
 @Component({
@@ -14,17 +14,17 @@ export class AddroleappComponent implements OnInit {
    /* Config for add and edit start */
    public configAddEdit: any = {
     action: "add",
-    endpoint: "http://166.62.39.137:5009/addorupdatedata",
+    endpoint: "http://18.191.148.255:5009/addorupdatedata",
     source: "rolemanagement",
     condition: {},
     defaultData: null,
-    jwtToken: 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJleHAiOjE1NjcwNTQzNDYsImlhdCI6MTU2Njk2Nzk0Nn0.qZMR2qvzA30k6cIfiFBLc9oBT1kQcfgkuX1lBzZZmDA',
+    jwtToken: this.cookieService.get('jwtToken'),
     callBack: "role-management",
     userData: { id: "18801017007", name: "Admin" },
   }
 
 
-  constructor(private router: Router, private activateRoute: ActivatedRoute, ) {
+  constructor(private router: Router, private activateRoute: ActivatedRoute, private cookieService : CookieService ) {
   }
 
   ngOnInit() {

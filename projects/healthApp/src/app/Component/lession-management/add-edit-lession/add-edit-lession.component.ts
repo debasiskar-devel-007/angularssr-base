@@ -16,7 +16,8 @@ export class AddEditLessionComponent implements OnInit {
 
   public configAddEdit: any = {
     action: "add",
-    endpoint: "http://166.62.39.137:5009/addorupdatedata",
+    endpoint: "http://18.191.148.255:5009/addorupdatedata",
+    // listEndPoint: "addorupdatedata",
     source: "lession",
     condition: {},
     defaultData: null,
