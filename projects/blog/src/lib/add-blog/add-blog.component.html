@@ -10,7 +10,6 @@
       <form class="example-form" autocomplete="off" name="blogAddEditForm" (ngSubmit)="blogAddEditFormSubmit()"
         [formGroup]="blogAddEditForm">
 
-
         <mat-form-field >
           <input matInput type="text" placeholder="Title" [formControl]="blogAddEditForm.controls['title']"
             (blur)="inputUntouch(blogAddEditForm,'title')">

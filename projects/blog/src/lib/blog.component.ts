@@ -24,7 +24,8 @@ export class BlogComponent implements OnInit {
   /**lib-listing start here**/
   public blogDataarray: any = [];
   public Bloglist_skip: any = ["_id","description"];
-  public Bloglist_modify_header: any = { 'title': "Title", 'description': "Description", 'parentcategoryname': "Parent Category" };
+  public Bloglist_modify_header: any = { 'title': "Title", 'description': "Description",
+      'parentcategoryname': "Parent Category","status":"Status","priority":"Priority" };
   public status: any = [{ val: 1, 'name': 'Active' }, { val: 0, 'name': 'Inactive' }];
   /**lib-listing end here**/
 
@@ -95,6 +96,8 @@ export class BlogComponent implements OnInit {
   set listResolve(listresolveUrlval: any) {
     this.blogDataarray = (listresolveUrlval) || '<no name set>';
     this.blogDataarray = listresolveUrlval;
+    
+    
   }
 
   constructor(public router: Router,
@@ -117,6 +120,7 @@ export class BlogComponent implements OnInit {
       this.apiService.setgetdataEndpoint(this.getDataEndpointData);
     }, 50);
     /**observable end here**/
+    
   }
   /***getting all the blog data function start here**/
 
@@ -130,6 +134,7 @@ export class BlogComponent implements OnInit {
       let result: any;
       result = response;
       this.blogDataarray = result.res;
+      
 
     })
 

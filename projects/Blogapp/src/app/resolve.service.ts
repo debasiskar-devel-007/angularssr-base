@@ -16,7 +16,7 @@ export class ResolveService {
     var data: any = { source: route.data.requestcondition.source };
 
     if (route.data.requestcondition.condition.key_id != null && route.data.requestcondition.condition.key_id == '') {
-      data.condition._id = route.params.id;
+      data.condition = { _id: route.params.id };
     }
     /* will come into play while editing otherwise no effect */
 

@@ -27,6 +27,7 @@ export class BloglistComponent implements OnInit {
       let result:any;
       result=data.results.res;
       this.BlogList=result;
+     
     })
   }
 

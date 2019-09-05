@@ -16,7 +16,7 @@ export class AddComponent implements OnInit {
   constructor(public activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-     console.log("Ki ID dea tanche URL",this.activatedRoute.snapshot.params.id);
+    //  console.log("Ki ID dea tanche URL",this.activatedRoute.snapshot.params.id);
     if (this.activatedRoute.snapshot.params.id) {
       this.activatedRoute.data.forEach(data => {
         let result: any;

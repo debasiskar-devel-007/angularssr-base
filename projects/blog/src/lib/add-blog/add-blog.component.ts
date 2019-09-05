@@ -72,9 +72,9 @@ export class AddBlogComponent implements OnInit {
   }
   @Input()          //single data from resolve call  & set the value for edit
   set singleData(allData: any) {
-    console.log(allData[0].title);
     this.allData = allData;
     if (this.activeroute.snapshot.params.id) {
+      this.params_id=this.activeroute.snapshot.params.id;
       this.headerText = "Edit Blogs";
       this.buttonText = "Update";
       this.blogAddEditForm.controls['title'].patchValue(allData[0].title);
@@ -123,10 +123,9 @@ export class AddBlogComponent implements OnInit {
     }, 50);
     /**Observable end here**/
 
-    //getBlogData call here
-    // setTimeout(() => {
-    //   this.getBlogData();
-    // }, 100);
+    setTimeout(() => {
+      this.getBlogData();
+    }, 100);
 
 
   }
@@ -151,24 +150,23 @@ export class AddBlogComponent implements OnInit {
   }
   /*validation untouch purpose*/
 
-  // /** getting all blogs data start here **/
-  // getBlogData() {
+   /** getting all blogs data start here **/
+  getBlogData() {
 
-  //   let data: any = {
-  //     "source": "blog_category_view"
-  //   }
+    let data: any = {
+      "source": "blog_category_view"
+    }
 
-  //   this.apiservice.getData(data).subscribe(response => {
+    this.apiservice.getData(data).subscribe(response => {
 
-  //     let result: any = response;
-  //     this.blogarray = result.res;
-  //   })
-  // }
+      let result: any = response;
+      this.blogarray = result.res;
+    })
+  }
   // /**getting all blogs data end here**/
 
   /**add & update* blogs submitting form start here**/
   blogAddEditFormSubmit() {
-    console.log("Button click korle---",this.activeroute.snapshot.params.id);
     this.blogAddEditForm.patchValue({
       description: this.model.editorData
     });
@@ -237,10 +235,9 @@ export class AddBlogComponent implements OnInit {
 
   }
   /**add & update* blogs submitting form end here**/
-
-
-
 }
+
+
 @Component({
   selector: 'dialogtest',
   templateUrl: 'modal.html',
