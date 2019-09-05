@@ -11,7 +11,7 @@
     <!-- adding button end here -->
     <!-- applying lib-listing start here -->
     <mat-card-content class="listing-content-admin">
-        <lib-listing class="formfilterdiv formfilterdivnew" [datasource]="blogDataarray"
+        <lib-listing class="formfilterdiv formfilterdivnew" *ngIf="blogDataarray.length>0" [datasource]="blogDataarray"
             [skip]="Bloglist_skip" [modify_header_array]="Bloglist_modify_header" [sourcedata]="Blogtablename"
             [statusarr]="status" [editroute]="editRouteUrl" [apiurl]="serverUrlData" [jwttoken]="tokenViapp"
             [deleteendpoint]="deleteRouteUrl" [updateendpoint]="addupdateRouteUrl">
