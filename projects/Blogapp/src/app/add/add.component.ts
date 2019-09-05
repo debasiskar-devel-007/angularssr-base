@@ -16,14 +16,14 @@ export class AddComponent implements OnInit {
   constructor(public activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    if (this.activatedRoute.snapshot.params.id)
-
+     console.log("Ki ID dea tanche URL",this.activatedRoute.snapshot.params.id);
+    if (this.activatedRoute.snapshot.params.id) {
       this.activatedRoute.data.forEach(data => {
         let result: any;
         result = data.results.res;
         this.editdata = result;
-
-      })
+      });
+    }
   }
 
 

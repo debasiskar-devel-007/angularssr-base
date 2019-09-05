@@ -11,22 +11,25 @@ export class ResolveService {
   constructor(private apiService: ApiService, private router: Router) {
 
   }
+
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
+    var data: any = { source: route.data.requestcondition.source };
+
     if (route.data.requestcondition.condition.key_id != null && route.data.requestcondition.condition.key_id == '') {
-      delete route.data.requestcondition.condition.key_id;
-      route.data.requestcondition.condition._id = route.params.id;
+      data.condition._id = route.params.id;
     }
+    /* will come into play while editing otherwise no effect */
+
 
 
     return new Promise((resolve) => {
-      this.apiService.CustomRequest(route.data.requestcondition, route.data.endpoint).subscribe(api_object => {
+      this.apiService.CustomRequest(data, route.data.endpoint).subscribe(api_object => {
         if (api_object) {
           return resolve(api_object);
         } else {
           return true;
         }
       });
-
     });
   }
 

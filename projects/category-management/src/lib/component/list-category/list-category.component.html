@@ -14,8 +14,9 @@
 <br />
 
 <mat-card *ngIf="loader==true">
-<mat-spinner class="spinner"></mat-spinner>
+  <mat-spinner class="spinner"></mat-spinner>
 </mat-card>
+
 <mat-card *ngIf="loader==false">
   <lib-listing class="formfilterdiv" *ngIf="categoryListingConfig.datasource !=null && categoryListingConfig.datasource.length > 0"
       [datasource]="categoryListingConfig.datasource"

@@ -11,13 +11,25 @@
         [formGroup]="blogAddEditForm">
 
 
-        <mat-form-field class="example-full-width">
+        <mat-form-field >
           <input matInput type="text" placeholder="Title" [formControl]="blogAddEditForm.controls['title']"
             (blur)="inputUntouch(blogAddEditForm,'title')">
           <mat-error
             *ngIf="blogAddEditForm.controls['title'].touched && !blogAddEditForm.controls['title'].valid && blogAddEditForm.controls['title'].errors.required">
             Category Name field can not be blank</mat-error>
         </mat-form-field>
+  
+         <!-- -------------------------------priority--------------------------- -->
+         <mat-form-field>
+         <input matInput type="number" placeholder="Priority" [formControl]="blogAddEditForm.controls['priority']"  (blur)="inputUntouch(blogAddEditForm,'priority')">
+         
+         <mat-error *ngIf="blogAddEditForm.controls['priority'].touched && !blogAddEditForm.controls['priority'].valid && blogAddEditForm.controls['priority'].errors.required">
+          Priority field can not be blank</mat-error> <br>
+        </mat-form-field>
+          <!-- -------------------------------status--------------------------- -->
+          
+          <mat-checkbox [formControl]="blogAddEditForm.controls['status']">Active</mat-checkbox><br>
+          
 
         <!-- ckeditor using start here -->
         <mat-label>Description</mat-label>
