@@ -19,6 +19,8 @@ export class BloglistComponent implements OnInit {
   public getSourceUrl:any = 'demoteam';
   public BlogList:any;
   public token:any=this.cookieService.get('jwtToken');
+  public searchEndpoint:any='datalist';
+  public searchSourcename:any='blog_category_view';
 
   constructor(private activatedRoute: ActivatedRoute, private router: Router,private cookieService:CookieService) { }
 

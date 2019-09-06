@@ -33,6 +33,7 @@ export class AddBlogComponent implements OnInit {
   public serverUrlData: any;
   public listUrl: any;
   public blogarray: any = [];
+  public blogDataarray: any = [];
   isSubmitted = false;
   blogAddEditForm: FormGroup;
   public params_id: any;
@@ -48,7 +49,11 @@ export class AddBlogComponent implements OnInit {
   set listRoute(listval: any) {
     this.listUrl = (listval) || '<no name set>';
     this.listUrl = listval;
-
+  }
+  @Input()          //resolve list
+  set listResolve(listresolveUrlval: any) {
+    this.blogDataarray = (listresolveUrlval) || '<no name set>';
+    this.blogDataarray = listresolveUrlval;
   }
 
   @Input()          //setting the server url from project
@@ -74,7 +79,7 @@ export class AddBlogComponent implements OnInit {
   set singleData(allData: any) {
     this.allData = allData;
     if (this.activeroute.snapshot.params.id) {
-      this.params_id=this.activeroute.snapshot.params.id;
+      this.params_id = this.activeroute.snapshot.params.id;
       this.headerText = "Edit Blogs";
       this.buttonText = "Update";
       this.blogAddEditForm.controls['title'].patchValue(allData[0].title);
@@ -91,16 +96,12 @@ export class AddBlogComponent implements OnInit {
     public apiservice: ApiService, public _http: HttpClient, public router: Router
     , public dialog: MatDialog) {
 
-    /**catch the parameter id***/
-
-    /*catch parameter id end here**/
-
     /**Formgroup create start here**/
     this.blogAddEditForm = this.fb.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
-      priority:['',Validators.required],
-      status:[true,],
+      priority: ['', Validators.required],
+      status: [true,],
       parent_id: []
     })
     /**Formgroup create end here**/
@@ -123,9 +124,6 @@ export class AddBlogComponent implements OnInit {
     }, 50);
     /**Observable end here**/
 
-    setTimeout(() => {
-      this.getBlogData();
-    }, 100);
 
 
   }
@@ -143,27 +141,12 @@ export class AddBlogComponent implements OnInit {
   }
   /**modal end here */
 
-  /**validation untouch purpose **/
+  /**validation for untouch purpose start here **/
   inputUntouch(form: any, val: any) {
 
     form.controls[val].markAsUntouched();
   }
-  /*validation untouch purpose*/
-
-   /** getting all blogs data start here **/
-  getBlogData() {
-
-    let data: any = {
-      "source": "blog_category_view"
-    }
-
-    this.apiservice.getData(data).subscribe(response => {
-
-      let result: any = response;
-      this.blogarray = result.res;
-    })
-  }
-  // /**getting all blogs data end here**/
+  /*validation untouch purpose end here*/
 
   /**add & update* blogs submitting form start here**/
   blogAddEditFormSubmit() {
@@ -176,10 +159,10 @@ export class AddBlogComponent implements OnInit {
       this.blogAddEditForm.controls[x].markAsTouched();
     }
     if (this.blogAddEditForm.valid) {
-       if(this.blogAddEditForm.value.status)
-             this.blogAddEditForm.value.status = parseInt("1");
-             else
-             this.blogAddEditForm.value.status = parseInt("0");
+      if (this.blogAddEditForm.value.status)
+        this.blogAddEditForm.value.status = parseInt("1");
+      else
+        this.blogAddEditForm.value.status = parseInt("0");
       var data: any;
       if (this.activeroute.snapshot.params.id != null) {    //update part
         this.messageText = "One row updated!!!";
@@ -189,8 +172,8 @@ export class AddBlogComponent implements OnInit {
             "id": this.params_id,
             "parent_id": this.blogAddEditForm.value.parent_id,
             'title': this.blogAddEditForm.value.title,
-            'priority':this.blogAddEditForm.value.priority,
-            'status':this.blogAddEditForm.value.status,
+            'priority': this.blogAddEditForm.value.priority,
+            'status': this.blogAddEditForm.value.status,
             'description': this.blogAddEditForm.value.description
           },
           "sourceobj": ["parent_id"]
@@ -201,8 +184,8 @@ export class AddBlogComponent implements OnInit {
           "data": {
             "parent_id": this.blogAddEditForm.value.parent_id,
             'title': this.blogAddEditForm.value.title,
-            'priority':this.blogAddEditForm.value.priority,
-            'status':this.blogAddEditForm.value.status,
+            'priority': this.blogAddEditForm.value.priority,
+            'status': this.blogAddEditForm.value.status,
             'description': this.blogAddEditForm.value.description
 
           },
@@ -213,23 +196,16 @@ export class AddBlogComponent implements OnInit {
         let result: any;
         result = response;
         this.statusarray = result.status;
-
-
-
         if (result.status == "success")
           this.openDialog(this.messageText);
         setTimeout(() => {
           this.dialogRef.close();
-        }, 2000);
+        }, 1000);
 
         setTimeout(() => {
           this.router.navigateByUrl('/' + this.listUrl);
-        }, 3000);
-
-
-
+        }, 2000);
       });
-
 
     }
 

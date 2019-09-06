@@ -20,14 +20,39 @@ export class BlogComponent implements OnInit {
   public getDataSourceData: any;
   public addEndpointData: any;
   public apiUrlviaApp: any = '';
-  public tokenViapp:any=''
+  public tokenViaapp: any = ''
+  public statusArray: any = [];
+  public searchEndpointViaApp: any = '';
+  public SearchSourcenameViaapp: any = '';
   /**lib-listing start here**/
   public blogDataarray: any = [];
-  public Bloglist_skip: any = ["_id","description"];
-  public Bloglist_modify_header: any = { 'title': "Title", 'description': "Description",
-      'parentcategoryname': "Parent Category","status":"Status","priority":"Priority" };
+  public Bloglist_skip: any = ["_id", "description", "parent_id"];
+  public Bloglist_modify_header: any = {
+    'title': "Title", 'description': "Description",
+    'parentcategoryname': "Parent Category", "status": "Status", "priority": "Priority"
+  };
+
   public status: any = [{ val: 1, 'name': 'Active' }, { val: 0, 'name': 'Inactive' }];
+
+  public search_settings: any =
+    {
+      selectsearch: [{ label: 'Search By Status', field: 'status', values: this.status }],
+      textsearch: [{ label: "Search By Title", field: 'title' }],
+      search: [{ label: "Search By Parent Category", field: 'parentcategoryname' }]
+    };
   /**lib-listing end here**/
+
+  @Input()   // get search endpoint from app
+  set SearchEndpoint(value: any) {
+    this.searchEndpointViaApp = (value) || '<no name set>';
+    this.searchEndpointViaApp = value;
+  }
+  @Input()   //get search source name from app
+  set SearchSourcename(Sourcevalue: any) {
+    this.SearchSourcenameViaapp = (Sourcevalue) || '<no name set>';
+    this.SearchSourcenameViaapp = Sourcevalue;
+  }
+
 
   @Input()  //for apiUrl via application
   set BlogapiUrl(apivalue: any) {
@@ -36,8 +61,8 @@ export class BlogComponent implements OnInit {
   }
   @Input()  //for token via application
   set BlogToken(token: any) {
-    this.tokenViapp = (token) || '<no name set>';
-    this.tokenViapp = token;
+    this.tokenViaapp = (token) || '<no name set>';
+    this.tokenViaapp = token;
   }
 
   @Input()  //for add button
@@ -96,8 +121,6 @@ export class BlogComponent implements OnInit {
   set listResolve(listresolveUrlval: any) {
     this.blogDataarray = (listresolveUrlval) || '<no name set>';
     this.blogDataarray = listresolveUrlval;
-    
-    
   }
 
   constructor(public router: Router,
@@ -120,29 +143,13 @@ export class BlogComponent implements OnInit {
       this.apiService.setgetdataEndpoint(this.getDataEndpointData);
     }, 50);
     /**observable end here**/
-    
-  }
-  /***getting all the blog data function start here**/
-
-  getData() {
-
-    let data: any;
-    data = {
-      "source": "blog_category_view"
-    }
-    this.apiService.getData(data).subscribe(response => {
-      let result: any;
-      result = response;
-      this.blogDataarray = result.res;
-      
-
-    })
 
   }
-   /**function end here**/
- 
-  addButton(){
-    this.router.navigateByUrl('/'+this.addMemberviaUrl);
+
+  /**function end here**/
+
+  addButton() {
+    this.router.navigateByUrl('/' + this.addMemberviaUrl);
   }
- 
+
 }

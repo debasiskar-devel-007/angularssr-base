@@ -12,11 +12,11 @@ export class AddComponent implements OnInit {
   public addUrl: any = 'addorupdatedata';
   public getDataUrl: any = 'datalist';
   public editdata: any = [];
+  public BlogList: any = [];
 
   constructor(public activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    //  console.log("Ki ID dea tanche URL",this.activatedRoute.snapshot.params.id);
     if (this.activatedRoute.snapshot.params.id) {
       this.activatedRoute.data.forEach(data => {
         let result: any;
@@ -24,7 +24,13 @@ export class AddComponent implements OnInit {
         this.editdata = result;
       });
     }
+    this.activatedRoute.data.forEach(data=>{
+      let result:any;
+      result=data.results.res;
+      this.BlogList=result;
+    });
   }
 
 
-}
+
+  }

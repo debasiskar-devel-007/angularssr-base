@@ -12,7 +12,10 @@ const appRoutes: Routes = [
     path: 'blog/list', component: BloglistComponent, resolve: { results: ResolveService },
     data: { requestcondition: { source: 'blog_category_view', condition: {} }, endpoint: 'datalist' }
   },
-  { path: 'blog/add', component: AddComponent },
+  { 
+    path: 'blog/add', component: AddComponent,resolve :{results :ResolveService},
+    data:{requestcondition:{source:'blog_category_view',condition:{}},endpoint:'datalist'} 
+  },
   {
     path: 'blog/edit/:id', component: AddComponent, resolve: { results: ResolveService },
     data: { requestcondition: { source: 'blog_category', condition: { key_id: '' } }, endpoint: 'datalist' }
