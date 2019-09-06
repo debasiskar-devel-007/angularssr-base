@@ -7,14 +7,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AddComponent } from './add/add.component';
 import { BloglistComponent } from './bloglist/bloglist.component';
 import { DemoMaterialModule } from './material-module'
-
 import { CookieService } from 'ngx-cookie-service';
+import { AddeditBlogmanagementComponent } from './addedit-blogmanagement/addedit-blogmanagement.component';
 //import {ResolveService} from './resolve.service';
 @NgModule({
   declarations: [
     AppComponent,
     AddComponent,
-    BloglistComponent
+    BloglistComponent,
+    AddeditBlogmanagementComponent
   ],
   imports: [
     BrowserModule,

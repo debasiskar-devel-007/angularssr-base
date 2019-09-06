@@ -197,18 +197,18 @@ export class ApiService {
     // const isRefreshTokenExpired = helper.isTokenExpired(localStorage.getItem('refresh_token'));
     // console.log('id_token isExpired:',isIdTokenExpired)
     // console.log('refresh_token isExpired:',isRefreshTokenExpired)
-
-
-
   }
 
   addData(requestdata: any) {
+    console.log('in adddata apiservice');
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'access-token': this.accesstoken          //hard code written access-token(temp)
       })
     };
+
+    console.log('httpoptions',httpOptions,this.serverUrl,requestdata);
     var result = this._http.post(this.serverUrl + this.addendpointUrl, JSON.stringify(requestdata), httpOptions).pipe(map(res => res));
     return result;
   }

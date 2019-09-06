@@ -55,7 +55,6 @@ export class AddBlogComponent implements OnInit {
   set serverUrl(serverUrlval: any) {
     this.serverUrlData = (serverUrlval) || '<no name set>';
     this.serverUrlData = serverUrlval;
-
   }
 
   @Input()          //setting the server url from project
@@ -74,7 +73,7 @@ export class AddBlogComponent implements OnInit {
   set singleData(allData: any) {
     this.allData = allData;
     if (this.activeroute.snapshot.params.id) {
-      this.params_id=this.activeroute.snapshot.params.id;
+      this.params_id = this.activeroute.snapshot.params.id;
       this.headerText = "Edit Blogs";
       this.buttonText = "Update";
       this.blogAddEditForm.controls['title'].patchValue(allData[0].title);
@@ -82,6 +81,7 @@ export class AddBlogComponent implements OnInit {
       this.blogAddEditForm.controls['status'].patchValue(allData[0].status);
       this.blogAddEditForm.controls['description'].patchValue(allData[0].description);
       this.model.editorData = allData[0].description;
+     
       this.blogAddEditForm.controls['parent_id'].patchValue(allData[0].parent_id);
     }
   }
@@ -99,15 +99,15 @@ export class AddBlogComponent implements OnInit {
     this.blogAddEditForm = this.fb.group({
       title: ['', Validators.required],
       description: ['', Validators.required],
-      priority:['',Validators.required],
-      status:[true,],
-      parent_id: []
+      priority: ['', Validators.required],
+      status: [true,],
+      parent_id: [0, Validators.required]
+
     })
     /**Formgroup create end here**/
   }
 
   ngOnInit() {
-
     /**Observable start here**/
     this.apiservice.clearServerUrl();
     setTimeout(() => {
@@ -126,9 +126,8 @@ export class AddBlogComponent implements OnInit {
     setTimeout(() => {
       this.getBlogData();
     }, 100);
-
-
   }
+
   /*modal start here*/
   openDialog(x: any): void {
     this.dialogRef = this.dialog.open(Dialogtest, {
@@ -150,7 +149,7 @@ export class AddBlogComponent implements OnInit {
   }
   /*validation untouch purpose*/
 
-   /** getting all blogs data start here **/
+  /** getting all blogs data start here **/
   getBlogData() {
 
     let data: any = {
@@ -176,10 +175,10 @@ export class AddBlogComponent implements OnInit {
       this.blogAddEditForm.controls[x].markAsTouched();
     }
     if (this.blogAddEditForm.valid) {
-       if(this.blogAddEditForm.value.status)
-             this.blogAddEditForm.value.status = parseInt("1");
-             else
-             this.blogAddEditForm.value.status = parseInt("0");
+      if (this.blogAddEditForm.value.status)
+        this.blogAddEditForm.value.status = parseInt("1");
+      else
+        this.blogAddEditForm.value.status = parseInt("0");
       var data: any;
       if (this.activeroute.snapshot.params.id != null) {    //update part
         this.messageText = "One row updated!!!";
@@ -189,9 +188,11 @@ export class AddBlogComponent implements OnInit {
             "id": this.params_id,
             "parent_id": this.blogAddEditForm.value.parent_id,
             'title': this.blogAddEditForm.value.title,
-            'priority':this.blogAddEditForm.value.priority,
-            'status':this.blogAddEditForm.value.status,
+            'priority': this.blogAddEditForm.value.priority,
+            'status': this.blogAddEditForm.value.status,
             'description': this.blogAddEditForm.value.description
+            
+
           },
           "sourceobj": ["parent_id"]
         };
@@ -201,10 +202,9 @@ export class AddBlogComponent implements OnInit {
           "data": {
             "parent_id": this.blogAddEditForm.value.parent_id,
             'title': this.blogAddEditForm.value.title,
-            'priority':this.blogAddEditForm.value.priority,
-            'status':this.blogAddEditForm.value.status,
+            'priority': this.blogAddEditForm.value.priority,
+            'status': this.blogAddEditForm.value.status,
             'description': this.blogAddEditForm.value.description
-
           },
           "sourceobj": ["parent_id"]
         };

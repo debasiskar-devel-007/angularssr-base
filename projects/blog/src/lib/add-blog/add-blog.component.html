@@ -21,14 +21,13 @@
          <!-- -------------------------------priority--------------------------- -->
          <mat-form-field>
          <input matInput type="number" placeholder="Priority" [formControl]="blogAddEditForm.controls['priority']"  (blur)="inputUntouch(blogAddEditForm,'priority')">
-         
+         <!-- ------------------------------------------------------------------ -->
          <mat-error *ngIf="blogAddEditForm.controls['priority'].touched && !blogAddEditForm.controls['priority'].valid && blogAddEditForm.controls['priority'].errors.required">
           Priority field can not be blank</mat-error> <br>
         </mat-form-field>
-          <!-- -------------------------------status--------------------------- -->
-          
+          <!-- -------------------------------status--------------------------- -->          
           <mat-checkbox [formControl]="blogAddEditForm.controls['status']">Active</mat-checkbox><br>
-          
+          <!-- ---------------------------------------------------------------- -->
 
         <!-- ckeditor using start here -->
         <mat-label>Description</mat-label>
@@ -42,14 +41,20 @@
 
           <mat-label>Parent Category</mat-label>
           <mat-select formControlName="parent_id">
-            <mat-option>
+            <mat-option [value]=0>
               Select a category
             </mat-option>
             <mat-option *ngFor=" let f of blogarray" [value]="f._id">
               {{f.title}}
             </mat-option>
           </mat-select>
+
+          <mat-error
+          *ngIf="blogAddEditForm.controls['parent_id'].touched && !blogAddEditForm.controls['parent_id'].valid && blogAddEditForm.controls['parent_id'].errors.required">
+          Category cannot be blank</mat-error>
         </mat-form-field>
+
+      
 
 
 
