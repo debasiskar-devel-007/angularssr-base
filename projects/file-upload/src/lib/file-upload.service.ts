@@ -38,7 +38,11 @@ export class FileUploadService {
               return { status: 'complete', data: null };
             }
           case HttpEventType.Response:
-            return { status: 'complete', data: event.body };
+            if(event.body.status == 'success') {
+              return { status: 'complete', data: event.body };
+            } else {
+              return { status: 'error', data: 'An error occord.' };
+            }
           default:
             return { status: 'waiting', data: '' };
             return `Unhandled event: ${event.type}`;

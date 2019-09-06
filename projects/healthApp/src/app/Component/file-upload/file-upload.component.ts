@@ -13,12 +13,19 @@ export class FileUploadComponent implements OnInit {
     baseUrl: "http://3.15.236.141:5005/",
     endpoint: "uploads",
     size: "20480", // kb
-    format: ["jpg", "jpeg", "png", "bmp", "zip"]
+    format: ["jpg", "jpeg", "png", "bmp", "zip"], // use all small font
+    type: "profile-picture",
+    path: "files",
+    prefix: "profile_picture_"
   }
 
   constructor() { }
 
   ngOnInit() {
+  }
+
+  showData() {
+    console.log(this.configData);
   }
 
 }

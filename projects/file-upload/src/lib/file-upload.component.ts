@@ -6,6 +6,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { AlertMessageComponent } from './component/alert-message/alert-message.component';
 import { DialogBoxComponent } from './component/dialog-box/dialog-box.component';
+import { PreviewFilesComponent } from './component/preview-files/preview-files.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { from } from 'rxjs';
 
@@ -39,19 +40,37 @@ export class FileUploadComponent implements OnInit {
   /* Select File Proccess */
   selectFiles(event) {
     for (let index = 0; index < event.length; index++) {
+      var count: number = this.files.length + index;
       const element = event[index];
+      
       /* Checking Validation */
       let validate: any = this.checkingValidation(element);
       if (validate.status) {
         element.valid = { status: true };
         element.upload = { status: 'selected' };
+        element.viewUrl = 'https://media.giphy.com/media/jAYUbVXgESSti/giphy.gif';
         this.files.push(element);
+        this.viewTh(count);
       } else {
         element.valid = { status: false, message: validate.message };
         element.upload = { status: 'selected' };
+        element.viewUrl = 'https://media.giphy.com/media/jAYUbVXgESSti/giphy.gif';
         this.files.push(element);
+        this.viewTh(count);
       }
     }
+  }
+
+  viewTh(count) {
+    setTimeout(() => {
+      var reader = new FileReader();
+      let imagePath = this.files[count];
+      reader.readAsDataURL(this.files[count]);
+      reader.onload = (_event) => { 
+        let imgURL = reader.result;
+        this.files[count].viewUrl = imgURL;
+      }
+    }, 2000);
   }
 
   /* Checking Validation */
@@ -97,13 +116,20 @@ export class FileUploadComponent implements OnInit {
       prefix: "image_"
     }
 
-    this.fileUploadService.upload(this.configData.baseUrl + this.configData.endpoint, postData).subscribe(
+    let url: string = this.configData.baseUrl + this.configData.endpoint + '?path=' + this.configData.path + '&prefix=' + this.configData.prefix + '&type=' + this.configData.type + '&rand=' + index;
+
+    this.fileUploadService.upload(url, postData).subscribe(
       (response) => {
         let result: any = response;
         switch (result.status) {
           case 'complete':
             this.files[index].upload = result;
+            this.configData.files = this.files;
             this.openSnackBar('Successfully Uploaded !!', 'Undo');
+            break;
+          case 'error':
+            this.files[index].upload = result.data;
+            this.openSnackBar(result.data, '');
             break;
           default:
             this.files[index].upload = result;
@@ -145,6 +171,25 @@ export class FileUploadComponent implements OnInit {
   /* Delete all selected files */
   deleteAll() {
     this.files.splice(0, this.files.length);
+  }
+
+  /* Preview Files */
+  previewFiles(index) {
+    var mimeType = this.files[index].type;
+    if (mimeType.match(/image\/*/) == null) {
+      console.log('Preview not supported.');
+      return;
+    }
+ 
+    var reader = new FileReader();
+    let imagePath = this.files[index];
+    reader.readAsDataURL(this.files[index]);
+    reader.onload = (_event) => { 
+      let imgURL = reader.result; 
+      const dialogRef = this.dialog.open(PreviewFilesComponent, {
+        data: { imgURL: imgURL }
+      });
+    }
   }
 
 }
