@@ -10,8 +10,11 @@
             <form [formGroup]="blogManagementForm">
                 <!-- ----------------------------Blog title---------------------------- -->
                 <mat-form-field>
-                    <input matInput placeholder="Blog title" formControlName="blogtitle" (ngClass)="{'is-invalid':isSubmitted && onSignUpValidate.blogtitle.errors}"  (blur)="inputBlur('blogtitle')">
-                <mat-error *ngIf="onSignUpValidate.blogtitle.errors && onSignUpValidate.blogtitle.errors.required">Blog title cannot be blank</mat-error>
+                    <input matInput placeholder="Blog title" formControlName="blogtitle"
+                        (ngClass)="{'is-invalid':isSubmitted && onSignUpValidate.blogtitle.errors}"
+                        (blur)="inputBlur('blogtitle')">
+                    <mat-error *ngIf="onSignUpValidate.blogtitle.errors && onSignUpValidate.blogtitle.errors.required">
+                        Blog title cannot be blank</mat-error>
                 </mat-form-field><br>
                 <!-- ------------------------------------------------------------------ -->
 
@@ -19,13 +22,13 @@
                 <!-- -------------------------Blog Category---------------------------- -->
                 <mat-form-field>
                     <mat-label>Blog Category</mat-label>
-                    <select matNativeControl formControlName="blogcat" (ngClass)="{'is-invalid':isSubmitted && onSignUpValidate.blogcat.errors}"  (blur)="inputBlur('blogcat')">
-                        <option value="volvo">Volvo</option>
-                        <option value="saab">Saab</option>
-                        <option value="mercedes">Mercedes</option>
-                        <option value="audi">Audi</option>
+                    <select matNativeControl formControlName="blogcat"
+                        (ngClass)="{'is-invalid':isSubmitted && onSignUpValidate.blogcat.errors}"
+                        (blur)="inputBlur('blogcat')">
+                        <option *ngFor="let item of blogCategoryArray" [value]="item._id">{{ item.title}}</option>
                     </select>
-                    <mat-error *ngIf="onSignUpValidate.blogcat.errors && onSignUpValidate.blogcat.errors.required">Blog Category cannot be blank</mat-error>
+                    <mat-error *ngIf="onSignUpValidate.blogcat.errors && onSignUpValidate.blogcat.errors.required">Blog
+                        Category cannot be blank</mat-error>
                 </mat-form-field><br>
                 <!-- -----------------------------------------------------------------  -->
 
@@ -33,8 +36,11 @@
 
                 <!-- ------------------------------------Blog Content------------------ -->
 
-                <ckeditor [editor]="Editor" [config]="editorConfig" formControlName="blogcontent" (ngClass)="{'is-invalid':isSubmitted && onSignUpValidate.blogcontent.errors}"  ></ckeditor>
-                <mat-error *ngIf="onSignUpValidate.blogcontent.errors && onSignUpValidate.blogcontent.errors.required && onSignUpValidate.blogcontent.touched">Blog Content cannot be blank</mat-error><br>
+                <ckeditor [editor]="Editor" [config]="editorConfig" formControlName="blogcontent"
+                    (ngClass)="{'is-invalid':isSubmitted && onSignUpValidate.blogcontent.errors}"></ckeditor>
+                <mat-error
+                    *ngIf="onSignUpValidate.blogcontent.errors && onSignUpValidate.blogcontent.errors.required && onSignUpValidate.blogcontent.touched">
+                    Blog Content cannot be blank</mat-error><br>
                 <!-- -----------------------------------------------------------------  -->
 
 
@@ -42,8 +48,11 @@
 
                 <!-- -----------------------------------Priority------------------------ -->
                 <mat-form-field>
-                    <input matInput type="number" placeholder="Priority" formControlName="priority" (ngClass)="{'is-invalid':isSubmitted && onSignUpValidate.priority.errors}"  (blur)="inputBlur('priority')">
-                    <mat-error *ngIf="onSignUpValidate.priority.errors && onSignUpValidate.priority.errors.required">Priority cannot be blank</mat-error>
+                    <input matInput type="number" placeholder="Priority" formControlName="priority"
+                        (ngClass)="{'is-invalid':isSubmitted && onSignUpValidate.priority.errors}"
+                        (blur)="inputBlur('priority')">
+                    <mat-error *ngIf="onSignUpValidate.priority.errors && onSignUpValidate.priority.errors.required">
+                        Priority cannot be blank</mat-error>
                 </mat-form-field><br>
                 <!-- ------------------------------------------------------------------- -->
 
@@ -59,8 +68,11 @@
 
                 <!-- --------------------------------Meta title-------------------------  -->
                 <mat-form-field>
-                    <input matInput placeholder="Meta title" formControlName="metatitle" (ngClass)="{'is-invalid':isSubmitted && onSignUpValidate.metatitle.errors}"  (blur)="inputBlur('metatitle')">
-                    <mat-error *ngIf="onSignUpValidate.metatitle.errors && onSignUpValidate.metatitle.errors.required">Meta title cannot be blank</mat-error>
+                    <input matInput placeholder="Meta title" formControlName="metatitle"
+                        (ngClass)="{'is-invalid':isSubmitted && onSignUpValidate.metatitle.errors}"
+                        (blur)="inputBlur('metatitle')">
+                    <mat-error *ngIf="onSignUpValidate.metatitle.errors && onSignUpValidate.metatitle.errors.required">
+                        Meta title cannot be blank</mat-error>
                 </mat-form-field>
                 <!-- -------------------------------------------------------------------- -->
 
@@ -68,12 +80,56 @@
 
                 <!-- ----------------------------------Meta Description------------------ -->
                 <mat-form-field>
-                    <textarea matInput placeholder="Meta Description" formControlName="metadesc" (ngClass)="{'is-invalid':isSubmitted && onSignUpValidate.metadesc.errors}"  (blur)="inputBlur('metadesc')"></textarea>
-                    <mat-error *ngIf="onSignUpValidate.metadesc.errors && onSignUpValidate.metadesc.errors.required">Meta description cannot be blank</mat-error>
+                    <textarea matInput placeholder="Meta Description" formControlName="metadesc"
+                        (ngClass)="{'is-invalid':isSubmitted && onSignUpValidate.metadesc.errors}"
+                        (blur)="inputBlur('metadesc')"></textarea>
+                    <mat-error *ngIf="onSignUpValidate.metadesc.errors && onSignUpValidate.metadesc.errors.required">
+                        Meta description cannot be blank</mat-error>
                 </mat-form-field><br>
                 <!-- -------------------------------------------------------------------- -->
 
-       
+
+
+                <!-- --------------------------------------Video URL--------------------- -->
+                <mat-label>Embed Video URL:</mat-label>
+                <div formArrayName="credentials"
+                    *ngFor="let creds of blogManagementForm.controls.credentials?.value; let i = index; trackBy: trackByFn">
+                    <ng-container [formGroupName]="i">
+
+                        <mat-form-field>
+
+                            <input type="text" matInput formControlName="video_url">
+                            <span matPrefix>{{ video_prefix }}</span>
+                            <mat-icon matSuffix>link</mat-icon>
+                        </mat-form-field>
+                        <button (click)="addCreds()">
+                            <mat-icon matSuffix>add_box</mat-icon>
+                        </button>
+                        <span *ngIf="i!=0"><button (click)="deleteCreds()">
+                                <mat-icon matSuffix>delete</mat-icon>
+                            </button></span>
+                    </ng-container>
+                </div><br>
+                <!-- ------------------------------------------------------------------- -->
+
+
+                <!-- -----------------------------Multi Tags---------------------------- -->
+                <mat-form-field class="example-full-width">
+                    <input type="text" placeholder="Pick one" aria-label="Number" formControlName="tags" matInput
+                        [formControl]="myControl" [matAutocomplete]="auto" (keyup)="showval($event)">
+                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                            {{option}}
+                        </mat-option>
+                    </mat-autocomplete>
+                </mat-form-field>
+                <div>
+                    <ol>
+                        <li *ngFor="let item of tags_array">{{ item }}</li>
+                    </ol>
+                </div>
+                <!-- ----------------------------------------------------------------- -->
+
 
                 <button class="submitbtn" mat-raised-button color="primary" type="submit"
                     (click)="onSubmit()">{{buttonText}}</button>

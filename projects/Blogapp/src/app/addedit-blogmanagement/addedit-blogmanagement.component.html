@@ -1,8 +1,9 @@
 
-<div>{{configAddEdit.addEndPoint}}</div>
+<div>{{configAddEdit.getDataUrl}}</div>
 <lib-addedit-blogmanagement 
 [config]="configAddEdit" 
 [serverUrl]="configAddEdit.serverUrl"
 [addEndpoint]="configAddEdit.addEndPoint" 
-[getDataEndpoint]="configAddEdit.addEndpoint"
+[getDataEndpoint]="configAddEdit.getDataUrl"
+
 ></lib-addedit-blogmanagement>

@@ -19,6 +19,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
     jwtToken: this.cookieService.get('jwtToken'),
     callBack: "role-management",
     userData: { id: "18801017007", name: "Admin" },
+    getDataUrl: 'datalist'
   }
   
   // public server: any = 'http://18.191.148.255:5009/';

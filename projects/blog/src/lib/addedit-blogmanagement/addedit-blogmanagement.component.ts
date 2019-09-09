@@ -1,9 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators,FormArray } from '@angular/forms';
 import { ApiService } from '../api.service';
+import { Observable } from 'rxjs';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from "@angular/material";
+import {map, startWith} from 'rxjs/operators';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
 @Component({
@@ -41,6 +43,11 @@ export class AddeditBlogmanagementComponent implements OnInit {
   public getDataEndpointData: any;
   public addEndpointData: any;
   isSubmitted = false;
+  video_prefix:any = 'https://www.youtube.com/watch?v=';
+  options: string[] = ['One', 'Two', 'Three','Four','Five','Six'];
+  filteredOptions: Observable<string[]>;
+  myControl = new FormControl();
+  tags_array : any = [];
   // -----------------------------------------------------------------------
 
 
@@ -60,13 +67,13 @@ export class AddeditBlogmanagementComponent implements OnInit {
   set serverUrl(serverUrl: any) {
     this.serverUrlData = (serverUrl) || '<no name set>';
     this.serverUrlData = serverUrl;
-    console.log('serverUrlval', this.serverUrlData, serverUrl);
   }
 
   @Input()          //setting the server url from project
   set getDataEndpoint(endpointUrlval: any) {
     this.getDataEndpointData = (endpointUrlval) || '<no name set>';
     this.getDataEndpointData = endpointUrlval;
+    
 
   }
   @Input()          //setting the server url from project
@@ -98,8 +105,25 @@ export class AddeditBlogmanagementComponent implements OnInit {
     /**Observable end here**/
 
     this.generateForm();
+    this.addCreds();
+    setTimeout(()=>{
+      this.getBlogCategory();
+    },50)
+
+
+
+    this.filteredOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value))
+    );
   }
 
+ 
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+
+    return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
+  }
 
   // -----------------------------Form Controls---------------------------------
   generateForm() {
@@ -110,20 +134,59 @@ export class AddeditBlogmanagementComponent implements OnInit {
       priority: ['', Validators.required],
       status: ['true', Validators.required],
       metatitle: ['', Validators.required],
-      metadesc: ['', Validators.required],
-      test:['', [ Validators.required ] ]
-
+      metadesc: ['', Validators.required],      
+      credentials: this.formBuilder.array([]),
+      tags:['',]
+     
     });
   }
   // ---------------------------------------------------------------------------
 
+  // ----------------------------Ediatble material Form Array-------------------
+  trackByFn(index) {
+    return index;
+  }
+// -----------------------------------------------------------------------------
+  
+
+  // ----------------------------------Add Credential Fucntions-----------------
+  addCreds() {
+    const creds = this.blogManagementForm.controls.credentials as FormArray;
+    creds.push(this.formBuilder.group({
+      video_url:[]       
+    }));    
+  }
+  // ---------------------------------------------------------------------------
+
+
+  // ---------------------------------Delete Credetial Fucntions----------------
+  deleteCreds()
+  {
+    const creds = this.blogManagementForm.controls.credentials as FormArray;
+    creds.removeAt(1); 
+  }
+  // ----------------------------------------------------------------------------
 
 
 
 
 
 
+// ----------------------------------Get Blog Category Function-------------------
 
+getBlogCategory()
+{ 
+  var data:any;   
+  data={ 
+      'source':'blog_category'
+  };
+  this.apiservice.getData(data).subscribe(response => {
+    let result: any;
+    result = response;
+    this.blogCategoryArray = result.res;
+  });
+}
+// ----------------------------------------------------------------------------------
 
 
 
@@ -137,6 +200,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
     this.blogManagementForm.controls['blogcontent'].markAsTouched();
 
     if (this.blogManagementForm.valid) {
+
       this.isSubmitted = true;
       var data: any;
       data = {                                         //add part
@@ -148,10 +212,6 @@ export class AddeditBlogmanagementComponent implements OnInit {
       this.apiservice.addData(data).subscribe(response => {
         let result: any;
         result = response;
-
-
-        console.log(result);
-
       });
     }
   }
@@ -166,8 +226,24 @@ export class AddeditBlogmanagementComponent implements OnInit {
 
 
   inputBlur(val: any) {
-    console.log("Blur being called part 1",val,this.blogManagementForm.controls[val].touched);
     this.blogManagementForm.controls[val].markAsUntouched();
-    console.log("Blur being called part 2",val,this.blogManagementForm.controls[val].touched);
   }
+
+
+
+
+
+
+  // -------------------------------Select Tags AutoComplete Field-----------------------
+  showval(event : any ){
+    if(event.keyCode==13)
+    {
+     this.tags_array.push(event.target.value);      
+     this.blogManagementForm.controls['tags'].patchValue("");
+    }
+    this.blogManagementForm.value.tags = this.tags_array;
+  }
+
+    
+  
 }
