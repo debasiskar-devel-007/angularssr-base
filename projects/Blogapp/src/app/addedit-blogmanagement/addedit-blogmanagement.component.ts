@@ -21,11 +21,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
     userData: { id: "18801017007", name: "Admin" },
     getDataUrl: 'datalist'
   }
-  
-  // public server: any = 'http://18.191.148.255:5009/';
-  // public addUrl: any = 'addorupdatedata';
-  // public getDataUrl: any = 'datalist';
-  // public editdata: any = [];
+
   constructor( private cookieService : CookieService , private activateRoute : ActivatedRoute) { }
 
   ngOnInit() {
