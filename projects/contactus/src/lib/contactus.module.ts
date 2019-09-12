@@ -6,7 +6,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ApiService } from './api.service';
 // import { AgmCoreModule} from '@agm/core';
-import { ListingModule } from 'listing-angular7';
+import { ListingModule } from 'lib-listing';
 import { ContactusListingComponent } from './contactus-listing/contactus-listing.component';
 import { LoadingComponent } from './loading/loading.component';
 import { HttpClientModule } from '@angular/common/http';

@@ -54,6 +54,12 @@
       ],
       "from/*": [
         "dist/from/*"
+      ],
+      "lib-listing": [
+        "dist/listing"
+      ],
+      "listing/*": [
+        "dist/listing/*"
       ]
     }
   }

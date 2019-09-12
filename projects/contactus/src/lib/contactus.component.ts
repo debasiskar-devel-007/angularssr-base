@@ -31,7 +31,7 @@ export class ContactusComponent implements OnInit {
   set serverUrl(serverUrlval: any) {
     this.serverURL = (serverUrlval) || '<no name set>';
     this.serverURL = serverUrlval;
-    console.log(this.serverURL);
+    // console.log(this.serverURL);
 
   }
 
@@ -40,16 +40,16 @@ export class ContactusComponent implements OnInit {
   set addEndpoint(endpointUrlval: any) {
     this.addEndpointData = (endpointUrlval) || '<no name set>';
     this.addEndpointData = endpointUrlval;
-    console.log('this.addEndpointData');
-    console.log(this.addEndpointData);
-    console.log(this.addEndpointData.endpoint);
+    // console.log('this.addEndpointData');
+    // console.log(this.addEndpointData);
+    // console.log(this.addEndpointData.endpoint);
   }
 
   @Input()          // setting the navigate By Url from project
   set routeingUrl(routeingUrlval: any) {
     this.routeingUrlValue = (routeingUrlval) || '<no name set>';
     this.routeingUrlValue = routeingUrlval;
-    console.log(this.routeingUrlValue);
+    // console.log(this.routeingUrlValue);
   }
 
   /*Using for google map start ----*/
@@ -78,14 +78,14 @@ export class ContactusComponent implements OnInit {
     setTimeout(() => {
       this.apiService.setServerUrl(this.serverURL);
     }, 50);
-    console.log(this.serverURL);
+    // console.log(this.serverURL);
 
 
     this.apiService.clearaddEndpoint();
     setTimeout(() => {
       this.apiService.setaddEndpoint(this.addEndpointData.endpoint);
     }, 50);
-    console.log(this.addEndpointData.endpoint);
+    // console.log(this.addEndpointData.endpoint);
 
   }
   /* Multiple emails created start here*/
@@ -125,7 +125,7 @@ export class ContactusComponent implements OnInit {
 
   /* Remove addresses field start here */
   removeAddress(index) {
-    console.log(index);
+    // console.log(index);
     this.addresses.removeAt(index);
   }
   /* Remove addresses field end here */
@@ -140,7 +140,7 @@ export class ContactusComponent implements OnInit {
   /* Add addresses field start here */
 
   addPhone() {
-    console.log('okk');
+    // console.log('okk');
     this.phones.push(this.fb.group({ phone: ['', Validators.required] }));
   }
 
@@ -148,7 +148,7 @@ export class ContactusComponent implements OnInit {
 
   /* Remove phones field start here */
   removePhone(index) {
-    console.log(index);
+    // console.log(index);
     this.phones.removeAt(index);
   }
   /* Remove phones field end here */
@@ -165,14 +165,13 @@ export class ContactusComponent implements OnInit {
 
     }
     if (this.contactUsForm.valid) {
-      console.log('ok');
+      // console.log('ok');
 
-      console.log(this.contactUsForm.value);
+      // console.log(this.contactUsForm.value);
 
 
       // All emails sites in a Array start here
 
-      console.log(this.contactUsForm.value.multipleemails);
       for (const key of this.contactUsForm.value.multipleemails) {
         this.email.push(key.emails);
 
@@ -181,7 +180,7 @@ export class ContactusComponent implements OnInit {
 
       // All Phones sites in a Array start here
 
-      console.log(this.contactUsForm.value.phones);
+      // console.log(this.contactUsForm.value.phones);
       for (const key of this.contactUsForm.value.phones) {
         this.phone.push(key.phone);
 
@@ -190,7 +189,6 @@ export class ContactusComponent implements OnInit {
 
       // All addresses sites in a Array start here
 
-      console.log(this.contactUsForm.value.addresses);
       for (const key of this.contactUsForm.value.addresses) {
         this.address.push(key.address);
       }
@@ -202,7 +200,7 @@ export class ContactusComponent implements OnInit {
       allData.phone = this.phone;
       allData.email = this.email;
       allData.message = this.contactUsForm.value.message; 
-      console.log(allData);
+      // console.log(allData);
       let data: any = {
         "source": this.addEndpointData.source,
         "data": allData
@@ -211,7 +209,7 @@ export class ContactusComponent implements OnInit {
         let result: any;
         result = res;
         if (result.status === 'success') {
-          console.log(result);
+          // console.log(result);
 
 
           this.formDirective.resetForm();
