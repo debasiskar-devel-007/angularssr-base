@@ -287,6 +287,7 @@ export class ApiService {
     var result = this._http.post(this.serverUrl + this.updatestatus_single_endpointUrl+'many', JSON.stringify(requestdata), httpOptions).pipe(map(res => res));
     return result;
   }
+  
   CustomRequest(requestdata: any, endpoint:any ) {
     const httpOptions = {
       headers: new HttpHeaders({

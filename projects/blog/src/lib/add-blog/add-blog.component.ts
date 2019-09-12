@@ -60,7 +60,6 @@ export class AddBlogComponent implements OnInit {
   set serverUrl(serverUrlval: any) {
     this.serverUrlData = (serverUrlval) || '<no name set>';
     this.serverUrlData = serverUrlval;
-
   }
 
   @Input()          //setting the server url from project
@@ -87,6 +86,7 @@ export class AddBlogComponent implements OnInit {
       this.blogAddEditForm.controls['status'].patchValue(allData[0].status);
       this.blogAddEditForm.controls['description'].patchValue(allData[0].description);
       this.model.editorData = allData[0].description;
+     
       this.blogAddEditForm.controls['parent_id'].patchValue(allData[0].parent_id);
     }
   }
@@ -102,13 +102,12 @@ export class AddBlogComponent implements OnInit {
       description: ['', Validators.required],
       priority: ['', Validators.required],
       status: [true,],
-      parent_id: []
+      parent_id: [0, Validators.required]
     })
     /**Formgroup create end here**/
   }
 
   ngOnInit() {
-
     /**Observable start here**/
     this.apiservice.clearServerUrl();
     setTimeout(() => {
@@ -124,9 +123,8 @@ export class AddBlogComponent implements OnInit {
     }, 50);
     /**Observable end here**/
 
-
-
   }
+
   /*modal start here*/
   openDialog(x: any): void {
     this.dialogRef = this.dialog.open(Dialogtest, {
@@ -146,7 +144,7 @@ export class AddBlogComponent implements OnInit {
 
     form.controls[val].markAsUntouched();
   }
-  /*validation untouch purpose end here*/
+
 
   /**add & update* blogs submitting form start here**/
   blogAddEditFormSubmit() {
@@ -175,6 +173,8 @@ export class AddBlogComponent implements OnInit {
             'priority': this.blogAddEditForm.value.priority,
             'status': this.blogAddEditForm.value.status,
             'description': this.blogAddEditForm.value.description
+            
+
           },
           "sourceobj": ["parent_id"]
         };
@@ -187,7 +187,6 @@ export class AddBlogComponent implements OnInit {
             'priority': this.blogAddEditForm.value.priority,
             'status': this.blogAddEditForm.value.status,
             'description': this.blogAddEditForm.value.description
-
           },
           "sourceobj": ["parent_id"]
         };

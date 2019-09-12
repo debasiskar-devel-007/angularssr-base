@@ -7,14 +7,18 @@ import { CookieService } from 'ngx-cookie-service';
 import { ListCategoryComponent } from '../Component/category-management/list-category/list-category.component';
 import { AddEditCategoryComponent } from '../Component/category-management/add-edit-category/add-edit-category.component';
 
-/* Category Management */
+/* lesson Management */
 import { ListLessionComponent } from '../Component/lession-management/list-lession/list-lession.component';
 import { AddEditLessionComponent } from '../Component/lession-management/add-edit-lession/add-edit-lession.component';
 
 /* Test route */
 import { TestComponent } from '../Component/test/test.component';
 import { SetCookieComponent } from 'src/app/set-cookie/set-cookie.component';
-
+/** Video Library**/
+import { ListVideosComponent } from '../Component/video-management/list-videos/list-videos.component';
+import { VideoCategoryManagementComponent } from '../Component/video-management/video-category-management/video-category-management.component';
+import { AddEditVideosComponent } from '../Component/video-management/video-library-management/add-edit-videos/add-edit-videos.component';
+import { ListVideoManagementComponent } from '../Component/video-management/video-library-management/list-video-management/list-video-management.component'
 const appRoutes: Routes = [
     /* Category Management Routes Start */
     { 
@@ -65,11 +69,50 @@ const appRoutes: Routes = [
       data: { requestcondition: { source: 'lession', condition: {} }, endpoint: 'datalist'}
     },
     /* Lesson Management Routes End */
+    
+    /** Video Library start Route here**/
+    { 
+      path:'video-management/list',
+      component: ListVideosComponent,
+      resolve:{ videoData : ResolveService},
+      data:{ requestcondition : {source:'video_category_view',condition:{} },endpoint:'datalist'}
+      
+    },
+    { 
+      path:'video-management/add',
+      component: VideoCategoryManagementComponent,
+      resolve:{ videoData : ResolveService},
+      data:{ requestcondition : {source:'video_category',condition:{} },endpoint:'datalist'}
+    },
+    { 
 
-    /* Test Route */
-    // { path:'', component: TestComponent },
-    // { path:'test', component: TestComponent },
+      path:'video-management/edit/:_id',
+      component: VideoCategoryManagementComponent,
+      resolve:{ videoData : ResolveService},
+      data:{ requestcondition : {source:'video_category',condition:{} },endpoint:'datalist'}
+    },
 
+    /** Video Library End Route here**/
+    /** Video Library management start here**/
+    { 
+      path:'video-library-management/add',
+      component: AddEditVideosComponent
+      
+    },
+    
+     { 
+      path:'video-library-management/edit/:_id',
+      component: AddEditVideosComponent,
+      resolve : {videodata : ResolveService },
+      data : { requestcondition : {source : 'video_management', condition : {} },endpoint :'datalist'}
+      
+    },
+    { 
+      path:'video-library-management/list',
+      component: ListVideoManagementComponent,
+      resolve:{ videoData : ResolveService },
+      data : {requestcondition : {source :'video_management',condition : {} }, endpoint : 'datalist'}
+    },
 
 ];
 

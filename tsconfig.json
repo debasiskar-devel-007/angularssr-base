@@ -54,6 +54,18 @@
       ],
       "blog/*": [
         "dist/blog/*"
+      ],
+      "video": [
+        "dist/video"
+      ],
+      "video/*": [
+        "dist/video/*"
+      ],
+      "lib-listing": [
+        "dist/listing"
+      ],
+      "listing/*": [
+        "dist/listing/*"
       ]
     }
   }

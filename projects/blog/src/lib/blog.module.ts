@@ -1,21 +1,23 @@
-import { NgModule} from '@angular/core';
+import { NgModule } from '@angular/core';
 import { BlogComponent } from './blog.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { DemoMaterialModule } from './material-module'
 import { from } from 'rxjs';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
-import { AddBlogComponent,Dialogtest } from './add-blog/add-blog.component';
-import { ListingModule } from 'listing-angular7';
+import { AddBlogComponent, Dialogtest } from './add-blog/add-blog.component';
+import { ListingModule } from 'lib-listing';
 import { HttpClientModule } from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
-import {ApiService} from './api.service';
+import { ApiService } from './api.service';
+import { AddeditBlogmanagementComponent } from './addedit-blogmanagement/addedit-blogmanagement.component';
 @NgModule({
   declarations: [
-    BlogComponent, 
+    BlogComponent,
     AddBlogComponent,
-    Dialogtest
+    Dialogtest,
+    AddeditBlogmanagementComponent
   ],
   imports: [
     DemoMaterialModule,
@@ -28,9 +30,9 @@ import {ApiService} from './api.service';
     BrowserModule,
     CKEditorModule
   ],
-  exports: [BlogComponent, AddBlogComponent],
-  providers:[ApiService],
-  entryComponents:[Dialogtest],
-  
+  exports: [BlogComponent, AddBlogComponent, AddeditBlogmanagementComponent],
+  providers: [ApiService],
+  entryComponents: [Dialogtest],
+
 })
 export class BlogModule { }

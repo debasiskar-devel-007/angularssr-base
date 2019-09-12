@@ -6,7 +6,7 @@ import { MaterialModule } from './Module/material-module';
 
 import { HttpClientModule } from '@angular/common/http';
 
-import { ListingModule } from "listing-angular7";
+import { ListingModule } from "lib-listing";
 
 import { ListLessionComponent } from './component/list-lession/list-lession.component';
 import { AddEditLessionComponent } from './component/add-edit-lession/add-edit-lession.component';

@@ -17,8 +17,14 @@ import { LessionManagementModule } from 'lession-management';
 import { ListLessionComponent } from './Component/lession-management/list-lession/list-lession.component';
 import { AddEditLessionComponent } from './Component/lession-management/add-edit-lession/add-edit-lession.component';
 import { TestComponent } from './Component/test/test.component';
-import { ListingModule } from 'listing-angular7';
+import { ListingModule } from 'lib-listing';
 
+/**Video Library **/
+import { VideoModule } from 'video';
+import { VideoCategoryManagementComponent } from './Component/video-management/video-category-management/video-category-management.component';
+import { ListVideosComponent } from './Component/video-management/list-videos/list-videos.component';
+import { AddEditVideosComponent } from './Component/video-management/video-library-management/add-edit-videos/add-edit-videos.component';
+import { ListVideoManagementComponent } from './Component/video-management/video-library-management/list-video-management/list-video-management.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -26,7 +32,11 @@ import { ListingModule } from 'listing-angular7';
     ListCategoryComponent,
     ListLessionComponent,
     AddEditLessionComponent,
-    TestComponent
+    TestComponent,
+    VideoCategoryManagementComponent,
+    ListVideosComponent,
+    AddEditVideosComponent,
+    ListVideoManagementComponent
   ],
   imports: [
     MaterialModule,
@@ -36,7 +46,8 @@ import { ListingModule } from 'listing-angular7';
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,
-    ListingModule
+    ListingModule,
+    VideoModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]
