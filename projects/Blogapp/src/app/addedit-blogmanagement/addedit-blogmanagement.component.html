@@ -1,9 +1,11 @@
 
 
+
 <lib-addedit-blogmanagement 
-[config]="configAddEdit" 
-[serverUrl]="configAddEdit.serverUrl"
-[addEndpoint]="configAddEdit.addEndPoint" 
-[getDataEndpoint]="configAddEdit.getDataUrl"
+[serverUrl]="server"
+[addEndpoint]="addUrl" 
+[getDataEndpoint]="getDataUrl"
+listRoute="blog-management/list"
+[singleData]="editdata" 
 
 ></lib-addedit-blogmanagement>

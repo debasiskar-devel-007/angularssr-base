@@ -100,13 +100,13 @@
                             <input type="text" matInput formControlName="video_url">
                             <span matPrefix>{{ video_prefix }}</span>
                         
-                            <mat-icon matSuffix class="clickable" (click)="preview_video($event)">remove_red_eye</mat-icon>
+                            <mat-icon matSuffix class="clickable" (click)="preview_video(i)">remove_red_eye</mat-icon>
                             
                         </mat-form-field>
-                        <button (click)="addCreds()">
+                        <button type="button" (click)="addYoutubeVideo('')">
                             <mat-icon matSuffix>add_box</mat-icon>
                         </button>
-                        <span *ngIf="i!=0"><button (click)="deleteCreds()">
+                        <span *ngIf="i!=0"><button type="button" (click)="deleteCreds()">
                                 <mat-icon matSuffix>delete</mat-icon>
                             </button></span>
                     </ng-container>
@@ -115,21 +115,25 @@
 
 
                 <!-- -----------------------------Multi Tags---------------------------- -->
+                <div>
                 <mat-label>Tags:</mat-label>
                 <mat-form-field class="example-full-width">
-                    <input type="text" placeholder="Pick one" aria-label="Number" formControlName="tags" matInput
-                        [formControl]="myControl" [matAutocomplete]="auto" (keyup)="showval($event)">
-                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                        <mat-option *ngFor="let option of filteredOptions | async ; let i = index;" [value]="option">
+                    <input type="text" placeholder="Tag something"  formControlName="tags" matInput
+                        [formControl]="myControl" [matAutocomplete]="auto"  (keyup)="showval($event)">
+                       
+                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" >
+                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
                             {{option}}
                         </mat-option>
                     </mat-autocomplete>
+               
                 </mat-form-field>
                 <div>
                     <ol>
-                        <li *ngFor="let item of tags_array;let i = index">{{ item }}<mat-icon matSuffix (click)="clearTags(i)">clear</mat-icon></li>
+                        <li *ngFor="let item of tags_array;let j = index">{{ item }}<mat-icon matSuffix class="clickable" (click)="clearTags(j)">clear</mat-icon></li>
                     </ol>
                 </div>
+            </div>
                 <!-- ----------------------------------------------------------------- -->
 
 

@@ -1,0 +1,21 @@
+
+<mat-card *ngIf="loader==true">
+  <mat-spinner class="spinner"></mat-spinner>
+</mat-card>
+
+
+
+<!-- ------------------------lib listing being called------------------------ -->
+<mat-card *ngIf="loader==false">
+  <lib-listing class="formfilterdiv"
+      *ngIf="blogListingConfig.datasource !=null && blogListingConfig.datasource.length > 0"
+      [datasource]="blogListingConfig.datasource" [skip]="blogListingConfig.listArray_skip"
+      [modify_header_array]="blogListingConfig.listArray_modify_header" [sourcedata]="blogListingConfig.tableName"
+      [statusarr]="blogListingConfig.statusarr" [jwttoken]="blogListingConfig.jwtToken"
+      [apiurl]="blogListingConfig.apiUrl" [editroute]="blogListingConfig.editUrl"
+      [deleteendpoint]="blogListingConfig.deleteEndPoint">
+  </lib-listing>
+<!-- ----------------------------------------------------------------------------->
+
+  <h2 *ngIf="blogListingConfig.datasource.length == 0">No record found.</h2>
+</mat-card>

@@ -7,13 +7,13 @@ import { Observable } from 'rxjs';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from "@angular/material";
 import { map, startWith } from 'rxjs/operators';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { DomSanitizer} from '@angular/platform-browser';
+// import { DomSanitizer } from '@angular/platform-browser';
 
 
 
 export interface DialogData {
   msg: any;
-  videourl:any;
+  videourl: any;
 }
 
 
@@ -51,13 +51,17 @@ export class AddeditBlogmanagementComponent implements OnInit {
   public addEndpointData: any;
   isSubmitted = false;
   video_prefix: any = 'https://www.youtube.com/watch?v=';
-  options: string[] = ['One', 'Two', 'Three', 'Four', 'Five', 'Six'];
-  filteredOptions: Observable<string[]>;
+  options: any = [];
+  filteredOptions:any=[];
   myControl = new FormControl();
   tags_array: any = [];
-  dialogRef:any;
-  videourl:any = 'https://www.youtube.com/embed/rTuxUAuJRyY';
-  videoid :any = 'rTuxUAuJRyY';
+  dialogRef: any;
+  public params_id: any;
+  setData: any;
+  messageText: any;
+  listUrl: any;
+  tags_display: any = [];
+  tag_flag:boolean = false;
   // -----------------------------------------------------------------------
 
 
@@ -70,6 +74,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
   @Input()
   set config(getConfig: any) {
     this.configData = getConfig;
+
   }
 
   @Input()          //setting the server url from project
@@ -91,13 +96,33 @@ export class AddeditBlogmanagementComponent implements OnInit {
     this.addEndpointData = endpointUrlval;
 
   }
+
+
+  @Input()         //setting the listing url form the application
+  set listRoute(listval: any) {
+    this.listUrl = (listval) || '<no name set>';
+    this.listUrl = listval;
+
+  }
   // -----------------------------------------------------------------------------------------
 
   constructor(private http: HttpClient, private apiservice: ApiService,
     private activatedRoute: ActivatedRoute, private router: Router,
-    private formBuilder: FormBuilder, public dialog: MatDialog, public sanitizer : DomSanitizer) { }
+    private formBuilder: FormBuilder, public dialog: MatDialog) {
+    this.blogManagementForm = this.formBuilder.group({
+      blogtitle: ['', Validators.required],
+      blogcat: ['',],
+      blogcontent: ['', Validators.required],
+      priority: ['', Validators.required],
+      status: ['true', Validators.required],
+      metatitle: ['', Validators.required],
+      metadesc: ['', Validators.required],
+      credentials: this.formBuilder.array([]),
+      tags: [''],
+    });
+  }
 
-    
+
   ngOnInit() {
     /**Observable start here**/
     this.apiservice.clearServerUrl();
@@ -114,22 +139,56 @@ export class AddeditBlogmanagementComponent implements OnInit {
     }, 50);
     /**Observable end here**/
 
-    this.generateForm();
-    this.addCreds();
+    if (!this.activatedRoute.snapshot.params.id)
+      setTimeout(() => {
+        console.log('aDD ENDPOINT ...');
+        this.addYoutubeVideo('');
+      }, 500)
+
     setTimeout(() => {
       this.getBlogCategory();
     }, 50)
 
-
+    
+    setTimeout(() => {
+      this.getTagsCount();
+    }, 50)
 
     // ------------------------------Auticomplete Functions----------------------------------
-
+    
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
       map(value => this._filter(value))
     );
+
+
+    if (this.activatedRoute.snapshot.params.id) {
+      this.params_id = this.activatedRoute.snapshot.params.id;
+      this.buttonText = "Update";
+      this.blogManagementForm.controls['blogtitle'].patchValue(this.setData.blogtitle);
+      this.blogManagementForm.controls['blogcat'].patchValue(this.setData.blogcat);
+      this.blogManagementForm.controls['blogcontent'].patchValue(this.setData.blogcontent);
+      this.blogManagementForm.controls['priority'].patchValue(this.setData.priority);
+      this.blogManagementForm.controls['status'].patchValue(this.setData.status);
+      this.blogManagementForm.controls['metatitle'].patchValue(this.setData.metatitle);
+      this.blogManagementForm.controls['metadesc'].patchValue(this.setData.metadesc);
+
+
+      for (const vid in this.setData.credentials) {
+        this.addYoutubeVideo(this.setData.credentials[vid].video_url);  
+      }
+
+      if (this.setData.tags != "")
+        this.setData.tags.forEach(element => {
+          this.tags_array.push(element);
+        });
+
+        
+    }
+
+
   }
-  private _filter(value: string): string[] {
+  private _filter(value: any): any[] {
     const filterValue = value.toLowerCase();
 
     return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
@@ -143,44 +202,28 @@ export class AddeditBlogmanagementComponent implements OnInit {
 
 
 
-// ------------------------------------MODAL Function--------------------------------------------
-  openDialog(x:any): void {
+  // ------------------------------------MODAL Function--------------------------------------------
+  openDialog(x: any): void {
     this.dialogRef = this.dialog.open(Modal, {
       width: '45%',
-      height:'500px',
-      data: {  msg:x }
-      
+      height: '500px',
+      data: { msg: x }
+
     });
-   
-  // this.sanitizer.bypassSecurityTrustResourceUrl
+
+    // this.sanitizer.bypassSecurityTrustResourceUrl
     this.dialogRef.afterClosed().subscribe(result => {
-      
-    });
-  }
-// ----------------------------------------------------------------------------------------------
-
-
-
-
-
-
-
-  // -----------------------------Form Controls---------------------------------
-  generateForm() {
-    this.blogManagementForm = this.formBuilder.group({
-      blogtitle: ['', Validators.required],
-      blogcat: ['',],
-      blogcontent: ['', Validators.required],
-      priority: ['', Validators.required],
-      status: ['true', Validators.required],
-      metatitle: ['', Validators.required],
-      metadesc: ['', Validators.required],
-      credentials: this.formBuilder.array([]),
-      tags: ['',]
 
     });
   }
-  // ---------------------------------------------------------------------------
+  // ----------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
 
 
 
@@ -198,11 +241,12 @@ export class AddeditBlogmanagementComponent implements OnInit {
 
 
   // ----------------------------------Add Credential Fucntions-----------------
-  addCreds() {
+  addYoutubeVideo(val: any) {
     const creds = this.blogManagementForm.controls.credentials as FormArray;
     creds.push(this.formBuilder.group({
-      video_url: []
+      video_url: [val]
     }));
+    console.log("Add youtube field Function being called");
   }
   // ---------------------------------------------------------------------------
 
@@ -234,6 +278,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
     this.apiservice.getData(data).subscribe(response => {
       let result: any;
       result = response;
+      result = response;
       this.blogCategoryArray = result.res;
     });
   }
@@ -243,6 +288,36 @@ export class AddeditBlogmanagementComponent implements OnInit {
 
 
 
+  // ----------------------------------TAGS view Function-------------------
+
+  getTagsCount() {
+    var data: any;
+    data = {
+      'source': 'tags_view'
+    };
+    this.apiservice.getData(data).subscribe(response => {
+      let result: any;
+      result = response;
+      if(result!=null && result.res!=null && result.res[0] !=null )this.options = result.res[0].tags;
+      
+      
+    });
+  }
+  // ----------------------------------------------------------------------------------
+
+
+
+
+
+  //  -----------------------------EDIT RESOLVE FUNCTION------------------------------
+  @Input()          //single data from resolve call  & set the value for edit
+  set singleData(editDatavals: any) {
+    this.setData = editDatavals;
+    console.log("Library te", this.setData);
+    
+
+  }
+  // -----------------------------------------------------------------------------------
 
 
   // ---------------------------------SUBMIT----------------------------------------
@@ -251,20 +326,59 @@ export class AddeditBlogmanagementComponent implements OnInit {
     this.blogManagementForm.controls['blogcontent'].markAsTouched();
 
     if (this.blogManagementForm.valid) {
+      if (this.blogManagementForm.value.status)
+        this.blogManagementForm.value.status = parseInt("1");
+      else
+        this.blogManagementForm.value.status = parseInt("0");
+      if (this.activatedRoute.snapshot.params.id != null) {    //update part
+        this.messageText = "One row updated!!!";
+        this.blogManagementForm.value.tags = this.tags_array;
+        data = {
+          "source": "blogs",
+          "data": {
+            "id": this.params_id,
+            "blogtitle": this.blogManagementForm.value.blogtitle,
+            "blogcat": this.blogManagementForm.value.blogcat,
+            "blogcontent": this.blogManagementForm.value.blogcontent,
+            "priority": this.blogManagementForm.value.priority,
+            "status": this.blogManagementForm.value.status,
+            "metatitle": this.blogManagementForm.value.metatitle,
+            "metadesc": this.blogManagementForm.value.metadesc,
 
-      this.isSubmitted = true;
-      var data: any;
-      data = {                                         //add part
-        "source": "blogs",
-        "data": this.blogManagementForm.value,
-      };
+            "tags": this.blogManagementForm.value.tags,
+            "credentials": this.blogManagementForm.value.credentials
+
+          },
+          "sourceobj": ["blogcat"]
+        };
+      } else {
+        this.isSubmitted = true;
+        var data: any;
+        data = {                                         //add part
+          "source": "blogs",
+          "data": this.blogManagementForm.value,
+          "sourceobj": ["blogcat"]
+        };
+      }
 
       this.apiservice.addData(data).subscribe(response => {
         let result: any;
         result = response;
+
+
+
+        setTimeout(() => {
+          this.router.navigateByUrl('/' + this.listUrl);
+        }, 3000);
+
       });
+
+
+
     }
   }
+
+
   // -----------------------------------------------------------------------------------
 
 
@@ -285,12 +399,14 @@ export class AddeditBlogmanagementComponent implements OnInit {
 
 
   // -------------------------------Select Tags AutoComplete Field-----------------------
-  showval(event : any) {
+  showval(event: any) {
     if (event.keyCode == 13) {
       this.tags_array.push(event.target.value);
       this.blogManagementForm.controls['tags'].patchValue("");
+      return; 
     }
-    this.blogManagementForm.value.tags = this.tags_array;
+    //this.blogManagementForm.value.tags = this.tags_array;
+    console.log("Showval function being called v2");
   }
   // ------------------------------------------------------------------------------------
 
@@ -298,18 +414,20 @@ export class AddeditBlogmanagementComponent implements OnInit {
 
 
   // ---------------------------------------VIDEO URL PREVIEW-----------------------------
-  preview_video(event:any) {
-    this.openDialog(this.blogManagementForm.value.credentials[0].video_url);
+  preview_video(video_index) {
+    this.openDialog(this.blogManagementForm.value.credentials[video_index].video_url);
   }
   // -------------------------------------------------------------------------------------
 
 
 
- clearTags(index)
- {
-  this.tags_array.splice(index,1);
- 
- }
+
+
+  // --------------------------------------------CLEAR TAGS---------------------------------
+  clearTags(index) {
+    this.tags_array.splice(index, 1);
+  }
+  // -------------------------------------------------------------------------------------
 
 
 
@@ -328,14 +446,14 @@ export class AddeditBlogmanagementComponent implements OnInit {
   templateUrl: 'modal.html',
 })
 export class Modal {
-  videoid :any = 'rTuxUAuJRyY';
+  videoid: any = '';
 
   constructor(
     public dialogRef: MatDialogRef<Modal>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData, public sanitizer:DomSanitizer) { 
-            console.log(data.msg);
-      
-    }
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {
+
+
+  }
 
   onNoClick(): void {
     this.dialogRef.close();

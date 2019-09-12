@@ -13,6 +13,8 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { ApiService } from './api.service';
 import { AddeditBlogmanagementComponent,Modal } from './addedit-blogmanagement/addedit-blogmanagement.component';
 import { YoutubeplayerComponent } from './youtubeplayer/youtubeplayer.component';
+import { ListingBlogmanagementlibComponent } from './listing-blogmanagementlib/listing-blogmanagementlib.component';
+// import { ListingBlogmanagementlibComponent } from './listing-blogmanagementlib/listing-blogmanagementlib.component';
 
 @NgModule({
   declarations: [
@@ -21,7 +23,8 @@ import { YoutubeplayerComponent } from './youtubeplayer/youtubeplayer.component'
     Dialogtest,
     AddeditBlogmanagementComponent,
     Modal,
-    YoutubeplayerComponent
+    YoutubeplayerComponent,
+    ListingBlogmanagementlibComponent
   ],
   imports: [
     DemoMaterialModule,
@@ -34,7 +37,7 @@ import { YoutubeplayerComponent } from './youtubeplayer/youtubeplayer.component'
     BrowserModule,
     CKEditorModule
   ],
-  exports: [BlogComponent, AddBlogComponent, AddeditBlogmanagementComponent],
+  exports: [BlogComponent, AddBlogComponent, AddeditBlogmanagementComponent,ListingBlogmanagementlibComponent],
   providers: [ApiService],
   entryComponents: [Dialogtest,Modal],
 

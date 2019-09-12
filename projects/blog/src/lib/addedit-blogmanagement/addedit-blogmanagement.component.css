@@ -74,7 +74,7 @@ button.submitbtn.mat-raised-button.mat-primary {
 :host ::ng-deep .ck-editor__editable_inline {
   min-height: 50px;
 }
-.cliackable
+.clickable
 {
   cursor: pointer;
 }

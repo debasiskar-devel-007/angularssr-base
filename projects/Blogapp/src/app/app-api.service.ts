@@ -17,7 +17,7 @@ export class ApiService {
   public uploaderror: any = '';
   public accesstoken:any=this.cookieService.get('jwtToken');
   fileservername: any = [];
-  serverUrl: any='http://18.191.148.255:5009/';
+  serverUrl: any='https://o820cv2lu8.execute-api.us-east-2.amazonaws.com/production/api/';
   addendpointUrl: any;
   uploadEndpointUrl:any; //souresh
   updateendpointUrl: any;
@@ -204,7 +204,7 @@ export class ApiService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'access-token': this.accesstoken          //hard code written access-token(temp)
+        'Authorization': this.accesstoken          //hard code written access-token(temp)
       })
     };
     var result = this._http.post(this.serverUrl + this.addendpointUrl, JSON.stringify(requestdata), httpOptions).pipe(map(res => res));
@@ -237,7 +237,7 @@ export class ApiService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'access-token': this.accesstoken
+        'Authorization': this.accesstoken
       })
     };
     var result = this._http.post(this.serverUrl + this.getdata_endpointUrl, JSON.stringify(requestdata), httpOptions).pipe(map(res => res));
@@ -248,7 +248,7 @@ export class ApiService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'access-token': this.accesstoken
+        'Authorization': this.accesstoken
       })
     };
     var result = this._http.post(this.serverUrl + this.deletesingle_endpointUrl, JSON.stringify(requestdata), httpOptions).pipe(map(res => res));
@@ -292,7 +292,7 @@ export class ApiService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'access-token': this.accesstoken
+        'Authorization': this.accesstoken
       })
     };
 

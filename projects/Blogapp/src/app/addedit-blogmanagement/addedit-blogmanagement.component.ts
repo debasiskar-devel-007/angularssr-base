@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute ,Router} from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 @Component({
   selector: 'app-addedit-blogmanagement',
@@ -8,33 +8,24 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class AddeditBlogmanagementComponent implements OnInit {
 
-  public configAddEdit: any = {
-    action: "add",
-    endpoint: "http://18.191.148.255:5009/",
-    serverUrl:"http://18.191.148.255:5009/",
-    addEndPoint: "addorupdatedata",
-    source: "blogmanagement",
-    condition: {},
-    defaultData: null,
-    jwtToken: this.cookieService.get('jwtToken'),
-    callBack: "role-management",
-    userData: { id: "18801017007", name: "Admin" },
-    getDataUrl: 'datalist'
-  }
+    server: any ='https://o820cv2lu8.execute-api.us-east-2.amazonaws.com/production/api/';
+    addUrl: any = 'addorupdatedata';
+    getDataUrl: any= 'datalist';
+    public editdata: any = [];
+  
 
-  constructor( private cookieService : CookieService , private activateRoute : ActivatedRoute) { }
+  constructor(private cookieService: CookieService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.activateRoute.params.subscribe(params => {
-      if(params._id) {
-        this.activateRoute.data.subscribe(resolveData => {
-          this.configAddEdit.defaultData = resolveData.editData.res[0];
-          this.configAddEdit.action = "edit";
-          this.configAddEdit.condition = { id: params._id };
-         
-        });
-      }
-    });
+    
+    if (this.activatedRoute.snapshot.params.id) {
+      this.activatedRoute.data.forEach(data => {
+        let result: any;
+        result = data.results.res[0];
+        this.editdata = result;
+      });
+    }
+    
   }
 
 }
