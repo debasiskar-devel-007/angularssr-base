@@ -10,6 +10,8 @@ import { ListingModule } from 'listing-angular7';
 import { ContactusListingComponent } from './contactus-listing/contactus-listing.component';
 import { LoadingComponent } from './loading/loading.component';
 import { HttpClientModule } from '@angular/common/http';
+import{CookieService} from 'ngx-cookie-service';
+
 
 @NgModule({
   declarations: [ContactusComponent, ContactusListingComponent, LoadingComponent],
@@ -30,7 +32,7 @@ import { HttpClientModule } from '@angular/common/http';
     })*/
   ],
   exports: [ContactusComponent, ContactusListingComponent],
-  providers: [ApiService, LoadingComponent],
+  providers: [ApiService, LoadingComponent, CookieService],
   bootstrap: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })

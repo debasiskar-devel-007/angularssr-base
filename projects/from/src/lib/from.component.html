@@ -1,0 +1,21 @@
+<p>
+    from works!
+
+
+</p>
+
+<ng-container *ngFor="let field of fieldsValue">
+    <span [ngSwitch]="field.type">
+        <textbox *ngSwitchCase="'text'"></textbox>
+        <!-- <p *ngSwitchCase="false">
+
+        </p>
+        <p *ngSwitchDefault>
+
+        </p> -->
+    </span>
+</ng-container>
+ 
+    
+
+<!-- <textbox> </textbox> -->

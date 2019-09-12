@@ -10,6 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
 import { ResetFromComponent } from './reset-from/reset-from.component';
+import { AuthGuard } from './auth.guard';
 
 const appRoutes: Routes = [
   { path: 'about2', component: AboutusComponent,data: {
@@ -23,7 +24,7 @@ const appRoutes: Routes = [
           title: 'About US',
           description: 'Have you seen my rubber duckie?'
       }
-  } },
+  }},
 
   { path: 'contact',      component: ContactusComponent,
       data: {
@@ -39,7 +40,9 @@ const appRoutes: Routes = [
                   title: 'Home',
                   description: 'Have you seen my rubber duckie?'
               }
-          }},
+          }
+        //   , canActivate:[AuthGuard]
+         },
 
           { path: 'socialMedia',      component: SocialMediaComponent,
               data: {

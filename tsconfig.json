@@ -42,6 +42,18 @@
       ],
       "login/*": [
         "dist/login/*"
+      ],
+      "blogs": [
+        "dist/blogs"
+      ],
+      "blogs/*": [
+        "dist/blogs/*"
+      ],
+      "from": [
+        "dist/from"
+      ],
+      "from/*": [
+        "dist/from/*"
       ]
     }
   }

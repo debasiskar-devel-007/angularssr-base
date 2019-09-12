@@ -7,10 +7,29 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LoginComponent implements OnInit {
 public projectName: any = "Login Form";
-public fullUrl: any = "http://166.62.39.137:5050/login";
+public fullUrl: any = "http://18.191.148.255:5009/login";
 public signUpRouteingUrl: any = 'sign-up';
 public forgetRouteingUrl: any = 'forget-password';
-  constructor() { }
+public routerStatus: any;
+  constructor() { 
+    this.routerStatus = {
+      "data": [
+        {
+         "type":"admin",
+         "routerNav":"forget-password"
+        },
+        {
+          "type":"user",
+         "routerNav":"userDashbord"
+        },
+        {
+          "type":"model",
+          "routerNav":"modelDashbord"
+        }
+      ]
+    }
+
+  }
 
   ngOnInit() {
   }

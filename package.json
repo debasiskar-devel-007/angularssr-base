@@ -16,7 +16,9 @@
     "start-build": "ng build contactus --watch",
     "start-serve": "ng serve onpageeditorexample",
     "start-buildAutoShare": "ng build autoShare --watch",
-    "start-buildlogin": "ng build login --watch"
+    "start-buildlogin": "ng build login --watch",
+    "start-buildblogs": "ng build Blogs --watch",
+    "start-buildfrom": "ng build from --watch"
   },
   "private": true,
   "dependencies": {
@@ -44,6 +46,7 @@
     "hammerjs": "^2.0.8",
     "listing-angular7": "0.0.93",
     "moment": "^2.24.0",
+    "ngx-cookie-service": "^2.2.0",
     "ngx-facebook": "^2.4.0",
     "ngx-moment": "^3.4.0",
     "ngx-uploader": "^7.1.0",

@@ -3,12 +3,13 @@ import { switchMap, map, takeWhile } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 // for setting observables to get serverurl and endpointurl from app
 import { Observable, Subject, Subscription } from 'rxjs';
+import{CookieService} from 'ngx-cookie-service';
 
-@Injectable({
+
+@Injectable({   
   providedIn: 'root'
 })
 export class ApiService {
-
 
   public lengthis;
   public percentageis;
@@ -16,37 +17,40 @@ export class ApiService {
   public progress: any = [];
   public uploadtype;
   public uploaderror: any = '';
-  public accesstoken: any = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJleHAiOjE1NjUyNzAxNDAsImlhdCI6MTU2NTE4Mzc0MH0.IskOLes3ly3QtSSRWDJGTMENhaR-f3zagfnoQxS6me0';
+  public accesstoken:any=this.cookieService.get('jwtToken');
+  // public accesstoken:any='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJleHAiOjE1NjgzNTgyMTAsImlhdCI6MTU2ODI3MTgxMH0.2ltvxVKwfX1uwMOwQ2Zzgp1K2jiaCDj051Wyho0Iw-Q';
   fileservername: any = [];
   serverUrl: any;
   addendpointUrl: any;
+  uploadEndpointUrl:any; //souresh
   updateendpointUrl: any;
-  deletesingle_endpointUrl : any;
-  updatestatus_single_endpointUrl : any;
+  deletesingle_endpointUrl: any;
+  updatestatus_single_endpointUrl: any;
   deletemultiple_endpointUrl: any;
   updatestatus_multiple_endpointUrl: any;
   getdata_endpointUrl: any;
   private subjectForServerUrl = new Subject<any>();
   private subjectForaddEndpointUrl = new Subject<any>();
+  private subjectForuploadEndpointUrl = new Subject<any>();  //added by souresh
   private subjectForupdateEndpointUrl = new Subject<any>();
   private subjectFordeletesingleEndpointUrl = new Subject<any>();
   private subjectForupdatestatusSingleEndpointUrl = new Subject<any>();
   private subjectForGetdataEndpointUrl = new Subject<any>();
   public subscriptionServer: Subscription;
   public subscriptionaddEndpoint: Subscription;
+  public subscriptionuploadEndpoint: Subscription;   //added by souresh
   public subscriptionupdateEndpoint: Subscription;
   public subscriptiondeletesingleEndpoint: Subscription;
   public subscriptionupdatestatusSingleEndpoint: Subscription;
   public subscriptionGetdataEndpoint: Subscription;
 
   constructor(private _http: HttpClient,
-              private _authHttp: HttpClient) {
+    private _authHttp: HttpClient,private cookieService :CookieService) {
     this.subscriptionServer = this.getServerUrl().subscribe(message => {
-      let result: any;
+     let result: any;
       result = message;
       if (result != null) {
         this.serverUrl = result;
-        console.log('this.serverUrl ----- ' + this.serverUrl);
       } else {
         this.serverUrl = null;
       }
@@ -56,17 +60,26 @@ export class ApiService {
       result = message;
       if (result != null) {
         this.addendpointUrl = result;
-        console.log('this.getEndpoint ----- ' + this.addendpointUrl);
       } else {
         this.addendpointUrl = null;
       }
     });
+    /*********added by souresh***********/
+    this.subscriptionuploadEndpoint=this.getuploadEndpoint().subscribe(message=>{
+      let result:any;
+      result=message;
+        if(result!=null){
+          this.uploadEndpointUrl = result;
+        } else{
+          this.uploadEndpointUrl = null;
+        }
+    })
+    /************souresh end here**************/
     this.subscriptionupdateEndpoint = this.getupdateEndpoint().subscribe(message => {
       let result: any;
       result = message;
       if (result != null) {
         this.updateendpointUrl = result;
-        console.log('this.getEndpoint ----- ' + this.updateendpointUrl);
       } else {
         this.updateendpointUrl = null;
       }
@@ -76,7 +89,6 @@ export class ApiService {
       result = message;
       if (result != null) {
         this.deletesingle_endpointUrl = result;
-        console.log('this.getEndpoint ----- ' + this.deletesingle_endpointUrl);
       } else {
         this.deletesingle_endpointUrl = null;
       }
@@ -86,7 +98,6 @@ export class ApiService {
       result = message;
       if (result != null) {
         this.updatestatus_single_endpointUrl = result;
-        console.log('this.getEndpoint ----- ' + this.updatestatus_single_endpointUrl);
       } else {
         this.updatestatus_single_endpointUrl = null;
       }
@@ -96,11 +107,12 @@ export class ApiService {
       result = message;
       if (result != null) {
         this.getdata_endpointUrl = result;
-        console.log('this.getEndpoint ----- ' + this.getdata_endpointUrl);
       } else {
         this.getdata_endpointUrl = null;
       }
     });
+
+    
   }
 
   setServerUrl(value: any) {
@@ -122,6 +134,19 @@ export class ApiService {
   public getaddEndpoint(): Observable<any> {
     return this.subjectForaddEndpointUrl.asObservable();
   }
+/*****added by souresh******/
+  setuploadEndpont(value:any){
+    this.subjectForuploadEndpointUrl.next(value);
+  }
+  public clearuploadEndpoint(){
+    this.subjectForuploadEndpointUrl.next(null);
+  }
+  public getuploadEndpoint(): Observable <any> {
+    return this.subjectForuploadEndpointUrl.asObservable();
+  }
+   /********souresh end here********/
+
+
   setupdateEndpoint(value: any) {
     this.subjectForupdateEndpointUrl.next(value);
   }
@@ -173,26 +198,38 @@ export class ApiService {
     // const isRefreshTokenExpired = helper.isTokenExpired(localStorage.getItem('refresh_token'));
     // console.log('id_token isExpired:',isIdTokenExpired)
     // console.log('refresh_token isExpired:',isRefreshTokenExpired)
-
-
-
   }
 
   addData(requestdata: any) {
+    console.log('in adddata apiservice');
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'access-token': this.accesstoken          // hard code written access-token(temp)
+        'Authorization': this.accesstoken          //hard code written access-token(temp)
       })
     };
+
+    console.log('httpoptions',httpOptions,this.serverUrl,requestdata);
     var result = this._http.post(this.serverUrl + this.addendpointUrl, JSON.stringify(requestdata), httpOptions).pipe(map(res => res));
     return result;
   }
+  /*******added by souresh************/
+  uploadFile(requestdata:any){
+    const httpOptions={
+        headers: new HttpHeaders({
+          'Content-Type':'application/json',
+          'access-token':this.accesstoken          //hard code written access-token(temp)
+        })
+    };
+    var result=this._http.post(this.serverUrl + this.uploadEndpointUrl,JSON.stringify(requestdata),httpOptions).pipe(map(res=>res));
+    return result;
+  }
+  /*******souresh end here********/
   UpdateData(requestdata: any) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'access-token': this.accesstoken          // hard code written access-token(temp)
+        'access-token': this.accesstoken          //hard code written access-token(temp)
       })
     };
     var result = this._http.post(this.serverUrl + this.updateendpointUrl, JSON.stringify(requestdata), httpOptions).pipe(map(res => res));
@@ -203,7 +240,7 @@ export class ApiService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'access-token': this.accesstoken
+        'Authorization': this.accesstoken
       })
     };
     var result = this._http.post(this.serverUrl + this.getdata_endpointUrl, JSON.stringify(requestdata), httpOptions).pipe(map(res => res));
@@ -253,8 +290,37 @@ export class ApiService {
     var result = this._http.post(this.serverUrl + this.updatestatus_single_endpointUrl+'many', JSON.stringify(requestdata), httpOptions).pipe(map(res => res));
     return result;
   }
+  CustomRequest(requestdata: any, endpoint:any ) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'access-token': this.accesstoken
+      })
+    };
+    var result = this._http.post(this.serverUrl +endpoint, JSON.stringify(requestdata), httpOptions).pipe(map(res => res));
+    return result;
+  }
 
 
 
 
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

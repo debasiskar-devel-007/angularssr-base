@@ -20,6 +20,8 @@ export class ContactusListingComponent implements OnInit {
   public serverURL: any = '';      // url variable to fetch the add availability form page
   public addEndpointData: any = '';
   public getDataEndpointData: any = '';
+  public updateendpointData: any = '';
+  public deleteendpointData: any = '';
 
   @Input()     // setting the server url from project
 
@@ -51,15 +53,35 @@ export class ContactusListingComponent implements OnInit {
   set addEndpoint(endpointUrlval: any) {
     this.addEndpointData = (endpointUrlval) || '<no name set>';
     this.addEndpointData = endpointUrlval;
+    // console.log('this.addEndpointData');
+    // console.log(this.addEndpointData)
   }
 
   @Input()          // setting the server url from project
   set getDataEndpoint(endpointUrlval: any) {
     this.getDataEndpointData = (endpointUrlval) || '<no name set>';
     this.getDataEndpointData = endpointUrlval;
-    console.log('this.getDataEndpoint');
-    console.log(this.getDataEndpoint);
+    console.log('this.getDataEndpointData');
+    console.log(this.getDataEndpointData);
   }
+
+  @Input()          // This is a Update Url
+  set updateendpoint(updateendpointval: any) {
+    this.updateendpointData = (updateendpointval) || '<no name set>';
+    this.updateendpointData = updateendpointval;
+    console.log('this.updateendpointData');
+    console.log(this.updateendpointData);
+  }
+
+  @Input()          // this is a Delete Url
+  set deleteendpoint(deleteendpointval: any) {
+    this.deleteendpointData = (deleteendpointval) || '<no name set>';
+    this.deleteendpointData = deleteendpointval;
+    console.log('this.deleteendpointData');
+    console.log(this.deleteendpointData);
+  }
+
+  
 
 
   constructor(public apiService: ApiService, public http: HttpClient,
@@ -75,7 +97,7 @@ export class ContactusListingComponent implements OnInit {
 
     this.apiService.cleargetdataEndpoint();
     setTimeout(() => {
-      this.apiService.setgetdataEndpoint(this.getDataEndpointData);
+      this.apiService.setgetdataEndpoint(this.getDataEndpointData.endpoint);
     }, 50);
 
 
@@ -95,15 +117,15 @@ export class ContactusListingComponent implements OnInit {
     this.loadingComponent.loading = false;
     let data: any;
     data = {
-      "source" : 'demoappcontactdetails'
+      "source" : this.getDataEndpointData.source
     };
-    this.apiService.getData(data).subscribe( res => {
+    this.apiService.getData(data).subscribe(response => {
       this.loadingComponent.loading = true;
       let result: any = [];
 
-      result = res;
+      result = response;
       if (result.resc != 0) {
-      console.log('resurt');
+      console.log('result');
       console.log(result);
       this.contactUsAllData = result.res;
       } else 

@@ -17,8 +17,10 @@ import { LoginModule } from 'login';
 import { LoginComponent } from './login/login.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { SignUpComponent } from './sign-up/sign-up.component';
-import { from } from 'rxjs';
 import { ResetFromComponent } from './reset-from/reset-from.component';
+import { BlogsModule } from 'blogs';
+import { FromModule } from 'from';
+import { AuthGuard } from './auth.guard';
 
 @NgModule({
   declarations: [
@@ -40,9 +42,11 @@ import { ResetFromComponent } from './reset-from/reset-from.component';
     BrowserAnimationsModule,
     HttpClientModule,
     AutoShareModule,
-    LoginModule
+    LoginModule,
+    BlogsModule,
+    FromModule,
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

@@ -1,8 +1,10 @@
-import { Component, Input, OnInit, Pipe, PipeTransform } from '@angular/core';
-import { FormArray, FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Component, Input, OnInit, Pipe, PipeTransform, ViewChild } from '@angular/core';
+import { FormArray, FormBuilder, FormGroup, Validators, FormGroupDirective } from '@angular/forms';
 import { ApiService } from './api.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
+
 
 
 
@@ -15,9 +17,11 @@ import { Router } from '@angular/router';
 
 export class ContactusComponent implements OnInit {
 
+  @ViewChild(FormGroupDirective) formDirective: FormGroupDirective;
 
-
-
+  public email: any[] = [];
+  public phone: any[] = [];
+  public address: any[] = [];
 
   public serverURL: any = '';      // url variable to fetch the add availability form page
   public addEndpointData: any = '';
@@ -36,6 +40,9 @@ export class ContactusComponent implements OnInit {
   set addEndpoint(endpointUrlval: any) {
     this.addEndpointData = (endpointUrlval) || '<no name set>';
     this.addEndpointData = endpointUrlval;
+    console.log('this.addEndpointData');
+    console.log(this.addEndpointData);
+    console.log(this.addEndpointData.endpoint);
   }
 
   @Input()          // setting the navigate By Url from project
@@ -53,7 +60,7 @@ export class ContactusComponent implements OnInit {
 
 
   public contactUsForm: FormGroup;
-  constructor(public fb: FormBuilder, public apiService: ApiService, public http: HttpClient, public router: Router) {
+  constructor(public fb: FormBuilder, public apiService: ApiService, public http: HttpClient, public router: Router, public cookieService: CookieService) {
     this.contactUsForm = this.fb.group({
       locationname: ['', Validators.required],
       message: ['', Validators.required],
@@ -76,9 +83,9 @@ export class ContactusComponent implements OnInit {
 
     this.apiService.clearaddEndpoint();
     setTimeout(() => {
-      this.apiService.setaddEndpoint(this.addEndpointData);
+      this.apiService.setaddEndpoint(this.addEndpointData.endpoint);
     }, 50);
-    console.log(this.addEndpointData);
+    console.log(this.addEndpointData.endpoint);
 
   }
   /* Multiple emails created start here*/
@@ -148,50 +155,71 @@ export class ContactusComponent implements OnInit {
   /* Multiple phones created end here*/
 
 
+
+
   // contactUsForm submit function start here
-
-
   contactUsFormSubmit() {
     let x: any;
     for (x in this.contactUsForm.controls) {
       this.contactUsForm.controls[x].markAsTouched();
 
     }
-
-    console.log(this.contactUsForm.value);
-
-
     if (this.contactUsForm.valid) {
       console.log('ok');
 
       console.log(this.contactUsForm.value);
-      let data: any = this.contactUsForm.value;
+
+
+      // All emails sites in a Array start here
+
+      console.log(this.contactUsForm.value.multipleemails);
+      for (const key of this.contactUsForm.value.multipleemails) {
+        this.email.push(key.emails);
+
+      }
+      // All emails sites in a Array end here
+
+      // All Phones sites in a Array start here
+
+      console.log(this.contactUsForm.value.phones);
+      for (const key of this.contactUsForm.value.phones) {
+        this.phone.push(key.phone);
+
+      }
+ // All Phones sites in a Array end here
+
+      // All addresses sites in a Array start here
+
+      console.log(this.contactUsForm.value.addresses);
+      for (const key of this.contactUsForm.value.addresses) {
+        this.address.push(key.address);
+      }
+      // All addresses sites in a Array end here
+
+      let allData: any ={};
+      allData.locationname = this.contactUsForm.value.locationname;
+      allData.address = this.address;
+      allData.phone = this.phone;
+      allData.email = this.email;
+      allData.message = this.contactUsForm.value.message; 
+      console.log(allData);
+      let data: any = {
+        "source": this.addEndpointData.source,
+        "data": allData
+      }
       this.apiService.addData(data).subscribe(res => {
         let result: any;
         result = res;
         if (result.status === 'success') {
           console.log(result);
-          this.contactUsForm.reset();
+
+
+          this.formDirective.resetForm();
         }
       });
 
     }
 
-
-    //     var res: any;
-    // for (const x in this.contactUsForm.value.phones){
-    //   this.contactUsForm.value.phones.hasOwnProperty(x) && res.push(this.contactUsForm.value.phones[x])
-    // }
-    // console.log('okkk'+res);
-
-    // var result = new Array();
-    // for (var item in this.contactUsForm.value.addresses) {
-    //   if (this.contactUsForm.value.addresses.hasOwnProperty(item)) {
-    //     var key: any = item.toString();
-    //     result.push({key: this.contactUsForm.value.addresses[item]});
-    //   }
-    // }
-    // console.log(result);
 
 
   }
@@ -209,6 +237,20 @@ export class ContactusComponent implements OnInit {
 
   goToListing() {
     this.router.navigateByUrl('/' + this.routeingUrlValue);
+  }
+
+
+
+  setJwtToken() {
+    let link: any = "https://o820cv2lu8.execute-api.us-east-2.amazonaws.com/production/api/temptoken";
+    let data: any;
+    this.http.post(link,data).subscribe((res)=>{
+      // console.log(res);
+      let result: any={};
+      result = res;
+      this.cookieService.set('jwtToken', result.token);
+      this.cookieService.getAll();
+    })
   }
 
 }
