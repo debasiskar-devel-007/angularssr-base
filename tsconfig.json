@@ -49,6 +49,24 @@
       "formmanagerlib/*": [
         "dist/formmanagerlib/*"
       ],
+      "myteam": [
+        "dist/myteam"
+      ],
+      "myteam/*": [
+        "dist/myteam/*"
+      ],
+      "demo-lib": [
+        "dist/demo-lib"
+      ],
+      "demo-lib/*": [
+        "dist/demo-lib/*"
+      ],
+      "uploadfile": [
+        "dist/uploadfile"
+      ],
+      "uploadfile/*": [
+        "dist/uploadfile/*"
+      ],
       "blog": [
         "dist/blog"
       ],
@@ -66,6 +84,12 @@
       ],
       "listing/*": [
         "dist/listing/*"
+      ],
+      "team": [
+        "dist/team"
+      ],
+      "team/*": [
+        "dist/team/*"
       ]
     }
   }

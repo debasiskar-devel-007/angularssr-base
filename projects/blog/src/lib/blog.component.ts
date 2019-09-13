@@ -20,6 +20,7 @@ export class BlogComponent implements OnInit {
   public getDataSourceData: any;
   public addEndpointData: any;
   public apiUrlviaApp: any = '';
+
   public tokenViaapp: any = ''
   public statusArray: any = [];
   public searchEndpointViaApp: any = '';
@@ -54,6 +55,7 @@ export class BlogComponent implements OnInit {
   }
 
 
+
   @Input()  //for apiUrl via application
   set BlogapiUrl(apivalue: any) {
     this.apiUrlviaApp = (apivalue) || '<no name set>';
@@ -61,8 +63,10 @@ export class BlogComponent implements OnInit {
   }
   @Input()  //for token via application
   set BlogToken(token: any) {
+
     this.tokenViaapp = (token) || '<no name set>';
     this.tokenViaapp = token;
+
   }
 
   @Input()  //for add button
@@ -134,6 +138,7 @@ export class BlogComponent implements OnInit {
     setTimeout(() => {
       this.apiService.setServerUrl(this.serverUrlData);
     }, 50);
+
     this.apiService.clearaddEndpoint();
     setTimeout(() => {
       this.apiService.setaddEndpoint(this.addEndpointData);
@@ -151,5 +156,6 @@ export class BlogComponent implements OnInit {
   addButton() {
     this.router.navigateByUrl('/' + this.addMemberviaUrl);
   }
+
 
 }

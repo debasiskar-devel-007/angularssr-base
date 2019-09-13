@@ -3,21 +3,33 @@ import { switchMap, map, takeWhile } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 // for setting observables to get serverurl and endpointurl from app
 import { Observable, Subject, Subscription } from 'rxjs';
+<<<<<<< HEAD
 import{CookieService} from 'ngx-cookie-service';
 
+=======
+import { CookieService } from 'ngx-cookie-service';
+>>>>>>> 7acdf98a6e6573520ca6d7aa154b7eefa094645b
 
 @Injectable({   
   providedIn: 'root'
 })
 export class ApiService {
+<<<<<<< HEAD
 
+=======
+  public jwtToken:string=''; //jwtToken variable declaration
+>>>>>>> 7acdf98a6e6573520ca6d7aa154b7eefa094645b
   public lengthis;
   public percentageis;
   public inprogress;
   public progress: any = [];
   public uploadtype;
   public uploaderror: any = '';
+<<<<<<< HEAD
   public accesstoken:any=this.cookieService.get('jwtToken');
+=======
+  public accesstoken:any='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJleHAiOjE1Njc1MDUxMTEsImlhdCI6MTU2NzQxODcxMX0.PwcteDraTnwzlt-4QfHZOX8tIhgiGgbMvlElhR3cnnI';
+>>>>>>> 7acdf98a6e6573520ca6d7aa154b7eefa094645b
   fileservername: any = [];
   serverUrl: any;
   addendpointUrl: any;
@@ -44,7 +56,11 @@ export class ApiService {
   public subscriptionGetdataEndpoint: Subscription;
 
   constructor(private _http: HttpClient,
+<<<<<<< HEAD
     private _authHttp: HttpClient,private cookieService :CookieService) {
+=======
+    private _authHttp: HttpClient,private cookieService:CookieService) {
+>>>>>>> 7acdf98a6e6573520ca6d7aa154b7eefa094645b
     this.subscriptionServer = this.getServerUrl().subscribe(message => {
      let result: any;
       result = message;
@@ -53,12 +69,22 @@ export class ApiService {
       } else {
         this.serverUrl = null;
       }
+<<<<<<< HEAD
     });
+=======
+     
+    });
+    this.cookieService.set('jwtToken',this.jwtToken); //set the cookie service by souresh
+>>>>>>> 7acdf98a6e6573520ca6d7aa154b7eefa094645b
     this.subscriptionaddEndpoint = this.getaddEndpoint().subscribe(message => {
       let result: any;
       result = message;
       if (result != null) {
         this.addendpointUrl = result;
+<<<<<<< HEAD
+=======
+        this.cookieService.set('addendpointUrl',this.addendpointUrl); //Souresh
+>>>>>>> 7acdf98a6e6573520ca6d7aa154b7eefa094645b
       } else {
         this.addendpointUrl = null;
       }
@@ -69,6 +95,10 @@ export class ApiService {
       result=message;
         if(result!=null){
           this.uploadEndpointUrl = result;
+<<<<<<< HEAD
+=======
+          this.cookieService.set('uploadEndpointUrl',this.uploadEndpointUrl); //Souresh
+>>>>>>> 7acdf98a6e6573520ca6d7aa154b7eefa094645b
         } else{
           this.uploadEndpointUrl = null;
         }
@@ -79,6 +109,10 @@ export class ApiService {
       result = message;
       if (result != null) {
         this.updateendpointUrl = result;
+<<<<<<< HEAD
+=======
+        this.cookieService.set('updateendpointUrl', this.updateendpointUrl); //Souresh
+>>>>>>> 7acdf98a6e6573520ca6d7aa154b7eefa094645b
       } else {
         this.updateendpointUrl = null;
       }
@@ -88,6 +122,10 @@ export class ApiService {
       result = message;
       if (result != null) {
         this.deletesingle_endpointUrl = result;
+<<<<<<< HEAD
+=======
+        this.cookieService.set('deletesingle_endpointUrl',this.deletesingle_endpointUrl); //Souresh
+>>>>>>> 7acdf98a6e6573520ca6d7aa154b7eefa094645b
       } else {
         this.deletesingle_endpointUrl = null;
       }
@@ -97,6 +135,10 @@ export class ApiService {
       result = message;
       if (result != null) {
         this.updatestatus_single_endpointUrl = result;
+<<<<<<< HEAD
+=======
+        this.cookieService.set('updatestatus_single_endpointUrl',this.updatestatus_single_endpointUrl); //Souresh
+>>>>>>> 7acdf98a6e6573520ca6d7aa154b7eefa094645b
       } else {
         this.updatestatus_single_endpointUrl = null;
       }
@@ -106,6 +148,10 @@ export class ApiService {
       result = message;
       if (result != null) {
         this.getdata_endpointUrl = result;
+<<<<<<< HEAD
+=======
+        this.cookieService.set('getdata_endpointUrl',this.getdata_endpointUrl); //Souresh
+>>>>>>> 7acdf98a6e6573520ca6d7aa154b7eefa094645b
       } else {
         this.getdata_endpointUrl = null;
       }
@@ -197,18 +243,30 @@ export class ApiService {
     // const isRefreshTokenExpired = helper.isTokenExpired(localStorage.getItem('refresh_token'));
     // console.log('id_token isExpired:',isIdTokenExpired)
     // console.log('refresh_token isExpired:',isRefreshTokenExpired)
+<<<<<<< HEAD
   }
 
   addData(requestdata: any) {
     console.log('in adddata apiservice');
+=======
+
+
+
+  }
+
+  addData(requestdata: any) {
+>>>>>>> 7acdf98a6e6573520ca6d7aa154b7eefa094645b
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'access-token': this.accesstoken          //hard code written access-token(temp)
       })
     };
+<<<<<<< HEAD
 
     console.log('httpoptions',httpOptions,this.serverUrl,requestdata);
+=======
+>>>>>>> 7acdf98a6e6573520ca6d7aa154b7eefa094645b
     var result = this._http.post(this.serverUrl + this.addendpointUrl, JSON.stringify(requestdata), httpOptions).pipe(map(res => res));
     return result;
   }

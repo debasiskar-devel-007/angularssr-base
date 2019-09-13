@@ -27,8 +27,12 @@
   }
   .singleButton{
     margin: 5px;
+<<<<<<< HEAD
    
     float: right;
+=======
+    display: inline-block;
+>>>>>>> 7acdf98a6e6573520ca6d7aa154b7eefa094645b
   }
   .example-form {
     min-width: 150px;
@@ -45,6 +49,7 @@
   }
 
 
+<<<<<<< HEAD
 .mat-card{ background:white!important;}
 
   .mat-dialog-content{padding: 10px !important; border-radius: 0; overflow: hidden !important;}
@@ -117,3 +122,5 @@
   }
   
   .mat-bottom-sheet-container bottom-sheet .mat-nav-list{text-align: center;}
+=======
+>>>>>>> 7acdf98a6e6573520ca6d7aa154b7eefa094645b

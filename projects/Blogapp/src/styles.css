@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 
 
 /* You can add global styles to this file, and also import other style files */
@@ -78,3 +79,7 @@
 .mat-bottom-sheet-container bottom-sheet .mat-nav-list{text-align: center;}
 
 
+=======
+/* You can add global styles to this file, and also import other style files */
+@import '@angular/material/prebuilt-themes/deeppurple-amber.css';
+>>>>>>> 7acdf98a6e6573520ca6d7aa154b7eefa094645b

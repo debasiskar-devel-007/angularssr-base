@@ -7,15 +7,23 @@ import { AppRoutingModule } from './app-routing.module';
 import { AddComponent } from './add/add.component';
 import { BloglistComponent } from './bloglist/bloglist.component';
 import { DemoMaterialModule } from './material-module'
+<<<<<<< HEAD
 import { CookieService } from 'ngx-cookie-service';
 import { AddeditBlogmanagementComponent } from './addedit-blogmanagement/addedit-blogmanagement.component';
+=======
+
+>>>>>>> 7acdf98a6e6573520ca6d7aa154b7eefa094645b
 //import {ResolveService} from './resolve.service';
 @NgModule({
   declarations: [
     AppComponent,
     AddComponent,
+<<<<<<< HEAD
     BloglistComponent,
     AddeditBlogmanagementComponent
+=======
+    BloglistComponent
+>>>>>>> 7acdf98a6e6573520ca6d7aa154b7eefa094645b
   ],
   imports: [
     BrowserModule,
@@ -25,7 +33,11 @@ import { AddeditBlogmanagementComponent } from './addedit-blogmanagement/addedit
     DemoMaterialModule
     //ResolveService
   ],
+<<<<<<< HEAD
   providers: [CookieService],
+=======
+  providers: [],
+>>>>>>> 7acdf98a6e6573520ca6d7aa154b7eefa094645b
   bootstrap: [AppComponent]
   
 })

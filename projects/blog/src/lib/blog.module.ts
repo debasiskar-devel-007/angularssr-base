@@ -1,4 +1,5 @@
 import { NgModule } from '@angular/core';
+
 import { BlogComponent } from './blog.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { DemoMaterialModule } from './material-module'
@@ -18,6 +19,7 @@ import { AddeditBlogmanagementComponent } from './addedit-blogmanagement/addedit
     AddBlogComponent,
     Dialogtest,
     AddeditBlogmanagementComponent
+
   ],
   imports: [
     DemoMaterialModule,
@@ -33,6 +35,7 @@ import { AddeditBlogmanagementComponent } from './addedit-blogmanagement/addedit
   exports: [BlogComponent, AddBlogComponent, AddeditBlogmanagementComponent],
   providers: [ApiService],
   entryComponents: [Dialogtest],
+
 
 })
 export class BlogModule { }

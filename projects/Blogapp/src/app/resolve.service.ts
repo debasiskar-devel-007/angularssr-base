@@ -11,6 +11,7 @@ export class ResolveService {
   constructor(private apiService: ApiService, private router: Router) {
 
   }
+<<<<<<< HEAD
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
     var data: any = { source: route.data.requestcondition.source };
@@ -24,12 +25,28 @@ export class ResolveService {
 
     return new Promise((resolve) => {
       this.apiService.CustomRequest(data, route.data.endpoint).subscribe(api_object => {
+=======
+  resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
+  
+    if (route.data.requestcondition.condition.key_id != null && route.data.requestcondition.condition.key_id == '') {
+      delete route.data.requestcondition.condition.key_id;
+      route.data.requestcondition.condition._id = route.params.id;
+    }
+   
+
+    return new Promise((resolve) => {
+      this.apiService.CustomRequest(route.data.requestcondition, route.data.endpoint).subscribe(api_object => {
+>>>>>>> 7acdf98a6e6573520ca6d7aa154b7eefa094645b
         if (api_object) {
           return resolve(api_object);
         } else {
           return true;
         }
       });
+<<<<<<< HEAD
+=======
+
+>>>>>>> 7acdf98a6e6573520ca6d7aa154b7eefa094645b
     });
   }
 

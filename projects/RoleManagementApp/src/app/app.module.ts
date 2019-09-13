@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { AppComponent } from './app.component';
-// import { RolemanagementlibModule } from 'rolemanagementlib';
+import { RolemanagementlibModule } from 'rolemanagementlib';
 import { ListingComponent } from './components/listing/listing.component';
 import { AppRoutingModule } from './app-routing.module';
 import { RouterModule }  from '@angular/router';
@@ -26,7 +26,7 @@ import { CookieService } from 'ngx-cookie-service';
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
-    // RolemanagementlibModule,
+    RolemanagementlibModule,
     AppRoutingModule,
     RouterModule,
     HttpClientModule,

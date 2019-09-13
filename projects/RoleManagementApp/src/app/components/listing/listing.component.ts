@@ -14,7 +14,7 @@ export class ListingComponent implements OnInit {
 
   /************** lib list setup start here *************/
   public roleListingConfig: any = {
-    apiBaseUrl: "http://18.191.148.255:5009/",
+    apiBaseUrl: "https://o820cv2lu8.execute-api.us-east-2.amazonaws.com/production/api/",
     listEndPoint: "datalist",
     datasource: "",
     tableName: "rolemanagement",

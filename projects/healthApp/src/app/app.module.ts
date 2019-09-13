@@ -25,6 +25,8 @@ import { VideoCategoryManagementComponent } from './Component/video-management/v
 import { ListVideosComponent } from './Component/video-management/list-videos/list-videos.component';
 import { AddEditVideosComponent } from './Component/video-management/video-library-management/add-edit-videos/add-edit-videos.component';
 import { ListVideoManagementComponent } from './Component/video-management/video-library-management/list-video-management/list-video-management.component';
+import { AddEditTeamComponent } from './Component/Team-Library/add-edit-team/add-edit-team.component';
+import { ListTeamComponent } from './Component/Team-Library/list-team/list-team.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,7 +38,9 @@ import { ListVideoManagementComponent } from './Component/video-management/video
     VideoCategoryManagementComponent,
     ListVideosComponent,
     AddEditVideosComponent,
-    ListVideoManagementComponent
+    ListVideoManagementComponent,
+    AddEditTeamComponent,
+    ListTeamComponent
   ],
   imports: [
     MaterialModule,

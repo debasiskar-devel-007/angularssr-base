@@ -5,6 +5,10 @@ import { ApiService } from '../api.service';
 import { HttpClient } from '@angular/common/http';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from "@angular/material";
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+<<<<<<< HEAD
+=======
+import { CookieService } from 'ngx-cookie-service';
+>>>>>>> 7acdf98a6e6573520ca6d7aa154b7eefa094645b
 
 export interface DialogData {
   message: string;
@@ -33,7 +37,10 @@ export class AddBlogComponent implements OnInit {
   public serverUrlData: any;
   public listUrl: any;
   public blogarray: any = [];
+<<<<<<< HEAD
   public blogDataarray: any = [];
+=======
+>>>>>>> 7acdf98a6e6573520ca6d7aa154b7eefa094645b
   isSubmitted = false;
   blogAddEditForm: FormGroup;
   public params_id: any;
@@ -42,19 +49,25 @@ export class AddBlogComponent implements OnInit {
   public allData: any = [];
   /**blog varibles declaration end here**/
   public headerText: any = 'Add Blogs';
+<<<<<<< HEAD
   public buttonText: any = 'Submit';
   public messageText: any = 'Successfully Submitted';
+=======
+>>>>>>> 7acdf98a6e6573520ca6d7aa154b7eefa094645b
 
   @Input()         //setting the listing url form the application
   set listRoute(listval: any) {
     this.listUrl = (listval) || '<no name set>';
     this.listUrl = listval;
   }
+<<<<<<< HEAD
   @Input()          //resolve list
   set listResolve(listresolveUrlval: any) {
     this.blogDataarray = (listresolveUrlval) || '<no name set>';
     this.blogDataarray = listresolveUrlval;
   }
+=======
+>>>>>>> 7acdf98a6e6573520ca6d7aa154b7eefa094645b
 
   @Input()          //setting the server url from project
   set serverUrl(serverUrlval: any) {
@@ -66,12 +79,16 @@ export class AddBlogComponent implements OnInit {
   set getDataEndpoint(endpointUrlval: any) {
     this.getDataEndpointData = (endpointUrlval) || '<no name set>';
     this.getDataEndpointData = endpointUrlval;
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7acdf98a6e6573520ca6d7aa154b7eefa094645b
   }
   @Input()          //setting the server url from project
   set addEndpoint(endpointUrlval: any) {
     this.addEndpointData = (endpointUrlval) || '<no name set>';
     this.addEndpointData = endpointUrlval;
+<<<<<<< HEAD
 
   }
   @Input()          //single data from resolve call  & set the value for edit
@@ -87,6 +104,18 @@ export class AddBlogComponent implements OnInit {
       this.blogAddEditForm.controls['description'].patchValue(allData[0].description);
       this.model.editorData = allData[0].description;
      
+=======
+  }
+
+  @Input()          //resolve data and set the value for edit
+  set dataList(allData: any) {
+    this.allData = allData;
+    if (this.activeroute.snapshot.params.id) {
+      this.headerText = "Edit Blogs";
+      this.blogAddEditForm.controls['title'].patchValue(allData[0].title);
+      this.blogAddEditForm.controls['description'].patchValue(allData[0].description);
+      this.model.editorData = allData[0].description;
+>>>>>>> 7acdf98a6e6573520ca6d7aa154b7eefa094645b
       this.blogAddEditForm.controls['parent_id'].patchValue(allData[0].parent_id);
     }
   }
@@ -94,6 +123,7 @@ export class AddBlogComponent implements OnInit {
 
   constructor(public fb: FormBuilder, public activeroute: ActivatedRoute,
     public apiservice: ApiService, public _http: HttpClient, public router: Router
+<<<<<<< HEAD
     , public dialog: MatDialog) {
 
     /**Formgroup create start here**/
@@ -103,11 +133,26 @@ export class AddBlogComponent implements OnInit {
       priority: ['', Validators.required],
       status: [true,],
       parent_id: [0, Validators.required]
+=======
+    , public dialog: MatDialog, private cookieService: CookieService) {
+    /**catch the parameter id***/
+
+    /**Formgroup create start here**/
+    this.blogAddEditForm = this.fb.group({
+      title:       ['', Validators.required],
+      description: ['', Validators.required],
+      parent_id:   []
+>>>>>>> 7acdf98a6e6573520ca6d7aa154b7eefa094645b
     })
     /**Formgroup create end here**/
   }
 
   ngOnInit() {
+<<<<<<< HEAD
+=======
+    this.params_id = this.activeroute.snapshot.params.id;
+
+>>>>>>> 7acdf98a6e6573520ca6d7aa154b7eefa094645b
     /**Observable start here**/
     this.apiservice.clearServerUrl();
     setTimeout(() => {
@@ -123,17 +168,28 @@ export class AddBlogComponent implements OnInit {
     }, 50);
     /**Observable end here**/
 
+<<<<<<< HEAD
+=======
+    //getBlogData call here
+    setTimeout(() => {
+      this.getBlogData();
+    }, 100);
+>>>>>>> 7acdf98a6e6573520ca6d7aa154b7eefa094645b
   }
 
   /*modal start here*/
   openDialog(x: any): void {
     this.dialogRef = this.dialog.open(Dialogtest, {
       width: '250px',
+<<<<<<< HEAD
 
+=======
+>>>>>>> 7acdf98a6e6573520ca6d7aa154b7eefa094645b
       data: { message: x }
     });
 
     this.dialogRef.afterClosed().subscribe(result => {
+<<<<<<< HEAD
 
     });
   }
@@ -151,12 +207,44 @@ export class AddBlogComponent implements OnInit {
     this.blogAddEditForm.patchValue({
       description: this.model.editorData
     });
+=======
+    });
+  }
+
+  /**validation untouch purpose **/
+  inputUntouch(form: any, val: any) {
+    form.controls[val].markAsUntouched();
+  }
+
+  /** getting all blogs data start here **/
+  getBlogData() {
+
+    let data: any = {
+      "source": "blog_category_view"
+    }
+
+    this.apiservice.getData(data).subscribe(response => {
+
+      let result: any = response;
+      this.blogarray = result.res;
+    })
+  }
+
+  /**add & update* blogs submitting form start here**/
+  blogAddEditFormSubmit() {
+
+    this.blogAddEditForm.patchValue({
+      description: this.model.editorData
+    });
+
+>>>>>>> 7acdf98a6e6573520ca6d7aa154b7eefa094645b
     this.isSubmitted = true;
     let x: any;
     for (x in this.blogAddEditForm.controls) {
       this.blogAddEditForm.controls[x].markAsTouched();
     }
     if (this.blogAddEditForm.valid) {
+<<<<<<< HEAD
       if (this.blogAddEditForm.value.status)
         this.blogAddEditForm.value.status = parseInt("1");
       else
@@ -164,17 +252,25 @@ export class AddBlogComponent implements OnInit {
       var data: any;
       if (this.activeroute.snapshot.params.id != null) {    //update part
         this.messageText = "One row updated!!!";
+=======
+      var data: any;
+      if (this.activeroute.snapshot.params.id != null) {   //update part
+>>>>>>> 7acdf98a6e6573520ca6d7aa154b7eefa094645b
         data = {
           "source": "blog_category",
           "data": {
             "id": this.params_id,
             "parent_id": this.blogAddEditForm.value.parent_id,
             'title': this.blogAddEditForm.value.title,
+<<<<<<< HEAD
             'priority': this.blogAddEditForm.value.priority,
             'status': this.blogAddEditForm.value.status,
             'description': this.blogAddEditForm.value.description
             
 
+=======
+            'description': this.blogAddEditForm.value.description
+>>>>>>> 7acdf98a6e6573520ca6d7aa154b7eefa094645b
           },
           "sourceobj": ["parent_id"]
         };
@@ -184,9 +280,14 @@ export class AddBlogComponent implements OnInit {
           "data": {
             "parent_id": this.blogAddEditForm.value.parent_id,
             'title': this.blogAddEditForm.value.title,
+<<<<<<< HEAD
             'priority': this.blogAddEditForm.value.priority,
             'status': this.blogAddEditForm.value.status,
             'description': this.blogAddEditForm.value.description
+=======
+            'description': this.blogAddEditForm.value.description
+
+>>>>>>> 7acdf98a6e6573520ca6d7aa154b7eefa094645b
           },
           "sourceobj": ["parent_id"]
         };
@@ -195,6 +296,7 @@ export class AddBlogComponent implements OnInit {
         let result: any;
         result = response;
         this.statusarray = result.status;
+<<<<<<< HEAD
         if (result.status == "success")
           this.openDialog(this.messageText);
         setTimeout(() => {
@@ -213,6 +315,22 @@ export class AddBlogComponent implements OnInit {
 }
 
 
+=======
+
+        this.openDialog(result.status);
+        setTimeout(() => {
+          this.dialogRef.close();
+        }, 2000);
+
+        setTimeout(() => {
+          this.router.navigateByUrl('/' + this.listUrl);
+        }, 3000);
+      });
+    }
+  }
+}
+
+>>>>>>> 7acdf98a6e6573520ca6d7aa154b7eefa094645b
 @Component({
   selector: 'dialogtest',
   templateUrl: 'modal.html',

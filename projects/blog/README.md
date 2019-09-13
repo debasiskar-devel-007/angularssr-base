@@ -4,6 +4,7 @@ This library was generated with [Angular CLI](https://github.com/angular/angular
 
 ## Code scaffolding
 
+<<<<<<< HEAD
 Run `ng generate component component-name --project blog` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project blog`.
 > Note: Don't forget to add `--project blog` or else it will be added to the default project in your `angular.json` file. 
 
@@ -18,10 +19,27 @@ After building your library with `ng build blog`, go to the dist folder `cd dist
 ## Running unit tests
 
 Run `ng test blog` to execute the unit tests via [Karma](https://karma-runner.github.io).
+=======
+Run `ng generate component component-name --project Blog` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module --project Blog`.
+> Note: Don't forget to add `--project Blog` or else it will be added to the default project in your `angular.json` file. 
+
+## Build
+
+Run `ng build Blog` to build the project. The build artifacts will be stored in the `dist/` directory.
+
+## Publishing
+
+After building your library with `ng build Blog`, go to the dist folder `cd dist/blog` and run `npm publish`.
+
+## Running unit tests
+
+Run `ng test Blog` to execute the unit tests via [Karma](https://karma-runner.github.io).
+>>>>>>> 7acdf98a6e6573520ca6d7aa154b7eefa094645b
 
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+<<<<<<< HEAD
 
 --------------------------------------------------------------------------------------------------
                                              BLOG MANAGEMENT
@@ -115,3 +133,5 @@ The BlogList does not contains any data so, it has to be assigned in this page:
 
 
    
+=======
+>>>>>>> 7acdf98a6e6573520ca6d7aa154b7eefa094645b

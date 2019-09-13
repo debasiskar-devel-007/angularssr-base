@@ -3,7 +3,11 @@ import { switchMap, map, takeWhile } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 // for setting observables to get serverurl and endpointurl from app
 import { Observable, Subject, Subscription } from 'rxjs';
+<<<<<<< HEAD
 import {CookieService} from 'ngx-cookie-service';
+=======
+
+>>>>>>> 7acdf98a6e6573520ca6d7aa154b7eefa094645b
 @Injectable({   
   providedIn: 'root'
 })
@@ -15,7 +19,11 @@ export class ApiService {
   public progress: any = [];
   public uploadtype;
   public uploaderror: any = '';
+<<<<<<< HEAD
   public accesstoken:any=this.cookieService.get('jwtToken');
+=======
+  public accesstoken:any='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJleHAiOjE1Njc1MDUxMTEsImlhdCI6MTU2NzQxODcxMX0.PwcteDraTnwzlt-4QfHZOX8tIhgiGgbMvlElhR3cnnI';
+>>>>>>> 7acdf98a6e6573520ca6d7aa154b7eefa094645b
   fileservername: any = [];
   serverUrl: any='http://18.191.148.255:5009/';
   addendpointUrl: any;
@@ -42,9 +50,13 @@ export class ApiService {
   public subscriptionGetdataEndpoint: Subscription;
 
   constructor(private _http: HttpClient,
+<<<<<<< HEAD
     private _authHttp: HttpClient,private cookieService:CookieService) {
 
     
+=======
+    private _authHttp: HttpClient) {
+>>>>>>> 7acdf98a6e6573520ca6d7aa154b7eefa094645b
     this.subscriptionServer = this.getServerUrl().subscribe(message => {
      let result: any;
       result = message;
@@ -287,8 +299,13 @@ export class ApiService {
     var result = this._http.post(this.serverUrl + this.updatestatus_single_endpointUrl+'many', JSON.stringify(requestdata), httpOptions).pipe(map(res => res));
     return result;
   }
+<<<<<<< HEAD
   
   CustomRequest(requestdata: any, endpoint:any ) {
+=======
+  CustomRequest(requestdata: any, endpoint:any ) {
+    console.log('resolve data',requestdata);
+>>>>>>> 7acdf98a6e6573520ca6d7aa154b7eefa094645b
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
