@@ -13,7 +13,7 @@
     "build:client-and-server-bundles": "ng build --prod && ng run angularssr:server:production",
     "webpack:server": "webpack --config webpack.server.config.js --progress --colors",
     "start-ssr": "npm run build:ssr && npm run serve:ssr",
-    "bloglibrary":"ng build blog --watch && ng serve Blogapp --port=4209 --watch"
+    "bloglibrary": "ng build blog --watch && ng serve Blogapp --port=4209 --watch"
   },
   "private": true,
   "dependencies": {

@@ -96,12 +96,17 @@
                     *ngFor="let creds of blogManagementForm.controls.credentials?.value; let i = index; trackBy: trackByFn">
                     <ng-container [formGroupName]="i">
 
-                        <mat-form-field>
+                        <mat-form-field class="video_embed">
                             <input type="text" matInput formControlName="video_url">
                             <span matPrefix>{{ video_prefix }}</span>
-                        
+                            <i style="     position: absolute;
+                            right: 4px;
+                            bottom: 7px;" class="material-icons" matTooltipPosition="top" mat-raised-button matTooltip="Info about the action"
+                                  aria-label="Button ">
+                                  contact_support
+                        </i>
                             <mat-icon matSuffix class="clickable" (click)="preview_video(i)">remove_red_eye</mat-icon>
-                            
+
                         </mat-form-field>
                         <button type="button" (click)="addYoutubeVideo('')">
                             <mat-icon matSuffix>add_box</mat-icon>
@@ -116,28 +121,33 @@
 
                 <!-- -----------------------------Multi Tags---------------------------- -->
                 <div>
-                <mat-label>Tags:</mat-label>
-                <mat-form-field class="example-full-width">
-                    <input type="text" placeholder="Tag something"  formControlName="tags" matInput
-                        [formControl]="myControl" [matAutocomplete]="auto"  (keyup)="showval($event)">
-                       
-                    <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete" >
-                        <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                            {{option}}
-                        </mat-option>
-                    </mat-autocomplete>
-               
-                </mat-form-field>
-                <div>
-                    <ol>
-                        <li *ngFor="let item of tags_array;let j = index">{{ item }}<mat-icon matSuffix class="clickable" (click)="clearTags(j)">clear</mat-icon></li>
-                    </ol>
+                    <mat-label>Tags:</mat-label>
+                    <mat-form-field class="example-full-width">
+                        <input type="text" placeholder="Tag something" formControlName="tags" matInput
+                            [formControl]="myControl" [matAutocomplete]="auto" (keyup)="showval($event)">
+
+                        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                                {{option}}
+                            </mat-option>
+                        </mat-autocomplete>
+
+                    </mat-form-field>
+                    <div>
+
+                        <mat-chip-list class="mat_chip">
+                            <!-- <li *ngFor="let item of tags_array;let j = index">{{ item }}<mat-icon matSuffix class="clickable" (click)="clearTags(j)">clear</mat-icon></li> -->
+                            <mat-chip color="primary" selected *ngFor="let item of tags_array;let j = index">{{ item }}
+                                <mat-icon matSuffix class="clickable" (click)="clearTags(j)">clear</mat-icon>
+                            </mat-chip>
+                        </mat-chip-list>
+
+                    </div>
                 </div>
-            </div>
                 <!-- ----------------------------------------------------------------- -->
 
 
-                <button class="submitbtn" mat-raised-button color="primary" type="submit"
+                <button class="submitbtn" mat-raised-button color="primary" type="button"
                     (click)="onSubmit()">{{buttonText}}</button>
 
             </form>

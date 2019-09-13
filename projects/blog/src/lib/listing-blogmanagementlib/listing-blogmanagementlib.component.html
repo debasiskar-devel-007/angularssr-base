@@ -6,14 +6,17 @@
 
 
 <!-- ------------------------lib listing being called------------------------ -->
-<mat-card *ngIf="loader==false">
+<mat-card *ngIf="loader==false" >
   <lib-listing class="formfilterdiv"
       *ngIf="blogListingConfig.datasource !=null && blogListingConfig.datasource.length > 0"
       [datasource]="blogListingConfig.datasource" [skip]="blogListingConfig.listArray_skip"
       [modify_header_array]="blogListingConfig.listArray_modify_header" [sourcedata]="blogListingConfig.tableName"
       [statusarr]="blogListingConfig.statusarr" [jwttoken]="blogListingConfig.jwtToken"
       [apiurl]="blogListingConfig.apiUrl" [editroute]="blogListingConfig.editUrl"
-      [deleteendpoint]="blogListingConfig.deleteEndPoint">
+      [deleteendpoint]="blogListingConfig.deleteEndPoint"
+      [search_settings]="blogListingConfig.search_settings"
+      [date_search_source]="blogListingConfig.tableName2"  
+      [date_search_endpoint]="blogListingConfig.listEndPoint" >
   </lib-listing>
 <!-- ----------------------------------------------------------------------------->
 

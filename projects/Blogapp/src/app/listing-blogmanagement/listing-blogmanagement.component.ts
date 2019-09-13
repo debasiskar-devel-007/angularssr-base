@@ -15,11 +15,13 @@ export class ListingBlogmanagementComponent implements OnInit {
     apiBaseUrl: "https://o820cv2lu8.execute-api.us-east-2.amazonaws.com/production/api/",
     listEndPoint: "datalist",
     datasource: "",
-    tableName: "blogs_view",
+    tableName: "blogs",
+    tableName2: "blogs_view",
     updateurl: "addorupdatedata",
     editUrl: "blog-management/edit",
     jwtToken: "",
     deleteEndPoint: "deletesingledata",
+   
 
   }
   /************** lib list setup end here *************/

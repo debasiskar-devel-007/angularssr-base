@@ -54,6 +54,18 @@
       ],
       "blog/*": [
         "dist/blog/*"
+      ],
+      "listing-library": [
+        "dist/listing-library"
+      ],
+      "listing-library/*": [
+        "dist/listing-library/*"
+      ],
+      "lib-listing": [
+        "dist/listing"
+      ],
+      "listing/*": [
+        "dist/listing/*"
       ]
     }
   }

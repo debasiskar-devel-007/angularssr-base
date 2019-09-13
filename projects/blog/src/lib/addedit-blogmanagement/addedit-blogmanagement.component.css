@@ -78,3 +78,9 @@ button.submitbtn.mat-raised-button.mat-primary {
 {
   cursor: pointer;
 }
+.mat_chip{
+  padding:10px;
+}
+
+.video_embed{ position: relative;}
+.video_embed .link_action{ position: absolute; right: 20px; }

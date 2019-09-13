@@ -7,7 +7,6 @@ import { Observable } from 'rxjs';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from "@angular/material";
 import { map, startWith } from 'rxjs/operators';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-// import { DomSanitizer } from '@angular/platform-browser';
 
 
 
@@ -52,7 +51,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
   isSubmitted = false;
   video_prefix: any = 'https://www.youtube.com/watch?v=';
   options: any = [];
-  filteredOptions:any=[];
+  filteredOptions: Observable<string[]>;
   myControl = new FormControl();
   tags_array: any = [];
   dialogRef: any;
@@ -60,8 +59,8 @@ export class AddeditBlogmanagementComponent implements OnInit {
   setData: any;
   messageText: any;
   listUrl: any;
-  tags_display: any = [];
-  tag_flag:boolean = false;
+  testTag : any = [];
+  
   // -----------------------------------------------------------------------
 
 
@@ -111,14 +110,14 @@ export class AddeditBlogmanagementComponent implements OnInit {
     private formBuilder: FormBuilder, public dialog: MatDialog) {
     this.blogManagementForm = this.formBuilder.group({
       blogtitle: ['', Validators.required],
-      blogcat: ['',],
+      blogcat: ['', Validators.required],
       blogcontent: ['', Validators.required],
       priority: ['', Validators.required],
       status: ['true', Validators.required],
       metatitle: ['', Validators.required],
       metadesc: ['', Validators.required],
       credentials: this.formBuilder.array([]),
-      tags: [''],
+      tags: ['',],
     });
   }
 
@@ -141,7 +140,6 @@ export class AddeditBlogmanagementComponent implements OnInit {
 
     if (!this.activatedRoute.snapshot.params.id)
       setTimeout(() => {
-        console.log('aDD ENDPOINT ...');
         this.addYoutubeVideo('');
       }, 500)
 
@@ -149,17 +147,10 @@ export class AddeditBlogmanagementComponent implements OnInit {
       this.getBlogCategory();
     }, 50)
 
-    
+
     setTimeout(() => {
       this.getTagsCount();
     }, 50)
-
-    // ------------------------------Auticomplete Functions----------------------------------
-    
-    this.filteredOptions = this.myControl.valueChanges.pipe(
-      startWith(''),
-      map(value => this._filter(value))
-    );
 
 
     if (this.activatedRoute.snapshot.params.id) {
@@ -175,7 +166,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
 
 
       for (const vid in this.setData.credentials) {
-        this.addYoutubeVideo(this.setData.credentials[vid].video_url);  
+        this.addYoutubeVideo(this.setData.credentials[vid].video_url);
       }
 
       if (this.setData.tags != "")
@@ -183,12 +174,25 @@ export class AddeditBlogmanagementComponent implements OnInit {
           this.tags_array.push(element);
         });
 
-        
+
     }
 
 
-  }
-  private _filter(value: any): any[] {
+
+
+
+    // ------------------------------Auticomplete Functions----------------------------------
+
+    this.filteredOptions = this.myControl.valueChanges.pipe(
+      startWith(''),
+      map(value => this._filter(value))
+    );
+// ------------------------------------------------------------------------------------------
+    }
+  
+
+    // ------------------------------------_Filter FUnction----------------------------------
+  private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
     return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
@@ -196,7 +200,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
   // --------------------------------------------------------------------------------------------
 
 
-
+  
 
 
 
@@ -246,7 +250,6 @@ export class AddeditBlogmanagementComponent implements OnInit {
     creds.push(this.formBuilder.group({
       video_url: [val]
     }));
-    console.log("Add youtube field Function being called");
   }
   // ---------------------------------------------------------------------------
 
@@ -298,9 +301,10 @@ export class AddeditBlogmanagementComponent implements OnInit {
     this.apiservice.getData(data).subscribe(response => {
       let result: any;
       result = response;
-      if(result!=null && result.res!=null && result.res[0] !=null )this.options = result.res[0].tags;
-      
-      
+      if(result!=null && result.res!=null && result.res[0] !=null )
+      this.options = result.res[0].tags;
+
+
     });
   }
   // ----------------------------------------------------------------------------------
@@ -314,7 +318,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
   set singleData(editDatavals: any) {
     this.setData = editDatavals;
     console.log("Library te", this.setData);
-    
+
 
   }
   // -----------------------------------------------------------------------------------
@@ -322,7 +326,8 @@ export class AddeditBlogmanagementComponent implements OnInit {
 
   // ---------------------------------SUBMIT----------------------------------------
   onSubmit() {
-    console.log(this.blogManagementForm.value);
+    this.blogManagementForm.value.tags = this.tags_array;
+    console.log("test",this.blogManagementForm.value.tags);
     this.blogManagementForm.controls['blogcontent'].markAsTouched();
 
     if (this.blogManagementForm.valid) {
@@ -344,7 +349,6 @@ export class AddeditBlogmanagementComponent implements OnInit {
             "status": this.blogManagementForm.value.status,
             "metatitle": this.blogManagementForm.value.metatitle,
             "metadesc": this.blogManagementForm.value.metadesc,
-
             "tags": this.blogManagementForm.value.tags,
             "credentials": this.blogManagementForm.value.credentials
 
@@ -403,10 +407,9 @@ export class AddeditBlogmanagementComponent implements OnInit {
     if (event.keyCode == 13) {
       this.tags_array.push(event.target.value);
       this.blogManagementForm.controls['tags'].patchValue("");
-      return; 
+      return;
     }
-    //this.blogManagementForm.value.tags = this.tags_array;
-    console.log("Showval function being called v2");
+    
   }
   // ------------------------------------------------------------------------------------
 

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { RolemanagementlibComponent } from './rolemanagementlib.component';
 import { DemoMaterialModule } from './modules/material-module';
 import { HttpClientModule } from '@angular/common/http';
-import { ListingModule } from 'listing-angular7';
+import { ListingModule } from 'lib-listing';
 import { BrowserModule } from '@angular/platform-browser';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';

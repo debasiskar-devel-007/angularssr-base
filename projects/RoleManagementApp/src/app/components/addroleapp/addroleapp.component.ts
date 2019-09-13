@@ -14,7 +14,7 @@ export class AddroleappComponent implements OnInit {
    /* Config for add and edit start */
    public configAddEdit: any = {
     action: "add",
-    endpoint: "http://18.191.148.255:5009/addorupdatedata",
+    endpoint: "https://o820cv2lu8.execute-api.us-east-2.amazonaws.com/production/api/addorupdatedata",
     source: "rolemanagement",
     condition: {},
     defaultData: null,
