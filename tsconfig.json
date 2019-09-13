@@ -60,6 +60,12 @@
       ],
       "listing/*": [
         "dist/listing/*"
+      ],
+      "news-title": [
+        "dist/news-title"
+      ],
+      "news-title/*": [
+        "dist/news-title/*"
       ]
     }
   }

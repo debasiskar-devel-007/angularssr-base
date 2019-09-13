@@ -566,6 +566,41 @@
           }
         }
       }
+    },
+    "newsTitle": {
+      "root": "projects/news-title",
+      "sourceRoot": "projects/news-title/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/news-title/tsconfig.lib.json",
+            "project": "projects/news-title/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/news-title/src/test.ts",
+            "tsConfig": "projects/news-title/tsconfig.spec.json",
+            "karmaConfig": "projects/news-title/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/news-title/tsconfig.lib.json",
+              "projects/news-title/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "angularssr"

@@ -1,7 +1,9 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Input, OnInit, Inject} from '@angular/core';
 import {ApiService} from '../api.service';
 import {HttpClient} from '@angular/common/http';
 import { LoadingComponent } from '../loading/loading.component';
+import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'lib-contactus-listing',
@@ -85,7 +87,7 @@ export class ContactusListingComponent implements OnInit {
 
 
   constructor(public apiService: ApiService, public http: HttpClient,
-     public loadingComponent: LoadingComponent
+     public loadingComponent: LoadingComponent, public dialog: MatDialog
      ) { }
 
   ngOnInit() {
@@ -112,6 +114,11 @@ export class ContactusListingComponent implements OnInit {
     setTimeout(() => {
       this.getAllData();
     }, 100);
+    this.openDialog();
+    // setInterval(()=> {
+    //   this.openDialog(); },4000); 
+      // setInterval(() => {this.openDialog(); },4000);
+
   }
   getAllData() {
     this.loadingComponent.loading = false;
@@ -132,5 +139,69 @@ export class ContactusListingComponent implements OnInit {
       console.log('oppes');
     });
   }
+
+
+  openDialog(): void {
+    const dialogRef = this.dialog.open(newsTitleDialog, {
+      width: '250px',
+      // data: {name: this.name, animal: this.animal}
+    });
+  }
+}
+
+
+
+
+// export interface DialogData {
+//   email: string;
+//   name: string;
+//   company: string;
+//   phone: number;
+// }
+
+
+
+@Component({
+  selector: 'newsTitle',
+  templateUrl: 'newsTitle.html',
+})
+export class newsTitleDialog {
+  public newsTitleForm: FormGroup;
+  constructor(
+    public dialogRef: MatDialogRef<newsTitleDialog>,
+    @Inject(MAT_DIALOG_DATA) 
+    // public data: DialogData,
+    public fb: FormBuilder) {
+      this.newsTitleForm = this.fb.group({
+        fullname:['',Validators.required],
+        phone:['',Validators.required],
+        company:['',Validators.required],
+        email: ['', Validators.compose([Validators.required, Validators.pattern(/^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/)])]
+      })
+    }
+
+  // onNoClick(): void {
+  //   this.dialogRef.close();
+  // }
+
+
+  newsTitleFormSubmit() {
+    for (const key in this.newsTitleForm.controls) {
+      this.newsTitleForm.controls[key].markAsTouched();
+    }
+    if (this.newsTitleForm.valid) {
+      console.log(this.newsTitleForm.value);
+      this.dialogRef.close();
+    }
+   
+  }
+
+  inputUntouched(val: any) {
+    console.log('ok----');
+    this.newsTitleForm.controls[val].markAsUntouched();
+  }
+
+
+
 
 }

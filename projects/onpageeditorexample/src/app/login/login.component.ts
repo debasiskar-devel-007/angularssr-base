@@ -6,13 +6,13 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-public projectName: any = "Login Form";
-public fullUrl: any = "http://18.191.148.255:5009/login";
+public fromTitle: any = "Login Form";    // This is a From Title 
+public fullUrl: any = "https://o820cv2lu8.execute-api.us-east-2.amazonaws.com/production/api/login";  // server url
 public signUpRouteingUrl: any = 'sign-up';
 public forgetRouteingUrl: any = 'forget-password';
 public routerStatus: any;
   constructor() { 
-    this.routerStatus = {
+    this.routerStatus = {           // this is use for if login succcess then navigate which page 
       "data": [
         {
          "type":"admin",

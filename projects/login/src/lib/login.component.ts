@@ -13,16 +13,16 @@ export class LoginComponent implements OnInit {
   //   FormGroupDirective: It is a directive that binds an existing FormGroup to a DOM element.
   @ViewChild(FormGroupDirective) formDirective: FormGroupDirective;
 
-  public projectNameValue: any = '';
+  public fromTitleValue: any = '';
   public fullUrlValue: any = '';
   public signUpRouteingUrlValue: any = '';
   public forgetRouteingUrlValue: any = '';
   public routerStatusValue: any = '';
 
   @Input()         // Set the project name
-  set projectName(projectNameVal: any) {
-    this.projectNameValue = (projectNameVal) || '<no name set>';
-    this.projectNameValue = projectNameVal;
+  set fromTitle(fromTitleVal: any) {
+    this.fromTitleValue = (fromTitleVal) || '<no name set>';
+    this.fromTitleValue = fromTitleVal;
 
   }
 

@@ -2,7 +2,7 @@
 
     <mat-card class="from">
 
-        <h2 *ngIf="projectNameValue != ''"> {{projectNameValue}}</h2>
+        <h2 *ngIf="fromTitleValue != ''"> {{fromTitleValue}}</h2>
 
         <form class="example-container" [formGroup]="loginForm" (ngSubmit)="loginFormSubmit()" novalidate>
 <mat-error class="error" *ngIf="message !=''">{{message}}</mat-error>
