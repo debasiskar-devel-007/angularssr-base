@@ -11,7 +11,7 @@ export class RolemanagementlibComponent implements OnInit {
 // ----------------------------variable declarations-----------------------
   public roleData: any;
   public roleListingConfig: any;
-  public loader: boolean = true;
+  //public loader: boolean = true;
 // ----------------------------------------------------------------------------
 
 
@@ -30,7 +30,8 @@ export class RolemanagementlibComponent implements OnInit {
       datasource: receivedCategoryData.datasource,
       tableName: receivedCategoryData.tableName,
       listArray_skip: [ "_id", "userId", "created_at", "id", "updated_at" ],
-      listArray_modify_header: { "rolename": "Role Name","roledesc":"Role Description","status":"Status"},
+      listArray_modify_header: { "rolename": "Role Name","roledesc":"Role Description",
+      "status":"Status","roleslug":"Role Slug"},
       admintablenameTableName: "admin",
       statusarr: [{ val: 1, name: "Active"}, { val: 0, name:'Inactive' }],
       updateurl: receivedCategoryData.updateEndpoint,
@@ -38,7 +39,7 @@ export class RolemanagementlibComponent implements OnInit {
       jwtToken: receivedCategoryData.jwtToken,
       deleteEndPoint: receivedCategoryData.deleteEndPoint
     }
-    this.loader = false; 
+    //this.loader = false; 
   }
 // ---------------------------------------------------------------------------------
 

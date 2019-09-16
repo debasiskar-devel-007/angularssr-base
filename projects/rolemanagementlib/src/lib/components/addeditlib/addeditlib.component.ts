@@ -20,7 +20,7 @@ export interface DialogData {
 export class AddeditlibComponent implements OnInit {
 
 
-
+  public spinnerloader:boolean;
   // ----------------declaration section-------------- 
   public roleForm: FormGroup;
   public usersData: any = null;
@@ -28,12 +28,12 @@ export class AddeditlibComponent implements OnInit {
   public configData: any;
   public loader: boolean = false;
   isSubmitted: boolean = false;
-  dialogRef : any;
+  dialogRef: any;
   public successMessage: string = 'Successfully Added';
-// ---------------------------------------------- 
+  // ---------------------------------------------- 
 
 
-// Input receiving from add/edit app 
+  // Input receiving from add/edit app 
   @Input()
   set config(getConfig: any) {
     this.configData = getConfig;
@@ -50,17 +50,17 @@ export class AddeditlibComponent implements OnInit {
   }
 
   //  ---------------------------------Modal function-----------------------
-openDialog(x:any): void {
-  this.dialogRef = this.dialog.open(Modal, {
-    width: '250px',
-    data: { msg : x }
-  });
+  openDialog(x: any): void {
+    this.dialogRef = this.dialog.open(Modal, {
+      width: '250px',
+      data: { msg: x }
+    });
 
-  this.dialogRef.afterClosed().subscribe(result => {
-    
-  });
-}
-// --------------------------------end of  modal---------------- 
+    this.dialogRef.afterClosed().subscribe(result => {
+
+    });
+  }
+  // --------------------------------end of  modal---------------- 
 
 
   ngOnInit() {
@@ -93,6 +93,7 @@ openDialog(x:any): void {
     this.roleForm = this.formBuilder.group({
       rolename: ['', Validators.required],
       roledesc: ['', Validators.required],
+      roleslug: ['', Validators.required],
       status: ['',],
       userId: [this.configData.userData.id, null]
     });
@@ -100,15 +101,15 @@ openDialog(x:any): void {
 
   }
 
-  resetRoleForm() {
+  ResetForm() {
     this.roleForm.reset();
   }
-
   /* Set default category form value */
   setDefaultValue(defaultValue) {
     this.roleForm.setValue({
       rolename: defaultValue.rolename,
       roledesc: defaultValue.roledesc,
+      roleslug: defaultValue.roleslug,
       status: defaultValue.status,
       userId: null
     });
@@ -121,16 +122,23 @@ openDialog(x:any): void {
 
   inputBlur(val: any) {
     this.roleForm.controls[val].markAsUntouched();
+
   }
 
 
   onSubmit() {
+    let x: any;
+    for (x in this.roleForm.controls) {
+      this.roleForm.controls[x].markAsTouched();
+    }
     this.loader = true;
     this.isSubmitted = true;
     /* stop here if form is invalid */
     if (this.roleForm.invalid) {
+
       return;
     } else {
+
       if (this.roleForm.value.status) {
         this.roleForm.value.status = parseInt("1");
       } else {
@@ -142,17 +150,19 @@ openDialog(x:any): void {
       source: this.configData.source,
       data: Object.assign(this.roleForm.value, this.configData.condition)
     };
+    this.spinnerloader = true;
 
     this.httpReq.addData(this.configData.endpoint, postData).subscribe((response: any) => {
 
       if (response.status == "success") {
+        //this.openDialog(this.successMessage);
+        this.spinnerloader = false;
+        this.ResetForm();
+        setTimeout(() => {
+          this.router.navigate([this.configData.callBack]);
+        },100);
+       
 
-        this.openDialog(this.successMessage);
-         setTimeout(() => {
-           this.dialogRef.close();
-         }, 2000);
-        this.router.navigate([this.configData.callBack]);
-        
       } else {
         alert("Some error occured. Please try again.");
       }
@@ -175,7 +185,7 @@ export class Modal {
 
   constructor(
     public dialogRef: MatDialogRef<Modal>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) {}
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
   onNoClick(): void {
     this.dialogRef.close();

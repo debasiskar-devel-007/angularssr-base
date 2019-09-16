@@ -19,6 +19,9 @@ import { ListVideosComponent } from '../Component/video-management/list-videos/l
 import { VideoCategoryManagementComponent } from '../Component/video-management/video-category-management/video-category-management.component';
 import { AddEditVideosComponent } from '../Component/video-management/video-library-management/add-edit-videos/add-edit-videos.component';
 import { ListVideoManagementComponent } from '../Component/video-management/video-library-management/list-video-management/list-video-management.component'
+/**Team Library**/
+import { ListTeamComponent } from '../Component/Team-Library/list-team/list-team.component';
+import { AddEditTeamComponent} from '../Component/Team-Library/add-edit-team/add-edit-team.component';
 const appRoutes: Routes = [
     /* Category Management Routes Start */
     { 
@@ -113,6 +116,15 @@ const appRoutes: Routes = [
       resolve:{ videoData : ResolveService },
       data : {requestcondition : {source :'video_management',condition : {} }, endpoint : 'datalist'}
     },
+    /**Team Library start here**/
+    {
+      path:'team/list',
+      component : ListTeamComponent
+    },
+    {
+      path:'team/add',
+      component : AddEditTeamComponent
+    }
 
 ];
 

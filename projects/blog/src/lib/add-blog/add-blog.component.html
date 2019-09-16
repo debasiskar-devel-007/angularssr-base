@@ -10,19 +10,14 @@
       <form class="example-form" autocomplete="off" name="blogAddEditForm" (ngSubmit)="blogAddEditFormSubmit()"
         [formGroup]="blogAddEditForm">
 
-<<<<<<< HEAD
         <mat-form-field >
-=======
 
-        <mat-form-field class="example-full-width">
->>>>>>> 7acdf98a6e6573520ca6d7aa154b7eefa094645b
           <input matInput type="text" placeholder="Title" [formControl]="blogAddEditForm.controls['title']"
             (blur)="inputUntouch(blogAddEditForm,'title')">
           <mat-error
             *ngIf="blogAddEditForm.controls['title'].touched && !blogAddEditForm.controls['title'].valid && blogAddEditForm.controls['title'].errors.required">
             Category Name field can not be blank</mat-error>
         </mat-form-field>
-<<<<<<< HEAD
   
          <!-- -------------------------------priority--------------------------- -->
          <mat-form-field>
@@ -34,8 +29,7 @@
           <!-- -------------------------------status--------------------------- -->          
           <mat-checkbox [formControl]="blogAddEditForm.controls['status']">Active</mat-checkbox><br>
           <!-- ---------------------------------------------------------------- -->
-=======
->>>>>>> 7acdf98a6e6573520ca6d7aa154b7eefa094645b
+
 
         <!-- ckeditor using start here -->
         <mat-label>Description</mat-label>
@@ -49,7 +43,6 @@
 
           <mat-label>Parent Category</mat-label>
           <mat-select formControlName="parent_id">
-<<<<<<< HEAD
             <mat-option [value]=0>
               Select a category
             </mat-option>
@@ -68,20 +61,7 @@
 
 
         <button class="submitbtn" mat-raised-button color="primary" type="submit">{{buttonText}}</button>
-=======
-            <mat-option>
-              Select a category
-            </mat-option>
-            <mat-option *ngFor=" let f of blogarray" [value]="f._id">
-              {{f.title}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
 
-
-
-        <button class="submitbtn" mat-raised-button color="primary" type="submit">Submit</button>
->>>>>>> 7acdf98a6e6573520ca6d7aa154b7eefa094645b
       </form>
     </mat-card-content>
   </span>

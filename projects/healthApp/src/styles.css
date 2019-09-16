@@ -3,7 +3,6 @@
 @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
 
 
-
 .mat-card{ background:white!important;}
 
 .mat-dialog-content{padding: 10px !important; border-radius: 0; overflow: hidden !important;}

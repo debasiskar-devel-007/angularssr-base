@@ -2,12 +2,10 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'lib-Team',
-  template: `
-    <p>
-      team works!
-    </p>
-  `,
-  styles: []
+  templateUrl: 'team.component.html',
+  styleUrls: ['style.css']
+ 
+
 })
 export class TeamComponent implements OnInit {
 
