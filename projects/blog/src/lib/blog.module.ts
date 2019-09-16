@@ -11,7 +11,7 @@ import { HttpClientModule } from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { ApiService } from './api.service';
-import { AddeditBlogmanagementComponent,Modal } from './addedit-blogmanagement/addedit-blogmanagement.component';
+import { AddeditBlogmanagementComponent,Modal, YoutubeComponent } from './addedit-blogmanagement/addedit-blogmanagement.component';
 import { YoutubeplayerComponent } from './youtubeplayer/youtubeplayer.component';
 import { ListingBlogmanagementlibComponent } from './listing-blogmanagementlib/listing-blogmanagementlib.component';
 // import { ListingBlogmanagementlibComponent } from './listing-blogmanagementlib/listing-blogmanagementlib.component';
@@ -24,6 +24,7 @@ import { ListingBlogmanagementlibComponent } from './listing-blogmanagementlib/l
     AddeditBlogmanagementComponent,
     Modal,
     YoutubeplayerComponent,
+    YoutubeComponent,
     ListingBlogmanagementlibComponent
   ],
   imports: [
@@ -39,7 +40,7 @@ import { ListingBlogmanagementlibComponent } from './listing-blogmanagementlib/l
   ],
   exports: [BlogComponent, AddBlogComponent, AddeditBlogmanagementComponent,ListingBlogmanagementlibComponent],
   providers: [ApiService],
-  entryComponents: [Dialogtest,Modal],
+  entryComponents: [Dialogtest,Modal, YoutubeComponent],
 
 })
 export class BlogModule { }

@@ -99,15 +99,15 @@
                         <mat-form-field class="video_embed">
                             <input type="text" matInput formControlName="video_url">
                             <span matPrefix>{{ video_prefix }}</span>
-                            <i style="     position: absolute;
-                            right: 4px;
-                            bottom: 7px;" class="material-icons" matTooltipPosition="top" mat-raised-button matTooltip="Info about the action"
-                                  aria-label="Button ">
-                                  contact_support
-                        </i>
+                           
                             <mat-icon matSuffix class="clickable" (click)="preview_video(i)">remove_red_eye</mat-icon>
-
+                            <i style="position: absolute;
+                            right: 4px;
+                            bottom: 7px;" class="material-icons" (click)="openSnackBar()">
+                                contact_support
+                            </i>
                         </mat-form-field>
+                       
                         <button type="button" (click)="addYoutubeVideo('')">
                             <mat-icon matSuffix>add_box</mat-icon>
                         </button>

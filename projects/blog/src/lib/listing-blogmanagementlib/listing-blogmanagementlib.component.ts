@@ -55,9 +55,13 @@ date_search_source: any='blogs_view';
        search_settings: 
    {
      
-     textsearch: [{ label: "Search By Title", field: 'blogtitle' }],
+     textsearch: [{ label: "Search By Title", field: 'blogtitle' },
+    //  { label: "Search By Blog Category", field: 'blogcat' },
+     { label: "Search By Tags", field:'tags' }],
+   },
+     search: [{ label: "Search By Blog Category", field: 'blogcat' }]
     
-   }
+   
     //   search_settings:{
     //     textsearch:[{label:"Search By Blog title",field:'blogtitle'},
     //     {label:"Search By Blog Category",field:'blogcat'},

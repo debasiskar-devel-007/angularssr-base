@@ -84,3 +84,4 @@ button.submitbtn.mat-raised-button.mat-primary {
 
 .video_embed{ position: relative;}
 .video_embed .link_action{ position: absolute; right: 20px; }
+.snackbar-color{ background:rgb(240, 29, 64)};

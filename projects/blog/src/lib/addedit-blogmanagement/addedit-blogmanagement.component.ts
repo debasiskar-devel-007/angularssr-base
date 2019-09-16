@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { FormBuilder, FormControl, FormGroup, Validators, FormArray } from '@angular/forms';
 import { ApiService } from '../api.service';
 import { Observable } from 'rxjs';
-import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from "@angular/material";
+import { MAT_DIALOG_DATA, MatDialogRef, MatDialog, MatSnackBar } from "@angular/material";
 import { map, startWith } from 'rxjs/operators';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 
@@ -59,8 +59,8 @@ export class AddeditBlogmanagementComponent implements OnInit {
   setData: any;
   messageText: any;
   listUrl: any;
-  testTag : any = [];
-  
+  testTag: any = [];
+
   // -----------------------------------------------------------------------
 
 
@@ -107,7 +107,8 @@ export class AddeditBlogmanagementComponent implements OnInit {
 
   constructor(private http: HttpClient, private apiservice: ApiService,
     private activatedRoute: ActivatedRoute, private router: Router,
-    private formBuilder: FormBuilder, public dialog: MatDialog) {
+    private formBuilder: FormBuilder, public dialog: MatDialog,
+    public snackBar: MatSnackBar) {
     this.blogManagementForm = this.formBuilder.group({
       blogtitle: ['', Validators.required],
       blogcat: ['', Validators.required],
@@ -187,11 +188,11 @@ export class AddeditBlogmanagementComponent implements OnInit {
       startWith(''),
       map(value => this._filter(value))
     );
-// ------------------------------------------------------------------------------------------
-    }
-  
+    // ------------------------------------------------------------------------------------------
+  }
 
-    // ------------------------------------_Filter FUnction----------------------------------
+
+  // ------------------------------------_Filter FUnction----------------------------------
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
 
@@ -200,7 +201,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
   // --------------------------------------------------------------------------------------------
 
 
-  
+
 
 
 
@@ -301,8 +302,8 @@ export class AddeditBlogmanagementComponent implements OnInit {
     this.apiservice.getData(data).subscribe(response => {
       let result: any;
       result = response;
-      if(result!=null && result.res!=null && result.res[0] !=null )
-      this.options = result.res[0].tags;
+      if (result != null && result.res != null && result.res[0] != null)
+        this.options = result.res[0].tags;
 
 
     });
@@ -327,7 +328,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
   // ---------------------------------SUBMIT----------------------------------------
   onSubmit() {
     this.blogManagementForm.value.tags = this.tags_array;
-    console.log("test",this.blogManagementForm.value.tags);
+    console.log("test", this.blogManagementForm.value.tags);
     this.blogManagementForm.controls['blogcontent'].markAsTouched();
 
     if (this.blogManagementForm.valid) {
@@ -409,7 +410,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
       this.blogManagementForm.controls['tags'].patchValue("");
       return;
     }
-    
+
   }
   // ------------------------------------------------------------------------------------
 
@@ -432,7 +433,12 @@ export class AddeditBlogmanagementComponent implements OnInit {
   }
   // -------------------------------------------------------------------------------------
 
-
+  openSnackBar() {
+    this.snackBar.openFromComponent(YoutubeComponent, {
+      duration: 1500,
+      panelClass: ['snackbar-color']
+    });
+  }
 
 }
 
@@ -463,3 +469,10 @@ export class Modal {
   }
 }
 // ---------------------------------------------------------------------------------------
+@Component({
+  templateUrl: 'youtubetip.html',
+})
+export class YoutubeComponent {
+
+}
+
