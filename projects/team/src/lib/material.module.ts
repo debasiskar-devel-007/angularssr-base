@@ -45,7 +45,9 @@ import {MatTreeModule} from '@angular/material/tree';
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule,
+    CommonModule
+  ],
+  exports: [
     A11yModule,
     CdkStepperModule,
     CdkTableModule,
@@ -88,6 +90,11 @@ import {MatTreeModule} from '@angular/material/tree';
     MatTreeModule,
     PortalModule,
     ScrollingModule,
+    //MatFileUploadModule
   ]
 })
 export class MaterialModule { }
+
+
+
+

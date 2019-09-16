@@ -4,8 +4,8 @@ import { AddEditTeamComponent } from './Component/add-edit-team/add-edit-team.co
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from "@angular/common/http";
-import { MaterialModule } from './Module/material/material.module';
-
+import { MaterialModule } from './material.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 @NgModule({
   declarations: [TeamComponent, AddEditTeamComponent],
   imports: [
@@ -13,7 +13,8 @@ import { MaterialModule } from './Module/material/material.module';
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    MaterialModule
+    MaterialModule,
+    BrowserAnimationsModule
   ],
   exports: [TeamComponent,AddEditTeamComponent],
   schemas: [ CUSTOM_ELEMENTS_SCHEMA ]

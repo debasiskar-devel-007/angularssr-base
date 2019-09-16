@@ -86,5 +86,11 @@ addemail(){
 removeemail(index:any){
  this.multipleemail.removeAt(index);
 }
-
+TeamFormSubmit(){
+  console.log("data",this.teamForm.value);
+  let x: any;
+  for (x in this.teamForm.controls) {
+    this.teamForm.controls[x].markAsTouched();
+  }
+}
 }
