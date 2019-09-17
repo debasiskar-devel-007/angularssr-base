@@ -1,12 +1,13 @@
-import { NgModule } from '@angular/core';
-import { NewsTitleComponent } from './news-title.component';
+import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { NewsTitleComponent, modalData } from './news-title.component';
 import { DemoMaterialModule } from './material-module';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
+import { ApiService } from './api.service';
 
 @NgModule({
-  declarations: [NewsTitleComponent],
+  declarations: [NewsTitleComponent, modalData],
   imports: [
     DemoMaterialModule,
     ReactiveFormsModule,FormsModule,
@@ -14,7 +15,9 @@ import { CommonModule } from '@angular/common';
     CommonModule
   ],
   exports: [NewsTitleComponent],
-  // schemas: [CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  providers: [ApiService],
+  entryComponents:[NewsTitleComponent, modalData]
 })
 export class NewsTitleModule { }
 

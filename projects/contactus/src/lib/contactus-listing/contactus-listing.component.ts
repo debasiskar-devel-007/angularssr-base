@@ -12,6 +12,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 })
 export class ContactusListingComponent implements OnInit {
 
+  public formTitleValue: any;
   public contactUsAllData: any = [];
   contactUsAllDataHeaderSkipValue: any = [];
   contactUsAllDataModifyHeaderValue: any = {};
@@ -24,6 +25,14 @@ export class ContactusListingComponent implements OnInit {
   public getDataEndpointData: any = '';
   public updateendpointData: any = '';
   public deleteendpointData: any = '';
+
+
+  @Input()
+  
+  public set formTitle(formTitleVal : string) {
+    this.formTitleValue = formTitleVal;
+    console.log(this.formTitleValue)
+  }
 
   @Input()     // setting the server url from project
 
@@ -114,7 +123,6 @@ export class ContactusListingComponent implements OnInit {
     setTimeout(() => {
       this.getAllData();
     }, 100);
-    this.openDialog();
     // setInterval(()=> {
     //   this.openDialog(); },4000); 
       // setInterval(() => {this.openDialog(); },4000);
@@ -141,12 +149,12 @@ export class ContactusListingComponent implements OnInit {
   }
 
 
-  openDialog(): void {
-    const dialogRef = this.dialog.open(newsTitleDialog, {
-      width: '250px',
-      // data: {name: this.name, animal: this.animal}
-    });
-  }
+  // openDialog(): void {
+  //   const dialogRef = this.dialog.open(newsTitleDialog, {
+  //     width: '250px',
+  //     // data: {name: this.name, animal: this.animal}
+  //   });
+  // }
 }
 
 
@@ -161,47 +169,47 @@ export class ContactusListingComponent implements OnInit {
 
 
 
-@Component({
-  selector: 'newsTitle',
-  templateUrl: 'newsTitle.html',
-})
-export class newsTitleDialog {
-  public newsTitleForm: FormGroup;
-  constructor(
-    public dialogRef: MatDialogRef<newsTitleDialog>,
-    @Inject(MAT_DIALOG_DATA) 
-    // public data: DialogData,
-    public fb: FormBuilder) {
-      this.newsTitleForm = this.fb.group({
-        fullname:['',Validators.required],
-        phone:['',Validators.required],
-        company:['',Validators.required],
-        email: ['', Validators.compose([Validators.required, Validators.pattern(/^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/)])]
-      })
-    }
+// @Component({
+//   selector: 'newsTitle',
+//   templateUrl: 'newsTitle.html',
+// })
+// export class newsTitleDialog {
+//   public newsTitleForm: FormGroup;
+//   constructor(
+//     public dialogRef: MatDialogRef<newsTitleDialog>,
+//     @Inject(MAT_DIALOG_DATA) 
+//     // public data: DialogData,
+//     public fb: FormBuilder) {
+//       this.newsTitleForm = this.fb.group({
+//         fullname:['',Validators.required],
+//         phone:['',Validators.required],
+//         company:['',Validators.required],
+//         email: ['', Validators.compose([Validators.required, Validators.pattern(/^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/)])]
+//       })
+//     }
 
-  // onNoClick(): void {
-  //   this.dialogRef.close();
-  // }
+//   // onNoClick(): void {
+//   //   this.dialogRef.close();
+//   // }
 
 
-  newsTitleFormSubmit() {
-    for (const key in this.newsTitleForm.controls) {
-      this.newsTitleForm.controls[key].markAsTouched();
-    }
-    if (this.newsTitleForm.valid) {
-      console.log(this.newsTitleForm.value);
-      this.dialogRef.close();
-    }
+//   newsTitleFormSubmit() {
+//     for (const key in this.newsTitleForm.controls) {
+//       this.newsTitleForm.controls[key].markAsTouched();
+//     }
+//     if (this.newsTitleForm.valid) {
+//       console.log(this.newsTitleForm.value);
+//       this.dialogRef.close();
+//     }
    
-  }
+//   }
 
-  inputUntouched(val: any) {
-    console.log('ok----');
-    this.newsTitleForm.controls[val].markAsUntouched();
-  }
-
-
+//   inputUntouched(val: any) {
+//     console.log('ok----');
+//     this.newsTitleForm.controls[val].markAsUntouched();
+//   }
 
 
-}
+
+
+// }

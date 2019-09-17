@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ViewChild, Inject } from '@angular/core';
 import { FormBuilder, Validators, FormGroup, FormGroupDirective } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'lib-reset-password',
@@ -16,12 +17,15 @@ export class ResetPasswordComponent implements OnInit {
   @ViewChild(FormGroupDirective) formDirective: FormGroupDirective;
   public resetPasswordForm: FormGroup;
   public fromTitleNameValue: any = '';
-  public fullUrlValue: any = '';
+  public serverUrlValue: any = '';
   public message: any = '';
+  public addEndpointValue: any = '';
+
+  public logoValue: any = '';
   // public signUpRouteingUrlValue: any = '';
 
 
-  @Input()         // Set the project name
+  @Input()         // Set the Form name
   set fromTitleName(fromTitleNameVal: any) {
     this.fromTitleNameValue = (fromTitleNameVal) || '<no name set>';
     this.fromTitleNameValue = fromTitleNameVal;
@@ -31,12 +35,25 @@ export class ResetPasswordComponent implements OnInit {
 
 
   @Input()        // setting the server url from project
-  set fullUrl(fullUrlVal: any) {
-    this.fullUrlValue = (fullUrlVal) || '<no name set>';
-    this.fullUrlValue = fullUrlVal;
-    console.log(this.fullUrlValue);
+  set serverUrl(serverUrlVal: any) {
+    this.serverUrlValue = (serverUrlVal) || '<no name set>';
+    this.serverUrlValue = serverUrlVal;
+    console.log(this.serverUrlValue);
 
   }
+
+  @Input()        // set the endpoint and source
+
+  public set addEndpoint(addEndpointVal: any) {
+    this.addEndpointValue = addEndpointVal;
+  }
+
+  @Input()      // set the from logo
+
+set logo(logoVal : any) {
+  this.logoValue = logoVal;
+}
+
 
   // @Input()          // setting the navigate By Sign Up Url from project
   // set signUpRouteingUrl(routeingUrlval: any) {
@@ -46,33 +63,46 @@ export class ResetPasswordComponent implements OnInit {
   // }
   public accesscode: string;
 
-  constructor(public fb: FormBuilder, public http: HttpClient, public router: Router, public route: ActivatedRoute) {
+  constructor(public fb: FormBuilder, public http: HttpClient, public router: Router, public route: ActivatedRoute, public apiService: ApiService) {
 
-    this.route.params.subscribe(params =>{
-     
+    this.route.params.subscribe(params => {
+
       this.accesscode = params['token'];
       console.log(this.accesscode);
     })
 
     this.resetPasswordForm = this.fb.group({
       // password: ['',  Validators.compose([Validators.required, Validators.minLength(4)])],
-      password: ['',  Validators.required],
+      password: ['', Validators.required],
       confirmPassword: ['', Validators.required],
     }, {
       validator: this.machpassword('password', 'confirmPassword')
     })
-   }
+  }
 
   ngOnInit() {
+    this.apiService.clearServerUrl();       // Clear the server url
+    setTimeout(() => {
+      this.apiService.setServerUrl(this.serverUrlValue);       // set the server url 
+    }, 50);
+    // console.log(this.serverURL);
+
+
+    this.apiService.clearaddEndpoint();       // clear the endpoint 
+    setTimeout(() => {
+      this.apiService.setaddEndpoint(this.addEndpointValue.endpoint);       // set the endpoint
+    }, 50);
+    // console.log(this.addEndpointData.endpoint);
+
   }
-//  this function is use for mach password and confirm Password 
+  //  this function is use for mach password and confirm Password 
 
   machpassword(passwordkye: string, confirmpasswordkye: string) {
     return (group: FormGroup) => {
       let passwordInput = group.controls[passwordkye],
-          confirmpasswordInput = group.controls[confirmpasswordkye];
+        confirmpasswordInput = group.controls[confirmpasswordkye];
       if (passwordInput.value !== confirmpasswordInput.value) {
-        return confirmpasswordInput.setErrors({notEquivalent: true});
+        return confirmpasswordInput.setErrors({ notEquivalent: true });
       }
       else {
         return confirmpasswordInput.setErrors(null);
@@ -80,21 +110,26 @@ export class ResetPasswordComponent implements OnInit {
     };
   }
 
-  
+
+
+/********* Reset Password Form Submit start here*********/ 
   resetPasswordSubmit() {
     console.log(this.resetPasswordForm.value);
     let x: any;
-    for(x in this.resetPasswordForm.controls) {
+    for (x in this.resetPasswordForm.controls) {
       this.resetPasswordForm.controls[x].markAsTouched();
     }
     if (this.resetPasswordForm.valid) {
-      let data : any = {"password":this.resetPasswordForm.value.password,"accesscode":this.accesscode}
+      let data1: any = { "password": this.resetPasswordForm.value.password, "accesscode": this.accesscode }
+      let data: any = {
+        'data': data1,
+        "source": this.addEndpointValue.source
+      }
+
+
       // data.accesscode = this.accesscode;
 
-        let link: any = this.fullUrlValue;
-        console.log(data)
-        console.log(link)
-      this.http.post(link, data).subscribe((response) => {
+      this.apiService.addData(data).subscribe((response) => {
         let result: any = {};
         result = response;
         console.log(result);
@@ -103,11 +138,14 @@ export class ResetPasswordComponent implements OnInit {
         } else {
           this.message = result.msg;
         }
-        
+
       })
     }
   }
-  
+
+
+/********* Reset Password Form Submit end here*********/ 
+
 
   inputUntouched(val: any) {
     this.resetPasswordForm.controls[val].markAsUntouched();

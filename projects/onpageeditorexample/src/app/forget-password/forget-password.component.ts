@@ -8,9 +8,13 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ForgetPasswordComponent implements OnInit {
 
+  public logo: any = '../../assets/favicon.ico';
   public signUpRouteingUrl: any = 'sign-up';
-  public projectName: any = 'Forget Password';
-  public fullUrl:any = 'http://166.62.39.137:5050/forgetpassword';
+  public formTitle: any = 'Forget Password';
+  public serverUrl:any = 'http://166.62.39.137:5050/';
+  public addEndpoint: any = {
+    endpoint:'forgetpassword'
+  };
   public domanUrl: any = 'http://localhost:4200/reset-password';
   constructor() { }
 

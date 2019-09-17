@@ -7,14 +7,14 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import { ApiService } from './api.service';
 // import { AgmCoreModule} from '@agm/core';
 import { ListingModule } from 'lib-listing';
-import { ContactusListingComponent, newsTitleDialog } from './contactus-listing/contactus-listing.component';
+import { ContactusListingComponent} from './contactus-listing/contactus-listing.component';
 import { LoadingComponent } from './loading/loading.component';
 import { HttpClientModule } from '@angular/common/http';
 import{CookieService} from 'ngx-cookie-service';
 
 
 @NgModule({
-  declarations: [ContactusComponent, ContactusListingComponent, LoadingComponent, newsTitleDialog],
+  declarations: [ContactusComponent, ContactusListingComponent, LoadingComponent],
   imports: [
     DemoMaterialModule,
     BrowserAnimationsModule,
@@ -35,7 +35,7 @@ import{CookieService} from 'ngx-cookie-service';
   providers: [ApiService, LoadingComponent, CookieService],
   bootstrap: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  entryComponents:[newsTitleDialog]
+  entryComponents:[]
 })
 export class ContactusModule { }
 

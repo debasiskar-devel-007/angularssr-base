@@ -1,6 +1,9 @@
 <div class="main-div">
 
     <mat-card class="from">
+            <span class="logowrapper" *ngIf="logoValue != ''" >
+                    <img  [src]="logoValue">
+                </span>
 
         <h2 *ngIf="fromTitleValue != ''"> {{fromTitleValue}}</h2>
 
@@ -8,7 +11,7 @@
 <mat-error class="error" *ngIf="message !=''">{{message}}</mat-error>
 
             <mat-form-field>
-                <input matInput placeholder="Username" formControlName="username" (blur)="inputUntouched('username')">
+                <input matInput type="text" placeholder="Username" formControlName="username" (blur)="inputUntouched('username')">
                 <mat-error
                     *ngIf="!loginForm.controls['username'].valid && loginForm.controls['username'].errors.required && loginForm.controls['username'].touched">
                     Username field can not be blank</mat-error>

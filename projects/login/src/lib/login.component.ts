@@ -2,6 +2,8 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators, MinLengthValidator, FormGroupDirective } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
+import { ApiService } from './api.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'lib-login',
@@ -14,10 +16,12 @@ export class LoginComponent implements OnInit {
   @ViewChild(FormGroupDirective) formDirective: FormGroupDirective;
 
   public fromTitleValue: any = '';
-  public fullUrlValue: any = '';
+  public serverURL: any = '';
   public signUpRouteingUrlValue: any = '';
   public forgetRouteingUrlValue: any = '';
   public routerStatusValue: any = '';
+  public endpointValue: any;
+  public logoValue: any = '';
 
   @Input()         // Set the project name
   set fromTitle(fromTitleVal: any) {
@@ -25,13 +29,24 @@ export class LoginComponent implements OnInit {
     this.fromTitleValue = fromTitleVal;
 
   }
+  @Input()      // set the from logo
+
+set logo(logoVal : any) {
+  this.logoValue = logoVal;
+}
 
   @Input()        // setting the server url from project
   set fullUrl(fullUrlVal: any) {
-    this.fullUrlValue = (fullUrlVal) || '<no name set>';
-    this.fullUrlValue = fullUrlVal;
+    this.serverURL = (fullUrlVal) || '<no name set>';
+    this.serverURL = fullUrlVal;
 
   }
+  @Input()
+
+  set endpoint(endpointVal: any) {
+    this.endpointValue = endpointVal;
+  }
+
 
 
   @Input()          // setting the navigate By Sign Up Url from project
@@ -61,7 +76,7 @@ export class LoginComponent implements OnInit {
   public loginForm: FormGroup;
   public project_name: any = '';
 
-  constructor(public fb: FormBuilder, public http: HttpClient, public router: Router) {
+  constructor(public fb: FormBuilder, public http: HttpClient, public router: Router, public apiService: ApiService, public cookieService: CookieService) {
     this.loginForm = this.fb.group({
       username: ['', Validators.compose([Validators.required, Validators.pattern(/^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/)])],
       password: ['', Validators.required]
@@ -69,12 +84,24 @@ export class LoginComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.apiService.clearServerUrl();       // Clear the server url
+    setTimeout(() => {
+      this.apiService.setServerUrl(this.serverURL);       // set the server url 
+    }, 50);
+    // console.log(this.serverURL);
+
+
+    this.apiService.clearaddEndpoint();       // clear the endpoint 
+    setTimeout(() => {
+      this.apiService.setaddEndpoint(this.endpointValue);       // set the endpoint
+    }, 50);
+    // console.log(this.addEndpointData.endpoint);
+
   }
 
+/********* Login Form Submit start here*********/ 
   loginFormSubmit() {
     let x: any;
-
-
 
     // use for validation checking
 
@@ -83,19 +110,15 @@ export class LoginComponent implements OnInit {
     }
 
     if (this.loginForm.valid) {
-      let link: any = this.fullUrlValue;
       let data: any = this.loginForm.value;
-      this.http.post(link, data).subscribe((response) => {
+      this.apiService.addLogin(data).subscribe((response) => {
+        // console.log(response);
         let result: any = {};
         result = response;
 
 
         if (result.status == "success") {
-          // for (let index = 0; index < this.routerStatusValue.data.length; index++) {
-          //   // const element = array[index];
-          //   console.log(index);
-
-          // }
+          
           for (const key in this.routerStatusValue.data) {
             console.log(this.routerStatusValue.data[key].type);
 
@@ -111,7 +134,7 @@ export class LoginComponent implements OnInit {
           // display error message on html
           this.message = result.msg;
         }
-      })
+      });
     }
 
   }

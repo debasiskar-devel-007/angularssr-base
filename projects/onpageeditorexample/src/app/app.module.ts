@@ -21,7 +21,7 @@ import { ResetFromComponent } from './reset-from/reset-from.component';
 import { BlogsModule } from 'blogs';
 import { FromModule } from 'from';
 import { AuthGuard } from './auth.guard';
-import { NewstitleComponent } from './newstitle/newstitle.component';
+import { NewstitleComponent} from './newstitle/newstitle.component';
 import { NewsTitleModule } from 'news-title';
 
 @NgModule({
@@ -51,6 +51,7 @@ import { NewsTitleModule } from 'news-title';
     NewsTitleModule
   ],
   providers: [AuthGuard],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+
 })
 export class AppModule { }

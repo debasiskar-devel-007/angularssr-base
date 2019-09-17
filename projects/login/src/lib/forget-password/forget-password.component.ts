@@ -2,6 +2,7 @@ import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, FormGroupDirective } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
+import { ApiService } from '../api.service';
 
 @Component({
   selector: 'lib-forget-password',
@@ -15,32 +16,46 @@ export class ForgetPasswordComponent implements OnInit {
   @ViewChild(FormGroupDirective) formDirective: FormGroupDirective;
 
   public forgetPasswordForm: FormGroup;
-  public projectNameValue: any = '';
-  public fullUrlValue: any = '';
+  public formTitleValue: any = '';
+  public serverUrlValue: any = '';
   public signUpRouteingUrlValue: any = '';
   private domanUrlValue: any = '';
+  public addEndpointValue: any = '';
+  public logoValue: any = '';
 
 
-  @Input()         // Set the project Doman URL
+  @Input()         // Set the project email Doman URL
   set domanUrl(domanUrlVal: any) {
     this.domanUrlValue = (domanUrlVal) || '<no name set>';
     this.domanUrlValue = domanUrlVal;
     console.log(this.domanUrlValue);
-
   }
   @Input()         // Set the project name
-  set projectName(projectNameVal: any) {
-    this.projectNameValue = (projectNameVal) || '<no name set>';
-    this.projectNameValue = projectNameVal;
+  set formTitle(formTitleVal: any) {
+    this.formTitleValue = (formTitleVal) || '<no name set>';
+    this.formTitleValue = formTitleVal;
 
   }
 
   @Input()        // setting the server url from project
-  set fullUrl(fullUrlVal: any) {
-    this.fullUrlValue = (fullUrlVal) || '<no name set>';
-    this.fullUrlValue = fullUrlVal;
+  set serverUrl(serverUrlVal: any) {
+    this.serverUrlValue = (serverUrlVal) || '<no name set>';
+    this.serverUrlValue = serverUrlVal;
 
   }
+
+  @Input()      // set the from logo
+
+set logo(logoVal : any) {
+  this.logoValue = logoVal;
+}
+
+  @Input()          // set the endpoint and source
+  
+  set addEndpoint(addEndpointval : any) {
+    this.addEndpointValue = addEndpointval;
+  }
+  
 
   @Input()          // setting the navigate By Sign Up Url from project
   set signUpRouteingUrl(routeingUrlval: any) {
@@ -48,7 +63,7 @@ export class ForgetPasswordComponent implements OnInit {
     this.signUpRouteingUrlValue = routeingUrlval;
   }
 
-  constructor(public fb: FormBuilder, private http: HttpClient, public router: Router) {
+  constructor(public fb: FormBuilder, private http: HttpClient, public router: Router, public apiService:ApiService) {
 
   
 
@@ -63,20 +78,33 @@ export class ForgetPasswordComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.apiService.clearServerUrl();       //  Clear the server url
+    setTimeout(() => {
+      this.apiService.setServerUrl(this.serverUrlValue);        //  set the server url
+    }, 50);
+    // console.log(this.serverURL);
+
+
+    this.apiService.clearaddEndpoint();       //  Clear the endpoint
+    setTimeout(() => {
+      this.apiService.setaddEndpoint(this.addEndpointValue.endpoint);   //  set the endpoint
+    }, 50);
   }
 
-
+/********* Forget password  Form Submit start here*********/ 
   forgetPasswordSubmit() {
     let x: any;
     for (x in this.forgetPasswordForm.controls) {
       this.forgetPasswordForm.controls[x].markAsTouched();
     }
     if (this.forgetPasswordForm.valid) {
-      let link: any = this.fullUrlValue;
+      let link: any = this.serverUrlValue;
       let data: any = this.forgetPasswordForm.value;
 
       data.domanUrl = this.domanUrlValue;
-      this.http.post(link, data).subscribe((response) => {
+
+      this.apiService.forgetPassword(data).subscribe((response) =>{
+        console.log(response);
         let result: any = {};
         result = response;
 
@@ -90,9 +118,11 @@ export class ForgetPasswordComponent implements OnInit {
           this.message = result.msg;
 
         }
-      })
+      });
     }
   }
+
+/********* Forget password  Form Submit end here*********/ 
 
   // This is use for navigate this component to sign-Up component 
   signup() {

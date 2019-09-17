@@ -50,3 +50,8 @@
 .error {
   text-align: center;
 }
+.logowrapper {
+  margin: 0px auto;
+  display: block;
+  text-align: center;
+}

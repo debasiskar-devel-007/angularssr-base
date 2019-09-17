@@ -6,8 +6,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  
+public logo: any = '../../assets/favicon.ico';
 public fromTitle: any = "Login Form";    // This is a From Title 
-public fullUrl: any = "https://o820cv2lu8.execute-api.us-east-2.amazonaws.com/production/api/login";  // server url
+public fullUrl: any = "https://o820cv2lu8.execute-api.us-east-2.amazonaws.com/production/api/";  // server url
+public endpoint: any = "login";
 public signUpRouteingUrl: any = 'sign-up';
 public forgetRouteingUrl: any = 'forget-password';
 public routerStatus: any;

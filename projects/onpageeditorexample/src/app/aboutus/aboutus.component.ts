@@ -6,15 +6,23 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./aboutus.component.css']
 })
 export class AboutusComponent implements OnInit {
+  public formTitle: any = "Contact Us";      // Enter the Forl Title
   public serverUrl: any = 'https://o820cv2lu8.execute-api.us-east-2.amazonaws.com/production/api/';
+
+  public setJwtToken: any = '';
+  
+  public logoimg: any = '../../assets/favicon.ico'; 
+         // set logo path 
+
+  public addlisting: any ='GoTo Licting';
+  public getDataUrl: any = 'datalist';
+  public routeingUrl: any = 'home';
+
+
   public addEndpoint: any = {
     endpoint:'addorupdatedata',
     source:'contactusForm'
   };
-  public getDataUrl: any = 'datalist';
-
-
-
 
   public fields: any[] = [
     {
@@ -89,6 +97,10 @@ export class AboutusComponent implements OnInit {
      this.meta.setTag('og:type', 'website');
      this.meta.setTag('og:image', 'https://upload.wikimedia.org/wikipedia/commons/f/f8/superraton.jpg');
      */
+
+
+    //  console.log(this.addlisting);
+
   }
 
   ngOnInit() {

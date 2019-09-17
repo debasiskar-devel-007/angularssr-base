@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { SignUpComponent, commonModalComponent } from './sign-up/sign-up.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { ApiService } from './api.service';
 
 @NgModule({
   declarations: [LoginComponent, SignUpComponent, ForgetPasswordComponent, ResetPasswordComponent, commonModalComponent],
@@ -20,7 +21,7 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
      HttpClientModule
   ],
   exports: [LoginComponent, SignUpComponent, ForgetPasswordComponent, ResetPasswordComponent],
-  providers: [],
+  providers: [ApiService],
   bootstrap: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   entryComponents: [commonModalComponent]

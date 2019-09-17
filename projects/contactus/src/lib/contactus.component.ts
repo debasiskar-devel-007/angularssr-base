@@ -19,6 +19,7 @@ export class ContactusComponent implements OnInit {
 
   @ViewChild(FormGroupDirective) formDirective: FormGroupDirective;
 
+  public formTitleValue: any;        // This variable is use for show the Form title   
   public email: any[] = [];
   public phone: any[] = [];
   public address: any[] = [];
@@ -26,6 +27,40 @@ export class ContactusComponent implements OnInit {
   public serverURL: any = '';      // url variable to fetch the add availability form page
   public addEndpointData: any = '';
   public routeingUrlValue: any = '';
+  public setJwtTokenValue: any = '';  
+  public listingValue: any = '';
+  public logoImgValue: any = '';
+
+  @Input()
+  
+  public set formTitle(formTitleVal : string) {
+    this.formTitleValue = formTitleVal;
+    console.log(this.formTitleValue)
+  }
+
+
+  @Input()
+  
+  public set logoimg(logoVal : string) {
+    this.logoImgValue = logoVal;
+    console.log(this.logoImgValue)
+  }
+
+  @Input()
+  set addlisting(listingVal : any) {
+    this.listingValue = (listingVal) || '<no name set>';
+    this.listingValue = listingVal;
+    console.log('this.listingValue')
+    console.log(this.listingValue)
+  }
+
+
+  @Input()
+  
+  set JwtToken(JwtTokenVal : any) {
+    this.setJwtTokenValue = JwtTokenVal;
+  }
+
   @Input()     // setting the server url from project
 
   set serverUrl(serverUrlval: any) {
@@ -40,8 +75,8 @@ export class ContactusComponent implements OnInit {
   set addEndpoint(endpointUrlval: any) {
     this.addEndpointData = (endpointUrlval) || '<no name set>';
     this.addEndpointData = endpointUrlval;
-    // console.log('this.addEndpointData');
-    // console.log(this.addEndpointData);
+    console.log('this.addEndpointData');
+    console.log(this.addEndpointData);
     // console.log(this.addEndpointData.endpoint);
   }
 
@@ -203,7 +238,8 @@ export class ContactusComponent implements OnInit {
       // console.log(allData);
       let data: any = {
         "source": this.addEndpointData.source,
-        "data": allData
+        "data": allData,
+        "token": this.cookieService.get('jwtToken')
       }
       this.apiService.addData(data).subscribe(res => {
         let result: any;
@@ -250,6 +286,7 @@ export class ContactusComponent implements OnInit {
       this.cookieService.getAll();
     })
   }
+
 
 }
 

@@ -1,33 +1,70 @@
+
+
+
+
 .example-container {
-    display: flex;
-    flex-direction: column;
-  }
-
-  .example-container > * {
-    width: 100%;
-  }
-
-  .fromClass {
-    display: flex;
-    flex-direction: column;
-
-    width: 100%;
-  }
-.example-radio-group {
   display: flex;
   flex-direction: column;
-  margin: 15px 0;
 }
 
-.example-radio-button {
-  margin: 5px;
+.example-container > * {
+  width: 100%;
 }
 
-.agm-map {
-  height: 300px;
+.from {
+  width: 30%; margin: 0 auto;
 }
 
-.form-mat-card {
-  margin-bottom: 0;
-  padding: 5px;
+.from h2 {
+  text-align: center;
+  background-color: blue;
+  color: white;
+  padding: 15px;
+}
+
+.from a {
+  padding-right: 30px;
+}
+
+
+.from button {
+  width: 60px;
+  height: 40px;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.main-div{
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.signupfooter {
+  margin-top: 12px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.signupfooter a {
+cursor: pointer;
+}
+
+.error {
+text-align: center;
+}
+
+
+.fromClass {
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+}
+
+.logowrapper {
+  margin: 0px auto;
+  display: block;
+  text-align: center;
 }
