@@ -22,6 +22,8 @@ import { ListVideoManagementComponent } from '../Component/video-management/vide
 /**Team Library**/
 import { ListTeamComponent } from '../Component/Team-Library/list-team/list-team.component';
 import { AddEditTeamComponent} from '../Component/Team-Library/add-edit-team/add-edit-team.component';
+import { AddEditComponent } from '../Component/Team-Library/Category-Management/add-edit/add-edit.component';
+import {  ListComponent } from '../Component/Team-Library/Category-Management/list/list.component';
 const appRoutes: Routes = [
     /* Category Management Routes Start */
     { 
@@ -119,11 +121,40 @@ const appRoutes: Routes = [
     /**Team Library start here**/
     {
       path:'team/list',
-      component : ListTeamComponent
+      component : ListTeamComponent,
+      resolve : {teamdata : ResolveService },
+      data : { requestcondition : { source : 'Team_management_view', condition : {}},endpoint : 'datalist'}
     },
     {
       path:'team/add',
-      component : AddEditTeamComponent
+      component : AddEditTeamComponent,
+      resolve : {teamdata : ResolveService },
+      data : { requestcondition : { source : 'Team_category',condition : {}}, endpoint : 'datalist'},
+    },
+    {
+      path:'team/edit/:_id',
+      component : AddEditTeamComponent,
+      
+    },
+    {
+      path :'team/category-management/add',
+      component : AddEditComponent,
+      resolve : {teamdata : ResolveService },
+      data : { requestcondition : { source : 'rolemanagement',condition : {}}, endpoint : 'datalist'}
+    },
+    {
+      path :'team/category-management/edit/:_id',
+      component : AddEditComponent,
+      resolve : {teamdata : ResolveService },
+      data : { requestcondition : { source : 'Team_category_slug_view',condition : {}}, endpoint : 'datalist'},
+      
+     
+    },
+    {
+      path :'team/category-management/list',
+      component : ListComponent,
+      resolve : {teamdata : ResolveService},
+      data : { requestcondition : { source : 'Team_category_view',condition : {}}, endpoint : 'datalist'}
     }
 
 ];

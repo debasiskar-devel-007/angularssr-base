@@ -90,6 +90,12 @@
       ],
       "team/*": [
         "dist/team/*"
+      ],
+      "file-upload": [
+        "dist/file-upload"
+      ],
+      "file-upload/*": [
+        "dist/file-upload/*"
       ]
     }
   }

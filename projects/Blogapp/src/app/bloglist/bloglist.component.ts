@@ -1,9 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {ActivatedRoute,Router} from '@angular/router';
-<<<<<<< HEAD
  import{CookieService} from 'ngx-cookie-service';
-=======
->>>>>>> 7acdf98a6e6573520ca6d7aa154b7eefa094645b
+
 
 @Component({
   selector: 'app-bloglist',
@@ -21,7 +19,6 @@ export class BloglistComponent implements OnInit {
   public listingTablename:any='blog_category';
   public getSourceUrl:any = 'demoteam';
   public BlogList:any;
-<<<<<<< HEAD
   public token:any=this.cookieService.get('jwtToken');
   public searchEndpoint:any='datalist';
   public searchSourcename:any='blog_category_view';
@@ -29,23 +26,12 @@ export class BloglistComponent implements OnInit {
   constructor(private activatedRoute: ActivatedRoute, private router: Router,private cookieService:CookieService) { }
 
   ngOnInit() {
-=======
-  public token:any='eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJleHAiOjE1Njc1MDUxMTEsImlhdCI6MTU2NzQxODcxMX0.PwcteDraTnwzlt-4QfHZOX8tIhgiGgbMvlElhR3cnnI';
-
-  constructor(private activatedRoute: ActivatedRoute, private router: Router) { }
-
-  ngOnInit() {
-    /**getting alll blog data by resolve call **/
->>>>>>> 7acdf98a6e6573520ca6d7aa154b7eefa094645b
     this.activatedRoute.data.forEach(data=>{
       let result:any;
       result=data.results.res;
       this.BlogList=result;
-<<<<<<< HEAD
      
-=======
-      
->>>>>>> 7acdf98a6e6573520ca6d7aa154b7eefa094645b
+
     })
   }
 

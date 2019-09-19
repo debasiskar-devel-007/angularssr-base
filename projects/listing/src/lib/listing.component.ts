@@ -1012,7 +1012,7 @@ export class ListingComponent implements OnInit {
     });
   }
   deletedata(data:any){
-    
+    //alert(5);
     //this._apiService.deteOneData(this.apiurlval+this.deleteendpointval,data,this.jwttokenval);
     console.log('data 889 ---');
     console.log(data);
@@ -1030,10 +1030,7 @@ export class ListingComponent implements OnInit {
       console.log('The dialog was closed');
       console.log(result);
       if(result=='yes'){
-        this._apiService.deteOneData(this.apiurlval+this.deleteendpointval,data,this.jwttokenval,this.sourcedataval)
-        .subscribe(res => {
-          console.log('res in delete');
-          console.log(res);
+        this._apiService.deteOneData(this.apiurlval+this.deleteendpointval,data,this.jwttokenval,this.sourcedataval).subscribe(res => {
           let result: any = {};
           result = res;
           if(result.status=='success'){

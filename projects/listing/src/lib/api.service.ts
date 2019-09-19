@@ -300,22 +300,16 @@ postSearch1( link,source) {
 
 
   deteOneData(endpoint:any, data,token,source) {
-    //alert(78);
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': token
       })
     };
-    console.log('httpheader');
-    console.log(httpOptions);
     console.log('------ ');
     console.log("endpoint");
     console.log(endpoint);
     console.log(data);
-    // return;
-    
-   
     let dataval:any;
     dataval={source:source,id:data._id}
     var result = this._http.post(endpoint,dataval, httpOptions).pipe(map(res => res));

@@ -7,6 +7,7 @@ import 'hammerjs';
 import { CookieService } from 'ngx-cookie-service';
 import { AppComponent } from './app.component';
 
+
 /* Category Management Lib */
 import { CategoryManagementModule } from 'category-management';
 import { AddEditCategoryComponent } from './Component/category-management/add-edit-category/add-edit-category.component';
@@ -30,6 +31,8 @@ import { ListVideoManagementComponent } from './Component/video-management/video
 import { TeamModule } from 'team';
 import { AddEditTeamComponent } from './Component/Team-Library/add-edit-team/add-edit-team.component';
 import { ListTeamComponent } from './Component/Team-Library/list-team/list-team.component';
+import { AddEditComponent } from './Component/Team-Library/Category-Management/add-edit/add-edit.component';
+import { ListComponent } from './Component/Team-Library/Category-Management/list/list.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -43,7 +46,9 @@ import { ListTeamComponent } from './Component/Team-Library/list-team/list-team.
     AddEditVideosComponent,
     ListVideoManagementComponent,
     AddEditTeamComponent,
-    ListTeamComponent
+    ListTeamComponent,
+    AddEditComponent,
+    ListComponent
   ],
   imports: [
     MaterialModule,
@@ -55,7 +60,8 @@ import { ListTeamComponent } from './Component/Team-Library/list-team/list-team.
     ReactiveFormsModule,
     ListingModule,
     VideoModule,
-    TeamModule
+    TeamModule,
+    
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

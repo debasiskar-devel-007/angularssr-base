@@ -1,0 +1,17 @@
+
+<mat-card>
+  <mat-toolbar color="primary" style="justify-content: center; align-items: center;">
+    <h2 class="headerSpan">Team List</h2>
+  </mat-toolbar>
+</mat-card>
+<mat-card-content class="listing-content-admin">
+  <lib-listing class="formfilterdiv formfilterdivnew" *ngIf="DataList.length>0" 
+    [datasource]="DataList"
+   
+    [skip]="data_skip" 
+    [modify_header_array]="data_modify_header" 
+    [apiurl]="serverUrlData" 
+    
+   >
+</lib-listing>
+</mat-card-content>
