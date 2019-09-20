@@ -16,26 +16,47 @@ export class AddEditTeamComponent implements OnInit {
   public getDataEndpointData: any;
   public addEndpointData: any;
   public serverUrlData: any;
-  public listrouteData="";
+  public listrouteData = "";
   public editarray: any = [];
   public spinnerLoader: boolean;
-  /******Upload*********/
-  error: string;
-  userId: number = 1;
-  uploadResponse = { status: '', message: '', filePath: '' };
-  /******End*********/
+  public imageConfigData: any = '';
+  public SingleDataList:any=[];
+
+
+  /* Config Upload file lib */
+  @Input()
+  set imageUpload(getConfig: any) {
+    this.imageConfigData = getConfig;
+    console.log(this.imageConfigData);
+  }
+  @Input()
+  set singleData(val:any){
+     this.SingleDataList= (val) || '<no name set>';
+     this.SingleDataList = val;
+     
+     if(this.activeroute.snapshot.params._id){
+       this.params_id=this.activeroute.snapshot.params._id;
+      // this.teamForm.controls['categoryname'].patchValue(val[0].categoryname);
+       //this.teamForm.controls['bulletarray'].setValue(val[0].bulletarray);
+      // this.teamForm.controls['description'].patchValue(val[0].description);
+      // this.teamForm.controls['membername'].patchValue(val[0].membername);
+      // this.teamForm.controls['multipleemail'].patchValue(val[0].multipleemail);
+      // this.teamForm.controls['multiplephone'].patchValue(val[0].multiplephone);
+     }
+  }
+
   @Input()          //setting the server url from project
   set serverUrl(serverUrlval: any) {
     this.serverUrlData = (serverUrlval) || '<no name set>';
     this.serverUrlData = serverUrlval;
-    console.log("serverurl", this.serverUrlData);
+    
   }
- 
+
   @Input()   //getting the listing route
-  set ListRoute(val:any){
+  set ListRoute(val: any) {
     this.listrouteData = (val) || '<no name set>';
     this.listrouteData = val;
-    console.log("okkkkkkkkkkkk",this.listrouteData);
+    
   }
 
   @Input()          //setting the server url from project
@@ -56,15 +77,12 @@ export class AddEditTeamComponent implements OnInit {
   }
 
   constructor(public fb: FormBuilder, public activeroute: ActivatedRoute,
-    public _http: HttpClient, private uploadService: UploadService, 
-    public apiservice: ApiService , public router : Router) {
-    this.activeroute.params.subscribe(params => {
-      this.params_id = params['_id'];
+    public _http: HttpClient, private uploadService: UploadService,
+    public apiservice: ApiService, public router: Router) {
+    // this.activeroute.params.subscribe(params => {
+    //   this.params_id = params['_id'];
 
-    })
-  }
-
-  ngOnInit() {
+    // })
     this.teamForm = this.fb.group({
       //upload: [""],
       categoryname: ["", Validators.required],
@@ -78,6 +96,22 @@ export class AddEditTeamComponent implements OnInit {
       bulletarray: this.fb.array([]),
 
     })
+  }
+
+  ngOnInit() {
+    // this.teamForm = this.fb.group({
+    //   //upload: [""],
+    //   categoryname: ["", Validators.required],
+    //   membername: ["", Validators.required],
+    //   description: ["", Validators.required],
+    //   multiplephone: this.fb.array([this.fb.group({ contactphone: ["", Validators.required] })]),
+    //   multipleemail: this.fb.array([this.fb.group({
+    //     contactemail:
+    //       ['', Validators.compose([Validators.required, Validators.pattern(/^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/)])]
+    //   })]),
+    //   bulletarray: this.fb.array([]),
+
+    // })
     this.apiservice.clearServerUrl();
     setTimeout(() => {
       this.apiservice.setServerUrl(this.serverUrlData);
@@ -160,7 +194,7 @@ export class AddEditTeamComponent implements OnInit {
         "data": this.teamForm.value,
         "sourceobj": ["categoryname"]
       }
-        this.spinnerLoader = true;
+      this.spinnerLoader = true;
       this.apiservice.addData(data).subscribe(response => {
         this.spinnerLoader = false;
         this.ResetForm();

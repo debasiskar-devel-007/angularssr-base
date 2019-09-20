@@ -11,6 +11,15 @@ public serverUrl:any="https://o820cv2lu8.execute-api.us-east-2.amazonaws.com/pro
 public addendpoint:any="addorupdatedata";
 public listPageRoute:any="team/list";
 
+public configData: any = {
+  baseUrl: "http://3.15.236.141:5005/",
+  endpoint: "uploads",
+  size: "51200", // kb
+  format: ["jpg", "jpeg", "png", "bmp", "zip", 'html'], // use all small font
+  type: "profile-picture",
+  path: "files",
+  prefix: "profile_picture_"
+}
   constructor(public activeRoute : ActivatedRoute) { }
 
   ngOnInit() {
@@ -20,6 +29,15 @@ public listPageRoute:any="team/list";
       this.teamDataList = result;
   
     })
+    if(this.activeRoute.snapshot.params._id){
+       this.activeRoute.data.forEach(data => {
+        let result: any;
+        result = data.teamdata.res;
+        this.teamDataList = result;
+        console.log("routing data1111111111111",this.teamDataList);
+    
+      })
+    }
   }
 
 }

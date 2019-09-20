@@ -12,7 +12,11 @@ export class ListTeamComponent implements OnInit {
    public serverUrl:any="https://o820cv2lu8.execute-api.us-east-2.amazonaws.com/production/api/";
    public token=this.cookies.get('jwtToken');
    public deleteendpoint:any="deletesingledata";
-   public editUrl="";
+   public editUrl="team/edit";
+   public collectionName="Team_management";
+   public searchSourceName="Team_management_view";
+   public searchingEndpoint="datalist";
+   public addPageRoute = "team/add";
   constructor(public activateRoute : ActivatedRoute,public cookies :CookieService) { }
 
   ngOnInit() {

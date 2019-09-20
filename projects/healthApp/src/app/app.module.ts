@@ -62,6 +62,7 @@ import { ListComponent } from './Component/Team-Library/Category-Management/list
     VideoModule,
     TeamModule,
     
+    
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

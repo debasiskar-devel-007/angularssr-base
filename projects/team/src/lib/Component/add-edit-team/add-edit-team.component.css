@@ -40,14 +40,25 @@ padding: 14px;
 margin-bottom: 0;
 }
 
-.formspan .mat-form-field, .formspan .form-field-span {
-  display: inline-block;
+.formspan .mat-form-field, 
+.formspan .form-field-span {
+  /* display: inline-block;
   position: relative;
   text-align: left;
   width: 98%;
   background: #fff;
   margin-bottom: 9px;
+  padding: 1px 14px; */
+  display: block;
+  position: relative;
+  text-align: left;
+  width: 100%;
+  background: #fff;
+  margin-bottom: 9px;
   padding: 1px 14px;
+  box-sizing: border-box;
+  margin: 0;
+  /* margin-top: 16px; */
 }
 .formspan .form-field-span .mat-checkbox, .formspan .form-field-span .mat-radio-button{
   padding-right: 15px;
@@ -76,7 +87,7 @@ min-height: 50px;
 }
 
 .bulletarr{ margin-top: 20px;
-  border: 3px solid #3f50b4;
+  border: 2px solid #3f50b4;
   box-sizing: border-box;
   margin-bottom: 15px;
   padding:10px;
@@ -87,4 +98,7 @@ min-height: 50px;
   color: #ffffff;
   font-weight: bold;
   text-transform: capitalize;
+  margin-bottom: 20px;
+
   }
+ 

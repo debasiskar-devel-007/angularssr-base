@@ -1,0 +1,174 @@
+.uploadfilecontainer {
+    background-repeat: no-repeat;
+    background-size: 100px;
+    background-position: center;
+    height: 200px;
+    width: 80%;
+    margin: 20px auto;
+    border: 2px dashed #1C8ADB;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.uploadfilecontainer:hover {
+    cursor: pointer;
+    background-color: #9ecbec !important;
+    opacity: 0.8;
+}
+
+.uploadfilecontainer{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+
+.files-view {
+    background-repeat: no-repeat;
+    background-size: 100px;
+    background-position: center;
+    height: 200px;
+    width: 80%;
+    margin: 20px auto;
+    border-radius: 10px;
+}
+
+.button-group {
+    background-repeat: no-repeat;
+    background-size: 100px;
+    background-position: center;
+    height: 40px;
+    width: 80%;
+    margin: 20px auto;
+    border-radius: 10px;
+}
+
+.error.mat-card-subtitle {
+    color: #AA0000;
+    text-align: left;
+}
+
+.example-card {
+    margin: auto;
+    margin-top: 6px;
+    max-width: 100%;
+}
+  
+.example-header-image {
+    background-image: url('https://material.angular.io/assets/img/examples/shiba1.jpg');
+    background-size: cover;
+}
+  
+
+.progress-bar {
+    margin-top: 24px;
+}
+
+.file-div {
+    background-color: #dedddc;
+    margin-top: 6px;
+}
+
+.files-view .mat-card {
+    position: relative;
+    z-index: 9;
+}
+
+.othersFilePreview {
+    background-color: blueviolet;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+}
+
+.fileDescription {
+    text-align: left;
+}
+
+
+.files-view{
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: auto !important;
+    width: 82%;
+    margin: 20px auto;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    flex-wrap: wrap;
+}
+.files-view .mat-card{
+    flex: 1 1 28.33%;
+    margin: 10px !important;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+
+.viewUrlwrapper{
+    height: 160px;
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.viewUrlwrapper img{
+    max-width: 100%;
+    -o-object-fit: cover;
+    object-fit: cover;
+    margin: 0 auto;
+    z-index: 99;
+    position: relative;
+    max-width: 100%;
+    width: initial;
+    display: block;    
+    margin-top: -46px !important;
+}
+
+.viewUrlcontent{
+    display: block;
+    justify-content: center;
+    align-items: stretch;
+    flex-wrap: wrap;
+    flex: 1 1 100%;
+}
+
+.viewUrlcontent .mat-card-header {
+    display: flex;
+    flex-direction: row;
+    flex: 1 1 100%;
+    justify-content: center;
+    text-align: center;
+    flex-wrap: wrap;
+}
+
+.viewUrlcontent .mat-progress-bar {
+    margin-bottom: 5px;
+}
+
+.viewUrlcontent .mat-card-header .mat-card-header-text {
+    margin: 10px;
+    width: 100%;
+}
+
+.viewUrlcontent .mat-card-header .mat-card-header-text .mat-card-title{    
+    width: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    line-height: 19px;
+    max-height: 40px;
+    -webkit-line-clamp: 2;
+}
+
+
+.mat-typography .mat-card-image {
+    width: inherit !important;
+    margin: 0 !important;
+}

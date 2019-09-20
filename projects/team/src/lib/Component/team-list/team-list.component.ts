@@ -1,4 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'lib-team-list',
@@ -12,6 +13,10 @@ export class TeamListComponent implements OnInit {
   public DelEndpoint:any='';
   public editroute :any='';
   public updatendpoint:any='';
+  public collectionName:any='';
+  public searchingSource:any='';
+  public searchingEndpoint:any='';
+  public addPageRoute:any='';
   @Input()    //getting all data via resolve call from app
   set allData(val: any) {
     this.DataList = (val) || '<no name set>';
@@ -19,9 +24,20 @@ export class TeamListComponent implements OnInit {
     console.log("ts all data", this.DataList);
   }
   public data_skip: any = ["_id"];
-  public data_modify_header: any = {"multipleemail":"Multiple E-mail","categoryname":"Category Name",
-  "bulletarray":"Bullet List","multiplephone":"Multiple Phone",
-  "membername" : "Member Name","description":"Description"};
+  public data_modify_header: any = { "membername" : "Member Name","description":"Description",
+  "categoryname":"Category Name","multipleemail":"Multiple E-mails",
+  "bulletarray":"Bullet List","multiplephone":"Phone Numbers",
+ };
+ public search_settings: any =
+    {
+     
+      textsearch: [{ label: "Search By Category Name", field: 'categoryname' },
+      { label: "Search By Member Name" , field:'membername'},
+      { label: "Search By E-Mail" , field:'multipleemail'}],
+      // selectsearch:[{label:'Search By email',field:''}],
+      // search:[{label:"Search By E-Mails",field:'multipleemail'}]
+
+    };
   @Input()          //setting the server url from project
   set serverUrl(serverUrlval: any) {
     this.serverUrlData = (serverUrlval) || '<no name set>';
@@ -49,9 +65,32 @@ export class TeamListComponent implements OnInit {
     this.updatendpoint = (val) || '<no name set>';
     this.updatendpoint = val;
   }
-  constructor() { }
+  @Input()
+  set SourceName(val:any){
+    this.collectionName = (val) || '<no name set>';
+    this.collectionName = val;
+  }
+  @Input()
+  set SearchSourceName(val:any){
+    this.searchingSource = (val) || '<no name set>';
+    this.searchingSource = val;
+  }
+  @Input()
+  set SearchEndpoint(val:any){
+    this.searchingEndpoint = (val) || '<no name set>';
+    this.searchingEndpoint = val;
+  }
+  @Input()
+  set AddPageRoute(val:any){
+    this.addPageRoute = (val) || '<no name set>';
+    this.addPageRoute = val;
+  }
+  constructor(public router : Router) { }
 
   ngOnInit() {
+  }
+  addButton(){
+    this.router.navigateByUrl('/' + this.addPageRoute);
   }
 
 }

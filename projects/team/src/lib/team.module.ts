@@ -11,6 +11,8 @@ import { AddeditTeamComponent } from './Category-Management/addedit-team/addedit
 import { ListTeamComponent } from './Category-Management/list-team/list-team.component';
 import { ApiService } from '../lib/Service/api.service';
 import { TeamListComponent } from './Component/team-list/team-list.component';
+import { FileUploadModule } from 'file-upload';
+
 @NgModule({
   declarations: [TeamComponent, AddEditTeamComponent, AddeditTeamComponent, ListTeamComponent, TeamListComponent],
   imports: [
@@ -20,7 +22,8 @@ import { TeamListComponent } from './Component/team-list/team-list.component';
     HttpClientModule,
     MaterialModule,
     BrowserAnimationsModule,
-    ListingModule
+    ListingModule,
+    FileUploadModule
   ],
   providers: [ApiService],
   exports: [TeamComponent,AddEditTeamComponent,AddeditTeamComponent,ListTeamComponent,TeamListComponent],

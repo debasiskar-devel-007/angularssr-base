@@ -134,6 +134,8 @@ const appRoutes: Routes = [
     {
       path:'team/edit/:_id',
       component : AddEditTeamComponent,
+      resolve : {teamdata : ResolveService },
+      data : { requestcondition : { source : 'Team_management_view',condition : {}}, endpoint : 'datalist'},
       
     },
     {
