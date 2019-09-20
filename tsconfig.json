@@ -66,6 +66,18 @@
       ],
       "listing/*": [
         "dist/listing/*"
+      ],
+      "testimonial": [
+        "dist/testimonial"
+      ],
+      "testimonial/*": [
+        "dist/testimonial/*"
+      ],
+      "servicelib": [
+        "dist/servicelib"
+      ],
+      "servicelib/*": [
+        "dist/servicelib/*"
       ]
     }
   }

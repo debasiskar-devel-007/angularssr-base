@@ -25,7 +25,7 @@ date_search_source: any='blogs_view';
 
 
 
-  // --------------------------Lib Listing Input from App---------------------------
+  // --------------------------Lib Listing Input from App------------------------
   @Input()
   set config(receivedCategoryData: any) {
     console.log("END",receivedCategoryData);
@@ -56,10 +56,10 @@ date_search_source: any='blogs_view';
    {
      
      textsearch: [{ label: "Search By Title", field: 'blogtitle' },
-    //  { label: "Search By Blog Category", field: 'blogcat' },
+     { label: "Search By Blog Category", field: 'blogcat' },
      { label: "Search By Tags", field:'tags' }],
    },
-     search: [{ label: "Search By Blog Category", field: 'blogcat' }]
+     
     
    
     //   search_settings:{

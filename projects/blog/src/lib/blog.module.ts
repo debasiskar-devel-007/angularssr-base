@@ -36,7 +36,8 @@ import { ListingBlogmanagementlibComponent } from './listing-blogmanagementlib/l
     FormsModule,
     ReactiveFormsModule,
     BrowserModule,
-    CKEditorModule
+    CKEditorModule,
+    ListingModule
   ],
   exports: [BlogComponent, AddBlogComponent, AddeditBlogmanagementComponent,ListingBlogmanagementlibComponent],
   providers: [ApiService],

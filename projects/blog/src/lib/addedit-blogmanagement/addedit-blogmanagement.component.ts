@@ -435,7 +435,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
 
   openSnackBar() {
     this.snackBar.openFromComponent(YoutubeComponent, {
-      duration: 1500,
+      // duration: 1500,
       panelClass: ['snackbar-color']
     });
   }
@@ -471,6 +471,7 @@ export class Modal {
 // ---------------------------------------------------------------------------------------
 @Component({
   templateUrl: 'youtubetip.html',
+  styleUrls: ['./addedit-blogmanagement.component.css']
 })
 export class YoutubeComponent {
 
