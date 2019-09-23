@@ -11,6 +11,7 @@ export class AddEditComponent implements OnInit {
   public addendpoint: any = "addorupdatedata";
   public listRoute: any = "team/category-management/list";
   public SingleTeamData: any = [];
+  public getdataEndpoint:any="datalist";
   constructor(public activeRoute: ActivatedRoute) { }
 
   ngOnInit() {

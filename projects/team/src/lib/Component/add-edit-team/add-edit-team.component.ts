@@ -142,14 +142,20 @@ export class AddEditTeamComponent implements OnInit {
   /**multiple phone end here**/
 
   /**for multiple emails functions start here**/
-
-
   addemail(a: any) {
     const memail = this.teamForm.controls.multipleemail as FormArray;
     memail.push(this.fb.group({
       contactemail: [a]
     }))
   }
+  removeemail(index: any) {
+    const mphone = this.teamForm.controls.multipleemail as FormArray;
+    mphone.removeAt(index);
+  }
+ 
+
+  
+  /**multiple email functions end here**/
   getData(){
     let data: any = {
       "source": "Team_category"
@@ -159,13 +165,6 @@ export class AddEditTeamComponent implements OnInit {
       this.allData = result.res;
       })
   }
-
-  removeemail(index: any) {
-    const mphone = this.teamForm.controls.multipleemail as FormArray;
-    mphone.removeAt(index);
-  }
-  /**multiple email functions end here**/
-
   /**resetting the form**/
   ResetForm() {
     this.teamForm.reset();

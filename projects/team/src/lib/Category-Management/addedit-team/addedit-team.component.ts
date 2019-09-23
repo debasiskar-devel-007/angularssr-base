@@ -11,6 +11,7 @@ import { ApiService } from '../../Service/api.service';
 export class AddeditTeamComponent implements OnInit {
   public CategoryManagementTeamForm: FormGroup;
   public DataListViaResolve: any = [];
+  public allData:any=[];
   public SingledataEdit: any = [];
   public getDataEndpointData: any;
   public addEndpointData: any;
@@ -23,11 +24,19 @@ export class AddeditTeamComponent implements OnInit {
   set TeamData(val: any) {
     this.DataListViaResolve = (val) || '<no name set>';
     this.DataListViaResolve = val;
+    console.log("in ts ",this.DataListViaResolve);
   }
   @Input()          //setting the server url from project
   set serverUrl(serverUrlval: any) {
     this.serverUrlData = (serverUrlval) || '<no name set>';
     this.serverUrlData = serverUrlval;
+  }
+  @Input()          //setting the server url from project
+  set getDataEndpoint(endpointUrlval: any) {
+    this.getDataEndpointData = (endpointUrlval) || '<no name set>';
+    this.getDataEndpointData = endpointUrlval;
+    console.log("data",this.getDataEndpointData);
+
   }
   @Input()
   set singleEditData(val:any){
@@ -40,6 +49,12 @@ export class AddeditTeamComponent implements OnInit {
     this.CategoryManagementTeamForm.controls['categoryName'].patchValue(val[0].categoryName);
     this.CategoryManagementTeamForm.controls['description'].patchValue(val[0].description);
     this.CategoryManagementTeamForm.controls['status'].patchValue(val[0].status);
+    
+    //this.CategoryManagementTeamForm.controls['role'].patchValue(val[0].role);
+    // for (const i in this.SingledataEdit[0].role) {
+      
+    //     this.CategoryManagementTeamForm.controls['role'].patchValue(this.SingledataEdit[i].role)
+    // }
     }
   }
   @Input()          //setting the server url from project
@@ -75,12 +90,18 @@ export class AddeditTeamComponent implements OnInit {
     setTimeout(() => {
       this.apiService.setaddEndpoint(this.addEndpointData);
     }, 50);
+    this.apiService.cleargetdataEndpoint();
+    setTimeout(() => {
+      this.apiService.setgetdataEndpoint(this.getDataEndpointData);
+    }, 50);
+    setTimeout(() => {
+      this.getData();
+    }, 50);
   }
   inputUntouch(form: any, val: any) {
     form.controls[val].markAsUntouched();
   }
   CategoryManagementTeamFormSubmit() {
-    //console.log(this.CategoryManagementTeamForm.value);
     if (this.CategoryManagementTeamForm.valid) {
       let x: any;
       for (x in this.CategoryManagementTeamForm.controls) {
@@ -122,6 +143,16 @@ export class AddeditTeamComponent implements OnInit {
         }, 100);
       })
     }
+  }
+  getData(){
+    let data: any = {
+      "source": "rolemanagement"
+      }
+      this.apiService.getData(data).subscribe(response => {
+      let result: any = response;
+      this.allData = result.res;
+      
+      })
   }
   ResetTeamForm() {
     this.CategoryManagementTeamForm.reset();

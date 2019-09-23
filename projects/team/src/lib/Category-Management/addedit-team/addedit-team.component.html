@@ -42,7 +42,7 @@
           <mat-option [value]=0>
             Select a category
           </mat-option>
-          <mat-option *ngFor="let f of DataListViaResolve" [value]="f.roleslug">
+          <mat-option *ngFor="let f of allData" [value]="f.roleslug">
         {{f.roleslug}}
       </mat-option>
         </mat-select>
