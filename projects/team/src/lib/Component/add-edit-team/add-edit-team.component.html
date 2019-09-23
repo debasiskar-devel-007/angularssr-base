@@ -1,7 +1,7 @@
 <span class="formspan">
   <mat-card>
     <mat-toolbar color="primary" style="justify-content: center; align-items: center;">
-      <h2 class="headerSpan">Add Team Member</h2>
+      <h2 class="headerSpan">{{HeaderText}}</h2>
     </mat-toolbar>
     <span class="formspan">
       <mat-card-content class="example-container">
@@ -36,7 +36,7 @@
                 <mat-option [value]=0>
                   Select a category
                 </mat-option>
-                <mat-option *ngFor="let f of teamData" [value]="f._id">
+                <mat-option *ngFor="let f of allData" [value]="f._id">
                   {{f.categoryName}}
                 </mat-option>
               </mat-select>
@@ -65,64 +65,55 @@
                 <!-- ----------------------------------------------------------  -->
 
               </ng-container>
-              <button (click)="addBulletListData()">
+              <button type="button" (click)="addBulletListData('','')">
                 <mat-icon>add</mat-icon>
               </button>
-              <button (click)="deleteBulletListData()" *ngIf="i!=0">
+              <button type="button" (click)="deleteBulletListData()" *ngIf="i!=0">
                 <mat-icon>remove</mat-icon>
               </button>
             </div>
             <!-- bullet list end here -->
 
 
-            <span formArrayName="multiplephone">
-              <mat-form-field *ngFor="let item of multiplephone.controls; let i=index" [formGroupName]="i">
-                <!-- <input type="number" matInput placeholder="Phone" [formControl]="teamForm.controls['contactphone']" -->
-                <!-- (blur)="inputUntouch(teamForm,'contactphone')"> -->
-                <input matInput placeholder="Phone" formControlName="contactphone">
+            <!--multiple phone start here -->
+            <div formArrayName="multiplephone"
+              *ngFor="let plist of teamForm.controls.multiplephone?.value; let i = index; trackBy: trackByFn">
+              <ng-container [formGroupName]="i">
 
-                <!-- <mat-error
-          *ngIf="teamForm.controls['contactphone'].touched  &&!teamForm.controls['contactphone'].valid
-           && teamForm.controls['contactphone'].errors.required">
-          Phone field can not be blank</mat-error> -->
-                <mat-error *ngIf="item.valid  ">Phone field can not be blank</mat-error>
-                <span matSuffix>
-                  <i class="material-icons" (click)="addphone()">add</i>
-                  <i *ngIf="i>0" class="material-icons" (click)="removephone(i)">remove</i>
-                </span>
-              </mat-form-field><br>
-            </span>
+                <mat-form-field>
+                  <input matInput formControlName="contactphone" placeholder="contactphone">
+                  <span matSuffix>
+                    <i class="material-icons" (click)="addphone('')">add</i>
+                    <i *ngIf="i>0" class="material-icons" (click)="removephone(i)">remove</i>
+                  </span>
+                </mat-form-field><br>
 
+              </ng-container>
+            </div>
+            <!-- multiple phone end here -->
 
-            <span formArrayName="multipleemail">
-              <mat-form-field *ngFor="let item of multipleemail.controls; let i=index" [formGroupName]="i">
-                <!-- <input matInput placeholder="E-mail" [formControl]="teamForm.controls['contactemail']" -->
-                <!-- (blur)="inputUntouch(teamForm,'contactemail')"> -->
-                <input matInput placeholder="E-mail " formControlName="contactemail">
-                <mat-error *ngIf="item.valid ">E-mail field can not be blank</mat-error>
-                <!-- <mat-error *ngIf="!item.errors.required"> E-mail is not valid</mat-error> -->
-                <!-- <mat-error
-          *ngIf="teamForm.controls['contactemail'].touched && !teamForm.controls['contactemail'].valid 
-          && teamForm.controls['contactemail'].errors.required">
-          E-mail field can not be blank</mat-error>
-        <mat-error
-          *ngIf="!teamForm.controls['contactemail'].valid && 
-          !teamForm.controls['contactemail'].errors.required">
-          E-mail is not valid</mat-error> -->
-                <span matSuffix>
-                  <i class="material-icons" (click)="addemail()">add</i>
-                  <i *ngIf="i>0" class="material-icons" (click)="removeemail(i)">remove</i>
-                </span>
-              </mat-form-field>
+            <!-- multiple e-mail start here -->
+            <div formArrayName="multipleemail"
+              *ngFor="let elist of teamForm.controls.multipleemail?.value; let i = index; trackBy: trackByFn">
+              <ng-container [formGroupName]="i">
 
+                <mat-form-field>
+                  <input matInput formControlName="contactemail" placeholder="contactemail">
+                  <span matSuffix>
+                    <i class="material-icons" (click)="addemail('')">add</i>
+                    <i *ngIf="i>0" class="material-icons" (click)="removeemail(i)">remove</i>
+                  </span>
+                </mat-form-field><br>
 
+              </ng-container>
+            </div>
+            <!-- multiple e-mail end here -->
 
-            </span>
           </div>
           <!-- file upload library start here -->
           <lib-file-upload [config]="imageConfigData"></lib-file-upload>
           <!-- file upload end here -->
-          <button mat-raised-button color="primary" mat-button class="submitbtn" type="submit">Submit</button>
+          <button mat-raised-button color="primary" mat-button class="submitbtn" type="submit">{{ButtonText}}</button>
           <button type="button" class="submitbtn" mat-raised-button color="primary" (click)="ResetForm()">Reset</button>
         </form>
       </mat-card-content>

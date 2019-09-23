@@ -6,10 +6,11 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./add-edit-team.component.css']
 })
 export class AddEditTeamComponent implements OnInit {
-  public teamDataList:any=[];
+public teamDataList:any=[];
 public serverUrl:any="https://o820cv2lu8.execute-api.us-east-2.amazonaws.com/production/api/";
 public addendpoint:any="addorupdatedata";
 public listPageRoute:any="team/list";
+public getdataEndpoint:any="datalist";
 
 public configData: any = {
   baseUrl: "http://3.15.236.141:5005/",
@@ -23,19 +24,11 @@ public configData: any = {
   constructor(public activeRoute : ActivatedRoute) { }
 
   ngOnInit() {
-    this.activeRoute.data.forEach(data => {
-      let result: any;
-      result = data.teamdata.res;
-      this.teamDataList = result;
-  
-    })
     if(this.activeRoute.snapshot.params._id){
        this.activeRoute.data.forEach(data => {
         let result: any;
         result = data.teamdata.res;
-        this.teamDataList = result;
-        console.log("routing data1111111111111",this.teamDataList);
-    
+        this.teamDataList = result;    
       })
     }
   }

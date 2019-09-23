@@ -80,7 +80,7 @@ export class AddeditTeamComponent implements OnInit {
     form.controls[val].markAsUntouched();
   }
   CategoryManagementTeamFormSubmit() {
-    console.log(this.CategoryManagementTeamForm.value);
+    //console.log(this.CategoryManagementTeamForm.value);
     if (this.CategoryManagementTeamForm.valid) {
       let x: any;
       for (x in this.CategoryManagementTeamForm.controls) {

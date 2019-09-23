@@ -128,14 +128,13 @@ const appRoutes: Routes = [
     {
       path:'team/add',
       component : AddEditTeamComponent,
-      resolve : {teamdata : ResolveService },
-      data : { requestcondition : { source : 'Team_category',condition : {}}, endpoint : 'datalist'},
+      resolve : {teamdata : ResolveService }
     },
     {
       path:'team/edit/:_id',
       component : AddEditTeamComponent,
       resolve : {teamdata : ResolveService },
-      data : { requestcondition : { source : 'Team_management_view',condition : {}}, endpoint : 'datalist'},
+      data : { requestcondition : { source : 'Team_management',condition : {}}, endpoint : 'datalist'},
       
     },
     {

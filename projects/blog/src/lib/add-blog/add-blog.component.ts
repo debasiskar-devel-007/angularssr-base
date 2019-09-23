@@ -179,7 +179,6 @@ export class AddBlogComponent implements OnInit {
       var data: any;
       if (this.activeroute.snapshot.params.id != null) {    //update part
         this.messageText = "One row updated!!!";
-
         data = {
           "source": "blog_category",
           "data": {
@@ -190,9 +189,6 @@ export class AddBlogComponent implements OnInit {
             'priority': this.blogAddEditForm.value.priority,
             'status': this.blogAddEditForm.value.status,
             'description': this.blogAddEditForm.value.description
-            
-
-
           },
           "sourceobj": ["parent_id"]
         };

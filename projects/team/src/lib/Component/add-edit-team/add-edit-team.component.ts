@@ -4,6 +4,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../Service/api.service';
 import { HttpClient } from '@angular/common/http';
 import { UploadService } from '../../Service/upload.service';
+import { NgStyle } from '@angular/common';
+import { analyzeAndValidateNgModules } from '@angular/compiler';
 @Component({
   selector: 'lib-add-edit-team',
   templateUrl: './add-edit-team.component.html',
@@ -11,6 +13,7 @@ import { UploadService } from '../../Service/upload.service';
 })
 export class AddEditTeamComponent implements OnInit {
   public teamData: any = [];
+  public allData: any = [];
   public teamForm: FormGroup;
   public params_id: any;
   public getDataEndpointData: any;
@@ -20,8 +23,9 @@ export class AddEditTeamComponent implements OnInit {
   public editarray: any = [];
   public spinnerLoader: boolean;
   public imageConfigData: any = '';
-  public SingleDataList:any=[];
-
+  public SingleDataList: any = [];
+  public ButtonText:any="Submit";
+  public HeaderText:any="Add Team Member";
 
   /* Config Upload file lib */
   @Input()
@@ -30,39 +34,48 @@ export class AddEditTeamComponent implements OnInit {
     console.log(this.imageConfigData);
   }
   @Input()
-  set singleData(val:any){
-     this.SingleDataList= (val) || '<no name set>';
-     this.SingleDataList = val;
-     
-     if(this.activeroute.snapshot.params._id){
-       this.params_id=this.activeroute.snapshot.params._id;
-      // this.teamForm.controls['categoryname'].patchValue(val[0].categoryname);
-       //this.teamForm.controls['bulletarray'].setValue(val[0].bulletarray);
-      // this.teamForm.controls['description'].patchValue(val[0].description);
-      // this.teamForm.controls['membername'].patchValue(val[0].membername);
-      // this.teamForm.controls['multipleemail'].patchValue(val[0].multipleemail);
-      // this.teamForm.controls['multiplephone'].patchValue(val[0].multiplephone);
-     }
+  set singleData(val: any) {
+    this.SingleDataList = (val) || '<no name set>';
+    this.SingleDataList = val;
+    if (this.activeroute.snapshot.params._id) {
+      this.ButtonText="Update";
+      this.HeaderText="Edit Team Member"
+      this.params_id = this.activeroute.snapshot.params._id;
+       this.teamForm.controls['categoryname'].patchValue(val[0].categoryname);
+      this.teamForm.controls['description'].patchValue(val[0].description);
+      this.teamForm.controls['membername'].patchValue(val[0].membername);
+      for (const i in this.SingleDataList[0].bulletarray) {
+        this.addBulletListData(this.SingleDataList[0].bulletarray[i].bullet_name,
+          this.SingleDataList[0].bulletarray[i].bullet_desc);
+      }
+      for (const i in this.SingleDataList[0].multiplephone) {
+        this.addphone(this.SingleDataList[0].multiplephone[i].contactphone);
+      }
+      for (const i in this.SingleDataList[0].multipleemail) {
+        this.addemail(this.SingleDataList[0].multipleemail[i].contactemail);
+      }
+    }
   }
 
   @Input()          //setting the server url from project
   set serverUrl(serverUrlval: any) {
     this.serverUrlData = (serverUrlval) || '<no name set>';
     this.serverUrlData = serverUrlval;
-    
+
   }
 
   @Input()   //getting the listing route
   set ListRoute(val: any) {
     this.listrouteData = (val) || '<no name set>';
     this.listrouteData = val;
-    
+
   }
 
   @Input()          //setting the server url from project
   set getDataEndpoint(endpointUrlval: any) {
     this.getDataEndpointData = (endpointUrlval) || '<no name set>';
     this.getDataEndpointData = endpointUrlval;
+    console.log("data",this.getDataEndpointData);
 
   }
   @Input()          //setting the server url from project
@@ -70,48 +83,23 @@ export class AddEditTeamComponent implements OnInit {
     this.addEndpointData = (endpointUrlval) || '<no name set>';
     this.addEndpointData = endpointUrlval;
   }
-  @Input()
-  set DataList(val: any) {
-    this.teamData = (val) || '<no name set>'
-    this.teamData = val;
-  }
+  
 
   constructor(public fb: FormBuilder, public activeroute: ActivatedRoute,
     public _http: HttpClient, private uploadService: UploadService,
     public apiservice: ApiService, public router: Router) {
-    // this.activeroute.params.subscribe(params => {
-    //   this.params_id = params['_id'];
 
-    // })
     this.teamForm = this.fb.group({
-      //upload: [""],
       categoryname: ["", Validators.required],
       membername: ["", Validators.required],
       description: ["", Validators.required],
-      multiplephone: this.fb.array([this.fb.group({ contactphone: ["", Validators.required] })]),
-      multipleemail: this.fb.array([this.fb.group({
-        contactemail:
-          ['', Validators.compose([Validators.required, Validators.pattern(/^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/)])]
-      })]),
+      multiplephone: this.fb.array([]),
+      multipleemail: this.fb.array([]),
       bulletarray: this.fb.array([]),
-
     })
   }
 
   ngOnInit() {
-    // this.teamForm = this.fb.group({
-    //   //upload: [""],
-    //   categoryname: ["", Validators.required],
-    //   membername: ["", Validators.required],
-    //   description: ["", Validators.required],
-    //   multiplephone: this.fb.array([this.fb.group({ contactphone: ["", Validators.required] })]),
-    //   multipleemail: this.fb.array([this.fb.group({
-    //     contactemail:
-    //       ['', Validators.compose([Validators.required, Validators.pattern(/^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/)])]
-    //   })]),
-    //   bulletarray: this.fb.array([]),
-
-    // })
     this.apiservice.clearServerUrl();
     setTimeout(() => {
       this.apiservice.setServerUrl(this.serverUrlData);
@@ -124,37 +112,57 @@ export class AddEditTeamComponent implements OnInit {
     setTimeout(() => {
       this.apiservice.setaddEndpoint(this.addEndpointData);
     }, 50);
-    this.addBulletListData();
+    setTimeout(() => {
+      this.getData();
+    }, 50);
+
+    if (this.activeroute.snapshot.params._id == null) {
+      this.addBulletListData('', '');
+      this.addphone('');
+      this.addemail('');
+    }
+
   }
   inputUntouch(form: any, val: any) {
     form.controls[val].markAsUntouched();
   }
   /**for multiple phone function start here**/
-  get multiplephone() {
-    return this.teamForm.get('multiplephone') as FormArray;
-  }
-  addphone() {
-    this.multiplephone.push(this.fb.group({ contactphone: ['', Validators.required] }))
-  }
 
+  addphone(a: any) {
+    const mphone = this.teamForm.controls.multiplephone as FormArray;
+    mphone.push(this.fb.group({
+      contactphone: [a]
+    }));
+  }
   removephone(index: any) {
-    this.multiplephone.removeAt(index);
+    const mphone = this.teamForm.controls.multiplephone as FormArray;
+    mphone.removeAt(index);
 
   }
   /**multiple phone end here**/
 
   /**for multiple emails functions start here**/
-  get multipleemail() {
-    return this.teamForm.get('multipleemail') as FormArray;
+
+
+  addemail(a: any) {
+    const memail = this.teamForm.controls.multipleemail as FormArray;
+    memail.push(this.fb.group({
+      contactemail: [a]
+    }))
   }
-
-  addemail() {
-    this.multipleemail.push(this.fb.group({ contactemail: ["", Validators.required] }))
-
+  getData(){
+    let data: any = {
+      "source": "Team_category"
+      }
+      this.apiservice.getData(data).subscribe(response => {
+      let result: any = response;
+      this.allData = result.res;
+      })
   }
 
   removeemail(index: any) {
-    this.multipleemail.removeAt(index);
+    const mphone = this.teamForm.controls.multipleemail as FormArray;
+    mphone.removeAt(index);
   }
   /**multiple email functions end here**/
 
@@ -164,11 +172,11 @@ export class AddEditTeamComponent implements OnInit {
   }
 
   /**bullet list function start here**/
-  addBulletListData() {
+  addBulletListData(a: any, b: any) {
     const bulletlist = this.teamForm.controls.bulletarray as FormArray;
     bulletlist.push(this.fb.group({
-      bullet_name: ['',],
-      bullet_desc: ['',],
+      bullet_name: [a],
+      bullet_desc: [b],
     }));
   }
 
@@ -182,18 +190,34 @@ export class AddEditTeamComponent implements OnInit {
   /**bullet list function end here**/
 
   TeamFormSubmit() {
-
     let x: any;
     for (x in this.teamForm.controls) {
       this.teamForm.controls[x].markAsTouched();
     }
     if (this.teamForm.valid) {
       var data: any;
-      data = {                                         //add part
-        "source": "Team_management",
-        "data": this.teamForm.value,
-        "sourceobj": ["categoryname"]
-      }
+      if (this.activeroute.snapshot.params._id) {
+        data = {
+          "source": "Team_management",
+          "data": {
+            "id": this.params_id,
+            "categoryname": this.teamForm.value.categoryname,
+            "membername": this.teamForm.value.membername,
+            "description": this.teamForm.value.description,
+            "multiplephone": this.teamForm.value.multiplephone,
+            "multipleemail": this.teamForm.value.multipleemail,
+            "bulletarray": this.teamForm.value.bulletarray,
+          },
+          "sourceobj": ["categoryname"]
+        };
+      } else {
+        data = {                                         //add part
+          "source": "Team_management",
+          "data": this.teamForm.value,
+          "sourceobj": ["categoryname"]
+        }
+      };
+
       this.spinnerLoader = true;
       this.apiservice.addData(data).subscribe(response => {
         this.spinnerLoader = false;
@@ -202,6 +226,8 @@ export class AddEditTeamComponent implements OnInit {
           this.router.navigateByUrl('/' + this.listrouteData);
         }, 100);
       })
+    } else {
+      alert("error occured");
     }
   }
 }
