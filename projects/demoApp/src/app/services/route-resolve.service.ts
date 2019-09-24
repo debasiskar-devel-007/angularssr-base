@@ -14,13 +14,14 @@ export class Resolveservice implements Resolve<EndpointComponent> {
     resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
         // let id = route.params['id'];
         console.log('resolve route data');
-        console.log(route.data);
+        console.log(route.data.requestcondition);
+        console.log(route.data.endpoint );
         console.log(state);
         // let endpoint = route.data.object;
         console.log('endpoint!!!!!');
         // console.log(endpoint);
         return new Promise((resolve) => {
-            this._apiService.getData(route.data).subscribe(api_object => {
+            this._apiService.CustomRequest(route.data.requestcondition,route.data.endpoint).subscribe(api_object => {
                console.log('api_object  !!!!');
                 console.log(api_object);
                 if (api_object) {

@@ -13,7 +13,8 @@
     "build:client-and-server-bundles": "ng build --prod && ng run angularssr:server:production",
     "webpack:server": "webpack --config webpack.server.config.js --progress --colors",
     "start-ssr": "npm run build:ssr && npm run serve:ssr",
-    "calenderlibbuild": "ng build calendar-management --watch"
+    "calenderlibbuild": "ng build calendar-management --watch",
+    "build-dynamic-form": "ng build dynamic-form --watch && ng serve demoApp --watch"
   },
   "private": true,
   "dependencies": {
@@ -44,6 +45,7 @@
     "hammerjs": "^2.0.8",
     "listing-angular7": "0.0.93",
     "moment": "^2.24.0",
+    "ngx-cookie-service": "^2.2.0",
     "ngx-moment": "^3.4.0",
     "ngx-uploader": "^7.1.0",
     "node-fetch": "^2.6.0",

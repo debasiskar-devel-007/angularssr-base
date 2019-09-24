@@ -37,9 +37,9 @@
         </mat-form-field>
 
         <mat-form-field>
-          <p>Type Of Event</p>
+          <mat-label>Type Of Event</mat-label>
           <mat-select formControlName="eventtype" (blur)="inputUntouch(addAvailiabiltyForm,'eventtype')">
-            <mat-option>--</mat-option>
+            
             <mat-option *ngFor="let item of eventType_arr" [value]="item.value">
               {{item.name}}
             </mat-option>
@@ -73,9 +73,9 @@
         </div>
         <!-- </mat-form-field> -->
         <mat-form-field>
-          <p>Time zone</p>
+          <mat-label>Time zone</mat-label>
           <mat-select formControlName="timezone" (blur)="inputUntouch(addAvailiabiltyForm,'timezone')">
-            <mat-option>--</mat-option>
+            
             <mat-option *ngFor="let item of timezone_arr" [value]="item.value">
               {{item.name}}
             </mat-option>
@@ -110,7 +110,7 @@
         
           <button class="submitbtn" mat-raised-button color="primary" (click)="createEvent(addAvailiabiltyForm.value)">Submit</button>
           <!-- <button mat-raised-button color="primary" (click)="demoApiserviceCall()">Test </button> -->
-          <button class="resetbtn" mat-raised-button color="primary" (click)="resetForm()">Reset</button>
+          <button type="reset" class="resetbtn" mat-raised-button color="primary" >Reset</button>
         
       </form>
     </mat-card-content>

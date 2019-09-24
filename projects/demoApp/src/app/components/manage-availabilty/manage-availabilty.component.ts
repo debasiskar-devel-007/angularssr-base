@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./manage-availabilty.component.css']
 })
 export class ManageAvailabiltyComponent implements OnInit {
-  public server:any = 'http://166.62.39.137:5009/';
+  public server:any = 'http://18.191.148.255:5009';
   public timespan1:any = '15';
   public timespan2:any = '60';
   public eventtype_arr:any = [];

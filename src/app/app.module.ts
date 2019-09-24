@@ -12,7 +12,7 @@ import {DemoMaterialModule} from './material-module';
 
 import {  ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { ListingModule } from 'listing-angular7';
+import { ListingModule } from 'listing';
 
 @NgModule({
   declarations: [

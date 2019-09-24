@@ -4,10 +4,10 @@ import { Router,ActivatedRoute } from '@angular/router';
 @Component({
   selector: 'app-homepage',
   templateUrl: './homepage.component.html',
-  styleUrls: ['./homepage.component.css']
+  styleUrls: ['./homepage.component.css'] 
 })
 export class HomepageComponent implements OnInit {
-  public server:any = 'http://166.62.39.137:5009/';
+  public server:any = 'http://18.191.148.255:5009/';
   public addUrl:any = 'addorupdatedata';
   public updateUrl:any = 'addorupdatedata';
   public deleteUrl:any = 'deletesingledata';
@@ -20,7 +20,7 @@ export class HomepageComponent implements OnInit {
     
    }
 
-  ngOnInit() {
+  ngOnInit() { 
     this.activatedroute.data.forEach((data) => {
       // PRE LOAD DATA PRIOR
       this.eventList = data['results'].res;

@@ -36,6 +36,24 @@
       ],
       "calendar-management/*": [
         "dist/calendar-management/*"
+      ],
+      "dynamic-form": [
+        "dist/dynamic-form"
+      ],
+      "dynamic-form/*": [
+        "dist/dynamic-form/*"
+      ],
+      "listing": [
+        "dist/listing"
+      ],
+      "listing/*": [
+        "dist/listing/*"
+      ],
+      "file-upload": [
+        "dist/file-upload"
+      ],
+      "file-upload/*": [
+        "dist/file-upload/*"
       ]
     }
   }
