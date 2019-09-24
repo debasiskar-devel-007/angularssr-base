@@ -33,6 +33,9 @@ import { AddEditTeamComponent } from './Component/Team-Library/add-edit-team/add
 import { ListTeamComponent } from './Component/Team-Library/list-team/list-team.component';
 import { AddEditComponent } from './Component/Team-Library/Category-Management/add-edit/add-edit.component';
 import { ListComponent } from './Component/Team-Library/Category-Management/list/list.component';
+/**Share-tool Library**/
+import { SharetoolsModule } from 'sharetools';
+import { ShareToolComponent } from './Component/share-tool/share-tool.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,7 +51,8 @@ import { ListComponent } from './Component/Team-Library/Category-Management/list
     AddEditTeamComponent,
     ListTeamComponent,
     AddEditComponent,
-    ListComponent
+    ListComponent,
+    ShareToolComponent
   ],
   imports: [
     MaterialModule,
@@ -61,6 +65,7 @@ import { ListComponent } from './Component/Team-Library/Category-Management/list
     ListingModule,
     VideoModule,
     TeamModule,
+    SharetoolsModule
     
     
   ],

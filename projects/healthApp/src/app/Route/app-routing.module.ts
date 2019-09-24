@@ -24,6 +24,8 @@ import { ListTeamComponent } from '../Component/Team-Library/list-team/list-team
 import { AddEditTeamComponent} from '../Component/Team-Library/add-edit-team/add-edit-team.component';
 import { AddEditComponent } from '../Component/Team-Library/Category-Management/add-edit/add-edit.component';
 import {  ListComponent } from '../Component/Team-Library/Category-Management/list/list.component';
+/**Share-tools Library**/
+import { ShareToolComponent } from '../Component/share-tool/share-tool.component';
 const appRoutes: Routes = [
     /* Category Management Routes Start */
     { 
@@ -147,7 +149,7 @@ const appRoutes: Routes = [
       path :'team/category-management/edit/:_id',
       component : AddEditComponent,
       resolve : {teamdata : ResolveService },
-      data : { requestcondition : { source : 'Team_category_slug_view',condition : {}}, endpoint : 'datalist'},
+      data : { requestcondition : { source : 'Team_category',condition : {}}, endpoint : 'datalist'},
       
      
     },
@@ -156,8 +158,12 @@ const appRoutes: Routes = [
       component : ListComponent,
       resolve : {teamdata : ResolveService},
       data : { requestcondition : { source : 'Team_category_view',condition : {}}, endpoint : 'datalist'}
+    },
+    /**share-tool library start here**/
+    {
+      path : 'sharetool/home',
+      component : ShareToolComponent 
     }
-
 ];
 
 @NgModule({

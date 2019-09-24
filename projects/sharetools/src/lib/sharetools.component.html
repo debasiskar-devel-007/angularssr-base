@@ -1,0 +1,20 @@
+<span class="mainclass">
+
+    <ng-container class="mainclass" *ngFor="let val of ConfigData ">
+        <button mat-button color="primary" *ngIf="val.type =='facebook'" class="social" style="padding: 0;">
+            <img style="max-width: 100%;" src="../assets/images/facebook.png">
+        </button>
+        <button mat-button class="social" color="primary" *ngIf="val.type =='twitter'">
+            <img style="max-width: 100%;" src="../assets/images/twitter.png">
+        </button>
+        <button mat-button class="social" color="primary" *ngIf="val.type =='linkedin'">
+            <img style="max-width: 100%;" src="../assets/images/linkedin.png">
+        </button>
+        <button mat-button class="social" color="primary" *ngIf="val.type =='tumbler'">
+            <img style="max-width: 100%;" src="../assets/images/tumblr.png">
+        </button>
+
+
+    </ng-container>
+
+</span>

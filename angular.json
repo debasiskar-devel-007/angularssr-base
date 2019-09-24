@@ -1145,6 +1145,41 @@
           }
         }
       }
+    },
+    "sharetools": {
+      "root": "projects/sharetools",
+      "sourceRoot": "projects/sharetools/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/sharetools/tsconfig.lib.json",
+            "project": "projects/sharetools/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/sharetools/src/test.ts",
+            "tsConfig": "projects/sharetools/tsconfig.spec.json",
+            "karmaConfig": "projects/sharetools/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/sharetools/tsconfig.lib.json",
+              "projects/sharetools/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "angularssr"
