@@ -1,23 +1,35 @@
 <span class="mainclass">
 
     <ng-container class="mainclass" *ngFor="let val of ConfigData ">
-        <button mat-button type="button" (click)="share('https://github.com/zyra/ngx-facebook/')" color="primary" *ngIf="val.type =='facebook'" class="social" style="padding: 0;">
+        <button mat-button type="button" (click)="share(ConfigData[0].link)" color="primary"
+            *ngIf="val.type =='facebook'" class="social" style="padding: 0;">
             <img style="max-width: 100%;" src="../assets/images/facebook.png">
-           
+
         </button>
-        <button mat-button class="social" color="primary" *ngIf="val.type =='twitter'">
-            <img style="max-width: 100%;" src="../assets/images/twitter.png">
-        </button>
+        
+            
+            <a class="twitter-share-button" 
+            href="https://twitter.com/intent/tweet?url={{ConfigData[1].link}}" target="_blank">
+                <button mat-button class="social" color="primary" *ngIf="val.type =='twitter'">
+                <img style="max-width: 100%;" src="../assets/images/twitter.png">
+            </button>
+            </a>
+        
         <button mat-button class="social" color="primary" *ngIf="val.type =='linkedin'">
             <img style="max-width: 100%;" src="../assets/images/linkedin.png">
+            <div class="a2a_kit">
+                    <a class="a2a_button_linkedin_share" data-url="https://example.com/"></a>
+                    
+                </div>
         </button>
         <button mat-button class="social" color="primary" *ngIf="val.type =='tumbler'">
             <img style="max-width: 100%;" src="../assets/images/tumblr.png">
         </button>
-        
 
+        <script src="https://platform.linkedin.com/in.js" type="text/javascript">lang: en_US</script>
+        <script type="IN/Share" data-url="https://www.linkedin.com">Share</script>
     </ng-container>
-
-    
+    <a class="tumblr-share-button" data-color="blue" data-notes="right" href="https://embed.tumblr.com/share"></a> 
+    <a className="fa fa-linkedin share-base share-linked-in spacing-left-5" onclick="window.open('https://www.linkedin.com/cws/share?url=the_url')"></a>
 
 </span>

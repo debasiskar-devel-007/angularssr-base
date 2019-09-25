@@ -15,7 +15,7 @@ public ConfigData:any=[];
    {
      this.ConfigData = (val) || '<no name set>';
      this.ConfigData = val;
-     console.log(this.ConfigData[0].link);
+    console.log(this.ConfigData[1].link);
    }
   
   constructor(private fb: FacebookService) { 
@@ -34,7 +34,7 @@ public ConfigData:any=[];
   share(url: string) {
  
     let params: UIParams = {
-      href: this.ConfigData[0].link,
+      href: url,
       method: 'share'
     };
    
