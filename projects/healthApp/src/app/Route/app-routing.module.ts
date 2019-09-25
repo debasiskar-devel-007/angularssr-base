@@ -163,6 +163,10 @@ const appRoutes: Routes = [
     {
       path : 'sharetool/home',
       component : ShareToolComponent 
+    },
+    {
+      path : '',
+      component : ShareToolComponent 
     }
 ];
 

@@ -12,7 +12,7 @@ export class ApiService {
   humanizeBytes: Function;
   dragOver: boolean;
   options: UploaderOptions;
-  @ViewChild('fileInput1') uploaderInput: ElementRef;
+  @ViewChild('fileInput1',{static: false}) uploaderInput: ElementRef;
   /*@Input()
   set domain_for_fileupload(domain_for_fileupload: any) {
     this.domain_for_fileupload_val = domain_for_fileupload;

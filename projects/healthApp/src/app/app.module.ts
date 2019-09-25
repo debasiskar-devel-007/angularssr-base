@@ -21,7 +21,7 @@ import { TestComponent } from './Component/test/test.component';
 import { ListingModule } from 'lib-listing';
 
 /**Video Library **/
-import { VideoModule } from 'video';
+ import { VideoModule } from 'video';
 import { VideoCategoryManagementComponent } from './Component/video-management/video-category-management/video-category-management.component';
 import { ListVideosComponent } from './Component/video-management/list-videos/list-videos.component';
 import { AddEditVideosComponent } from './Component/video-management/video-library-management/add-edit-videos/add-edit-videos.component';

@@ -258,8 +258,8 @@ export class ListingComponent implements OnInit {
   //dataSource = new MatTableDataSource(this.datasourceval);
   dataSource = new MatTableDataSource;
 
-  @ViewChild(MatSort) sort: MatSort;
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort, {static: false}) sort: MatSort;
+  @ViewChild(MatPaginator, {static: false}) paginator: MatPaginator;
   // options: FormGroup;
   myForm:any;
   // myForm:any;

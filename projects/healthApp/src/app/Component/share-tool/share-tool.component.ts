@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ShareToolComponent implements OnInit {
   public ConfigData: any = [
-    { type: 'facebook', link: '' },
+    { type: 'facebook', link: 'https://SoureshBanerjee.com' },
     { type: 'twitter', link: '' },
     { type: 'linkedin', link: '' },
     { type: 'tumbler', link: '' }
