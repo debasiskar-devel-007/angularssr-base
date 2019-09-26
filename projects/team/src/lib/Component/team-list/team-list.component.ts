@@ -17,6 +17,8 @@ export class TeamListComponent implements OnInit {
   public searchingSource:any='';
   public searchingEndpoint:any='';
   public addPageRoute:any='';
+
+ 
   @Input()    //getting all data via resolve call from app
   set allData(val: any) {
     this.DataList = (val) || '<no name set>';
@@ -26,7 +28,7 @@ export class TeamListComponent implements OnInit {
   public data_skip: any = ["_id"];
   public data_modify_header: any = { "membername" : "Member Name","description":"Description",
   "categoryname":"Category Name","multipleemail":"Multiple E-mails",
-  "bulletarray":"Bullet List","multiplephone":"Phone Numbers",
+  "bulletarray":"Bullet List","multiplephone":"Phone Numbers","images":"Images"
  };
  public search_settings: any =
     {
@@ -38,6 +40,17 @@ export class TeamListComponent implements OnInit {
       // search:[{label:"Search By E-Mails",field:'multipleemail'}]
 
     };
+   pendingmodelapplicationarray_detail_datatype:any=[{
+      key: "images",
+      value: 'image',
+      fileurl: 'https://s3.us-east-2.amazonaws.com/crmfiles.influxhostserver/team/'             // Image path 
+    }];
+  //   pendingmodelapplicationarray_detail_datatype: any = [{
+  //     key: "images",
+  //     value: 'image',
+  //     fileurl: "http://18.222.26.198/upload/brandimages/"             // Image path 
+  // }];
+  
   @Input()          //setting the server url from project
   set serverUrl(serverUrlval: any) {
     this.serverUrlData = (serverUrlval) || '<no name set>';
@@ -85,9 +98,12 @@ export class TeamListComponent implements OnInit {
     this.addPageRoute = (val) || '<no name set>';
     this.addPageRoute = val;
   }
+ 
   constructor(public router : Router) { }
 
   ngOnInit() {
+    console.log('this.preview_detail_listing')
+    console.log(this.pendingmodelapplicationarray_detail_datatype)
   }
   addButton(){
     this.router.navigateByUrl('/' + this.addPageRoute);

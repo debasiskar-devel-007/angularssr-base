@@ -4,4 +4,13 @@
 
  .social { padding: 0!important; min-width: 50px!important;}
 
- 
+ .linkedinbtn{
+    height: 35px;
+    min-width: 35px !important;
+    width: 35px;
+    position: relative;
+    overflow: hidden;
+    background: red;
+    border-radius: 50%;
+    padding: 0 !important;
+ }

@@ -17,13 +17,19 @@ public configData: any = {
   endpoint: "uploads",
   size: "51200", // kb
   format: ["jpg", "jpeg", "png", "bmp", "zip", 'html'], // use all small font
-  type: "profile-picture",
-  path: "files",
-  prefix: "profile_picture_"
+  type: "team-picture",
+  path: "team",
+  prefix: "team_picture_"
 }
   constructor(public activeRoute : ActivatedRoute) { }
 
   ngOnInit() {
+    this.activeRoute.data.forEach(data => {
+      let result: any;
+      result = data.teamdata.res;
+      this.teamDataList = result;    
+    })
+    
     if(this.activeRoute.snapshot.params._id){
        this.activeRoute.data.forEach(data => {
         let result: any;
