@@ -26,11 +26,12 @@ export class AddEditTeamComponent implements OnInit {
   public SingleDataList: any = [];
   public ButtonText: any = "Submit";
   public HeaderText: any = "Add Team Member";
-  public ErrCode: any;
+  public ErrCode: boolean;
   public flag: boolean = false;
   public img_var: any = '';
   public image_name: any;
   public image_type: any;
+
   /* Config Upload file lib */
   @Input()
   set imageUpload(getConfig: any) {
@@ -207,7 +208,8 @@ export class AddEditTeamComponent implements OnInit {
   TeamFormSubmit() {
     if (this.imageConfigData.files) {
       if (this.imageConfigData.files.length > 1) {
-        this.ErrCode = true; return;
+        this.ErrCode = true;
+        return;
       }
       this.teamForm.value.team_img =
         {
@@ -226,7 +228,7 @@ export class AddEditTeamComponent implements OnInit {
     }
     if (this.teamForm.valid) {
       var data: any;
-      if (this.activeroute.snapshot.params._id) {
+      if (this.activeroute.snapshot.params._id) {      //update part
         data = {
           "source": "Team_management",
           "data": {
@@ -237,9 +239,8 @@ export class AddEditTeamComponent implements OnInit {
             "multiplephone": this.teamForm.value.multiplephone,
             "multipleemail": this.teamForm.value.multipleemail,
             "bulletarray": this.teamForm.value.bulletarray,
-            'team_img':this.teamForm.value.team_img
+            'team_img': this.teamForm.value.team_img
 
-            // "bulletarray": this.teamForm.value.bulletarray,
           },
           "sourceobj": ["categoryname"]
         };

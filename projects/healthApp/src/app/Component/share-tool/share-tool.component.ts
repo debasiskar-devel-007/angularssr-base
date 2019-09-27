@@ -9,8 +9,8 @@ export class ShareToolComponent implements OnInit {
   public ConfigData: any = [
     { type: 'facebook', link: 'https://SoureshBanerjee.com' },
     { type: 'twitter', link: 'https://google.com' },
-    { type: 'linkedin', link: '' },
-    { type: 'tumbler', link: '' }
+    { type: 'linkedin', link: 'https://jasonwatmore.com' },
+    { type: 'tumbler', link:'material.angular.io' }
   ];
   constructor() { }
 
