@@ -35,6 +35,13 @@ export class AddeditComponent implements OnInit {
   configData;
   successMessage: string = "Submitted Successfully";
   dialogRef: any;
+  imageConfigData:any;
+  ErrCode:boolean = false;
+  flag: boolean;
+  img_var: any;
+  header_name: any;
+  image_name: any;
+  image_type: any;
   // ==================================================================================================
 
 
@@ -49,12 +56,16 @@ export class AddeditComponent implements OnInit {
       case 'add':
         /* Button text */
         this.buttonText = "SUBMIT";
+        this.flag = false;
+        this.header_name = "ADD";
         break;
       case 'edit':
         /* Button text */
         this.buttonText = "UPDATE";
         this.successMessage = "One row updated";
         this.setDefaultValue(this.configData.defaultData);
+        this.header_name = "EDIT";
+        this.flag = true;
         break;
     }
     // --------------------------------------------------------------------------
@@ -66,6 +77,11 @@ export class AddeditComponent implements OnInit {
     this.configData = getConfig;
   }
 
+  @Input()
+  set imageUpload(getConfig: any) {
+    this.imageConfigData = getConfig;
+  }
+
   // =====================================Form Validation/generation===================================
   generateForm() {
     this.testimonialForm = this.formBuilder.group({
@@ -75,6 +91,7 @@ export class AddeditComponent implements OnInit {
       testimonial: ['', [Validators.required]],
       priority: ['', Validators.required],
       status: [true,],
+      testimonial_img : ['',],
       userId: [this.configData.userData.id, null]
     })
     
@@ -87,6 +104,22 @@ export class AddeditComponent implements OnInit {
 
 
   onSubmit() {
+    // Testimonial File Upload Works 
+    if (this.imageConfigData.files) {
+            
+      if (this.imageConfigData.files.length > 1) { this.ErrCode = true; return; }
+      this.testimonialForm.value.testimonial_img =
+        {
+          "basepath": this.imageConfigData.files[0].upload.data.basepath + '/' + this.imageConfigData.path + '/',
+          "image": this.imageConfigData.files[0].upload.data.data.fileservername,
+          "name": this.imageConfigData.files[0].name,
+          "type": this.imageConfigData.files[0].type
+        };
+    } else {
+      this.testimonialForm.value.testimonial_img = false;
+    }
+
+
      this.testimonialForm.controls['testimonial'].markAsTouched();
     this.loader = true;
     /* stop here if form is invalid */
@@ -126,14 +159,18 @@ export class AddeditComponent implements OnInit {
 
   // ================================================Default value======================================
   setDefaultValue(defaultValue) {
-    this.testimonialForm.setValue({
+    this.testimonialForm.patchValue({
       name: defaultValue.name,
       email: defaultValue.email,
       testimonial: defaultValue.testimonial,
       priority: defaultValue.priority,
       status: defaultValue.status,
-      userId: null
+      userId: null,
+      testimonial_img: defaultValue.testimonial_img
     });
+    this.img_var = defaultValue.testimonial_img.basepath + defaultValue.testimonial_img.image;
+    this.image_name = defaultValue.testimonial_img.name;
+    this.image_type = defaultValue.testimonial_img.type
   }
   // ==================================================================================================
 
@@ -155,7 +192,13 @@ export class AddeditComponent implements OnInit {
   inputBlur(val: any) {
     this.testimonialForm.controls[val].markAsUntouched();
   }
+// ==========================================Clear MAT tag===================================
+  clear_image() {
+    this.flag = false;
+  }
+  // ========================================================================================
 }
+
 
 
 

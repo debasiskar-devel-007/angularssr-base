@@ -18,7 +18,7 @@ export class ListingTestimonialComponent implements OnInit {
     tableName: "testimonial",
     updateurl: "addorupdatedata",
     editUrl: "testimonial/edit",
-    jwtToken: "",
+    jwtToken: "",   
     deleteEndPoint: "deletesingledata",
     addLink: "/testimonial/add",
     view: "testimonial_view"

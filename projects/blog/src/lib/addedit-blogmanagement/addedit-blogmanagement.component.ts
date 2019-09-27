@@ -60,7 +60,17 @@ export class AddeditBlogmanagementComponent implements OnInit {
   messageText: any;
   listUrl: any;
   testTag: any = [];
-
+  imageConfigData: any;
+  ErrCode: any;
+  img_var: any;
+  image_name: any;
+  image_type: any;
+  flag: boolean = false;
+  images_array: any = [];
+  images_array_edit: any = [];
+  fileConfigData: any;
+  file_array: any = [];
+  file_array_edit: any = [];
   // -----------------------------------------------------------------------
 
 
@@ -119,6 +129,8 @@ export class AddeditBlogmanagementComponent implements OnInit {
       metadesc: ['', Validators.required],
       credentials: this.formBuilder.array([]),
       tags: ['',],
+      blogs_image: [''],
+      blogs_file: ['']
     });
   }
 
@@ -141,7 +153,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
 
     if (!this.activatedRoute.snapshot.params.id)
       setTimeout(() => {
-        this.addYoutubeVideo('');
+        this.addYoutubeVideo('', '', '');
       }, 500)
 
     setTimeout(() => {
@@ -155,6 +167,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
 
 
     if (this.activatedRoute.snapshot.params.id) {
+      this.flag = true;
       this.params_id = this.activatedRoute.snapshot.params.id;
       this.buttonText = "Update";
       this.blogManagementForm.controls['blogtitle'].patchValue(this.setData.blogtitle);
@@ -164,10 +177,40 @@ export class AddeditBlogmanagementComponent implements OnInit {
       this.blogManagementForm.controls['status'].patchValue(this.setData.status);
       this.blogManagementForm.controls['metatitle'].patchValue(this.setData.metatitle);
       this.blogManagementForm.controls['metadesc'].patchValue(this.setData.metadesc);
+      this.blogManagementForm.controls['blogs_image'].patchValue(this.setData.blogs_image);
+      this.blogManagementForm.controls['blogs_file'].patchValue(this.setData.blogs_file);
+
+
+      /*Image works*/
+      for (let i = 0; i < this.setData.blogs_image.length; i++) {
+        this.img_var = this.setData.blogs_image[i].basepath + this.setData.blogs_image[i].image;
+        this.image_name = this.setData.blogs_image[i].name;
+        this.image_type = this.setData.blogs_image[i].type;
+        this.images_array_edit.push({ 'img_var': this.img_var, 'image_name': this.image_name, 'image_type': this.image_type });
+        this.images_array.push({
+          "basepath": this.setData.blogs_image[i].basepath,
+          "image": this.setData.blogs_image[i].image,
+          "name": this.setData.blogs_image[i].name,
+          "type": this.setData.blogs_image[i].type
+        });
+      }
+
+      /*File works*/
+      for (let i2 = 0; i2 < this.setData.blogs_file.length; i2++) {
+        this.file_array_edit.push(this.setData.blogs_file[i2].name);
+        this.file_array.push({
+          "basepath": this.setData.blogs_file[i2].basepath,
+          "file": this.setData.blogs_file[i2].file,
+          "name": this.setData.blogs_file[i2].name,
+          "type": this.setData.blogs_file[i2].type
+        });
+      }
 
 
       for (const vid in this.setData.credentials) {
-        this.addYoutubeVideo(this.setData.credentials[vid].video_url);
+        this.addYoutubeVideo(this.setData.credentials[vid].video_url,
+          this.setData.credentials[vid].video_title,
+          this.setData.credentials[vid].video_description);
       }
 
       if (this.setData.tags != "")
@@ -182,7 +225,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
 
 
 
-    // ------------------------------Auticomplete Functions----------------------------------
+    // ------------------------------Autocomplete Functions----------------------------------
 
     this.filteredOptions = this.myControl.valueChanges.pipe(
       startWith(''),
@@ -195,14 +238,21 @@ export class AddeditBlogmanagementComponent implements OnInit {
   // ------------------------------------_Filter FUnction----------------------------------
   private _filter(value: string): string[] {
     const filterValue = value.toLowerCase();
-
     return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
   }
   // --------------------------------------------------------------------------------------------
 
 
 
+  @Input()
+  set imageUpload(getConfig: any) {
+    this.imageConfigData = getConfig;
+  }
 
+  @Input()
+  set fileUpload(getConfig: any) {
+    this.fileConfigData = getConfig;
+  }
 
 
 
@@ -246,10 +296,12 @@ export class AddeditBlogmanagementComponent implements OnInit {
 
 
   // ----------------------------------Add Credential Fucntions-----------------
-  addYoutubeVideo(val: any) {
+  addYoutubeVideo(vid_url: any, vid_tit: any, vid_desc: any) {
     const creds = this.blogManagementForm.controls.credentials as FormArray;
     creds.push(this.formBuilder.group({
-      video_url: [val]
+      video_url: [vid_url],
+      video_title: [vid_tit],
+      video_description: [vid_desc]
     }));
   }
   // ---------------------------------------------------------------------------
@@ -318,7 +370,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
   @Input()          //single data from resolve call  & set the value for edit
   set singleData(editDatavals: any) {
     this.setData = editDatavals;
-    console.log("Library te", this.setData);
+
 
 
   }
@@ -327,8 +379,44 @@ export class AddeditBlogmanagementComponent implements OnInit {
 
   // ---------------------------------SUBMIT----------------------------------------
   onSubmit() {
+    /*__________________________IMAGE UPLOADER________________________________________*/
+    if (this.imageConfigData) {
+      for (const loop in this.imageConfigData.files) {
+        this.images_array =
+          this.images_array.concat({
+            "basepath": this.imageConfigData.files[loop].upload.data.basepath + '/' + this.imageConfigData.path + '/',
+            "image": this.imageConfigData.files[loop].upload.data.data.fileservername,
+            "name": this.imageConfigData.files[loop].name,
+            "type": this.imageConfigData.files[loop].type
+          });
+      }
+      this.blogManagementForm.value.blogs_image = this.images_array;
+    } else {
+      this.blogManagementForm.value.blogs_image = false;
+    }
+    /*_____________________________________________________________________________________*/
+
+
+    /*_________________________________________FILE UPLOADER_______________________________*/
+
+    if (this.fileConfigData) {
+      for (const loop in this.fileConfigData.files) {
+        this.file_array =
+          this.file_array.concat({
+            "basepath": this.fileConfigData.files[loop].upload.data.basepath + '/' + this.fileConfigData.path + '/',
+            "file": this.fileConfigData.files[loop].upload.data.data.fileservername,
+            "name": this.fileConfigData.files[loop].name,
+            "type": this.fileConfigData.files[loop].type
+          });
+      }
+      this.blogManagementForm.value.blogs_file = this.file_array;
+    } else {
+      this.blogManagementForm.value.blogs_file = false;
+    }
+    // ___________________________________________________________________________________
+
     this.blogManagementForm.value.tags = this.tags_array;
-    console.log("test", this.blogManagementForm.value.tags);
+
     this.blogManagementForm.controls['blogcontent'].markAsTouched();
 
     if (this.blogManagementForm.valid) {
@@ -351,7 +439,9 @@ export class AddeditBlogmanagementComponent implements OnInit {
             "metatitle": this.blogManagementForm.value.metatitle,
             "metadesc": this.blogManagementForm.value.metadesc,
             "tags": this.blogManagementForm.value.tags,
-            "credentials": this.blogManagementForm.value.credentials
+            "credentials": this.blogManagementForm.value.credentials,
+            "blogs_image": this.blogManagementForm.value.blogs_image,
+            "blogs_file": this.blogManagementForm.value.blogs_file
 
           },
           "sourceobj": ["blogcat"]
@@ -424,9 +514,6 @@ export class AddeditBlogmanagementComponent implements OnInit {
   // -------------------------------------------------------------------------------------
 
 
-
-
-
   // --------------------------------------------CLEAR TAGS---------------------------------
   clearTags(index) {
     this.tags_array.splice(index, 1);
@@ -439,7 +526,19 @@ export class AddeditBlogmanagementComponent implements OnInit {
       panelClass: ['snackbar-color']
     });
   }
+  // --------------------------------------Blogs Image clear-------------------------------
+  clear_image(index) {
+    this.images_array.pop(this.setData.blogs_image[index]);
+    this.images_array_edit.splice(index, 1);
+  }
+  // ------------------------------------------------------------------------------------
 
+  // --------------------------------------Blogs File clear-------------------------------
+  clearFileTags(index) {
+    this.file_array.pop(this.setData.blogs_file[index]);
+    this.file_array_edit.splice(index, 1);
+  }
+  // ------------------------------------------------------------------------------------
 }
 
 

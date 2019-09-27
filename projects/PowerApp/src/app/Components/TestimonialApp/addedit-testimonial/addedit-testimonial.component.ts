@@ -19,6 +19,17 @@ public configAddEdit: any = {
   callBack: "testimonial/list",
   userData: { id: "18801017007", name: "Admin" },
 }
+
+public configData: any = {
+  baseUrl: "http://3.15.236.141:5005/",
+  endpoint: "uploads",
+  size: "51200", // kb
+  format: ["jpg", "jpeg", "png"], // use all small font
+  type: "testimonial-image",
+  path: "testimonial",
+  prefix: "testimonial-image_"
+}
+
 /* Config for add and edit end */
 
   constructor( private router : Router , private activatedRoute : ActivatedRoute ,private cookieService : CookieService) { }

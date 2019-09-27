@@ -13,17 +13,16 @@ export class ServicelibComponent implements OnInit {
   // =====================================================================================================
 
 
-  // ================================================Input For Lib Listing================================
+  // =============================================Input For Lib Listing================================
   @Input()
   set config(receivedData: any) {
-    console.log("+++",receivedData.view);
     this.serviceListConfig = {
       apiUrl: receivedData.apiBaseUrl,
-      listEndPoint: "datalist",
+      listEndPoint: receivedData.listEndPoint,
       datasource: receivedData.datasource,
       tableName: receivedData.tableName,
-      listArray_skip: ["_id", "userId", "created_at", "id", "updated_at"],
-      listArray_modify_header: { "service title": "Service title", "service desc": "Service Description",  "priority": "Priority", "status": "Status","bulletarr":"Number of bullets" },
+      listArray_skip: ["_id", "userId", "created_at", "id", "updated_at", "service_desc", "images"],
+      listArray_modify_header: { "service title": "Service title", "priority": "Priority", "status": "Status", "bulletarr": "Number of bullets" },
       admintablenameTableName: "admin",
       statusarr: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }],
       updateurl: receivedData.updateEndpoint,
@@ -31,15 +30,28 @@ export class ServicelibComponent implements OnInit {
       jwtToken: receivedData.jwtToken,
       deleteEndPoint: receivedData.deleteEndPoint,
       view: receivedData.view,
+
+      /*Search settings in the Listing*/
       search_settings: {
-        textsearch: [{ label: "title...", field: 'service_title' }, { label: "status...", field: 'status' }],
-      }
+        textsearch: [{ label: "Search by title", field: 'service_title' }],
+        selectsearch: [{ label: 'Search By Status', field: 'status', values: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }] }], // this is use for  select search
+      },
+
+      /*Showing Image in the Modal*/
+      pendingmodelapplicationarray_detail_datatype: [{
+        key: "images",
+        value: 'image',
+        fileurl: 'https://s3.us-east-2.amazonaws.com/crmfiles.influxhostserver/services/'    // Image path 
+      }],
+
     }
     this.loader = false;
   }
+
   // ====================================================================================================
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }

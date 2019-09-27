@@ -9,6 +9,7 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { ListingModule } from 'lib-listing';
+import { FileUploadModule } from 'file-upload';
 
 @NgModule({
   declarations: [TestimonialComponent, AddeditComponent ,Modal],
@@ -21,7 +22,8 @@ import { ListingModule } from 'lib-listing';
     ReactiveFormsModule,
     CommonModule,
     BrowserModule,
-    ListingModule
+    ListingModule,
+    FileUploadModule
   ],
   exports: [TestimonialComponent,AddeditComponent] ,
   entryComponents:[Modal ]

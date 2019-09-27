@@ -1,6 +1,6 @@
 <mat-card>
   <mat-toolbar color="primary" style="justify-content: center; align-items: center;">
-    <h2 class="headerSpan">Add Testimonials</h2>
+    <h2 class="headerSpan">{{ header_name }}</h2>
   </mat-toolbar>
   <span class="formspan">
     <mat-card-content class="example-container">
@@ -14,7 +14,7 @@
         <!-- -----------------------------------customer username---------------------------- -->
         <mat-form-field>
           <mat-label>Customer/User Name:</mat-label>
-          <input matInput type="text" formControlName="name"  (blur)="inputBlur('name')">
+          <input matInput type="text" formControlName="name" (blur)="inputBlur('name')">
           <mat-error *ngIf="testimonialForm.controls['name']?.touched || testimonialForm.controls['name'].errors 
           && testimonialForm.controls['name'].errors.required">Name is required.</mat-error>
         </mat-form-field><br>
@@ -28,10 +28,12 @@
         <!-- ----------------------------------------customer email-------------------------- -->
         <mat-form-field>
           <mat-label>Customer/User Email:</mat-label>
-          <input matInput type="email" formControlName="email"  (blur)="inputBlur('email')">
+          <input matInput type="email" formControlName="email" (blur)="inputBlur('email')">
           <mat-error *ngIf="testimonialForm.controls['email']?.touched || testimonialForm.controls['email'].errors 
           && testimonialForm.controls['email'].errors.required">Email is required.</mat-error>
-          <mat-error  *ngIf="!testimonialForm.controls['email'].valid && !testimonialForm.controls['email'].errors.required">Email is not valid</mat-error>
+          <mat-error
+            *ngIf="!testimonialForm.controls['email'].valid && !testimonialForm.controls['email'].errors.required">Email
+            is not valid</mat-error>
         </mat-form-field><br>
         <!-- -------------------------------------------------------------------------------- -->
 
@@ -40,7 +42,8 @@
 
 
         <!-- ----------------------------------testimonial----------------------------------- -->
-        <ckeditor [editor]="Editor" [config]="editorConfig" formControlName="testimonial"  (blur)="inputBlur('testimonial')"></ckeditor>
+        <ckeditor [editor]="Editor" [config]="editorConfig" formControlName="testimonial"
+          (blur)="inputBlur('testimonial')"></ckeditor>
         <mat-error *ngIf="testimonialForm.controls['testimonial']?.touched || testimonialForm.controls['testimonial']?.touched && testimonialForm.controls['testimonial'].errors 
           && testimonialForm.controls['testimonial'].errors.required">Please write a testimonial.</mat-error>
         <br>
@@ -54,7 +57,7 @@
         <!-- ------------------------------------------priority------------------------------ -->
         <mat-form-field>
           <mat-label>Priority:</mat-label>
-          <input matInput type="number" formControlName="priority"  (blur)="inputBlur('priority')">
+          <input matInput type="number" formControlName="priority" (blur)="inputBlur('priority')">
           <mat-error *ngIf="testimonialForm.controls['priority']?.touched || testimonialForm.controls['priority'].errors 
           && testimonialForm.controls['priority'].errors.required">Priority is required.</mat-error>
         </mat-form-field><br>
@@ -71,9 +74,27 @@
         <!-- -------------------------------------------------------------------------------  -->
 
 
+        <!-- ---------------------------------------------Image Uploader--------------------- -->
+        <h1>Testimonial Image:</h1>
+        <lib-file-upload [config]="imageConfigData"></lib-file-upload>
+        <mat-error *ngIf="ErrCode==true">Please add just one testimonial image.</mat-error>
+        <!-- -------------------------------------------------------------------------------- -->
+
+        <!-- CARD VIEW  -->
+        <mat-card-content class="files-view" *ngIf="flag==true">
+          <mat-card class="example-card">
+            <img mat-card-image [attr.src]="img_var">
+            <mat-card-title>{{ image_name }}</mat-card-title>
+            <mat-card-subtitle>{{ image_type }}</mat-card-subtitle>
+            <span class="closecard" (click)="clear_image()"><i class="material-icons">clear</i></span>
+          </mat-card>
+        </mat-card-content>
+        <!-- ---------  -->
 
 
-        <button type="submit" class="submitbtn" class="submitbtn" mat-raised-button color="primary">{{buttonText}}</button>
+
+        <button type="submit" class="submitbtn" class="submitbtn" mat-raised-button
+          color="primary">{{buttonText}}</button>
         <button type="reset" class="submitbtn" class="submitbtn" mat-raised-button color="primary">RESET</button>
 
 

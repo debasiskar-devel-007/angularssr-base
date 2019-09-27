@@ -9,38 +9,38 @@ import { ListingServiceComponent } from '../Components/ServiceApp/listing-servic
 
 
 const appRoutes: Routes = [
-   
+
   // _______________________TESTIMONIAL LIBRARY_________________
-    { path:'testimonial/add' , component: AddeditTestimonialComponent},
-    { 
-        path:'testimonial/list',
-        component: ListingTestimonialComponent,
-        resolve: { testimonialList: ResolveService },
-        data: { requestcondition: { source: 'testimonial_view', condition: {} }, endpoint: 'datalist'}
-      },
-      { 
-        path:'testimonial/edit/:_id',
-        component: AddeditTestimonialComponent,
-        resolve: { testimonialData: ResolveService },
-        data: { requestcondition: { source: 'testimonial', condition: {} }, endpoint: 'datalist'}
-      },
-   
-    
-      // _______________________SERVICE LIBRARY____________________
-      { path:'service/add' , component: AddeditServiceComponent },
-      { 
-        path:'service/list',
-        component: ListingServiceComponent,
-        resolve: { serviceList: ResolveService },
-        data: { requestcondition: { source: 'services_view', condition: {} }, endpoint: 'datalist'}
-      },
-      { 
-        path:'service/edit/:_id',
-        component: AddeditServiceComponent,
-        resolve: { serviceList: ResolveService },
-        data: { requestcondition: { source: 'services', condition: {} }, endpoint: 'datalist'}
-      },
-   
+  { path: 'testimonial/add', component: AddeditTestimonialComponent },
+  {
+    path: 'testimonial/list',
+    component: ListingTestimonialComponent,
+    resolve: { testimonialList: ResolveService },
+    data: { requestcondition: { source: 'testimonial_view', condition: {} }, endpoint: 'datalist' }
+  },
+  {
+    path: 'testimonial/edit/:_id',
+    component: AddeditTestimonialComponent,
+    resolve: { testimonialData: ResolveService },
+    data: { requestcondition: { source: 'testimonial', condition: {} }, endpoint: 'datalist' }
+  },
+
+
+  // _______________________SERVICE LIBRARY____________________
+  { path: 'service/add', component: AddeditServiceComponent },
+  {
+    path: 'service/list',
+    component: ListingServiceComponent,
+    resolve: { serviceList: ResolveService },
+    data: { requestcondition: { source: 'services_view', condition: {} }, endpoint: 'datalist' }
+  },
+  {
+    path: 'service/edit/:_id',
+    component: AddeditServiceComponent,
+    resolve: { serviceList: ResolveService },
+    data: { requestcondition: { source: 'services', condition: {} }, endpoint: 'datalist' }
+  },
+
 ];
 
 @NgModule({
@@ -52,5 +52,5 @@ export class AppRoutingModule {
 
   constructor(public cookieService: CookieService) {
   }
-  
+
 }

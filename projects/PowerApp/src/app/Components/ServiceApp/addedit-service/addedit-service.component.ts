@@ -23,10 +23,10 @@ export class AddeditServiceComponent implements OnInit {
     baseUrl: "http://3.15.236.141:5005/",
     endpoint: "uploads",
     size: "51200", // kb
-    format: ["jpg", "jpeg", "png", "bmp", "zip", 'html'], // use all small font
-    type: "profile-picture",
-    path: "files",
-    prefix: "profile_picture_"
+    format: ["jpg", "jpeg", "png"], // use all small font
+    type: "service-image",
+    path: "services",
+    prefix: "service-image_"
   }
 
   constructor(private router : Router , private activatedRoute : ActivatedRoute ,private cookieService : CookieService) { }

@@ -3,7 +3,6 @@
 </mat-card>
 
 
-
 <!-- ------------------------lib listing being called------------------------ -->
 <mat-card *ngIf="loader==false">
     <lib-listing class="formfilterdiv"
@@ -13,14 +12,10 @@
         [statusarr]="serviceListConfig.statusarr" [jwttoken]="serviceListConfig.jwtToken"
         [apiurl]="serviceListConfig.apiUrl" [editroute]="serviceListConfig.editUrl"
         [deleteendpoint]="serviceListConfig.deleteEndPoint" [date_search_source]="serviceListConfig.view"
+        [detail_datatype]="serviceListConfig.pendingmodelapplicationarray_detail_datatype"
         [date_search_endpoint]="serviceListConfig.listEndPoint" [search_settings]="serviceListConfig.search_settings">
     </lib-listing>
     <!-- ----------------------------------------------------------------------------->
 
     <h2 *ngIf="serviceListConfig.datasource.length == 0">No record found.</h2>
 </mat-card>
-
-<!-- 
-    [date_search_source]="serviceListConfig.tableName"
-    [date_search_endpoint]="serviceListConfig.listEndPoint"
-    [search_settings]="serviceListConfig.search_settings" -->

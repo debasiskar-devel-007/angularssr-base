@@ -59,7 +59,7 @@
 
 
                 <!-- ----------------------------------Status---------------------------- -->
-                <mat-checkbox formControlName="status">Active</mat-checkbox><br>
+                <mat-checkbox formControlName="status" color="primary">Active</mat-checkbox><br>
                 <!-- -------------------------------------------------------------------- -->
 
 
@@ -91,23 +91,35 @@
 
 
                 <!-- --------------------------------------Video URL--------------------- -->
-                <mat-label>Embed Video URL:</mat-label>
+                <mat-label>Attach Videos:</mat-label>
                 <div formArrayName="credentials"
                     *ngFor="let creds of blogManagementForm.controls.credentials?.value; let i = index; trackBy: trackByFn">
                     <ng-container [formGroupName]="i">
-
                         <mat-form-field class="video_embed">
                             <input type="text" matInput formControlName="video_url">
                             <span matPrefix>{{ video_prefix }}</span>
-                           
                             <mat-icon matSuffix class="clickable" (click)="preview_video(i)">remove_red_eye</mat-icon>
                             <i style="position: absolute; cursor: pointer;                           right: 4px;
                             bottom: 7px;" class="material-icons" (click)="openSnackBar()">
                                 contact_support
                             </i>
                         </mat-form-field>
-                       
-                        <button type="button" (click)="addYoutubeVideo('')">
+
+
+                        <!-- Video Title  -->
+                        <mat-form-field>
+                            <input type="text" matInput formControlName="video_title" placeholder="Video title">
+                            <mat-icon matSuffix>title</mat-icon>
+                        </mat-form-field>
+                        <!-- Video Description  -->
+                        <mat-form-field>
+
+                            <textarea type="text" matInput formControlName="video_description"
+                                placeholder="Video description"></textarea>
+                            <mat-icon matSuffix>description</mat-icon>
+                        </mat-form-field>
+
+                        <button type="button" (click)="addYoutubeVideo('','','')">
                             <mat-icon matSuffix>add_box</mat-icon>
                         </button>
                         <span *ngIf="i!=0"><button type="button" (click)="deleteCreds()">
@@ -146,6 +158,41 @@
                 <!-- ----------------------------------------------------------------- -->
 
 
+                <!-- ---------------------------------------------Image Uploader--------------------- -->
+                <h1>Blogs Image:</h1>
+                <lib-file-upload [config]="imageConfigData"></lib-file-upload>
+                <!-- -------------------------------------------------------------------------------- -->
+               
+                <ng-container  *ngIf="flag==true">
+                <!-- CARD VIEW  -->
+                <mat-card-content class="files-view" *ngFor="let img of images_array_edit; let i2 = index">
+                    <mat-card class="example-card" >
+                        <img mat-card-image [src]="img.img_var">
+                        <mat-card-title>{{ img.image_name }}</mat-card-title>
+                        <mat-card-subtitle>{{img.image_type}}</mat-card-subtitle>
+                        <span class="closecard" (click)="clear_image(i2)"><i class="material-icons">clear</i></span>
+                    
+                    </mat-card>
+                </mat-card-content>
+                <!-- ---------  -->
+            </ng-container>
+
+
+
+
+
+                <!-- ---------------------------------------------File Uploader--------------------- -->
+                <h1>Blogs File:</h1>
+                <lib-file-upload [config]="fileConfigData"></lib-file-upload>
+                <!-- -------------------------------------------------------------------------------- -->
+               
+                <mat-chip-list class="mat_chip">                  
+                    <mat-chip color="primary" selected *ngFor="let item of file_array_edit;let j = index">{{ item }}
+                        <mat-icon matSuffix class="clickable" (click)="clearFileTags(j)">clear</mat-icon>
+                    </mat-chip>
+                </mat-chip-list>
+               
+               
                 <button class="submitbtn" mat-raised-button color="primary" type="button"
                     (click)="onSubmit()">{{buttonText}}</button>
 

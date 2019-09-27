@@ -32,7 +32,7 @@ export class AddeditServiceComponent implements OnInit {
 
 
 
-  // ===========================================declaration section================================
+  // ===========================================Declaration section================================
   serviceForm: FormGroup;
   loader: boolean = false;
   configData: any;
@@ -40,8 +40,13 @@ export class AddeditServiceComponent implements OnInit {
   buttonText = "SUBMIT";
   successMessage: string = "Submitted Successfully";
   dialogRef: any;
-  flag: boolean = false;
-  img_arr:any = [];
+  img_arr: any = [];
+  ErrCode: boolean = false;
+  flag: boolean;
+  img_var: any;
+  header_name: any;
+  image_name: any;
+  image_type: any;
   // ==============================================================================================
 
 
@@ -57,17 +62,20 @@ export class AddeditServiceComponent implements OnInit {
       this.addBulletList('', '');
 
 
-    // ============================================SWITCH CASES==========================================
+    // =========================================SWITCH CASES==========================================
     switch (this.configData.action) {
       case 'add':
         /* Button text */
         this.buttonText = "SUBMIT";
+        this.flag = false;
+        this.header_name = "ADD";
         break;
       case 'edit':
         /* Button text */
         this.buttonText = "UPDATE";
         this.successMessage = "One row updated";
         this.setDefaultValue(this.configData.defaultData);
+        this.header_name = "EDIT";
         this.flag = true;
         break;
     }
@@ -97,7 +105,7 @@ export class AddeditServiceComponent implements OnInit {
       priority: ['', [Validators.required]],
       status: [true,],
       bulletarr: this.formBuilder.array([]),
-      service_img:['',],
+      service_img: ['',],
       userId: ['',]
     });
   }
@@ -107,7 +115,7 @@ export class AddeditServiceComponent implements OnInit {
 
 
 
-  // ================================================Default value======================================
+  // ===============================================Default value======================================
   setDefaultValue(defaultValue) {
 
     defaultValue.bulletarr.forEach(element => {
@@ -119,9 +127,12 @@ export class AddeditServiceComponent implements OnInit {
       service_desc: defaultValue.service_desc,
       priority: defaultValue.priority,
       status: defaultValue.status,
-      
+      service_img: defaultValue.service_img,
       userId: null
     });
+    this.img_var = defaultValue.service_img.basepath + defaultValue.service_img.image;
+    this.image_name = defaultValue.service_img.name;
+    this.image_type = defaultValue.service_img.type
   }
   // ==================================================================================================
 
@@ -156,16 +167,22 @@ export class AddeditServiceComponent implements OnInit {
 
   // ================================================SUBMIT============================================
   onSubmit() {
-    if(this.imageConfigData.files) {
-      for(let loop = 0; loop < this.imageConfigData.files.length; loop++ ) {
-        this.img_arr.push(this.imageConfigData.files[loop].name);
-        this.serviceForm.value.service_img = this.img_arr;
-      }
+    // Service File Upload Works 
+    if (this.imageConfigData.files) {
+
+      if (this.imageConfigData.files.length > 1) { this.ErrCode = true; return; }
+      this.serviceForm.value.service_img =
+        {
+          "basepath": this.imageConfigData.files[0].upload.data.basepath + '/' + this.imageConfigData.path + '/',
+          "image": this.imageConfigData.files[0].upload.data.data.fileservername,
+          "name": this.imageConfigData.files[0].name,
+          "type": this.imageConfigData.files[0].type
+        };
     } else {
       this.serviceForm.value.service_img = false;
     }
 
-    
+
     this.loader = true;
     this.serviceForm.controls['service_desc'].markAsTouched();
     if (this.serviceForm.invalid) {
@@ -183,7 +200,6 @@ export class AddeditServiceComponent implements OnInit {
         data: Object.assign(this.serviceForm.value, this.configData.condition)
       };
       this.servicehttp.addData(this.configData.endpoint, postData).subscribe((response: any) => {
-        console.log(response);
         if (response.status == "success") {
           this.openDialog(this.successMessage);
           setTimeout(() => {
@@ -191,10 +207,10 @@ export class AddeditServiceComponent implements OnInit {
           }, 2000);
           this.router.navigate([this.configData.callBack]);
         } else {
-          alert("Some error occurred. Please try angain.");
+          alert("Some error occurred. Please try again.");
         }
       }, (error) => {
-        alert("Some error occurred. Please try angain.");
+        alert("Some error occurred. Please try again.");
       });
     }
 
@@ -209,22 +225,26 @@ export class AddeditServiceComponent implements OnInit {
       width: '250px',
       data: { msg: x }
     });
-
     this.dialogRef.afterClosed().subscribe(result => {
-
     });
   }
   // =================================================================================================
 
 
 
-  resetserviceForm(){
-      this.serviceForm.reset();
+  resetserviceForm() {
+    this.serviceForm.reset();
   }
 
   inputBlur(val: any) {
     this.serviceForm.controls[val].markAsUntouched();
   }
+
+  // ================================================================================================
+  clear_image() {
+    this.flag = false;
+  }
+  // ================================================================================================
 }
 
 

@@ -14,6 +14,25 @@ export class AddeditBlogmanagementComponent implements OnInit {
     public editdata: any = [];
   
 
+    public configData: any = {
+      baseUrl: "http://3.15.236.141:5005/",
+      endpoint: "uploads",
+      size: "51200", // kb
+      format: ["jpg", "jpeg", "png"], // use all small font
+      type: "blogs-image",
+      path: "blogs",
+      prefix: "blogs-image_"
+    }
+
+    public configFileData: any = {
+      baseUrl: "http://3.15.236.141:5005/",
+      endpoint: "uploads",
+      size: "51200", // kb
+      format: ["pdf", "doc", "docx","docxx"], // use all small font
+      type: "blogs-file",
+      path: "blogs",
+      prefix: "blogs-file"
+    }
   constructor(private cookieService: CookieService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {

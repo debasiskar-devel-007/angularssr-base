@@ -1,6 +1,6 @@
 <mat-card>
   <mat-toolbar color="primary" style="justify-content: center; align-items: center;">
-    <h2 class="headerSpan">Add Service</h2>
+    <h2 class="headerSpan">{{ header_name }}</h2>
   </mat-toolbar>
   <span class="formspan">
     <mat-card-content class="example-container">
@@ -60,7 +60,7 @@
             <!-- ------------bullet title-----------  -->
             <mat-form-field>
               <input matInput formControlName="bullet_title" placeholder="Bullet title">
-              <mat-icon matSuffix>create</mat-icon>
+              <mat-icon matSuffix>title</mat-icon>
             </mat-form-field><br>
             <!-- -----------------------------------  -->
 
@@ -82,12 +82,24 @@
         <!-- __________________________________________________________________________________________________________ -->
 
         <h1>Service Image:</h1>
-        <lib-file-upload [config]="imageConfigData"></lib-file-upload>
-        <mat-error *ngIf="serviceForm.controls['service_img'].errors && serviceForm.controls['service_img'].errors.required">Priority is required.</mat-error>
+        <lib-file-upload [config]="imageConfigData" ></lib-file-upload>
+        <mat-error *ngIf="ErrCode==true">Please add just one service image.</mat-error>
+        <!-- <mat-error *ngIf="serviceForm.controls['service_img'].errors && serviceForm.controls['service_img'].errors.required">Priority is required.</mat-error> -->
 
+
+
+        <mat-card-content class="files-view" *ngIf="flag==true">
+          <mat-card class="example-card">
+            <img mat-card-image [attr.src]="img_var">
+            <mat-card-title>{{ image_name }}</mat-card-title>
+            <mat-card-subtitle>{{ image_type }}</mat-card-subtitle>
+            <span class="closecard" (click)="clear_image()"><i class="material-icons">clear</i></span>
+          </mat-card>
+        </mat-card-content>
 
         <span><button type="submit" class="submitbtn" mat-raised-button color="primary">{{buttonText}}</button></span>
-        <span><button type="reset" class="submitbtn" mat-raised-button color="primary" (click)="resetserviceForm()">RESET</button></span>
+        <span><button type="reset" class="submitbtn" mat-raised-button color="primary"
+            (click)="resetserviceForm()">RESET</button></span>
 
       </form>
     </mat-card-content>

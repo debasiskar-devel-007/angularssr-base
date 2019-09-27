@@ -757,30 +757,34 @@ export class ListingComponent implements OnInit {
     let data:any;
     data=data1;
     let data2:any=[];
-    console.log('data');
-    console.log(data);
+    // console.log('data11111');
+    // console.log(typeof(data));
 
       for (let key in data) {
         let flagk:any='';
           if (data.hasOwnProperty(key)) {
+            console.log(typeof(data[key]));
               console.log(key + " -> " + data[key]+"--->"+typeof (data[key]));
               if(typeof (data[key])=='boolean') {
                   if(data[key]==true) data[key]='Yes';
                   if(data[key]==false) data[key]='No';
               }
+              // console.log('_________________1');
 
               if(typeof (data[key])=='object') {
+                console.log(data[key])
                   let tempdata:any=[];
                   for(let k in data[key]){
                       console.log('key');
-                      console.log(key);
+                      console.log(key +'====+++');
                       console.log(this.detail_datatypeval);
                       for(let p in this.detail_datatypeval){
                           console.log('p');
                           console.log(p);
                           console.log(key);
-                          console.log(data[key][k]);
+                          console.log(data[key][k] +'=====');
                           if(this.detail_datatypeval[p].key==key && this.detail_datatypeval[p].value=='image'){
+                            console.log('_________________');
 
                               let imgval:any=this.detail_datatypeval[p].fileurl+data[key][k].replace(/'/g, '');
                               console.log('imgval');
