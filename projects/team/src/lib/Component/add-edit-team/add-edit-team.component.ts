@@ -36,13 +36,11 @@ export class AddEditTeamComponent implements OnInit {
   @Input()
   set imageUpload(getConfig: any) {
     this.imageConfigData = getConfig;
-    console.log(this.imageConfigData);
   }
   @Input()
   set singleData(val: any) {
     this.SingleDataList = (val) || '<no name set>';
     this.SingleDataList = val;
-    console.log("single data with image", this.SingleDataList);
     if (this.activeroute.snapshot.params._id) {
       this.ButtonText = "Update";
       this.HeaderText = "Edit Team Member"
@@ -56,7 +54,7 @@ export class AddEditTeamComponent implements OnInit {
 
       this.img_var = this.SingleDataList[0].team_img.basepath + this.SingleDataList[0].team_img.image;
       this.image_name = this.SingleDataList[0].team_img.name;
-      this.image_type = this.SingleDataList[0].team_img.type
+      this.image_type = this.SingleDataList[0].team_img.type;
 
       for (const i in this.SingleDataList[0].bulletarray) {
         this.addBulletListData(this.SingleDataList[0].bulletarray[i].bullet_name,
@@ -89,7 +87,6 @@ export class AddEditTeamComponent implements OnInit {
   set getDataEndpoint(endpointUrlval: any) {
     this.getDataEndpointData = (endpointUrlval) || '<no name set>';
     this.getDataEndpointData = endpointUrlval;
-    console.log("data", this.getDataEndpointData);
 
   }
   @Input()          //setting the server url from project

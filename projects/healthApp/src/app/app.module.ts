@@ -36,6 +36,10 @@ import { ListComponent } from './Component/Team-Library/Category-Management/list
 /**Share-tool Library**/
 import { SharetoolsModule } from 'sharetools';
 import { ShareToolComponent } from './Component/share-tool/share-tool.component';
+/**Image Gallery start here**/
+import { ImageGalleryModule } from 'image-gallery';
+import { ListingCategoryComponent } from './Component/ImageGallery/categoryManagement/listing-category/listing-category.component';
+import { AddeditImageCategoryComponent} from './Component/ImageGallery/categoryManagement/addedit-image-category/addedit-image-category.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -52,7 +56,9 @@ import { ShareToolComponent } from './Component/share-tool/share-tool.component'
     ListTeamComponent,
     AddEditComponent,
     ListComponent,
-    ShareToolComponent
+    ShareToolComponent,
+    ListingCategoryComponent,
+    AddeditImageCategoryComponent
   ],
   imports: [
     MaterialModule,
@@ -65,9 +71,9 @@ import { ShareToolComponent } from './Component/share-tool/share-tool.component'
     ListingModule,
     VideoModule,
     TeamModule,
-    SharetoolsModule
-    
-    
+    SharetoolsModule,
+    ImageGalleryModule
+
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

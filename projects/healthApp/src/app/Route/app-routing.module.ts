@@ -26,6 +26,9 @@ import { AddEditComponent } from '../Component/Team-Library/Category-Management/
 import {  ListComponent } from '../Component/Team-Library/Category-Management/list/list.component';
 /**Share-tools Library**/
 import { ShareToolComponent } from '../Component/share-tool/share-tool.component';
+/**Image-Gallery start here**/
+import{AddeditImageCategoryComponent} from '../Component/ImageGallery/categoryManagement/addedit-image-category/addedit-image-category.component';
+import { ListingCategoryComponent} from '../Component/ImageGallery/categoryManagement/listing-category/listing-category.component'
 const appRoutes: Routes = [
     /* Category Management Routes Start */
     { 
@@ -169,7 +172,17 @@ const appRoutes: Routes = [
     {
       path : '',
       component : ShareToolComponent 
+    },
+    /**Image Gallery start here**/
+    {
+      path : 'image-gallery/category-management/add',
+      component : AddeditImageCategoryComponent
+    },
+    {
+      path : 'image-gallery/category-management/list',
+      component : ListingCategoryComponent,
     }
+
 ];
 
 @NgModule({

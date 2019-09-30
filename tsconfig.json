@@ -10,6 +10,7 @@
     "moduleResolution": "node",
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
+   // "allowJs": true, //30.9.2019
     "importHelpers": true,
     "target": "es2015",
     "typeRoots": [
@@ -103,6 +104,12 @@
       ],
       "sharetools/*": [
         "dist/sharetools/*"
+      ],
+      "image-gallery": [
+        "dist/image-gallery"
+      ],
+      "image-gallery/*": [
+        "dist/image-gallery/*"
       ]
     }
   }
