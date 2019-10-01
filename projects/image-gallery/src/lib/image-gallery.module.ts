@@ -9,6 +9,8 @@ import { ApiService } from './Service/api.service';
 import { ListingModule } from 'lib-listing';
 
 import { DemoMaterialModule } from './modules/material-module';
+import { AddEditImageComponent } from './component/imageGallery-management/add-edit-image/add-edit-image.component';
+import { FileUploadModule } from 'file-upload';    //file upload library
 
 @NgModule({
   imports: [
@@ -17,13 +19,14 @@ import { DemoMaterialModule } from './modules/material-module';
     FormsModule,
     ReactiveFormsModule,
     CKEditorModule,
-    ListingModule
+    ListingModule,
+    FileUploadModule
   ],
-  declarations: [ImageGalleryComponent, AddEditCaegoryComponent, ListCategoryComponent],
+  declarations: [ImageGalleryComponent, AddEditCaegoryComponent, ListCategoryComponent, AddEditImageComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ],
   providers: [ApiService],
-  exports: [ImageGalleryComponent, AddEditCaegoryComponent, ListCategoryComponent]
+  exports: [ImageGalleryComponent, AddEditCaegoryComponent, ListCategoryComponent,AddEditImageComponent]
 })
 export class ImageGalleryModule { }

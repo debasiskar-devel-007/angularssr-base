@@ -42,9 +42,8 @@
              && videolibAddEditForm.controls['description'].errors.required">
             Description field can not be blank</mat-error>
           <!-- ckeditor end here -->
-          <mat-form-field>
-
-            <mat-label>Parent Category</mat-label>
+          <mat-form-field class="parent_cat">
+            <mat-label >Parent Category</mat-label>
             <mat-select formControlName="parent_id">
               <mat-option [value]=0>
                 Select a category

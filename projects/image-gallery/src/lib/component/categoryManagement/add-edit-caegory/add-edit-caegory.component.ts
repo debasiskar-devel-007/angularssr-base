@@ -18,16 +18,36 @@ export class AddEditCaegoryComponent implements OnInit {
   public addEndpointData: any;
   public videoStatusArr: any = [];
   public listUrl: any;
+  public listrouteData: any = '';
   public parameter_id: any;
   public VideolistingArray: any = [];
   public editedListData: any = [];
   public spinnerloader: boolean;
-  public allData :any=[];
+  public allData: any = [];
+  public singleDatalist: any = [];
+
   @Input()          //setting the server url from project
   set serverUrl(serverUrlval: any) {
     this.serverUrlData = (serverUrlval) || '<no name set>';
     this.serverUrlData = serverUrlval;
 
+  }
+  @Input()
+  set singleData(val: any) {
+    this.singleDatalist = (val) || '<no name set>';
+    this.singleDatalist = val;
+    if (this.activeroute.snapshot.params._id) {
+      this.headerText = "Edit Image";
+      this.buttonText = "Update";
+      this.parameter_id = this.activeroute.snapshot.params._id;
+      this.imageGalleryAddEditForm.controls['title'].patchValue(val[0].title);
+      this.imageGalleryAddEditForm.controls['priority'].patchValue(val[0].priority);
+      this.imageGalleryAddEditForm.controls['status'].patchValue(val[0].status);
+      this.imageGalleryAddEditForm.controls['description'].patchValue(val[0].description);
+      this.model.editorData = val[0].description;
+      this.imageGalleryAddEditForm.controls['parent_category'].patchValue(val[0].parent_category);
+
+    }
   }
 
   @Input()          //setting the getdat endpoint from project
@@ -97,7 +117,7 @@ export class AddEditCaegoryComponent implements OnInit {
 
     form.controls[val].markAsUntouched();
   }
-  resetImageForm(){
+  resetImageForm() {
     this.imageGalleryAddEditForm.reset();
   }
   getData() {
@@ -107,7 +127,7 @@ export class AddEditCaegoryComponent implements OnInit {
     this.apiService.getData(data).subscribe(response => {
       let result: any = response;
       this.allData = result.res;
-      console.log(this.allData,"yooooooooooooooo");
+      console.log(this.allData, "yooooooooooooooo");
     })
   }
   ImageAddEditFormSubmit() {
@@ -124,21 +144,40 @@ export class AddEditCaegoryComponent implements OnInit {
         this.imageGalleryAddEditForm.value.status = parseInt("1");
       else
         this.imageGalleryAddEditForm.value.status = parseInt("0");
+
+      if (this.activeroute.snapshot.params._id) {
+        data = {
+          "source": "imageGallery_category",
+          'data': {
+            "id": this.parameter_id,
+            "title": this.imageGalleryAddEditForm.value.title,
+            "description": this.imageGalleryAddEditForm.value.description,
+            "priority": this.imageGalleryAddEditForm.value.priority,
+            "status": this.imageGalleryAddEditForm.value.status,
+            "parent_category": this.imageGalleryAddEditForm.value.parent_category
+          },
+          "sourceobj": ["parent_category"]
+        }
+      } else {
+        var data: any;
+        data = {                                         //add part
+          "source": "imageGallery_category",
+          "data": this.imageGalleryAddEditForm.value,
+          "sourceobj": ["parent_category"]
+        }
+      }
     }
-    var data: any;
-    data = {                                         //add part
-      "source": "imageGallery_category",
-      "data": this.imageGalleryAddEditForm.value,
-      "sourceobj": ["parent_category"]
-    }
+    this.spinnerloader = true;
     this.apiService.addData(data).subscribe(response => {
-     
-     console.log(response);
-      // setTimeout(() => {
-      //   this.router.navigateByUrl('/' + this.listrouteData);
-      // }, 100);
+
+      console.log(response);
+      this.spinnerloader = false;
+      this.resetImageForm();
+      setTimeout(() => {
+        this.router.navigateByUrl('/' + this.listUrl);
+      }, 100);
     })
-  
+
   }
 
 }
