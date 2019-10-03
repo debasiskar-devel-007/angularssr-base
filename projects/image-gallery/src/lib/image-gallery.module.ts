@@ -10,7 +10,8 @@ import { ListingModule } from 'lib-listing';
 
 import { DemoMaterialModule } from './modules/material-module';
 import { AddEditImageComponent } from './component/imageGallery-management/add-edit-image/add-edit-image.component';
-import { FileUploadModule } from 'file-upload';    //file upload library
+import { FileUploadModule } from 'file-upload';     //file upload library
+import { ImagelistingComponent } from './component/imageGallery-management/imagelisting/imagelisting.component';    
 
 @NgModule({
   imports: [
@@ -22,11 +23,11 @@ import { FileUploadModule } from 'file-upload';    //file upload library
     ListingModule,
     FileUploadModule
   ],
-  declarations: [ImageGalleryComponent, AddEditCaegoryComponent, ListCategoryComponent, AddEditImageComponent],
+  declarations: [ImageGalleryComponent, AddEditCaegoryComponent, ListCategoryComponent, AddEditImageComponent, ImagelistingComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA
   ],
   providers: [ApiService],
-  exports: [ImageGalleryComponent, AddEditCaegoryComponent, ListCategoryComponent,AddEditImageComponent]
+  exports: [ImageGalleryComponent, AddEditCaegoryComponent, ListCategoryComponent,AddEditImageComponent,ImagelistingComponent]
 })
 export class ImageGalleryModule { }

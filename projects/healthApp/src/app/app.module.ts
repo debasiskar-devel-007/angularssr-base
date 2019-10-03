@@ -41,6 +41,7 @@ import { ImageGalleryModule } from 'image-gallery';
 import { ListingCategoryComponent } from './Component/ImageGallery/categoryManagement/listing-category/listing-category.component';
 import { AddeditImageCategoryComponent} from './Component/ImageGallery/categoryManagement/addedit-image-category/addedit-image-category.component';
 import { AddeditImageComponent } from './Component/ImageGallery/ImageManagement/addedit-image/addedit-image.component';
+import { ListImagesComponent } from './Component/ImageGallery/ImageManagement/list-images/list-images.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -60,7 +61,8 @@ import { AddeditImageComponent } from './Component/ImageGallery/ImageManagement/
     ShareToolComponent,
     ListingCategoryComponent,
     AddeditImageCategoryComponent,
-    AddeditImageComponent
+    AddeditImageComponent,
+    ListImagesComponent
   ],
   imports: [
     MaterialModule,

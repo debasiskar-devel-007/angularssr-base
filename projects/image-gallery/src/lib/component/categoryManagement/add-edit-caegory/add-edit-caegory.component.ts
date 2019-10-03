@@ -127,7 +127,7 @@ export class AddEditCaegoryComponent implements OnInit {
     this.apiService.getData(data).subscribe(response => {
       let result: any = response;
       this.allData = result.res;
-      console.log(this.allData, "yooooooooooooooo");
+      
     })
   }
   ImageAddEditFormSubmit() {

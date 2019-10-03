@@ -237,7 +237,6 @@ export class AddEditTeamComponent implements OnInit {
             "multipleemail": this.teamForm.value.multipleemail,
             "bulletarray": this.teamForm.value.bulletarray,
             'team_img': this.teamForm.value.team_img
-
           },
           "sourceobj": ["categoryname"]
         };

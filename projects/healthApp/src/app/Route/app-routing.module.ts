@@ -30,6 +30,8 @@ import { ShareToolComponent } from '../Component/share-tool/share-tool.component
 import{AddeditImageCategoryComponent} from '../Component/ImageGallery/categoryManagement/addedit-image-category/addedit-image-category.component';
 import { ListingCategoryComponent} from '../Component/ImageGallery/categoryManagement/listing-category/listing-category.component'
 import { AddeditImageComponent } from '../Component/ImageGallery/ImageManagement/addedit-image/addedit-image.component';
+import { ListImagesComponent } from '../Component/ImageGallery/ImageManagement/list-images/list-images.component';
+import { from } from 'rxjs';
 const appRoutes: Routes = [
     /* Category Management Routes Start */
     { 
@@ -194,6 +196,18 @@ const appRoutes: Routes = [
     {
       path : 'image-gallery/add',
       component : AddeditImageComponent
+     },
+     {
+      path : 'image-gallery/edit/:_id',
+      component : AddeditImageComponent,
+      resolve: { ImageData : ResolveService},
+      data :{ requestcondition : {source :'imageGallery_management',condition:{}},endpoint :'datalist'}
+     },
+    {
+      path : 'image-gallery/list',
+      component :ListImagesComponent,
+      resolve: { ImageData : ResolveService},
+      data :{ requestcondition : {source :'imageGallery_management_view',condition:{}},endpoint :'datalist'}
     }
 
 ];

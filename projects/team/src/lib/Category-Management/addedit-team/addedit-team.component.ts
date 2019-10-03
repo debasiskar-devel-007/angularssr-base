@@ -42,7 +42,6 @@ export class AddeditTeamComponent implements OnInit {
   set singleEditData(val:any){
     this.SingledataEdit = (val) || '<no name set>';
     this.SingledataEdit = val;
-    console.log(this.SingledataEdit,"uyydsuohfudghdiughdiuhfg");
     if(this.activeroute.snapshot.params._id){
       this.ButtonText="Update";
     this.params_id=this.activeroute.snapshot.params._id;
