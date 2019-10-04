@@ -83,7 +83,7 @@ export class AddEditImageComponent implements OnInit {
           "type": val[0].img_gallery[i].type
         });
       }
-      console.log("array for edit for multiple images",this.images_array_edit);
+      console.log("array for edit for multiple souresh",this.images_array);
 
     }
 
@@ -111,10 +111,10 @@ export class AddEditImageComponent implements OnInit {
       this.apiService.setaddEndpoint(this.addEndpointData);
     }, 50);
     setTimeout(() => {
-      this.getDataDropdown();
+      this.getDropdownData();
     }, 50);
   }
-  getDataDropdown() {
+  getDropdownData() {
     let data: any = {
       "source": "imageGallery_category"
     }
@@ -127,7 +127,9 @@ export class AddEditImageComponent implements OnInit {
     this.imageGalleryManagementForm.reset();
   }
   clear_image(index: any) {
-    this.images_array.pop(this.dataForEdit.blogs_image[index]);
+    console.log(this.dataForEdit.img_gallery[0]);
+    //console.log("sb sala faltu",this.dataForEdit.img_gallery[index]);
+    // this.images_array.pop(this.dataForEdit.img_gallery[index]);
     this.images_array_edit.splice(index, 1);
   }
   ImageAddEditFormSubmit() {

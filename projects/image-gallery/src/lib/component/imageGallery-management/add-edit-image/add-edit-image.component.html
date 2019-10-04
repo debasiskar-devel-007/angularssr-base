@@ -25,7 +25,7 @@
 
           <!-- -------------------------------------------------------------------------------- -->
 
-          <ng-container *ngIf="flag==true">
+          <ng-container >
             <!-- CARD VIEW  -->
             <mat-card-content class="files-view" *ngFor="let img of images_array_edit; let i2 = index">
               <mat-card class="example-card">
@@ -36,7 +36,7 @@
 
               </mat-card>
             </mat-card-content>
-            <!-- ---------  -->
+            <!-- ----CARD VIEW end here-----  -->
           </ng-container>
 
           <button class="submitbtn" mat-raised-button color="primary" type="submit">{{buttonText}}</button>

@@ -26,11 +26,10 @@ export class AddeditImageComponent implements OnInit {
   ngOnInit() {
     if(this.activeRoute.snapshot.params._id){
       this.activeRoute.data.forEach(data=>{
-        console.log(data);
         let result:any;
         result=data.ImageData.res;
         this.editedData=result;
-        console.log("8080808080",this.editedData);
+       
       })
     }
     

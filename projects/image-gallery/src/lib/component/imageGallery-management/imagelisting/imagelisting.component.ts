@@ -22,20 +22,19 @@ export class ImagelistingComponent implements OnInit {
   data_modify_header: any =
     {
       'parent_category_image': "Parent Category",
-      'img_gallery': "Images"
+      'images': "Images"
     };
   search_settings: any =
     {
       textsearch: [
         { label: "Search By Parent Category", field: 'parent_category_image' }],
-
     };
     pendingmodelapplicationarray_detail_datatype:any=[{
       key: "images",
       value: 'image',
       fileurl: 'https://s3.us-east-2.amazonaws.com/crmfiles.influxhostserver/imageGallery/'    // Image path 
     }];
-  @Input()
+  @Input()           //getting all data from application
   set allDataList(val: any) {
     this.listingData = (val) || 'no name set';
     this.listingData = val;

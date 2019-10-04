@@ -24,7 +24,7 @@ public serverUrl:any="https://o820cv2lu8.execute-api.us-east-2.amazonaws.com/pro
       let result: any;
       result = data.ImageData.res;
       this.imageGalleryallData = result;
-      console.log("all data via resolve call",this.imageGalleryallData);
+     
     })
   }
 
