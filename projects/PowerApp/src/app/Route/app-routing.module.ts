@@ -6,6 +6,7 @@ import { AddeditTestimonialComponent } from '../Components/TestimonialApp/addedi
 import { ListingTestimonialComponent } from '../Components/TestimonialApp/listing-testimonial/listing-testimonial.component';
 import { AddeditServiceComponent } from '../Components/ServiceApp/addedit-service/addedit-service.component';
 import { ListingServiceComponent } from '../Components/ServiceApp/listing-service/listing-service.component';
+import { ListingNewsletterComponent } from '../Components/NewsletterApp/listing-newsletter/listing-newsletter.component';
 
 
 const appRoutes: Routes = [
@@ -40,6 +41,16 @@ const appRoutes: Routes = [
     resolve: { serviceList: ResolveService },
     data: { requestcondition: { source: 'services', condition: {} }, endpoint: 'datalist' }
   },
+
+   // _______________________NEWSLETTER LIBRARY___________________
+   { 
+     path:'newsletter/list',
+     component: ListingNewsletterComponent,
+     resolve: { newsletterList : ResolveService },
+     data: { requestcondition : { source :'newsTitle_view' , condition : {} },endpoint : 'datalist' }
+   },
+   
+  //  { path: 'newsletter', component: ListingNewsletterComponent },
 
 ];
 

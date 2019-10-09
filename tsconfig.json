@@ -61,7 +61,7 @@
       "listing-library/*": [
         "dist/listing-library/*"
       ],
-      "lib-listing": [
+      "listing": [
         "dist/listing"
       ],
       "listing/*": [
@@ -84,6 +84,12 @@
       ],
       "file-upload/*": [
         "dist/file-upload/*"
+      ],
+      "news-title": [
+        "dist/news-title"
+      ],
+      "news-title/*": [
+        "dist/news-title/*"
       ]
     }
   }

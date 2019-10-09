@@ -27,7 +27,10 @@ import { AddeditServiceComponent } from './Components/ServiceApp/addedit-service
 import { ListingServiceComponent } from './Components/ServiceApp/listing-service/listing-service.component';
 
 
-// _________________________________FILE UPLOAD__________________________________
+// ___________________________NEWSLETTER LIBRARY__________________________________
+import { NewsTitleModule } from 'news-title';
+import { ListingNewsletterComponent } from './Components/NewsletterApp/listing-newsletter/listing-newsletter.component';
+
 
 
 @NgModule({
@@ -37,6 +40,8 @@ import { ListingServiceComponent } from './Components/ServiceApp/listing-service
     ListingTestimonialComponent,
     AddeditServiceComponent,
     ListingServiceComponent,
+    ListingNewsletterComponent,
+    
    
     
   ],
@@ -49,7 +54,8 @@ import { ListingServiceComponent } from './Components/ServiceApp/listing-service
     RouterModule,
     DemoMaterialModule,
     ServicelibModule,
-    FileUploadModule
+    FileUploadModule,
+    NewsTitleModule
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

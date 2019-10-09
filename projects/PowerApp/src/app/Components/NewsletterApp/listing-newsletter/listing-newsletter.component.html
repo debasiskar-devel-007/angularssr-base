@@ -1,0 +1,15 @@
+<mat-card>
+  <mat-toolbar color="primary" style="justify-content: center; align-items: center;">
+      <h2 class="headerSpan">Newsletters</h2>
+  </mat-toolbar>
+
+  <!-- ---------------------Button for adding new role------------------------------ -->
+  <mat-toolbar class="buttonsetToolbar">
+      <button class="singleButton" mat-raised-button color="primary" [routerLink]="['/testimonial/add']">Add a newsletter</button>
+  </mat-toolbar>
+  
+
+  <!-- to listing library -->
+  <lib-listing-newsletter [config]="newsLetterListConfig"></lib-listing-newsletter>
+</mat-card>
+
