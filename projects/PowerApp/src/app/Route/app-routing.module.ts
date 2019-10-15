@@ -6,7 +6,9 @@ import { AddeditTestimonialComponent } from '../Components/TestimonialApp/addedi
 import { ListingTestimonialComponent } from '../Components/TestimonialApp/listing-testimonial/listing-testimonial.component';
 import { AddeditServiceComponent } from '../Components/ServiceApp/addedit-service/addedit-service.component';
 import { ListingServiceComponent } from '../Components/ServiceApp/listing-service/listing-service.component';
-import { ListingNewsletterComponent } from '../Components/NewsletterApp/listing-newsletter/listing-newsletter.component';
+import { AddeditResourceComponent } from '../Components/ResourceApp/addedit-resource/addedit-resource.component';
+import { ListingResourceComponent } from '../Components/ResourceApp/listing-resource/listing-resource.component';
+
 
 
 const appRoutes: Routes = [
@@ -42,15 +44,21 @@ const appRoutes: Routes = [
     data: { requestcondition: { source: 'services', condition: {} }, endpoint: 'datalist' }
   },
 
-   // _______________________NEWSLETTER LIBRARY___________________
-   { 
-     path:'newsletter/list',
-     component: ListingNewsletterComponent,
-     resolve: { newsletterList : ResolveService },
-     data: { requestcondition : { source :'newsTitle_view' , condition : {} },endpoint : 'datalist' }
-   },
    
-  //  { path: 'newsletter', component: ListingNewsletterComponent },
+  //_______________________RESOURCE LIBRARY_____________________
+  { path:'resource/add',component:AddeditResourceComponent},
+  {
+    path: 'resource/list',
+    component: ListingResourceComponent,
+    resolve: { resourceList: ResolveService },
+    data: { requestcondition: { source: 'resources_view', condition: {} }, endpoint: 'datalist' }
+  },
+  {
+    path: 'resource/edit/:_id',
+    component: AddeditResourceComponent,
+    resolve: { resourceList: ResolveService },
+    data: { requestcondition: { source: 'resources', condition: {} }, endpoint: 'datalist' }
+  },
 
 ];
 

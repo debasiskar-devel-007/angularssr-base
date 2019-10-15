@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { ListingNewsletterComponent } from './listing-newsletter.component';
+import { AddeditResourceappComponent } from './addedit-resourceapp.component';
 
-describe('ListingNewsletterComponent', () => {
-  let component: ListingNewsletterComponent;
-  let fixture: ComponentFixture<ListingNewsletterComponent>;
+describe('AddeditResourceappComponent', () => {
+  let component: AddeditResourceappComponent;
+  let fixture: ComponentFixture<AddeditResourceappComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ListingNewsletterComponent ]
+      declarations: [ AddeditResourceappComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(ListingNewsletterComponent);
+    fixture = TestBed.createComponent(AddeditResourceappComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

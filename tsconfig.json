@@ -90,6 +90,12 @@
       ],
       "news-title/*": [
         "dist/news-title/*"
+      ],
+      "resourcelib": [
+        "dist/resourcelib"
+      ],
+      "resourcelib/*": [
+        "dist/resourcelib/*"
       ]
     }
   }

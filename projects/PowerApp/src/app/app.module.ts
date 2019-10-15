@@ -27,11 +27,10 @@ import { AddeditServiceComponent } from './Components/ServiceApp/addedit-service
 import { ListingServiceComponent } from './Components/ServiceApp/listing-service/listing-service.component';
 
 
-// ___________________________NEWSLETTER LIBRARY__________________________________
-import { NewsTitleModule } from 'news-title';
-import { ListingNewsletterComponent } from './Components/NewsletterApp/listing-newsletter/listing-newsletter.component';
-
-
+//________________________________RESOURCE LIBRARY_____________________________
+import { ResourcelibModule } from 'resourcelib';
+import { AddeditResourceComponent } from './Components/ResourceApp/addedit-resource/addedit-resource.component';
+import { ListingResourceComponent } from './Components/ResourceApp/listing-resource/listing-resource.component';
 
 @NgModule({
   declarations: [
@@ -40,7 +39,9 @@ import { ListingNewsletterComponent } from './Components/NewsletterApp/listing-n
     ListingTestimonialComponent,
     AddeditServiceComponent,
     ListingServiceComponent,
-    ListingNewsletterComponent,
+    AddeditResourceComponent,
+    ListingResourceComponent
+    
     
    
     
@@ -55,7 +56,9 @@ import { ListingNewsletterComponent } from './Components/NewsletterApp/listing-n
     DemoMaterialModule,
     ServicelibModule,
     FileUploadModule,
-    NewsTitleModule
+    ResourcelibModule,
+   
+    
   ],
   providers: [CookieService],
   bootstrap: [AppComponent]

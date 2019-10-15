@@ -1,0 +1,24 @@
+<mat-card *ngIf="loader==true">
+    <mat-spinner class="spinner"></mat-spinner>
+</mat-card>
+
+
+
+<!-- ------------------------lib listing being called------------------------ -->
+<mat-card *ngIf="loader==false">
+    <lib-listing class="formfilterdiv"
+        *ngIf="resourceListConfig.datasource !=null && resourceListConfig.datasource.length > 0"
+        [datasource]="resourceListConfig.datasource" [skip]="resourceListConfig.listArray_skip"
+        [modify_header_array]="resourceListConfig.listArray_modify_header" [sourcedata]="resourceListConfig.tableName"
+        [statusarr]="resourceListConfig.statusarr" [jwttoken]="resourceListConfig.jwtToken"
+        [apiurl]="resourceListConfig.apiUrl" [editroute]="resourceListConfig.editUrl"
+        [deleteendpoint]="resourceListConfig.deleteEndPoint"
+        [date_search_source]="resourceListConfig.view"
+       [date_search_endpoint]="resourceListConfig.listEndPoint"
+       [search_settings]="resourceListConfig.search_settings"
+       [detail_datatype]="resourceListConfig.pendingmodelapplicationarray_detail_datatype">
+    </lib-listing>
+<!-- ----------------------------------------------------------------------------->
+
+    <h2 *ngIf="resourceListConfig.datasource.length == 0">No record found.</h2>
+</mat-card>

@@ -1,25 +1,24 @@
-import { ElementRef, EventEmitter, Injectable, Input, ViewChild } from '@angular/core';
-import { switchMap, map, takeWhile } from 'rxjs/operators';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
-// for setting observables to get serverurl and endpointurl from app
-import { Observable, Subject, Subscription } from 'rxjs';
+
+import { Injectable } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpErrorResponse, HttpClientModule } from '@angular/common/http';
+import { Observable, of } from 'rxjs';
+import { map, catchError, tap } from 'rxjs/operators';
 import { CookieService } from 'ngx-cookie-service';
+
 
 @Injectable({
   providedIn: 'root'
 })
-
-export class HttpService {
-
+export class ResourcelibService {
   public lengthis;
   public percentageis;
   public inprogress;
   public progress: any = [];
   public uploadtype;
   public uploaderror: any = '';
-  public accesstoken: any = this.cookieService.get('jwtToken');
+  public accesstoken: any = this.cookieService.get('jwtToken');;
   public fileservername: any = [];
-  public serverUrl: any = 'https://63zzhpnoti.execute-api.us-east-1.amazonaws.com/production/api/';
+  public serverUrl: any = '';
   public addendpointUrl: any;
   public updateendpointUrl: any;
   public deletesingle_endpointUrl: any;
@@ -28,7 +27,7 @@ export class HttpService {
   public updatestatus_multiple_endpointUrl: any;
   public getdata_endpointUrl: any = 'datalist';
 
-  constructor(private _http: HttpClient, private _authHttp: HttpClient, private cookieService: CookieService) { }
+  constructor(private _http: HttpClient, private _authHttp: HttpClient,private cookieService : CookieService) { }
 
   isTokenExpired() {
     // const helper = new JwtHelperService();
@@ -40,84 +39,84 @@ export class HttpService {
     // console.log('refresh_token isExpired:',isRefreshTokenExpired)
   }
 
-  addData(requestdata: any) {
+  addData(endpoint: any, requestdata: any) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': this.accesstoken
       })
     };
-    var result = this._http.post(this.serverUrl + this.addendpointUrl, JSON.stringify(requestdata), httpOptions).pipe(map(res => res));
+    var result = this._http.post(this.serverUrl + endpoint, JSON.stringify(requestdata), httpOptions).pipe(map(res => res));
     return result;
   }
 
-  UpdateData(requestdata: any) {
+  UpdateData(endpoint: any, requestdata: any) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': this.accesstoken
       })
     };
-    var result = this._http.post(this.serverUrl + this.updateendpointUrl, JSON.stringify(requestdata), httpOptions).pipe(map(res => res));
+    var result = this._http.post(this.serverUrl + endpoint, JSON.stringify(requestdata), httpOptions).pipe(map(res => res));
     return result;
   }
 
-  getData(requestdata: any) {
+  getData(endpoint: any, requestdata: any) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': this.accesstoken
       })
     };
-    var result = this._http.post(this.serverUrl + this.getdata_endpointUrl, JSON.stringify(requestdata), httpOptions).pipe(map(res => res));
+    var result = this._http.post(this.serverUrl + endpoint, JSON.stringify(requestdata), httpOptions).pipe(map(res => res));
     return result;
   }
 
-  deleteSingleData(requestdata: any) {
+  deleteSingleData(endpoint: any, requestdata: any) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': this.accesstoken
       })
     };
-    var result = this._http.post(this.serverUrl + this.deletesingle_endpointUrl, JSON.stringify(requestdata), httpOptions).pipe(map(res => res));
+    var result = this._http.post(this.serverUrl + endpoint, JSON.stringify(requestdata), httpOptions).pipe(map(res => res));
     return result;
   }
 
-  deleteMultipleData(requestdata: any) {
+  deleteMultipleData(endpoint: any, requestdata: any) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': this.accesstoken
       })
     };
-    var result = this._http.post(this.serverUrl + this.deletesingle_endpointUrl + 'many', JSON.stringify(requestdata), httpOptions).pipe(map(res => res));
+    var result = this._http.post(this.serverUrl + endpoint, JSON.stringify(requestdata), httpOptions).pipe(map(res => res));
     return result;
   }
 
-  UpdateStatusForSingleData(requestdata: any) {
+  UpdateStatusForSingleData(endpoint: any, requestdata: any) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': this.accesstoken
       })
     };
-    var result = this._http.post(this.serverUrl + this.updatestatus_single_endpointUrl, JSON.stringify(requestdata), httpOptions).pipe(map(res => res));
+    var result = this._http.post(this.serverUrl + endpoint, JSON.stringify(requestdata), httpOptions).pipe(map(res => res));
     return result;
   }
 
-  UpdateStatusForMultipleData(requestdata: any) {
+  UpdateStatusForMultipleData(endpoint: any, requestdata: any) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
         'Authorization': this.accesstoken
       })
     };
-    var result = this._http.post(this.serverUrl + this.updatestatus_single_endpointUrl + 'many', JSON.stringify(requestdata), httpOptions).pipe(map(res => res));
+    var result = this._http.post(this.serverUrl + endpoint + 'many', JSON.stringify(requestdata), httpOptions).pipe(map(res => res));
     return result;
   }
 
-  CustomRequest(requestdata: any, endpoint: any) {
+  CustomRequest(endpoint: any, requestdata: any) {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
