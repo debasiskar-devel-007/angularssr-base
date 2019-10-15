@@ -22,7 +22,7 @@ import { BlogsModule } from 'blogs';
 import { FromModule } from 'from';
 import { AuthGuard } from './auth.guard';
 import { NewstitleComponent} from './newstitle/newstitle.component';
-import { NewsTitleModule } from 'news-title';
+// import { NewsTitleModule } from 'news-title';
 
 @NgModule({
   declarations: [
@@ -48,7 +48,7 @@ import { NewsTitleModule } from 'news-title';
     LoginModule,
     BlogsModule,
     FromModule,
-    NewsTitleModule
+    // NewsTitleModule
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent],

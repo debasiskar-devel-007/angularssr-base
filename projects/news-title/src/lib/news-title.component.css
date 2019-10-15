@@ -1,4 +1,4 @@
-.example-container {
+/* .example-container {
     display: flex;
     flex-direction: column;
   }
@@ -23,13 +23,6 @@
   }
 
 
-  /* .from button {
-    width: 60px;
-    height: 40px;
-    text-align: center;
-    margin: 0 auto;
-  } */
-
   .main-div{
     height: 100vh;
     display: flex;
@@ -49,4 +42,42 @@
 
 .error {
   text-align: center;
+} */
+
+.mat-form-field {
+  display: inline-block;
+  position: relative;
+  text-align: left;
+  width: 100%;
 }
+.material-icons {
+  
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  font-family: 'Material Icons';
+  font-weight: normal;
+  font-style: normal;
+  font-size: 24px;
+  line-height: 1;
+  letter-spacing: normal;
+  text-transform: none;
+  display: inline-block;
+  white-space: nowrap;
+  word-wrap: normal;
+  direction: ltr;
+  -webkit-font-smoothing: antialiased;
+}
+.logowrapper {
+  margin: 0px auto;
+  display: block;
+  text-align: center;
+}
+h2{
+  text-align: center;
+  background-color: blue;
+  color: aliceblue;
+  padding: 10px;
+  margin: 0 auto;
+}
+

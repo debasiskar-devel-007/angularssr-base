@@ -11,10 +11,10 @@
 <mat-error class="error" *ngIf="message !=''">{{message}}</mat-error>
 
             <mat-form-field>
-                <input matInput type="text" placeholder="Username" formControlName="username" (blur)="inputUntouched('username')">
+                <input matInput type="text" placeholder="Email" formControlName="email" (blur)="inputUntouched('email')">
                 <mat-error
-                    *ngIf="!loginForm.controls['username'].valid && loginForm.controls['username'].errors.required && loginForm.controls['username'].touched">
-                    Username field can not be blank</mat-error>
+                    *ngIf="!loginForm.controls['email'].valid && loginForm.controls['email'].errors.required && loginForm.controls['email'].touched">
+                    Email field can not be blank</mat-error>
             </mat-form-field>
 
 
@@ -26,10 +26,30 @@
             </mat-form-field>
 
 
-            <button mat-raised-button color="primary">Login</button>
+   
+            <button mat-raised-button *ngIf="buttonNameValue != ''" color="primary">{{buttonNameValue}}</button>
+            <button mat-raised-button *ngIf="buttonNameValue == ''" color="primary">Login</button>
+            
+            
+            
             <span class="signupfooter">
-                <a (click)="forgetpassword()">Forgot password</a>
-                <a (click)="signup()">Sign Up</a>
+  <a *ngIf="signUpRouteingUrlValue.buttonName !='' && signUpRouteingUrlValue.customLink =='' && signUpRouteingUrlValue.customURl =='' " (click)="signup()">{{signUpRouteingUrlValue.buttonName}}</a>
+
+                <a *ngIf="signUpRouteingUrlValue.buttonName !='' && signUpRouteingUrlValue.customLink !='' && signUpRouteingUrlValue.path =='' " (click)="customFunction(signUpRouteingUrlValue.customLink)">{{signUpRouteingUrlValue.buttonName}}</a>
+
+<a *ngIf="signUpRouteingUrlValue.customURl !='' && signUpRouteingUrlValue.buttonName !='' && signUpRouteingUrlValue.customLink ==''  && signUpRouteingUrlValue.path ==''" [attr.href]="signUpRouteingUrlValue.customURl">{{signUpRouteingUrlValue.buttonName}}</a>
+
+                <a *ngIf="signUpRouteingUrlValue.buttonName =='' && signUpRouteingUrlValue.customLink ==''" (click)="signup()">Sign Up</a>
+
+                    <a *ngIf="forgetRouteingUrlValue.buttonName !='' && forgetRouteingUrlValue.customLink =='' && forgetRouteingUrlValue.customURl ==''" (click)="forgetpassword()">{{forgetRouteingUrlValue.buttonName}}</a>
+
+                <a *ngIf="forgetRouteingUrlValue.buttonName !='' && forgetRouteingUrlValue.customLink !='' && forgetRouteingUrlValue.path =='' " (click)="customFunction(forgetRouteingUrlValue.customLink)">{{forgetRouteingUrlValue.buttonName}}</a>
+
+                <a *ngIf="forgetRouteingUrlValue.customURl !='' && forgetRouteingUrlValue.customLink =='' && forgetRouteingUrlValue.path ==''" [href]="forgetRouteingUrlValue.customURl">{{forgetRouteingUrlValue.buttonName}}</a>
+
+
+                <a *ngIf="forgetRouteingUrlValue.buttonName =='' && forgetRouteingUrlValue.customLink ==''" (click)="forgetpassword()">Forget Password</a> 
+
             </span>
         </form>
 

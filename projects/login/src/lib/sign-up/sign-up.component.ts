@@ -8,7 +8,8 @@ import { ApiService } from '../api.service';
 
 
 export interface DialogData {
-  name: string;
+  value: string;
+  Url: any;
 }
 
 @Component({
@@ -17,6 +18,9 @@ export interface DialogData {
   styleUrls: ['./sign-up.component.css']
 })
 export class SignUpComponent implements OnInit {
+  public value: any='';
+  public link: any='';
+  public Url: any='';
   public message: any = '';
 
   //   FormGroupDirective: It is a directive that binds an existing FormGroup to a DOM element.
@@ -28,6 +32,7 @@ export class SignUpComponent implements OnInit {
   public loginRouteingUrlValue: any = '';
   public addEndpointValue: any = '';
   public logoValue: any = '';
+  public typevalue: any = '';
 
   @Input()         // Set the Form name
   set formTitle(formTitleVal: any) {
@@ -48,6 +53,17 @@ export class SignUpComponent implements OnInit {
 
 set logo(logoVal : any) {
   this.logoValue = logoVal;
+}
+
+@Input()      // set the from logo
+
+set modaleLogo(modaleLogoVal : any) {
+  this.link = modaleLogoVal;
+}
+
+@Input()
+set userType(typeval: any) {
+  this.typevalue = typeval;
 }
 
 
@@ -108,8 +124,12 @@ set logo(logoVal : any) {
     }
     if (this.signUpForm.valid) {
       // let link: any = this.fullUrlValue;
+      let allData: any = this.signUpForm.value;
+      allData.type = this.typevalue;
+      console.log(allData);
+
       let data: any = {
-        'data': this.signUpForm.value,
+        'data': allData,
         "source": this.addEndpointValue.source
       };
       console.log(data);
@@ -119,6 +139,10 @@ set logo(logoVal : any) {
         console.log(result);
 
         if (result.status == "success") {
+          const dialogRef = this.dialog.open(successModalComponent, {
+            width: '250px',
+            data: {value: result.status, Url: this.link}
+          });
           // this.router.navigateByUrl('/' + )     // navigate to dashboard url 
 
 
@@ -154,16 +178,19 @@ set logo(logoVal : any) {
 
 
 @Component({
-  selector: 'commonModal',
-  templateUrl: '../commonModal/commonModal.html',
+  selector: 'successModal',
+  templateUrl: '../successModal.html',
 
 })
-export class commonModalComponent {
+export class successModalComponent {
 
   constructor(
-    public dialogRef: MatDialogRef<commonModalComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+    public dialogRef: MatDialogRef<successModalComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {
+      console.log(data)
+     }
 
+    
   onNoClick(): void {
     this.dialogRef.close();
   }

@@ -209,7 +209,7 @@ export class ApiService {
       })
     };
 
-    console.log('httpoptions',httpOptions,this.serverUrl,requestdata);
+    // console.log('httpoptions',httpOptions,this.serverUrl,requestdata);
     var result = this._http.post(this.serverUrl + this.addendpointUrl, JSON.stringify(requestdata), httpOptions).pipe(map(res => res));
     return result;
   }
@@ -256,7 +256,7 @@ export class ApiService {
       })
     };
 
-    console.log(this.serverUrl,requestdata);
+    // console.log(this.serverUrl,requestdata);
     var result = this._http.post(this.serverUrl + this.addendpointUrl, JSON.stringify(requestdata), httpOptions).pipe(map(res => res));
     return result;
   }
@@ -272,7 +272,7 @@ forgetPassword(requestdata: any) {
     })
   };
 
-  console.log(this.serverUrl,requestdata);
+  // console.log(this.serverUrl,requestdata);
   var result = this._http.post(this.serverUrl + this.addendpointUrl, JSON.stringify(requestdata), httpOptions).pipe(map(res => res));
   return result;
 }
