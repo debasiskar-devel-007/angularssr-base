@@ -33,6 +33,7 @@ export class SignUpComponent implements OnInit {
   public addEndpointValue: any = '';
   public logoValue: any = '';
   public typevalue: any = '';
+  public buttonNameValue: any = '';
 
   @Input()         // Set the Form name
   set formTitle(formTitleVal: any) {
@@ -40,6 +41,12 @@ export class SignUpComponent implements OnInit {
     this.formTitleValue = formTitleVal;
     // console.log(this.formTitleValue);
 
+  }
+
+  @Input()
+  set buttonName (buttonNameVal :any){
+    this.buttonNameValue = (buttonNameVal) || '<no name set>';
+    this.buttonNameValue = buttonNameVal
   }
 
   @Input()        // setting the server url from project
@@ -162,17 +169,20 @@ set userType(typeval: any) {
 
   // This is use for navigate this component to forget component 
   forgetpassword() {
-    this.router.navigateByUrl('/' + this.forgetRouteingUrlValue);
+    this.router.navigateByUrl('/' + this.forgetRouteingUrlValue.path);
   }
 
 
   // This is use for navigate this component to forget component 
   login() {
-    this.router.navigateByUrl('/' + this.loginRouteingUrlValue);
+    this.router.navigateByUrl('/' + this.loginRouteingUrlValue.path);
   }
 
   inputUntouched(val: any) {
     this.signUpForm.controls[val].markAsUntouched();
+  }
+  customFunction(link: any) {
+    this.router.navigateByUrl('/'+ link);
   }
 }
 
