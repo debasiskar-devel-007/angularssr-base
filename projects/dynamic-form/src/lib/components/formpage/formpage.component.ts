@@ -103,6 +103,7 @@ export class FormpageComponent implements OnInit {
   public selectedlead:any={};
   public inputflag:any=0;
   public serializedDate:any;
+  public imagedata:any;
     //   demo file upload json
     public configData: any = {
     baseUrl: "http://3.15.236.141:5005/",
@@ -235,6 +236,17 @@ export class FormpageComponent implements OnInit {
              console.log(this.formdataval[c]);
              console.log(this.formdataval[c].validationrule);*/
     if (this.isedit == 0 || (this.formdataval[c].isaddonly == null && this.formdataval[c].isaddonly != true)) {
+        if (this.formdataval[c].inputtype == 'file') {
+            console.log('this.formdataval[c].files');
+            console.log(this.formdataval[c].files);
+            if(this.formdataval[c].files!=null){
+                this.formdataval[c].value = this.formdataval[c].files;
+                formgrp[this.formdataval[c].name] = [this.formdataval[c].value];
+                console.log('formgrp[this.formdataval[c].name]');
+                console.log(formgrp[this.formdataval[c].name]);
+            }
+            
+        }
                 this.start_time = '';
                 this.end_time = '';
                 if (this.formdataval[c].inputtype == 'checkbox') {
@@ -261,6 +273,7 @@ export class FormpageComponent implements OnInit {
                         console.log(this.formdataval[c].sourceview);
                         this.getselectdata(this.formdataval[c].sourceview, c);
                     }
+                    
                     this.imageChangedEvent = [];
                     this.croppedImage = [];
     
@@ -599,6 +612,10 @@ openform(template: TemplateRef<any>, type) {
                     }, 1000);
                 }
             }
+            if(this.formdataval[c].inputtype == 'file'){
+                if (this.formdataval[c].validationrule != null && !this.formdataval[c].validationrule && this.formdataval[c].value == null)
+                formgrp[this.formdataval[c].name]=[this.formbuilder.array([]),Validators.required];
+            }
         }
     }
     this.dataForm = this.formbuilder.group(formgrp);
@@ -672,6 +689,20 @@ formsubmit() {
         // this.dataForm.controls['end_time'].patchValue(moment(this.dataForm.controls['end_time'].value).format('HH:mm'));/*.tz(tzval)*/
         
     }
+    for(let c in this.formdataval){
+        if (this.formdataval[c].inputtype == 'file') {
+            console.log('this.formdataval[c].files');
+            console.log(this.formdataval[c].filedata.files);
+            if(this.formdataval[c].files!=null){
+                this.formdataval[c].value = this.formdataval[c].filedata.files;
+                this.dataForm.controls[this.formdataval[c].name].patchValue(this.formdataval[c].value);
+                console.log('this.dataForm.controls[this.formdataval[c].name]');
+                console.log(this.dataForm.controls[this.formdataval[c].name]);
+            }
+            
+        }
+    }
+    
     //  console.log($('select[name="roleaccess"]').val());
     if (this.dataForm.valid && this.submitval == 1) {
         const link = this.nodesslurl + 'addorupdatedata';

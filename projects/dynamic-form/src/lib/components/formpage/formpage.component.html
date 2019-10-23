@@ -127,8 +127,10 @@
                                 
                               </mat-form-field>
                                 <!-- file uploader library import -->
-                            <lib-file-upload *ngIf="item.inputtype=='file'" [config]="item.filedata"></lib-file-upload>
-                             
+                          <!-- <span *ngIf="item.inputtype=='file'">
+                            <lib-file-upload [config]="item.filedata" [formControl]="dataForm.controls[item.name]"></lib-file-upload>
+                            <p>{{item.filedata | json}}</p>
+                          </span> -->
             </ng-container>
             </ng-container>
             <!-- <input *ngIf="item.inputtype=='dateis' " id="inputdateis{{item.name}}" [name]="item.name"
