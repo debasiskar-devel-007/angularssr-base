@@ -8,10 +8,11 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class AddeditBlogmanagementComponent implements OnInit {
 
-    server: any ='https://o820cv2lu8.execute-api.us-east-2.amazonaws.com/production/api/';
+    server: any ='https://r245816wug.execute-api.us-east-1.amazonaws.com/dev/api/';
     addUrl: any = 'addorupdatedata';
     getDataUrl: any= 'datalist';
     public editdata: any = [];
+    action:any="add";
   
 
     public configData: any = {
@@ -37,14 +38,15 @@ export class AddeditBlogmanagementComponent implements OnInit {
 
   ngOnInit() {
     
-    if (this.activatedRoute.snapshot.params.id) {
-      this.activatedRoute.data.forEach(data => {
-        let result: any;
-        result = data.results.res[0];
-        this.editdata = result;
-      });
-    }
-    
+    this.activatedRoute.params.subscribe(params => {
+      if (params._id) {
+        this.activatedRoute.data.subscribe(resolveData => {         
+          this.editdata= resolveData.blogList.res[0];
+          console.log("EDIT DATA",this.editdata);  
+          this.action="edit";    
+        });
+      }
+    });
   }
 
 }

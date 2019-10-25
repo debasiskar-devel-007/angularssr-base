@@ -127,7 +127,7 @@ export class AddeditResourceappComponent implements OnInit {
 
 
 
-  // ======================================OnPopulate=============================
+  // ======================================GetParentCategory=============================
     
         getParentCategory()
         {

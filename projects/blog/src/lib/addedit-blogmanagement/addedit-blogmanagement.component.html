@@ -25,7 +25,7 @@
                     <select matNativeControl formControlName="blogcat"
                         (ngClass)="{'is-invalid':isSubmitted && onSignUpValidate.blogcat.errors}"
                         (blur)="inputBlur('blogcat')">
-                        <option *ngFor="let item of blogCategoryArray" [value]="item._id">{{ item.title}}</option>
+                        <option *ngFor="let item of blogCategoryArray" value="{{item._id}}">{{ item.blogtitle }}</option>
                     </select>
                     <mat-error *ngIf="onSignUpValidate.blogcat.errors && onSignUpValidate.blogcat.errors.required">Blog
                         Category cannot be blank</mat-error>
@@ -36,10 +36,10 @@
 
                 <!-- ------------------------------------Blog Content------------------ -->
 
-                <ckeditor [editor]="Editor" [config]="editorConfig" formControlName="blogcontent"
-                    (ngClass)="{'is-invalid':isSubmitted && onSignUpValidate.blogcontent.errors}"></ckeditor>
+                <ckeditor [editor]="Editor" [config]="editorConfig" formControlName="description"
+                    (ngClass)="{'is-invalid':isSubmitted && onSignUpValidate.description.errors}"></ckeditor>
                 <mat-error
-                    *ngIf="onSignUpValidate.blogcontent.errors && onSignUpValidate.blogcontent.errors.required && onSignUpValidate.blogcontent.touched">
+                    *ngIf="onSignUpValidate.description.errors && onSignUpValidate.description.errors.required && onSignUpValidate.description.touched">
                     Blog Content cannot be blank</mat-error><br>
                 <!-- -----------------------------------------------------------------  -->
 

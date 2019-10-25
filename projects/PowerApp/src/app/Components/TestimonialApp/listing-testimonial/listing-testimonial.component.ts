@@ -12,7 +12,7 @@ export class ListingTestimonialComponent implements OnInit {
 
   /************** lib list setup start here *************/
   public testimonialListConfig:any = {
-    apiBaseUrl: "https://o820cv2lu8.execute-api.us-east-2.amazonaws.com/production/api/",
+    apiBaseUrl: "https://63zzhpnoti.execute-api.us-east-1.amazonaws.com/production/api/",
     listEndPoint: "datalist",
     datasource: "",
     tableName: "testimonial",

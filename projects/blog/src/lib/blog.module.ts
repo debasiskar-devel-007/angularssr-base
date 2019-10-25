@@ -6,8 +6,9 @@ import { from } from 'rxjs';
 import { FileUploadModule } from 'file-upload';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
-import { AddBlogComponent, Dialogtest  } from './add-blog/add-blog.component';
-import { ListingModule } from 'lib-listing';
+import { AddBlogComponent,Modal2 } from './add-blog/add-blog.component';
+// import { ListingModule} from 'listing';
+import { ListingModule } from 'listing-angular7';
 import { HttpClientModule } from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
@@ -16,18 +17,18 @@ import { CommonModule } from '@angular/common';
 import { AddeditBlogmanagementComponent,Modal, YoutubeComponent } from './addedit-blogmanagement/addedit-blogmanagement.component';
 import { YoutubeplayerComponent } from './youtubeplayer/youtubeplayer.component';
 import { ListingBlogmanagementlibComponent } from './listing-blogmanagementlib/listing-blogmanagementlib.component';
-// import { ListingBlogmanagementlibComponent } from './listing-blogmanagementlib/listing-blogmanagementlib.component';
+
 
 @NgModule({
   declarations: [
     BlogComponent,
     AddBlogComponent,
-    Dialogtest,
+    
     AddeditBlogmanagementComponent,
     Modal,
     YoutubeplayerComponent,
     YoutubeComponent,
-    ListingBlogmanagementlibComponent
+    ListingBlogmanagementlibComponent,Modal2
   ],
   imports: [
     DemoMaterialModule,
@@ -41,11 +42,12 @@ import { ListingBlogmanagementlibComponent } from './listing-blogmanagementlib/l
     CKEditorModule,
     ListingModule,
     FileUploadModule,
-    CommonModule
+    CommonModule,
+  
   ],
   exports: [BlogComponent, AddBlogComponent, AddeditBlogmanagementComponent,ListingBlogmanagementlibComponent],
   providers: [ApiService],
-  entryComponents: [Dialogtest,Modal, YoutubeComponent],
+  entryComponents: [Modal2,Modal, YoutubeComponent],
 
 })
 export class BlogModule { }

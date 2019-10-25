@@ -1,20 +1,16 @@
+<mat-card>
+    <mat-toolbar color="primary" style="justify-content: center; align-items: center;">
+        <h2 class="headerSpan">Blog Categories</h2>
+    </mat-toolbar>
 
- 
-<lib-Blog
-  [serverUrl]="server"
-  addTeammember="blog/add"
-  editblog="blog/edit"
-  [Blogtable]="listingTablename"
-  [deleteBlog]="Blogdelete"
-  [AddEditBlog]="updateUrl"
-  [getDataEndpoint]="getDataUrl" 
-  [getDataSource]="getSourceUrl"
-  [listResolve]="BlogList"
-  [BlogToken]="token"
->
-</lib-Blog>
+    <!-- ---------------------Button for adding new role------------------------------ -->
+    <mat-toolbar class="buttonsetToolbar">
+        <button class="singleButton" mat-raised-button color="primary"
+         [routerLink]="['/blog-category/add']">Add blog category </button>
+    </mat-toolbar>
 
 
+    <!-- to listing library -->
 
-
-
+    <lib-Blog [config]="blogListConfig"></lib-Blog>
+</mat-card>

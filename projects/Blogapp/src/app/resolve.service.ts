@@ -1,41 +1,37 @@
+
+
 import { Injectable } from '@angular/core';
 import { Router, Resolve, ActivatedRouteSnapshot, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
-import { ApiService } from './app-api.service'
+
+import { ApiService } from './app-api.service';
+
+export interface EndpointComponent {
+    endpoint: string;
+}
 
 @Injectable({
   providedIn: 'root'
 })
-export class ResolveService {
 
-  constructor(private apiService: ApiService, private router: Router) {
+export class ResolveService implements Resolve<any> {
 
-  }
+  constructor(private _apiService: ApiService, private router: Router) { }
 
   resolve(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): Observable<any> | Promise<any> | any {
-    var data: any = { source: route.data.requestcondition.source };
-
-    if (route.data.requestcondition.condition.key_id != null && route.data.requestcondition.condition.key_id == '') {
-      data.condition = { _id: route.params.id };
-    }
+     
     /* will come into play while editing otherwise no effect */
-
-
+    let requestData: any = route.data.requestcondition;
+    requestData.condition = Object.assign(requestData.condition, route.params);
 
     return new Promise((resolve) => {
-      this.apiService.CustomRequest(data, route.data.endpoint).subscribe(api_object => {
+      this._apiService.CustomRequest(route.data.requestcondition, route.data.endpoint).subscribe(api_object => {
         if (api_object) {
           return resolve(api_object);
-        } else {
+        } else { // id not found
           return true;
         }
       });
     });
   }
-
 }
-
-
-
-
-

@@ -9,35 +9,33 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class ListingBlogmanagementComponent implements OnInit {
 
-  cookieValue = "Unknown";
-  /*Listing Variables*/
-  public blogListingConfig: any = {
-    apiBaseUrl: "https://o820cv2lu8.execute-api.us-east-2.amazonaws.com/production/api/",
+  //Blogs Lib List
+  public blogListConfig: any = {
+    apiBaseUrl: "https://r245816wug.execute-api.us-east-1.amazonaws.com/dev/api/",
     listEndPoint: "datalist",
     datasource: "",
-    tableName: "blogs",
-    tableName2: "blogs_view",
+    tableName: "blog_category",
     updateurl: "addorupdatedata",
     editUrl: "blog-management/edit",
     jwtToken: "",
     deleteEndPoint: "deletesingledata",
-   
+    addLink: "/blog-management/add",
+    view: "blogs"
 
   }
-  /************** lib list setup end here *************/
 
-  constructor(private router: Router, private activatedRoute: ActivatedRoute,
-    private cookieService: CookieService) {
-    this.cookieValue = this.cookieService.get('jwtToken');
-    this.activatedRoute.data.subscribe(resolveData => {
-      this.blogListingConfig.datasource = resolveData.results.res;
-      this.blogListingConfig.jwtToken = this.cookieValue;
 
-    });
+  constructor(private router: Router, private activatedRoute: ActivatedRoute, private cookieService: CookieService) {
+
   }
 
   ngOnInit() {
+    this.activatedRoute.data.subscribe(resolveData => {
+      this.blogListConfig.datasource = resolveData.blogList.res;
+      console.log("DATALIST",this.blogListConfig.datasource);
+      this.blogListConfig.jwtToken = this.cookieService.get('jwtToken');
 
+    });
   }
 
 }

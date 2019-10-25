@@ -71,6 +71,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
   fileConfigData: any;
   file_array: any = [];
   file_array_edit: any = [];
+  action2:any;
   // -----------------------------------------------------------------------
 
 
@@ -120,9 +121,9 @@ export class AddeditBlogmanagementComponent implements OnInit {
     private formBuilder: FormBuilder, public dialog: MatDialog,
     public snackBar: MatSnackBar) {
     this.blogManagementForm = this.formBuilder.group({
-      blogtitle: ['', Validators.required],
+      blogtitle: ['', [Validators.required,Validators.maxLength(20)]],
       blogcat: ['', Validators.required],
-      blogcontent: ['', Validators.required],
+      description: ['', Validators.required],
       priority: ['', Validators.required],
       status: ['true', Validators.required],
       metatitle: ['', Validators.required],
@@ -166,13 +167,14 @@ export class AddeditBlogmanagementComponent implements OnInit {
     }, 50)
 
 
-    if (this.activatedRoute.snapshot.params.id) {
+    if (this.action2=='edit') {
+      this.headerText="Edit Blog Management Data";
       this.flag = true;
-      this.params_id = this.activatedRoute.snapshot.params.id;
+      this.params_id = this.setData._id;
       this.buttonText = "Update";
       this.blogManagementForm.controls['blogtitle'].patchValue(this.setData.blogtitle);
       this.blogManagementForm.controls['blogcat'].patchValue(this.setData.blogcat);
-      this.blogManagementForm.controls['blogcontent'].patchValue(this.setData.blogcontent);
+      this.blogManagementForm.controls['description'].patchValue(this.setData.description);
       this.blogManagementForm.controls['priority'].patchValue(this.setData.priority);
       this.blogManagementForm.controls['status'].patchValue(this.setData.status);
       this.blogManagementForm.controls['metatitle'].patchValue(this.setData.metatitle);
@@ -242,6 +244,12 @@ export class AddeditBlogmanagementComponent implements OnInit {
   }
   // --------------------------------------------------------------------------------------------
 
+
+  @Input()
+  set action(action: any) {
+    console.log("action",action);
+    this.action2 = action;
+  }
 
 
   @Input()
@@ -334,8 +342,8 @@ export class AddeditBlogmanagementComponent implements OnInit {
     this.apiservice.getData(data).subscribe(response => {
       let result: any;
       result = response;
-      result = response;
       this.blogCategoryArray = result.res;
+      console.log("88888888",this.blogCategoryArray);
     });
   }
   // ----------------------------------------------------------------------------------
@@ -370,9 +378,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
   @Input()          //single data from resolve call  & set the value for edit
   set singleData(editDatavals: any) {
     this.setData = editDatavals;
-
-
-
+    console.log("SETDATA",editDatavals);
   }
   // -----------------------------------------------------------------------------------
 
@@ -417,14 +423,14 @@ export class AddeditBlogmanagementComponent implements OnInit {
 
     this.blogManagementForm.value.tags = this.tags_array;
 
-    this.blogManagementForm.controls['blogcontent'].markAsTouched();
+    this.blogManagementForm.controls['description'].markAsTouched();
 
     if (this.blogManagementForm.valid) {
       if (this.blogManagementForm.value.status)
         this.blogManagementForm.value.status = parseInt("1");
       else
         this.blogManagementForm.value.status = parseInt("0");
-      if (this.activatedRoute.snapshot.params.id != null) {    //update part
+      if (this.params_id!= null) {    //update part
         this.messageText = "One row updated!!!";
         this.blogManagementForm.value.tags = this.tags_array;
         data = {
@@ -433,7 +439,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
             "id": this.params_id,
             "blogtitle": this.blogManagementForm.value.blogtitle,
             "blogcat": this.blogManagementForm.value.blogcat,
-            "blogcontent": this.blogManagementForm.value.blogcontent,
+            "description": this.blogManagementForm.value.description,
             "priority": this.blogManagementForm.value.priority,
             "status": this.blogManagementForm.value.status,
             "metatitle": this.blogManagementForm.value.metatitle,

@@ -1,66 +1,78 @@
 <!-- Form Header -->
 <mat-card>
   <mat-toolbar color="primary" style="justify-content: center; align-items: center;">
-    <h2 class="headerSpan">{{headerText}}</h2>
+    <h2 class="headerSpan">{{header_txt}}</h2>
   </mat-toolbar>
 
   <!-- Blog Add or Edit Form Start Here -->
   <span class="formspan">
     <mat-card-content class="example-container">
-      <form class="example-form" autocomplete="off" name="blogAddEditForm" (ngSubmit)="blogAddEditFormSubmit()"
-        [formGroup]="blogAddEditForm">
+      <form class="example-form" autocomplete="off" [formGroup]="blogCatForm">
 
-        <mat-form-field >
-          <input matInput type="text" placeholder="Title" [formControl]="blogAddEditForm.controls['title']"
-            (blur)="inputUntouch(blogAddEditForm,'title')">
+
+
+        <!-- Blog title  -->
+        <mat-form-field>
+          <input matInput type="text" placeholder="Title" formControlName="blogtitle" >
+          <mat-error *ngIf="!blogCatForm.controls['blogtitle'].valid
+        && blogCatForm.controls['blogtitle'].errors.required"> Blog title is required.</mat-error>
           <mat-error
-            *ngIf="blogAddEditForm.controls['title'].touched && !blogAddEditForm.controls['title'].valid && blogAddEditForm.controls['title'].errors.required">
-            Category Name field can not be blank</mat-error>
+            *ngIf="!blogCatForm.controls['blogtitle'].valid && !blogCatForm.controls['blogtitle'].errors.required">
+            Max length exceeded</mat-error>
         </mat-form-field>
-  
-         <!-- -------------------------------priority--------------------------- -->
-         <mat-form-field>
-         <input matInput type="number" placeholder="Priority" [formControl]="blogAddEditForm.controls['priority']"  (blur)="inputUntouch(blogAddEditForm,'priority')">
-         <!-- ------------------------------------------------------------------ -->
-         <mat-error *ngIf="blogAddEditForm.controls['priority'].touched && !blogAddEditForm.controls['priority'].valid && blogAddEditForm.controls['priority'].errors.required">
-          Priority field can not be blank</mat-error> <br>
+
+
+
+        <!-- Priority   -->
+        <mat-form-field>
+          <input matInput type="number" placeholder="Priority" formControlName="priority">
+          <mat-error *ngIf="!blogCatForm.controls['priority'].valid
+        && blogCatForm.controls['priority'].errors.required"> Priority is required.</mat-error>
+          <mat-error
+            *ngIf="!blogCatForm.controls['priority'].valid && !blogCatForm.controls['priority'].errors.required">
+            Can't have a lower priority</mat-error>
         </mat-form-field>
-          <!-- -------------------------------status--------------------------- -->          
-          <mat-checkbox [formControl]="blogAddEditForm.controls['status']">Active</mat-checkbox><br>
-          <!-- ---------------------------------------------------------------- -->
+
+        <!-- Status  -->
+
+        <mat-checkbox formControlName="status">Active</mat-checkbox><br>
+
 
         <!-- ckeditor using start here -->
         <mat-label>Description</mat-label>
-        <ckeditor [editor]="Editor" [config]="editorConfig" [(ngModel)]="model.editorData"
-          [ngModelOptions]="{standalone: true}"></ckeditor>
-        <mat-error
-          *ngIf="blogAddEditForm.controls['description'].touched && !blogAddEditForm.controls['description'].valid && blogAddEditForm.controls['description'].errors.required">
-          Description field can not be blank</mat-error>
+        <ckeditor [editor]="Editor" [config]="editorConfig" formControlName="description" ></ckeditor>
+        <mat-error *ngIf="!blogCatForm.controls['description'].valid
+        && blogCatForm.controls['description'].errors.required && blogCatForm.controls['description'].touched" > Please describe.</mat-error>
+          <mat-error
+            *ngIf="!blogCatForm.controls['description'].valid && !blogCatForm.controls['description'].errors.required">
+            Max length exceeded</mat-error>
         <!-- ckeditor end here -->
-        <mat-form-field>
 
+
+
+
+
+        <mat-form-field>
           <mat-label>Parent Category</mat-label>
           <mat-select formControlName="parent_id">
             <mat-option [value]=0>
               Select a category
             </mat-option>
-            <mat-option *ngFor=" let f of blogarray" [value]="f._id">
-              {{f.title}}
+            <mat-option *ngFor="let parCat of getParentCatArr" value="{{ parCat._id }}"> {{ parCat.blogtitle }}
             </mat-option>
-          </mat-select>
 
-          <mat-error
-          *ngIf="blogAddEditForm.controls['parent_id'].touched && !blogAddEditForm.controls['parent_id'].valid && blogAddEditForm.controls['parent_id'].errors.required">
-          Category cannot be blank</mat-error>
+          </mat-select>
         </mat-form-field>
 
-      
+
+        <button type="submit" class="submitbtn" class="submitbtn" mat-raised-button color="primary"
+          (click)="onSubmit()">{{buttonText}}</button>
+        <button type="reset" class="submitbtn" class="submitbtn" mat-raised-button color="primary">RESET</button>
 
 
 
-        <button class="submitbtn" mat-raised-button color="primary" type="submit">{{buttonText}}</button>
+
       </form>
     </mat-card-content>
   </span>
 </mat-card>
-<!-- Blog Add or Edit Form End Here -->
