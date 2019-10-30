@@ -2,13 +2,11 @@ import { NgModule } from '@angular/core';
 import { BlogComponent } from './blog.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { DemoMaterialModule } from './material-module'
-import { from } from 'rxjs';
 import { FileUploadModule } from 'file-upload';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AddBlogComponent,Modal2 } from './add-blog/add-blog.component';
-// import { ListingModule} from 'listing';
-import { ListingModule } from 'listing-angular7';
+import { ListingModule } from 'lib-listing';
 import { HttpClientModule } from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';

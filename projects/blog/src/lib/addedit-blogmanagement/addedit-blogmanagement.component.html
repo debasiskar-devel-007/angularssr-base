@@ -11,10 +11,16 @@
                 <!-- ----------------------------Blog title---------------------------- -->
                 <mat-form-field>
                     <input matInput placeholder="Blog title" formControlName="blogtitle"
-                        (ngClass)="{'is-invalid':isSubmitted && onSignUpValidate.blogtitle.errors}"
-                        (blur)="inputBlur('blogtitle')">
-                    <mat-error *ngIf="onSignUpValidate.blogtitle.errors && onSignUpValidate.blogtitle.errors.required">
-                        Blog title cannot be blank</mat-error>
+                       >
+                    <mat-error
+                        *ngIf="!blogManagementForm.controls['blogtitle'].valid
+        && blogManagementForm.controls['blogtitle'].errors.required && blogManagementForm.controls['blogtitle'].touched">
+                        Blog title is required.</mat-error>
+
+                    <mat-error
+                        *ngIf="!blogManagementForm.controls['blogtitle'].valid && !blogManagementForm.controls['blogtitle'].errors.required">
+                        Max length exceeded</mat-error>
+
                 </mat-form-field><br>
                 <!-- ------------------------------------------------------------------ -->
 
@@ -23,24 +29,43 @@
                 <mat-form-field>
                     <mat-label>Blog Category</mat-label>
                     <select matNativeControl formControlName="blogcat"
-                        (ngClass)="{'is-invalid':isSubmitted && onSignUpValidate.blogcat.errors}"
-                        (blur)="inputBlur('blogcat')">
-                        <option *ngFor="let item of blogCategoryArray" value="{{item._id}}">{{ item.blogtitle }}</option>
+                      >
+                        <option *ngFor="let item of blogCategoryArray" value="{{item._id}}">{{ item.blogtitle }}
+                        </option>
                     </select>
-                    <mat-error *ngIf="onSignUpValidate.blogcat.errors && onSignUpValidate.blogcat.errors.required">Blog
-                        Category cannot be blank</mat-error>
+
                 </mat-form-field><br>
                 <!-- -----------------------------------------------------------------  -->
 
+
+                <!-- -------------------------Author---------------------------- -->
+                <mat-form-field>
+                    <mat-label>Author</mat-label>
+                    <input matInput formControlName="author" placeholder="Author">
+                    <mat-error *ngIf="!blogManagementForm.controls['author'].valid
+    && blogManagementForm.controls['author'].errors.required && blogManagementForm.controls['author'].touched">
+                        Blog title is required.</mat-error>
+
+                    <mat-error
+                        *ngIf="!blogManagementForm.controls['author'].valid && !blogManagementForm.controls['author'].errors.required">
+                        Max length exceeded</mat-error>
+                </mat-form-field><br>
+                <!-- -----------------------------------------------------------------  -->
 
 
                 <!-- ------------------------------------Blog Content------------------ -->
 
                 <ckeditor [editor]="Editor" [config]="editorConfig" formControlName="description"
-                    (ngClass)="{'is-invalid':isSubmitted && onSignUpValidate.description.errors}"></ckeditor>
+                  ></ckeditor>
                 <mat-error
-                    *ngIf="onSignUpValidate.description.errors && onSignUpValidate.description.errors.required && onSignUpValidate.description.touched">
-                    Blog Content cannot be blank</mat-error><br>
+                    *ngIf="!blogManagementForm.controls['description'].valid
+    && blogManagementForm.controls['description'].errors.required && blogManagementForm.controls['description'].touched">
+                    Blog title is required.</mat-error>
+
+                <mat-error
+                    *ngIf="!blogManagementForm.controls['description'].valid && !blogManagementForm.controls['description'].errors.required">
+                    Max length exceeded</mat-error>
+                <br>
                 <!-- -----------------------------------------------------------------  -->
 
 
@@ -49,10 +74,14 @@
                 <!-- -----------------------------------Priority------------------------ -->
                 <mat-form-field>
                     <input matInput type="number" placeholder="Priority" formControlName="priority"
-                        (ngClass)="{'is-invalid':isSubmitted && onSignUpValidate.priority.errors}"
-                        (blur)="inputBlur('priority')">
-                    <mat-error *ngIf="onSignUpValidate.priority.errors && onSignUpValidate.priority.errors.required">
-                        Priority cannot be blank</mat-error>
+                        >
+
+                    <mat-error *ngIf="!blogManagementForm.controls['priority'].valid && blogManagementForm.controls['priority'].errors.required">
+                        Priority is required.</mat-error>
+
+                    <!-- <mat-error
+                        *ngIf="!blogManagementForm.controls['priority'].valid && !blogManagementForm.controls['priority'].errors.required">
+                        Max length exceeded</mat-error> -->
                 </mat-form-field><br>
                 <!-- ------------------------------------------------------------------- -->
 
@@ -69,10 +98,15 @@
                 <!-- --------------------------------Meta title-------------------------  -->
                 <mat-form-field>
                     <input matInput placeholder="Meta title" formControlName="metatitle"
-                        (ngClass)="{'is-invalid':isSubmitted && onSignUpValidate.metatitle.errors}"
-                        (blur)="inputBlur('metatitle')">
-                    <mat-error *ngIf="onSignUpValidate.metatitle.errors && onSignUpValidate.metatitle.errors.required">
-                        Meta title cannot be blank</mat-error>
+                       >
+                    <mat-error
+                        *ngIf="!blogManagementForm.controls['metatitle'].valid
+        && blogManagementForm.controls['metatitle'].errors.required && blogManagementForm.controls['metatitle'].touched">
+                        Meta title is required.</mat-error>
+
+                    <mat-error
+                        *ngIf="!blogManagementForm.controls['metatitle'].valid && !blogManagementForm.controls['metatitle'].errors.required">
+                        Max length exceeded</mat-error>
                 </mat-form-field>
                 <!-- -------------------------------------------------------------------- -->
 
@@ -81,10 +115,14 @@
                 <!-- ----------------------------------Meta Description------------------ -->
                 <mat-form-field>
                     <textarea matInput placeholder="Meta Description" formControlName="metadesc"
-                        (ngClass)="{'is-invalid':isSubmitted && onSignUpValidate.metadesc.errors}"
-                        (blur)="inputBlur('metadesc')"></textarea>
-                    <mat-error *ngIf="onSignUpValidate.metadesc.errors && onSignUpValidate.metadesc.errors.required">
-                        Meta description cannot be blank</mat-error>
+                      ></textarea>
+                    <mat-error *ngIf="!blogManagementForm.controls['metadesc'].valid
+      && blogManagementForm.controls['metadesc'].errors.required && blogManagementForm.controls['metadesc'].touched">
+                        Meta description is required.</mat-error>
+
+                    <mat-error
+                        *ngIf="!blogManagementForm.controls['metadesc'].valid && !blogManagementForm.controls['metadesc'].errors.required">
+                        Max length exceeded</mat-error>
                 </mat-form-field><br>
                 <!-- -------------------------------------------------------------------- -->
 
@@ -103,6 +141,8 @@
                             bottom: 7px;" class="material-icons" (click)="openSnackBar()">
                                 contact_support
                             </i>
+
+
                         </mat-form-field>
 
 
@@ -142,6 +182,9 @@
                                 {{option}}
                             </mat-option>
                         </mat-autocomplete>
+                        <mat-error *ngIf="!blogManagementForm.controls['tags'].valid
+        && blogManagementForm.controls['tags'].errors.required">
+                            Tags are required.</mat-error>
 
                     </mat-form-field>
                     <div>
@@ -162,20 +205,20 @@
                 <h1>Blogs Image:</h1>
                 <lib-file-upload [config]="imageConfigData"></lib-file-upload>
                 <!-- -------------------------------------------------------------------------------- -->
-               
-                <ng-container  *ngIf="flag==true">
-                <!-- CARD VIEW  -->
-                <mat-card-content class="files-view" *ngFor="let img of images_array_edit; let i2 = index">
-                    <mat-card class="example-card" >
-                        <img mat-card-image [src]="img.img_var">
-                        <mat-card-title>{{ img.image_name }}</mat-card-title>
-                        <mat-card-subtitle>{{img.image_type}}</mat-card-subtitle>
-                        <span class="closecard" (click)="clear_image(i2)"><i class="material-icons">clear</i></span>
-                    
-                    </mat-card>
-                </mat-card-content>
-                <!-- ---------  -->
-            </ng-container>
+
+                <ng-container *ngIf="flag==true">
+                    <!-- CARD VIEW  -->
+                    <mat-card-content class="files-view" *ngFor="let img of images_array_edit; let i2 = index">
+                        <mat-card class="example-card">
+                            <img mat-card-image [src]="img.img_var">
+                            <mat-card-title>{{ img.image_name }}</mat-card-title>
+                            <mat-card-subtitle>{{img.image_type}}</mat-card-subtitle>
+                            <span class="closecard" (click)="clear_image(i2)"><i class="material-icons">clear</i></span>
+
+                        </mat-card>
+                    </mat-card-content>
+                    <!-- ---------  -->
+                </ng-container>
 
 
 
@@ -185,14 +228,14 @@
                 <h1>Blogs File:</h1>
                 <lib-file-upload [config]="fileConfigData"></lib-file-upload>
                 <!-- -------------------------------------------------------------------------------- -->
-               
-                <mat-chip-list class="mat_chip">                  
+
+                <mat-chip-list class="mat_chip">
                     <mat-chip color="primary" selected *ngFor="let item of file_array_edit;let j = index">{{ item }}
                         <mat-icon matSuffix class="clickable" (click)="clearFileTags(j)">clear</mat-icon>
                     </mat-chip>
                 </mat-chip-list>
-               
-               
+
+
                 <button class="submitbtn" mat-raised-button color="primary" type="button"
                     (click)="onSubmit()">{{buttonText}}</button>
 

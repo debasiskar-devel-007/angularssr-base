@@ -14,7 +14,7 @@ export class ListingBlogmanagementComponent implements OnInit {
     apiBaseUrl: "https://r245816wug.execute-api.us-east-1.amazonaws.com/dev/api/",
     listEndPoint: "datalist",
     datasource: "",
-    tableName: "blog_category",
+    tableName: "blogs",
     updateurl: "addorupdatedata",
     editUrl: "blog-management/edit",
     jwtToken: "",
@@ -32,7 +32,6 @@ export class ListingBlogmanagementComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.data.subscribe(resolveData => {
       this.blogListConfig.datasource = resolveData.blogList.res;
-      console.log("DATALIST",this.blogListConfig.datasource);
       this.blogListConfig.jwtToken = this.cookieService.get('jwtToken');
 
     });

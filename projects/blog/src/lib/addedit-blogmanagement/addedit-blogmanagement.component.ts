@@ -50,7 +50,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
   public addEndpointData: any;
   isSubmitted = false;
   video_prefix: any = 'https://www.youtube.com/watch?v=';
-  options: any = [];
+  options: any = [''];
   filteredOptions: Observable<string[]>;
   myControl = new FormControl();
   tags_array: any = [];
@@ -121,15 +121,16 @@ export class AddeditBlogmanagementComponent implements OnInit {
     private formBuilder: FormBuilder, public dialog: MatDialog,
     public snackBar: MatSnackBar) {
     this.blogManagementForm = this.formBuilder.group({
-      blogtitle: ['', [Validators.required,Validators.maxLength(20)]],
-      blogcat: ['', Validators.required],
-      description: ['', Validators.required],
-      priority: ['', Validators.required],
+      blogtitle: ['', [Validators.required,Validators.maxLength(30)]],
+      blogcat: ['', ],
+      description: ['', [Validators.required,Validators.maxLength(50)]],
+      priority: ['', [Validators.required,Validators.maxLength(2)]],
       status: ['true', Validators.required],
-      metatitle: ['', Validators.required],
-      metadesc: ['', Validators.required],
+      metatitle: ['', [Validators.required,Validators.maxLength(20)]],
+      metadesc: ['', [Validators.required,Validators.maxLength(50)]],
+      author:['',[Validators.required,Validators.maxLength(20)]],
       credentials: this.formBuilder.array([]),
-      tags: ['',],
+      tags: [''],
       blogs_image: [''],
       blogs_file: ['']
     });
@@ -181,6 +182,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
       this.blogManagementForm.controls['metadesc'].patchValue(this.setData.metadesc);
       this.blogManagementForm.controls['blogs_image'].patchValue(this.setData.blogs_image);
       this.blogManagementForm.controls['blogs_file'].patchValue(this.setData.blogs_file);
+      this.blogManagementForm.controls['author'].patchValue(this.setData.author);
 
 
       /*Image works*/
@@ -247,7 +249,6 @@ export class AddeditBlogmanagementComponent implements OnInit {
 
   @Input()
   set action(action: any) {
-    console.log("action",action);
     this.action2 = action;
   }
 
@@ -343,7 +344,6 @@ export class AddeditBlogmanagementComponent implements OnInit {
       let result: any;
       result = response;
       this.blogCategoryArray = result.res;
-      console.log("88888888",this.blogCategoryArray);
     });
   }
   // ----------------------------------------------------------------------------------
@@ -362,8 +362,10 @@ export class AddeditBlogmanagementComponent implements OnInit {
     this.apiservice.getData(data).subscribe(response => {
       let result: any;
       result = response;
-      if (result != null && result.res != null && result.res[0] != null)
-        this.options = result.res[0].tags;
+      if (result != null && result.res != null && result.res[0] != null)      
+        this.options=result.res[0].tags;
+      
+       
 
 
     });
@@ -378,13 +380,13 @@ export class AddeditBlogmanagementComponent implements OnInit {
   @Input()          //single data from resolve call  & set the value for edit
   set singleData(editDatavals: any) {
     this.setData = editDatavals;
-    console.log("SETDATA",editDatavals);
   }
   // -----------------------------------------------------------------------------------
 
 
   // ---------------------------------SUBMIT----------------------------------------
   onSubmit() {
+     
     /*__________________________IMAGE UPLOADER________________________________________*/
     if (this.imageConfigData) {
       for (const loop in this.imageConfigData.files) {
@@ -447,7 +449,8 @@ export class AddeditBlogmanagementComponent implements OnInit {
             "tags": this.blogManagementForm.value.tags,
             "credentials": this.blogManagementForm.value.credentials,
             "blogs_image": this.blogManagementForm.value.blogs_image,
-            "blogs_file": this.blogManagementForm.value.blogs_file
+            "blogs_file": this.blogManagementForm.value.blogs_file,
+            "author":this.blogManagementForm.value.author
 
           },
           "sourceobj": ["blogcat"]
@@ -475,8 +478,10 @@ export class AddeditBlogmanagementComponent implements OnInit {
       });
 
 
-
     }
+    else
+    console.log("Form is invalid");
+    
   }
 
 
@@ -501,6 +506,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
 
   // -------------------------------Select Tags AutoComplete Field-----------------------
   showval(event: any) {
+    
     if (event.keyCode == 13) {
       this.tags_array.push(event.target.value);
       this.blogManagementForm.controls['tags'].patchValue("");

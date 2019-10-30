@@ -13,6 +13,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
     getDataUrl: any= 'datalist';
     public editdata: any = [];
     action:any="add";
+    listURL:any="blog-management/list";
   
 
     public configData: any = {
@@ -41,8 +42,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       if (params._id) {
         this.activatedRoute.data.subscribe(resolveData => {         
-          this.editdata= resolveData.blogList.res[0];
-          console.log("EDIT DATA",this.editdata);  
+          this.editdata= resolveData.blogList.res[0];  
           this.action="edit";    
         });
       }
