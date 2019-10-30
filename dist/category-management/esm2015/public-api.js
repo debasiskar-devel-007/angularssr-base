@@ -1,0 +1,11 @@
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/*
+ * Public API Surface of category-management
+ */
+export { CategoryManagementService } from './lib/category-management.service';
+export { CategoryManagementComponent } from './lib/category-management.component';
+export { CategoryManagementModule } from './lib/category-management.module';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHVibGljLWFwaS5qcyIsInNvdXJjZVJvb3QiOiJuZzovL2NhdGVnb3J5LW1hbmFnZW1lbnQvIiwic291cmNlcyI6WyJwdWJsaWMtYXBpLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7QUFJQSwwQ0FBYyxtQ0FBbUMsQ0FBQztBQUNsRCw0Q0FBYyxxQ0FBcUMsQ0FBQztBQUNwRCx5Q0FBYyxrQ0FBa0MsQ0FBQyIsInNvdXJjZXNDb250ZW50IjpbIi8qXG4gKiBQdWJsaWMgQVBJIFN1cmZhY2Ugb2YgY2F0ZWdvcnktbWFuYWdlbWVudFxuICovXG5cbmV4cG9ydCAqIGZyb20gJy4vbGliL2NhdGVnb3J5LW1hbmFnZW1lbnQuc2VydmljZSc7XG5leHBvcnQgKiBmcm9tICcuL2xpYi9jYXRlZ29yeS1tYW5hZ2VtZW50LmNvbXBvbmVudCc7XG5leHBvcnQgKiBmcm9tICcuL2xpYi9jYXRlZ29yeS1tYW5hZ2VtZW50Lm1vZHVsZSc7XG4iXX0=

@@ -1,0 +1,21 @@
+{
+  "name": "lession-management",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^7.2.0",
+    "@angular/core": "^7.2.0"
+  },
+  "main": "bundles/lession-management.umd.js",
+  "module": "fesm5/lession-management.js",
+  "es2015": "fesm2015/lession-management.js",
+  "esm5": "esm5/lession-management.js",
+  "esm2015": "esm2015/lession-management.js",
+  "fesm5": "fesm5/lession-management.js",
+  "fesm2015": "fesm2015/lession-management.js",
+  "typings": "lession-management.d.ts",
+  "metadata": "lession-management.metadata.json",
+  "sideEffects": false,
+  "dependencies": {
+    "tslib": "^1.9.0"
+  }
+}
