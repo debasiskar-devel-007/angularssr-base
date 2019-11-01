@@ -8,6 +8,8 @@ import { AddeditServiceComponent } from '../Components/ServiceApp/addedit-servic
 import { ListingServiceComponent } from '../Components/ServiceApp/listing-service/listing-service.component';
 import { AddeditResourceComponent } from '../Components/ResourceApp/addedit-resource/addedit-resource.component';
 import { ListingResourceComponent } from '../Components/ResourceApp/listing-resource/listing-resource.component';
+import { AddEditSubcategoryComponent } from '../Components/NewsletterApp/add-edit-subcategory/add-edit-subcategory.component';
+import { ListingSubcategoryComponent } from '../Components/NewsletterApp/listing-subcategory/listing-subcategory.component';
 
 
 
@@ -44,9 +46,9 @@ const appRoutes: Routes = [
     data: { requestcondition: { source: 'services', condition: {} }, endpoint: 'datalist' }
   },
 
-   
+
   //_______________________RESOURCE LIBRARY_____________________
-  { path:'resource/add',component:AddeditResourceComponent},
+  { path: 'resource/add', component: AddeditResourceComponent },
   {
     path: 'resource/list',
     component: ListingResourceComponent,
@@ -59,6 +61,24 @@ const appRoutes: Routes = [
     resolve: { resourceList: ResolveService },
     data: { requestcondition: { source: 'resources', condition: {} }, endpoint: 'datalist' }
   },
+
+
+  //_______________________NEWSLETTER LIBRARY_____________________
+  //  =============================================================
+  { path: 'newsletter/add-category', component: AddEditSubcategoryComponent },
+  {
+    path: 'newsletter/list-category',
+    component: ListingSubcategoryComponent,
+    resolve: { subscriptionCatData: ResolveService },
+    data: { requestcondition: { source: 'news_category_view', condition: {} }, endpoint: 'datalist' }
+  },
+  {
+    path: 'newsletter/list-category/edit/:_id',
+    component: AddEditSubcategoryComponent,
+    resolve: { subscriptionCatData: ResolveService },
+    data: { requestcondition: { source: 'news_category', condition: {} }, endpoint: 'datalist' }
+  },
+
 
 ];
 
