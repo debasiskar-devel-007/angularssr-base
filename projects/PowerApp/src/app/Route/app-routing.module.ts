@@ -10,6 +10,9 @@ import { AddeditResourceComponent } from '../Components/ResourceApp/addedit-reso
 import { ListingResourceComponent } from '../Components/ResourceApp/listing-resource/listing-resource.component';
 import { AddEditSubcategoryComponent } from '../Components/NewsletterApp/add-edit-subcategory/add-edit-subcategory.component';
 import { ListingSubcategoryComponent } from '../Components/NewsletterApp/listing-subcategory/listing-subcategory.component';
+import { AddEditSubscriptionComponent } from '../Components/NewsletterApp/add-edit-subscription/add-edit-subscription.component';
+import { ListingSubscriptionComponent } from '../Components/NewsletterApp/listing-subscription/listing-subscription.component';
+import { AddEditGroupComponent } from '../Components/NewsletterApp/add-edit-group/add-edit-group.component';
 
 
 
@@ -65,6 +68,9 @@ const appRoutes: Routes = [
 
   //_______________________NEWSLETTER LIBRARY_____________________
   //  =============================================================
+
+
+  // ______________________subscription category_______________
   { path: 'newsletter/add-category', component: AddEditSubcategoryComponent },
   {
     path: 'newsletter/list-category',
@@ -78,8 +84,20 @@ const appRoutes: Routes = [
     resolve: { subscriptionCatData: ResolveService },
     data: { requestcondition: { source: 'news_category', condition: {} }, endpoint: 'datalist' }
   },
-
-
+  //  ______________________subscription_____________________
+  { path: 'newsletter/add-subscription', component: AddEditSubscriptionComponent },
+  {
+    path: 'newsletter/list-subscription',
+    component: ListingSubscriptionComponent,
+    resolve: { subscriptionData: ResolveService },
+    data: { requestcondition: { source: 'subscriptions', condition: {} }, endpoint: 'datalist' }
+  },
+  {
+    path: 'newsletter/add-group/edit/:_id',
+    component: AddEditGroupComponent,
+    resolve: { groupData: ResolveService },
+    data: { requestcondition: { source: 'subscriptions', condition: {} }, endpoint: 'datalist' }
+  },
 ];
 
 @NgModule({

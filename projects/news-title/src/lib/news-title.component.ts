@@ -39,7 +39,7 @@ export class NewsTitleComponent implements OnInit {
   set serverUrl(serverUrlVal: any) {
     this.serverUrlValue = (serverUrlVal) || '<no name set>';
     this.serverUrlValue = serverUrlVal;
-    // console.log(this.serverUrlValue);
+    // console.log("======================",this.serverUrlValue);
 
   }
   @Input()        // set the endpoint And source
@@ -124,8 +124,8 @@ export class NewsTitleComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log('The dialog was closed');
-      console.log(result);
+      // console.log('The dialog was closed');
+      // console.log(result);
     });
   }
 
@@ -165,7 +165,7 @@ export class modalData implements OnInit {
     setTimeout(() => {
       this.apiService.setServerUrl(this.data.serverUrlValue);        //  set the server url
     }, 50);
-    // console.log(this.serverURL);
+    // console.log("+++++++++++++++",this.data.serverUrlValue);
 
 
     this.apiService.clearaddEndpoint();       //  Clear the endpoint
@@ -202,7 +202,7 @@ export class modalData implements OnInit {
 
 
   inputUntouched(val: any) {
-    console.log('ok----');
+    // console.log('ok---?-');
     this.newsLatterForm.controls[val].markAsUntouched();
   }
 

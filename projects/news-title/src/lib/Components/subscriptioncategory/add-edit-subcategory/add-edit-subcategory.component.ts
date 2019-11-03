@@ -49,7 +49,7 @@ export class AddEditSubcategoryComponent implements OnInit {
       case 'edit':
         /* Button text */
         this.buttonText = "UPDATE";
-        this.successMessage = "One row updated";
+        this.successMessage = "One row updated!!!";
         this.setDefaultValue(this.configData.defaultData);
         this.header_name = "EDIT";
         break;
@@ -59,16 +59,16 @@ export class AddEditSubcategoryComponent implements OnInit {
 
 
   // =========================================MODAL functions==========================================
-  // openDialog(x: any): void {
-  //   this.dialogRef = this.dialog.open(Modal, {
-  //     width: '250px',
-  //     data: { msg: x }
-  //   });
+  openDialog(x: any): void {
+    this.dialogRef = this.dialog.open(Modal, {
+      width: '250px',
+      data: { msg: x }
+    });
 
-  //   this.dialogRef.afterClosed().subscribe(result => {
+    this.dialogRef.afterClosed().subscribe(result => {
 
-  //   });
-  // }
+    });
+  }
   // =====================================================================================================
 
   // ================================================Default value======================================
@@ -116,10 +116,10 @@ export class AddEditSubcategoryComponent implements OnInit {
       this.newsletterService.addData(this.configData.endpoint, postData).subscribe((response: any) => {
         if (response.status == "success") {
           
-          // this.openDialog(this.successMessage);
-          // setTimeout(() => {
-          //   this.dialogRef.close();
-          // }, 2000);
+          this.openDialog(this.successMessage);
+          setTimeout(() => {
+            this.dialogRef.close();
+          }, 2000);
           this.router.navigate([this.configData.callBack]);
         } else {
           alert("Some error occurred. Please try angain.");
@@ -135,19 +135,19 @@ export class AddEditSubcategoryComponent implements OnInit {
 
 
 // ============================================MODAL COMPONENT===========================================
-// @Component({
-//   selector: 'app-modal',
-//   templateUrl: 'modal.html',
-// })
-// export class Modal {
+@Component({
+  selector: 'app-modal',
+  templateUrl: 'modal.html',
+})
+export class Modal {
 
-//   constructor(
-//     public dialogRef: MatDialogRef<Modal>,
-//     @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+  constructor(
+    public dialogRef: MatDialogRef<Modal>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
 
-//   onNoClick(): void {
-//     this.dialogRef.close();
-//   }
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
 
-// }
+}
 // ======================================================================================================

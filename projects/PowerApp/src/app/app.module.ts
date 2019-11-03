@@ -35,6 +35,9 @@ import { ListingResourceComponent } from './Components/ResourceApp/listing-resou
 import { NewsTitleModule } from 'news-title';
 import { AddEditSubcategoryComponent } from './Components/NewsletterApp/add-edit-subcategory/add-edit-subcategory.component';
 import { ListingSubcategoryComponent } from './Components/NewsletterApp/listing-subcategory/listing-subcategory.component';
+import { AddEditSubscriptionComponent } from './Components/NewsletterApp/add-edit-subscription/add-edit-subscription.component';
+import { ListingSubscriptionComponent } from './Components/NewsletterApp/listing-subscription/listing-subscription.component';
+import { AddEditGroupComponent } from './Components/NewsletterApp/add-edit-group/add-edit-group.component';
 
 @NgModule({
   declarations: [
@@ -46,7 +49,10 @@ import { ListingSubcategoryComponent } from './Components/NewsletterApp/listing-
     AddeditResourceComponent,
     ListingResourceComponent,
     AddEditSubcategoryComponent,
-    ListingSubcategoryComponent
+    ListingSubcategoryComponent,
+    AddEditSubscriptionComponent,
+    ListingSubscriptionComponent,
+    AddEditGroupComponent
     
     
    

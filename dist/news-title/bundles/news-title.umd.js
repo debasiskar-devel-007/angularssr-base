@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('rxjs/operators'), require('rxjs'), require('ngx-cookie-service'), require('@angular/material'), require('@angular/cdk/a11y'), require('@angular/cdk/drag-drop'), require('@angular/cdk/portal'), require('@angular/cdk/scrolling'), require('@angular/cdk/stepper'), require('@angular/cdk/table'), require('@angular/cdk/tree'), require('@angular/material/autocomplete'), require('@angular/material/badge'), require('@angular/material/bottom-sheet'), require('@angular/material/button'), require('@angular/material/button-toggle'), require('@angular/material/card'), require('@angular/material/checkbox'), require('@angular/material/chips'), require('@angular/material/stepper'), require('@angular/material/datepicker'), require('@angular/material/divider'), require('@angular/material/expansion'), require('@angular/material/grid-list'), require('@angular/material/icon'), require('@angular/material/input'), require('@angular/material/list'), require('@angular/material/menu'), require('@angular/material/core'), require('@angular/material/paginator'), require('@angular/material/progress-bar'), require('@angular/material/progress-spinner'), require('@angular/material/radio'), require('@angular/material/select'), require('@angular/material/sidenav'), require('@angular/material/slider'), require('@angular/material/slide-toggle'), require('@angular/material/snack-bar'), require('@angular/material/sort'), require('@angular/material/table'), require('@angular/material/tabs'), require('@angular/material/toolbar'), require('@angular/material/tooltip'), require('@angular/material/tree'), require('@angular/platform-browser/animations'), require('@angular/common'), require('listing-angular7'), require('@angular/forms'), require('@angular/material/dialog'), require('@angular/router'), require('@angular/common/http'), require('@angular/core')) :
-    typeof define === 'function' && define.amd ? define('news-title', ['exports', 'rxjs/operators', 'rxjs', 'ngx-cookie-service', '@angular/material', '@angular/cdk/a11y', '@angular/cdk/drag-drop', '@angular/cdk/portal', '@angular/cdk/scrolling', '@angular/cdk/stepper', '@angular/cdk/table', '@angular/cdk/tree', '@angular/material/autocomplete', '@angular/material/badge', '@angular/material/bottom-sheet', '@angular/material/button', '@angular/material/button-toggle', '@angular/material/card', '@angular/material/checkbox', '@angular/material/chips', '@angular/material/stepper', '@angular/material/datepicker', '@angular/material/divider', '@angular/material/expansion', '@angular/material/grid-list', '@angular/material/icon', '@angular/material/input', '@angular/material/list', '@angular/material/menu', '@angular/material/core', '@angular/material/paginator', '@angular/material/progress-bar', '@angular/material/progress-spinner', '@angular/material/radio', '@angular/material/select', '@angular/material/sidenav', '@angular/material/slider', '@angular/material/slide-toggle', '@angular/material/snack-bar', '@angular/material/sort', '@angular/material/table', '@angular/material/tabs', '@angular/material/toolbar', '@angular/material/tooltip', '@angular/material/tree', '@angular/platform-browser/animations', '@angular/common', 'listing-angular7', '@angular/forms', '@angular/material/dialog', '@angular/router', '@angular/common/http', '@angular/core'], factory) :
-    (factory((global['news-title'] = {}),global.rxjs.operators,global.rxjs,global.i2,global.ng.material,global.ng.cdk.a11y,global.ng.cdk['drag-drop'],global.ng.cdk.portal,global.ng.cdk.scrolling,global.ng.cdk.stepper,global.ng.cdk.table,global.ng.cdk.tree,global.ng.material.autocomplete,global.ng.material.badge,global.ng.material['bottom-sheet'],global.ng.material.button,global.ng.material['button-toggle'],global.ng.material.card,global.ng.material.checkbox,global.ng.material.chips,global.ng.material.stepper,global.ng.material.datepicker,global.ng.material.divider,global.ng.material.expansion,global.ng.material['grid-list'],global.ng.material.icon,global.ng.material.input,global.ng.material.list,global.ng.material.menu,global.ng.material.core,global.ng.material.paginator,global.ng.material['progress-bar'],global.ng.material['progress-spinner'],global.ng.material.radio,global.ng.material.select,global.ng.material.sidenav,global.ng.material.slider,global.ng.material['slide-toggle'],global.ng.material['snack-bar'],global.ng.material.sort,global.ng.material.table,global.ng.material.tabs,global.ng.material.toolbar,global.ng.material.tooltip,global.ng.material.tree,global.ng.platformBrowser.animations,global.ng.common,global.listingAngular7,global.ng.forms,global.ng.material.dialog,global.ng.router,global.ng.common.http,global.ng.core));
-}(this, (function (exports,operators,rxjs,i2,material,a11y,dragDrop,portal,scrolling,stepper,table,tree,autocomplete,badge,bottomSheet,button,buttonToggle,card,checkbox,chips,stepper$1,datepicker,divider,expansion,gridList,icon,input,list,menu,core,paginator,progressBar,progressSpinner,radio,select,sidenav,slider,slideToggle,snackBar,sort,table$1,tabs,toolbar,tooltip,tree$1,animations,common,listingAngular7,forms,dialog,router,i1,i0) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('rxjs/operators'), require('rxjs'), require('@angular/material'), require('@angular/cdk/a11y'), require('@angular/cdk/drag-drop'), require('@angular/cdk/portal'), require('@angular/cdk/scrolling'), require('@angular/cdk/stepper'), require('@angular/cdk/table'), require('@angular/cdk/tree'), require('@angular/material/autocomplete'), require('@angular/material/badge'), require('@angular/material/bottom-sheet'), require('@angular/material/button'), require('@angular/material/button-toggle'), require('@angular/material/card'), require('@angular/material/checkbox'), require('@angular/material/chips'), require('@angular/material/stepper'), require('@angular/material/datepicker'), require('@angular/material/divider'), require('@angular/material/expansion'), require('@angular/material/grid-list'), require('@angular/material/icon'), require('@angular/material/input'), require('@angular/material/list'), require('@angular/material/menu'), require('@angular/material/core'), require('@angular/material/paginator'), require('@angular/material/progress-bar'), require('@angular/material/progress-spinner'), require('@angular/material/radio'), require('@angular/material/select'), require('@angular/material/sidenav'), require('@angular/material/slider'), require('@angular/material/slide-toggle'), require('@angular/material/snack-bar'), require('@angular/material/sort'), require('@angular/material/table'), require('@angular/material/tabs'), require('@angular/material/toolbar'), require('@angular/material/tooltip'), require('@angular/material/tree'), require('@angular/platform-browser/animations'), require('@angular/common'), require('listing-angular7'), require('@angular/common/http'), require('@angular/core'), require('@angular/forms'), require('ngx-cookie-service'), require('@angular/router'), require('@angular/material/dialog')) :
+    typeof define === 'function' && define.amd ? define('news-title', ['exports', 'rxjs/operators', 'rxjs', '@angular/material', '@angular/cdk/a11y', '@angular/cdk/drag-drop', '@angular/cdk/portal', '@angular/cdk/scrolling', '@angular/cdk/stepper', '@angular/cdk/table', '@angular/cdk/tree', '@angular/material/autocomplete', '@angular/material/badge', '@angular/material/bottom-sheet', '@angular/material/button', '@angular/material/button-toggle', '@angular/material/card', '@angular/material/checkbox', '@angular/material/chips', '@angular/material/stepper', '@angular/material/datepicker', '@angular/material/divider', '@angular/material/expansion', '@angular/material/grid-list', '@angular/material/icon', '@angular/material/input', '@angular/material/list', '@angular/material/menu', '@angular/material/core', '@angular/material/paginator', '@angular/material/progress-bar', '@angular/material/progress-spinner', '@angular/material/radio', '@angular/material/select', '@angular/material/sidenav', '@angular/material/slider', '@angular/material/slide-toggle', '@angular/material/snack-bar', '@angular/material/sort', '@angular/material/table', '@angular/material/tabs', '@angular/material/toolbar', '@angular/material/tooltip', '@angular/material/tree', '@angular/platform-browser/animations', '@angular/common', 'listing-angular7', '@angular/common/http', '@angular/core', '@angular/forms', 'ngx-cookie-service', '@angular/router', '@angular/material/dialog'], factory) :
+    (factory((global['news-title'] = {}),global.rxjs.operators,global.rxjs,global.ng.material,global.ng.cdk.a11y,global.ng.cdk['drag-drop'],global.ng.cdk.portal,global.ng.cdk.scrolling,global.ng.cdk.stepper,global.ng.cdk.table,global.ng.cdk.tree,global.ng.material.autocomplete,global.ng.material.badge,global.ng.material['bottom-sheet'],global.ng.material.button,global.ng.material['button-toggle'],global.ng.material.card,global.ng.material.checkbox,global.ng.material.chips,global.ng.material.stepper,global.ng.material.datepicker,global.ng.material.divider,global.ng.material.expansion,global.ng.material['grid-list'],global.ng.material.icon,global.ng.material.input,global.ng.material.list,global.ng.material.menu,global.ng.material.core,global.ng.material.paginator,global.ng.material['progress-bar'],global.ng.material['progress-spinner'],global.ng.material.radio,global.ng.material.select,global.ng.material.sidenav,global.ng.material.slider,global.ng.material['slide-toggle'],global.ng.material['snack-bar'],global.ng.material.sort,global.ng.material.table,global.ng.material.tabs,global.ng.material.toolbar,global.ng.material.tooltip,global.ng.material.tree,global.ng.platformBrowser.animations,global.ng.common,global.listingAngular7,global.ng.common.http,global.ng.core,global.ng.forms,global.i2,global.ng.router,global.ng.material.dialog));
+}(this, (function (exports,operators,rxjs,material,a11y,dragDrop,portal,scrolling,stepper,table,tree,autocomplete,badge,bottomSheet,button,buttonToggle,card,checkbox,chips,stepper$1,datepicker,divider,expansion,gridList,icon,input,list,menu,core,paginator,progressBar,progressSpinner,radio,select,sidenav,slider,slideToggle,snackBar,sort,table$1,tabs,toolbar,tooltip,tree$1,animations,common,listingAngular7,i1,i0,forms,i2,router,dialog) { 'use strict';
 
     /**
      * @fileoverview added by tsickle
@@ -947,7 +947,7 @@
              */ function (serverUrlVal) {
                 this.serverUrlValue = (serverUrlVal) || '<no name set>';
                 this.serverUrlValue = serverUrlVal;
-                // console.log(this.serverUrlValue);
+                // console.log("======================",this.serverUrlValue);
             },
             enumerable: true,
             configurable: true
@@ -1087,8 +1087,8 @@
                  * @param {?} result
                  * @return {?}
                  */function (result) {
-                    console.log('The dialog was closed');
-                    console.log(result);
+                    // console.log('The dialog was closed');
+                    // console.log(result);
                 }));
             };
         NewsTitleComponent.decorators = [
@@ -1145,7 +1145,7 @@
                  */function () {
                     _this.apiService.setServerUrl(_this.data.serverUrlValue); //  set the server url
                 }), 50);
-                // console.log(this.serverURL);
+                // console.log("+++++++++++++++",this.data.serverUrlValue);
                 this.apiService.clearaddEndpoint(); //  Clear the endpoint
                 setTimeout(( /**
                  * @return {?}
@@ -1204,7 +1204,7 @@
          * @return {?}
          */
             function (val) {
-                console.log('ok----');
+                // console.log('ok---?-');
                 this.newsLatterForm.controls[val].markAsUntouched();
             };
         modalData.decorators = [
@@ -1319,7 +1319,7 @@
                     datasource: receivedData.datasource,
                     tableName: receivedData.tableName,
                     listArray_skip: ["_id", "userId", "created_at", "id", "updated_at", "image"],
-                    listArray_modify_header: { "fullname": "Full Name", "phone": "Phone", "company": "Company", "email": "Email" },
+                    listArray_modify_header: { "fullname": "Full Name", "phone": "Phone", "company": "Company", "email": "Email", "group": "Group" },
                     admintablenameTableName: "admin",
                     statusarr: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }],
                     updateurl: receivedData.updateEndpoint,
@@ -1328,8 +1328,7 @@
                     deleteEndPoint: receivedData.deleteEndPoint,
                     view: receivedData.view,
                     search_settings: {
-                        textsearch: [{ label: "Search by customer name...", field: 'fullname' }],
-                        search: [{ label: "email", field: 'email' }],
+                        textsearch: [{ label: "Search by customer name...", field: 'fullname' }, { label: "Search by email...", field: 'email' }],
                     }
                 };
                 this.loader = false;
@@ -1398,7 +1397,7 @@
                     case 'edit':
                         /* Button text */
                         this.buttonText = "UPDATE";
-                        this.successMessage = "One row updated";
+                        this.successMessage = "One row updated!!!";
                         this.setDefaultValue(this.configData.defaultData);
                         this.header_name = "EDIT";
                         break;
@@ -1406,25 +1405,30 @@
                 // --------------------------------------------------------------------------
             };
         // =========================================MODAL functions==========================================
-        // openDialog(x: any): void {
-        //   this.dialogRef = this.dialog.open(Modal, {
-        //     width: '250px',
-        //     data: { msg: x }
-        //   });
-        //   this.dialogRef.afterClosed().subscribe(result => {
-        //   });
-        // }
+        // =========================================MODAL functions==========================================
+        /**
+         * @param {?} x
+         * @return {?}
+         */
+        AddEditSubcategoryComponent.prototype.openDialog =
+            // =========================================MODAL functions==========================================
+            /**
+             * @param {?} x
+             * @return {?}
+             */
+            function (x) {
+                this.dialogRef = this.dialog.open(Modal, {
+                    width: '250px',
+                    data: { msg: x }
+                });
+                this.dialogRef.afterClosed().subscribe(( /**
+                 * @param {?} result
+                 * @return {?}
+                 */function (result) {
+                }));
+            };
         // =====================================================================================================
         // ================================================Default value======================================
-        // =========================================MODAL functions==========================================
-        // openDialog(x: any): void {
-        //   this.dialogRef = this.dialog.open(Modal, {
-        //     width: '250px',
-        //     data: { msg: x }
-        //   });
-        //   this.dialogRef.afterClosed().subscribe(result => {
-        //   });
-        // }
         // =====================================================================================================
         // ================================================Default value======================================
         /**
@@ -1432,15 +1436,6 @@
          * @return {?}
          */
         AddEditSubcategoryComponent.prototype.setDefaultValue =
-            // =========================================MODAL functions==========================================
-            // openDialog(x: any): void {
-            //   this.dialogRef = this.dialog.open(Modal, {
-            //     width: '250px',
-            //     data: { msg: x }
-            //   });
-            //   this.dialogRef.afterClosed().subscribe(result => {
-            //   });
-            // }
             // =====================================================================================================
             // ================================================Default value======================================
             /**
@@ -1511,10 +1506,12 @@
                      * @return {?}
                      */function (response) {
                         if (response.status == "success") {
-                            // this.openDialog(this.successMessage);
-                            // setTimeout(() => {
-                            //   this.dialogRef.close();
-                            // }, 2000);
+                            _this.openDialog(_this.successMessage);
+                            setTimeout(( /**
+                             * @return {?}
+                             */function () {
+                                _this.dialogRef.close();
+                            }), 2000);
                             _this.router.navigate([_this.configData.callBack]);
                         }
                         else {
@@ -1548,6 +1545,36 @@
             config: [{ type: i0.Input }]
         };
         return AddEditSubcategoryComponent;
+    }());
+    // ============================================MODAL COMPONENT===========================================
+    var Modal = /** @class */ (function () {
+        function Modal(dialogRef, data) {
+            this.dialogRef = dialogRef;
+            this.data = data;
+        }
+        /**
+         * @return {?}
+         */
+        Modal.prototype.onNoClick = /**
+         * @return {?}
+         */
+            function () {
+                this.dialogRef.close();
+            };
+        Modal.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'app-modal',
+                        template: "<h1 mat-dialog-title>MESSAGE</h1>\r\n<div mat-dialog-content>\r\n   <p>{{ data.msg }}</p>\r\n</div>\r\n\r\n"
+                    }] }
+        ];
+        /** @nocollapse */
+        Modal.ctorParameters = function () {
+            return [
+                { type: dialog.MatDialogRef },
+                { type: undefined, decorators: [{ type: i0.Inject, args: [dialog.MAT_DIALOG_DATA,] }] }
+            ];
+        };
+        return Modal;
     }());
 
     /**
@@ -1627,12 +1654,252 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    var AddEditSubscriptiongroupComponent = /** @class */ (function () {
+        // ========================================================
+        function AddEditSubscriptiongroupComponent(formBuilder, cookieService, newsService, router$$1, dialog$$1) {
+            this.formBuilder = formBuilder;
+            this.cookieService = cookieService;
+            this.newsService = newsService;
+            this.router = router$$1;
+            this.dialog = dialog$$1;
+            this.buttonText = "UPDATE";
+            this.header_name = "Add a group to subscriptions";
+            this.group_array = [];
+        }
+        /**
+         * @return {?}
+         */
+        AddEditSubscriptiongroupComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+                //generating the form
+                this.generateForm();
+                //getting the group
+                this.getGroup();
+                //Setting the default values
+                this.setDefaultValue(this.configData.defaultData);
+            };
+        Object.defineProperty(AddEditSubscriptiongroupComponent.prototype, "config", {
+            set: /**
+             * @param {?} getConfig
+             * @return {?}
+             */ function (getConfig) {
+                this.configData = getConfig;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        // =====================generate form==============
+        // =====================generate form==============
+        /**
+         * @return {?}
+         */
+        AddEditSubscriptiongroupComponent.prototype.generateForm =
+            // =====================generate form==============
+            /**
+             * @return {?}
+             */
+            function () {
+                this.subGroupForm = this.formBuilder.group({
+                    fullname: [],
+                    phone: [],
+                    email: [],
+                    company: [],
+                    group: []
+                });
+            };
+        // ================================================
+        // ================================================Default value======================================
+        // ================================================
+        // ================================================Default value======================================
+        /**
+         * @param {?} defaultValue
+         * @return {?}
+         */
+        AddEditSubscriptiongroupComponent.prototype.setDefaultValue =
+            // ================================================
+            // ================================================Default value======================================
+            /**
+             * @param {?} defaultValue
+             * @return {?}
+             */
+            function (defaultValue) {
+                this.subGroupForm.patchValue({
+                    fullname: defaultValue.fullname,
+                    phone: defaultValue.phone,
+                    email: defaultValue.email,
+                    company: defaultValue.company
+                });
+            };
+        // ==================================================================================================
+        // =========================================MODAL functions==========================================
+        // ==================================================================================================
+        // =========================================MODAL functions==========================================
+        /**
+         * @param {?} x
+         * @return {?}
+         */
+        AddEditSubscriptiongroupComponent.prototype.openDialog =
+            // ==================================================================================================
+            // =========================================MODAL functions==========================================
+            /**
+             * @param {?} x
+             * @return {?}
+             */
+            function (x) {
+                this.dialogRef = this.dialog.open(Modal2, {
+                    width: '250px',
+                    data: { msg: x }
+                });
+                this.dialogRef.afterClosed().subscribe(( /**
+                 * @param {?} result
+                 * @return {?}
+                 */function (result) {
+                }));
+            };
+        // =====================================================================================================
+        // ==========================================SUBMIT=================================================
+        // =====================================================================================================
+        // ==========================================SUBMIT=================================================
+        /**
+         * @return {?}
+         */
+        AddEditSubscriptiongroupComponent.prototype.onSubmit =
+            // =====================================================================================================
+            // ==========================================SUBMIT=================================================
+            /**
+             * @return {?}
+             */
+            function () {
+                var _this = this;
+                console.log("++++++++", this.subGroupForm.value);
+                /* stop here if form is invalid */
+                if (this.subGroupForm.invalid) {
+                    return;
+                }
+                else {
+                    /* start process to submited data */
+                    /** @type {?} */
+                    var postData = {
+                        source: this.configData.source,
+                        data: Object.assign(this.subGroupForm.value, this.configData.condition)
+                    };
+                    this.newsService.addData(this.configData.endpoint, postData).subscribe(( /**
+                     * @param {?} response
+                     * @return {?}
+                     */function (response) {
+                        if (response.status == "success") {
+                            // console.log(response.status);
+                            _this.openDialog("Group Added!!!");
+                            setTimeout(( /**
+                             * @return {?}
+                             */function () {
+                                _this.dialogRef.close();
+                            }), 2000);
+                            _this.router.navigate([_this.configData.callBack]);
+                        }
+                        else {
+                            alert("Some error occurred. Please try angain.");
+                        }
+                    }), ( /**
+                     * @param {?} error
+                     * @return {?}
+                     */function (error) {
+                        alert("Some error occurred. Please try angain.");
+                    }));
+                }
+            };
+        // =================================================================================================
+        //Getting the parent category
+        // =================================================================================================
+        //Getting the parent category
+        /**
+         * @return {?}
+         */
+        AddEditSubscriptiongroupComponent.prototype.getGroup =
+            // =================================================================================================
+            //Getting the parent category
+            /**
+             * @return {?}
+             */
+            function () {
+                var _this = this;
+                /** @type {?} */
+                var postData = {
+                    source: this.configData.group,
+                    token: this.cookieService.get('jwtToken')
+                };
+                this.newsService.getData(this.configData.endpoint2 + 'datalist', postData).subscribe(( /**
+                 * @param {?} response
+                 * @return {?}
+                 */function (response) {
+                    _this.group_array = response.res;
+                }));
+            };
+        AddEditSubscriptiongroupComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'lib-add-edit-subscriptiongroup',
+                        template: "<mat-card>\r\n  <mat-toolbar color=\"primary\" style=\"justify-content: center; align-items: center;\">\r\n    <h2 class=\"headerSpan\">{{ header_name }}</h2>\r\n  </mat-toolbar>\r\n  <span class=\"formspan\">\r\n    <mat-card-content class=\"example-container\">\r\n      <form autocomplete=\"off\" [formGroup]=\"subGroupForm\">\r\n        <!-- Name -->\r\n        <mat-form-field>\r\n          <mat-label>Name</mat-label>\r\n          <input matInput formControlName=\"fullname\">\r\n        </mat-form-field>\r\n\r\n        <!-- Phone -->\r\n        <mat-form-field>\r\n          <mat-label>Phone</mat-label>\r\n          <input matInput formControlName=\"phone\">\r\n        </mat-form-field>\r\n\r\n        <!-- Email -->\r\n        <mat-form-field>\r\n          <mat-label>Email</mat-label>\r\n          <input matInput formControlName=\"email\">\r\n        </mat-form-field>\r\n\r\n        <!-- Company -->\r\n        <mat-form-field>\r\n          <mat-label>Company</mat-label>\r\n          <input matInput formControlName=\"company\">\r\n        </mat-form-field>\r\n\r\n        <!-- Group  -->\r\n        <mat-form-field>\r\n          <mat-label>Group</mat-label>\r\n          <select matNativeControl formControlName=\"group\">\r\n              \r\n              <option value=\"{{  item._id }}\" *ngFor=\"let item of group_array\">{{ item.name  }}</option>\r\n            \r\n            </select>\r\n        </mat-form-field>\r\n\r\n\r\n\r\n        <button type=\"submit\" class=\"submitbtn\" class=\"submitbtn\" mat-raised-button\r\n          color=\"primary\"  (click)=\"onSubmit()\">{{buttonText}}</button>\r\n        <button type=\"reset\" class=\"submitbtn\" class=\"submitbtn\" mat-raised-button color=\"primary\">RESET</button>\r\n\r\n\r\n\r\n\r\n      </form>\r\n      <!-- ---------------------------------------FORM ENDS HERE----------------------------- -->\r\n    </mat-card-content>\r\n  </span>\r\n</mat-card>",
+                        styles: [".example-container{display:flex;flex-direction:column}.example-container>*{width:100%}.main-class .submitbtn{display:block;width:170px;margin:10px auto;background:#3f50b5!important;color:#fff}.main-class .material-icons{cursor:pointer}.formspan{background-color:#e7e9ea;border:6px solid #fff;border-bottom:10px solid #fff;display:inline-block;width:100%;position:relative;z-index:9}.formspan .example-container{display:flex;flex-direction:column;width:98%;padding:14px;margin-bottom:0}.formspan .form-field-span,.formspan .mat-form-field{display:inline-block;position:relative;text-align:left;width:98%;background:#fff;margin-bottom:9px;padding:1px 14px}.formspan .form-field-span .mat-checkbox,.formspan .form-field-span .mat-radio-button{padding-right:15px;padding-bottom:15px;display:inline-block}.formspan .mat-form-field-wrapper{padding-bottom:0!important}.form-field-span .mat-error{font-size:13px!important}.mat-error{color:#f44336;font-size:13px!important}button.submitbtn.mat-raised-button.mat-primary{margin-right:15px}h1{color:#3f50b4}.files-view{background-repeat:no-repeat;background-size:cover;background-position:center;height:auto!important;width:82%;margin:20px auto;border-radius:10px;display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap}.files-view .mat-card{z-index:9;margin:10px!important;display:flex;flex-wrap:wrap;justify-content:center;width:27%;position:relative}.files-view .mat-card .mat-card-actions,.files-view .mat-card .mat-card-titlt{display:inline-block;width:100%}.files-view .mat-card .mat-card-subtitle{display:inline-block;width:100%;text-align:center}.closecard{position:absolute;top:-10px;right:-8px;background:#464545;height:25px;width:25px;border-radius:50%;border:1px solid #696969;color:#fff;text-align:center;box-shadow:0 2px 6px #00000070;cursor:pointer}.closecard i{font-size:18px;line-height:27px}"]
+                    }] }
+        ];
+        /** @nocollapse */
+        AddEditSubscriptiongroupComponent.ctorParameters = function () {
+            return [
+                { type: forms.FormBuilder },
+                { type: i2.CookieService },
+                { type: NewsTitleService },
+                { type: router.Router },
+                { type: dialog.MatDialog }
+            ];
+        };
+        AddEditSubscriptiongroupComponent.propDecorators = {
+            config: [{ type: i0.Input }]
+        };
+        return AddEditSubscriptiongroupComponent;
+    }());
+    // ============================================MODAL COMPONENT===========================================
+    var Modal2 = /** @class */ (function () {
+        function Modal2(dialogRef, data) {
+            this.dialogRef = dialogRef;
+            this.data = data;
+        }
+        /**
+         * @return {?}
+         */
+        Modal2.prototype.onNoClick = /**
+         * @return {?}
+         */
+            function () {
+                this.dialogRef.close();
+            };
+        Modal2.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'app-modal',
+                        template: "<h1 mat-dialog-title>MESSAGE</h1>\r\n<div mat-dialog-content>\r\n   <p>{{ data.msg }}</p>\r\n</div>\r\n\r\n"
+                    }] }
+        ];
+        /** @nocollapse */
+        Modal2.ctorParameters = function () {
+            return [
+                { type: dialog.MatDialogRef },
+                { type: undefined, decorators: [{ type: i0.Inject, args: [dialog.MAT_DIALOG_DATA,] }] }
+            ];
+        };
+        return Modal2;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     var NewsTitleModule = /** @class */ (function () {
         function NewsTitleModule() {
         }
         NewsTitleModule.decorators = [
             { type: i0.NgModule, args: [{
-                        declarations: [NewsTitleComponent, modalData, ListingNewsletterComponent, AddEditSubcategoryComponent, ListingSubcategoryComponent],
+                        declarations: [Modal2, Modal, NewsTitleComponent, modalData, ListingNewsletterComponent, AddEditSubcategoryComponent, ListingSubcategoryComponent, AddEditSubscriptiongroupComponent],
                         imports: [
                             DemoMaterialModule,
                             forms.ReactiveFormsModule, forms.FormsModule,
@@ -1642,10 +1909,10 @@
                             router.RouterModule,
                             i1.HttpClientModule
                         ],
-                        exports: [NewsTitleComponent, ListingNewsletterComponent, AddEditSubcategoryComponent, ListingSubcategoryComponent],
+                        exports: [AddEditSubscriptiongroupComponent, Modal, NewsTitleComponent, ListingNewsletterComponent, AddEditSubcategoryComponent, ListingSubcategoryComponent],
                         schemas: [i0.CUSTOM_ELEMENTS_SCHEMA],
                         providers: [ApiService],
-                        entryComponents: [NewsTitleComponent, modalData]
+                        entryComponents: [NewsTitleComponent, modalData, Modal, Modal2]
                     },] }
         ];
         return NewsTitleModule;
@@ -1665,11 +1932,14 @@
     exports.NewsTitleComponent = NewsTitleComponent;
     exports.modalData = modalData;
     exports.NewsTitleModule = NewsTitleModule;
-    exports.ɵb = ListingNewsletterComponent;
-    exports.ɵc = AddEditSubcategoryComponent;
-    exports.ɵd = ListingSubcategoryComponent;
+    exports.ɵb = AddEditSubscriptiongroupComponent;
+    exports.ɵc = Modal2;
+    exports.ɵf = ListingNewsletterComponent;
+    exports.ɵd = AddEditSubcategoryComponent;
+    exports.ɵe = Modal;
+    exports.ɵg = ListingSubcategoryComponent;
     exports.ɵa = ApiService;
-    exports.ɵe = DemoMaterialModule;
+    exports.ɵh = DemoMaterialModule;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

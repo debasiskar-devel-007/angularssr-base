@@ -1,6 +1,5 @@
 import { map } from 'rxjs/operators';
 import { Subject } from 'rxjs';
-import { CookieService } from 'ngx-cookie-service';
 import { MatSnackBar, MatDialogRef, MAT_DIALOG_DATA, MatDialog } from '@angular/material';
 import { A11yModule } from '@angular/cdk/a11y';
 import { DragDropModule } from '@angular/cdk/drag-drop';
@@ -45,11 +44,12 @@ import { MatTreeModule } from '@angular/material/tree';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { ListingModule } from 'listing-angular7';
-import { FormBuilder, Validators, FormGroupDirective, ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { MatDialogModule, MatDialog as MatDialog$1 } from '@angular/material/dialog';
-import { Router, RouterModule } from '@angular/router';
 import { HttpClient, HttpHeaders, HttpClientModule } from '@angular/common/http';
-import { Injectable, NgModule, Component, Input, CUSTOM_ELEMENTS_SCHEMA, Inject, ViewChild, defineInjectable, inject } from '@angular/core';
+import { Injectable, Component, Input, NgModule, Inject, CUSTOM_ELEMENTS_SCHEMA, ViewChild, defineInjectable, inject } from '@angular/core';
+import { FormBuilder, Validators, FormGroupDirective, ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { CookieService } from 'ngx-cookie-service';
+import { Router, RouterModule } from '@angular/router';
+import { MatDialogModule, MatDialog as MatDialog$1, MatDialogRef as MatDialogRef$1, MAT_DIALOG_DATA as MAT_DIALOG_DATA$1 } from '@angular/material/dialog';
 
 /**
  * @fileoverview added by tsickle
@@ -847,7 +847,7 @@ class NewsTitleComponent {
     set serverUrl(serverUrlVal) {
         this.serverUrlValue = (serverUrlVal) || '<no name set>';
         this.serverUrlValue = serverUrlVal;
-        // console.log(this.serverUrlValue);
+        // console.log("======================",this.serverUrlValue);
     }
     /**
      * @param {?} addEndpointVal
@@ -916,8 +916,8 @@ class NewsTitleComponent {
          * @return {?}
          */
         result => {
-            console.log('The dialog was closed');
-            console.log(result);
+            // console.log('The dialog was closed');
+            // console.log(result);
         }));
     }
 }
@@ -974,7 +974,7 @@ class modalData {
         () => {
             this.apiService.setServerUrl(this.data.serverUrlValue); //  set the server url
         }), 50);
-        // console.log(this.serverURL);
+        // console.log("+++++++++++++++",this.data.serverUrlValue);
         this.apiService.clearaddEndpoint(); //  Clear the endpoint
         setTimeout((/**
          * @return {?}
@@ -1024,7 +1024,7 @@ class modalData {
      * @return {?}
      */
     inputUntouched(val) {
-        console.log('ok----');
+        // console.log('ok---?-');
         this.newsLatterForm.controls[val].markAsUntouched();
     }
 }
@@ -1127,7 +1127,7 @@ class ListingNewsletterComponent {
             datasource: receivedData.datasource,
             tableName: receivedData.tableName,
             listArray_skip: ["_id", "userId", "created_at", "id", "updated_at", "image"],
-            listArray_modify_header: { "fullname": "Full Name", "phone": "Phone", "company": "Company", "email": "Email" },
+            listArray_modify_header: { "fullname": "Full Name", "phone": "Phone", "company": "Company", "email": "Email", "group": "Group" },
             admintablenameTableName: "admin",
             statusarr: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }],
             updateurl: receivedData.updateEndpoint,
@@ -1136,8 +1136,7 @@ class ListingNewsletterComponent {
             deleteEndPoint: receivedData.deleteEndPoint,
             view: receivedData.view,
             search_settings: {
-                textsearch: [{ label: "Search by customer name...", field: 'fullname' }],
-                search: [{ label: "email", field: 'email' }],
+                textsearch: [{ label: "Search by customer name...", field: 'fullname' }, { label: "Search by email...", field: 'email' }],
             }
         };
         this.loader = false;
@@ -1199,7 +1198,7 @@ class AddEditSubcategoryComponent {
             case 'edit':
                 /* Button text */
                 this.buttonText = "UPDATE";
-                this.successMessage = "One row updated";
+                this.successMessage = "One row updated!!!";
                 this.setDefaultValue(this.configData.defaultData);
                 this.header_name = "EDIT";
                 break;
@@ -1207,14 +1206,22 @@ class AddEditSubcategoryComponent {
         // --------------------------------------------------------------------------
     }
     // =========================================MODAL functions==========================================
-    // openDialog(x: any): void {
-    //   this.dialogRef = this.dialog.open(Modal, {
-    //     width: '250px',
-    //     data: { msg: x }
-    //   });
-    //   this.dialogRef.afterClosed().subscribe(result => {
-    //   });
-    // }
+    /**
+     * @param {?} x
+     * @return {?}
+     */
+    openDialog(x) {
+        this.dialogRef = this.dialog.open(Modal, {
+            width: '250px',
+            data: { msg: x }
+        });
+        this.dialogRef.afterClosed().subscribe((/**
+         * @param {?} result
+         * @return {?}
+         */
+        result => {
+        }));
+    }
     // =====================================================================================================
     // ================================================Default value======================================
     /**
@@ -1269,10 +1276,13 @@ class AddEditSubcategoryComponent {
              */
             (response) => {
                 if (response.status == "success") {
-                    // this.openDialog(this.successMessage);
-                    // setTimeout(() => {
-                    //   this.dialogRef.close();
-                    // }, 2000);
+                    this.openDialog(this.successMessage);
+                    setTimeout((/**
+                     * @return {?}
+                     */
+                    () => {
+                        this.dialogRef.close();
+                    }), 2000);
                     this.router.navigate([this.configData.callBack]);
                 }
                 else {
@@ -1305,6 +1315,34 @@ AddEditSubcategoryComponent.ctorParameters = () => [
 AddEditSubcategoryComponent.propDecorators = {
     config: [{ type: Input }]
 };
+// ============================================MODAL COMPONENT===========================================
+class Modal {
+    /**
+     * @param {?} dialogRef
+     * @param {?} data
+     */
+    constructor(dialogRef, data) {
+        this.dialogRef = dialogRef;
+        this.data = data;
+    }
+    /**
+     * @return {?}
+     */
+    onNoClick() {
+        this.dialogRef.close();
+    }
+}
+Modal.decorators = [
+    { type: Component, args: [{
+                selector: 'app-modal',
+                template: "<h1 mat-dialog-title>MESSAGE</h1>\r\n<div mat-dialog-content>\r\n   <p>{{ data.msg }}</p>\r\n</div>\r\n\r\n"
+            }] }
+];
+/** @nocollapse */
+Modal.ctorParameters = () => [
+    { type: MatDialogRef$1 },
+    { type: undefined, decorators: [{ type: Inject, args: [MAT_DIALOG_DATA$1,] }] }
+];
 
 /**
  * @fileoverview added by tsickle
@@ -1372,11 +1410,210 @@ ListingSubcategoryComponent.propDecorators = {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+class AddEditSubscriptiongroupComponent {
+    // ========================================================
+    /**
+     * @param {?} formBuilder
+     * @param {?} cookieService
+     * @param {?} newsService
+     * @param {?} router
+     * @param {?} dialog
+     */
+    constructor(formBuilder, cookieService, newsService, router, dialog) {
+        this.formBuilder = formBuilder;
+        this.cookieService = cookieService;
+        this.newsService = newsService;
+        this.router = router;
+        this.dialog = dialog;
+        this.buttonText = "UPDATE";
+        this.header_name = "Add a group to subscriptions";
+        this.group_array = [];
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        //generating the form
+        this.generateForm();
+        //getting the group
+        this.getGroup();
+        //Setting the default values
+        this.setDefaultValue(this.configData.defaultData);
+    }
+    /**
+     * @param {?} getConfig
+     * @return {?}
+     */
+    set config(getConfig) {
+        this.configData = getConfig;
+    }
+    // =====================generate form==============
+    /**
+     * @return {?}
+     */
+    generateForm() {
+        this.subGroupForm = this.formBuilder.group({
+            fullname: [],
+            phone: [],
+            email: [],
+            company: [],
+            group: []
+        });
+    }
+    // ================================================
+    // ================================================Default value======================================
+    /**
+     * @param {?} defaultValue
+     * @return {?}
+     */
+    setDefaultValue(defaultValue) {
+        this.subGroupForm.patchValue({
+            fullname: defaultValue.fullname,
+            phone: defaultValue.phone,
+            email: defaultValue.email,
+            company: defaultValue.company
+        });
+    }
+    // ==================================================================================================
+    // =========================================MODAL functions==========================================
+    /**
+     * @param {?} x
+     * @return {?}
+     */
+    openDialog(x) {
+        this.dialogRef = this.dialog.open(Modal2, {
+            width: '250px',
+            data: { msg: x }
+        });
+        this.dialogRef.afterClosed().subscribe((/**
+         * @param {?} result
+         * @return {?}
+         */
+        result => {
+        }));
+    }
+    // =====================================================================================================
+    // ==========================================SUBMIT=================================================
+    /**
+     * @return {?}
+     */
+    onSubmit() {
+        console.log("++++++++", this.subGroupForm.value);
+        /* stop here if form is invalid */
+        if (this.subGroupForm.invalid) {
+            return;
+        }
+        else {
+            /* start process to submited data */
+            /** @type {?} */
+            let postData = {
+                source: this.configData.source,
+                data: Object.assign(this.subGroupForm.value, this.configData.condition)
+            };
+            this.newsService.addData(this.configData.endpoint, postData).subscribe((/**
+             * @param {?} response
+             * @return {?}
+             */
+            (response) => {
+                if (response.status == "success") {
+                    // console.log(response.status);
+                    this.openDialog("Group Added!!!");
+                    setTimeout((/**
+                     * @return {?}
+                     */
+                    () => {
+                        this.dialogRef.close();
+                    }), 2000);
+                    this.router.navigate([this.configData.callBack]);
+                }
+                else {
+                    alert("Some error occurred. Please try angain.");
+                }
+            }), (/**
+             * @param {?} error
+             * @return {?}
+             */
+            (error) => {
+                alert("Some error occurred. Please try angain.");
+            }));
+        }
+    }
+    // =================================================================================================
+    //Getting the parent category
+    /**
+     * @return {?}
+     */
+    getGroup() {
+        /** @type {?} */
+        let postData = {
+            source: this.configData.group,
+            token: this.cookieService.get('jwtToken')
+        };
+        this.newsService.getData(this.configData.endpoint2 + 'datalist', postData).subscribe((/**
+         * @param {?} response
+         * @return {?}
+         */
+        (response) => {
+            this.group_array = response.res;
+        }));
+    }
+}
+AddEditSubscriptiongroupComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'lib-add-edit-subscriptiongroup',
+                template: "<mat-card>\r\n  <mat-toolbar color=\"primary\" style=\"justify-content: center; align-items: center;\">\r\n    <h2 class=\"headerSpan\">{{ header_name }}</h2>\r\n  </mat-toolbar>\r\n  <span class=\"formspan\">\r\n    <mat-card-content class=\"example-container\">\r\n      <form autocomplete=\"off\" [formGroup]=\"subGroupForm\">\r\n        <!-- Name -->\r\n        <mat-form-field>\r\n          <mat-label>Name</mat-label>\r\n          <input matInput formControlName=\"fullname\">\r\n        </mat-form-field>\r\n\r\n        <!-- Phone -->\r\n        <mat-form-field>\r\n          <mat-label>Phone</mat-label>\r\n          <input matInput formControlName=\"phone\">\r\n        </mat-form-field>\r\n\r\n        <!-- Email -->\r\n        <mat-form-field>\r\n          <mat-label>Email</mat-label>\r\n          <input matInput formControlName=\"email\">\r\n        </mat-form-field>\r\n\r\n        <!-- Company -->\r\n        <mat-form-field>\r\n          <mat-label>Company</mat-label>\r\n          <input matInput formControlName=\"company\">\r\n        </mat-form-field>\r\n\r\n        <!-- Group  -->\r\n        <mat-form-field>\r\n          <mat-label>Group</mat-label>\r\n          <select matNativeControl formControlName=\"group\">\r\n              \r\n              <option value=\"{{  item._id }}\" *ngFor=\"let item of group_array\">{{ item.name  }}</option>\r\n            \r\n            </select>\r\n        </mat-form-field>\r\n\r\n\r\n\r\n        <button type=\"submit\" class=\"submitbtn\" class=\"submitbtn\" mat-raised-button\r\n          color=\"primary\"  (click)=\"onSubmit()\">{{buttonText}}</button>\r\n        <button type=\"reset\" class=\"submitbtn\" class=\"submitbtn\" mat-raised-button color=\"primary\">RESET</button>\r\n\r\n\r\n\r\n\r\n      </form>\r\n      <!-- ---------------------------------------FORM ENDS HERE----------------------------- -->\r\n    </mat-card-content>\r\n  </span>\r\n</mat-card>",
+                styles: [".example-container{display:flex;flex-direction:column}.example-container>*{width:100%}.main-class .submitbtn{display:block;width:170px;margin:10px auto;background:#3f50b5!important;color:#fff}.main-class .material-icons{cursor:pointer}.formspan{background-color:#e7e9ea;border:6px solid #fff;border-bottom:10px solid #fff;display:inline-block;width:100%;position:relative;z-index:9}.formspan .example-container{display:flex;flex-direction:column;width:98%;padding:14px;margin-bottom:0}.formspan .form-field-span,.formspan .mat-form-field{display:inline-block;position:relative;text-align:left;width:98%;background:#fff;margin-bottom:9px;padding:1px 14px}.formspan .form-field-span .mat-checkbox,.formspan .form-field-span .mat-radio-button{padding-right:15px;padding-bottom:15px;display:inline-block}.formspan .mat-form-field-wrapper{padding-bottom:0!important}.form-field-span .mat-error{font-size:13px!important}.mat-error{color:#f44336;font-size:13px!important}button.submitbtn.mat-raised-button.mat-primary{margin-right:15px}h1{color:#3f50b4}.files-view{background-repeat:no-repeat;background-size:cover;background-position:center;height:auto!important;width:82%;margin:20px auto;border-radius:10px;display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap}.files-view .mat-card{z-index:9;margin:10px!important;display:flex;flex-wrap:wrap;justify-content:center;width:27%;position:relative}.files-view .mat-card .mat-card-actions,.files-view .mat-card .mat-card-titlt{display:inline-block;width:100%}.files-view .mat-card .mat-card-subtitle{display:inline-block;width:100%;text-align:center}.closecard{position:absolute;top:-10px;right:-8px;background:#464545;height:25px;width:25px;border-radius:50%;border:1px solid #696969;color:#fff;text-align:center;box-shadow:0 2px 6px #00000070;cursor:pointer}.closecard i{font-size:18px;line-height:27px}"]
+            }] }
+];
+/** @nocollapse */
+AddEditSubscriptiongroupComponent.ctorParameters = () => [
+    { type: FormBuilder },
+    { type: CookieService },
+    { type: NewsTitleService },
+    { type: Router },
+    { type: MatDialog$1 }
+];
+AddEditSubscriptiongroupComponent.propDecorators = {
+    config: [{ type: Input }]
+};
+// ============================================MODAL COMPONENT===========================================
+class Modal2 {
+    /**
+     * @param {?} dialogRef
+     * @param {?} data
+     */
+    constructor(dialogRef, data) {
+        this.dialogRef = dialogRef;
+        this.data = data;
+    }
+    /**
+     * @return {?}
+     */
+    onNoClick() {
+        this.dialogRef.close();
+    }
+}
+Modal2.decorators = [
+    { type: Component, args: [{
+                selector: 'app-modal',
+                template: "<h1 mat-dialog-title>MESSAGE</h1>\r\n<div mat-dialog-content>\r\n   <p>{{ data.msg }}</p>\r\n</div>\r\n\r\n"
+            }] }
+];
+/** @nocollapse */
+Modal2.ctorParameters = () => [
+    { type: MatDialogRef$1 },
+    { type: undefined, decorators: [{ type: Inject, args: [MAT_DIALOG_DATA$1,] }] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 class NewsTitleModule {
 }
 NewsTitleModule.decorators = [
     { type: NgModule, args: [{
-                declarations: [NewsTitleComponent, modalData, ListingNewsletterComponent, AddEditSubcategoryComponent, ListingSubcategoryComponent],
+                declarations: [Modal2, Modal, NewsTitleComponent, modalData, ListingNewsletterComponent, AddEditSubcategoryComponent, ListingSubcategoryComponent, AddEditSubscriptiongroupComponent],
                 imports: [
                     DemoMaterialModule,
                     ReactiveFormsModule, FormsModule,
@@ -1386,10 +1623,10 @@ NewsTitleModule.decorators = [
                     RouterModule,
                     HttpClientModule
                 ],
-                exports: [NewsTitleComponent, ListingNewsletterComponent, AddEditSubcategoryComponent, ListingSubcategoryComponent],
+                exports: [AddEditSubscriptiongroupComponent, Modal, NewsTitleComponent, ListingNewsletterComponent, AddEditSubcategoryComponent, ListingSubcategoryComponent],
                 schemas: [CUSTOM_ELEMENTS_SCHEMA],
                 providers: [ApiService],
-                entryComponents: [NewsTitleComponent, modalData]
+                entryComponents: [NewsTitleComponent, modalData, Modal, Modal2]
             },] }
 ];
 
@@ -1403,6 +1640,6 @@ NewsTitleModule.decorators = [
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { NewsTitleService, NewsTitleComponent, modalData, NewsTitleModule, ListingNewsletterComponent as ɵb, AddEditSubcategoryComponent as ɵc, ListingSubcategoryComponent as ɵd, ApiService as ɵa, DemoMaterialModule as ɵe };
+export { NewsTitleService, NewsTitleComponent, modalData, NewsTitleModule, AddEditSubscriptiongroupComponent as ɵb, Modal2 as ɵc, ListingNewsletterComponent as ɵf, AddEditSubcategoryComponent as ɵd, Modal as ɵe, ListingSubcategoryComponent as ɵg, ApiService as ɵa, DemoMaterialModule as ɵh };
 
 //# sourceMappingURL=news-title.js.map
