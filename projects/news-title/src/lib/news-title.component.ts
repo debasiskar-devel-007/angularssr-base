@@ -154,6 +154,7 @@ export class modalData implements OnInit {
       // console.log(data);
     this.newsLatterForm = this.fb.group({
       fullname: ['', Validators.required],
+      group: [0,],
       phone: ['', Validators.required],
       company: ['', Validators.required],
       email: ['', Validators.compose([Validators.required, Validators.pattern(/^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/)])]

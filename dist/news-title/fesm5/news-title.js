@@ -1199,6 +1199,7 @@ var modalData = /** @class */ (function () {
         // console.log(data);
         this.newsLatterForm = this.fb.group({
             fullname: ['', Validators.required],
+            group: [0,],
             phone: ['', Validators.required],
             company: ['', Validators.required],
             email: ['', Validators.compose([Validators.required, Validators.pattern(/^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/)])]
@@ -1736,9 +1737,10 @@ var AddEditSubscriptiongroupComponent = /** @class */ (function () {
         this.newsService = newsService;
         this.router = router;
         this.dialog = dialog;
-        this.buttonText = "UPDATE";
+        this.buttonText = "SUBMIT";
         this.header_name = "Add a group to subscriptions";
         this.group_array = [];
+        this.successMessage = "Group Added!!!";
     }
     /**
      * @return {?}
@@ -1751,8 +1753,20 @@ var AddEditSubscriptiongroupComponent = /** @class */ (function () {
         this.generateForm();
         //getting the group
         this.getGroup();
-        //Setting the default values
-        this.setDefaultValue(this.configData.defaultData);
+        //Switch Case starts here
+        switch (this.configData.action) {
+            case 'add':
+                /* Button text */
+                this.buttonText = "SUBMIT";
+                this.header_name = "Add a Group";
+                break;
+            case 'edit':
+                /* Button text */
+                this.buttonText = "UPDATE";
+                this.setDefaultValue(this.configData.defaultData);
+                this.header_name = "Change/Remove Group";
+                break;
+        }
     };
     Object.defineProperty(AddEditSubscriptiongroupComponent.prototype, "config", {
         set: /**
@@ -1804,7 +1818,8 @@ var AddEditSubscriptiongroupComponent = /** @class */ (function () {
             fullname: defaultValue.fullname,
             phone: defaultValue.phone,
             email: defaultValue.email,
-            company: defaultValue.company
+            company: defaultValue.company,
+            group: defaultValue.group
         });
     };
     // ==================================================================================================
@@ -1849,6 +1864,8 @@ var AddEditSubscriptiongroupComponent = /** @class */ (function () {
      */
     function () {
         var _this = this;
+        if (this.subGroupForm.value.group == 0)
+            this.successMessage = "Removed Group!!!";
         console.log("++++++++", this.subGroupForm.value);
         /* stop here if form is invalid */
         if (this.subGroupForm.invalid) {
@@ -1867,8 +1884,7 @@ var AddEditSubscriptiongroupComponent = /** @class */ (function () {
              */
             function (response) {
                 if (response.status == "success") {
-                    // console.log(response.status);
-                    _this.openDialog("Group Added!!!");
+                    _this.openDialog(_this.successMessage);
                     setTimeout((/**
                      * @return {?}
                      */
@@ -1920,7 +1936,7 @@ var AddEditSubscriptiongroupComponent = /** @class */ (function () {
     AddEditSubscriptiongroupComponent.decorators = [
         { type: Component, args: [{
                     selector: 'lib-add-edit-subscriptiongroup',
-                    template: "<mat-card>\r\n  <mat-toolbar color=\"primary\" style=\"justify-content: center; align-items: center;\">\r\n    <h2 class=\"headerSpan\">{{ header_name }}</h2>\r\n  </mat-toolbar>\r\n  <span class=\"formspan\">\r\n    <mat-card-content class=\"example-container\">\r\n      <form autocomplete=\"off\" [formGroup]=\"subGroupForm\">\r\n        <!-- Name -->\r\n        <mat-form-field>\r\n          <mat-label>Name</mat-label>\r\n          <input matInput formControlName=\"fullname\">\r\n        </mat-form-field>\r\n\r\n        <!-- Phone -->\r\n        <mat-form-field>\r\n          <mat-label>Phone</mat-label>\r\n          <input matInput formControlName=\"phone\">\r\n        </mat-form-field>\r\n\r\n        <!-- Email -->\r\n        <mat-form-field>\r\n          <mat-label>Email</mat-label>\r\n          <input matInput formControlName=\"email\">\r\n        </mat-form-field>\r\n\r\n        <!-- Company -->\r\n        <mat-form-field>\r\n          <mat-label>Company</mat-label>\r\n          <input matInput formControlName=\"company\">\r\n        </mat-form-field>\r\n\r\n        <!-- Group  -->\r\n        <mat-form-field>\r\n          <mat-label>Group</mat-label>\r\n          <select matNativeControl formControlName=\"group\">\r\n              \r\n              <option value=\"{{  item._id }}\" *ngFor=\"let item of group_array\">{{ item.name  }}</option>\r\n            \r\n            </select>\r\n        </mat-form-field>\r\n\r\n\r\n\r\n        <button type=\"submit\" class=\"submitbtn\" class=\"submitbtn\" mat-raised-button\r\n          color=\"primary\"  (click)=\"onSubmit()\">{{buttonText}}</button>\r\n        <button type=\"reset\" class=\"submitbtn\" class=\"submitbtn\" mat-raised-button color=\"primary\">RESET</button>\r\n\r\n\r\n\r\n\r\n      </form>\r\n      <!-- ---------------------------------------FORM ENDS HERE----------------------------- -->\r\n    </mat-card-content>\r\n  </span>\r\n</mat-card>",
+                    template: "<mat-card>\r\n  <mat-toolbar color=\"primary\" style=\"justify-content: center; align-items: center;\">\r\n    <h2 class=\"headerSpan\">{{ header_name }}</h2>\r\n  </mat-toolbar>\r\n  <span class=\"formspan\">\r\n    <mat-card-content class=\"example-container\">\r\n      <form autocomplete=\"off\" [formGroup]=\"subGroupForm\">\r\n        <!-- Name -->\r\n        <mat-form-field>\r\n          <mat-label>Name</mat-label>\r\n          <input matInput formControlName=\"fullname\">\r\n        </mat-form-field>\r\n\r\n        <!-- Phone -->\r\n        <mat-form-field>\r\n          <mat-label>Phone</mat-label>\r\n          <input matInput formControlName=\"phone\">\r\n        </mat-form-field>\r\n\r\n        <!-- Email -->\r\n        <mat-form-field>\r\n          <mat-label>Email</mat-label>\r\n          <input matInput formControlName=\"email\">\r\n        </mat-form-field>\r\n\r\n        <!-- Company -->\r\n        <mat-form-field>\r\n          <mat-label>Company</mat-label>\r\n          <input matInput formControlName=\"company\">\r\n        </mat-form-field>\r\n\r\n        <!-- Group  -->\r\n        <mat-form-field>\r\n          <mat-label>Group</mat-label>\r\n          <select matNativeControl formControlName=\"group\">\r\n               <option value=0>Remove Group</option>\r\n              <option value=\"{{  item._id }}\" *ngFor=\"let item of group_array\">{{ item.name  }}</option>\r\n            \r\n            </select>\r\n        </mat-form-field>\r\n\r\n\r\n\r\n        <button type=\"submit\" class=\"submitbtn\" class=\"submitbtn\" mat-raised-button\r\n          color=\"primary\"  (click)=\"onSubmit()\">{{buttonText}}</button>\r\n        <button type=\"reset\" class=\"submitbtn\" class=\"submitbtn\" mat-raised-button color=\"primary\">RESET</button>\r\n\r\n\r\n\r\n\r\n      </form>\r\n      <!-- ---------------------------------------FORM ENDS HERE----------------------------- -->\r\n    </mat-card-content>\r\n  </span>\r\n</mat-card>",
                     styles: [".example-container{display:flex;flex-direction:column}.example-container>*{width:100%}.main-class .submitbtn{display:block;width:170px;margin:10px auto;background:#3f50b5!important;color:#fff}.main-class .material-icons{cursor:pointer}.formspan{background-color:#e7e9ea;border:6px solid #fff;border-bottom:10px solid #fff;display:inline-block;width:100%;position:relative;z-index:9}.formspan .example-container{display:flex;flex-direction:column;width:98%;padding:14px;margin-bottom:0}.formspan .form-field-span,.formspan .mat-form-field{display:inline-block;position:relative;text-align:left;width:98%;background:#fff;margin-bottom:9px;padding:1px 14px}.formspan .form-field-span .mat-checkbox,.formspan .form-field-span .mat-radio-button{padding-right:15px;padding-bottom:15px;display:inline-block}.formspan .mat-form-field-wrapper{padding-bottom:0!important}.form-field-span .mat-error{font-size:13px!important}.mat-error{color:#f44336;font-size:13px!important}button.submitbtn.mat-raised-button.mat-primary{margin-right:15px}h1{color:#3f50b4}.files-view{background-repeat:no-repeat;background-size:cover;background-position:center;height:auto!important;width:82%;margin:20px auto;border-radius:10px;display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap}.files-view .mat-card{z-index:9;margin:10px!important;display:flex;flex-wrap:wrap;justify-content:center;width:27%;position:relative}.files-view .mat-card .mat-card-actions,.files-view .mat-card .mat-card-titlt{display:inline-block;width:100%}.files-view .mat-card .mat-card-subtitle{display:inline-block;width:100%;text-align:center}.closecard{position:absolute;top:-10px;right:-8px;background:#464545;height:25px;width:25px;border-radius:50%;border:1px solid #696969;color:#fff;text-align:center;box-shadow:0 2px 6px #00000070;cursor:pointer}.closecard i{font-size:18px;line-height:27px}"]
                 }] }
     ];

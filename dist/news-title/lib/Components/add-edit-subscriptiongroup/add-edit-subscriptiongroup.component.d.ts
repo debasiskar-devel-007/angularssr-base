@@ -19,6 +19,7 @@ export declare class AddEditSubscriptiongroupComponent implements OnInit {
     configData: any;
     group_array: any;
     dialogRef: any;
+    successMessage: any;
     constructor(formBuilder: FormBuilder, cookieService: CookieService, newsService: NewsTitleService, router: Router, dialog: MatDialog);
     ngOnInit(): void;
     config: any;

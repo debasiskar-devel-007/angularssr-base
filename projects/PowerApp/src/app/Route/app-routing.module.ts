@@ -86,11 +86,12 @@ const appRoutes: Routes = [
   },
   //  ______________________subscription_____________________
   { path: 'newsletter/add-subscription', component: AddEditSubscriptionComponent },
+  { path: 'newsletter/add-subscription-admin', component: AddEditGroupComponent },
   {
     path: 'newsletter/list-subscription',
     component: ListingSubscriptionComponent,
     resolve: { subscriptionData: ResolveService },
-    data: { requestcondition: { source: 'subscriptions', condition: {} }, endpoint: 'datalist' }
+    data: { requestcondition: { source: 'subscriptions_view', condition: {} }, endpoint: 'datalist' }
   },
   {
     path: 'newsletter/add-group/edit/:_id',

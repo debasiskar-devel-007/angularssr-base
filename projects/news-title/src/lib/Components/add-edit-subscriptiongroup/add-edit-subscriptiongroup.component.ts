@@ -19,11 +19,12 @@ export class AddEditSubscriptiongroupComponent implements OnInit {
 
   // =======================declaratiosn=====================
   subGroupForm: FormGroup;
-  buttonText: any = "UPDATE";
+  buttonText: any = "SUBMIT";
   header_name: any = "Add a group to subscriptions";
   configData: any;
   group_array: any = [];
   dialogRef:any;
+  successMessage:any="Group Added!!!"
   // ========================================================
 
 
@@ -38,10 +39,22 @@ export class AddEditSubscriptiongroupComponent implements OnInit {
     //getting the group
     this.getGroup();
 
-    //Setting the default values
-    this.setDefaultValue(this.configData.defaultData);
+    //Switch Case starts here
 
-
+    switch (this.configData.action) {
+      case 'add':
+        /* Button text */
+        this.buttonText = "SUBMIT";
+        this.header_name = "Add a Group";
+        break;
+      case 'edit':
+        /* Button text */
+        this.buttonText = "UPDATE";
+        
+        this.setDefaultValue(this.configData.defaultData);
+        this.header_name = "Change/Remove Group";
+        break;
+    }
 
 
   }
@@ -70,7 +83,8 @@ export class AddEditSubscriptiongroupComponent implements OnInit {
       fullname: defaultValue.fullname,
       phone: defaultValue.phone,
       email: defaultValue.email,
-      company: defaultValue.company
+      company: defaultValue.company,
+      group:defaultValue.group
     });
 
   }
@@ -100,6 +114,8 @@ openDialog(x: any): void {
 
   onSubmit() {
 
+    if(this.subGroupForm.value.group==0)
+    this.successMessage="Removed Group!!!";
     console.log("++++++++", this.subGroupForm.value);
     /* stop here if form is invalid */
     if (this.subGroupForm.invalid) {
@@ -113,8 +129,8 @@ openDialog(x: any): void {
       };
       this.newsService.addData(this.configData.endpoint, postData).subscribe((response: any) => {
         if (response.status == "success") {
-          // console.log(response.status);
-          this.openDialog("Group Added!!!");
+         
+          this.openDialog(this.successMessage);
           setTimeout(() => {
             this.dialogRef.close();
           }, 2000);
