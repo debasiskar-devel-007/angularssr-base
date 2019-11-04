@@ -9,7 +9,7 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class ListTeamComponent implements OnInit {
    public allDataList:any=[];
-   public serverUrl:any="https://o820cv2lu8.execute-api.us-east-2.amazonaws.com/production/api/";
+   public serverUrl:any="https://w8lauzoyaa.execute-api.us-east-1.amazonaws.com/dev/api/";
    public token=this.cookies.get('jwtToken');
    public deleteendpoint:any="deletesingledata";
    public editUrl="team/edit";

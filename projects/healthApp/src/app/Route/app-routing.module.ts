@@ -131,7 +131,7 @@ const appRoutes: Routes = [
       path:'team/list',
       component : ListTeamComponent,
       resolve : {teamdata : ResolveService },
-      data : { requestcondition : { source : 'Team_management_view', condition : {}},endpoint : 'datalist'}
+      data : { requestcondition : { source : 'Team_management', condition : {}},endpoint : 'datalist'}
     },
     {
       path:'team/add',
@@ -165,7 +165,7 @@ const appRoutes: Routes = [
       path :'team/category-management/list',
       component : ListComponent,
       resolve : {teamdata : ResolveService},
-      data : { requestcondition : { source : 'Team_category_view',condition : {}}, endpoint : 'datalist'}
+      data : { requestcondition : { source : 'Team_category',condition : {}}, endpoint : 'datalist'}
     },
     /**share-tool library start here**/
     {

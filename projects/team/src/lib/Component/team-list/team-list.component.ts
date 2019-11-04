@@ -24,10 +24,9 @@ export class TeamListComponent implements OnInit {
     this.DataList = (val) || '<no name set>';
     this.DataList = val;
   }
-  public data_skip: any = ["_id"];
+  public data_skip: any = ["_id","multipleemail","bulletarray"];
   public data_modify_header: any = { "membername" : "Member Name","description":"Description",
-  "categoryname":"Category Name","multipleemail":"Multiple E-mails",
-  "bulletarray":"Bullet List","multiplephone":"Phone Numbers","images":"Images"
+  "categoryName":"Category Name","multiplephone":"Phone Numbers","images":"Images"
  };
  public search_settings: any =
     {

@@ -139,15 +139,9 @@ export class AddBlogComponent implements OnInit {
   openDialog(x: any): void {
     this.dialogRef = this.dialog.open(Dialogtest, {
       width: '250px',
-
-
-
       data: { message: x }
     });
-
     this.dialogRef.afterClosed().subscribe(result => {
-
-
     });
   }
   /**modal end here */

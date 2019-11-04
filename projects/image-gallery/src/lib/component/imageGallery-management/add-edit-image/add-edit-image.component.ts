@@ -83,7 +83,6 @@ export class AddEditImageComponent implements OnInit {
           "type": val[0].img_gallery[i].type
         });
       }
-      console.log("array for edit for multiple souresh",this.images_array);
 
     }
 
@@ -127,7 +126,7 @@ export class AddEditImageComponent implements OnInit {
     this.imageGalleryManagementForm.reset();
   }
   clear_image(index: any) {
-    console.log(this.dataForEdit.img_gallery[0]);
+    //console.log(this.dataForEdit.img_gallery[0]);
     //console.log("sb sala faltu",this.dataForEdit.img_gallery[index]);
     // this.images_array.pop(this.dataForEdit.img_gallery[index]);
     this.images_array_edit.splice(index, 1);
@@ -156,8 +155,8 @@ export class AddEditImageComponent implements OnInit {
     }
     if (this.imageGalleryManagementForm.valid) {
       var data: any;
-      if (this.activeroute.snapshot.params._id) {
-        data = {
+      if (this.activeroute.snapshot.params._id) { 
+        data = {                                        //update part
           "source": "imageGallery_management",
           'data': {
             "id": this.parameter_id,
