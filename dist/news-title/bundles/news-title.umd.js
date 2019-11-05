@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('rxjs/operators'), require('rxjs'), require('@angular/material'), require('@angular/cdk/a11y'), require('@angular/cdk/drag-drop'), require('@angular/cdk/portal'), require('@angular/cdk/scrolling'), require('@angular/cdk/stepper'), require('@angular/cdk/table'), require('@angular/cdk/tree'), require('@angular/material/autocomplete'), require('@angular/material/badge'), require('@angular/material/bottom-sheet'), require('@angular/material/button'), require('@angular/material/button-toggle'), require('@angular/material/card'), require('@angular/material/checkbox'), require('@angular/material/chips'), require('@angular/material/stepper'), require('@angular/material/datepicker'), require('@angular/material/divider'), require('@angular/material/expansion'), require('@angular/material/grid-list'), require('@angular/material/icon'), require('@angular/material/input'), require('@angular/material/list'), require('@angular/material/menu'), require('@angular/material/core'), require('@angular/material/paginator'), require('@angular/material/progress-bar'), require('@angular/material/progress-spinner'), require('@angular/material/radio'), require('@angular/material/select'), require('@angular/material/sidenav'), require('@angular/material/slider'), require('@angular/material/slide-toggle'), require('@angular/material/snack-bar'), require('@angular/material/sort'), require('@angular/material/table'), require('@angular/material/tabs'), require('@angular/material/toolbar'), require('@angular/material/tooltip'), require('@angular/material/tree'), require('@angular/platform-browser/animations'), require('@angular/common'), require('listing-angular7'), require('@angular/common/http'), require('@angular/core'), require('@angular/forms'), require('ngx-cookie-service'), require('@angular/router'), require('@angular/material/dialog')) :
-    typeof define === 'function' && define.amd ? define('news-title', ['exports', 'rxjs/operators', 'rxjs', '@angular/material', '@angular/cdk/a11y', '@angular/cdk/drag-drop', '@angular/cdk/portal', '@angular/cdk/scrolling', '@angular/cdk/stepper', '@angular/cdk/table', '@angular/cdk/tree', '@angular/material/autocomplete', '@angular/material/badge', '@angular/material/bottom-sheet', '@angular/material/button', '@angular/material/button-toggle', '@angular/material/card', '@angular/material/checkbox', '@angular/material/chips', '@angular/material/stepper', '@angular/material/datepicker', '@angular/material/divider', '@angular/material/expansion', '@angular/material/grid-list', '@angular/material/icon', '@angular/material/input', '@angular/material/list', '@angular/material/menu', '@angular/material/core', '@angular/material/paginator', '@angular/material/progress-bar', '@angular/material/progress-spinner', '@angular/material/radio', '@angular/material/select', '@angular/material/sidenav', '@angular/material/slider', '@angular/material/slide-toggle', '@angular/material/snack-bar', '@angular/material/sort', '@angular/material/table', '@angular/material/tabs', '@angular/material/toolbar', '@angular/material/tooltip', '@angular/material/tree', '@angular/platform-browser/animations', '@angular/common', 'listing-angular7', '@angular/common/http', '@angular/core', '@angular/forms', 'ngx-cookie-service', '@angular/router', '@angular/material/dialog'], factory) :
-    (factory((global['news-title'] = {}),global.rxjs.operators,global.rxjs,global.ng.material,global.ng.cdk.a11y,global.ng.cdk['drag-drop'],global.ng.cdk.portal,global.ng.cdk.scrolling,global.ng.cdk.stepper,global.ng.cdk.table,global.ng.cdk.tree,global.ng.material.autocomplete,global.ng.material.badge,global.ng.material['bottom-sheet'],global.ng.material.button,global.ng.material['button-toggle'],global.ng.material.card,global.ng.material.checkbox,global.ng.material.chips,global.ng.material.stepper,global.ng.material.datepicker,global.ng.material.divider,global.ng.material.expansion,global.ng.material['grid-list'],global.ng.material.icon,global.ng.material.input,global.ng.material.list,global.ng.material.menu,global.ng.material.core,global.ng.material.paginator,global.ng.material['progress-bar'],global.ng.material['progress-spinner'],global.ng.material.radio,global.ng.material.select,global.ng.material.sidenav,global.ng.material.slider,global.ng.material['slide-toggle'],global.ng.material['snack-bar'],global.ng.material.sort,global.ng.material.table,global.ng.material.tabs,global.ng.material.toolbar,global.ng.material.tooltip,global.ng.material.tree,global.ng.platformBrowser.animations,global.ng.common,global.listingAngular7,global.ng.common.http,global.ng.core,global.ng.forms,global.i2,global.ng.router,global.ng.material.dialog));
-}(this, (function (exports,operators,rxjs,material,a11y,dragDrop,portal,scrolling,stepper,table,tree,autocomplete,badge,bottomSheet,button,buttonToggle,card,checkbox,chips,stepper$1,datepicker,divider,expansion,gridList,icon,input,list,menu,core,paginator,progressBar,progressSpinner,radio,select,sidenav,slider,slideToggle,snackBar,sort,table$1,tabs,toolbar,tooltip,tree$1,animations,common,listingAngular7,i1,i0,forms,i2,router,dialog) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('rxjs/operators'), require('rxjs'), require('@angular/material'), require('@angular/cdk/a11y'), require('@angular/cdk/drag-drop'), require('@angular/cdk/portal'), require('@angular/cdk/scrolling'), require('@angular/cdk/stepper'), require('@angular/cdk/table'), require('@angular/cdk/tree'), require('@angular/material/autocomplete'), require('@angular/material/badge'), require('@angular/material/bottom-sheet'), require('@angular/material/button'), require('@angular/material/button-toggle'), require('@angular/material/card'), require('@angular/material/checkbox'), require('@angular/material/chips'), require('@angular/material/stepper'), require('@angular/material/datepicker'), require('@angular/material/divider'), require('@angular/material/expansion'), require('@angular/material/grid-list'), require('@angular/material/icon'), require('@angular/material/input'), require('@angular/material/list'), require('@angular/material/menu'), require('@angular/material/core'), require('@angular/material/paginator'), require('@angular/material/progress-bar'), require('@angular/material/progress-spinner'), require('@angular/material/radio'), require('@angular/material/select'), require('@angular/material/sidenav'), require('@angular/material/slider'), require('@angular/material/slide-toggle'), require('@angular/material/snack-bar'), require('@angular/material/sort'), require('@angular/material/table'), require('@angular/material/tabs'), require('@angular/material/toolbar'), require('@angular/material/tooltip'), require('@angular/material/tree'), require('@angular/platform-browser/animations'), require('@angular/common'), require('listing-angular7'), require('@angular/common/http'), require('ngx-cookie-service'), require('@angular/forms'), require('@angular/router'), require('@angular/material/dialog'), require('@angular/core')) :
+    typeof define === 'function' && define.amd ? define('news-title', ['exports', 'rxjs/operators', 'rxjs', '@angular/material', '@angular/cdk/a11y', '@angular/cdk/drag-drop', '@angular/cdk/portal', '@angular/cdk/scrolling', '@angular/cdk/stepper', '@angular/cdk/table', '@angular/cdk/tree', '@angular/material/autocomplete', '@angular/material/badge', '@angular/material/bottom-sheet', '@angular/material/button', '@angular/material/button-toggle', '@angular/material/card', '@angular/material/checkbox', '@angular/material/chips', '@angular/material/stepper', '@angular/material/datepicker', '@angular/material/divider', '@angular/material/expansion', '@angular/material/grid-list', '@angular/material/icon', '@angular/material/input', '@angular/material/list', '@angular/material/menu', '@angular/material/core', '@angular/material/paginator', '@angular/material/progress-bar', '@angular/material/progress-spinner', '@angular/material/radio', '@angular/material/select', '@angular/material/sidenav', '@angular/material/slider', '@angular/material/slide-toggle', '@angular/material/snack-bar', '@angular/material/sort', '@angular/material/table', '@angular/material/tabs', '@angular/material/toolbar', '@angular/material/tooltip', '@angular/material/tree', '@angular/platform-browser/animations', '@angular/common', 'listing-angular7', '@angular/common/http', 'ngx-cookie-service', '@angular/forms', '@angular/router', '@angular/material/dialog', '@angular/core'], factory) :
+    (factory((global['news-title'] = {}),global.rxjs.operators,global.rxjs,global.ng.material,global.ng.cdk.a11y,global.ng.cdk['drag-drop'],global.ng.cdk.portal,global.ng.cdk.scrolling,global.ng.cdk.stepper,global.ng.cdk.table,global.ng.cdk.tree,global.ng.material.autocomplete,global.ng.material.badge,global.ng.material['bottom-sheet'],global.ng.material.button,global.ng.material['button-toggle'],global.ng.material.card,global.ng.material.checkbox,global.ng.material.chips,global.ng.material.stepper,global.ng.material.datepicker,global.ng.material.divider,global.ng.material.expansion,global.ng.material['grid-list'],global.ng.material.icon,global.ng.material.input,global.ng.material.list,global.ng.material.menu,global.ng.material.core,global.ng.material.paginator,global.ng.material['progress-bar'],global.ng.material['progress-spinner'],global.ng.material.radio,global.ng.material.select,global.ng.material.sidenav,global.ng.material.slider,global.ng.material['slide-toggle'],global.ng.material['snack-bar'],global.ng.material.sort,global.ng.material.table,global.ng.material.tabs,global.ng.material.toolbar,global.ng.material.tooltip,global.ng.material.tree,global.ng.platformBrowser.animations,global.ng.common,global.listingAngular7,global.ng.common.http,global.i2,global.ng.forms,global.ng.router,global.ng.material.dialog,global.ng.core));
+}(this, (function (exports,operators,rxjs,material,a11y,dragDrop,portal,scrolling,stepper,table,tree,autocomplete,badge,bottomSheet,button,buttonToggle,card,checkbox,chips,stepper$1,datepicker,divider,expansion,gridList,icon,input,list,menu,core,paginator,progressBar,progressSpinner,radio,select,sidenav,slider,slideToggle,snackBar,sort,table$1,tabs,toolbar,tooltip,tree$1,animations,common,listingAngular7,i1,i2,forms,router,dialog,i0) { 'use strict';
 
     /**
      * @fileoverview added by tsickle
@@ -1790,7 +1790,6 @@
                 var _this = this;
                 if (this.subGroupForm.value.group == 0)
                     this.successMessage = "Removed Group!!!";
-                console.log("++++++++", this.subGroupForm.value);
                 /* stop here if form is invalid */
                 if (this.subGroupForm.invalid) {
                     return;
@@ -1800,7 +1799,8 @@
                     /** @type {?} */
                     var postData = {
                         source: this.configData.source,
-                        data: Object.assign(this.subGroupForm.value, this.configData.condition)
+                        data: Object.assign(this.subGroupForm.value, this.configData.condition),
+                        "sourceobj": ["group"]
                     };
                     this.newsService.addData(this.configData.endpoint, postData).subscribe(( /**
                      * @param {?} response
@@ -1910,12 +1910,632 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    var AddEditNewsletterlibComponent = /** @class */ (function () {
+        // ==============================================
+        function AddEditNewsletterlibComponent() {
+            // =================declaration==================
+            this.header_name = "Newsletter";
+        }
+        /**
+         * @return {?}
+         */
+        AddEditNewsletterlibComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+            };
+        AddEditNewsletterlibComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'lib-add-edit-newsletterlib',
+                        template: "<mat-card>\r\n  <mat-toolbar color=\"primary\" style=\"justify-content: center; align-items: center;\">\r\n    <h2 class=\"headerSpan\">{{ header_name }}</h2>\r\n  </mat-toolbar>\r\n  <span class=\"formspan\">\r\n    <mat-card-content class=\"example-container\">\r\n      <form autocomplete=\"off\" >\r\n      \r\n\r\n \r\n        <!-- Newsletter title  -->\r\n        <mat-form-field>\r\n          <mat-label>Newsletter Title:</mat-label>\r\n          <input matInput>\r\n        </mat-form-field>\r\n\r\n        <!-- Newsletter Subject  -->\r\n        <mat-form-field>\r\n            <mat-label>Newsletter Subject:</mat-label>\r\n            <input matInput>\r\n          </mat-form-field>\r\n\r\n\r\n \r\n         <!-- Buttons  -->\r\n        <!-- <button type=\"submit\" class=\"submitbtn\" class=\"submitbtn\" mat-raised-button\r\n          color=\"primary\"  (click)=\"onSubmit()\">{{buttonText}}</button>\r\n        <button type=\"reset\" class=\"submitbtn\" class=\"submitbtn\" mat-raised-button color=\"primary\">RESET</button> -->\r\n\r\n\r\n\r\n\r\n      </form>\r\n      <!-- ---------------------------------------FORM ENDS HERE----------------------------- -->\r\n    </mat-card-content>\r\n  </span>\r\n</mat-card>",
+                        styles: [".example-container{display:flex;flex-direction:column}.example-container>*{width:100%}.main-class .submitbtn{display:block;width:170px;margin:10px auto;background:#3f50b5!important;color:#fff}.main-class .material-icons{cursor:pointer}.formspan{background-color:#e7e9ea;border:6px solid #fff;border-bottom:10px solid #fff;display:inline-block;width:100%;position:relative;z-index:9}.formspan .example-container{display:flex;flex-direction:column;width:98%;padding:14px;margin-bottom:0}.formspan .form-field-span,.formspan .mat-form-field{display:inline-block;position:relative;text-align:left;width:98%;background:#fff;margin-bottom:9px;padding:1px 14px}.formspan .form-field-span .mat-checkbox,.formspan .form-field-span .mat-radio-button{padding-right:15px;padding-bottom:15px;display:inline-block}.formspan .mat-form-field-wrapper{padding-bottom:0!important}.form-field-span .mat-error{font-size:13px!important}.mat-error{color:#f44336;font-size:13px!important}button.submitbtn.mat-raised-button.mat-primary{margin-right:15px}h1{color:#3f50b4}.files-view{background-repeat:no-repeat;background-size:cover;background-position:center;height:auto!important;width:82%;margin:20px auto;border-radius:10px;display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap}.files-view .mat-card{z-index:9;margin:10px!important;display:flex;flex-wrap:wrap;justify-content:center;width:27%;position:relative}.files-view .mat-card .mat-card-actions,.files-view .mat-card .mat-card-titlt{display:inline-block;width:100%}.files-view .mat-card .mat-card-subtitle{display:inline-block;width:100%;text-align:center}.closecard{position:absolute;top:-10px;right:-8px;background:#464545;height:25px;width:25px;border-radius:50%;border:1px solid #696969;color:#fff;text-align:center;box-shadow:0 2px 6px #00000070;cursor:pointer}.closecard i{font-size:18px;line-height:27px}"]
+                    }] }
+        ];
+        /** @nocollapse */
+        AddEditNewsletterlibComponent.ctorParameters = function () { return []; };
+        return AddEditNewsletterlibComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ListingNewsletterlibComponent = /** @class */ (function () {
+        function ListingNewsletterlibComponent() {
+        }
+        /**
+         * @return {?}
+         */
+        ListingNewsletterlibComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+            };
+        ListingNewsletterlibComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'lib-listing-newsletterlib',
+                        template: "<p>\r\n  listing-newsletterlib works!\r\n</p>\r\n",
+                        styles: [""]
+                    }] }
+        ];
+        /** @nocollapse */
+        ListingNewsletterlibComponent.ctorParameters = function () { return []; };
+        return ListingNewsletterlibComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var AddEditSenderComponent = /** @class */ (function () {
+        // ===========================================
+        function AddEditSenderComponent(formBuilder, newsService, router$$1, dialog$$1) {
+            this.formBuilder = formBuilder;
+            this.newsService = newsService;
+            this.router = router$$1;
+            this.dialog = dialog$$1;
+            this.buttonText = "SUBMIT";
+            this.header_name = "Add Sender";
+            this.successMessage = "Submitted Successfully!!!";
+        }
+        /**
+         * @return {?}
+         */
+        AddEditSenderComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+                //generating the form
+                this.generateForm();
+                // --------------------------------checking the cases------------------------ 
+                switch (this.configData.action) {
+                    case 'add':
+                        /* Button text */
+                        break;
+                    case 'edit':
+                        /* Button text */
+                        this.buttonText = "UPDATE";
+                        this.successMessage = "One row updated!!!";
+                        this.setDefaultValue(this.configData.defaultData);
+                        this.header_name = "Edit Sender's Information";
+                        break;
+                }
+                // --------------------------------------------------------------------------
+            };
+        // ===============generate form====================
+        // ===============generate form====================
+        /**
+         * @return {?}
+         */
+        AddEditSenderComponent.prototype.generateForm =
+            // ===============generate form====================
+            /**
+             * @return {?}
+             */
+            function () {
+                this.senderForm = this.formBuilder.group({
+                    name: [],
+                    email: []
+                });
+            };
+        Object.defineProperty(AddEditSenderComponent.prototype, "config", {
+            // ================================================
+            set: 
+            // ================================================
+            /**
+             * @param {?} getConfig
+             * @return {?}
+             */
+            function (getConfig) {
+                this.configData = getConfig;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        // =========================================MODAL functions==========================================
+        // =========================================MODAL functions==========================================
+        /**
+         * @param {?} x
+         * @return {?}
+         */
+        AddEditSenderComponent.prototype.openDialog =
+            // =========================================MODAL functions==========================================
+            /**
+             * @param {?} x
+             * @return {?}
+             */
+            function (x) {
+                this.dialogRef = this.dialog.open(Modal3, {
+                    width: '250px',
+                    data: { msg: x }
+                });
+                this.dialogRef.afterClosed().subscribe(( /**
+                 * @param {?} result
+                 * @return {?}
+                 */function (result) {
+                }));
+            };
+        // =====================================================================================================
+        // ================================================Default value======================================
+        // =====================================================================================================
+        // ================================================Default value======================================
+        /**
+         * @param {?} defaultValue
+         * @return {?}
+         */
+        AddEditSenderComponent.prototype.setDefaultValue =
+            // =====================================================================================================
+            // ================================================Default value======================================
+            /**
+             * @param {?} defaultValue
+             * @return {?}
+             */
+            function (defaultValue) {
+                this.senderForm.patchValue({
+                    name: defaultValue.name,
+                    email: defaultValue.email
+                });
+            };
+        // ==================================================================================================
+        // =======================On SUBMIT======================
+        // ==================================================================================================
+        // =======================On SUBMIT======================
+        /**
+         * @return {?}
+         */
+        AddEditSenderComponent.prototype.onSubmit =
+            // ==================================================================================================
+            // =======================On SUBMIT======================
+            /**
+             * @return {?}
+             */
+            function () {
+                var _this = this;
+                console.log("++++++++", this.senderForm.value);
+                /* stop here if form is invalid */
+                if (this.senderForm.invalid) {
+                    return;
+                }
+                else {
+                    /* start process to submited data */
+                    /** @type {?} */
+                    var postData = {
+                        source: this.configData.source,
+                        data: Object.assign(this.senderForm.value, this.configData.condition),
+                        "sourceobj": ["group"]
+                    };
+                    this.newsService.addData(this.configData.endpoint, postData).subscribe(( /**
+                     * @param {?} response
+                     * @return {?}
+                     */function (response) {
+                        if (response.status == "success") {
+                            console.log(response.status);
+                            _this.openDialog(_this.successMessage);
+                            setTimeout(( /**
+                             * @return {?}
+                             */function () {
+                                _this.dialogRef.close();
+                            }), 2000);
+                            _this.router.navigate([_this.configData.callBack]);
+                        }
+                        else {
+                            alert("Some error occurred. Please try angain.");
+                        }
+                    }), ( /**
+                     * @param {?} error
+                     * @return {?}
+                     */function (error) {
+                        alert("Some error occurred. Please try angain.");
+                    }));
+                }
+            };
+        AddEditSenderComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'lib-add-edit-sender',
+                        template: "<mat-card>\r\n  <mat-toolbar color=\"primary\" style=\"justify-content: center; align-items: center;\">\r\n    <h2 class=\"headerSpan\">{{ header_name }}</h2>\r\n  </mat-toolbar>\r\n  <span class=\"formspan\">\r\n    <mat-card-content class=\"example-container\">\r\n      <form autocomplete=\"off\" [formGroup]=\"senderForm\">\r\n        <!-- Senders name -->\r\n        <mat-form-field>\r\n          <mat-label>Sender's Name</mat-label>\r\n          <input matInput formControlName=\"name\">\r\n        </mat-form-field>\r\n\r\n        <!-- Sender's email  -->\r\n        <mat-form-field>\r\n          <mat-label>Email</mat-label>\r\n          <input matInput formControlName=\"email\">\r\n        </mat-form-field>\r\n\r\n\r\n        <!-- Button  -->\r\n        <button type=\"submit\" class=\"submitbtn\" class=\"submitbtn\" mat-raised-button color=\"primary\"\r\n          (click)=\"onSubmit()\">{{buttonText}}</button>\r\n        <button type=\"reset\" class=\"submitbtn\" class=\"submitbtn\" mat-raised-button color=\"primary\">RESET</button>\r\n\r\n      </form>\r\n    </mat-card-content>\r\n  </span>\r\n</mat-card>",
+                        styles: [".example-container{display:flex;flex-direction:column}.example-container>*{width:100%}.main-class .submitbtn{display:block;width:170px;margin:10px auto;background:#3f50b5!important;color:#fff}.main-class .material-icons{cursor:pointer}.formspan{background-color:#e7e9ea;border:6px solid #fff;border-bottom:10px solid #fff;display:inline-block;width:100%;position:relative;z-index:9}.formspan .example-container{display:flex;flex-direction:column;width:98%;padding:14px;margin-bottom:0}.formspan .form-field-span,.formspan .mat-form-field{display:inline-block;position:relative;text-align:left;width:98%;background:#fff;margin-bottom:9px;padding:1px 14px}.formspan .form-field-span .mat-checkbox,.formspan .form-field-span .mat-radio-button{padding-right:15px;padding-bottom:15px;display:inline-block}.formspan .mat-form-field-wrapper{padding-bottom:0!important}.form-field-span .mat-error{font-size:13px!important}.mat-error{color:#f44336;font-size:13px!important}button.submitbtn.mat-raised-button.mat-primary{margin-right:15px}h1{color:#3f50b4}.files-view{background-repeat:no-repeat;background-size:cover;background-position:center;height:auto!important;width:82%;margin:20px auto;border-radius:10px;display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap}.files-view .mat-card{z-index:9;margin:10px!important;display:flex;flex-wrap:wrap;justify-content:center;width:27%;position:relative}.files-view .mat-card .mat-card-actions,.files-view .mat-card .mat-card-titlt{display:inline-block;width:100%}.files-view .mat-card .mat-card-subtitle{display:inline-block;width:100%;text-align:center}.closecard{position:absolute;top:-10px;right:-8px;background:#464545;height:25px;width:25px;border-radius:50%;border:1px solid #696969;color:#fff;text-align:center;box-shadow:0 2px 6px #00000070;cursor:pointer}.closecard i{font-size:18px;line-height:27px}"]
+                    }] }
+        ];
+        /** @nocollapse */
+        AddEditSenderComponent.ctorParameters = function () {
+            return [
+                { type: forms.FormBuilder },
+                { type: NewsTitleService },
+                { type: router.Router },
+                { type: dialog.MatDialog }
+            ];
+        };
+        AddEditSenderComponent.propDecorators = {
+            config: [{ type: i0.Input }]
+        };
+        return AddEditSenderComponent;
+    }());
+    // ============================================MODAL COMPONENT===========================================
+    var Modal3 = /** @class */ (function () {
+        function Modal3(dialogRef, data) {
+            this.dialogRef = dialogRef;
+            this.data = data;
+        }
+        /**
+         * @return {?}
+         */
+        Modal3.prototype.onNoClick = /**
+         * @return {?}
+         */
+            function () {
+                this.dialogRef.close();
+            };
+        Modal3.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'app-modal',
+                        template: "<h1 mat-dialog-title>MESSAGE</h1>\r\n<div mat-dialog-content>\r\n   <p>{{ data.msg }}</p>\r\n</div>\r\n\r\n"
+                    }] }
+        ];
+        /** @nocollapse */
+        Modal3.ctorParameters = function () {
+            return [
+                { type: dialog.MatDialogRef },
+                { type: undefined, decorators: [{ type: i0.Inject, args: [dialog.MAT_DIALOG_DATA,] }] }
+            ];
+        };
+        return Modal3;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ListingSenderComponent = /** @class */ (function () {
+        // ====================================================================================================
+        function ListingSenderComponent() {
+            this.loader = true;
+        }
+        Object.defineProperty(ListingSenderComponent.prototype, "config", {
+            // =====================================================================================================
+            // ================================================Input For Lib Listing================================
+            set: 
+            // =====================================================================================================
+            // ================================================Input For Lib Listing================================
+            /**
+             * @param {?} receivedData
+             * @return {?}
+             */
+            function (receivedData) {
+                this.senderConfigForm = {
+                    apiUrl: receivedData.apiBaseUrl,
+                    listEndPoint: receivedData.listEndPoint,
+                    datasource: receivedData.datasource,
+                    tableName: receivedData.tableName,
+                    listArray_skip: ["_id", "userId", "created_at", "id", "updated_at"],
+                    listArray_modify_header: { "name": "Sender's Name", "email": "Sender's Email" },
+                    admintablenameTableName: "admin",
+                    statusarr: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }],
+                    updateurl: receivedData.updateEndpoint,
+                    editUrl: receivedData.editUrl,
+                    jwtToken: receivedData.jwtToken,
+                    deleteEndPoint: receivedData.deleteEndPoint,
+                    view: receivedData.view,
+                };
+                this.loader = false;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        /**
+         * @return {?}
+         */
+        ListingSenderComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+            };
+        ListingSenderComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'lib-listing-sender',
+                        template: "<mat-card *ngIf=\"loader==true\">\r\n  <mat-spinner class=\"spinner\"></mat-spinner>\r\n</mat-card>\r\n\r\n\r\n\r\n<!-- ------------------------lib listing being called------------------------ -->\r\n<mat-card *ngIf=\"loader==false\">\r\n  <lib-listing class=\"formfilterdiv\"\r\n      *ngIf=\"senderConfigForm.datasource !=null && senderConfigForm.datasource.length > 0\"\r\n      [datasource]=\"senderConfigForm.datasource\" [skip]=\"senderConfigForm.listArray_skip\"\r\n      [modify_header_array]=\"senderConfigForm.listArray_modify_header\" [sourcedata]=\"senderConfigForm.tableName\"\r\n      [statusarr]=\"senderConfigForm.statusarr\" [jwttoken]=\"senderConfigForm.jwtToken\"\r\n      [apiurl]=\"senderConfigForm.apiUrl\" [editroute]=\"senderConfigForm.editUrl\"\r\n      [deleteendpoint]=\"senderConfigForm.deleteEndPoint\">\r\n  </lib-listing>\r\n<!-- ----------------------------------------------------------------------------->\r\n\r\n  <h2 *ngIf=\"senderConfigForm.datasource.length == 0\">No record found.</h2>\r\n</mat-card>",
+                        styles: [""]
+                    }] }
+        ];
+        /** @nocollapse */
+        ListingSenderComponent.ctorParameters = function () { return []; };
+        ListingSenderComponent.propDecorators = {
+            config: [{ type: i0.Input }]
+        };
+        return ListingSenderComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var AddEditTestemaillibComponent = /** @class */ (function () {
+        // ===========================================
+        function AddEditTestemaillibComponent(formBuilder, newsService, router$$1, dialog$$1) {
+            this.formBuilder = formBuilder;
+            this.newsService = newsService;
+            this.router = router$$1;
+            this.dialog = dialog$$1;
+            this.buttonText = "SUBMIT";
+            this.header_name = "Add Sender(Test)";
+            this.successMessage = "Submitted Successfully!!!";
+        }
+        /**
+         * @return {?}
+         */
+        AddEditTestemaillibComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+                //generating the form
+                this.generateForm();
+                // --------------------------------checking the cases------------------------ 
+                switch (this.configData.action) {
+                    case 'add':
+                        /* Button text */
+                        break;
+                    case 'edit':
+                        /* Button text */
+                        this.buttonText = "UPDATE";
+                        this.successMessage = "One row updated!!!";
+                        this.setDefaultValue(this.configData.defaultData);
+                        this.header_name = "Edit sender's Information";
+                        break;
+                }
+                // --------------------------------------------------------------------------
+            };
+        // ===============generate form====================
+        // ===============generate form====================
+        /**
+         * @return {?}
+         */
+        AddEditTestemaillibComponent.prototype.generateForm =
+            // ===============generate form====================
+            /**
+             * @return {?}
+             */
+            function () {
+                this.senderForm = this.formBuilder.group({
+                    name: [],
+                    email: []
+                });
+            };
+        Object.defineProperty(AddEditTestemaillibComponent.prototype, "config", {
+            // ================================================
+            set: 
+            // ================================================
+            /**
+             * @param {?} getConfig
+             * @return {?}
+             */
+            function (getConfig) {
+                this.configData = getConfig;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        // =========================================MODAL functions==========================================
+        // =========================================MODAL functions==========================================
+        /**
+         * @param {?} x
+         * @return {?}
+         */
+        AddEditTestemaillibComponent.prototype.openDialog =
+            // =========================================MODAL functions==========================================
+            /**
+             * @param {?} x
+             * @return {?}
+             */
+            function (x) {
+                this.dialogRef = this.dialog.open(Modal4, {
+                    width: '250px',
+                    data: { msg: x }
+                });
+                this.dialogRef.afterClosed().subscribe(( /**
+                 * @param {?} result
+                 * @return {?}
+                 */function (result) {
+                }));
+            };
+        // =====================================================================================================
+        // ================================================Default value======================================
+        // =====================================================================================================
+        // ================================================Default value======================================
+        /**
+         * @param {?} defaultValue
+         * @return {?}
+         */
+        AddEditTestemaillibComponent.prototype.setDefaultValue =
+            // =====================================================================================================
+            // ================================================Default value======================================
+            /**
+             * @param {?} defaultValue
+             * @return {?}
+             */
+            function (defaultValue) {
+                this.senderForm.patchValue({
+                    name: defaultValue.name,
+                    email: defaultValue.email
+                });
+            };
+        // ==================================================================================================
+        // =======================On SUBMIT======================
+        // ==================================================================================================
+        // =======================On SUBMIT======================
+        /**
+         * @return {?}
+         */
+        AddEditTestemaillibComponent.prototype.onSubmit =
+            // ==================================================================================================
+            // =======================On SUBMIT======================
+            /**
+             * @return {?}
+             */
+            function () {
+                var _this = this;
+                /* stop here if form is invalid */
+                if (this.senderForm.invalid) {
+                    return;
+                }
+                else {
+                    /* start process to submited data */
+                    /** @type {?} */
+                    var postData = {
+                        source: this.configData.source,
+                        data: Object.assign(this.senderForm.value, this.configData.condition),
+                    };
+                    this.newsService.addData(this.configData.endpoint, postData).subscribe(( /**
+                     * @param {?} response
+                     * @return {?}
+                     */function (response) {
+                        if (response.status == "success") {
+                            console.log(response.status);
+                            _this.openDialog(_this.successMessage);
+                            setTimeout(( /**
+                             * @return {?}
+                             */function () {
+                                _this.dialogRef.close();
+                            }), 2000);
+                            _this.router.navigate([_this.configData.callBack]);
+                        }
+                        else {
+                            alert("Some error occurred. Please try angain.");
+                        }
+                    }), ( /**
+                     * @param {?} error
+                     * @return {?}
+                     */function (error) {
+                        alert("Some error occurred. Please try angain.");
+                    }));
+                }
+            };
+        AddEditTestemaillibComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'lib-add-edit-testemaillib',
+                        template: "<mat-card>\r\n  <mat-toolbar color=\"primary\" style=\"justify-content: center; align-items: center;\">\r\n    <h2 class=\"headerSpan\">{{ header_name }}</h2>\r\n  </mat-toolbar>\r\n  <span class=\"formspan\">\r\n    <mat-card-content class=\"example-container\">\r\n      <form autocomplete=\"off\" [formGroup]=\"senderForm\">\r\n        <!-- Senders name -->\r\n        <mat-form-field>\r\n          <mat-label>Sender's Name</mat-label>\r\n          <input matInput formControlName=\"name\">\r\n        </mat-form-field>\r\n\r\n        <!-- Sender's email  -->\r\n        <mat-form-field>\r\n          <mat-label>Email</mat-label>\r\n          <input matInput formControlName=\"email\">\r\n        </mat-form-field>\r\n\r\n\r\n        <!-- Button  -->\r\n        <button type=\"submit\" class=\"submitbtn\" class=\"submitbtn\" mat-raised-button color=\"primary\"\r\n          (click)=\"onSubmit()\">{{buttonText}}</button>\r\n        <button type=\"reset\" class=\"submitbtn\" class=\"submitbtn\" mat-raised-button color=\"primary\">RESET</button>\r\n\r\n      </form>\r\n    </mat-card-content>\r\n  </span>\r\n</mat-card>",
+                        styles: [".example-container{display:flex;flex-direction:column}.example-container>*{width:100%}.main-class .submitbtn{display:block;width:170px;margin:10px auto;background:#3f50b5!important;color:#fff}.main-class .material-icons{cursor:pointer}.formspan{background-color:#e7e9ea;border:6px solid #fff;border-bottom:10px solid #fff;display:inline-block;width:100%;position:relative;z-index:9}.formspan .example-container{display:flex;flex-direction:column;width:98%;padding:14px;margin-bottom:0}.formspan .form-field-span,.formspan .mat-form-field{display:inline-block;position:relative;text-align:left;width:98%;background:#fff;margin-bottom:9px;padding:1px 14px}.formspan .form-field-span .mat-checkbox,.formspan .form-field-span .mat-radio-button{padding-right:15px;padding-bottom:15px;display:inline-block}.formspan .mat-form-field-wrapper{padding-bottom:0!important}.form-field-span .mat-error{font-size:13px!important}.mat-error{color:#f44336;font-size:13px!important}button.submitbtn.mat-raised-button.mat-primary{margin-right:15px}h1{color:#3f50b4}.files-view{background-repeat:no-repeat;background-size:cover;background-position:center;height:auto!important;width:82%;margin:20px auto;border-radius:10px;display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap}.files-view .mat-card{z-index:9;margin:10px!important;display:flex;flex-wrap:wrap;justify-content:center;width:27%;position:relative}.files-view .mat-card .mat-card-actions,.files-view .mat-card .mat-card-titlt{display:inline-block;width:100%}.files-view .mat-card .mat-card-subtitle{display:inline-block;width:100%;text-align:center}.closecard{position:absolute;top:-10px;right:-8px;background:#464545;height:25px;width:25px;border-radius:50%;border:1px solid #696969;color:#fff;text-align:center;box-shadow:0 2px 6px #00000070;cursor:pointer}.closecard i{font-size:18px;line-height:27px}"]
+                    }] }
+        ];
+        /** @nocollapse */
+        AddEditTestemaillibComponent.ctorParameters = function () {
+            return [
+                { type: forms.FormBuilder },
+                { type: NewsTitleService },
+                { type: router.Router },
+                { type: dialog.MatDialog }
+            ];
+        };
+        AddEditTestemaillibComponent.propDecorators = {
+            config: [{ type: i0.Input }]
+        };
+        return AddEditTestemaillibComponent;
+    }());
+    // ============================================MODAL COMPONENT===========================================
+    var Modal4 = /** @class */ (function () {
+        function Modal4(dialogRef, data) {
+            this.dialogRef = dialogRef;
+            this.data = data;
+        }
+        /**
+         * @return {?}
+         */
+        Modal4.prototype.onNoClick = /**
+         * @return {?}
+         */
+            function () {
+                this.dialogRef.close();
+            };
+        Modal4.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'app-modal',
+                        template: "<h1 mat-dialog-title>MESSAGE</h1>\r\n<div mat-dialog-content>\r\n   <p>{{ data.msg }}</p>\r\n</div>\r\n\r\n"
+                    }] }
+        ];
+        /** @nocollapse */
+        Modal4.ctorParameters = function () {
+            return [
+                { type: dialog.MatDialogRef },
+                { type: undefined, decorators: [{ type: i0.Inject, args: [dialog.MAT_DIALOG_DATA,] }] }
+            ];
+        };
+        return Modal4;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    var ListingTestemaillibComponent = /** @class */ (function () {
+        // ====================================================================================================
+        function ListingTestemaillibComponent() {
+            this.loader = true;
+        }
+        Object.defineProperty(ListingTestemaillibComponent.prototype, "config", {
+            // =====================================================================================================
+            // ================================================Input For Lib Listing================================
+            set: 
+            // =====================================================================================================
+            // ================================================Input For Lib Listing================================
+            /**
+             * @param {?} receivedData
+             * @return {?}
+             */
+            function (receivedData) {
+                this.senderConfigForm = {
+                    apiUrl: receivedData.apiBaseUrl,
+                    listEndPoint: receivedData.listEndPoint,
+                    datasource: receivedData.datasource,
+                    tableName: receivedData.tableName,
+                    listArray_skip: ["_id", "userId", "created_at", "id", "updated_at"],
+                    listArray_modify_header: { "name": "Sender's Name", "email": "Sender's Email" },
+                    admintablenameTableName: "admin",
+                    statusarr: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }],
+                    updateurl: receivedData.updateEndpoint,
+                    editUrl: receivedData.editUrl,
+                    jwtToken: receivedData.jwtToken,
+                    deleteEndPoint: receivedData.deleteEndPoint,
+                    view: receivedData.view,
+                };
+                this.loader = false;
+            },
+            enumerable: true,
+            configurable: true
+        });
+        /**
+         * @return {?}
+         */
+        ListingTestemaillibComponent.prototype.ngOnInit = /**
+         * @return {?}
+         */
+            function () {
+            };
+        ListingTestemaillibComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'lib-listing-testemaillib',
+                        template: "<mat-card *ngIf=\"loader==true\">\r\n  <mat-spinner class=\"spinner\"></mat-spinner>\r\n</mat-card>\r\n\r\n\r\n\r\n<!-- ------------------------lib listing being called------------------------ -->\r\n<mat-card *ngIf=\"loader==false\">\r\n  <lib-listing class=\"formfilterdiv\"\r\n      *ngIf=\"senderConfigForm.datasource !=null && senderConfigForm.datasource.length > 0\"\r\n      [datasource]=\"senderConfigForm.datasource\" [skip]=\"senderConfigForm.listArray_skip\"\r\n      [modify_header_array]=\"senderConfigForm.listArray_modify_header\" [sourcedata]=\"senderConfigForm.tableName\"\r\n      [statusarr]=\"senderConfigForm.statusarr\" [jwttoken]=\"senderConfigForm.jwtToken\"\r\n      [apiurl]=\"senderConfigForm.apiUrl\" [editroute]=\"senderConfigForm.editUrl\"\r\n      [deleteendpoint]=\"senderConfigForm.deleteEndPoint\">\r\n  </lib-listing>\r\n<!-- ----------------------------------------------------------------------------->\r\n\r\n  <h2 *ngIf=\"senderConfigForm.datasource.length == 0\">No record found.</h2>\r\n</mat-card>",
+                        styles: [""]
+                    }] }
+        ];
+        /** @nocollapse */
+        ListingTestemaillibComponent.ctorParameters = function () { return []; };
+        ListingTestemaillibComponent.propDecorators = {
+            config: [{ type: i0.Input }]
+        };
+        return ListingTestemaillibComponent;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     var NewsTitleModule = /** @class */ (function () {
         function NewsTitleModule() {
         }
         NewsTitleModule.decorators = [
             { type: i0.NgModule, args: [{
-                        declarations: [Modal2, Modal, NewsTitleComponent, modalData, ListingNewsletterComponent, AddEditSubcategoryComponent, ListingSubcategoryComponent, AddEditSubscriptiongroupComponent],
+                        declarations: [Modal4, Modal2, Modal, NewsTitleComponent, modalData, ListingNewsletterComponent,
+                            AddEditSubcategoryComponent, ListingSubcategoryComponent, AddEditSubscriptiongroupComponent,
+                            AddEditNewsletterlibComponent, ListingNewsletterlibComponent, AddEditSenderComponent,
+                            ListingSenderComponent, Modal3, AddEditTestemaillibComponent, ListingTestemaillibComponent],
                         imports: [
                             DemoMaterialModule,
                             forms.ReactiveFormsModule, forms.FormsModule,
@@ -1925,10 +2545,12 @@
                             router.RouterModule,
                             i1.HttpClientModule
                         ],
-                        exports: [AddEditSubscriptiongroupComponent, Modal, NewsTitleComponent, ListingNewsletterComponent, AddEditSubcategoryComponent, ListingSubcategoryComponent],
+                        exports: [AddEditSenderComponent, AddEditNewsletterlibComponent, AddEditSubscriptiongroupComponent,
+                            Modal, NewsTitleComponent, ListingNewsletterComponent, AddEditSubcategoryComponent,
+                            ListingSubcategoryComponent, AddEditTestemaillibComponent, ListingTestemaillibComponent],
                         schemas: [i0.CUSTOM_ELEMENTS_SCHEMA],
                         providers: [ApiService],
-                        entryComponents: [NewsTitleComponent, modalData, Modal, Modal2]
+                        entryComponents: [Modal4, Modal3, NewsTitleComponent, modalData, Modal, Modal2]
                     },] }
         ];
         return NewsTitleModule;
@@ -1948,14 +2570,22 @@
     exports.NewsTitleComponent = NewsTitleComponent;
     exports.modalData = modalData;
     exports.NewsTitleModule = NewsTitleModule;
-    exports.ɵb = AddEditSubscriptiongroupComponent;
-    exports.ɵc = Modal2;
-    exports.ɵf = ListingNewsletterComponent;
-    exports.ɵd = AddEditSubcategoryComponent;
-    exports.ɵe = Modal;
-    exports.ɵg = ListingSubcategoryComponent;
+    exports.ɵd = AddEditSubscriptiongroupComponent;
+    exports.ɵe = Modal2;
+    exports.ɵh = ListingNewsletterComponent;
+    exports.ɵj = AddEditNewsletterlibComponent;
+    exports.ɵk = ListingNewsletterlibComponent;
+    exports.ɵl = AddEditSenderComponent;
+    exports.ɵm = Modal3;
+    exports.ɵn = ListingSenderComponent;
+    exports.ɵf = AddEditSubcategoryComponent;
+    exports.ɵg = Modal;
+    exports.ɵi = ListingSubcategoryComponent;
+    exports.ɵb = AddEditTestemaillibComponent;
+    exports.ɵc = Modal4;
+    exports.ɵo = ListingTestemaillibComponent;
     exports.ɵa = ApiService;
-    exports.ɵh = DemoMaterialModule;
+    exports.ɵp = DemoMaterialModule;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

@@ -13,6 +13,12 @@ import { ListingSubcategoryComponent } from '../Components/NewsletterApp/listing
 import { AddEditSubscriptionComponent } from '../Components/NewsletterApp/add-edit-subscription/add-edit-subscription.component';
 import { ListingSubscriptionComponent } from '../Components/NewsletterApp/listing-subscription/listing-subscription.component';
 import { AddEditGroupComponent } from '../Components/NewsletterApp/add-edit-group/add-edit-group.component';
+import { AddEditNewsletterComponent } from '../Components/NewsletterApp/add-edit-newsletter/add-edit-newsletter.component';
+import { ListingNewsletterComponent } from '../Components/NewsletterApp/listing-newsletter/listing-newsletter.component';
+import { AddEditSenderappComponent } from '../Components/NewsletterApp/add-edit-senderapp/add-edit-senderapp.component';
+import { ListingSenderappComponent } from '../Components/NewsletterApp/listing-senderapp/listing-senderapp.component';
+import { AddEditTestemailappComponent } from '../Components/NewsletterApp/add-edit-testemailapp/add-edit-testemailapp.component';
+import { LisitngTestemailappComponent } from '../Components/NewsletterApp/lisitng-testemailapp/lisitng-testemailapp.component';
 
 
 
@@ -98,6 +104,50 @@ const appRoutes: Routes = [
     component: AddEditGroupComponent,
     resolve: { groupData: ResolveService },
     data: { requestcondition: { source: 'subscriptions', condition: {} }, endpoint: 'datalist' }
+  },
+
+  // ________________________sender's list_____________________
+  { path: 'sender/add', component: AddEditSenderappComponent },
+  {
+    path: 'sender/list',
+    component: ListingSenderappComponent,
+    resolve: { senderData: ResolveService },
+    data: { requestcondition: { source: 'senders', condition: {} }, endpoint: 'datalist' }
+  },
+  {
+    path: 'sender/edit/:_id',
+    component: AddEditSenderappComponent,
+    resolve: { senderData: ResolveService },
+    data: { requestcondition: { source: 'senders', condition: {} }, endpoint: 'datalist' }
+  },
+
+  // ________________________test email _____________________
+  { path: 'test/add', component: AddEditTestemailappComponent },
+  {
+    path: 'test/list',
+    component: LisitngTestemailappComponent,
+    resolve: { testData: ResolveService },
+    data: { requestcondition: { source: 'testemail', condition: {} }, endpoint: 'datalist' }
+  },
+  {
+    path: 'test/edit/:_id',
+    component: AddEditTestemailappComponent,
+    resolve: { testData: ResolveService },
+    data: { requestcondition: { source: 'testemail', condition: {} }, endpoint: 'datalist' }
+  },
+  // ________________________newsletter_____________________
+  { path: 'newsletter/add', component: AddEditNewsletterComponent },
+  {
+    path: 'newsletter/list',
+    component: ListingNewsletterComponent,
+    resolve: { newsData: ResolveService },
+    data: { requestcondition: { source: 'newsletters', condition: {} }, endpoint: 'datalist' }
+  },
+  {
+    path: 'newsletter/edit/:_id',
+    component: AddEditNewsletterComponent,
+    resolve: { newsData: ResolveService },
+    data: { requestcondition: { source: 'newsletters', condition: {} }, endpoint: 'datalist' }
   },
 ];
 
