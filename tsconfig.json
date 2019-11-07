@@ -54,6 +54,48 @@
       ],
       "blog/*": [
         "dist/blog/*"
+      ],
+      "listing-library": [
+        "dist/listing-library"
+      ],
+      "listing-library/*": [
+        "dist/listing-library/*"
+      ],    
+      "lib-listing": [
+        "dist/listing"
+      ],
+      "listing/*": [
+        "dist/listing/*"
+      ],
+      "testimonial": [
+        "dist/testimonial"
+      ],
+      "testimonial/*": [
+        "dist/testimonial/*"
+      ],
+      "servicelib": [
+        "dist/servicelib"
+      ],
+      "servicelib/*": [
+        "dist/servicelib/*"
+      ],
+      "file-upload": [
+        "dist/file-upload"
+      ],
+      "file-upload/*": [
+        "dist/file-upload/*"
+      ],
+      "news-title": [
+        "dist/news-title"
+      ],
+      "news-title/*": [
+        "dist/news-title/*"
+      ],
+      "resourcelib": [
+        "dist/resourcelib"
+      ],
+      "resourcelib/*": [
+        "dist/resourcelib/*"
       ]
     }
   }

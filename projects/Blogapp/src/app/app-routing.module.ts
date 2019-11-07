@@ -3,24 +3,53 @@ import { Routes, RouterModule } from '@angular/router';
 import { AddComponent } from './add/add.component';
 import { BloglistComponent } from './bloglist/bloglist.component'
 import { ResolveService } from './resolve.service';
+import { AddeditBlogmanagementComponent } from './addedit-blogmanagement/addedit-blogmanagement.component';
+import { ListingBlogmanagementComponent } from './listing-blogmanagement/listing-blogmanagement.component';
 
 /* Routes path */
 const appRoutes: Routes = [
   /* Blog Management Routes Start */
-  { path: 'blog', component: BloglistComponent },
+
+  // ______________________BLOG CATEGORY___________________
+  
+  { path: 'blog-category/add', component: AddComponent },
   {
-    path: 'blog/list', component: BloglistComponent, resolve: { results: ResolveService },
+    path: 'blog-category/list',
+    component: BloglistComponent,
+    resolve: { blogCatList: ResolveService },
     data: { requestcondition: { source: 'blog_category_view', condition: {} }, endpoint: 'datalist' }
   },
+<<<<<<< HEAD
   { 
     path: 'blog/add', component: AddComponent,resolve :{results :ResolveService},
     data:{requestcondition:{source:'blog_category_view',condition:{}},endpoint:'datalist'} 
   },
+=======
+>>>>>>> f5c94d362a5902414edc831d0f2ede0f73ae81c4
   {
-    path: 'blog/edit/:id', component: AddComponent, resolve: { results: ResolveService },
-    data: { requestcondition: { source: 'blog_category', condition: { key_id: '' } }, endpoint: 'datalist' }
-  }
-  /* Blog Management Routes End */
+    path: 'blog-category/edit/:_id',
+    component: AddComponent,
+    resolve: { blogCatList: ResolveService },
+    data: { requestcondition: { source: 'blog_category', condition: {} }, endpoint: 'datalist' }
+  },
+
+
+  // ______________________BLOG LIST____________________
+
+  
+  { path: 'blog-management/add', component: AddeditBlogmanagementComponent },
+  {
+    path: 'blog-management/list',
+    component: ListingBlogmanagementComponent,
+    resolve: { blogList: ResolveService },
+    data: { requestcondition: { source: 'blogs_view', condition: {} }, endpoint: 'datalist' }
+  },
+  {
+    path: 'blog-management/edit/:_id',
+    component: AddeditBlogmanagementComponent,
+    resolve: { blogList: ResolveService },
+    data: { requestcondition: { source: 'blogs', condition: {} }, endpoint: 'datalist' }
+  },
 ];
 
 @NgModule({

@@ -197,18 +197,18 @@ export class ApiService {
     // const isRefreshTokenExpired = helper.isTokenExpired(localStorage.getItem('refresh_token'));
     // console.log('id_token isExpired:',isIdTokenExpired)
     // console.log('refresh_token isExpired:',isRefreshTokenExpired)
-
-
-
   }
 
   addData(requestdata: any) {
+    console.log('in adddata apiservice');
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'access-token': this.accesstoken          //hard code written access-token(temp)
+        'Authorization': this.accesstoken          //hard code written Authorization(temp)
       })
     };
+
+    console.log('httpoptions',httpOptions,this.serverUrl,requestdata);
     var result = this._http.post(this.serverUrl + this.addendpointUrl, JSON.stringify(requestdata), httpOptions).pipe(map(res => res));
     return result;
   }
@@ -217,7 +217,7 @@ export class ApiService {
     const httpOptions={
         headers: new HttpHeaders({
           'Content-Type':'application/json',
-          'access-token':this.accesstoken          //hard code written access-token(temp)
+          'Authorization':this.accesstoken          //hard code written Authorization(temp)
         })
     };
     var result=this._http.post(this.serverUrl + this.uploadEndpointUrl,JSON.stringify(requestdata),httpOptions).pipe(map(res=>res));
@@ -228,7 +228,7 @@ export class ApiService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'access-token': this.accesstoken          //hard code written access-token(temp)
+        'Authorization': this.accesstoken          //hard code written Authorization(temp)
       })
     };
     var result = this._http.post(this.serverUrl + this.updateendpointUrl, JSON.stringify(requestdata), httpOptions).pipe(map(res => res));
@@ -239,7 +239,7 @@ export class ApiService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'access-token': this.accesstoken
+        'Authorization': this.accesstoken
       })
     };
     var result = this._http.post(this.serverUrl + this.getdata_endpointUrl, JSON.stringify(requestdata), httpOptions).pipe(map(res => res));
@@ -250,7 +250,7 @@ export class ApiService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'access-token': this.accesstoken
+        'Authorization': this.accesstoken
       })
     };
     var result = this._http.post(this.serverUrl + this.deletesingle_endpointUrl, JSON.stringify(requestdata), httpOptions).pipe(map(res => res));
@@ -261,7 +261,7 @@ export class ApiService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'access-token': this.accesstoken
+        'Authorization': this.accesstoken
       })
     };
     var result = this._http.post(this.serverUrl + this.deletesingle_endpointUrl+'many', JSON.stringify(requestdata), httpOptions).pipe(map(res => res));
@@ -272,7 +272,7 @@ export class ApiService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'access-token': this.accesstoken
+        'Authorization': this.accesstoken
       })
     };
     var result = this._http.post(this.serverUrl + this.updatestatus_single_endpointUrl, JSON.stringify(requestdata), httpOptions).pipe(map(res => res));
@@ -283,7 +283,7 @@ export class ApiService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'access-token': this.accesstoken
+        'Authorization': this.accesstoken
       })
     };
     var result = this._http.post(this.serverUrl + this.updatestatus_single_endpointUrl+'many', JSON.stringify(requestdata), httpOptions).pipe(map(res => res));
@@ -293,7 +293,7 @@ export class ApiService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'access-token': this.accesstoken
+        'Authorization': this.accesstoken
       })
     };
     var result = this._http.post(this.serverUrl +endpoint, JSON.stringify(requestdata), httpOptions).pipe(map(res => res));

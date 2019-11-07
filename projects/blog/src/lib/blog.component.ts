@@ -8,6 +8,7 @@ import { ApiService } from './api.service';
   styleUrls: ['style.css']
 })
 export class BlogComponent implements OnInit {
+<<<<<<< HEAD
   /**blog variables declaration**/
   public addMemberviaUrl: any;
   public ResolveLIstData: any = [];
@@ -121,14 +122,51 @@ export class BlogComponent implements OnInit {
   set listResolve(listresolveUrlval: any) {
     this.blogDataarray = (listresolveUrlval) || '<no name set>';
     this.blogDataarray = listresolveUrlval;
-  }
+=======
+ 
+  // ===========================================declaration================================
+  blogListConfig:any;
+  loader:boolean=false;
+  // ======================================================================================
 
-  constructor(public router: Router,
-    public apiService: ApiService, public activeroute: ActivatedRoute) {
-
+  // ================================================Input For Lib Listing================================
+  @Input()
+  set config(receivedData: any) {
+   
+    this.blogListConfig = {
+      apiUrl: receivedData.apiBaseUrl,
+      listEndPoint: receivedData.listEndPoint,
+      datasource: receivedData.datasource,
+      tableName: receivedData.tableName,
+      listArray_skip: ["_id", "userId", "created_at", "updated_at","image","description_html"],
+      listArray_modify_header: { "blogtitle":"Blog Title", "description": "Description", "priority": "Priority", "status": "Status" ,"parentcategoryname":"Parent Category Name"},
+      admintablenameTableName: "admin",
+      statusarr: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }],
+      updateurl: receivedData.updateEndpoint,
+      editUrl: receivedData.editUrl,
+      jwtToken: receivedData.jwtToken,
+      deleteEndPoint: receivedData.deleteEndPoint,
+      view: receivedData.view,
+      search_settings:{
+        textsearch: [{ label: "Search by blog title...", field: 'blogtitle' },{ label: "Search by parent category...", field: 'parentcategoryname' }],
+        selectsearch: [{ label: 'Search By status', field: 'status', values: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }] }],
+      },
+      //  /*Showing Image in the Modal*/
+      //  pendingmodelapplicationarray_detail_datatype: [{
+      //   key: "image",
+      //   value: 'image',
+      //   fileurl: 'https://s3.us-east-2.amazonaws.com/crmfiles.influxhostserver/testimonial/'             // Image path 
+      // }],
+    }
+    this.loader = false;
+>>>>>>> f5c94d362a5902414edc831d0f2ede0f73ae81c4
   }
+  // ====================================================================================================
+
+  constructor() { }
 
   ngOnInit() {
+<<<<<<< HEAD
     /**observable start here**/
     this.apiService.clearServerUrl();
     setTimeout(() => {
@@ -152,4 +190,9 @@ export class BlogComponent implements OnInit {
     this.router.navigateByUrl('/' + this.addMemberviaUrl);
   }
 
+=======
+  }
+
+>>>>>>> f5c94d362a5902414edc831d0f2ede0f73ae81c4
 }
+

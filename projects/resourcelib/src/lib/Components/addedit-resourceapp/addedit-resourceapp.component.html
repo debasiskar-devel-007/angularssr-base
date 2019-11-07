@@ -1,0 +1,63 @@
+<mat-card>
+  <mat-toolbar color="primary" style="justify-content: center; align-items: center;">
+    <h2 class="headerSpan">{{ header_name }}</h2>
+  </mat-toolbar>
+  <span class="formspan">
+    <mat-card-content class="example-container">
+
+
+      <!-- ---------------------------------FORM BEGINS--------------------------- -->
+      <form [formGroup]="resourceForm" autocomplete="off" (ngSubmit)="onSubmit()">
+
+
+        <!-- category name  -->
+        <mat-form-field>
+          <input matInput placeholder="Category name" formControlName="category_name">
+          <mat-error *ngIf="resourceForm.controls['category_name']?.touched || resourceForm.controls['category_name'].errors 
+          && resourceForm.controls['category_name'].errors.required">Category name is required.</mat-error>
+        </mat-form-field>
+
+
+
+        <!-- parent category  -->
+        <mat-form-field>
+          <mat-label>Parent Category</mat-label>
+          <select matNativeControl required formControlName="parent_category">
+            <option value="0">Please choose a parent</option>            
+            <option value="{{ i.category_name }}" *ngFor="let i of cat_array">{{ i.category_name }}</option>
+          </select>
+        </mat-form-field>
+
+        <!-- description  -->
+        <mat-form-field>
+          <textarea matInput placeholder="Category Description" formControlName="description"></textarea>
+          <mat-error *ngIf="resourceForm.controls['description']?.touched || resourceForm.controls['description'].errors 
+          && resourceForm.controls['description'].errors.required">Please add a description.</mat-error>
+        </mat-form-field>
+
+
+
+        <!-- priority  -->
+        <mat-form-field>
+          <input matInput type="number" placeholder="Priority" formControlName="priority">
+          <mat-error *ngIf="resourceForm.controls['priority']?.touched || resourceForm.controls['priority'].errors 
+          && resourceForm.controls['priority'].errors.required">Please set priority.</mat-error>
+        </mat-form-field>
+
+
+        <!-- status  -->
+        <mat-checkbox color="primary" formControlName="status">Status</mat-checkbox><br>
+      
+
+
+        <!-- buttons sets  -->
+        <button type="submit" class="submitbtn" mat-raised-button color="primary">{{buttonText}}</button>
+        <button type="reset" class="submitbtn" mat-raised-button color="primary">RESET</button>
+
+      </form>
+      <!-- ---------------------------------------FORM ENDS HERE----------------------------- -->
+
+
+    </mat-card-content>
+  </span>
+</mat-card>

@@ -1,0 +1,11 @@
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Generated bundle index. Do not edit.
+ */
+export { ResourcelibService, ResourcelibComponent, ResourcelibModule } from './public-api';
+export { AddeditResourceappComponent as ɵa, Modal as ɵb } from './lib/Components/addedit-resourceapp/addedit-resourceapp.component';
+export { DemoMaterialModule as ɵc } from './lib/Modules/material-module';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicmVzb3VyY2VsaWIuanMiLCJzb3VyY2VSb290Ijoibmc6Ly9yZXNvdXJjZWxpYi8iLCJzb3VyY2VzIjpbInJlc291cmNlbGliLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7QUFJQSw0RUFBYyxjQUFjLENBQUM7QUFFN0IsT0FBTyxFQUFDLDJCQUEyQixJQUFJLEVBQUUsRUFBQyxLQUFLLElBQUksRUFBRSxFQUFDLE1BQU0sb0VBQW9FLENBQUM7QUFDakksT0FBTyxFQUFDLGtCQUFrQixJQUFJLEVBQUUsRUFBQyxNQUFNLCtCQUErQixDQUFDIiwic291cmNlc0NvbnRlbnQiOlsiLyoqXG4gKiBHZW5lcmF0ZWQgYnVuZGxlIGluZGV4LiBEbyBub3QgZWRpdC5cbiAqL1xuXG5leHBvcnQgKiBmcm9tICcuL3B1YmxpYy1hcGknO1xuXG5leHBvcnQge0FkZGVkaXRSZXNvdXJjZWFwcENvbXBvbmVudCBhcyDJtWEsTW9kYWwgYXMgybVifSBmcm9tICcuL2xpYi9Db21wb25lbnRzL2FkZGVkaXQtcmVzb3VyY2VhcHAvYWRkZWRpdC1yZXNvdXJjZWFwcC5jb21wb25lbnQnO1xuZXhwb3J0IHtEZW1vTWF0ZXJpYWxNb2R1bGUgYXMgybVjfSBmcm9tICcuL2xpYi9Nb2R1bGVzL21hdGVyaWFsLW1vZHVsZSc7Il19

@@ -1,0 +1,14 @@
+<mat-card>
+    <mat-toolbar color="primary" style="justify-content: center; align-items: center;">
+        <h2 class="headerSpan">Testimonials List</h2>
+    </mat-toolbar>
+
+    <!-- ---------------------Button for adding new role------------------------------ -->
+    <mat-toolbar class="buttonsetToolbar">
+        <button class="singleButton" mat-raised-button color="primary" [routerLink]="['/testimonial/add']">Add a testimonial</button>
+    </mat-toolbar>
+    
+
+    <!-- to listing library -->
+    <lib-testimonial [config]="testimonialListConfig"></lib-testimonial>
+</mat-card>

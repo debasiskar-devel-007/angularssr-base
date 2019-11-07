@@ -8,7 +8,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { RouterModule }  from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule } from '@angular/common';
-import { ListingModule } from 'listing-angular7';
+import { ListingModule } from 'lib-listing';
 import { AddroleappComponent } from './components/addroleapp/addroleapp.component';
 import { DemoMaterialModule } from './modules/material-module';
 import { CookieService } from 'ngx-cookie-service';

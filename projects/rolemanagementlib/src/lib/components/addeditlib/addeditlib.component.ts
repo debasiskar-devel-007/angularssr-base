@@ -144,6 +144,7 @@ openDialog(x:any): void {
     };
 
     this.httpReq.addData(this.configData.endpoint, postData).subscribe((response: any) => {
+
       if (response.status == "success") {
 
         this.openDialog(this.successMessage);
@@ -160,6 +161,8 @@ openDialog(x:any): void {
     });
   }
 }
+
+
 
 
 

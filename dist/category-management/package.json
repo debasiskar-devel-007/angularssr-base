@@ -1,0 +1,21 @@
+{
+  "name": "category-management",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^7.2.0",
+    "@angular/core": "^7.2.0"
+  },
+  "main": "bundles/category-management.umd.js",
+  "module": "fesm5/category-management.js",
+  "es2015": "fesm2015/category-management.js",
+  "esm5": "esm5/category-management.js",
+  "esm2015": "esm2015/category-management.js",
+  "fesm5": "fesm5/category-management.js",
+  "fesm2015": "fesm2015/category-management.js",
+  "typings": "category-management.d.ts",
+  "metadata": "category-management.metadata.json",
+  "sideEffects": false,
+  "dependencies": {
+    "tslib": "^1.9.0"
+  }
+}

@@ -3,6 +3,7 @@ import { switchMap, map, takeWhile } from 'rxjs/operators';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 // for setting observables to get serverurl and endpointurl from app
 import { Observable, Subject, Subscription } from 'rxjs';
+import { CookieService } from 'ngx-cookie-service';
 
 @Injectable({
   providedIn: 'root'
@@ -15,7 +16,7 @@ export class ApiService {
   public progress: any = [];
   public uploadtype;
   public uploaderror: any = '';
-  public accesstoken: any = '';
+  public accesstoken: any = this.cookieService.get('jwtToken');;
   public fileservername: any = [];
   public serverUrl: any = '';
   public addendpointUrl: any;
@@ -26,7 +27,7 @@ export class ApiService {
   public updatestatus_multiple_endpointUrl: any;
   public getdata_endpointUrl: any = 'datalist';
 
-  constructor(private _http: HttpClient, private authHttp: HttpClient) { }
+  constructor(private _http: HttpClient, private authHttp: HttpClient , public cookieService : CookieService) { }
 
   isTokenExpired() {
     // const helper = new JwtHelperService();
@@ -42,7 +43,7 @@ export class ApiService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'access-token': this.accesstoken
+        'Authorization': this.accesstoken
       })
     };
     var result = this._http.post(this.serverUrl + endpoint, JSON.stringify(requestdata), httpOptions).pipe(map(res => res));
@@ -53,7 +54,7 @@ export class ApiService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'access-token': this.accesstoken
+        'Authorization': this.accesstoken
       })
     };
     var result = this._http.post(this.serverUrl + endpoint, JSON.stringify(requestdata), httpOptions).pipe(map(res => res));
@@ -64,7 +65,7 @@ export class ApiService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'access-token': this.accesstoken
+        'Authorization': this.accesstoken
       })
     };
     var result = this._http.post(this.serverUrl + endpoint, JSON.stringify(requestdata), httpOptions).pipe(map(res => res));
@@ -75,7 +76,7 @@ export class ApiService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'access-token': this.accesstoken
+        'Authorization': this.accesstoken
       })
     };
     var result = this._http.post(this.serverUrl + endpoint, JSON.stringify(requestdata), httpOptions).pipe(map(res => res));
@@ -86,7 +87,7 @@ export class ApiService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'access-token': this.accesstoken
+        'Authorization': this.accesstoken
       })
     };
     var result = this._http.post(this.serverUrl + endpoint, JSON.stringify(requestdata), httpOptions).pipe(map(res => res));
@@ -97,7 +98,7 @@ export class ApiService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'access-token': this.accesstoken
+        'Authorization': this.accesstoken
       })
     };
     var result = this._http.post(this.serverUrl + endpoint, JSON.stringify(requestdata), httpOptions).pipe(map(res => res));
@@ -108,7 +109,7 @@ export class ApiService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'access-token': this.accesstoken
+        'Authorization': this.accesstoken
       })
     };
     var result = this._http.post(this.serverUrl + endpoint + 'many', JSON.stringify(requestdata), httpOptions).pipe(map(res => res));
@@ -119,7 +120,7 @@ export class ApiService {
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json',
-        'access-token': this.accesstoken
+        'Authorization': this.accesstoken
       })
     };
     var result = this._http.post(this.serverUrl + endpoint, JSON.stringify(requestdata), httpOptions).pipe(map(res => res));
