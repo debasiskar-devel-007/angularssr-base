@@ -8,7 +8,7 @@ import { Component, OnInit ,Input} from '@angular/core';
 export class ListingSenderComponent implements OnInit {
 
   // ==============================================declaration============================================
-public senderConfigForm: any;
+public senderConfigForm2: any;
 public loader: boolean = true;
 // =====================================================================================================
 
@@ -19,13 +19,13 @@ public loader: boolean = true;
 @Input()
 set config(receivedData: any) {
  
-  this.senderConfigForm = {
+  this.senderConfigForm2 = {
     apiUrl: receivedData.apiBaseUrl,
     listEndPoint: receivedData.listEndPoint,
     datasource: receivedData.datasource,
     tableName: receivedData.tableName,
     listArray_skip: ["_id", "userId", "created_at", "id", "updated_at"],
-    listArray_modify_header: { "name": "Sender's Name", "email":"Sender's Email"},
+    listArray_modify_header: { "name": "Sender's Name", "email":"Sender's Email","date":"Date"},
     admintablenameTableName: "admin",
     statusarr: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }],
     updateurl: receivedData.updateEndpoint,

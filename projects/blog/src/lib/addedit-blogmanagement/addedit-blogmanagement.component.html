@@ -10,16 +10,14 @@
             <form [formGroup]="blogManagementForm">
                 <!-- ----------------------------Blog title---------------------------- -->
                 <mat-form-field>
-                    <input matInput placeholder="Blog title" formControlName="blogtitle"
+                    <input matInput placeholder="Blog title*" formControlName="blogtitle"
                        >
                     <mat-error
                         *ngIf="!blogManagementForm.controls['blogtitle'].valid
         && blogManagementForm.controls['blogtitle'].errors.required && blogManagementForm.controls['blogtitle'].touched">
                         Blog title is required.</mat-error>
 
-                    <mat-error
-                        *ngIf="!blogManagementForm.controls['blogtitle'].valid && !blogManagementForm.controls['blogtitle'].errors.required">
-                        Max length exceeded</mat-error>
+                   
 
                 </mat-form-field><br>
                 <!-- ------------------------------------------------------------------ -->
@@ -28,7 +26,7 @@
                 <!-- -------------------------Blog Category---------------------------- -->
                 <mat-form-field>
                     <mat-label>Blog Category</mat-label>
-                    <select matNativeControl formControlName="blogcat"
+                    <select matNativeControl required formControlName="blogcat"
                       >
                         <option *ngFor="let item of blogCategoryArray" value="{{item._id}}">{{ item.blogtitle }}
                         </option>
@@ -40,8 +38,8 @@
 
                 <!-- -------------------------Author---------------------------- -->
                 <mat-form-field>
-                    <mat-label>Author</mat-label>
-                    <input matInput formControlName="author" placeholder="Author">
+                    
+                    <input matInput formControlName="author" placeholder="Author*">
                     <mat-error *ngIf="!blogManagementForm.controls['author'].valid
     && blogManagementForm.controls['author'].errors.required && blogManagementForm.controls['author'].touched">
                         Blog title is required.</mat-error>
@@ -62,9 +60,7 @@
     && blogManagementForm.controls['description'].errors.required && blogManagementForm.controls['description'].touched">
                     Blog title is required.</mat-error>
 
-                <mat-error
-                    *ngIf="!blogManagementForm.controls['description'].valid && !blogManagementForm.controls['description'].errors.required">
-                    Max length exceeded</mat-error>
+              
                 <br>
                 <!-- -----------------------------------------------------------------  -->
 
@@ -73,15 +69,12 @@
 
                 <!-- -----------------------------------Priority------------------------ -->
                 <mat-form-field>
-                    <input matInput type="number" placeholder="Priority" formControlName="priority"
+                    <input matInput type="number" placeholder="Priority*" formControlName="priority"
                         >
 
                     <mat-error *ngIf="!blogManagementForm.controls['priority'].valid && blogManagementForm.controls['priority'].errors.required">
                         Priority is required.</mat-error>
 
-                    <!-- <mat-error
-                        *ngIf="!blogManagementForm.controls['priority'].valid && !blogManagementForm.controls['priority'].errors.required">
-                        Max length exceeded</mat-error> -->
                 </mat-form-field><br>
                 <!-- ------------------------------------------------------------------- -->
 
@@ -96,7 +89,7 @@
 
 
                 <!-- --------------------------------Meta title-------------------------  -->
-                <mat-form-field>
+                <!-- <mat-form-field>
                     <input matInput placeholder="Meta title" formControlName="metatitle"
                        >
                     <mat-error
@@ -104,26 +97,21 @@
         && blogManagementForm.controls['metatitle'].errors.required && blogManagementForm.controls['metatitle'].touched">
                         Meta title is required.</mat-error>
 
-                    <mat-error
-                        *ngIf="!blogManagementForm.controls['metatitle'].valid && !blogManagementForm.controls['metatitle'].errors.required">
-                        Max length exceeded</mat-error>
-                </mat-form-field>
+                   
+                </mat-form-field> -->
                 <!-- -------------------------------------------------------------------- -->
 
 
 
                 <!-- ----------------------------------Meta Description------------------ -->
-                <mat-form-field>
+                <!-- <mat-form-field>
                     <textarea matInput placeholder="Meta Description" formControlName="metadesc"
                       ></textarea>
                     <mat-error *ngIf="!blogManagementForm.controls['metadesc'].valid
       && blogManagementForm.controls['metadesc'].errors.required && blogManagementForm.controls['metadesc'].touched">
                         Meta description is required.</mat-error>
 
-                    <mat-error
-                        *ngIf="!blogManagementForm.controls['metadesc'].valid && !blogManagementForm.controls['metadesc'].errors.required">
-                        Max length exceeded</mat-error>
-                </mat-form-field><br>
+                </mat-form-field><br> -->
                 <!-- -------------------------------------------------------------------- -->
 
 

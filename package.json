@@ -35,6 +35,7 @@
     "@nguniversal/express-engine": "^8.1.1",
     "@nguniversal/module-map-ngfactory-loader": "^8.1.1",
     "@ngx-meta/core": "^7.0.0",
+    "amazing-time-picker": "^1.8.0",
     "cli-update": "^3.2.6",
     "compression": "^1.7.4",
     "core-js": "^2.5.4",

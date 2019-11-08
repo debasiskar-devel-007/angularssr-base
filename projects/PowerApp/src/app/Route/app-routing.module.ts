@@ -112,7 +112,7 @@ const appRoutes: Routes = [
     path: 'sender/list',
     component: ListingSenderappComponent,
     resolve: { senderData: ResolveService },
-    data: { requestcondition: { source: 'senders', condition: {} }, endpoint: 'datalist' }
+    data: { requestcondition: { source: 'senders_view', condition: {} }, endpoint: 'datalist' }
   },
   {
     path: 'sender/edit/:_id',
@@ -127,7 +127,7 @@ const appRoutes: Routes = [
     path: 'test/list',
     component: LisitngTestemailappComponent,
     resolve: { testData: ResolveService },
-    data: { requestcondition: { source: 'testemail', condition: {} }, endpoint: 'datalist' }
+    data: { requestcondition: { source: 'testemail_view', condition: {} }, endpoint: 'datalist' }
   },
   {
     path: 'test/edit/:_id',

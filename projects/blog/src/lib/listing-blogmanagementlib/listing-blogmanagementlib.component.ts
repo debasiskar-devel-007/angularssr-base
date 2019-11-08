@@ -40,8 +40,8 @@ export class ListingBlogmanagementlibComponent implements OnInit {
       deleteEndPoint: receivedData.deleteEndPoint,
       view: receivedData.view,
       search_settings: {
-        textsearch: [{ label: "Search by blog title...", field: 'blogtitle' },{ label: "Search by author...", field: 'author' }],
-        selectsearch: [{ label: 'Search By Status', field: 'status', values: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }] }],
+        textsearch: [{ label: "blog title...", field: 'blogtitle' },{ label: "author...", field: 'author' }],
+        selectsearch: [{ label: 'status...', field: 'status', values: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }] }],
       },
       //  /*Showing Image in the Modal*/
       //  pendingmodelapplicationarray_detail_datatype: [{

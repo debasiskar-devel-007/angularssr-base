@@ -1,6 +1,6 @@
 import { OnInit } from '@angular/core';
 export declare class ListingSenderComponent implements OnInit {
-    senderConfigForm: any;
+    senderConfigForm2: any;
     loader: boolean;
     config: any;
     constructor();

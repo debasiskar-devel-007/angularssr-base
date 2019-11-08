@@ -4,10 +4,10 @@
   </mat-toolbar>
   <span class="formspan">
     <mat-card-content class="example-container">
-      <form autocomplete="off" >
-      
+      <form autocomplete="off">
 
- 
+
+
         <!-- Newsletter title  -->
         <mat-form-field>
           <mat-label>Newsletter Title:</mat-label>
@@ -16,16 +16,135 @@
 
         <!-- Newsletter Subject  -->
         <mat-form-field>
-            <mat-label>Newsletter Subject:</mat-label>
-            <input matInput>
-          </mat-form-field>
+          <mat-label>Newsletter Subject:</mat-label>
+          <input matInput>
+        </mat-form-field>
 
 
- 
-         <!-- Buttons  -->
-        <!-- <button type="submit" class="submitbtn" class="submitbtn" mat-raised-button
-          color="primary"  (click)="onSubmit()">{{buttonText}}</button>
-        <button type="reset" class="submitbtn" class="submitbtn" mat-raised-button color="primary">RESET</button> -->
+        <!-- share newsletter with -->
+        <mat-form-field>
+          <mat-label>Share newsletter with</mat-label>
+          <mat-select matNativeControl required>
+            <mat-option value="volvo">Volvo</mat-option>
+            <mat-option value="saab">Saab</mat-option>
+            <mat-option value="mercedes">Mercedes</mat-option>
+            <mat-option value="audi">Audi</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- sender's address  -->
+        <mat-form-field>
+          <mat-label>Sender's address</mat-label>
+          <mat-select matNativeControl required>
+            <mat-option value="volvo">Volvo</mat-option>
+            <mat-option value="saab">Saab</mat-option>
+            <mat-option value="mercedes">Mercedes</mat-option>
+            <mat-option value="audi">Audi</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+
+        <!-- Set Publish Date  -->
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker" placeholder="Choose a date">
+          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+
+        <!-- Time Picker  -->
+        <mat-form-field>
+        <input matInput  atp-time-picker value="00:00" />
+        </mat-form-field>
+         <!-- Content  -->
+        <ckeditor [editor]="Editor" [config]="editorConfig" ></ckeditor>
+
+
+
+       <h1> SET FREQUENCY </h1><hr>
+
+
+         <!-- Automatically send newsletters to -->
+         <mat-form-field>
+          <mat-label>Sender's address</mat-label>
+          <mat-select matNativeControl required>
+            <mat-option value="volvo">Volvo</mat-option>
+            <mat-option value="saab">Saab</mat-option>
+            <mat-option value="mercedes">Mercedes</mat-option>
+            <mat-option value="audi">Audi</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+
+        <!-- Newsletter frequency  -->
+        <mat-form-field>
+          <mat-label>Sender's address</mat-label>
+          <mat-select matNativeControl required>
+            <mat-option value="volvo">Volvo</mat-option>
+            <mat-option value="saab">Saab</mat-option>
+            <mat-option value="mercedes">Mercedes</mat-option>
+            <mat-option value="audi">Audi</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+
+        <!-- News letter Day of the week  -->
+        <h5>NewsLetter day of the week</h5>
+        <mat-card-content class="date_wrapper">
+        <mat-checkbox>Sunday</mat-checkbox>
+        <mat-checkbox>Monday</mat-checkbox>
+        <mat-checkbox>Tuesday</mat-checkbox>
+        <mat-checkbox>Wednesday</mat-checkbox>
+        <mat-checkbox>Thursday</mat-checkbox>   
+        <mat-checkbox>Friday</mat-checkbox>
+        <mat-checkbox>Saturday</mat-checkbox>
+      </mat-card-content>
+        <!-- News Letter time of the day -->
+        <mat-form-field>
+          <mat-label>Sender's address</mat-label>
+          <mat-select matNativeControl required>
+            <mat-option value="volvo">Volvo</mat-option>
+            <mat-option value="saab">Saab</mat-option>
+            <mat-option value="mercedes">Mercedes</mat-option>
+            <mat-option value="audi">Audi</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- News Letter Time Zone -->
+        <mat-form-field>
+          <mat-label>Sender's address</mat-label>
+          <mat-select matNativeControl required>
+            <mat-option value="volvo">Volvo</mat-option>
+            <mat-option value="saab">Saab</mat-option>
+            <mat-option value="mercedes">Mercedes</mat-option>
+            <mat-option value="audi">Audi</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+        <!-- News letter start Date -->
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker2" placeholder="Choose a date">
+          <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+          <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+
+
+        <!-- NewsLetter reply to email address  -->
+        <mat-form-field>
+          <input matInput placeholder="Newsletter reply to email address">
+        </mat-form-field>
+
+
+
+
+
+
+        <!-- Buttons  -->
+        <button type="submit" class="submitbtn" class="submitbtn" mat-raised-button
+        color="primary" >PREVIEW</button>
+        <button type="submit" class="submitbtn" class="submitbtn" mat-raised-button
+          color="primary" >{{buttonText}}</button>
+        <button type="reset" class="submitbtn" class="submitbtn" mat-raised-button color="primary">RESET</button>
 
 
 

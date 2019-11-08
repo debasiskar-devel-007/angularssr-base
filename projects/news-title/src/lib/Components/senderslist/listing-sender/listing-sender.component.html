@@ -7,14 +7,18 @@
 <!-- ------------------------lib listing being called------------------------ -->
 <mat-card *ngIf="loader==false">
   <lib-listing class="formfilterdiv"
-      *ngIf="senderConfigForm.datasource !=null && senderConfigForm.datasource.length > 0"
-      [datasource]="senderConfigForm.datasource" [skip]="senderConfigForm.listArray_skip"
-      [modify_header_array]="senderConfigForm.listArray_modify_header" [sourcedata]="senderConfigForm.tableName"
-      [statusarr]="senderConfigForm.statusarr" [jwttoken]="senderConfigForm.jwtToken"
-      [apiurl]="senderConfigForm.apiUrl" [editroute]="senderConfigForm.editUrl"
-      [deleteendpoint]="senderConfigForm.deleteEndPoint">
+      *ngIf="senderConfigForm2.datasource !=null && senderConfigForm2.datasource.length > 0"
+      [datasource]="senderConfigForm2.datasource" [skip]="senderConfigForm2.listArray_skip"
+      [modify_header_array]="senderConfigForm2.listArray_modify_header" [sourcedata]="senderConfigForm2.tableName"
+      [statusarr]="senderConfigForm2.statusarr" [jwttoken]="senderConfigForm2.jwtToken"
+      [apiurl]="senderConfigForm2.apiUrl" [editroute]="senderConfigForm2.editUrl"
+      [deleteendpoint]="senderConfigForm2.deleteEndPoint">
   </lib-listing>
 <!-- ----------------------------------------------------------------------------->
 
-  <h2 *ngIf="senderConfigForm.datasource.length == 0">No record found.</h2>
+<mat-form-field class="sender_message">
+  <input matInput placeholder="Send Newsletter reply to sender">
+</mat-form-field>
+
+  <h2 *ngIf="senderConfigForm2.datasource.length == 0">No record found.</h2>
 </mat-card>

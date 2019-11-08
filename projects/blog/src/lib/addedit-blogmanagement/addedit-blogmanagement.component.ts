@@ -28,7 +28,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
   /**ckeditor start here*/
   public Editor = ClassicEditor;  //for ckeditor
   editorConfig = {
-    placeholder: 'Description...',
+    placeholder: 'Description*',
   };
   public model = {
     editorData: ''
@@ -121,14 +121,14 @@ export class AddeditBlogmanagementComponent implements OnInit {
     private formBuilder: FormBuilder, public dialog: MatDialog,
     public snackBar: MatSnackBar) {
     this.blogManagementForm = this.formBuilder.group({
-      blogtitle: ['', [Validators.required,Validators.maxLength(30)]],
+      blogtitle: ['', [Validators.required]],
       blogcat: ['', ],
-      description: ['', [Validators.required,Validators.maxLength(50)]],
-      priority: ['', [Validators.required,Validators.maxLength(2)]],
-      status: ['true', Validators.required],
-      metatitle: ['', [Validators.required,Validators.maxLength(20)]],
-      metadesc: ['', [Validators.required,Validators.maxLength(50)]],
-      author:['',[Validators.required,Validators.maxLength(20)]],
+      description: ['', [Validators.required]],
+      priority: ['', [Validators.required]],
+      status: ['true',],
+      // metatitle: ['', [Validators.required]],
+      // metadesc: ['', [Validators.required]],
+      author:['',[Validators.required]],
       credentials: this.formBuilder.array([]),
       tags: [''],
       blogs_image: [''],
