@@ -121,7 +121,10 @@ h1{
   cursor: pointer;
 }
 
-
+.dayofweek{
+   border : 5px solid rebeccapurple;
+   padding:10px;
+}
 
 .closecard i{font-size: 18px; line-height: 27px;}
 .date_wrapper .mat-checkbox{ margin-right: 15px;}

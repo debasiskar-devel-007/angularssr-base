@@ -26,7 +26,7 @@ export class TestimonialComponent implements OnInit {
       datasource: receivedData.datasource,
       tableName: receivedData.tableName,
       listArray_skip: ["_id", "userId", "created_at", "id", "updated_at","image"],
-      listArray_modify_header: { "name": "Customer/User Name", "email": "Customer/User Email", "testimonial": "Testimonial", "priority": "Priority", "status": "Status" },
+      listArray_modify_header: { "name": "Customer/User Name", "email": "Customer/User Email", "description": "Testimonial", "priority": "Priority", "status": "Status" },
       admintablenameTableName: "admin",
       statusarr: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }],
       updateurl: receivedData.updateEndpoint,

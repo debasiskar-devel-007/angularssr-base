@@ -20,6 +20,8 @@ import { AddEditTestemaillibComponent,Modal4 } from './Components/testemails/add
 import { ListingTestemaillibComponent } from './Components/testemails/listing-testemaillib/listing-testemaillib.component';
 import { AmazingTimePickerModule } from 'amazing-time-picker';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { DatePipe} from '@angular/common';
+
 @NgModule({
   declarations: [Modal4,Modal2,Modal,NewsTitleComponent, modalData, ListingNewsletterComponent, 
     AddEditSubcategoryComponent, ListingSubcategoryComponent, AddEditSubscriptiongroupComponent, 
@@ -34,14 +36,15 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     RouterModule,
     HttpClientModule,
     AmazingTimePickerModule,
-    CKEditorModule
+    CKEditorModule,
+    
   ],
   exports: [AddEditSenderComponent,AddEditNewsletterlibComponent,AddEditSubscriptiongroupComponent,
     Modal,NewsTitleComponent,ListingNewsletterComponent,AddEditSubcategoryComponent,
     ListingSubcategoryComponent,AddEditTestemaillibComponent,ListingTestemaillibComponent,
     ListingSenderComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  providers: [ApiService],
+  providers: [ApiService,DatePipe],
   entryComponents:[Modal4,Modal3,NewsTitleComponent, modalData,Modal,Modal2]
 })
 export class NewsTitleModule { }

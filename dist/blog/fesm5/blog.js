@@ -1527,8 +1527,6 @@ var AddeditBlogmanagementComponent = /** @class */ (function () {
             this.blogManagementForm.controls['description'].patchValue(this.setData.description);
             this.blogManagementForm.controls['priority'].patchValue(this.setData.priority);
             this.blogManagementForm.controls['status'].patchValue(this.setData.status);
-            this.blogManagementForm.controls['metatitle'].patchValue(this.setData.metatitle);
-            this.blogManagementForm.controls['metadesc'].patchValue(this.setData.metadesc);
             this.blogManagementForm.controls['blogs_image'].patchValue(this.setData.blogs_image);
             this.blogManagementForm.controls['blogs_file'].patchValue(this.setData.blogs_file);
             this.blogManagementForm.controls['author'].patchValue(this.setData.author);
