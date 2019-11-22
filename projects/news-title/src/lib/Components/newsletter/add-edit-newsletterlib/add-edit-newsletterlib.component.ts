@@ -5,6 +5,7 @@ import { NewsTitleService } from '../../../news-title.service';
 import { DatePipe } from '@angular/common';
 import { CookieService } from 'ngx-cookie-service';
 import { FormGroup, FormControl, FormArray, FormBuilder } from "@angular/forms";
+import { Router , ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'lib-add-edit-newsletterlib',
@@ -42,13 +43,17 @@ export class AddEditNewsletterlibComponent implements OnInit {
   }
 
   constructor( private atp : AmazingTimePickerService, private newsService : NewsTitleService,
-    private datepipe: DatePipe , public cookieService : CookieService , private formBuilder : FormBuilder) { 
-      this.time = datepipe.transform(new Date(),'h:mm a');
-      console.log('Time',this.time);
+    public datepipe: DatePipe , public cookieService : CookieService , private formBuilder : FormBuilder,
+    public router : Router) { 
+
+     
   }
 
 
   ngOnInit() {
+
+    if(this.configData.action=='add')
+    this.time = this.datepipe.transform(new Date(),'h:mm a');  
 
        //Calling the group name
        this.getGroupName();
@@ -59,6 +64,27 @@ export class AddEditNewsletterlibComponent implements OnInit {
        //Getting the cookie value
        this.cookieValue = this.cookieService.getAll();
 
+      //  calling the form generation 
+      this.generateForm();
+
+       this.newsForm.value.cookiemail = this.cookieService.get('get_email');
+
+       /*Switch case*/
+       switch (this.configData.action) {
+        case 'add':
+          /* Button text */
+          this.buttonText = "SUBMIT";
+          this.header_name = "Add a Newsletter";
+          break;
+        case 'edit':
+          /* Button text */
+          this.buttonText = "UPDATE";  
+          this.time="";
+          this.setDefaultValue(this.configData.defaultData);        
+          break;
+      }
+      
+
        
   }
 
@@ -66,7 +92,6 @@ export class AddEditNewsletterlibComponent implements OnInit {
   {
     const amazingTimePicker = this.atp.open();
     amazingTimePicker.afterClose().subscribe(time=>{
-      console.log(time);
     });
   }
 
@@ -91,5 +116,79 @@ export class AddEditNewsletterlibComponent implements OnInit {
       result = response;
       this.sender_name_array = result.res;
    });
+  }
+
+
+  //generate form
+  generateForm(){
+    this.newsForm = this.formBuilder.group({
+      newstitle:[],
+      newssubject:[],
+      share_news:[],
+      senderaddress:[],
+      publishdate:[],
+      settime:[this.time],
+      content:[],
+      sendnews:[],
+      newsfrequency:[],
+      timeofday:[this.time],
+      timezone:[],
+      startdate:[],
+      enddate:[],
+      reply:[],
+      status:[1]
+    });
+  }
+
+
+
+  //setting the default value
+  setDefaultValue(defaultValue) {
+    this.newsForm.patchValue({
+      newstitle:defaultValue.newstitle,
+      newssubject:defaultValue.newssubject,
+      share_news:defaultValue.share_news,
+      senderaddress:defaultValue.senderaddress,
+      publishdate:defaultValue.publishdate,
+      settime:defaultValue.settime,
+      content:defaultValue.content,
+      sendnews:defaultValue.sendnews,
+      newsfrequency:defaultValue.newsfrequency,
+      timeofday:defaultValue.timeofday,
+      timezone:defaultValue.timezone,
+      startdate:defaultValue.startdate,
+      enddate:defaultValue.enddate,
+      reply:defaultValue.reply
+      
+    });
+
+  }
+
+  //submit function
+  onSubmit() {
+
+    /* stop here if form is invalid */
+    if (this.newsForm.invalid) {
+      console.log("Invalid Form");return;
+    } else {
+
+      /* start process to submited data */
+      let postData: any = {
+        source: this.configData.source,
+        data: Object.assign(this.newsForm.value, this.configData.condition),
+        "sourceobj": ["share_news","senderaddress"]
+      };
+      this.newsService.addData(this.configData.endpoint, postData).subscribe((response: any) => {
+        if (response.status == "success") {
+          console.log(response.status);
+        
+          this.router.navigate([this.configData.callBack]);
+        } else {
+          alert("Some error occurred. Please try angain.");
+        }
+      }, (error) => {
+        alert("Some error occurred. Please try angain.");
+      });
+    }
   }
 }

@@ -11,20 +11,20 @@
         <!-- Newsletter title  -->
         <mat-form-field>
           <mat-label>Newsletter Title:</mat-label>
-          <input matInput formControlName="">
+          <input matInput formControlName="newstitle">
         </mat-form-field>
 
         <!-- Newsletter Subject  -->
         <mat-form-field>
           <mat-label>Newsletter Subject:</mat-label>
-          <input matInput formControlName="">
+          <input matInput formControlName="newssubject">
         </mat-form-field>
 
 
         <!-- share newsletter with -->
         <mat-form-field>
           <mat-label>Share newsletter with group:</mat-label>
-          <mat-select matNativeControl required formControlName="">
+          <mat-select matNativeControl required formControlName="share_news">
             <mat-option value=0>Select a group</mat-option>
             <mat-option value="{{i._id}}" *ngFor="let i of group_name_array">{{ i.name }}</mat-option>
           </mat-select>
@@ -33,7 +33,7 @@
         <!-- sender's address  -->
         <mat-form-field>
           <mat-label>Sender's address</mat-label>
-          <mat-select matNativeControl required formControlName="">
+          <mat-select matNativeControl required formControlName="senderaddress">
             <mat-option value=0>Select a sender</mat-option>
             <mat-option value="{{ i._id }}" *ngFor='let i of sender_name_array'>{{ i.email }}</mat-option>
           </mat-select>
@@ -42,7 +42,7 @@
 
         <!-- Set Publish Date  -->
         <mat-form-field>
-          <input matInput [matDatepicker]="picker" placeholder="Set publish date:" formControlName="">
+          <input matInput [matDatepicker]="picker" placeholder="Set publish date:" formControlName="publishdate">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker #picker></mat-datepicker>
         </mat-form-field>
@@ -51,12 +51,12 @@
         <!-- Time Picker  -->
         <mat-form-field>
           <mat-label>Set time:</mat-label>
-          <input matInput atp-time-picker value="{{ time }}" formControlName=""/>
+          <input matInput atp-time-picker  formControlName="settime"/>
         </mat-form-field>
 
 
         <!-- Content  -->
-        <ckeditor [editor]="Editor" [config]="editorConfig"></ckeditor>
+        <ckeditor [editor]="Editor" [config]="editorConfig" formControlName="content"></ckeditor>
 
 
 
@@ -67,7 +67,7 @@
         <!-- Automatically send newsletters to -->
         <mat-form-field>
           <mat-label>Automatically send newsletter to members:</mat-label>
-          <mat-select matNativeControl required formControlName="">
+          <mat-select matNativeControl required formControlName="sendnews">
             <mat-option value=0>Select a group</mat-option>
             <mat-option value="{{i._id}}" *ngFor="let i of group_name_array">{{ i.name }}</mat-option>
           </mat-select>
@@ -77,7 +77,7 @@
         <!-- Newsletter frequency  -->
         <mat-form-field>
           <mat-label>Newsletter Frequency:</mat-label>
-          <mat-select matNativeControl required formControlName="">
+          <mat-select matNativeControl required formControlName="newsfrequency">
             <mat-option value="daily">Daily</mat-option>
             <mat-option value="weekly">Weekly</mat-option>
           </mat-select>
@@ -102,7 +102,7 @@
         <!-- News Letter time of the day -->
         <mat-form-field>
           <mat-label>News Letter time of the day:</mat-label>
-          <input matInput atp-time-picker value="{{ time }}" formControlName="" />
+          <input matInput atp-time-picker formControlName="timeofday" />
         </mat-form-field>
 
 
@@ -110,7 +110,7 @@
         <!-- News Letter Time Zone -->
         <mat-form-field>
           <mat-label>News Letter Time Zone</mat-label>
-          <mat-select matNativeControl required formControlName="">
+          <mat-select matNativeControl required formControlName="timezone">
             <mat-option value="Central Standard Time">Central Standard Time</mat-option>
             <mat-option value="Mountain Standard Time">Mountain Standard Time</mat-option>
             <mat-option value="Mountain Standard Time">Mountain Standard Time</mat-option>
@@ -122,14 +122,14 @@
 
         <!-- News letter start Date -->
         <mat-form-field>
-          <input matInput [matDatepicker]="picker2" placeholder="Newsletter start date" formControlName="">
+          <input matInput [matDatepicker]="picker2" placeholder="Newsletter start date" formControlName="startdate">
           <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
           <mat-datepicker #picker2></mat-datepicker>
         </mat-form-field>
 
         <!-- News letter end Date -->
         <mat-form-field>
-          <input matInput [matDatepicker]="picker3" placeholder="Newsletter end date" formControlName="">
+          <input matInput [matDatepicker]="picker3" placeholder="Newsletter end date" formControlName="enddate">
           <mat-datepicker-toggle matSuffix [for]="picker3"></mat-datepicker-toggle>
           <mat-datepicker #picker3></mat-datepicker>
         </mat-form-field>
@@ -137,9 +137,11 @@
         <!-- NewsLetter reply to email address  -->
 
         <mat-form-field>
-          <mat-label>Newsletter reply to email address</mat-label>
-          <input matInput placeholder="Newsletter reply to email address" 
-          value="{{ cookieValue.get_mail }}" formControlName="">
+          <mat-label>Reply address</mat-label>
+          <mat-select matNativeControl required formControlName="reply">
+            <mat-option value=0>Select a sender</mat-option>
+            <mat-option value="{{ i._id }}" *ngFor='let i of sender_name_array'>{{ i.email }}</mat-option>
+          </mat-select>
         </mat-form-field>
 
 
@@ -150,7 +152,7 @@
         <!-- Buttons  -->
         <button type="submit" class="submitbtn" class="submitbtn" mat-raised-button color="primary">PREVIEW</button>
         <button type="submit" class="submitbtn" class="submitbtn" mat-raised-button
-          color="primary">{{buttonText}}</button>
+          color="primary" (click)="onSubmit()">{{buttonText}}</button>
         <button type="reset" class="submitbtn" class="submitbtn" mat-raised-button color="primary">RESET</button>
 
 

@@ -10,7 +10,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class AddeditServiceComponent implements OnInit {
   public configAddEdit: any = {
     action: "add",
-    endpoint: "https://o820cv2lu8.execute-api.us-east-2.amazonaws.com/production/api/addorupdatedata",
+    endpoint: "https://r245816wug.execute-api.us-east-1.amazonaws.com/dev/api/addorupdatedata",
     source: "services",
     condition: {},
     defaultData: null,

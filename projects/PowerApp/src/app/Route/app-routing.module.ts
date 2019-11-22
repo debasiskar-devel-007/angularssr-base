@@ -141,7 +141,7 @@ const appRoutes: Routes = [
     path: 'newsletter/list',
     component: ListingNewsletterComponent,
     resolve: { newsData: ResolveService },
-    data: { requestcondition: { source: 'newsletters', condition: {} }, endpoint: 'datalist' }
+    data: { requestcondition: { source: 'newsletters_view', condition: {} }, endpoint: 'datalist' }
   },
   {
     path: 'newsletter/edit/:_id',

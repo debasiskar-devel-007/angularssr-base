@@ -313,7 +313,7 @@
         TestimonialComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'lib-testimonial',
-                        template: "<mat-card *ngIf=\"loader==true\">\r\n        <mat-spinner class=\"spinner\"></mat-spinner>\r\n    </mat-card>\r\n    \r\n    \r\n    \r\n    <!-- ------------------------lib listing being called------------------------ -->\r\n    <mat-card *ngIf=\"loader==false\">\r\n        <lib-listing class=\"formfilterdiv\"\r\n            *ngIf=\"testimonialListConfig.datasource !=null && testimonialListConfig.datasource.length > 0\"\r\n            [datasource]=\"testimonialListConfig.datasource\" [skip]=\"testimonialListConfig.listArray_skip\"\r\n            [modify_header_array]=\"testimonialListConfig.listArray_modify_header\" [sourcedata]=\"testimonialListConfig.tableName\"\r\n            [statusarr]=\"testimonialListConfig.statusarr\" [jwttoken]=\"testimonialListConfig.jwtToken\"\r\n            [apiurl]=\"testimonialListConfig.apiUrl\" [editroute]=\"testimonialListConfig.editUrl\"\r\n            [deleteendpoint]=\"testimonialListConfig.deleteEndPoint\"\r\n            [date_search_source]=\"testimonialListConfig.view\"\r\n           [date_search_endpoint]=\"testimonialListConfig.listEndPoint\"\r\n           [search_settings]=\"testimonialListConfig.search_settings\"\r\n           [detail_datatype]=\"testimonialListConfig.pendingmodelapplicationarray_detail_datatype\">\r\n        </lib-listing>\r\n    <!-- ----------------------------------------------------------------------------->\r\n    \r\n        <h2 *ngIf=\"testimonialListConfig.datasource.length == 0\">No record found.</h2>\r\n    </mat-card>",
+                        template: "<mat-card *ngIf=\"loader==true\">\n        <mat-spinner class=\"spinner\"></mat-spinner>\n    </mat-card>\n    \n    \n    \n    <!-- ------------------------lib listing being called------------------------ -->\n    <mat-card *ngIf=\"loader==false\">\n        <lib-listing class=\"formfilterdiv\"\n            *ngIf=\"testimonialListConfig.datasource !=null && testimonialListConfig.datasource.length > 0\"\n            [datasource]=\"testimonialListConfig.datasource\" [skip]=\"testimonialListConfig.listArray_skip\"\n            [modify_header_array]=\"testimonialListConfig.listArray_modify_header\" [sourcedata]=\"testimonialListConfig.tableName\"\n            [statusarr]=\"testimonialListConfig.statusarr\" [jwttoken]=\"testimonialListConfig.jwtToken\"\n            [apiurl]=\"testimonialListConfig.apiUrl\" [editroute]=\"testimonialListConfig.editUrl\"\n            [deleteendpoint]=\"testimonialListConfig.deleteEndPoint\"\n            [date_search_source]=\"testimonialListConfig.view\"\n           [date_search_endpoint]=\"testimonialListConfig.listEndPoint\"\n           [search_settings]=\"testimonialListConfig.search_settings\"\n           [detail_datatype]=\"testimonialListConfig.pendingmodelapplicationarray_detail_datatype\">\n        </lib-listing>\n    <!-- ----------------------------------------------------------------------------->\n    \n        <h2 *ngIf=\"testimonialListConfig.datasource.length == 0\">No record found.</h2>\n    </mat-card>",
                         styles: [".addbtn{display:block;width:170px;margin:10px;background:#3f50b5!important;color:#fff;float:right}.btnwrapper{display:flex;justify-content:flex-end}"]
                     }] }
         ];
@@ -331,11 +331,12 @@
      */
     var AddeditComponent = /** @class */ (function () {
         // ==================================================================================================
-        function AddeditComponent(formBuilder, testiService, router$$1, dialog$$1) {
+        function AddeditComponent(formBuilder, testiService, router$$1, dialog$$1, sanitizer) {
             this.formBuilder = formBuilder;
             this.testiService = testiService;
             this.router = router$$1;
             this.dialog = dialog$$1;
+            this.sanitizer = sanitizer;
             /**
              * ckeditor start here
              */
@@ -355,6 +356,7 @@
             this.loader = false;
             this.successMessage = "Submitted Successfully";
             this.ErrCode = false;
+            this.youtube_suffix = "https://www.youtube.com/embed/";
         }
         /**
          * @return {?}
@@ -418,10 +420,13 @@
                 this.testimonialForm = this.formBuilder.group({
                     name: ['', [forms.Validators.required]],
                     email: ['', [forms.Validators.required, forms.Validators.pattern(/^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/)]],
-                    testimonial: ['', [forms.Validators.required]],
+                    description: ['', [forms.Validators.required]],
                     priority: ['', forms.Validators.required],
                     status: [true,],
                     testimonial_img: ['',],
+                    video_url: [],
+                    video_name: [],
+                    video_desc: [],
                     userId: [this.configData.userData.id, null]
                 });
             };
@@ -457,7 +462,7 @@
                 else {
                     this.testimonialForm.value.testimonial_img = false;
                 }
-                this.testimonialForm.controls['testimonial'].markAsTouched();
+                this.testimonialForm.controls['description'].markAsTouched();
                 this.loader = true;
                 /* stop here if form is invalid */
                 if (this.testimonialForm.invalid) {
@@ -519,11 +524,14 @@
                 this.testimonialForm.patchValue({
                     name: defaultValue.name,
                     email: defaultValue.email,
-                    testimonial: defaultValue.testimonial,
+                    description: defaultValue.description,
                     priority: defaultValue.priority,
                     status: defaultValue.status,
                     userId: null,
-                    testimonial_img: defaultValue.testimonial_img
+                    testimonial_img: defaultValue.testimonial_img,
+                    video_url: defaultValue.video_url,
+                    video_name: defaultValue.video_name,
+                    video_desc: defaultValue.video_desc
                 });
                 this.img_var = defaultValue.testimonial_img.basepath + defaultValue.testimonial_img.image;
                 this.image_name = defaultValue.testimonial_img.name;
@@ -556,13 +564,40 @@
                 }));
             };
         // =====================================================================================================
+        //  =====================preview video================
         // =====================================================================================================
+        //  =====================preview video================
+        /**
+         * @return {?}
+         */
+        AddeditComponent.prototype.preview_video =
+            // =====================================================================================================
+            //  =====================preview video================
+            /**
+             * @return {?}
+             */
+            function () {
+                console.log("********", this.youtube_suffix + this.testimonialForm.value.video_url);
+                //  this.safeSrc =  this.sanitizer.bypassSecurityTrustResourceUrl(this.youtube_suffix+this.testimonialForm.value.video_url);
+                this.dialogRef = this.dialog.open(PreviewComponent, {
+                    width: '850px',
+                    height: '500px',
+                    data: { msg: this.youtube_suffix + this.testimonialForm.value.video_url }
+                });
+                this.dialogRef.afterClosed().subscribe(( /**
+                 * @param {?} result
+                 * @return {?}
+                 */function (result) {
+                }));
+            };
+        // ===================================================
+        // ===================================================
         /**
          * @param {?} val
          * @return {?}
          */
         AddeditComponent.prototype.inputBlur =
-            // =====================================================================================================
+            // ===================================================
             /**
              * @param {?} val
              * @return {?}
@@ -586,8 +621,8 @@
         AddeditComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'lib-addedit',
-                        template: "<mat-card>\r\n  <mat-toolbar color=\"primary\" style=\"justify-content: center; align-items: center;\">\r\n    <h2 class=\"headerSpan\">{{ header_name }}</h2>\r\n  </mat-toolbar>\r\n  <span class=\"formspan\">\r\n    <mat-card-content class=\"example-container\">\r\n\r\n\r\n      <!-- ---------------------------------FORM BEGINS--------------------------- -->\r\n      <form [formGroup]=\"testimonialForm\" autocomplete=\"off\" (ngSubmit)=\"onSubmit()\">\r\n\r\n\r\n\r\n        <!-- -----------------------------------customer username---------------------------- -->\r\n        <mat-form-field>\r\n          <mat-label>Customer/User Name:</mat-label>\r\n          <input matInput type=\"text\" formControlName=\"name\" (blur)=\"inputBlur('name')\">\r\n          <mat-error *ngIf=\"testimonialForm.controls['name']?.touched || testimonialForm.controls['name'].errors \r\n          && testimonialForm.controls['name'].errors.required\">Name is required.</mat-error>\r\n        </mat-form-field><br>\r\n        <!-- -------------------------------------------------------------------------------- -->\r\n\r\n\r\n\r\n\r\n\r\n\r\n        <!-- ----------------------------------------customer email-------------------------- -->\r\n        <mat-form-field>\r\n          <mat-label>Customer/User Email:</mat-label>\r\n          <input matInput type=\"email\" formControlName=\"email\" (blur)=\"inputBlur('email')\">\r\n          <mat-error *ngIf=\"testimonialForm.controls['email']?.touched || testimonialForm.controls['email'].errors \r\n          && testimonialForm.controls['email'].errors.required\">Email is required.</mat-error>\r\n          <mat-error\r\n            *ngIf=\"!testimonialForm.controls['email'].valid && !testimonialForm.controls['email'].errors.required\">Email\r\n            is not valid</mat-error>\r\n        </mat-form-field><br>\r\n        <!-- -------------------------------------------------------------------------------- -->\r\n\r\n\r\n\r\n\r\n\r\n        <!-- ----------------------------------testimonial----------------------------------- -->\r\n        <ckeditor [editor]=\"Editor\" [config]=\"editorConfig\" formControlName=\"testimonial\"\r\n          (blur)=\"inputBlur('testimonial')\"></ckeditor>\r\n        <mat-error *ngIf=\"testimonialForm.controls['testimonial']?.touched || testimonialForm.controls['testimonial']?.touched && testimonialForm.controls['testimonial'].errors \r\n          && testimonialForm.controls['testimonial'].errors.required\">Please write a testimonial.</mat-error>\r\n        <br>\r\n        <!-- -------------------------------------------------------------------------------- -->\r\n\r\n\r\n\r\n\r\n\r\n\r\n        <!-- ------------------------------------------priority------------------------------ -->\r\n        <mat-form-field>\r\n          <mat-label>Priority:</mat-label>\r\n          <input matInput type=\"number\" formControlName=\"priority\" (blur)=\"inputBlur('priority')\">\r\n          <mat-error *ngIf=\"testimonialForm.controls['priority']?.touched || testimonialForm.controls['priority'].errors \r\n          && testimonialForm.controls['priority'].errors.required\">Priority is required.</mat-error>\r\n        </mat-form-field><br>\r\n        <!-- -------------------------------------------------------------------------------- -->\r\n\r\n\r\n\r\n\r\n\r\n\r\n        <!-- ----------------------------------------status---------------------------------- -->\r\n        <mat-label>Status:</mat-label><br>\r\n        <mat-checkbox color=\"primary\" formControlName=\"status\">Active</mat-checkbox><br>\r\n        <!-- -------------------------------------------------------------------------------  -->\r\n\r\n\r\n        <!-- ---------------------------------------------Image Uploader--------------------- -->\r\n        <h1>Testimonial Image:</h1>\r\n        <lib-file-upload [config]=\"imageConfigData\"></lib-file-upload>\r\n        <mat-error *ngIf=\"ErrCode==true\">Please add just one testimonial image.</mat-error>\r\n        <!-- -------------------------------------------------------------------------------- -->\r\n\r\n        <!-- CARD VIEW  -->\r\n        <mat-card-content class=\"files-view\" *ngIf=\"flag==true\">\r\n          <mat-card class=\"example-card\">\r\n            <img mat-card-image [attr.src]=\"img_var\">\r\n            <mat-card-title>{{ image_name }}</mat-card-title>\r\n            <mat-card-subtitle>{{ image_type }}</mat-card-subtitle>\r\n            <span class=\"closecard\" (click)=\"clear_image()\"><i class=\"material-icons\">clear</i></span>\r\n          </mat-card>\r\n        </mat-card-content>\r\n        <!-- ---------  -->\r\n\r\n\r\n\r\n        <button type=\"submit\" class=\"submitbtn\" class=\"submitbtn\" mat-raised-button\r\n          color=\"primary\">{{buttonText}}</button>\r\n        <button type=\"reset\" class=\"submitbtn\" class=\"submitbtn\" mat-raised-button color=\"primary\">RESET</button>\r\n\r\n\r\n\r\n\r\n      </form>\r\n      <!-- ---------------------------------------FORM ENDS HERE----------------------------- -->\r\n    </mat-card-content>\r\n  </span>\r\n</mat-card>",
-                        styles: [".example-container{display:flex;flex-direction:column}.example-container>*{width:100%}.main-class .submitbtn{display:block;width:170px;margin:10px auto;background:#3f50b5!important;color:#fff}.main-class .material-icons{cursor:pointer}.formspan{background-color:#e7e9ea;border:6px solid #fff;border-bottom:10px solid #fff;display:inline-block;width:100%;position:relative;z-index:9}.formspan .example-container{display:flex;flex-direction:column;width:98%;padding:14px;margin-bottom:0}.formspan .form-field-span,.formspan .mat-form-field{display:inline-block;position:relative;text-align:left;width:98%;background:#fff;margin-bottom:9px;padding:1px 14px}.formspan .form-field-span .mat-checkbox,.formspan .form-field-span .mat-radio-button{padding-right:15px;padding-bottom:15px;display:inline-block}.formspan .mat-form-field-wrapper{padding-bottom:0!important}.form-field-span .mat-error{font-size:13px!important}.mat-error{color:#f44336;font-size:13px!important}button.submitbtn.mat-raised-button.mat-primary{margin-right:15px}h1{color:#3f50b4}.files-view{background-repeat:no-repeat;background-size:cover;background-position:center;height:auto!important;width:82%;margin:20px auto;border-radius:10px;display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap}.files-view .mat-card{z-index:9;margin:10px!important;display:flex;flex-wrap:wrap;justify-content:center;width:27%;position:relative}.files-view .mat-card .mat-card-actions,.files-view .mat-card .mat-card-titlt{display:inline-block;width:100%}.files-view .mat-card .mat-card-subtitle{display:inline-block;width:100%;text-align:center}.closecard{position:absolute;top:-10px;right:-8px;background:#464545;height:25px;width:25px;border-radius:50%;border:1px solid #696969;color:#fff;text-align:center;box-shadow:0 2px 6px #00000070;cursor:pointer}.closecard i{font-size:18px;line-height:27px}"]
+                        template: "<mat-card>\n  <mat-toolbar color=\"primary\" style=\"justify-content: center; align-items: center;\">\n    <h2 class=\"headerSpan\">{{ header_name }}</h2>\n  </mat-toolbar>\n  <span class=\"formspan\">\n    <mat-card-content class=\"example-container\">\n\n\n      <!-- ---------------------------------FORM BEGINS--------------------------- -->\n      <form [formGroup]=\"testimonialForm\" autocomplete=\"off\" (ngSubmit)=\"onSubmit()\">\n\n\n\n        <!-- -----------------------------------customer username---------------------------- -->\n        <mat-form-field>\n          <mat-label>Customer/User Name:</mat-label>\n          <input matInput type=\"text\" formControlName=\"name\" (blur)=\"inputBlur('name')\">\n          <mat-error *ngIf=\"!testimonialForm.controls['name'].valid\n          && testimonialForm.controls['name'].errors.required\"> Name is required.</mat-error>\n        </mat-form-field><br>\n        <!-- -------------------------------------------------------------------------------- -->\n\n\n\n\n\n\n        <!-- ----------------------------------------customer email-------------------------- -->\n        <mat-form-field>\n          <mat-label>Customer/User Email:</mat-label>\n          <input matInput type=\"email\" formControlName=\"email\" (blur)=\"inputBlur('email')\">\n          <mat-error *ngIf=\"!testimonialForm.controls['email'].valid\n          && testimonialForm.controls['email'].errors.required\">Email is required.</mat-error>\n \n\n        </mat-form-field><br>\n        <!-- -------------------------------------------------------------------------------- -->\n\n\n\n\n\n        <!-- ----------------------------------testimonial----------------------------------- -->\n        <ckeditor [editor]=\"Editor\" [config]=\"editorConfig\" formControlName=\"description\"\n          (blur)=\"inputBlur('description')\"></ckeditor>\n          <mat-error *ngIf=\"!testimonialForm.controls['description'].valid\n          && testimonialForm.controls['description'].errors.required && testimonialForm.controls['description'].touched  \" >Description is required.</mat-error>\n        <br>\n        <!-- -------------------------------------------------------------------------------- -->\n\n\n\n\n\n\n        <!-- ------------------------------------------priority------------------------------ -->\n        <mat-form-field>\n          <mat-label>Priority:</mat-label>\n          <input matInput type=\"number\" formControlName=\"priority\" (blur)=\"inputBlur('priority')\">\n          <mat-error *ngIf=\"!testimonialForm.controls['priority'].valid\n          && testimonialForm.controls['priority'].errors.required\">Priority is required.</mat-error>\n        </mat-form-field><br>\n        <!-- -------------------------------------------------------------------------------- -->\n\n\n\n\n\n\n        <!-- ----------------------------------------status---------------------------------- -->\n        <mat-label>Status:</mat-label><br>\n        <mat-checkbox color=\"primary\" formControlName=\"status\">Active</mat-checkbox><br>\n        <!-- -------------------------------------------------------------------------------  -->\n\n\n        <!-- ---------------------------------------------Image Uploader--------------------- -->\n        <h1>Testimonial Image:</h1>\n        <lib-file-upload [config]=\"imageConfigData\"></lib-file-upload>\n        <mat-error *ngIf=\"ErrCode==true\">Please add just one testimonial image.</mat-error>\n        <!-- -------------------------------------------------------------------------------- -->\n\n\n\n        <!-- --------------------------------------Video Attachment--------------------- -->\n        <h1>Attach a testimonial video:</h1>\n\n\n        <!-- video url  -->\n        <mat-form-field class=\"video_url\">\n          <input matInput formControlName=\"video_url\">\n          <span matPrefix> {{ youtube_suffix }} </span>\n          <mat-icon matSuffix class=\"clickable\" (click)=\"preview_video()\" type=\"button\">remove_red_eye</mat-icon>\n        </mat-form-field>\n\n        <!-- video name  -->\n        <mat-form-field>\n          <input matInput placeholder=\"Video title\" formControlName=\"video_name\">\n        </mat-form-field>\n\n        <!-- Video description  -->\n        <mat-form-field>\n          <input matInput placeholder=\"Video description\" formControlName=\"video_desc\">\n        </mat-form-field>\n\n        <br>\n        <!-- ------------------------------------------------------------------- -->\n\n\n        <!-- CARD VIEW  -->\n        <mat-card-content class=\"files-view\" *ngIf=\"flag==true\">\n          <mat-card class=\"example-card\">\n            <img mat-card-image [attr.src]=\"img_var\">\n            <mat-card-title>{{ image_name }}</mat-card-title>\n            <mat-card-subtitle>{{ image_type }}</mat-card-subtitle>\n            <span class=\"closecard\" (click)=\"clear_image()\"><i class=\"material-icons\">clear</i></span>\n          </mat-card>\n        </mat-card-content>\n        <!-- ---------  -->\n\n\n\n        <button type=\"submit\" class=\"submitbtn\" class=\"submitbtn\" mat-raised-button\n          color=\"primary\">{{buttonText}}</button>\n        <button type=\"reset\" class=\"submitbtn\" mat-raised-button color=\"primary\">RESET</button>\n\n\n\n\n      </form>\n      <!-- ---------------------------------------FORM ENDS HERE----------------------------- -->\n    </mat-card-content>\n  </span>\n</mat-card>",
+                        styles: [".example-container{display:flex;flex-direction:column}.example-container>*{width:100%}.main-class .submitbtn{display:block;width:170px;margin:10px auto;background:#3f50b5!important;color:#fff}.main-class .material-icons{cursor:pointer}.formspan{background-color:#e7e9ea;border:6px solid #fff;border-bottom:10px solid #fff;display:inline-block;width:100%;position:relative;z-index:9}.formspan .example-container{display:flex;flex-direction:column;width:98%;padding:14px;margin-bottom:0}.formspan .form-field-span,.formspan .mat-form-field{display:inline-block;position:relative;text-align:left;width:98%;background:#fff;margin-bottom:9px;padding:1px 14px}.formspan .form-field-span .mat-checkbox,.formspan .form-field-span .mat-radio-button{padding-right:15px;padding-bottom:15px;display:inline-block}.formspan .mat-form-field-wrapper{padding-bottom:0!important}.form-field-span .mat-error{font-size:13px!important}.mat-error{color:#f44336;font-size:13px!important}button.submitbtn.mat-raised-button.mat-primary{margin-right:15px}h1{color:#3f50b4}.files-view{background-repeat:no-repeat;background-size:cover;background-position:center;height:auto!important;width:82%;margin:20px auto;border-radius:10px;display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap}.files-view .mat-card{z-index:9;margin:10px!important;display:flex;flex-wrap:wrap;justify-content:center;width:27%;position:relative}.files-view .mat-card .mat-card-actions,.files-view .mat-card .mat-card-titlt{display:inline-block;width:100%}.files-view .mat-card .mat-card-subtitle{display:inline-block;width:100%;text-align:center}.closecard{position:absolute;top:-10px;right:-8px;background:#464545;height:25px;width:25px;border-radius:50%;border:1px solid #696969;color:#fff;text-align:center;box-shadow:0 2px 6px #00000070;cursor:pointer}.closecard i{font-size:18px;line-height:27px}.clickable{cursor:pointer;position:relative;z-index:999}"]
                     }] }
         ];
         /** @nocollapse */
@@ -596,7 +631,8 @@
                 { type: forms.FormBuilder },
                 { type: TestimonialService },
                 { type: router.Router },
-                { type: dialog.MatDialog }
+                { type: dialog.MatDialog },
+                { type: platformBrowser.DomSanitizer }
             ];
         };
         AddeditComponent.propDecorators = {
@@ -623,7 +659,7 @@
         Modal.decorators = [
             { type: i0.Component, args: [{
                         selector: 'app-modal',
-                        template: "<h1 mat-dialog-title>MESSAGE</h1>\r\n<div mat-dialog-content>\r\n   <p>{{ data.msg }}</p>\r\n</div>\r\n\r\n"
+                        template: "<h1 mat-dialog-title>MESSAGE</h1>\n<div mat-dialog-content>\n   <p>{{ data.msg }}</p>\n</div>\n\n"
                     }] }
         ];
         /** @nocollapse */
@@ -634,6 +670,41 @@
             ];
         };
         return Modal;
+    }());
+    // ======================================================================================================
+    // preview cmponent
+    var PreviewComponent = /** @class */ (function () {
+        function PreviewComponent(dialogRef, data, sanitizer) {
+            this.dialogRef = dialogRef;
+            this.data = data;
+            this.sanitizer = sanitizer;
+            console.log("data", data);
+            this.safeSrc = this.sanitizer.bypassSecurityTrustResourceUrl(data.msg);
+        }
+        /**
+         * @return {?}
+         */
+        PreviewComponent.prototype.onNoClick = /**
+         * @return {?}
+         */
+            function () {
+                this.dialogRef.close();
+            };
+        PreviewComponent.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'app-modal',
+                        template: "<h1 mat-dialog-title>PREVIEW VIDEO</h1>\n<div mat-dialog-content>\n    <p>{{ data.msg }}</p>\n    <!-- <p>{{ safeSrc }}</p> -->\n    <p>\n        <iframe [src]=\"safeSrc\" width=\"560\" height=\"315\" frameborder=\"0\" webkitallowfullscreen mozallowfullscreen\n            allowfullscreen></iframe>\n        <!-- <iframe width=\"420\" height=\"315\" [src]=\"safeSrc\" > -->\n        <!-- </iframe> -->\n    </p>\n</div>"
+                    }] }
+        ];
+        /** @nocollapse */
+        PreviewComponent.ctorParameters = function () {
+            return [
+                { type: dialog.MatDialogRef },
+                { type: undefined, decorators: [{ type: i0.Inject, args: [dialog.MAT_DIALOG_DATA,] }] },
+                { type: platformBrowser.DomSanitizer }
+            ];
+        };
+        return PreviewComponent;
     }());
 
     /**
@@ -704,7 +775,7 @@
         }
         TestimonialModule.decorators = [
             { type: i0.NgModule, args: [{
-                        declarations: [TestimonialComponent, AddeditComponent, Modal],
+                        declarations: [TestimonialComponent, AddeditComponent, Modal, PreviewComponent],
                         imports: [
                             DemoMaterialModule,
                             ckeditor5Angular.CKEditorModule,
@@ -718,7 +789,7 @@
                             fileUpload.FileUploadModule
                         ],
                         exports: [TestimonialComponent, AddeditComponent],
-                        entryComponents: [Modal]
+                        entryComponents: [Modal, PreviewComponent]
                     },] }
         ];
         return TestimonialModule;
@@ -739,7 +810,8 @@
     exports.TestimonialModule = TestimonialModule;
     exports.ɵa = AddeditComponent;
     exports.ɵb = Modal;
-    exports.ɵc = DemoMaterialModule;
+    exports.ɵc = PreviewComponent;
+    exports.ɵd = DemoMaterialModule;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

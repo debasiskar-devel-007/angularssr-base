@@ -153,7 +153,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
     }, 50);
     /**Observable end here**/
 
-    if (!this.activatedRoute.snapshot.params.id)
+    if (this.action2!='edit')
       setTimeout(() => {
         this.addYoutubeVideo('', '', '');
       }, 500)

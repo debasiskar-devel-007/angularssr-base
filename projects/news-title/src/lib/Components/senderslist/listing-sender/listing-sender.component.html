@@ -16,10 +16,6 @@
   </lib-listing>
 <!-- ----------------------------------------------------------------------------->
 
-<mat-form-field class="sender_message">
-  <input matInput placeholder="Send Newsletter reply to sender" [(ngModel)]="get_mail">
-  <input type="button" (click)="setMailAddress()" value="Set Token" />
-</mat-form-field>
 
   <h2 *ngIf="senderConfigForm2.datasource.length == 0">No record found.</h2>
 </mat-card>

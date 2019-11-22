@@ -10,7 +10,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class ListingSenderappComponent implements OnInit {
 
   public senderConfigForm: any = {
-    apiBaseUrl: "https://r245816wug.execute-api.us-east-1.amazonaws.com/dev/api/",
+    apiUrl: "https://r245816wug.execute-api.us-east-1.amazonaws.com/dev/api/",
     listEndPoint: "datalist",
     datasource: "",
     tableName: "senders",

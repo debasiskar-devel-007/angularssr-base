@@ -4,9 +4,7 @@ export declare class ListingSenderComponent implements OnInit {
     private cookieService;
     senderConfigForm2: any;
     loader: boolean;
-    get_mail: any;
     config: any;
     constructor(cookieService: CookieService);
     ngOnInit(): void;
-    setMailAddress(): void;
 }

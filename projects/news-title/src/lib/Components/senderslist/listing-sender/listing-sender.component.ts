@@ -11,7 +11,6 @@ export class ListingSenderComponent implements OnInit {
   // ==============================================declaration============================================
   public senderConfigForm2: any;
   public loader: boolean = true;
-  get_mail:any;
   // =====================================================================================================
 
 
@@ -48,10 +47,6 @@ export class ListingSenderComponent implements OnInit {
   ngOnInit() {
   }
 
-
-  setMailAddress() {
-    this.cookieService.set('get_mail', this.get_mail);    
-  }
 }
 
 

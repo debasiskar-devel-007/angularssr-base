@@ -4,12 +4,14 @@ import { NewsTitleService } from '../../../news-title.service';
 import { DatePipe } from '@angular/common';
 import { CookieService } from 'ngx-cookie-service';
 import { FormGroup, FormBuilder } from "@angular/forms";
+import { Router } from '@angular/router';
 export declare class AddEditNewsletterlibComponent implements OnInit {
     private atp;
     private newsService;
-    private datepipe;
+    datepipe: DatePipe;
     cookieService: CookieService;
     private formBuilder;
+    router: Router;
     header_name: any;
     buttonText: any;
     group_name_array: any;
@@ -28,9 +30,12 @@ export declare class AddEditNewsletterlibComponent implements OnInit {
     };
     /**ckeditor end here*/
     config: any;
-    constructor(atp: AmazingTimePickerService, newsService: NewsTitleService, datepipe: DatePipe, cookieService: CookieService, formBuilder: FormBuilder);
+    constructor(atp: AmazingTimePickerService, newsService: NewsTitleService, datepipe: DatePipe, cookieService: CookieService, formBuilder: FormBuilder, router: Router);
     ngOnInit(): void;
     open(): void;
     getGroupName(): void;
     getSenderAddress(): void;
+    generateForm(): void;
+    setDefaultValue(defaultValue: any): void;
+    onSubmit(): void;
 }
