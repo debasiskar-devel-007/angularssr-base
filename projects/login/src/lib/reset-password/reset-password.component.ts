@@ -3,6 +3,7 @@ import { FormBuilder, Validators, FormGroup, FormGroupDirective } from '@angular
 import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ApiService } from '../api.service';
+import { MatSnackBar } from '@angular/material';
 
 @Component({
   selector: 'lib-reset-password',
@@ -23,6 +24,7 @@ export class ResetPasswordComponent implements OnInit {
 
   public logoValue: any = '';
   // public signUpRouteingUrlValue: any = '';
+  public durationInSeconds = 5;             // This is SnackBar set time
 
 
   @Input()         // Set the Form name
@@ -63,7 +65,7 @@ set logo(logoVal : any) {
   // }
   public accesscode: string;
 
-  constructor(public fb: FormBuilder, public http: HttpClient, public router: Router, public route: ActivatedRoute, public apiService: ApiService) {
+  constructor(public fb: FormBuilder, public http: HttpClient, public router: Router, public route: ActivatedRoute, public apiService: ApiService,  private snackBar: MatSnackBar) {
 
     this.route.params.subscribe(params => {
 
@@ -134,13 +136,22 @@ set logo(logoVal : any) {
         result = response;
         console.log(result);
         if (result.status == "success") {
+          this.openSnackBar();
           this.formDirective.resetForm();       // Use for reset the form
+          this.message = '';
         } else {
           this.message = result.msg;
         }
 
       })
     }
+  }
+
+
+  openSnackBar() {
+    this.snackBar.openFromComponent(snackBarResetComponent, {
+      duration: this.durationInSeconds * 1000,
+    });
   }
 
 
@@ -155,3 +166,15 @@ set logo(logoVal : any) {
 
 
 }
+
+@Component({
+  selector: 'snack-bar-modale',
+  template: `Password changed successfully`,
+  styles: [`
+    .example {
+      color: aliceblue;
+      background-color: yellowgreen;
+    }
+  `],
+})
+export class snackBarResetComponent { }

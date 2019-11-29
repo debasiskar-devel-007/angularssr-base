@@ -1,5 +1,5 @@
 import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { ContactusComponent } from './contactus.component';
+import { ContactusComponent, successModalComponent } from './contactus.component';
 import {DemoMaterialModule} from './material-module';
 import {CommonModule} from '@angular/common';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
@@ -15,7 +15,7 @@ import { ListingModule } from 'listing-angular7';
 
 
 @NgModule({
-  declarations: [ContactusComponent, ContactusListingComponent, LoadingComponent],
+  declarations: [ContactusComponent, successModalComponent, ContactusListingComponent, LoadingComponent],
   imports: [
     DemoMaterialModule,
     BrowserAnimationsModule,
@@ -36,7 +36,7 @@ import { ListingModule } from 'listing-angular7';
   providers: [ApiService, LoadingComponent, CookieService],
   bootstrap: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
-  entryComponents:[]
+  entryComponents:[successModalComponent]
 })
 export class ContactusModule { }
 

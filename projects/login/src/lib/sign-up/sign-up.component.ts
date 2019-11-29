@@ -106,6 +106,11 @@ set userType(typeval: any) {
       lastname: ['', Validators.required],
       password: ['', Validators.required]
     })
+
+
+    this.http.get(this.serverUrlValue + 'gettemptoken').subscribe(res=>{
+      console.log(res);
+    });
   }
 
   ngOnInit() {
@@ -120,11 +125,19 @@ set userType(typeval: any) {
     setTimeout(() => {
       this.apiService.setaddEndpoint(this.addEndpointValue.endpoint);   //  set the endpoint
     }, 50);
+
+    
+
   }
 
 
 /********* Sign Up Form Submit start here*********/ 
   signUpFormSubmit() {
+    this.http.get(this.serverUrlValue + 'gettemptoken').subscribe(res=>{
+      console.log(res);
+    });
+    console.log('jhgj')
+    this.apiService.jwtTokenGet().subscribe((response) => {});
     // use for validation checking
     for (let x in this.signUpForm.controls) {
       this.signUpForm.controls[x].markAsTouched();

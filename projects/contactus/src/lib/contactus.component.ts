@@ -1,9 +1,15 @@
-import { Component, Input, OnInit, Pipe, PipeTransform, ViewChild } from '@angular/core';
+import { Component, Input, OnInit, Pipe, PipeTransform, ViewChild, Inject } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators, FormGroupDirective } from '@angular/forms';
 import { ApiService } from './api.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material';
+
+export interface DialogData {
+  value: string;
+  Url: any;
+}
 
 
 
@@ -19,6 +25,11 @@ export class ContactusComponent implements OnInit {
 
   @ViewChild(FormGroupDirective) formDirective: FormGroupDirective;
 
+  public value: any='';
+  public link: any='';
+  public Url: any='';
+  public message: any = '';
+
   public formTitleValue: any;        // This variable is use for show the Form title   
   public email: any[] = [];
   public phone: any[] = [];
@@ -30,6 +41,14 @@ export class ContactusComponent implements OnInit {
   public setJwtTokenValue: any = '';  
   public listingValue: any = '';
   public logoImgValue: any = '';
+
+
+  @Input()      // set the from modal logo
+
+  set modaleLogo(modaleLogoVal : any) {
+    this.link = modaleLogoVal;
+  }
+  
 
   @Input()
   
@@ -95,10 +114,10 @@ export class ContactusComponent implements OnInit {
 
 
   public contactUsForm: FormGroup;
-  constructor(public fb: FormBuilder, public apiService: ApiService, public http: HttpClient, public router: Router, public cookieService: CookieService) {
+  constructor(public fb: FormBuilder, public apiService: ApiService, public http: HttpClient, public router: Router, public cookieService: CookieService, public dialog: MatDialog) {
     this.contactUsForm = this.fb.group({
-      locationname: ['', Validators.required],
-      message: ['', Validators.required],
+      name: ['', Validators.required],
+      message: [''],
       // tslint:disable-next-line:max-line-length
       multipleemails: this.fb.array([this.fb.group({ emails: ['', Validators.compose([Validators.required, Validators.pattern(/^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/)])] })]),
       phones: this.fb.array([this.fb.group({ phone: ['', Validators.required] })]),
@@ -194,6 +213,8 @@ export class ContactusComponent implements OnInit {
 
   // contactUsForm submit function start here
   contactUsFormSubmit() {
+
+
     let x: any;
     for (x in this.contactUsForm.controls) {
       this.contactUsForm.controls[x].markAsTouched();
@@ -230,7 +251,7 @@ export class ContactusComponent implements OnInit {
       // All addresses sites in a Array end here
 
       let allData: any ={};
-      allData.locationname = this.contactUsForm.value.locationname;
+      allData.name = this.contactUsForm.value.name;
       allData.address = this.address;
       allData.phone = this.phone;
       allData.email = this.email;
@@ -239,14 +260,19 @@ export class ContactusComponent implements OnInit {
       let data: any = {
         "source": this.addEndpointData.source,
         "data": allData,
-        "token": this.cookieService.get('jwtToken')
+        "token": this.addEndpointData.token
       }
+      console.log(data);
+     
       this.apiService.addData(data).subscribe(res => {
         let result: any;
         result = res;
         if (result.status === 'success') {
           // console.log(result);
-
+          const dialogRef = this.dialog.open(successModalComponent, {
+            width: '250px',
+            data: {value: result.status, Url: this.link}
+          });
 
           this.formDirective.resetForm();
         }
@@ -273,20 +299,39 @@ export class ContactusComponent implements OnInit {
     this.router.navigateByUrl('/' + this.routeingUrlValue);
   }
 
-
-
-  setJwtToken() {
-    let link: any = "https://o820cv2lu8.execute-api.us-east-2.amazonaws.com/production/api/temptoken";
-    let data: any;
-    this.http.post(link,data).subscribe((res)=>{
-      // console.log(res);
-      let result: any={};
-      result = res;
-      this.cookieService.set('jwtToken', result.token);
-      this.cookieService.getAll();
-    })
-  }
-
-
 }
 
+
+@Component({
+  selector: 'successModal',
+  template: `
+  
+<span style="text-align: center"  *ngIf="data.Url != ''" >
+<img style="max-width: 100%; text-align: center" [src]="data.Url">
+</span>
+
+<div mat-dialog-content>
+<p *ngIf="data.value.length <= 7">Thanks! your account has been successfully created</p>
+<p *ngIf="data.value.length >= 8">{{data.value}}</p>
+
+</div>
+<div mat-dialog-actions>
+<button mat-button [mat-dialog-close]="" cdkFocusInitial>Ok</button>
+</div>
+
+  `,
+
+})
+export class successModalComponent {
+
+  constructor(
+    public dialogRef: MatDialogRef<successModalComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) {
+      console.log(data)
+     }
+
+    
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+}

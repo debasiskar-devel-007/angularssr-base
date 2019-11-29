@@ -45,9 +45,9 @@ import { MatTreeModule } from '@angular/material/tree';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, Validators, FormGroupDirective, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { Injectable, Component, NgModule, Input, CUSTOM_ELEMENTS_SCHEMA, defineInjectable, inject, ViewChild } from '@angular/core';
+import { Injectable, Component, NgModule, Input, CUSTOM_ELEMENTS_SCHEMA, defineInjectable, inject, ViewChild, Inject } from '@angular/core';
 import { Router, NavigationStart, NavigationEnd, NavigationCancel, NavigationError } from '@angular/router';
-import { MatDialog } from '@angular/material';
+import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from '@angular/material';
 import { HttpClient, HttpHeaders, HttpClientModule } from '@angular/common/http';
 import { CookieService } from 'ngx-cookie-service';
 import { ListingModule } from 'listing-angular7';
@@ -671,12 +671,17 @@ var ApiService = /** @class */ (function () {
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var ContactusComponent = /** @class */ (function () {
-    function ContactusComponent(fb, apiService, http, router, cookieService) {
+    function ContactusComponent(fb, apiService, http, router, cookieService, dialog) {
         this.fb = fb;
         this.apiService = apiService;
         this.http = http;
         this.router = router;
         this.cookieService = cookieService;
+        this.dialog = dialog;
+        this.value = '';
+        this.link = '';
+        this.Url = '';
+        this.message = '';
         // This variable is use for show the Form title   
         this.email = [];
         this.phone = [];
@@ -693,14 +698,25 @@ var ContactusComponent = /** @class */ (function () {
         this.longitude = -147.20785;
         this.mapType = 'satellite';
         this.contactUsForm = this.fb.group({
-            locationname: ['', Validators.required],
-            message: ['', Validators.required],
+            name: ['', Validators.required],
+            message: [''],
             // tslint:disable-next-line:max-line-length
             multipleemails: this.fb.array([this.fb.group({ emails: ['', Validators.compose([Validators.required, Validators.pattern(/^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/)])] })]),
             phones: this.fb.array([this.fb.group({ phone: ['', Validators.required] })]),
             addresses: this.fb.array([this.fb.group({ address: ['', Validators.required] })])
         });
     }
+    Object.defineProperty(ContactusComponent.prototype, "modaleLogo", {
+        set: /**
+         * @param {?} modaleLogoVal
+         * @return {?}
+         */
+        function (modaleLogoVal) {
+            this.link = modaleLogoVal;
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(ContactusComponent.prototype, "formTitle", {
         set: /**
          * @param {?} formTitleVal
@@ -1028,7 +1044,7 @@ var ContactusComponent = /** @class */ (function () {
             // All addresses sites in a Array end here
             /** @type {?} */
             var allData = {};
-            allData.locationname = this.contactUsForm.value.locationname;
+            allData.name = this.contactUsForm.value.name;
             allData.address = this.address;
             allData.phone = this.phone;
             allData.email = this.email;
@@ -1038,8 +1054,9 @@ var ContactusComponent = /** @class */ (function () {
             var data = {
                 "source": this.addEndpointData.source,
                 "data": allData,
-                "token": this.cookieService.get('jwtToken')
+                "token": this.addEndpointData.token
             };
+            console.log(data);
             this.apiService.addData(data).subscribe((/**
              * @param {?} res
              * @return {?}
@@ -1050,6 +1067,11 @@ var ContactusComponent = /** @class */ (function () {
                 result = res;
                 if (result.status === 'success') {
                     // console.log(result);
+                    /** @type {?} */
+                    var dialogRef = _this.dialog.open(successModalComponent, {
+                        width: '250px',
+                        data: { value: result.status, Url: _this.link }
+                    });
                     _this.formDirective.resetForm();
                 }
             }));
@@ -1080,35 +1102,10 @@ var ContactusComponent = /** @class */ (function () {
     function () {
         this.router.navigateByUrl('/' + this.routeingUrlValue);
     };
-    /**
-     * @return {?}
-     */
-    ContactusComponent.prototype.setJwtToken = /**
-     * @return {?}
-     */
-    function () {
-        var _this = this;
-        /** @type {?} */
-        var link = "https://o820cv2lu8.execute-api.us-east-2.amazonaws.com/production/api/temptoken";
-        /** @type {?} */
-        var data;
-        this.http.post(link, data).subscribe((/**
-         * @param {?} res
-         * @return {?}
-         */
-        function (res) {
-            // console.log(res);
-            /** @type {?} */
-            var result = {};
-            result = res;
-            _this.cookieService.set('jwtToken', result.token);
-            _this.cookieService.getAll();
-        }));
-    };
     ContactusComponent.decorators = [
         { type: Component, args: [{
                     selector: 'lib-contactus',
-                    template: "\n  <button *ngIf=\"listingValue != ''\" class=\"listingButton\" mat-raised-button color=\"accent\" (click)=\"goToListing()\">{{listingValue}}</button>\n  <button *ngIf=\"setJwtTokenValue != ''\" mat-raised-button color=\"warn\" (click)=\"setJwtToken()\"> SetToken</button>\n\n\n<div class=\"main-div\">\n\n    <mat-card class=\"from\">\n        <span class=\"logowrapper\" *ngIf=\"logoImgValue != ''\" >\n            <img  [src]=\"logoImgValue\">\n        </span>\n\n        <h2 *ngIf=\"formTitleValue != ''\" class=\"title\"> {{formTitleValue}}</h2>\n\n        <form class=\"example-container\" [formGroup]=\"contactUsForm\" (ngSubmit)=\"contactUsFormSubmit()\" novalidate>\n\n\n\n\n  <!-- Location Name field start here-->\n  <mat-form-field>\n      <input matInput placeholder=\"Location Name \" formControlName=\"locationname\" (blur)=\"inputUntouched('locationname')\" >\n      <mat-error *ngIf=\"!contactUsForm.controls['locationname'].valid && contactUsForm.controls['locationname'].errors.required && contactUsForm.controls['locationname'].touched\">Location Name field can not be blank</mat-error>\n    </mat-form-field>\n    <!-- Location Name field end here-->\n  \n  \n  \n    <!--  multiple emails fields added start here-->\n  <div formArrayName=\"multipleemails\" class=\"fromClass\" >\n  \n  \n    <mat-form-field *ngFor=\"let item of multipleemails.controls; let pointIndex=index\" [formGroupName]=\"pointIndex\">\n  \n  \n  \n      <input matInput placeholder=\"Email \"  formControlName=\"emails\" >\n      <span matSuffix>\n        <i class=\"material-icons\"  (click)=\"addEmail()\">add</i>\n        <i *ngIf=\"pointIndex != 0\" class=\"material-icons\"  (click)=\"removeEmail(pointIndex)\">remove</i>\n  \n      </span>\n  <!--    <mat-error  *ngIf=\"!item.valid && !item.errors.required\">Email is not valid</mat-error>-->\n      <mat-error *ngIf=\"!item.valid && contactUsForm.controls['locationname'].touched \">Email field can not be blank</mat-error>\n    </mat-form-field>\n  </div>\n    <!--  multiple emails fields added end here-->\n  \n  <!--  multiple Phone fields added start here-->\n  <div formArrayName=\"phones\" class=\"fromClass\">\n  \n  \n    <mat-form-field *ngFor=\"let item of phones.controls; let pointIndex=index\" [formGroupName]=\"pointIndex\">\n  \n  \n      <input matInput placeholder=\"Phone \"  formControlName=\"phone\" >\n  \n      <span matSuffix>\n        <i class=\"material-icons\"  (click)=\"addPhone()\">add</i>\n        <i *ngIf=\"pointIndex != 0\"  class=\"material-icons\"  (click)=\"removePhone(pointIndex)\">remove</i>\n  \n      </span>\n  \n  \n      <mat-error *ngIf=\"item.valid  \">Phone field can not be blank</mat-error>\n    </mat-form-field>\n  \n  </div>\n  \n    <!--  multiple Phone fields added end here-->\n  \n  <!--  multiple Addresses fields added start here-->\n  <div formArrayName=\"addresses\" class=\"fromClass\">\n  \n  \n    <mat-form-field *ngFor=\"let item of addresses.controls; let pointIndex=index\" [formGroupName]=\"pointIndex\">\n  \n      <textarea  matInput placeholder=\"Address {{pointIndex + 1}} \"  formControlName=\"address\" ></textarea>\n  \n      <span matSuffix>\n        <i class=\"material-icons\"  (click)=\"addAddress()\">add</i>\n        <i *ngIf=\"pointIndex != 0\" class=\"material-icons\"  (click)=\"removeAddress(pointIndex)\">remove</i>\n  \n      </span>\n  \n  <!--    <mat-error  *ngIf=\"!contactUsForm.controls['email'].valid && !contactUsForm.controls['email'].errors.required\">Email is not valid</mat-error>-->\n      <mat-error *ngIf=\"!item.valid \">Address field can not be blank</mat-error>\n  \n    </mat-form-field>\n  </div>\n    <!--  multiple Addresses fields added end here-->\n  \n    <!-- Address field start here-->\n    <!--<mat-form-field>\n      <textarea matInput placeholder=\"Address\" formControlName=\"address\" (blur)=\"inputblur('address')\"></textarea>\n      <mat-error *ngIf=\"!contactUsForm.controls['address'].valid && contactUsForm.controls['address'].errors.required\">Address field can not be blank</mat-error>\n    </mat-form-field>-->\n    <!-- Address field end here-->\n  \n  \n    <!-- Message field start here -->\n    <mat-form-field>\n      <textarea matInput placeholder=\"Message\" formControlName=\"message\" (blur)=\"inputUntouched('message')\"></textarea>\n  <!--    <mat-error *ngIf=\"!contactUsForm.controls['message'].valid && contactUsForm.controls['message'].errors.required\">Message field can not be blank</mat-error>-->\n    </mat-form-field>\n    <!-- Message field end here -->\n  \n    <button mat-raised-button color=\"primary\">Submit</button>\n\n        </form>\n\n    </mat-card>\n\n</div>",
+                    template: "\n  <button *ngIf=\"listingValue != ''\" class=\"listingButton\" mat-raised-button color=\"accent\" (click)=\"goToListing()\">{{listingValue}}</button>\n\n\n<div class=\"main-div\">\n\n    <mat-card class=\"from\">\n        <span class=\"logowrapper\" *ngIf=\"logoImgValue != ''\" >\n            <img  [src]=\"logoImgValue\">\n        </span>\n\n        <h2 *ngIf=\"formTitleValue != ''\" class=\"title\"> {{formTitleValue}}</h2>\n\n        <form class=\"example-container\" [formGroup]=\"contactUsForm\" (ngSubmit)=\"contactUsFormSubmit()\" novalidate>\n\n\n\n\n  <!-- Location Name field start here-->\n  <div class=\"fromClass\">\n  <mat-form-field>\n      <input matInput placeholder=\"Name \" formControlName=\"name\" (blur)=\"inputUntouched('name')\" >\n      <mat-error *ngIf=\"!contactUsForm.controls['name'].valid && contactUsForm.controls['name'].errors.required && contactUsForm.controls['name'].touched\">Name field can not be blank</mat-error>\n    </mat-form-field>\n  </div>\n    <!-- Location Name field end here-->\n  \n  \n  \n    <!--  multiple emails fields added start here-->\n  <div formArrayName=\"multipleemails\"  *ngFor=\"let item of multipleemails.controls; let pointIndex=index\" class=\"fromClass\" >\n  \n  \n    <mat-form-field [formGroupName]=\"pointIndex\">\n  \n  \n  \n      <input matInput placeholder=\"Email \"  formControlName=\"emails\" >\n      <span matSuffix>\n        <i class=\"material-icons\"  (click)=\"addEmail()\">add</i>\n        <i *ngIf=\"pointIndex != 0\" class=\"material-icons\"  (click)=\"removeEmail(pointIndex)\">remove</i>\n  \n      </span>\n     <!-- <mat-error  *ngIf=\"!item.valid && !item.errors.required\">Email is not valid</mat-error> -->\n      <!-- <mat-error *ngIf=\"!item.valid  \">Email field can not be blank</mat-error> -->\n    </mat-form-field>\n  </div>\n    <!--  multiple emails fields added end here-->\n  \n  <!--  multiple Phone fields added start here-->\n  <div formArrayName=\"phones\" *ngFor=\"let item of phones.controls; let pointIndex=index\" class=\"fromClass\">\n  \n    <mat-form-field [formGroupName]=\"pointIndex\">\n  \n  \n      <input matInput placeholder=\"Phone \"  formControlName=\"phone\" (blur)=\"inputUntouched('phone')\">\n  \n      <span matSuffix>\n        <i class=\"material-icons\"  (click)=\"addPhone()\">add</i>\n        <i *ngIf=\"pointIndex != 0\"  class=\"material-icons\"  (click)=\"removePhone(pointIndex)\">remove</i>\n  \n      </span>\n  \n  \n      <!-- <mat-error *ngIf=\"!item.valid  \">Phone field can not be blank</mat-error> -->\n    </mat-form-field>\n  \n  </div>\n  \n    <!--  multiple Phone fields added end here-->\n  \n  <!--  multiple Addresses fields added start here-->\n  <div formArrayName=\"addresses\" *ngFor=\"let item of addresses.controls; let pointIndex=index\"  class=\"fromClass\">\n  \n  \n    <mat-form-field [formGroupName]=\"pointIndex\">\n  \n      <textarea  matInput placeholder=\"Address {{pointIndex + 1}} \"  formControlName=\"address\" (blur)=\"inputUntouched('address')\"></textarea>\n  \n      <span matSuffix>\n        <i class=\"material-icons\"  (click)=\"addAddress()\">add</i>\n        <i *ngIf=\"pointIndex != 0\" class=\"material-icons\"  (click)=\"removeAddress(pointIndex)\">remove</i>\n  \n      </span>\n  \n  <!--    <mat-error  *ngIf=\"!contactUsForm.controls['email'].valid && !contactUsForm.controls['email'].errors.required\">Email is not valid</mat-error>-->\n      <!-- <mat-error *ngIf=\"!item.valid \">Address field can not be blank</mat-error> -->\n  \n    </mat-form-field>\n  </div>\n    <!--  multiple Addresses fields added end here-->\n  \n    <!-- Address field start here-->\n    <!--<mat-form-field>\n      <textarea matInput placeholder=\"Address\" formControlName=\"address\" (blur)=\"inputblur('address')\"></textarea>\n      <mat-error *ngIf=\"!contactUsForm.controls['address'].valid && contactUsForm.controls['address'].errors.required\">Address field can not be blank</mat-error>\n    </mat-form-field>-->\n    <!-- Address field end here-->\n  \n  \n    <!-- Message field start here -->\n    <div class=\"fromClass\">\n    <mat-form-field>\n      <textarea matInput placeholder=\"Message\" formControlName=\"message\" (blur)=\"inputUntouched('message')\"></textarea>\n  <!--    <mat-error *ngIf=\"!contactUsForm.controls['message'].valid && contactUsForm.controls['message'].errors.required\">Message field can not be blank</mat-error>-->\n    </mat-form-field>\n  </div>\n    <!-- Message field end here -->\n  \n    <button mat-raised-button color=\"primary\">Submit</button>\n\n        </form>\n\n    </mat-card>\n\n</div>",
                     styles: [".example-container{display:flex;flex-direction:column}.example-container>*{width:100%}.from{width:30%;margin:0 auto}.from h2{text-align:center;background-color:#00f;color:#fff;padding:15px}.from a{padding-right:30px}.from button{width:60px;height:40px;text-align:center;margin:0 auto}.main-div{height:100vh;display:flex;justify-content:center;align-items:center}.signupfooter{margin-top:12px;display:flex;justify-content:space-between;align-items:center}.signupfooter a{cursor:pointer}.error{text-align:center}.fromClass{display:flex;flex-direction:column;width:100%}.logowrapper{margin:0 auto;display:block;text-align:center}"]
                 }] }
     ];
@@ -1118,10 +1115,12 @@ var ContactusComponent = /** @class */ (function () {
         { type: ApiService },
         { type: HttpClient },
         { type: Router },
-        { type: CookieService }
+        { type: CookieService },
+        { type: MatDialog }
     ]; };
     ContactusComponent.propDecorators = {
         formDirective: [{ type: ViewChild, args: [FormGroupDirective,] }],
+        modaleLogo: [{ type: Input }],
         formTitle: [{ type: Input }],
         logoimg: [{ type: Input }],
         addlisting: [{ type: Input }],
@@ -1131,6 +1130,34 @@ var ContactusComponent = /** @class */ (function () {
         routeingUrl: [{ type: Input }]
     };
     return ContactusComponent;
+}());
+var successModalComponent = /** @class */ (function () {
+    function successModalComponent(dialogRef, data) {
+        this.dialogRef = dialogRef;
+        this.data = data;
+        console.log(data);
+    }
+    /**
+     * @return {?}
+     */
+    successModalComponent.prototype.onNoClick = /**
+     * @return {?}
+     */
+    function () {
+        this.dialogRef.close();
+    };
+    successModalComponent.decorators = [
+        { type: Component, args: [{
+                    selector: 'successModal',
+                    template: "\n  \n<span style=\"text-align: center\"  *ngIf=\"data.Url != ''\" >\n<img style=\"max-width: 100%; text-align: center\" [src]=\"data.Url\">\n</span>\n\n<div mat-dialog-content>\n<p *ngIf=\"data.value.length <= 7\">Thanks! your account has been successfully created</p>\n<p *ngIf=\"data.value.length >= 8\">{{data.value}}</p>\n\n</div>\n<div mat-dialog-actions>\n<button mat-button [mat-dialog-close]=\"\" cdkFocusInitial>Ok</button>\n</div>\n\n  "
+                }] }
+    ];
+    /** @nocollapse */
+    successModalComponent.ctorParameters = function () { return [
+        { type: MatDialogRef },
+        { type: undefined, decorators: [{ type: Inject, args: [MAT_DIALOG_DATA,] }] }
+    ]; };
+    return successModalComponent;
 }());
 
 /**
@@ -1483,7 +1510,7 @@ var ContactusModule = /** @class */ (function () {
     }
     ContactusModule.decorators = [
         { type: NgModule, args: [{
-                    declarations: [ContactusComponent, ContactusListingComponent, LoadingComponent],
+                    declarations: [ContactusComponent, successModalComponent, ContactusListingComponent, LoadingComponent],
                     imports: [
                         DemoMaterialModule,
                         BrowserAnimationsModule,
@@ -1497,7 +1524,7 @@ var ContactusModule = /** @class */ (function () {
                     providers: [ApiService, LoadingComponent, CookieService],
                     bootstrap: [],
                     schemas: [CUSTOM_ELEMENTS_SCHEMA],
-                    entryComponents: []
+                    entryComponents: [successModalComponent]
                 },] }
     ];
     return ContactusModule;
@@ -1513,6 +1540,6 @@ var ContactusModule = /** @class */ (function () {
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { ContactusService, ContactusComponent, ContactusModule, ApiService as ɵa, ContactusListingComponent as ɵb, LoadingComponent as ɵc, DemoMaterialModule as ɵd };
+export { ContactusService, ContactusComponent, successModalComponent, ContactusModule, ApiService as ɵa, ContactusListingComponent as ɵb, LoadingComponent as ɵc, DemoMaterialModule as ɵd };
 
 //# sourceMappingURL=contactus.js.map

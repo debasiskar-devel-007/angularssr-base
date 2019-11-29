@@ -31,7 +31,7 @@ export class ForgetPasswordComponent implements OnInit {
   public addEndpoint: any = {
     endpoint:'forgetpassword'
   };
-  public domanUrl: any = 'http://localhost:4200/reset-password';
+  public domainUrl: any = 'http://localhost:4200/reset-password';
   constructor() { }
 
   ngOnInit() {

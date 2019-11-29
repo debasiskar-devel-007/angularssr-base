@@ -22,7 +22,7 @@ export class ForgetPasswordComponent implements OnInit {
   public serverUrlValue: any = '';          //  This is Server url
   public signUpRouteingUrlValue: any = '';  // setting the navigate By Sign Up Url from project
   public loginRouteingUrlValue: any = '';  // setting the navigate By login Url from project
-  private domanUrlValue: any = '';          // This is reset password url
+  private domainUrlValue: any = '';          // This is reset password url
   public addEndpointValue: any = '';        // This is endpoint url
   public logoValue: any = '';               // This is from logo url
   public durationInSeconds = 5;             // This is SnackBar set time
@@ -35,9 +35,9 @@ set buttonName (buttonNameVal :any){
 }
 
   @Input()         // Set the project email Doman URL
-  set domanUrl(domanUrlVal: any) {
-    this.domanUrlValue = (domanUrlVal) || '<no name set>';
-    this.domanUrlValue = domanUrlVal;
+  set domainUrl(domainUrlVal: any) {
+    this.domainUrlValue = (domainUrlVal) || '<no name set>';
+    this.domainUrlValue = domainUrlVal;
     // console.log(this.domanUrlValue);
   }
   @Input()         // Set the project name
@@ -124,12 +124,12 @@ set buttonName (buttonNameVal :any){
     }
     if (this.forgetPasswordForm.valid) {    //    validation checking
 
-      this.openSnackBar();              // open snack-bar function
+      // this.openSnackBar();              // open snack-bar function
 
       let link: any = this.serverUrlValue;
       let data: any = this.forgetPasswordForm.value;
 
-      data.domanUrl = this.domanUrlValue;
+      data.domainUrl = this.domainUrlValue;
 
       this.apiService.forgetPassword(data).subscribe((response) => {
         // console.log(response);
@@ -137,7 +137,7 @@ set buttonName (buttonNameVal :any){
         result = response;
 
         if (result.status == "success") {
-          this.openSnackBar();             // open snack-bar function
+          // this.openSnackBar();             // open snack-bar function
           // this is use for reset the from
           this.formDirective.resetForm();
           this.message = '';         // clear the from

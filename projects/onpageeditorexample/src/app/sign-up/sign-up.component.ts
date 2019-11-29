@@ -11,7 +11,7 @@ export class SignUpComponent implements OnInit {
   public logo: any = '../../assets/favicon.ico';
   public modaleLogo: any = '../../assets/favicon.ico';
   public formTitle: any = 'Sign Up';
-  public serverUrl: any = 'https://o820cv2lu8.execute-api.us-east-2.amazonaws.com/production/api/';
+  public serverUrl: any = 'https://r245816wug.execute-api.us-east-1.amazonaws.com/dev/api/';
   public addEndpoint: any = {
     endpoint:'addorupdatedata',
     // source:'usermanagement'

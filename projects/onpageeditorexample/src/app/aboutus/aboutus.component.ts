@@ -17,11 +17,12 @@ export class AboutusComponent implements OnInit {
   public addlisting: any ='GoTo Licting';
   public getDataUrl: any = 'datalist';
   public routeingUrl: any = 'home';
-
+public modaleLogo: any = '';
 
   public addEndpoint: any = {
     endpoint:'addorupdatedata',
-    source:'contactusForm'
+    source:'contactusForm',
+    token: 1
   };
 
   public fields: any[] = [

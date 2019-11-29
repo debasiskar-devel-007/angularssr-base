@@ -333,6 +333,16 @@ forgetPassword(requestdata: any) {
     return result;
   }
 
+  jwtTokenGet() {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type':'application/json'
+      })
+    };
+    var result = this._http.get(this.serverUrl +'gettemptoken').pipe(map(res => res));
+    return result;
+  }
+
 
 
 

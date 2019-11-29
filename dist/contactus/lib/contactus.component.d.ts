@@ -4,13 +4,23 @@ import { ApiService } from './api.service';
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { MatDialogRef, MatDialog } from '@angular/material';
+export interface DialogData {
+    value: string;
+    Url: any;
+}
 export declare class ContactusComponent implements OnInit {
     fb: FormBuilder;
     apiService: ApiService;
     http: HttpClient;
     router: Router;
     cookieService: CookieService;
+    dialog: MatDialog;
     formDirective: FormGroupDirective;
+    value: any;
+    link: any;
+    Url: any;
+    message: any;
     formTitleValue: any;
     email: any[];
     phone: any[];
@@ -21,6 +31,7 @@ export declare class ContactusComponent implements OnInit {
     setJwtTokenValue: any;
     listingValue: any;
     logoImgValue: any;
+    modaleLogo: any;
     formTitle: string;
     logoimg: string;
     addlisting: any;
@@ -32,7 +43,7 @@ export declare class ContactusComponent implements OnInit {
     longitude: number;
     mapType: string;
     contactUsForm: FormGroup;
-    constructor(fb: FormBuilder, apiService: ApiService, http: HttpClient, router: Router, cookieService: CookieService);
+    constructor(fb: FormBuilder, apiService: ApiService, http: HttpClient, router: Router, cookieService: CookieService, dialog: MatDialog);
     ngOnInit(): void;
     readonly multipleemails: FormArray;
     addEmail(): void;
@@ -46,5 +57,10 @@ export declare class ContactusComponent implements OnInit {
     contactUsFormSubmit(): void;
     inputUntouched(val: any): void;
     goToListing(): void;
-    setJwtToken(): void;
+}
+export declare class successModalComponent {
+    dialogRef: MatDialogRef<successModalComponent>;
+    data: DialogData;
+    constructor(dialogRef: MatDialogRef<successModalComponent>, data: DialogData);
+    onNoClick(): void;
 }
