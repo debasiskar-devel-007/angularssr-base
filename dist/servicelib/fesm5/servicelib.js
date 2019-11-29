@@ -331,8 +331,9 @@ var ServicelibComponent = /** @class */ (function () {
                 listEndPoint: receivedData.listEndPoint,
                 datasource: receivedData.datasource,
                 tableName: receivedData.tableName,
-                listArray_skip: ["_id", "userId", "created_at", "id", "updated_at", "service_desc", "images"],
-                listArray_modify_header: { "service title": "Service title", "priority": "Priority", "status": "Status", "bulletarr": "Number of bullets" },
+                listArray_skip: ["_id", "userId", "id", "updated_at", "service_desc", "image", "additional_img", "description_html"],
+                listArray_modify_header: { "service title": "Service title", "priority": "Priority",
+                    "status": "Status", "bulletarr": "Number of bullets", "date_added": "Date" },
                 admintablenameTableName: "admin",
                 statusarr: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }],
                 updateurl: receivedData.updateEndpoint,
@@ -462,9 +463,10 @@ var AddeditServiceComponent = /** @class */ (function () {
         };
         this.loader = false;
         this.buttonText = "SUBMIT";
-        this.successMessage = "Submitted Successfully";
+        this.successMessage = "Service Added!!!";
         this.img_arr = [];
         this.ErrCode = false;
+        this.img_missing = false;
     }
     /**
      * @return {?}
@@ -483,15 +485,19 @@ var AddeditServiceComponent = /** @class */ (function () {
                 /* Button text */
                 this.buttonText = "SUBMIT";
                 this.flag = false;
-                this.header_name = "ADD";
+                this.flag2 = false;
+                this.header_name = "Add Service";
                 break;
             case 'edit':
                 /* Button text */
                 this.buttonText = "UPDATE";
-                this.successMessage = "One row updated";
+                this.successMessage = "Service Edited!!!";
                 this.setDefaultValue(this.configData.defaultData);
-                this.header_name = "EDIT";
+                this.header_name = "Edit Service";
                 this.flag = true;
+                this.flag2 = true;
+                if (this.configData.defaultData.additional_img == false)
+                    this.flag2 = false;
                 break;
         }
         // ===============================================================================================
@@ -518,6 +524,17 @@ var AddeditServiceComponent = /** @class */ (function () {
         enumerable: true,
         configurable: true
     });
+    Object.defineProperty(AddeditServiceComponent.prototype, "imageUpload2", {
+        set: /**
+         * @param {?} getConfig2
+         * @return {?}
+         */
+        function (getConfig2) {
+            this.imageConfigData2 = getConfig2;
+        },
+        enumerable: true,
+        configurable: true
+    });
     // =============================================form generation====================================
     // =============================================form generation====================================
     /**
@@ -531,12 +548,12 @@ var AddeditServiceComponent = /** @class */ (function () {
     function () {
         this.serviceForm = this.formBuilder.group({
             service_title: ['', [Validators.required]],
-            service_desc: ['', [Validators.required]],
+            description: ['', [Validators.required]],
             priority: ['', [Validators.required]],
             status: [true,],
             bulletarr: this.formBuilder.array([]),
             service_img: ['',],
-            userId: ['',]
+            additional_img: ['',]
         });
     };
     // =================================================================================================
@@ -565,15 +582,21 @@ var AddeditServiceComponent = /** @class */ (function () {
         }));
         this.serviceForm.patchValue({
             service_title: defaultValue.service_title,
-            service_desc: defaultValue.service_desc,
+            description: defaultValue.description,
             priority: defaultValue.priority,
             status: defaultValue.status,
             service_img: defaultValue.service_img,
-            userId: null
+            additional_img: defaultValue.additional_img,
         });
+        /** Service image **/
         this.img_var = defaultValue.service_img.basepath + defaultValue.service_img.image;
         this.image_name = defaultValue.service_img.name;
         this.image_type = defaultValue.service_img.type;
+        console.log(this.img_var);
+        /** Additional image **/
+        this.img_var2 = defaultValue.additional_img.basepath + defaultValue.additional_img.image;
+        this.image_name2 = defaultValue.additional_img.name;
+        this.image_type2 = defaultValue.additional_img.type;
     };
     // ==================================================================================================
     // ==========================================FORM ARRAY FUNCTIONS===================================
@@ -650,12 +673,32 @@ var AddeditServiceComponent = /** @class */ (function () {
                     "name": this.imageConfigData.files[0].name,
                     "type": this.imageConfigData.files[0].type
                 };
+            this.img_missing = false;
         }
         else {
-            this.serviceForm.value.service_img = false;
+            this.img_missing = true;
+        }
+        /** Additional Image  **/
+        if (this.imageConfigData2.files) {
+            if (this.imageConfigData2.files.length > 1) {
+                this.ErrCode = true;
+                return;
+            }
+            this.serviceForm.value.additional_img =
+                {
+                    "basepath": this.imageConfigData2.files[0].upload.data.basepath + '/' + this.imageConfigData2.path + '/',
+                    "image": this.imageConfigData2.files[0].upload.data.data.fileservername,
+                    "name": this.imageConfigData2.files[0].name,
+                    "type": this.imageConfigData2.files[0].type
+                };
+        }
+        for (var i in this.serviceForm.controls) {
+            this.serviceForm.controls[i].markAsTouched();
         }
         this.loader = true;
-        this.serviceForm.controls['service_desc'].markAsTouched();
+        if (this.img_missing == true) {
+            return;
+        }
         if (this.serviceForm.invalid) {
             return;
         }
@@ -762,11 +805,22 @@ var AddeditServiceComponent = /** @class */ (function () {
      */
     function () {
         this.flag = false;
+        this.img_missing = true;
+    };
+    /**
+     * @return {?}
+     */
+    AddeditServiceComponent.prototype.clear_image2 = /**
+     * @return {?}
+     */
+    function () {
+        this.flag2 = false;
+        this.serviceForm.value.additional_img = false;
     };
     AddeditServiceComponent.decorators = [
         { type: Component, args: [{
                     selector: 'lib-addedit-service',
-                    template: "<mat-card>\n  <mat-toolbar color=\"primary\" style=\"justify-content: center; align-items: center;\">\n    <h2 class=\"headerSpan\">{{ header_name }}</h2>\n  </mat-toolbar>\n  <span class=\"formspan\">\n    <mat-card-content class=\"example-container\">\n\n\n      <form [formGroup]=\"serviceForm\" autocomplete=\"off\" (ngSubmit)=\"onSubmit()\">\n\n\n\n        <!-- ------------------------------service title------------------- -->\n        <mat-form-field>\n          <input matInput placeholder=\"Service title\" formControlName=\"service_title\"\n            (blur)=\"inputBlur('service_title')\">\n          <mat-error *ngIf=\"serviceForm.controls['service_title']?.touched || serviceForm.controls['service_title'].errors \n          && serviceForm.controls['service_title'].errors.required\">Service title is required.</mat-error>\n        </mat-form-field><br>\n        <!-- -------------------------------------------------------------- -->\n\n\n\n        <!-- --------------------------------description------------------- -->\n        <ckeditor [editor]=\"Editor\" [config]=\"editorConfig\" formControlName=\"service_desc\"\n          (blur)=\"inputBlur('service_desc')\"></ckeditor>\n        <mat-error *ngIf=\"serviceForm.controls['service_desc']?.touched || serviceForm.controls['service_desc']?.touched && \n        serviceForm.controls['service_desc'].errors \n          && serviceForm.controls['service_desc'].errors.required\">Please write a testimonial.</mat-error>\n        <br>\n        <!-- -------------------------------------------------------------- -->\n\n\n        <!-- --------------------------------priority------------------- -->\n        <mat-form-field>\n          <input matInput type=\"number\" placeholder=\"Priority\" formControlName=\"priority\"\n            (blur)=\"inputBlur('priority')\">\n          <mat-error *ngIf=\"serviceForm.controls['priority']?.touched || serviceForm.controls['priority'].errors \n          && serviceForm.controls['priority'].errors.required\">Priority is required.</mat-error>\n        </mat-form-field><br>\n        <!-- -------------------------------------------------------------- -->\n\n\n        <!-- --------------------------------status------------------- -->\n        <mat-label>Status:</mat-label><br>\n        <mat-checkbox color=\"primary\" formControlName=\"status\">Active</mat-checkbox><br>\n        <!-- -------------------------------------------------------------- -->\n\n\n\n\n        <!-- ______________________________________________FORM ARRAY_________________________________________ -->\n\n        <div formArrayName=\"bulletarr\" class=\"bulletarr\"\n          *ngFor=\"let blist of serviceForm.controls.bulletarr?.value; let i = index; trackBy: trackByFn\">\n          <ng-container [formGroupName]=\"i\">\n            <div class=\"top_header\">\n              bullet list\n            </div>\n            <!-- ------------bullet title-----------  -->\n            <mat-form-field>\n              <input matInput formControlName=\"bullet_title\" placeholder=\"Bullet title\">\n              <mat-icon matSuffix>title</mat-icon>\n            </mat-form-field><br>\n            <!-- -----------------------------------  -->\n\n\n            <!-- --------------------bullet description-----------------  -->\n            <mat-form-field>\n              <textarea matInput formControlName=\"bullet_desc\" placeholder=\"Bullet description\"></textarea>\n              <mat-icon matSuffix>format_list_bulleted</mat-icon>\n            </mat-form-field><br>\n            <!-- ----------------------------------------------------------  -->\n          </ng-container>\n          <button (click)=\"addBulletList('','')\" type=\"button\">\n            <mat-icon>add</mat-icon>\n          </button>\n          <button (click)=\"deleteBulletList()\" *ngIf=\"i!=0\" type=\"button\">\n            <mat-icon>remove</mat-icon>\n          </button>\n        </div>\n        <!-- __________________________________________________________________________________________________________ -->\n\n        <h1>Service Image:</h1>\n        <lib-file-upload [config]=\"imageConfigData\" ></lib-file-upload>\n        <mat-error *ngIf=\"ErrCode==true\">Please add just one service image.</mat-error>\n        <!-- <mat-error *ngIf=\"serviceForm.controls['service_img'].errors && serviceForm.controls['service_img'].errors.required\">Priority is required.</mat-error> -->\n\n\n\n        <mat-card-content class=\"files-view\" *ngIf=\"flag==true\">\n          <mat-card class=\"example-card\">\n            <img mat-card-image [attr.src]=\"img_var\">\n            <mat-card-title>{{ image_name }}</mat-card-title>\n            <mat-card-subtitle>{{ image_type }}</mat-card-subtitle>\n            <span class=\"closecard\" (click)=\"clear_image()\"><i class=\"material-icons\">clear</i></span>\n          </mat-card>\n        </mat-card-content>\n\n        <span><button type=\"submit\" class=\"submitbtn\" mat-raised-button color=\"primary\">{{buttonText}}</button></span>\n        <span><button type=\"reset\" class=\"submitbtn\" mat-raised-button color=\"primary\"\n            (click)=\"resetserviceForm()\">RESET</button></span>\n\n      </form>\n    </mat-card-content>\n  </span>\n</mat-card>",
+                    template: "<mat-card>\n  <mat-toolbar color=\"primary\" style=\"justify-content: center; align-items: center;\">\n    <h2 class=\"headerSpan\">{{ header_name }}</h2>\n  </mat-toolbar>\n  <span class=\"formspan\">\n    <mat-card-content class=\"example-container\">\n\n\n      <form [formGroup]=\"serviceForm\" autocomplete=\"off\">\n\n\n\n        <!-- ------------------------------service title------------------- -->\n        <mat-form-field>\n          <input matInput placeholder=\"Service title\" formControlName=\"service_title\"\n          >\n          <mat-error *ngIf=\"!serviceForm.controls['service_title'].valid\n        && serviceForm.controls['service_title'].errors.required\"> Service title is required.</mat-error>\n        </mat-form-field><br>\n        <!-- -------------------------------------------------------------- -->\n\n\n\n        <!-- --------------------------------description------------------- -->\n        <ckeditor [editor]=\"Editor\" [config]=\"editorConfig\" formControlName=\"description\"\n          ></ckeditor>\n          <mat-error *ngIf=\"!serviceForm.controls['description'].valid\n          && serviceForm.controls['description'].errors.required && serviceForm.controls['description'].touched\" > Please describe.</mat-error>\n        <br>\n        <!-- -------------------------------------------------------------- -->\n\n\n        <!-- --------------------------------priority------------------- -->\n        <mat-form-field>\n          <input matInput type=\"number\" placeholder=\"Priority\" formControlName=\"priority\"\n           >\n           <mat-error *ngIf=\"!serviceForm.controls['priority'].valid\n           && serviceForm.controls['priority'].errors.required\"> Priority is required.</mat-error>\n        </mat-form-field><br>\n        <!-- -------------------------------------------------------------- -->\n\n\n        <!-- --------------------------------status------------------- -->\n        <mat-label>Status:</mat-label><br>\n        <mat-checkbox color=\"primary\" formControlName=\"status\">Active</mat-checkbox><br>\n        <!-- -------------------------------------------------------------- -->\n\n\n\n\n        <!-- ______________________________________________FORM ARRAY_________________________________________ -->\n\n        <div formArrayName=\"bulletarr\" class=\"bulletarr\"\n          *ngFor=\"let blist of serviceForm.controls.bulletarr?.value; let i = index; trackBy: trackByFn\">\n          <ng-container [formGroupName]=\"i\">\n            <div class=\"top_header\">\n              bullet list\n            </div>\n            <!-- ------------bullet title-----------  -->\n            <mat-form-field>\n              <input matInput formControlName=\"bullet_title\" placeholder=\"Bullet title\">\n              <mat-icon matSuffix>title</mat-icon>\n            </mat-form-field><br>\n            <!-- -----------------------------------  -->\n\n\n            <!-- --------------------bullet description-----------------  -->\n            <mat-form-field>\n              <textarea matInput formControlName=\"bullet_desc\" placeholder=\"Bullet description\"></textarea>\n              <mat-icon matSuffix>format_list_bulleted</mat-icon>\n            </mat-form-field><br>\n            <!-- ----------------------------------------------------------  -->\n          </ng-container>\n          <button (click)=\"addBulletList('','')\" type=\"button\">\n            <mat-icon>add</mat-icon>\n          </button>\n          <button (click)=\"deleteBulletList()\" *ngIf=\"i!=0\" type=\"button\">\n            <mat-icon>remove</mat-icon>\n          </button>\n        </div>\n        <!-- __________________________________________________________________________________________________________ -->\n\n        <h1>Service Image:</h1>\n        <lib-file-upload [config]=\"imageConfigData\"></lib-file-upload>\n        <mat-error *ngIf=\"ErrCode==true\">Please add just one service image.</mat-error>\n        <mat-error *ngIf=\"img_missing==true\">Please provide a service image.</mat-error>\n        <!-- <mat-error *ngIf=\"serviceForm.controls['service_img'].errors && serviceForm.controls['service_img'].errors.required\">Priority is required.</mat-error> -->\n\n\n\n        <mat-card-content class=\"files-view\" *ngIf=\"flag==true\">\n          <mat-card class=\"example-card\">\n            <img mat-card-image [attr.src]=\"img_var\">\n            <mat-card-title>{{ image_name }}</mat-card-title>\n            <mat-card-subtitle>{{ image_type }}</mat-card-subtitle>\n            <span class=\"closecard\" (click)=\"clear_image()\"><i class=\"material-icons\">clear</i></span>\n          </mat-card>\n        </mat-card-content>\n\n        <!-- ______________________________________________________________________________________________________________ -->\n        <!-- Additional Image  -->\n        <h1>Additional Image:</h1>\n        <lib-file-upload [config]=\"imageConfigData2\"></lib-file-upload>\n        <mat-error *ngIf=\"ErrCode==true\">Please add just one additional image.</mat-error>\n\n\n\n\n        <mat-card-content class=\"files-view\" *ngIf=\"flag2==true\">\n          <mat-card class=\"example-card\">\n            <img mat-card-image [attr.src]=\"img_var2\">\n            <mat-card-title>{{ image_name2 }}</mat-card-title>\n            <mat-card-subtitle>{{ image_type2 }}</mat-card-subtitle>\n            <span class=\"closecard\" (click)=\"clear_image2()\"><i class=\"material-icons\">clear</i></span>\n          </mat-card>\n        </mat-card-content>\n\n        <span><button type=\"button\" class=\"submitbtn\" mat-raised-button color=\"primary\"\n            (click)=\"onSubmit()\">{{buttonText}}</button></span>\n        <span><button type=\"reset\" class=\"submitbtn\" mat-raised-button color=\"primary\"\n            (click)=\"resetserviceForm()\">RESET</button></span>\n\n      </form>\n    </mat-card-content>\n  </span>\n</mat-card>",
                     styles: [".example-container{display:flex;flex-direction:column}.example-container>*{width:100%}.main-class .submitbtn{display:block;width:170px;margin:10px auto;background:#3f50b5!important;color:#fff}.main-class .material-icons{cursor:pointer}.formspan{background-color:#e7e9ea;border:6px solid #fff;border-bottom:10px solid #fff;display:inline-block;width:100%;position:relative;z-index:9}.formspan .example-container{display:flex;flex-direction:column;width:98%;padding:14px;margin-bottom:0}.formspan .form-field-span,.formspan .mat-form-field{display:inline-block;position:relative;text-align:left;width:98%;background:#fff;margin-bottom:9px;padding:1px 14px}.formspan .form-field-span .mat-checkbox,.formspan .form-field-span .mat-radio-button{padding-right:15px;padding-bottom:15px;display:inline-block}.formspan .mat-form-field-wrapper{padding-bottom:0!important}.form-field-span .mat-error{font-size:13px!important}.mat-error{color:#f44336;font-size:13px!important}button.submitbtn.mat-raised-button.mat-primary{margin-right:15px}.bulletarr{margin-top:20px;border:3px solid #3f50b4;box-sizing:border-box;margin-bottom:15px;padding:10px}.top_header{background:#3f50b4;padding:16px;color:#fff;font-weight:700;text-transform:capitalize}h1{color:#3f50b4}.files-view{background-repeat:no-repeat;background-size:cover;background-position:center;height:auto!important;width:82%;margin:20px auto;border-radius:10px;display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap}.files-view .mat-card{z-index:9;margin:10px!important;display:flex;flex-wrap:wrap;justify-content:center;width:27%;position:relative}.files-view .mat-card .mat-card-actions,.files-view .mat-card .mat-card-titlt{display:inline-block;width:100%}.files-view .mat-card .mat-card-subtitle{display:inline-block;width:100%;text-align:center}.closecard{position:absolute;top:-10px;right:-8px;background:#464545;height:25px;width:25px;border-radius:50%;border:1px solid #696969;color:#fff;text-align:center;box-shadow:0 2px 6px #00000070;cursor:pointer}.closecard i{font-size:18px;line-height:27px}"]
                 }] }
     ];
@@ -779,7 +833,8 @@ var AddeditServiceComponent = /** @class */ (function () {
     ]; };
     AddeditServiceComponent.propDecorators = {
         config: [{ type: Input }],
-        imageUpload: [{ type: Input }]
+        imageUpload: [{ type: Input }],
+        imageUpload2: [{ type: Input }]
     };
     return AddeditServiceComponent;
 }());

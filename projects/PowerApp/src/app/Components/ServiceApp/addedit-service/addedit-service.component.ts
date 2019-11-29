@@ -20,13 +20,25 @@ export class AddeditServiceComponent implements OnInit {
   }
   
   public configData: any = {
-    baseUrl: "http://3.15.236.141:5005/",
+    // baseUrl: "http://3.15.236.141:5005/"
+    baseUrl:"https://fileupload.influxhostserver.com/",
     endpoint: "uploads",
     size: "51200", // kb
     format: ["jpg", "jpeg", "png"], // use all small font
     type: "service-image",
     path: "services",
     prefix: "service-image_"
+  }
+
+
+  public configData2: any = {
+    baseUrl: "https://fileupload.influxhostserver.com/",
+    endpoint: "uploads",
+    size: "51200", // kb
+    format: ["jpg", "jpeg", "png"], // use all small font
+    type: "additional-image",
+    path: "services",
+    prefix: "additional-image_"
   }
 
   constructor(private router : Router , private activatedRoute : ActivatedRoute ,private cookieService : CookieService) { }

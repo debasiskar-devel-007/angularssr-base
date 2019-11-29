@@ -34,10 +34,18 @@ export declare class AddeditServiceComponent implements OnInit {
     header_name: any;
     image_name: any;
     image_type: any;
+    getConfig2: any;
+    imageConfigData2: any;
+    img_var2: any;
+    image_name2: any;
+    image_type2: any;
+    flag2: boolean;
+    img_missing: boolean;
     constructor(formBuilder: FormBuilder, servicehttp: ServicelibService, router: Router, dialog: MatDialog);
     ngOnInit(): void;
     config: any;
     imageUpload: any;
+    imageUpload2: any;
     generateForm(): void;
     setDefaultValue(defaultValue: any): void;
     addBulletList(a: any, b: any): void;
@@ -48,6 +56,7 @@ export declare class AddeditServiceComponent implements OnInit {
     resetserviceForm(): void;
     inputBlur(val: any): void;
     clear_image(): void;
+    clear_image2(): void;
 }
 export declare class Modal {
     dialogRef: MatDialogRef<Modal>;
