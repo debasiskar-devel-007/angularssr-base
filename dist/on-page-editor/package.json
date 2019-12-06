@@ -1,0 +1,25 @@
+{
+  "name": "on-page-editor",
+  "version": "0.0.1",
+  "peerDependencies": {
+    "@angular/common": "^7.2.0",
+    "@angular/core": "^7.2.0",
+    "@angular/material": "latest",
+    "@angular/cdk": "latest",
+    "@angular/animations": "latest",
+    "hammerjs": "latest"
+  },
+  "main": "bundles/on-page-editor.umd.js",
+  "module": "fesm5/on-page-editor.js",
+  "es2015": "fesm2015/on-page-editor.js",
+  "esm5": "esm5/on-page-editor.js",
+  "esm2015": "esm2015/on-page-editor.js",
+  "fesm5": "fesm5/on-page-editor.js",
+  "fesm2015": "fesm2015/on-page-editor.js",
+  "typings": "on-page-editor.d.ts",
+  "metadata": "on-page-editor.metadata.json",
+  "sideEffects": false,
+  "dependencies": {
+    "tslib": "^1.9.0"
+  }
+}

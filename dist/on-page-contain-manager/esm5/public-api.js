@@ -1,0 +1,11 @@
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/*
+ * Public API Surface of on-page-contain-manager
+ */
+export { OnPageContainManagerService } from './lib/on-page-contain-manager.service';
+export { OnPageContainManagerComponent } from './lib/on-page-contain-manager.component';
+export { OnPageContainManagerModule } from './lib/on-page-contain-manager.module';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoicHVibGljLWFwaS5qcyIsInNvdXJjZVJvb3QiOiJuZzovL29uLXBhZ2UtY29udGFpbi1tYW5hZ2VyLyIsInNvdXJjZXMiOlsicHVibGljLWFwaS50cyJdLCJuYW1lcyI6W10sIm1hcHBpbmdzIjoiOzs7Ozs7O0FBSUEsNENBQWMsdUNBQXVDLENBQUM7QUFDdEQsOENBQWMseUNBQXlDLENBQUM7QUFDeEQsMkNBQWMsc0NBQXNDLENBQUMiLCJzb3VyY2VzQ29udGVudCI6WyIvKlxuICogUHVibGljIEFQSSBTdXJmYWNlIG9mIG9uLXBhZ2UtY29udGFpbi1tYW5hZ2VyXG4gKi9cblxuZXhwb3J0ICogZnJvbSAnLi9saWIvb24tcGFnZS1jb250YWluLW1hbmFnZXIuc2VydmljZSc7XG5leHBvcnQgKiBmcm9tICcuL2xpYi9vbi1wYWdlLWNvbnRhaW4tbWFuYWdlci5jb21wb25lbnQnO1xuZXhwb3J0ICogZnJvbSAnLi9saWIvb24tcGFnZS1jb250YWluLW1hbmFnZXIubW9kdWxlJztcbiJdfQ==
