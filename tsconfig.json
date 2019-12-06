@@ -48,6 +48,18 @@
       ],
       "file-upload/*": [
         "dist/file-upload/*"
+      ],
+      "training-management": [
+        "dist/training-management"
+      ],
+      "training-management/*": [
+        "dist/training-management/*"
+      ],
+      "on-page-contain-manager": [
+        "dist/on-page-contain-manager"
+      ],
+      "on-page-contain-manager/*": [
+        "dist/on-page-contain-manager/*"
       ]
     }
   }

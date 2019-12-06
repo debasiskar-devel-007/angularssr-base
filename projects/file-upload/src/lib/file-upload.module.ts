@@ -26,6 +26,7 @@ import { PreviewFilesComponent } from './component/preview-files/preview-files.c
     HttpClientModule,
     ListingModule,
   ],
+  providers: [],
   exports: [FileUploadComponent],
   entryComponents: [
     AlertMessageComponent,

@@ -19,7 +19,7 @@ export class HttpService {
   public uploaderror: any = '';
   public accesstoken: any = this.cookieService.get('jwtToken');
   public fileservername: any = [];
-  public serverUrl: any = 'http://18.191.148.255.:5009/';
+  public serverUrl: any = 'https://o820cv2lu8.execute-api.us-east-2.amazonaws.com/production/api/';
   public addendpointUrl: any;
   public updateendpointUrl: any;
   public deletesingle_endpointUrl: any;

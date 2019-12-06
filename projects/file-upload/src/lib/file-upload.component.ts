@@ -24,6 +24,10 @@ export class FileUploadComponent implements OnInit {
   public configData: any;
   public totalFile: number = 0;
   public dialogRef: any;
+  public loading: boolean = false;
+
+  imgResultBeforeCompress:string;
+  imgResultAfterCompress:string;
 
   @Input()
   set config(getConfig: any) {
@@ -39,38 +43,45 @@ export class FileUploadComponent implements OnInit {
 
   /* Select File Proccess */
   selectFiles(event) {
+    this.loading = true;
     for (let index = 0; index < event.length; index++) {
-      var count: number = this.files.length + index;
+      var count: number = this.files.length;
       const element = event[index];
-      
+
       /* Checking Validation */
       let validate: any = this.checkingValidation(element);
       if (validate.status) {
         element.valid = { status: true };
         element.upload = { status: 'selected' };
-        element.viewUrl = 'https://media.giphy.com/media/jAYUbVXgESSti/giphy.gif';
+        element.viewUrl = 'https://loading.io/spinners/dual-ring/lg.dual-ring-loader.gif';
         this.files.push(element);
-        this.viewTh(count);
+        this.viewFiles(count, element);
       } else {
         element.valid = { status: false, message: validate.message };
         element.upload = { status: 'selected' };
-        element.viewUrl = 'https://media.giphy.com/media/jAYUbVXgESSti/giphy.gif';
+        element.viewUrl = null;
+
+        let format = element.type.split("/");
+        element.viewText = format[1];
         this.files.push(element);
-        this.viewTh(count);
       }
     }
   }
 
-  viewTh(count) {
-    setTimeout(() => {
+  viewFiles(count, element) {
+    let format = element.type.split("/");
+    if(format[0] == 'image') {
       var reader = new FileReader();
       let imagePath = this.files[count];
       reader.readAsDataURL(this.files[count]);
-      reader.onload = (_event) => { 
+      reader.onload = (_event) => {
         let imgURL = reader.result;
         this.files[count].viewUrl = imgURL;
       }
-    }, 2000);
+    } else {
+      this.files[count].viewUrl = null;
+      this.files[count].viewText = format[1];
+    }
   }
 
   /* Checking Validation */
@@ -82,7 +93,8 @@ export class FileUploadComponent implements OnInit {
     let check = this.configData.format.includes(format[1]);
     if (check == false) {
       valid.status = false;
-      valid.message = format[1] + " format not supported.";
+      valid.message = format[1].toUpperCase() + " format not supported.";
+      this.openSnackBar(format[1].toUpperCase() + " format not supported.", '');
       return valid;
     }
 
@@ -90,6 +102,7 @@ export class FileUploadComponent implements OnInit {
     if (element.size / 1000 > this.configData.size) {
       valid.status = false;
       valid.message = "File size too large. Maximum file size limit: " + this.configData.size + " KB.";
+      this.openSnackBar("File size too large. Maximum file size limit: " + this.configData.size + " KB.", '');
       return valid;
     }
 
@@ -101,7 +114,7 @@ export class FileUploadComponent implements OnInit {
   /* File Upload Process */
   uploadAll(getIndex: any = null) {
     for (let index = 0; index < this.files.length; index++) {
-      if(this.files[index].valid.status == true && this.files[index].upload.status != 'complete') {
+      if (this.files[index].valid.status == true && this.files[index].upload.status != 'complete') {
         this.uploading(index);
       }
     }
@@ -109,15 +122,17 @@ export class FileUploadComponent implements OnInit {
 
   /* Upload */
   uploading(index) {
-    let postData: any = {
+    var postData: any = {
       file: this.files[index],
-      type: "bulk-upload",
-      path: "files",
-      prefix: "image_"
+      type: this.configData.type,
+      path: this.configData.path,
+      prefix: this.configData.prefix,
+      uploadType: this.configData.uploadType,
+      conversion_needed: this.configData.conversionNeeded,
+      bucketname: this.configData.bucketName
     }
 
-    let url: string = this.configData.baseUrl + this.configData.endpoint + '?path=' + this.configData.path + '&prefix=' + this.configData.prefix + '&type=' + this.configData.type + '&rand=' + index;
-
+    var url: string = this.configData.baseUrl + this.configData.endpoint + '?path=' + this.configData.path + '&prefix=' + this.configData.prefix + '&type=' + this.configData.type + '&rand=' + index;
     this.fileUploadService.upload(url, postData).subscribe(
       (response) => {
         let result: any = response;
@@ -153,7 +168,7 @@ export class FileUploadComponent implements OnInit {
     });
   }
 
-  /* Snack Bar */
+  /* Snack Bar */name
   openSnackBar(message: string, action: string) {
     this._snackBar.open(message, action, {
       duration: 2000,
@@ -170,22 +185,28 @@ export class FileUploadComponent implements OnInit {
 
   /* Delete all selected files */
   deleteAll() {
-    this.files.splice(0, this.files.length);
+    this.openDialog();
+    this.dialogRef.afterClosed().subscribe(result => {
+      if (result) {
+        this.files.splice(0, this.files.length);
+        this.openSnackBar('Successfully Remove !!', '');
+      }
+    });
   }
 
   /* Preview Files */
   previewFiles(index) {
     var mimeType = this.files[index].type;
     if (mimeType.match(/image\/*/) == null) {
-      console.log('Preview not supported.');
+      this.openSnackBar('Preview not supported.', '');
       return;
     }
- 
+
     var reader = new FileReader();
     let imagePath = this.files[index];
     reader.readAsDataURL(this.files[index]);
-    reader.onload = (_event) => { 
-      let imgURL = reader.result; 
+    reader.onload = (_event) => {
+      let imgURL = reader.result;
       const dialogRef = this.dialog.open(PreviewFilesComponent, {
         data: { imgURL: imgURL }
       });

@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MetaService } from '@ngx-meta/core';
+import { FacebookService, InitParams } from 'ngx-facebook';
+import { Injectable } from '@angular/core';
 
 @Component({
   selector: 'app-aboutus',

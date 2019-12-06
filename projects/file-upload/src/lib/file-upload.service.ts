@@ -1,19 +1,15 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpEvent, HttpErrorResponse, HttpEventType } from '@angular/common/http';
-import { map } from 'rxjs/operators';
+import { Observable, of } from 'rxjs';
+import { map, catchError, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
+
 export class FileUploadService {
 
   public BASE_URL: string = "http://3.15.236.141:5005/uploads";
-  public httpOptions = {
-    headers: new HttpHeaders({
-      "Content-Type": "application/x-www-form-urlencoded",
-      "access-token": "TEST"
-    })
-  };
 
   constructor(private httpClient: HttpClient) { }
 
@@ -24,7 +20,9 @@ export class FileUploadService {
     formData.append('type', data.type);
     formData.append('path', data.path);
     formData.append('prefix', data.prefix);
-
+    formData.append('conversion_needed', data.conversion_needed);
+    formData.append('bucketname', data.bucketname);
+    
     return this.httpClient.post<any>(uploadURL, formData, {
       reportProgress: true,
       observe: 'events'
@@ -49,6 +47,16 @@ export class FileUploadService {
         }
       })
     );
+  }
+
+  public uploadBase64(uploadURL, data): Observable<any> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json'
+      })
+    };
+
+    return this.httpClient.post(uploadURL, data, httpOptions);
   }
 
 }

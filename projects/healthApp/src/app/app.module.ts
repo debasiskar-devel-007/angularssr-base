@@ -22,6 +22,14 @@ import { TestComponent } from './Component/test/test.component';
 /* File Upload Lib and Component */
 import { FileUploadModule } from 'file-upload';
 import { FileUploadComponent } from './Component/file-upload/file-upload.component';
+import { AddEditTrainingComponent } from './Component/training-management/add-edit-training/add-edit-training.component';
+import { ListTrainingComponent } from './Component/training-management/list-training/list-training.component';
+
+/* On Page Editor */
+import { OnPageContainManagerModule } from 'on-page-contain-manager';
+
+import { OnpageEditorComponent } from './Component/onpage-editor/onpage-editor.component';
+import { DynamicContainComponent } from './Component/dynamic-contain/dynamic-contain.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +39,11 @@ import { FileUploadComponent } from './Component/file-upload/file-upload.compone
     ListLessionComponent,
     AddEditLessionComponent,
     TestComponent,
-    FileUploadComponent
+    FileUploadComponent,
+    AddEditTrainingComponent,
+    ListTrainingComponent,
+    OnpageEditorComponent,
+    DynamicContainComponent
   ],
   imports: [
     MaterialModule,
@@ -39,6 +51,7 @@ import { FileUploadComponent } from './Component/file-upload/file-upload.compone
     CategoryManagementModule,
     // LessionManagementModule,
     FileUploadModule,
+    OnPageContainManagerModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,

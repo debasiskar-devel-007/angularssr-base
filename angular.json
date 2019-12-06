@@ -586,6 +586,76 @@
           }
         }
       }
+    },
+    "training-management": {
+      "root": "projects/training-management",
+      "sourceRoot": "projects/training-management/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/training-management/tsconfig.lib.json",
+            "project": "projects/training-management/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/training-management/src/test.ts",
+            "tsConfig": "projects/training-management/tsconfig.spec.json",
+            "karmaConfig": "projects/training-management/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/training-management/tsconfig.lib.json",
+              "projects/training-management/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
+    },
+    "on-page-contain-manager": {
+      "root": "projects/on-page-contain-manager",
+      "sourceRoot": "projects/on-page-contain-manager/src",
+      "projectType": "library",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/on-page-contain-manager/tsconfig.lib.json",
+            "project": "projects/on-page-contain-manager/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/on-page-contain-manager/src/test.ts",
+            "tsConfig": "projects/on-page-contain-manager/tsconfig.spec.json",
+            "karmaConfig": "projects/on-page-contain-manager/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/on-page-contain-manager/tsconfig.lib.json",
+              "projects/on-page-contain-manager/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "angularssr"

@@ -21,7 +21,7 @@ export class PreviewFilesComponent implements OnInit {
   }
 
   ngOnInit() {
-    console.log(this.data);
+    // console.log('Preview component: ', this.data);
   }
 
 }
