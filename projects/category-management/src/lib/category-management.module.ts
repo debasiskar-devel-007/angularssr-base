@@ -8,7 +8,7 @@ import { AddEditCategoryComponent } from './component/add-edit-category/add-edit
 
 import { HttpClientModule } from '@angular/common/http';
 
-import { ListingModule } from "lib-listing";
+import { ListingModule } from 'listing-angular7';
 
 @NgModule({
   declarations: [

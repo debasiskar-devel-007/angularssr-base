@@ -1,8 +1,25 @@
 {
-  "name": "image-gallery",
+  "name": "image-gallery-lib-influxiq",
   "version": "0.0.1",
-  "peerDependencies": {
+  "bugs": "https://github.com/debasiskar-devel-007/image-gallery/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/debasiskar-devel-007/image-gallery.git"
+  },
+  "devDependencies": {
     "@angular/common": "^8.2.7",
-    "@angular/core": "^8.2.7"
+    "@angular/core": "^8.2.7",
+    "@angular/material":"^8.2.0",
+    "@angular/cdk": "^8.2.0",
+    "@angular/animations": "github:angular/animations-builds",
+    "ngx-moment": "^3.4.0",
+    "ngx-uploader": "^7.1.0",
+    "listing-angular7": "0.0.96",
+    "ngx-ckeditor": "^8.0.0",
+    "ckeditor4-angular": "^1.0.0-beta.2",
+    "@ckeditor/ckeditor5-angular": "^1.1.0",
+    "@ckeditor/ckeditor5-build-classic": "^12.4.0",
+    "ngx-cookie-service": "^2.2.0",
+    "@ckeditor/ckeditor5-editor-decoupled": "^12.2.2"
   }
 }

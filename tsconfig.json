@@ -110,7 +110,10 @@
       ],
       "image-gallery/*": [
         "dist/image-gallery/*"
-      ]
+      ],
+       "files": [
+      "../project/healthApp/src/app/app.module.ts"
+       ]
     }
   }
 }

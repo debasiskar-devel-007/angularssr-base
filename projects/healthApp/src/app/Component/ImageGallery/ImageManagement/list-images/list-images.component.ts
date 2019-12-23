@@ -8,7 +8,7 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class ListImagesComponent implements OnInit {
 public imageGalleryallData:any=[];
-public serverUrl:any="https://o820cv2lu8.execute-api.us-east-2.amazonaws.com/production/api/";
+public serverUrl:any="https://9ozbyvv5v0.execute-api.us-east-1.amazonaws.com/production/api/";
   public updatedEndpoint:any="addorupdatedata";
   public SourceName:any="imageGallery_management";
   public DeleteEndpoint:any="deletesingledata";
