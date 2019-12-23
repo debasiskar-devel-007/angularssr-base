@@ -31,6 +31,9 @@ export class AddEditTeamComponent implements OnInit {
   public img_var: any = '';
   public image_name: any;
   public image_type: any;
+  public sourceName: any;
+  public categorySourceName: any;
+  public images_array: any = [];
 
   /* Config Upload file lib */
   @Input()
@@ -41,6 +44,7 @@ export class AddEditTeamComponent implements OnInit {
   set singleData(val: any) {
     this.SingleDataList = (val) || '<no name set>';
     this.SingleDataList = val;
+    console.log("single dataaaaa", this.SingleDataList);
     if (this.activeroute.snapshot.params._id) {
       this.ButtonText = "Update";
       this.HeaderText = "Edit Team Member"
@@ -52,9 +56,18 @@ export class AddEditTeamComponent implements OnInit {
 
       this.teamForm.controls['team_img'].patchValue(val[0].team_img);
 
-      this.img_var = this.SingleDataList[0].team_img.basepath + this.SingleDataList[0].team_img.image;
-      this.image_name = this.SingleDataList[0].team_img.name;
-      this.image_type = this.SingleDataList[0].team_img.type;
+      for (const i in this.SingleDataList[0].team_img) {
+
+        this.img_var = this.SingleDataList[0].team_img[i].basepath + this.SingleDataList[0].team_img[i].fileservername;
+        this.image_name = this.SingleDataList[0].team_img[i].name;
+        this.image_type = this.SingleDataList[0].team_img[i].type;
+        console.log("gffaghfahgag", this.img_var);
+
+      }
+
+
+
+
 
       for (const i in this.SingleDataList[0].bulletarray) {
         this.addBulletListData(this.SingleDataList[0].bulletarray[i].bullet_name,
@@ -73,6 +86,20 @@ export class AddEditTeamComponent implements OnInit {
   set serverUrl(serverUrlval: any) {
     this.serverUrlData = (serverUrlval) || '<no name set>';
     this.serverUrlData = serverUrlval;
+
+  }
+
+  @Input()          //setting the server url from project
+  set SourceName(val: any) {
+    this.sourceName = (val) || '<no name set>';
+    this.sourceName = val;
+    console.log("source nameeeeee", this.sourceName);
+  }
+
+  @Input()
+  set CategorySourceName(val: any) {
+    this.categorySourceName = (val) || '<no name set>';
+    this.categorySourceName = val;
 
   }
 
@@ -164,19 +191,21 @@ export class AddEditTeamComponent implements OnInit {
     const mphone = this.teamForm.controls.multipleemail as FormArray;
     mphone.removeAt(index);
   }
-
-
-
   /**multiple email functions end here**/
+
+  /*getting all category name function start here*/
   getData() {
     let data: any = {
-      "source": "Team_category"
+      "source": this.categorySourceName
     }
     this.apiservice.getData(data).subscribe(response => {
       let result: any = response;
       this.allData = result.res;
+
     })
   }
+  /*getting all category name function end here*/
+
   /**resetting the form**/
   ResetForm() {
     this.teamForm.reset();
@@ -203,22 +232,45 @@ export class AddEditTeamComponent implements OnInit {
     this.flag = false;
   }
   TeamFormSubmit() {
-    if (this.imageConfigData.files) {
-      if (this.imageConfigData.files.length > 1) {
-        this.ErrCode = true;
-        return;
+    /**old file upload adding code start here**/
+
+    // if (this.imageConfigData.files) {
+    //   if (this.imageConfigData.files.length > 1) {
+    //     this.ErrCode = true;
+    //     return;
+    //   }
+    //   this.teamForm.value.team_img =
+    //     {
+    //       "basepath": this.imageConfigData.files[0].upload.data.basepath + '/'
+    //         + this.imageConfigData.path + '/',
+    //       "image": this.imageConfigData.files[0].upload.data.data.fileservername,
+    //       "name": this.imageConfigData.files[0].name,
+    //       "type": this.imageConfigData.files[0].type
+    //     };
+    // } else {
+    //   this.teamForm.value.team_img = false;
+    // }
+
+    /**old file upload adding code end here**/
+
+    if (this.imageConfigData.files.length > 1) {
+      for (const loop in this.imageConfigData.files) {
+        this.images_array =
+          this.images_array.concat({
+            "upload_server_id": this.imageConfigData.files[loop].upload.data._id,
+            "basepath": this.imageConfigData.files[loop].upload.data.basepath + '/' + this.imageConfigData.path + '/',
+            "fileservername": this.imageConfigData.files[loop].upload.data.data.fileservername,
+            "name": this.imageConfigData.files[loop].name,
+            "type": this.imageConfigData.files[loop].type,
+            "bucketname": this.imageConfigData.bucketName
+          });
       }
-      this.teamForm.value.team_img =
-        {
-          "basepath": this.imageConfigData.files[0].upload.data.basepath + '/'
-            + this.imageConfigData.path + '/',
-          "image": this.imageConfigData.files[0].upload.data.data.fileservername,
-          "name": this.imageConfigData.files[0].name,
-          "type": this.imageConfigData.files[0].type
-        };
+
+      this.teamForm.controls['team_img'].patchValue(this.images_array);
     } else {
       this.teamForm.value.team_img = false;
     }
+
     let x: any;
     for (x in this.teamForm.controls) {
       this.teamForm.controls[x].markAsTouched();
@@ -227,7 +279,7 @@ export class AddEditTeamComponent implements OnInit {
       var data: any;
       if (this.activeroute.snapshot.params._id) {      //update part
         data = {
-          "source": "Team_management",
+          "source": this.sourceName,
           "data": {
             "id": this.params_id,
             "categoryname": this.teamForm.value.categoryname,
@@ -242,7 +294,7 @@ export class AddEditTeamComponent implements OnInit {
         };
       } else {
         data = {                                         //add part
-          "source": "Team_management",
+          "source": this.sourceName,
           "data": this.teamForm.value,
           "sourceobj": ["categoryname"]
         }

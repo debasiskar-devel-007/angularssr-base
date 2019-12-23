@@ -127,25 +127,27 @@ const appRoutes: Routes = [
       resolve:{ videoData : ResolveService },
       data : {requestcondition : {source :'video_management',condition : {} }, endpoint : 'datalist'}
     },
+
     /**Team Library start here**/
+
     {
       path:'team/list',
       component : ListTeamComponent,
       resolve : {teamdata : ResolveService },
-      data : { requestcondition : { source : 'Team_management', condition : {}},endpoint : 'datalist'}
+      data : { requestcondition : { source : 'team_management', condition : {}},endpoint : 'datalist'}
     },
     {
       path:'team/add',
       component : AddEditTeamComponent,
       resolve : {teamdata : ResolveService },
-      data : { requestcondition : { source : 'Team_category',condition : {}}, endpoint : 'datalist'},
+      data : { requestcondition : { source : 'team_category',condition : {}}, endpoint : 'datalist'},
 
     },
     {
       path:'team/edit/:_id',
       component : AddEditTeamComponent,
       resolve : {teamdata : ResolveService },
-      data : { requestcondition : { source : 'Team_management',condition : {}}, endpoint : 'datalist'},
+      data : { requestcondition : { source : 'team_management',condition : {}}, endpoint : 'datalist'},
       
     },
     {
@@ -158,7 +160,7 @@ const appRoutes: Routes = [
       path :'team/category-management/edit/:_id',
       component : AddEditComponent,
       resolve : {teamdata : ResolveService },
-      data : { requestcondition : { source : 'Team_category',condition : {}}, endpoint : 'datalist'},
+      data : { requestcondition : { source : 'team_category',condition : {}}, endpoint : 'datalist'},
       
      
     },
@@ -166,7 +168,7 @@ const appRoutes: Routes = [
       path :'team/category-management/list',
       component : ListComponent,
       resolve : {teamdata : ResolveService},
-      data : { requestcondition : { source : 'Team_category',condition : {}}, endpoint : 'datalist'}
+      data : { requestcondition : { source : 'team_category',condition : {}}, endpoint : 'datalist'}
     },
     /**share-tool library start here**/
     {

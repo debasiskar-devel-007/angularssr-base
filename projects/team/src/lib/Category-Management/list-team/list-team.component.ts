@@ -10,14 +10,14 @@ export class ListTeamComponent implements OnInit {
   public alldata: any = [];
   public addPageVal: any = '';
   public searchingendpoint: any = '';
-  public sourcenameViaapp: any = '';
+  public sourcenameViaapp: any ='';
   public tokenVal: any = '';
-  public deleteendpointVal: any = '';
+  public deleteendpointVal: any="";
   public addupdate: any = '';
   public serverUrlData: any = '';
   public editRouteval: any = '';
   public manageRoute: any;
-  public alldata_skip: any = ["_id", "created_at"];
+  public alldata_skip: any = ["_id", "created_at","description_html"];
   public alldata_modify_header: any = {
     "categoryName": "Category Name", "description": "Description",
     "rolename": "Role Name", "status": "Status","role" : "Role"
@@ -73,7 +73,7 @@ export class ListTeamComponent implements OnInit {
   set SearchEndpoint(val: any) {
     this.searchingendpoint = (val) || '<no name set>';
     this.searchingendpoint = val;
-    console.log(this.searchingendpoint);
+    console.log("searching endpoint",this.searchingendpoint);
   }
   @Input()
   set DeleteEndpoint(val: any) {
@@ -85,7 +85,7 @@ export class ListTeamComponent implements OnInit {
   set serverUrl(serverUrlval: any) {
     this.serverUrlData = (serverUrlval) || '<no name set>';
     this.serverUrlData = serverUrlval;
-    console.log(this.serverUrlData);
+    console.log("sserver urlllll",this.serverUrlData);
   }
   constructor(public router: Router) { }
 

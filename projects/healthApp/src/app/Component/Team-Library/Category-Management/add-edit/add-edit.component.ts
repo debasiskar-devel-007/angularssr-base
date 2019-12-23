@@ -7,9 +7,10 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class AddEditComponent implements OnInit {
   public teamDataList: any = [];
-  public serverUrl: any = "https://w8lauzoyaa.execute-api.us-east-1.amazonaws.com/dev/api/";
+  public serverUrl: any = "https://9ozbyvv5v0.execute-api.us-east-1.amazonaws.com/production/api/";
   public addendpoint: any = "addorupdatedata";
   public listRoute: any = "team/category-management/list";
+  public sourceName : any = "team_category";
   public SingleTeamData: any = [];
   public getdataEndpoint:any="datalist";
   constructor(public activeRoute: ActivatedRoute) { }

@@ -11,20 +11,21 @@ import { ApiService } from '../../Service/api.service';
 export class AddeditTeamComponent implements OnInit {
   public CategoryManagementTeamForm: FormGroup;
   public DataListViaResolve: any = [];
-  public allData:any=[];
+  public allData: any = [];
   public SingledataEdit: any = [];
   public getDataEndpointData: any;
   public addEndpointData: any;
+  public getSourceName: any;
   public serverUrlData: any;
   public spinnerLoader: boolean;
   public listingPageUrl: any = '';
-  public params_id:any;
-  public ButtonText:any="Submit";
+  public params_id: any;
+  public ButtonText: any = "Submit";
   @Input()          //getting all data list via resolve call from app
   set TeamData(val: any) {
     this.DataListViaResolve = (val) || '<no name set>';
     this.DataListViaResolve = val;
-    console.log("in ts ",this.DataListViaResolve);
+    console.log("in ts ", this.DataListViaResolve);
   }
   @Input()          //setting the server url from project
   set serverUrl(serverUrlval: any) {
@@ -35,25 +36,30 @@ export class AddeditTeamComponent implements OnInit {
   set getDataEndpoint(endpointUrlval: any) {
     this.getDataEndpointData = (endpointUrlval) || '<no name set>';
     this.getDataEndpointData = endpointUrlval;
-    console.log("data",this.getDataEndpointData);
-
+    console.log("data", this.getDataEndpointData);
   }
   @Input()
-  set singleEditData(val:any){
+  set SourceName(sourceName: any) {
+    this.getSourceName = (sourceName) || '<no name set>';
+    this.getSourceName = sourceName;
+    
+  }
+  @Input()
+  set singleEditData(val: any) {
     this.SingledataEdit = (val) || '<no name set>';
     this.SingledataEdit = val;
-    if(this.activeroute.snapshot.params._id){
-      this.ButtonText="Update";
-    this.params_id=this.activeroute.snapshot.params._id;
-    this.CategoryManagementTeamForm.controls['categoryName'].patchValue(val[0].categoryName);
-    this.CategoryManagementTeamForm.controls['description'].patchValue(val[0].description);
-    this.CategoryManagementTeamForm.controls['status'].patchValue(val[0].status);
-    
-    //this.CategoryManagementTeamForm.controls['role'].patchValue(val[0].role);
-    // for (const i in this.SingledataEdit[0].role) {
-      
-    //     this.CategoryManagementTeamForm.controls['role'].patchValue(this.SingledataEdit[i].role)
-    // }
+    if (this.activeroute.snapshot.params._id) {
+      this.ButtonText = "Update";
+      this.params_id = this.activeroute.snapshot.params._id;
+      this.CategoryManagementTeamForm.controls['categoryName'].patchValue(val[0].categoryName);
+      this.CategoryManagementTeamForm.controls['description'].patchValue(val[0].description);
+      this.CategoryManagementTeamForm.controls['status'].patchValue(val[0].status);
+
+      //this.CategoryManagementTeamForm.controls['role'].patchValue(val[0].role);
+      // for (const i in this.SingledataEdit[0].role) {
+
+      //     this.CategoryManagementTeamForm.controls['role'].patchValue(this.SingledataEdit[i].role)
+      // }
     }
   }
   @Input()          //setting the server url from project
@@ -65,7 +71,7 @@ export class AddeditTeamComponent implements OnInit {
   set ListPageRoute(Url: any) {
     this.listingPageUrl = (Url) || '<no name set>';
     this.listingPageUrl = Url;
-   
+
   }
 
   constructor(public fb: FormBuilder, public activeroute: ActivatedRoute,
@@ -94,7 +100,7 @@ export class AddeditTeamComponent implements OnInit {
       this.apiService.setgetdataEndpoint(this.getDataEndpointData);
     }, 50);
     setTimeout(() => {
-      this.getData();
+      // this.getData();
     }, 50);
   }
   inputUntouch(form: any, val: any) {
@@ -114,26 +120,26 @@ export class AddeditTeamComponent implements OnInit {
       }
       var data: any;
       if (this.activeroute.snapshot.params._id) {
-        
+
         data = {
-          "source": "Team_category",
+          "source": this.getSourceName,
           "data": {
             "id": this.params_id,
             'categoryName': this.CategoryManagementTeamForm.value.categoryName,
             'description': this.CategoryManagementTeamForm.value.description,
             'status': this.CategoryManagementTeamForm.value.status,
             'role': this.CategoryManagementTeamForm.value.role
-           
+
           }
         }
 
-      }else{
+      } else {
         data = {
-          "source": "Team_category",
+          "source":this.getSourceName,
           "data": this.CategoryManagementTeamForm.value
         }
       }
-     
+
       this.spinnerLoader = true;
       this.apiService.addData(data).subscribe(response => {
         this.spinnerLoader = false;
@@ -143,15 +149,15 @@ export class AddeditTeamComponent implements OnInit {
       })
     }
   }
-  getData(){
+  getData() {
     let data: any = {
       "source": "rolemanagement"
-      }
-      this.apiService.getData(data).subscribe(response => {
+    }
+    this.apiService.getData(data).subscribe(response => {
       let result: any = response;
       this.allData = result.res;
-      
-      })
+
+    })
   }
   ResetTeamForm() {
     this.CategoryManagementTeamForm.reset();

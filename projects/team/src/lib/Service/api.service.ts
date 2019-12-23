@@ -198,7 +198,6 @@ export class ApiService {
       const httpOptions = {
         headers: new HttpHeaders({
           'Content-Type': 'application/json',
-          // 'access-token': this.accesstoken 
           'Authorization': this.accesstoken         //hard code written access-token(temp)
         })
       };
