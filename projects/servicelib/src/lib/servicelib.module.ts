@@ -9,7 +9,7 @@ import { ReactiveFormsModule , FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { ListingModule } from 'listing-angular7';
-import { FileUploadModule } from 'file-upload';
+import { FileUploadModule } from 'file-upload-lib-influxiq';
 
 @NgModule({
   declarations: [ServicelibComponent,AddeditServiceComponent,Modal],

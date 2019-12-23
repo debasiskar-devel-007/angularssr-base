@@ -1,0 +1,11 @@
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/**
+ * Generated bundle index. Do not edit.
+ */
+export { TestimonialService, TestimonialComponent, TestimonialModule } from './public-api';
+export { AddeditComponent as ɵa, Modal as ɵb, PreviewComponent as ɵc } from './lib/Components/addedit/addedit.component';
+export { DemoMaterialModule as ɵd } from './lib/Modules/material-module';
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoidGVzdGltb25pYWwtbGliLWluZmx1eGlxLmpzIiwic291cmNlUm9vdCI6Im5nOi8vdGVzdGltb25pYWwtbGliLWluZmx1eGlxLyIsInNvdXJjZXMiOlsidGVzdGltb25pYWwtbGliLWluZmx1eGlxLnRzIl0sIm5hbWVzIjpbXSwibWFwcGluZ3MiOiI7Ozs7Ozs7QUFJQSw0RUFBYyxjQUFjLENBQUM7QUFFN0IsT0FBTyxFQUFDLGdCQUFnQixJQUFJLEVBQUUsRUFBQyxLQUFLLElBQUksRUFBRSxFQUFDLGdCQUFnQixJQUFJLEVBQUUsRUFBQyxNQUFNLDRDQUE0QyxDQUFDO0FBQ3JILE9BQU8sRUFBQyxrQkFBa0IsSUFBSSxFQUFFLEVBQUMsTUFBTSwrQkFBK0IsQ0FBQyIsInNvdXJjZXNDb250ZW50IjpbIi8qKlxuICogR2VuZXJhdGVkIGJ1bmRsZSBpbmRleC4gRG8gbm90IGVkaXQuXG4gKi9cblxuZXhwb3J0ICogZnJvbSAnLi9wdWJsaWMtYXBpJztcblxuZXhwb3J0IHtBZGRlZGl0Q29tcG9uZW50IGFzIMm1YSxNb2RhbCBhcyDJtWIsUHJldmlld0NvbXBvbmVudCBhcyDJtWN9IGZyb20gJy4vbGliL0NvbXBvbmVudHMvYWRkZWRpdC9hZGRlZGl0LmNvbXBvbmVudCc7XG5leHBvcnQge0RlbW9NYXRlcmlhbE1vZHVsZSBhcyDJtWR9IGZyb20gJy4vbGliL01vZHVsZXMvbWF0ZXJpYWwtbW9kdWxlJzsiXX0=

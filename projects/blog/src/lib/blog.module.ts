@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { BlogComponent } from './blog.component';
 import { BrowserModule } from '@angular/platform-browser';
 import { DemoMaterialModule } from './material-module'
-import { FileUploadModule } from 'file-upload';
+import { FileUploadModule } from 'file-upload-lib-influxiq';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app-routing.module';
 import { AddBlogComponent,Modal2 } from './add-blog/add-blog.component';
@@ -21,7 +21,6 @@ import { ListingBlogmanagementlibComponent } from './listing-blogmanagementlib/l
   declarations: [
     BlogComponent,
     AddBlogComponent,
-    
     AddeditBlogmanagementComponent,
     Modal,
     YoutubeplayerComponent,
@@ -38,7 +37,6 @@ import { ListingBlogmanagementlibComponent } from './listing-blogmanagementlib/l
     ReactiveFormsModule,
     BrowserModule,
     CKEditorModule,
-    ListingModule,
     FileUploadModule,
     CommonModule,
   
