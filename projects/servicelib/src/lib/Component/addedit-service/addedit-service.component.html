@@ -24,9 +24,9 @@
         <!-- --------------------------------description------------------- -->
         <ckeditor [editor]="Editor" [config]="editorConfig" formControlName="service_desc"
           (blur)="inputBlur('service_desc')"></ckeditor>
-        <mat-error *ngIf="serviceForm.controls['service_desc']?.touched || serviceForm.controls['service_desc']?.touched && 
+        <!-- <mat-error *ngIf="serviceForm.controls['service_desc']?.touched || serviceForm.controls['service_desc']?.touched && 
         serviceForm.controls['service_desc'].errors 
-          && serviceForm.controls['service_desc'].errors.required">Please write a testimonial.</mat-error>
+          && serviceForm.controls['service_desc'].errors.required">Please write a testimonial.</mat-error> -->
         <br>
         <!-- -------------------------------------------------------------- -->
 
