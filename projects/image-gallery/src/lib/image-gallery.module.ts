@@ -6,12 +6,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { BrowserModule } from '@angular/platform-browser';
 import { ApiService } from './Service/api.service';
-import { ListingModule } from 'lib-listing';
-
+import { FileUploadModule} from 'file-upload-lib-influxiq';
 import { DemoMaterialModule } from './modules/material-module';
 import { AddEditImageComponent } from './component/imageGallery-management/add-edit-image/add-edit-image.component';
-import { FileUploadModule } from 'file-upload';     //file upload library
 import { ImagelistingComponent } from './component/imageGallery-management/imagelisting/imagelisting.component';    
+import { ListingModule } from 'listing-angular7';
+import { from } from 'rxjs';
 
 @NgModule({
   imports: [

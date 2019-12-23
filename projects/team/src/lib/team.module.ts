@@ -5,13 +5,13 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from "@angular/common/http";
 import { MaterialModule } from './material.module';
-import { ListingModule } from 'lib-listing';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { AddeditTeamComponent } from './Category-Management/addedit-team/addedit-team.component';
 import { ListTeamComponent } from './Category-Management/list-team/list-team.component';
 import { ApiService } from '../lib/Service/api.service';
 import { TeamListComponent } from './Component/team-list/team-list.component';
-import { FileUploadModule } from 'file-upload';
+import { ListingModule } from 'listing-angular7';
+import { FileUploadModule } from 'file-upload-lib-influxiq';
 
 @NgModule({
   declarations: [TeamComponent, AddEditTeamComponent, AddeditTeamComponent, ListTeamComponent, TeamListComponent],

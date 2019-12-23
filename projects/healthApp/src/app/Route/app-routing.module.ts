@@ -40,6 +40,7 @@ const appRoutes: Routes = [
       resolve: { categoryListData: ResolveService },
       data: { requestcondition: { source: 'category', condition: {} }, endpoint: 'datalist'}
     },
+    {path: 'test', component: TestComponent},
     {
       path:'category-management/list',
       component: ListCategoryComponent,

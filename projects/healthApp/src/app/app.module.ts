@@ -18,7 +18,7 @@ import { LessionManagementModule } from 'lession-management';
 import { ListLessionComponent } from './Component/lession-management/list-lession/list-lession.component';
 import { AddEditLessionComponent } from './Component/lession-management/add-edit-lession/add-edit-lession.component';
 import { TestComponent } from './Component/test/test.component';
-import { ListingModule } from 'lib-listing';
+import { ListingModule } from 'listing-angular7';
 
 /**Video Library **/
  import { VideoModule } from 'video';
