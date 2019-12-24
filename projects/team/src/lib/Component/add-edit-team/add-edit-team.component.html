@@ -105,11 +105,11 @@
 
           <!-- CARD VIEW  -->
           <mat-card-content class="files-view" *ngIf="flag==true">
-            <mat-card class="example-card">
-              <img mat-card-image [attr.src]="img_var">
+            <mat-card *ngFor="let item of img_var;let i =index" class="example-card">
+              <img mat-card-image [attr.src]="item">
               <mat-card-title>{{ image_name }}</mat-card-title>
               <mat-card-subtitle>{{ image_type }}</mat-card-subtitle>
-              <span class="closecard" (click)="clear_image()">
+              <span class="closecard" (click)="clear_image(i)">
                 <i class="material-icons">clear</i>
               </span>
             </mat-card>

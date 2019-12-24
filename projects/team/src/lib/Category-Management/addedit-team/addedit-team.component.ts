@@ -29,7 +29,6 @@ export class AddeditTeamComponent implements OnInit {
   set TeamData(val: any) {
     this.DataListViaResolve = (val) || '<no name set>';
     this.DataListViaResolve = val;
-    console.log("in ts ", this.DataListViaResolve);
   }
   @Input()          //setting the server url from project
   set serverUrl(serverUrlval: any) {

@@ -6,7 +6,8 @@
     "umdModuleIds": {
       "ngx-cookie-service": "ngxCookieService",
       "listing-angular7": "listingAngular7",
-      "file-upload-lib-influxiq": "fileUploadLibInfluxiq"
+      "file-upload-lib-influxiq": "fileUploadLibInfluxiq",
+      "ngx-ckeditor" : "ngxCkeditor"
     }
   }
 }
