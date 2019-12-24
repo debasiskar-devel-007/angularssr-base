@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { TestimonialComponent } from './testimonial.component';
-import { AddeditComponent , Modal } from './Components/addedit/addedit.component';
+import { AddeditComponent , Modal, PreviewComponent } from './Components/addedit/addedit.component';
 import { DemoMaterialModule } from './Modules/material-module';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { HttpClientModule } from '@angular/common/http';
@@ -9,10 +9,10 @@ import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { ListingModule } from 'listing-angular7';
-import { FileUploadModule } from 'file-upload';
+import { FileUploadModule } from 'file-upload-lib-influxiq';
 
 @NgModule({
-  declarations: [TestimonialComponent, AddeditComponent ,Modal],
+  declarations: [TestimonialComponent, AddeditComponent ,Modal, PreviewComponent],
   imports: [
     DemoMaterialModule,
     CKEditorModule,
@@ -26,6 +26,10 @@ import { FileUploadModule } from 'file-upload';
     FileUploadModule
   ],
   exports: [TestimonialComponent,AddeditComponent] ,
-  entryComponents:[Modal ]
+  entryComponents:[Modal, PreviewComponent ]
+  
 })
-export class TestimonialModule { }
+export class TestimonialModule {
+
+  
+ }

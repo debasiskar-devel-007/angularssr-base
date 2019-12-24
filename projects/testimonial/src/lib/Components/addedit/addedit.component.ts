@@ -4,10 +4,15 @@ import { FormBuilder, FormGroup, Validators, FormControl } from '@angular/forms'
 import { TestimonialService } from '../../testimonial.service';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+
+
 export interface DialogData {
   msg: string;
 }
-
+export interface PreviewDialog{
+  msg:any; 
+}
 
 @Component({
   selector: 'lib-addedit',
@@ -29,7 +34,7 @@ export class AddeditComponent implements OnInit {
 
 
   //  ========================================Declaration Section======================================
-  buttonText = "SUBMIT";
+  buttonText = "SUBMIT"; 
   testimonialForm: FormGroup;
   public loader: boolean = false;
   configData;
@@ -42,11 +47,12 @@ export class AddeditComponent implements OnInit {
   header_name: any;
   image_name: any;
   image_type: any;
+  youtube_suffix:any="https://www.youtube.com/embed/"
   // ==================================================================================================
 
 
   constructor(private formBuilder: FormBuilder, private testiService: TestimonialService,
-    private router: Router, public dialog: MatDialog) { }
+    private router: Router, public dialog: MatDialog , private sanitizer: DomSanitizer) { }
 
   ngOnInit() {
     this.loader = false;
@@ -88,10 +94,13 @@ export class AddeditComponent implements OnInit {
       name: ['', [Validators.required]],
       email: ['', [Validators.required,Validators.pattern(/^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/
       )]],
-      testimonial: ['', [Validators.required]],
+      description: ['', [Validators.required]],
       priority: ['', Validators.required],
       status: [true,],
       testimonial_img : ['',],
+      video_url:[],
+      video_name:[],
+      video_desc:[],
       userId: [this.configData.userData.id, null]
     })
     
@@ -120,7 +129,7 @@ export class AddeditComponent implements OnInit {
     }
 
 
-     this.testimonialForm.controls['testimonial'].markAsTouched();
+     this.testimonialForm.controls['description'].markAsTouched();
     this.loader = true;
     /* stop here if form is invalid */
     if (this.testimonialForm.invalid) {
@@ -162,11 +171,14 @@ export class AddeditComponent implements OnInit {
     this.testimonialForm.patchValue({
       name: defaultValue.name,
       email: defaultValue.email,
-      testimonial: defaultValue.testimonial,
+      description: defaultValue.description,
       priority: defaultValue.priority,
       status: defaultValue.status,
       userId: null,
-      testimonial_img: defaultValue.testimonial_img
+      testimonial_img: defaultValue.testimonial_img,
+      video_url:defaultValue.video_url,
+      video_name:defaultValue.video_name,
+      video_desc:defaultValue.video_desc
     });
     this.img_var = defaultValue.testimonial_img.basepath + defaultValue.testimonial_img.image;
     this.image_name = defaultValue.testimonial_img.name;
@@ -189,9 +201,36 @@ export class AddeditComponent implements OnInit {
   // =====================================================================================================
 
 
+
+//  =====================preview video================
+  preview_video()
+  {
+     console.log("********",this.youtube_suffix +this.testimonialForm.value.video_url);
+    //  this.safeSrc =  this.sanitizer.bypassSecurityTrustResourceUrl(this.youtube_suffix+this.testimonialForm.value.video_url);
+    this.dialogRef = this.dialog.open(PreviewComponent, {
+      width: '850px',
+      height:'500px',
+      
+      data: { msg: this.youtube_suffix +this.testimonialForm.value.video_url }
+    });
+
+    this.dialogRef.afterClosed().subscribe(result => {
+
+    });
+  }
+// ===================================================
+
+
+
+
   inputBlur(val: any) {
     this.testimonialForm.controls[val].markAsUntouched();
   }
+
+
+
+
+
 // ==========================================Clear MAT tag===================================
   clear_image() {
     this.flag = false;
@@ -228,3 +267,26 @@ export class Modal {
 
 }
 // ======================================================================================================
+
+
+
+// preview cmponent
+
+@Component({
+  selector: 'app-modal',
+  templateUrl: 'preview.html',
+})
+export class PreviewComponent {
+  safeSrc: SafeResourceUrl;
+  constructor(
+    public dialogRef: MatDialogRef<PreviewComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: PreviewDialog , private sanitizer: DomSanitizer) { 
+      console.log("data",data);      
+      this.safeSrc =  this.sanitizer.bypassSecurityTrustResourceUrl(data.msg);
+    }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+    
+}

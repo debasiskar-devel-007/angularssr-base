@@ -32,16 +32,20 @@ export class AddeditServiceComponent implements OnInit {
     bucketName: "crmfiles.influxhostserver"
   }
 
+  public configData2: any = {
+    baseUrl: "https://fileupload.influxhostserver.com/",
+    endpoint: "uploads",
+    size: "51200", // kb
+    format: ["jpg", "jpeg","png"], // use all small font
+    type: "additional_service-image",
+    path: "services",
+    prefix: "additional_service-image_",
+    formSubmit: false,
+    conversionNeeded: 0,
+    bucketName: "crmfiles.influxhostserver"
+  }
 
-  // public configData: any = {
-  //   baseUrl: "http://3.15.236.141:5005/",
-  //   endpoint: "uploads",
-  //   size: "51200", // kb
-  //   format: ["jpg", "jpeg", "png"], // use all small font
-  //   type: "service-image",
-  //   path: "services",
-  //   prefix: "service-image_"
-  // }
+
 
   constructor(private router : Router , private activatedRoute : ActivatedRoute ,private cookieService : CookieService) { }
 

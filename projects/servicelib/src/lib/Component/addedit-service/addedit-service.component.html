@@ -6,7 +6,7 @@
     <mat-card-content class="example-container">
 
 
-      <form [formGroup]="serviceForm" autocomplete="off" (ngSubmit)="onSubmit()">
+      <form [formGroup]="serviceForm" autocomplete="off">
 
 
 
@@ -14,29 +14,47 @@
         <mat-form-field>
           <input matInput placeholder="Service title" formControlName="service_title"
             (blur)="inputBlur('service_title')">
-          <mat-error *ngIf="serviceForm.controls['service_title']?.touched || serviceForm.controls['service_title'].errors 
-          && serviceForm.controls['service_title'].errors.required">Service title is required.</mat-error>
+          <mat-error *ngIf="!serviceForm.controls['service_title'].valid
+        && serviceForm.controls['service_title'].errors.required"> Service title is required.</mat-error>
         </mat-form-field><br>
         <!-- -------------------------------------------------------------- -->
 
 
 
         <!-- --------------------------------description------------------- -->
-        <ckeditor [editor]="Editor" [config]="editorConfig" formControlName="service_desc"
-          (blur)="inputBlur('service_desc')"></ckeditor>
-        <!-- <mat-error *ngIf="serviceForm.controls['service_desc']?.touched || serviceForm.controls['service_desc']?.touched && 
-        serviceForm.controls['service_desc'].errors 
-          && serviceForm.controls['service_desc'].errors.required">Please write a testimonial.</mat-error> -->
+        <mat-label>Write Description...</mat-label>
+        <ck-editor formControlName="description"  [config]="editorconfig">
+        </ck-editor>
+        <!-- <ckeditor [data]="editorData" formControlName="description" (blur)="inputBlur('description')"> -->
+        <!-- </ckeditor> -->
+
+        <!-- <ckeditor [editor]="Editor" [config]="editorConfig" formControlName="description"
+          (blur)="inputBlur('description')"></ckeditor> -->
+
+
+        <mat-error *ngIf="!serviceForm.controls['description'].valid
+          && serviceForm.controls['description'].errors.required && serviceForm.controls['description'].touched">
+          Description is required.
+        </mat-error>
         <br>
         <!-- -------------------------------------------------------------- -->
 
+
+        <!-- --------------------------------additional details------------------- -->
+
+        <mat-label>Additional Details If Any...</mat-label>
+        <ck-editor formControlName="additional_details" [config]="editorconfig">
+        </ck-editor>
+
+        <br>
+        <!-- -------------------------------------------------------------- -->
 
         <!-- --------------------------------priority------------------- -->
         <mat-form-field>
           <input matInput type="number" placeholder="Priority" formControlName="priority"
             (blur)="inputBlur('priority')">
-          <mat-error *ngIf="serviceForm.controls['priority']?.touched || serviceForm.controls['priority'].errors 
-          && serviceForm.controls['priority'].errors.required">Priority is required.</mat-error>
+          <mat-error *ngIf="!serviceForm.controls['priority'].valid
+           && serviceForm.controls['priority'].errors.required"> Priority is required.</mat-error>
         </mat-form-field><br>
         <!-- -------------------------------------------------------------- -->
 
@@ -45,7 +63,6 @@
         <mat-label>Status:</mat-label><br>
         <mat-checkbox color="primary" formControlName="status">Active</mat-checkbox><br>
         <!-- -------------------------------------------------------------- -->
-
 
 
 
@@ -82,9 +99,22 @@
         <!-- __________________________________________________________________________________________________________ -->
 
         <h1>Service Image:</h1>
-        <lib-file-upload [config]="imageConfigData" ></lib-file-upload>
-        <mat-error *ngIf="ErrCode==true">Please add just one service image.</mat-error>
-        <!-- <mat-error *ngIf="serviceForm.controls['service_img'].errors && serviceForm.controls['service_img'].errors.required">Priority is required.</mat-error> -->
+
+        <div class="warning_reso">
+          <mat-icon>warning</mat-icon>
+          <p>Resolution: 650 x 300</p>
+        </div>
+
+
+        <lib-file-upload [config]="imageConfigData"></lib-file-upload>
+        <div *ngIf="ErrCode==true" class="desc_error">
+          <mat-icon>error</mat-icon>
+          <p>Please add just one service image.</p>
+        </div>
+        <div *ngIf="img_missing==true" class="desc_error">
+          <mat-icon>error</mat-icon>
+          <p>Please provide a service image.</p>
+        </div>
 
 
 
@@ -97,7 +127,29 @@
           </mat-card>
         </mat-card-content>
 
-        <span><button type="submit" class="submitbtn" mat-raised-button color="primary">{{buttonText}}</button></span>
+        <!-- ______________________________________________________________________________________________________________ -->
+        <!-- Additional Image  -->
+        <h1>Additional Image:</h1>
+        <lib-file-upload [config]="imageConfigData2"></lib-file-upload>
+        <div *ngIf="ErrCode2==true" class="desc_error">
+          <mat-icon>error</mat-icon>
+          <p>Please add just one additional image.</p>
+        </div><br>
+
+
+
+
+        <mat-card-content class="files-view" *ngIf="flag2==true">
+          <mat-card class="example-card">
+            <img mat-card-image [attr.src]="img_var2">
+            <mat-card-title>{{ image_name2 }}</mat-card-title>
+            <mat-card-subtitle>{{ image_type2 }}</mat-card-subtitle>
+            <span class="closecard" (click)="clear_image2()"><i class="material-icons">clear</i></span>
+          </mat-card>
+        </mat-card-content>
+
+        <span><button type="button" class="submitbtn" mat-raised-button color="primary"
+            (click)="onSubmit()">{{buttonText}}</button></span>
         <span><button type="reset" class="submitbtn" mat-raised-button color="primary"
             (click)="resetserviceForm()">RESET</button></span>
 

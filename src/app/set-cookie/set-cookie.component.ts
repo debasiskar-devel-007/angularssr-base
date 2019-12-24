@@ -14,6 +14,8 @@ export class SetCookieComponent implements OnInit {
 
   ngOnInit() {
   }
+
+
   setToken() {
     this.cookieService.set('jwtToken', this.jwtToken);
     alert('Successfully Set');

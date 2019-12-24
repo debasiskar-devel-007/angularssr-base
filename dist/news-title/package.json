@@ -1,19 +1,33 @@
 {
-  "name": "news-title",
+  "name": "news-title-lib-influxiq",
   "version": "0.0.1",
-  "peerDependencies": {
-    "@angular/common": "^7.2.0",
-    "@angular/core": "^7.2.0"
+  "bugs": "https://github.com/debasiskar-devel-007/news-title/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/debasiskar-devel-007/news-title.git"
   },
-  "main": "bundles/news-title.umd.js",
-  "module": "fesm5/news-title.js",
-  "es2015": "fesm2015/news-title.js",
-  "esm5": "esm5/news-title.js",
-  "esm2015": "esm2015/news-title.js",
-  "fesm5": "fesm5/news-title.js",
-  "fesm2015": "fesm2015/news-title.js",
-  "typings": "news-title.d.ts",
-  "metadata": "news-title.metadata.json",
+  "devDependencies": {
+    "@angular/common": "^7.2.0",
+    "@angular/core": "^7.2.0",
+    "@angular/material": "^7.3.7 ",
+    "@angular/cdk": "~7.3.7",
+    "@ckeditor/ckeditor5-angular": "^1.1.0",
+    "@ckeditor/ckeditor5-build-classic": "^12.4.0",
+    "@ckeditor/ckeditor5-editor-decoupled": "^12.2.2",
+    "ngx-ckeditor": "^8.0.0",
+    "ckeditor4-angular": "^1.0.0-beta.2",
+    "@angular/animations": "~7.3.7",
+    "listing-angular7": "0.0.96"
+  },
+  "main": "bundles/news-title-lib-influxiq.umd.js",
+  "module": "fesm5/news-title-lib-influxiq.js",
+  "es2015": "fesm2015/news-title-lib-influxiq.js",
+  "esm5": "esm5/news-title-lib-influxiq.js",
+  "esm2015": "esm2015/news-title-lib-influxiq.js",
+  "fesm5": "fesm5/news-title-lib-influxiq.js",
+  "fesm2015": "fesm2015/news-title-lib-influxiq.js",
+  "typings": "news-title-lib-influxiq.d.ts",
+  "metadata": "news-title-lib-influxiq.metadata.json",
   "sideEffects": false,
   "dependencies": {
     "tslib": "^1.9.0"

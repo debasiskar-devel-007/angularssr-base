@@ -28,7 +28,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
   /**ckeditor start here*/
   public Editor = ClassicEditor;  //for ckeditor
   editorConfig = {
-    placeholder: 'Description...',
+    placeholder: 'Description*',
   };
   public model = {
     editorData: ''
@@ -121,14 +121,14 @@ export class AddeditBlogmanagementComponent implements OnInit {
     private formBuilder: FormBuilder, public dialog: MatDialog,
     public snackBar: MatSnackBar) {
     this.blogManagementForm = this.formBuilder.group({
-      blogtitle: ['', [Validators.required,Validators.maxLength(30)]],
+      blogtitle: ['', [Validators.required]],
       blogcat: ['', ],
-      description: ['', [Validators.required,Validators.maxLength(50)]],
-      priority: ['', [Validators.required,Validators.maxLength(2)]],
-      status: ['true', Validators.required],
-      metatitle: ['', [Validators.required,Validators.maxLength(20)]],
-      metadesc: ['', [Validators.required,Validators.maxLength(50)]],
-      author:['',[Validators.required,Validators.maxLength(20)]],
+      description: ['', [Validators.required]],
+      priority: ['', [Validators.required]],
+      status: ['true',],
+      // metatitle: ['', [Validators.required]],
+      // metadesc: ['', [Validators.required]],
+      author:['',[Validators.required]],
       credentials: this.formBuilder.array([]),
       tags: [''],
       blogs_image: [''],
@@ -153,7 +153,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
     }, 50);
     /**Observable end here**/
 
-    if (!this.activatedRoute.snapshot.params.id)
+    if (this.action2!='edit')
       setTimeout(() => {
         this.addYoutubeVideo('', '', '');
       }, 500)
@@ -177,9 +177,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
       this.blogManagementForm.controls['blogcat'].patchValue(this.setData.blogcat);
       this.blogManagementForm.controls['description'].patchValue(this.setData.description);
       this.blogManagementForm.controls['priority'].patchValue(this.setData.priority);
-      this.blogManagementForm.controls['status'].patchValue(this.setData.status);
-      this.blogManagementForm.controls['metatitle'].patchValue(this.setData.metatitle);
-      this.blogManagementForm.controls['metadesc'].patchValue(this.setData.metadesc);
+      this.blogManagementForm.controls['status'].patchValue(this.setData.status);  
       this.blogManagementForm.controls['blogs_image'].patchValue(this.setData.blogs_image);
       this.blogManagementForm.controls['blogs_file'].patchValue(this.setData.blogs_file);
       this.blogManagementForm.controls['author'].patchValue(this.setData.author);
@@ -500,6 +498,8 @@ export class AddeditBlogmanagementComponent implements OnInit {
   }
 
 
+
+  
 
 
 

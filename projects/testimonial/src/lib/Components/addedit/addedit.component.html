@@ -15,8 +15,8 @@
         <mat-form-field>
           <mat-label>Customer/User Name:</mat-label>
           <input matInput type="text" formControlName="name" (blur)="inputBlur('name')">
-          <mat-error *ngIf="testimonialForm.controls['name']?.touched || testimonialForm.controls['name'].errors 
-          && testimonialForm.controls['name'].errors.required">Name is required.</mat-error>
+          <mat-error *ngIf="!testimonialForm.controls['name'].valid
+          && testimonialForm.controls['name'].errors.required"> Name is required.</mat-error>
         </mat-form-field><br>
         <!-- -------------------------------------------------------------------------------- -->
 
@@ -29,11 +29,10 @@
         <mat-form-field>
           <mat-label>Customer/User Email:</mat-label>
           <input matInput type="email" formControlName="email" (blur)="inputBlur('email')">
-          <mat-error *ngIf="testimonialForm.controls['email']?.touched || testimonialForm.controls['email'].errors 
+          <mat-error *ngIf="!testimonialForm.controls['email'].valid
           && testimonialForm.controls['email'].errors.required">Email is required.</mat-error>
-          <mat-error
-            *ngIf="!testimonialForm.controls['email'].valid && !testimonialForm.controls['email'].errors.required">Email
-            is not valid</mat-error>
+ 
+
         </mat-form-field><br>
         <!-- -------------------------------------------------------------------------------- -->
 
@@ -42,10 +41,10 @@
 
 
         <!-- ----------------------------------testimonial----------------------------------- -->
-        <ckeditor [editor]="Editor" [config]="editorConfig" formControlName="testimonial"
-          (blur)="inputBlur('testimonial')"></ckeditor>
-        <mat-error *ngIf="testimonialForm.controls['testimonial']?.touched || testimonialForm.controls['testimonial']?.touched && testimonialForm.controls['testimonial'].errors 
-          && testimonialForm.controls['testimonial'].errors.required">Please write a testimonial.</mat-error>
+        <ckeditor [editor]="Editor" [config]="editorConfig" formControlName="description"
+          (blur)="inputBlur('description')"></ckeditor>
+          <mat-error *ngIf="!testimonialForm.controls['description'].valid
+          && testimonialForm.controls['description'].errors.required && testimonialForm.controls['description'].touched  " >Description is required.</mat-error>
         <br>
         <!-- -------------------------------------------------------------------------------- -->
 
@@ -58,7 +57,7 @@
         <mat-form-field>
           <mat-label>Priority:</mat-label>
           <input matInput type="number" formControlName="priority" (blur)="inputBlur('priority')">
-          <mat-error *ngIf="testimonialForm.controls['priority']?.touched || testimonialForm.controls['priority'].errors 
+          <mat-error *ngIf="!testimonialForm.controls['priority'].valid
           && testimonialForm.controls['priority'].errors.required">Priority is required.</mat-error>
         </mat-form-field><br>
         <!-- -------------------------------------------------------------------------------- -->
@@ -80,6 +79,33 @@
         <mat-error *ngIf="ErrCode==true">Please add just one testimonial image.</mat-error>
         <!-- -------------------------------------------------------------------------------- -->
 
+
+
+        <!-- --------------------------------------Video Attachment--------------------- -->
+        <h1>Attach a testimonial video:</h1>
+
+
+        <!-- video url  -->
+        <mat-form-field class="video_url">
+          <input matInput formControlName="video_url">
+          <span matPrefix> {{ youtube_suffix }} </span>
+          <mat-icon matSuffix class="clickable" (click)="preview_video()" type="button">remove_red_eye</mat-icon>
+        </mat-form-field>
+
+        <!-- video name  -->
+        <mat-form-field>
+          <input matInput placeholder="Video title" formControlName="video_name">
+        </mat-form-field>
+
+        <!-- Video description  -->
+        <mat-form-field>
+          <input matInput placeholder="Video description" formControlName="video_desc">
+        </mat-form-field>
+
+        <br>
+        <!-- ------------------------------------------------------------------- -->
+
+
         <!-- CARD VIEW  -->
         <mat-card-content class="files-view" *ngIf="flag==true">
           <mat-card class="example-card">
@@ -95,7 +121,7 @@
 
         <button type="submit" class="submitbtn" class="submitbtn" mat-raised-button
           color="primary">{{buttonText}}</button>
-        <button type="reset" class="submitbtn" class="submitbtn" mat-raised-button color="primary">RESET</button>
+        <button type="reset" class="submitbtn" mat-raised-button color="primary">RESET</button>
 
 
 
