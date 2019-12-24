@@ -12,6 +12,7 @@ import { ApiService } from '../lib/Service/api.service';
 import { TeamListComponent } from './Component/team-list/team-list.component';
 import { ListingModule } from 'listing-angular7';
 import { FileUploadModule } from 'file-upload-lib-influxiq';
+import { CKEditorModule } from 'ngx-ckeditor';
 
 @NgModule({
   declarations: [TeamComponent, AddEditTeamComponent, AddeditTeamComponent, ListTeamComponent, TeamListComponent],
@@ -23,7 +24,8 @@ import { FileUploadModule } from 'file-upload-lib-influxiq';
     MaterialModule,
     BrowserAnimationsModule,
     ListingModule,
-    FileUploadModule
+    FileUploadModule,
+    CKEditorModule
   ],
   providers: [ApiService],
   exports: [TeamComponent,AddEditTeamComponent,AddeditTeamComponent,ListTeamComponent,TeamListComponent],

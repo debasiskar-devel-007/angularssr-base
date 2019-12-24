@@ -17,19 +17,8 @@
                        && teamForm.controls['membername'].errors.required">
                 Category Name field can not be blank</mat-error>
             </mat-form-field><br>
-
-
-
-            <mat-form-field>
-              <textarea matInput placeholder="Description" [formControl]="teamForm.controls['description']"
-                (blur)="inputUntouch(teamForm,'description')">
-                       </textarea>
-              <mat-error *ngIf="teamForm.controls['description'].touched && !teamForm.controls['description'].valid
-                   && teamForm.controls['description'].errors.required">
-                Description field can not be blank</mat-error>
-            </mat-form-field>
-
-
+            <ck-editor formControlName="description" [config]="editorconfig">
+            </ck-editor>
             <mat-form-field>
               <mat-label>Category Name</mat-label>
               <mat-select formControlName="categoryname">

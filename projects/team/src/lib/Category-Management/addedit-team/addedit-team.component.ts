@@ -16,11 +16,15 @@ export class AddeditTeamComponent implements OnInit {
   public getDataEndpointData: any;
   public addEndpointData: any;
   public getSourceName: any;
+  public getCategorySourceName : any;
+  public roleSourceName : any;
   public serverUrlData: any;
   public spinnerLoader: boolean;
   public listingPageUrl: any = '';
   public params_id: any;
   public ButtonText: any = "Submit";
+  public allCategoryName : any=[];
+  public editorconfig:any={};
   @Input()          //getting all data list via resolve call from app
   set TeamData(val: any) {
     this.DataListViaResolve = (val) || '<no name set>';
@@ -36,14 +40,19 @@ export class AddeditTeamComponent implements OnInit {
   set getDataEndpoint(endpointUrlval: any) {
     this.getDataEndpointData = (endpointUrlval) || '<no name set>';
     this.getDataEndpointData = endpointUrlval;
-    console.log("data", this.getDataEndpointData);
   }
   @Input()
   set SourceName(sourceName: any) {
     this.getSourceName = (sourceName) || '<no name set>';
     this.getSourceName = sourceName;
-    
   }
+  @Input()
+  set RoleSourceName (roleSourceName : any) {
+     this.roleSourceName = (roleSourceName) || '<no name set>' ; 
+     this.roleSourceName = roleSourceName ; 
+     console.log("role ", this.roleSourceName);
+  }
+
   @Input()
   set singleEditData(val: any) {
     this.SingledataEdit = (val) || '<no name set>';
@@ -81,8 +90,10 @@ export class AddeditTeamComponent implements OnInit {
       categoryName: ['', Validators.required],
       description: ['', Validators.required],
       status: [true,],
+      parent_category : [''],
       role: ['']
     })
+    this.editorconfig.extraAllowedContent = '*[class](*),span;ul;li;table;td;style;*[id];*(*);*{*}';
   }
 
 
@@ -100,7 +111,10 @@ export class AddeditTeamComponent implements OnInit {
       this.apiService.setgetdataEndpoint(this.getDataEndpointData);
     }, 50);
     setTimeout(() => {
-      // this.getData();
+      this.getAllCategoryName();
+    }, 50);
+    setTimeout(() => {
+      this.getAllRoleSlugData();
     }, 50);
   }
   inputUntouch(form: any, val: any) {
@@ -129,14 +143,15 @@ export class AddeditTeamComponent implements OnInit {
             'description': this.CategoryManagementTeamForm.value.description,
             'status': this.CategoryManagementTeamForm.value.status,
             'role': this.CategoryManagementTeamForm.value.role
-
-          }
+          },
+          "sourceobj": ["parent_category"]
         }
 
       } else {
         data = {
           "source":this.getSourceName,
-          "data": this.CategoryManagementTeamForm.value
+          "data": this.CategoryManagementTeamForm.value,
+          "sourceobj": ["parent_category"]
         }
       }
 
@@ -149,16 +164,29 @@ export class AddeditTeamComponent implements OnInit {
       })
     }
   }
-  getData() {
+  getAllRoleSlugData() {
     let data: any = {
-      "source": "rolemanagement"
+      "source": this.roleSourceName
     }
     this.apiService.getData(data).subscribe(response => {
       let result: any = response;
       this.allData = result.res;
-
     })
   }
+
+  getAllCategoryName(){
+    let data : any = {
+      "source" : this.getSourceName,
+      "condition": {
+        "status": 1
+      },
+    }
+    this.apiService.getData(data).subscribe(response => {
+      let result :any=response;
+      this.allCategoryName = result.res;
+    })
+  }
+
   ResetTeamForm() {
     this.CategoryManagementTeamForm.reset();
   }

@@ -153,8 +153,8 @@ const appRoutes: Routes = [
     {
       path :'team/category-management/add',
       component : AddEditComponent,
-      resolve : {teamdata : ResolveService },
-      data : { requestcondition : { source : 'rolemanagement',condition : {}}, endpoint : 'datalist'}
+      // resolve : {teamdata : ResolveService },
+      // data : { requestcondition : { source : 'rolemanagement',condition : {}}, endpoint : 'datalist'}
     },
     {
       path :'team/category-management/edit/:_id',

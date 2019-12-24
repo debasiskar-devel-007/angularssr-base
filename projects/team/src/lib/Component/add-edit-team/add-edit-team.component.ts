@@ -34,6 +34,7 @@ export class AddEditTeamComponent implements OnInit {
   public sourceName: any;
   public categorySourceName: any;
   public images_array: any = [];
+  public editorconfig : any = {};
 
   /* Config Upload file lib */
   @Input()
@@ -57,18 +58,11 @@ export class AddEditTeamComponent implements OnInit {
       this.teamForm.controls['team_img'].patchValue(val[0].team_img);
 
       for (const i in this.SingleDataList[0].team_img) {
-
         this.img_var = this.SingleDataList[0].team_img[i].basepath + this.SingleDataList[0].team_img[i].fileservername;
         this.image_name = this.SingleDataList[0].team_img[i].name;
         this.image_type = this.SingleDataList[0].team_img[i].type;
-        console.log("gffaghfahgag", this.img_var);
-
+       
       }
-
-
-
-
-
       for (const i in this.SingleDataList[0].bulletarray) {
         this.addBulletListData(this.SingleDataList[0].bulletarray[i].bullet_name,
           this.SingleDataList[0].bulletarray[i].bullet_desc);
@@ -128,7 +122,7 @@ export class AddEditTeamComponent implements OnInit {
     public apiservice: ApiService, public router: Router) {
 
     this.teamForm = this.fb.group({
-      categoryname: ["", Validators.required],
+      categoryname: [""],
       membername: ["", Validators.required],
       description: ["", Validators.required],
       multiplephone: this.fb.array([]),
@@ -136,6 +130,8 @@ export class AddEditTeamComponent implements OnInit {
       bulletarray: this.fb.array([]),
       team_img: ['']
     })
+    this.editorconfig.extraAllowedContent = '*[class](*),span;ul;li;table;td;style;*[id];*(*);*{*}';
+
   }
 
   ngOnInit() {
@@ -196,7 +192,10 @@ export class AddEditTeamComponent implements OnInit {
   /*getting all category name function start here*/
   getData() {
     let data: any = {
-      "source": this.categorySourceName
+      "source": this.categorySourceName,
+      "condition": {
+        "status": 1
+      },
     }
     this.apiservice.getData(data).subscribe(response => {
       let result: any = response;

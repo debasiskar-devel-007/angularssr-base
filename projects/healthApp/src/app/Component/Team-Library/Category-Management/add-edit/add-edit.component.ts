@@ -11,18 +11,18 @@ export class AddEditComponent implements OnInit {
   public addendpoint: any = "addorupdatedata";
   public listRoute: any = "team/category-management/list";
   public sourceName : any = "team_category";
+  public roleSourceName :any = "rolemanagement";
   public SingleTeamData: any = [];
   public getdataEndpoint:any="datalist";
   constructor(public activeRoute: ActivatedRoute) { }
 
   ngOnInit() {
-    this.activeRoute.data.forEach(data => {
-      console.log(data);
-      let result: any;
-      result = data.teamdata.res;
-      this.teamDataList = result;
-      console.log("okkkkkkk1111111111111",this.teamDataList);
-    })
+    // this.activeRoute.data.forEach(data => {
+    //   let result: any;
+    //   result = data.teamdata.res;
+    //   this.teamDataList = result;
+    //   console.log("okkkkkkk1111111111111",this.teamDataList);
+    // })
     if (this.activeRoute.snapshot.params._id) {
       this.activeRoute.data.forEach(data => {
         console.log(data);
