@@ -10,22 +10,23 @@ export class ListVideosComponent implements OnInit {
 
   
   public videoList: any = [];
-  public serverUrl:any="https://o820cv2lu8.execute-api.us-east-2.amazonaws.com/production/api/";
+  public serverUrl:any = "https://9ozbyvv5v0.execute-api.us-east-1.amazonaws.com/production/api/";
   public updatedEndpoint:any="addorupdatedata";
   public SourceName:any="video_category";
-  public DeleteEndpoint:any="deletesingledata";
-  public EditRoute:any="video-management/edit";
-  public addButtonRoute:any="video-management/add";
+  public deleteEndpoint:any="deletesingledata";
+  public EditRoute:any="video-category/edit/";
+  public addButtonRoute:any="video-category/add";
   public searchEndpoint:any="dalalist";
   public searchSourcename:any="video_category_view";
   constructor(public activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
     this.activatedRoute.data.forEach(data => {
-      
       let result: any;
       result = data.videoData.res;
       this.videoList = result;
+      console.log("video dataaaa",this.videoList);
+      
     })
 
   }

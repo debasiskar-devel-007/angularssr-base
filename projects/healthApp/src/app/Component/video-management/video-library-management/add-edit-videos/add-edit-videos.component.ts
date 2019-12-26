@@ -7,9 +7,11 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./add-edit-videos.component.css']
 })
 export class AddEditVideosComponent implements OnInit {
-  public serverUrl: any = "https://o820cv2lu8.execute-api.us-east-2.amazonaws.com/production/api/";
+  public serverUrl: any = "https://9ozbyvv5v0.execute-api.us-east-1.amazonaws.com/production/api/";
   public addUpdateEndpoint: any = "addorupdatedata";
+  public getDataEndpoint:any="datalist";
   public listingRoute: any = "video-library-management/list";
+  public sourceName:any ="video_management";
   public SingleVideoData: any = [];
   constructor(public activeRoute: ActivatedRoute) { }
 

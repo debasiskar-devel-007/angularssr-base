@@ -8,7 +8,7 @@
 
   <!-- add button start here -->
   <mat-toolbar class="buttonsetToolbar">
-    <button class="singleButton" mat-raised-button color="primary" (click)="AddButton()" > Add Video</button>
+    <button class="singleButton" mat-raised-button color="primary" (click)="AddButton()" > Add Video Category</button>
 </mat-toolbar>
 <!-- adding button end here -->
 
@@ -18,12 +18,13 @@
         [datasource]="allDataList"
         [skip]="allDataList_skip" 
         [modify_header_array]="allDataList_modify_header" 
+        [detail_skip_array]="previewModal_detail_skip"
         [sourcedata]="TableNameViaApp"
         [apiurl]="serverUrlData" 
         [jwttoken]="tokenViaApp" 
         [statusarr]="status" 
         [updateendpoint]="addupdateRouteUrl"
-        [deleteendpoint]="DeleteendpointViaApp"
+        [deleteendpoint]="deleteEndpointViaApp"
         [editroute]="editRouteViaApp" 
         [date_search_endpoint]="searchEndpointval"
         [date_search_source]="searchSourceval"

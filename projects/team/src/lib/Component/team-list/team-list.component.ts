@@ -25,9 +25,14 @@ export class TeamListComponent implements OnInit {
     this.DataList = val;
   }
   public data_skip: any = ["_id","multipleemail","bulletarray","created_at","description_html","description","updated_at","id"];
-  public data_modify_header: any = { "membername" : "Member Name",
-  "categoryName":"Category Name","multiplephone":"Phone Numbers","images":"Images"
+  public data_modify_header: any = { "membername" : "Member Name","date_added":"Date Added"
+,  "categoryname":"Category Name","multiplephone":"Phone Numbers","team_img":"Images"
  };
+//  pendingmodelapplicationarray_detail_datatype: any = [{
+//   key: "image",  
+//   value: 'image',
+//   fileurl: ""             // Image path 
+// }];
  public search_settings: any =
     {
       textsearch: [{ label: "Search By Category Name", field: 'categoryname' },
@@ -36,11 +41,9 @@ export class TeamListComponent implements OnInit {
       // selectsearch:[{label:'Search By email',field:''}],
       // search:[{label:"Search By E-Mails",field:'multipleemail'}]
     };
-   pendingmodelapplicationarray_detail_datatype:any=[{
-      key: "images",
-      value: 'image',
-      fileurl: 'https://s3.us-east-2.amazonaws.com/crmfiles.influxhostserver/team/'    // Image path 
-    }];
+    // public status: any = [{ val: 1, 'name': 'Active' }, { val: 0, 'name': 'Inactive' }];
+    public previewModal_detail_skip: any = ['_id'];
+  
   @Input()          //setting the server url from project
   set serverUrl(serverUrlval: any) {
     this.serverUrlData = (serverUrlval) || '<no name set>';
@@ -92,7 +95,7 @@ export class TeamListComponent implements OnInit {
 
   ngOnInit() {
     console.log('this.preview_detail_listing')
-    console.log(this.pendingmodelapplicationarray_detail_datatype)
+    // console.log(this.pendingmodelapplicationarray_detail_datatype)
   }
   addButton(){
     this.router.navigateByUrl('/' + this.addPageRoute);

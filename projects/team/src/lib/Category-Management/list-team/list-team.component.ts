@@ -23,6 +23,7 @@ export class ListTeamComponent implements OnInit {
     "rolename": "Role Name", "status": "Status","role" : "Role"
   };
   public status: any = [{ val: 1, 'name': 'Active' }, { val: 0, 'name': 'Inactive' }];
+  public previewModal_detail_skip: any = ['_id'];
   public search_settings: any =
     {
       selectsearch: [{ label: 'Search By Status', field: 'status', values: this.status }],

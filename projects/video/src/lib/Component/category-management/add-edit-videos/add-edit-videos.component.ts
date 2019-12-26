@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+// import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { ApiService } from 'projects/video/src/lib/Service/api.service';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
@@ -11,16 +11,17 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AddEditVideosComponent implements OnInit {
   public buttonText: any = "Submit";
-  public headerText: any = "Add Video";
+  public headerText: any = "Add Video Category";
   /**ckeditor start here*/
-  public Editor = ClassicEditor;  //for ckeditor
-  editorConfig = {
-    placeholder: 'Type the content here!',
-  };
+  // public Editor = ClassicEditor;  
+  // editorConfig = {
+  //   placeholder: 'Type the content here!',
+  // };
+   /**ckeditor end here*/
   public model = {
     editorData: ''
   };
-  /**ckeditor end here*/
+ 
   videolibAddEditForm: FormGroup;
   public serverUrlData: any;
   public getDataEndpointData: any;
@@ -29,9 +30,11 @@ export class AddEditVideosComponent implements OnInit {
   public listUrl: any;
   public parameter_id: any;
   public VideolistingArray: any = [];
+  public getSourceName :any;
   public editedListData: any = [];
+  public allCategoryName :any=[];
   public spinnerloader: boolean; // for spinner loader
-
+  public editorconfig:any={};
 
   @Input()          //setting the server url from project
   set serverUrl(serverUrlval: any) {
@@ -57,10 +60,11 @@ export class AddEditVideosComponent implements OnInit {
     this.listUrl = Urlval;
 
   }
-  @Input()          //getting the listing url
-  set dataListViaResolve(val: any) {
-    this.VideolistingArray = (val) || '<no name set>';
-    this.VideolistingArray = val;
+  @Input()          
+  set SourceName(val: any) {
+    this.getSourceName = (val) || '<no name set>';
+    this.getSourceName = val;
+    console.log("ddfdfdfdfdfd",this.getSourceName);
   }
   @Input()          //getting the listing url
   set EditList(val: any) {
@@ -68,7 +72,7 @@ export class AddEditVideosComponent implements OnInit {
     this.editedListData = val;
 
     if (this.activeroute.snapshot.params._id) {
-      this.headerText = "Edit Video"
+      this.headerText = "Edit Video Category";
       this.buttonText = "Update";
       this.parameter_id = this.activeroute.snapshot.params._id;
       this.videolibAddEditForm.controls['title'].patchValue(val[0].title);
@@ -91,6 +95,7 @@ export class AddEditVideosComponent implements OnInit {
       parent_id: ['']
     })
     /**formgroup end here**/
+    this.editorconfig.extraAllowedContent = '*[class](*),span;ul;li;table;td;style;*[id];*(*);*{*}';
   }
 
   ngOnInit() {
@@ -107,6 +112,9 @@ export class AddEditVideosComponent implements OnInit {
     setTimeout(() => {
       this.apiService.setaddEndpoint(this.addEndpointData);
     }, 50);
+    setTimeout(() => {
+      this.getAllCategoryName();
+    }, 50);
     /**Observable end here**/
   }
   /**for validation purpose**/
@@ -115,6 +123,20 @@ export class AddEditVideosComponent implements OnInit {
     form.controls[val].markAsUntouched();
   }
   /**for validation purpose**/
+
+  getAllCategoryName(){
+    let data : any = {
+      "source" : this.getSourceName,
+      "condition": {
+        "status": 1
+      },
+    }
+    this.apiService.getData(data).subscribe(response => {
+      let result :any=response;
+      this.allCategoryName = result.res;
+    })
+  }
+
   /**form submission start here**/
   videoAddEditFormSubmit() {
 
@@ -133,7 +155,7 @@ export class AddEditVideosComponent implements OnInit {
       var data: any;
       if (this.activeroute.snapshot.params._id) {
         data = {
-          "source": "video_category",
+          "source": this.getSourceName,
           'data': {
             "id": this.parameter_id,
             "title": this.videolibAddEditForm.value.title,
@@ -146,7 +168,7 @@ export class AddEditVideosComponent implements OnInit {
         }
       } else {
         data = {
-          "source": "video_category",
+          "source": this.getSourceName,
           'data': {
             "title": this.videolibAddEditForm.value.title,
             "description": this.videolibAddEditForm.value.description,

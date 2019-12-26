@@ -230,7 +230,11 @@ export class AddEditTeamComponent implements OnInit {
   /**bullet list function end here**/
   clear_image(index) {
     this.flag = false;
-    this.img_var.splice(index, 1);
+    var imageData:any = [] = this.SingleDataList[0].team_img;
+    console.log("imagedata frst",imageData);
+    console.log("indexed data",index);
+     imageData.splice(index,1);
+     console.log("imagedata 2nd",imageData);
   }
   TeamFormSubmit() {
     /**old file upload adding code start here**/
@@ -254,7 +258,7 @@ export class AddEditTeamComponent implements OnInit {
 
     /**old file upload adding code end here**/
 
-    if (this.imageConfigData.files.length > 1 || this.img_var.length > 0) {
+    if (this.imageConfigData.files.length > 0 || this.img_var.length > 0) {
       for (let loop = 0; loop < this.imageConfigData.files.length; loop++) {
         this.images_array =
           this.images_array.concat({
@@ -267,7 +271,7 @@ export class AddEditTeamComponent implements OnInit {
           });
       }
 
-      // this.teamForm.controls['team_img'].patchValue(this.images_array);
+      this.teamForm.controls['team_img'].patchValue(this.images_array);
     } else {
       this.teamForm.value.team_img = false;
     }

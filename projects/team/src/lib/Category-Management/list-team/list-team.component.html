@@ -6,7 +6,7 @@
   <!-- add button start here -->
   <mat-toolbar class="buttonsetToolbar">
     <button class="singleButton" mat-raised-button color="primary" (click)="addButton()" >Add Team Category</button>
-    <button class="singleButton" mat-raised-button color="primary" (click)="manageTeamButton()" >Manage Team</button>
+    <!-- <button class="singleButton" mat-raised-button color="primary" (click)="manageTeamButton()" >Manage Team</button> -->
 
   </mat-toolbar>
 <!-- adding button end here -->
@@ -17,6 +17,7 @@
     [sourcedata]="sourcenameViaapp"
     [skip]="alldata_skip" 
     [modify_header_array]="alldata_modify_header" 
+    [detail_skip_array]="previewModal_detail_skip"
     [apiurl]="serverUrlData" 
     [editroute]="editRouteval"
     [jwttoken]="tokenVal" 

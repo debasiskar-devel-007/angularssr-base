@@ -26,6 +26,17 @@
               Priority field can not be blank</mat-error> <br>
             <br>
           </mat-form-field>
+          <!-- <mat-form-field>
+            <mat-label>Category Name</mat-label>
+            <mat-select formControlName="categoryname">
+              <mat-option [value]=0>
+                Select a category
+              </mat-option>
+              <mat-option *ngFor="let f of allData" [value]="f._id">
+                {{f.categoryName}}
+              </mat-option>
+            </mat-select>
+          </mat-form-field> -->
 
           <mat-checkbox [formControl]="videoManagementForm.controls['status']">Active</mat-checkbox><br>
           <mat-label>Enter Video Url</mat-label>
@@ -37,13 +48,14 @@
           </mat-form-field>
 
           <!-- ckeditor using start here -->
-          <mat-label>Description</mat-label>
+          <!-- <mat-label>Description</mat-label>
           <ckeditor [editor]="Editor" [config]="editorConfig" [formControl]="videoManagementForm.controls['description']" [(ngModel)]="model.editorData"
             ></ckeditor>
           <mat-error *ngIf="videoManagementForm.controls['description'].touched && !videoManagementForm.controls['description'].valid
                && videoManagementForm.controls['description'].errors.required">
-            Description field can not be blank</mat-error>
-
+            Description field can not be blank</mat-error> -->
+            <ck-editor formControlName="description" [config]="editorconfig">
+            </ck-editor>
           <!-- ckeditor using end here -->
           <button class="submitbtn" mat-raised-button color="primary" type="submit">{{buttonText}}</button>
           <button class="submitbtn" mat-raised-button color="primary" type="submit" (click)="resetForm()">Reset</button>

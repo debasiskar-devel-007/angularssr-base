@@ -84,23 +84,22 @@ const appRoutes: Routes = [
     },
     /* Lesson Management Routes End */
     
-    /** Video Library start Route here**/
+    /** Video category Library start Route here**/
     { 
-      path:'video-management/list',
+      path:'video-category/list',
       component: ListVideosComponent,
       resolve:{ videoData : ResolveService},
       data:{ requestcondition : {source:'video_category_view',condition:{} },endpoint:'datalist'}
       
     },
     { 
-      path:'video-management/add',
+      path:'video-category/add',
       component: VideoCategoryManagementComponent,
-      resolve:{ videoData : ResolveService},
-      data:{ requestcondition : {source:'video_category',condition:{} },endpoint:'datalist'}
+      
     },
     { 
 
-      path:'video-management/edit/:_id',
+      path:'video-category/edit/:_id',
       component: VideoCategoryManagementComponent,
       resolve:{ videoData : ResolveService},
       data:{ requestcondition : {source:'video_category',condition:{} },endpoint:'datalist'}
@@ -134,7 +133,7 @@ const appRoutes: Routes = [
       path:'team/list',
       component : ListTeamComponent,
       resolve : {teamdata : ResolveService },
-      data : { requestcondition : { source : 'team_management', condition : {}},endpoint : 'datalist'}
+      data : { requestcondition : { source : 'team_management_view', condition : {}},endpoint : 'datalist'}
     },
     {
       path:'team/add',

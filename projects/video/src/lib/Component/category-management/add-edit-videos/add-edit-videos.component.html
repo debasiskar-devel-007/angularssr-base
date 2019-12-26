@@ -35,12 +35,12 @@
 
 
           <!-- ckeditor using start here -->
-          <mat-label>Description</mat-label>
-          <ckeditor [editor]="Editor" [config]="editorConfig" [formControl]="videolibAddEditForm.controls['description']" [(ngModel)]="model.editorData"
-            ></ckeditor>
-          <mat-error *ngIf="videolibAddEditForm.controls['description'].touched && !videolibAddEditForm.controls['description'].valid
+          <ck-editor formControlName="description" [config]="editorconfig">
+          </ck-editor>
+            
+          <!-- <mat-error *ngIf="videolibAddEditForm.controls['description'].touched && !videolibAddEditForm.controls['description'].valid
              && videolibAddEditForm.controls['description'].errors.required">
-            Description field can not be blank</mat-error>
+            Description field can not be blank</mat-error> -->
           <!-- ckeditor end here -->
           <mat-form-field class="parent_cat">
             <mat-label >Parent Category</mat-label>
@@ -48,7 +48,7 @@
               <mat-option [value]=0>
                 Select a category
               </mat-option>
-              <mat-option *ngFor="let f of VideolistingArray" [value]="f._id">
+              <mat-option *ngFor="let f of allCategoryName" [value]="f._id">
             {{f.title}}
           </mat-option>
             </mat-select>

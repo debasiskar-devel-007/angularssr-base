@@ -11,7 +11,7 @@ export class VideoComponent implements OnInit {
   public tokenViaApp: any = '';
   public addupdateRouteUrl: any = '';
   public TableNameViaApp: any = '';
-  public DeleteendpointViaApp: any = '';
+  public deleteEndpointViaApp: any ='';
   public editRouteViaApp: any = '';
   public AddButtonRouteViaApp: any = '';
   public searchEndpointval:any='';
@@ -31,6 +31,7 @@ export class VideoComponent implements OnInit {
       textsearch: [{ label: "Search By Title", field: 'title' }],
       search: [{ label: "Search By Parent Category", field: 'parentvideocategory' }]
     };
+    public previewModal_detail_skip: any = ['_id'];
 
   /**lib-listing end here **/
   @Input()          //getting search endpoint 
@@ -50,6 +51,7 @@ export class VideoComponent implements OnInit {
   set listingViaResolve(DataVal: any) {
     this.allDataList = (DataVal) || '<no name set>';
     this.allDataList = DataVal;
+   
   }
   @Input()          //gettingadd button route 
   set AddButtonRoute(Val: any) {
@@ -85,8 +87,9 @@ export class VideoComponent implements OnInit {
   }
   @Input()
   set DeleteEndpoint(val: any) {
-    this.DeleteendpointViaApp = (val) || '<no name set>';
-    this.DeleteendpointViaApp = val;
+    this.deleteEndpointViaApp = (val) || '<no name set>';
+    this.deleteEndpointViaApp = val;
+    console.log("delete endpoint",this.deleteEndpointViaApp);
   }
   constructor(public activeRoute: ActivatedRoute, public router: Router) { }
 

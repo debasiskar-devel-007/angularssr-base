@@ -24,6 +24,10 @@ export class AddEditVideoManagementComponent implements OnInit {
   public buttonText: any = "Submit";
   public headerText: any = "Add Video Management";
   public spinnerloader: boolean; // for spinner loader
+  public editorconfig:any={};
+  public getSourceName:any;
+  public allCategoryName:any=[];
+  public getDataEndpointData: any;
 
   /**ckeditor start here*/
   public Editor = ClassicEditor;  //for ckeditor
@@ -40,6 +44,12 @@ export class AddEditVideoManagementComponent implements OnInit {
     this.serverUrlData = (serverUrlval) || '<no name set>';
     this.serverUrlData = serverUrlval;
   }
+  @Input()          //setting the getdat endpoint from project
+  set getDataEndpoint(endpointUrlval: any) {
+    this.getDataEndpointData = (endpointUrlval) || '<no name set>';
+    this.getDataEndpointData = endpointUrlval;
+
+  }
   @Input()          //setting the addendpoint from application
   set addEndpoint(endpointUrlval: any) {
     this.addEndpointData = (endpointUrlval) || '<no name set>';
@@ -50,10 +60,14 @@ export class AddEditVideoManagementComponent implements OnInit {
     this.ListingRoute = (val) || '<no name set>';
     this.ListingRoute = val;
   }
+  @Input()          
+  set SourceName(val: any) {
+    this.getSourceName = (val) || '<no name set>';
+    this.getSourceName = val;
+  }
   @Input()          //getting single video data from application
   set EditVideoData(Videodata: any) {
     this.VideoDataArray = Videodata;
-    console.log("single data in ts ", this.VideoDataArray);
     if (this.activeRoute.snapshot.params._id) {
       this.buttonText = "Update";
       this.headerText = "Edit Video Management"
@@ -76,6 +90,7 @@ export class AddEditVideoManagementComponent implements OnInit {
       priority: ['', Validators.required],
       status: [true,]
     })
+    this.editorconfig.extraAllowedContent = '*[class](*),span;ul;li;table;td;style;*[id];*(*);*{*}';
   }
 
   ngOnInit() {
@@ -88,7 +103,13 @@ export class AddEditVideoManagementComponent implements OnInit {
     setTimeout(() => {
       this.apiService.setaddEndpoint(this.addEndpointData);
     }, 50);
+    setTimeout(() => {
+      this.apiService.setgetdataEndpoint(this.getDataEndpointData);
+    }, 50);
     /**Observable end here**/
+    setTimeout(() => {
+      this.getCategoryName();
+    }, 50);
   }
   /**for validation purpose**/
   inputUntouch(form: any, val: any) {
@@ -110,6 +131,20 @@ export class AddEditVideoManagementComponent implements OnInit {
     });
   }
   /**preview url start here **/
+
+  getCategoryName(){
+    let data: any = {
+      "source": "video_category",
+      "condition": {
+        "status": 1
+      },
+    }
+    this.apiService.getData(data).subscribe(response => {
+      let result: any = response;
+      this.allCategoryName = result.res;
+
+    })
+  }
   previewUrl() {
 
     this.openDialog(this.videoManagementForm.value.videoUrl);
@@ -134,7 +169,7 @@ export class AddEditVideoManagementComponent implements OnInit {
       var data: any;
       if (this.activeRoute.snapshot.params._id) {
         data = {
-          "source": "video_management",
+          "source":this.getSourceName,
           "data": {
             "id": this.params_id,
             'title': this.videoManagementForm.value.title,
@@ -149,7 +184,7 @@ export class AddEditVideoManagementComponent implements OnInit {
 
 
         data = {                                         //add part
-          "source": "video_management",
+          "source":this.getSourceName,
           "data": this.videoManagementForm.value,
         };
       }
