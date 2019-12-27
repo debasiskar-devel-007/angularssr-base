@@ -70,11 +70,12 @@ export class ListVideosComponent implements OnInit {
    }
   /** lib-listing start here**/
   public VideoDataListing: any = [];
-  public VideoDataListing_skip: any = ["_id", "description", "created_at","updated_at","id"];
+  public VideoDataListing_skip: any = ["_id", "description", "created_at","updated_at","id","description_html"];
   public VideoDataListing_modify_header: any = {
     "title": "Title", "priority": "Priority",
-    "status": "Status", "videoUrl": "Video Url"
+    "status": "Status", "videoUrl": "Video Url","parent_category" : "Parent Category"
   };
+  public previewModal_detail_skip: any = ['_id','created_at','id','updated_at'];
   public status: any = [{ val: 1, 'name': 'Active' }, { val: 0, 'name': 'Inactive' }];
   public search_settings: any =
     {

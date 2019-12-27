@@ -48,7 +48,7 @@ export class ListTeamComponent implements OnInit {
     this.addPageVal = val;
   }
   @Input()        //manage team button route
-  set manageButtonRoute(val: any) {
+  set ManageButtonRoute(val: any) {
     this.manageRoute = (val) || '<no name set>';
     this.manageRoute = (val);
   }

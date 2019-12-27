@@ -14,7 +14,7 @@ export class ListComponent implements OnInit {
  public searchendpoint:any="datalist";
  public deleteEndpoint:any="deletesingledata";
  public addPageRoute:any='team/category-management/add';
-//  public manageTeamRoute:any='team/add';
+ public manageButtonRoute:any='team/list';
  public editpageRoute:any='team/category-management/edit';
  public serverUrl:any = "https://9ozbyvv5v0.execute-api.us-east-1.amazonaws.com/production/api/";
  public jwtToken=this.cookies.get('jwtToken');

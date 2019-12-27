@@ -12,6 +12,7 @@ export class AddEditVideosComponent implements OnInit {
   public getDataEndpoint:any="datalist";
   public listingRoute: any = "video-library-management/list";
   public sourceName:any ="video_management";
+  public categorySourceName = "video_category";
   public SingleVideoData: any = [];
   constructor(public activeRoute: ActivatedRoute) { }
 

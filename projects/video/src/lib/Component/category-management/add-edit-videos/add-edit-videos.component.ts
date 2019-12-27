@@ -134,6 +134,7 @@ export class AddEditVideosComponent implements OnInit {
     this.apiService.getData(data).subscribe(response => {
       let result :any=response;
       this.allCategoryName = result.res;
+      console.log("parent category",this.allCategoryName);
     })
   }
 

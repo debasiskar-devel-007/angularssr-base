@@ -14,6 +14,7 @@ export class VideoComponent implements OnInit {
   public deleteEndpointViaApp: any ='';
   public editRouteViaApp: any = '';
   public AddButtonRouteViaApp: any = '';
+  public manageVideoRouteViaApp: any = '';
   public searchEndpointval:any='';
   public searchSourceval:any='';
   ;  /**lib-listing start here **/
@@ -59,6 +60,11 @@ export class VideoComponent implements OnInit {
     this.AddButtonRouteViaApp = Val;
 
   }
+  @Input()
+  set VideoManagementRoute(val:any){
+    this.manageVideoRouteViaApp = (val) || '<no name set>';
+    this.manageVideoRouteViaApp = val;
+  }
   @Input()          //getting edit route
   set editRoute(Val: any) {
     this.editRouteViaApp = (Val) || '<no name set>';
@@ -95,9 +101,14 @@ export class VideoComponent implements OnInit {
 
   ngOnInit() {
   }
-  AddButton() {
+  addVideoCategoryButton() {
 
     this.router.navigateByUrl('/' + this.AddButtonRouteViaApp);
+  }
+
+  videoManagementButton() {
+
+    this.router.navigateByUrl('/' + this.manageVideoRouteViaApp);
   }
 
 }

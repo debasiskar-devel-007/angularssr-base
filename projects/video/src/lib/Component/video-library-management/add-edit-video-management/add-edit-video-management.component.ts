@@ -28,7 +28,7 @@ export class AddEditVideoManagementComponent implements OnInit {
   public getSourceName:any;
   public allCategoryName:any=[];
   public getDataEndpointData: any;
-
+  public categorySourceName:any;
   /**ckeditor start here*/
   public Editor = ClassicEditor;  //for ckeditor
   editorConfig = {
@@ -65,6 +65,11 @@ export class AddEditVideoManagementComponent implements OnInit {
     this.getSourceName = (val) || '<no name set>';
     this.getSourceName = val;
   }
+  @Input()
+  set CategorySourceName(val:any){
+   this.categorySourceName = (val) || 'no name set';
+   this.categorySourceName = val ; 
+  }
   @Input()          //getting single video data from application
   set EditVideoData(Videodata: any) {
     this.VideoDataArray = Videodata;
@@ -76,6 +81,7 @@ export class AddEditVideoManagementComponent implements OnInit {
       this.videoManagementForm.controls['description'].patchValue(Videodata[0].description);
       this.model.editorData = Videodata[0].description;
       this.videoManagementForm.controls['videoUrl'].patchValue(Videodata[0].videoUrl);
+      this.videoManagementForm.controls['parent_category'].patchValue(Videodata[0].parent_category);
       this.videoManagementForm.controls['priority'].patchValue(Videodata[0].priority);
       this.videoManagementForm.controls['status'].patchValue(Videodata[0].status);
     }
@@ -88,6 +94,7 @@ export class AddEditVideoManagementComponent implements OnInit {
       description: ['', Validators.required],
       videoUrl: ['', Validators.required],
       priority: ['', Validators.required],
+      parent_category:[''],
       status: [true,]
     })
     this.editorconfig.extraAllowedContent = '*[class](*),span;ul;li;table;td;style;*[id];*(*);*{*}';
@@ -132,9 +139,10 @@ export class AddEditVideoManagementComponent implements OnInit {
   }
   /**preview url start here **/
 
-  getCategoryName(){
+/**getting all category list**/ 
+   getCategoryName(){
     let data: any = {
-      "source": "video_category",
+      "source": this.categorySourceName,
       "condition": {
         "status": 1
       },
@@ -142,7 +150,7 @@ export class AddEditVideoManagementComponent implements OnInit {
     this.apiService.getData(data).subscribe(response => {
       let result: any = response;
       this.allCategoryName = result.res;
-
+     
     })
   }
   previewUrl() {
@@ -153,9 +161,9 @@ export class AddEditVideoManagementComponent implements OnInit {
   /**preview url end here **/
   /**modal end here */
   VideoManagementFormSubmit() {
-    this.videoManagementForm.patchValue({
-      description: this.model.editorData
-    });
+    // this.videoManagementForm.patchValue({
+    //   description: this.model.editorData
+    // });
     let x: any;
     for (x in this.videoManagementForm.controls) {
       this.videoManagementForm.controls[x].markAsTouched();
@@ -177,7 +185,9 @@ export class AddEditVideoManagementComponent implements OnInit {
             'videoUrl': this.videoManagementForm.value.videoUrl,
             'status': this.videoManagementForm.value.status,
             'description': this.videoManagementForm.value.description
-          }
+          },
+          "sourceobj": ["parent_category"]
+
         }
 
       } else {
@@ -186,6 +196,8 @@ export class AddEditVideoManagementComponent implements OnInit {
         data = {                                         //add part
           "source":this.getSourceName,
           "data": this.videoManagementForm.value,
+          "sourceobj": ["parent_category"]
+
         };
       }
       this.spinnerloader = true;
