@@ -11,7 +11,9 @@
         <!-- Name  -->
         <mat-form-field>
           <mat-label>Name</mat-label>
-          <input matInput placeholder="name" formControlName="name">
+          <input matInput placeholder="name" formControlName="name" (blur)="inputBlur('name')">
+          <mat-error *ngIf="!subscriptionCatForm.controls['name'].valid
+          && subscriptionCatForm.controls['name'].errors.required"> Name is required.</mat-error>
         </mat-form-field>
 
 
@@ -19,7 +21,9 @@
 
         <mat-form-field>
           <mat-label>Priority</mat-label>
-          <input matInput placeholder="priority" type="number" formControlName="priority">
+          <input matInput placeholder="priority" type="number" formControlName="priority" (blur)="inputBlur('priority')">
+          <mat-error *ngIf="!subscriptionCatForm.controls['priority'].valid
+          && subscriptionCatForm.controls['priority'].errors.required"> Priority is required.</mat-error>
         </mat-form-field>
 
         <!-- Status  -->

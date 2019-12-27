@@ -19,8 +19,9 @@ import { ListingSenderComponent } from './Components/senderslist/listing-sender/
 import { AddEditTestemaillibComponent,Modal4 } from './Components/testemails/add-edit-testemaillib/add-edit-testemaillib.component';
 import { ListingTestemaillibComponent } from './Components/testemails/listing-testemaillib/listing-testemaillib.component';
 import { AmazingTimePickerModule } from 'amazing-time-picker';
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+// import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import { DatePipe} from '@angular/common';
+import { CKEditorModule } from 'ngx-ckeditor';
 
 
 @NgModule({
@@ -38,6 +39,7 @@ import { DatePipe} from '@angular/common';
     RouterModule,
     HttpClientModule,
     AmazingTimePickerModule,
+    // NgxMaterialTimepickerModule,
     CKEditorModule,
     
   ],

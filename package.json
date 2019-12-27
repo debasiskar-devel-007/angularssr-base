@@ -68,7 +68,6 @@
     "ngx-cookie-service": "^2.2.0",
     "ngx-embed-video": "^1.0.4",
     "ngx-image-compress": "^8.0.3",
-    "ngx-material-timepicker": "^5.3.0",
     "ngx-moment": "^3.5.0",
     "ngx-uploader": "^7.1.0",
     "node-fetch": "^2.6.0",

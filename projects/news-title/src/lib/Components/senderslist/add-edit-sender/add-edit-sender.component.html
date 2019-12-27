@@ -8,13 +8,19 @@
         <!-- Senders name -->
         <mat-form-field>
           <mat-label>Sender's Name</mat-label>
-          <input matInput formControlName="name">
+          <input matInput formControlName="name" (blur)="inputBlur('name')">
+          <mat-error *ngIf="!senderForm.controls['name'].valid
+          && senderForm.controls['name'].errors.required" > Name is required.</mat-error>
         </mat-form-field>
 
         <!-- Sender's email  -->
         <mat-form-field>
           <mat-label>Email</mat-label>
-          <input matInput formControlName="email">
+          <input matInput formControlName="email" (blur)="inputBlur('email')">
+          <mat-error *ngIf="!senderForm.controls['email'].valid
+          && senderForm.controls['email'].errors.required" > Email is required.</mat-error>
+          <mat-error *ngIf="!senderForm.controls['email'].valid
+          && senderForm.controls['email'].errors.email" > Email is not Valid.</mat-error>
         </mat-form-field>
 
 

@@ -4,8 +4,9 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { NewsTitleService } from '../../../news-title.service';
 import { DatePipe } from '@angular/common';
 import { CookieService } from 'ngx-cookie-service';
-import { FormGroup, FormControl, FormArray, FormBuilder } from "@angular/forms";
+import { FormGroup, FormControl, FormArray, FormBuilder, Validators } from "@angular/forms";
 import { Router , ActivatedRoute } from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'lib-add-edit-newsletterlib',
@@ -16,14 +17,21 @@ export class AddEditNewsletterlibComponent implements OnInit {
 
 
   // =================declaration==================
-  header_name:any="Newsletter"
-  buttonText:any="SAVE";
-  group_name_array:any = [];
-  sender_name_array:any = [];
-  configData:any;
-  time:any ;
-  cookieValue:any;
-  newsForm : FormGroup;
+  public header_name:any="Newsletter"
+  public buttonText:any="SAVE";
+  public group_name_array:any = [];
+  public sender_name_array:any = [];
+  public configData:any;
+  public time:any ;
+  public cookieValue:any;
+  public newsForm : FormGroup;
+  public frequency_flag:boolean = false;
+  public days_array:any = [];
+  public editorconfig : any = {};
+  days_json:any;
+  public message : string;
+
+  
   // ==============================================
 
     /**ckeditor start here*/
@@ -42,18 +50,65 @@ export class AddEditNewsletterlibComponent implements OnInit {
     this.configData = getConfig;
   }
 
+  
+
   constructor( private atp : AmazingTimePickerService, private newsService : NewsTitleService,
     public datepipe: DatePipe , public cookieService : CookieService , private formBuilder : FormBuilder,
-    public router : Router) { 
-
-     
+    public router : Router , private snackBar: MatSnackBar) {      
+      
+  
+      this.editorconfig.extraAllowedContent = '*[class](*),span;ul;li;table;td;style;*[id];*(*);*{*}';   
+      // setTimeout(() => {
+        this.days_json = [
+          {
+            "day":"Sunday",
+            "value":1,
+            isSelected:false
+          },
+          {
+            "day":"Monday",
+            "value":2,
+            isSelected:false
+          },
+          {
+            "day":"Tuesday",
+            "value":3,
+            isSelected:false
+          },
+          {
+            "day":"Wednesday",
+            "value":4,
+            isSelected:false
+          },
+          {
+            "day":"Thursday",
+            "value":5,
+            isSelected:true
+          },
+          {
+            "day":"Friday",
+            "value":6,
+            isSelected:false
+          },   
+          {
+            "day":"Saturday",
+            "value":7,
+            isSelected:false
+          }
+        ];
+      // }, 1000);
+      
+    
   }
+
 
 
   ngOnInit() {
 
     if(this.configData.action=='add')
-    this.time = this.datepipe.transform(new Date(),'h:mm a');  
+    this.time = this.datepipe.transform(new Date(),'h:mm');  
+  
+   
 
        //Calling the group name
        this.getGroupName();
@@ -75,12 +130,23 @@ export class AddEditNewsletterlibComponent implements OnInit {
           /* Button text */
           this.buttonText = "SUBMIT";
           this.header_name = "Add a Newsletter";
+          this.message = "Newsletter Added Successfully!!!";
           break;
         case 'edit':
+          this.days_json = [];
           /* Button text */
           this.buttonText = "UPDATE";  
           this.time="";
-          this.setDefaultValue(this.configData.defaultData);        
+          this.message = "Newsletter Information Updated!!!";
+          this.setDefaultValue(this.configData.defaultData);    
+          if(this.configData.defaultData.days_of_weeks!=null)
+          this.frequency_flag = true;    
+ 
+
+          setTimeout(() => {
+             this.days_json = this.configData.defaultData.days_of_weeks;
+          }, 1000);
+         
           break;
       }
       
@@ -88,12 +154,22 @@ export class AddEditNewsletterlibComponent implements OnInit {
        
   }
 
+  /** mat snackbar **/
+  openSnackBar(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+    });
+  }
+  
+
+ /** opening up the time picker **/
   open()
   {
     const amazingTimePicker = this.atp.open();
     amazingTimePicker.afterClose().subscribe(time=>{
     });
   }
+  
 
 
   /*getting the group name*/
@@ -122,25 +198,27 @@ export class AddEditNewsletterlibComponent implements OnInit {
   //generate form
   generateForm(){
     this.newsForm = this.formBuilder.group({
-      newstitle:[],
-      newssubject:[],
+      newstitle:['',[Validators.required]],
+      newssubject:['',[Validators.required]],
       share_news:[],
       senderaddress:[],
-      publishdate:[],
+      publishdate:['',[Validators.required]],
       settime:[this.time],
-      content:[],
+      content:['',[Validators.required]],
       sendnews:[],
       newsfrequency:[],
+      days_of_weeks:[],
       timeofday:[this.time],
       timezone:[],
-      startdate:[],
-      enddate:[],
+      startdate:['',[Validators.required]],
+      enddate:['',[Validators.required]],
       reply:[],
       status:[1]
     });
+   
   }
 
-
+  
 
   //setting the default value
   setDefaultValue(defaultValue) {
@@ -152,6 +230,7 @@ export class AddEditNewsletterlibComponent implements OnInit {
       publishdate:defaultValue.publishdate,
       settime:defaultValue.settime,
       content:defaultValue.content,
+      days_of_weeks:defaultValue.days_of_weeks,
       sendnews:defaultValue.sendnews,
       newsfrequency:defaultValue.newsfrequency,
       timeofday:defaultValue.timeofday,
@@ -164,12 +243,44 @@ export class AddEditNewsletterlibComponent implements OnInit {
 
   }
 
+
+  /** blur function **/
+  inputBlur(val: any) {
+    this.newsForm.controls[val].markAsUntouched();
+  }
+
+
+  /** marking the checkbox as true **/
+  getDays(day_var:any){
+    if(day_var.isSelected === true)
+    day_var.isSelected = false;
+    else
+    day_var.isSelected = true;
+  }
+  
   //submit function
   onSubmit() {
 
+    for (var i = 0; i < this.days_json.length; i++) {
+      if(this.days_json[i].isSelected)
+      this.days_array.push(this.days_json[i]);
+      else
+      this.days_array.push(this.days_json[i]);
+    }
+
+    this.newsForm.value.days_of_weeks = this.days_array;   
+
+
+     /** marking as untouched **/
+     for (let x in this.newsForm.controls) {
+      this.newsForm.controls[x].markAsTouched();
+    }
+
+   
+
     /* stop here if form is invalid */
     if (this.newsForm.invalid) {
-      console.log("Invalid Form");return;
+      return;
     } else {
 
       /* start process to submited data */
@@ -180,8 +291,8 @@ export class AddEditNewsletterlibComponent implements OnInit {
       };
       this.newsService.addData(this.configData.endpoint, postData).subscribe((response: any) => {
         if (response.status == "success") {
-          console.log(response.status);
-        
+         
+          this.openSnackBar(this.message,"OK");
           this.router.navigate([this.configData.callBack]);
         } else {
           alert("Some error occurred. Please try angain.");

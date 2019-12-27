@@ -39,6 +39,7 @@ export declare class AddeditComponent implements OnInit {
     image_name: any;
     image_type: any;
     youtube_suffix: any;
+    editorconfig: any;
     constructor(formBuilder: FormBuilder, testiService: TestimonialService, router: Router, dialog: MatDialog, sanitizer: DomSanitizer);
     ngOnInit(): void;
     config: any;

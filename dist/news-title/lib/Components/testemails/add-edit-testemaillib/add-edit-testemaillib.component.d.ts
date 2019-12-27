@@ -11,7 +11,7 @@ export declare class AddEditTestemaillibComponent implements OnInit {
     private newsService;
     private router;
     dialog: MatDialog;
-    senderForm: FormGroup;
+    senderFormTest: FormGroup;
     buttonText: any;
     header_name: any;
     configData: any;
@@ -23,6 +23,8 @@ export declare class AddEditTestemaillibComponent implements OnInit {
     config: any;
     openDialog(x: any): void;
     setDefaultValue(defaultValue: any): void;
+    /** blur function **/
+    inputBlur(val: any): void;
     onSubmit(): void;
 }
 export declare class Modal4 {

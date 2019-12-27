@@ -43,8 +43,8 @@ export class ListingNewsletterComponent implements OnInit {
       search_settings: {
         textsearch: [{ label: "Search by customer name...", field: 'fullname' },{ label: "Search by email...", field: 'email' }],
        
-      }
-
+      },
+      detail_header:['_id']
     }
     this.loader = false;
   }

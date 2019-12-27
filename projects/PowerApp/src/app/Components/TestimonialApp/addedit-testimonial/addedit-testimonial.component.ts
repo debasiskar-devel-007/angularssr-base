@@ -11,7 +11,7 @@ export class AddeditTestimonialComponent implements OnInit {
 /* Config for add and edit start */
 public configAddEdit: any = {
   action: "add",
-  endpoint: "https://r245816wug.execute-api.us-east-1.amazonaws.com/dev/api/addorupdatedata",
+  endpoint: "https://i1kzfac3pe.execute-api.us-east-1.amazonaws.com/dev/api/addorupdatedata",
   source: "testimonial",
   condition: {},
   defaultData: null,
@@ -21,13 +21,16 @@ public configAddEdit: any = {
 }
 
 public configData: any = {
-  baseUrl: "http://3.15.236.141:5005/",
+  baseUrl: "https://fileupload.influxhostserver.com/",
   endpoint: "uploads",
   size: "51200", // kb
-  format: ["jpg", "jpeg", "png"], // use all small font
+  format: ["jpg", "jpeg","png"], // use all small font
   type: "testimonial-image",
   path: "testimonial",
-  prefix: "testimonial-image_"
+  prefix: "testimonial-image_",
+  formSubmit: false,
+  conversionNeeded: 0,
+  bucketName: "crmfiles.influxhostserver"
 }
 
 /* Config for add and edit end */

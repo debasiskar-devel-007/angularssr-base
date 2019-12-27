@@ -84,11 +84,18 @@ export class AddEditSubcategoryComponent implements OnInit {
   // ==================================================================================================
 
 
+
+  /** blur function **/
+  inputBlur(val: any) {
+    this.subscriptionCatForm.controls[val].markAsUntouched();
+  }
+
+
   // ======================form generation=====================
   generateForm() {
     this.subscriptionCatForm = this.formBuilder.group({
-      name: [],
-      priority: [],
+      name: ['',Validators.required],
+      priority: ['',Validators.required],
       status: []
     });
   }
@@ -97,6 +104,12 @@ export class AddEditSubcategoryComponent implements OnInit {
 
   // =========================SUBMIT FUNCTION======================
   onSubmit() {
+
+     /** marking as untouched **/
+     for (let x in this.subscriptionCatForm.controls) {
+      this.subscriptionCatForm.controls[x].markAsTouched();
+    }
+
 
     /* stop here if form is invalid */
     if (this.subscriptionCatForm.invalid) {

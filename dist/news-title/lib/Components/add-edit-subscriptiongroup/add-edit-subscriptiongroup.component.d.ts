@@ -26,6 +26,8 @@ export declare class AddEditSubscriptiongroupComponent implements OnInit {
     generateForm(): void;
     setDefaultValue(defaultValue: any): void;
     openDialog(x: any): void;
+    /** blur function **/
+    inputBlur(val: any): void;
     onSubmit(): void;
     getGroup(): void;
 }

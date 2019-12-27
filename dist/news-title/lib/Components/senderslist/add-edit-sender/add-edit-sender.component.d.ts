@@ -22,6 +22,8 @@ export declare class AddEditSenderComponent implements OnInit {
     generateForm(): void;
     config: any;
     openDialog(x: any): void;
+    /** blur function **/
+    inputBlur(val: any): void;
     setDefaultValue(defaultValue: any): void;
     onSubmit(): void;
 }

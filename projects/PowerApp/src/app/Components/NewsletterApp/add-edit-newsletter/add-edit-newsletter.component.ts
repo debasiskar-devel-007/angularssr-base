@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { Router,ActivatedRoute } from '@angular/router';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-add-edit-newsletter',
@@ -10,8 +11,8 @@ import { Router,ActivatedRoute } from '@angular/router';
 export class AddEditNewsletterComponent implements OnInit {
   public configAddEdit: any = {
     action: "add",
-    endpoint: "https://r245816wug.execute-api.us-east-1.amazonaws.com/dev/api/addorupdatedata",
-    endpoint2: "https://r245816wug.execute-api.us-east-1.amazonaws.com/dev/api/",
+    endpoint: environment.apiBaseUrl +"addorupdatedata",
+    endpoint2: environment.apiBaseUrl,
     source: "newsletters",
     condition: {},
     defaultData: null,

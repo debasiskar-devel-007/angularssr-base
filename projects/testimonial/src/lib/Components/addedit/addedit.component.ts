@@ -34,25 +34,28 @@ export class AddeditComponent implements OnInit {
 
 
   //  ========================================Declaration Section======================================
-  buttonText = "SUBMIT"; 
-  testimonialForm: FormGroup;
+  public buttonText = "SUBMIT"; 
+  public testimonialForm: FormGroup;
   public loader: boolean = false;
-  configData;
-  successMessage: string = "Submitted Successfully";
-  dialogRef: any;
-  imageConfigData:any;
-  ErrCode:boolean = false;
-  flag: boolean;
-  img_var: any;
-  header_name: any;
-  image_name: any;
-  image_type: any;
-  youtube_suffix:any="https://www.youtube.com/embed/"
+  public configData;
+  public successMessage: string = "Submitted Successfully";
+  public dialogRef: any;
+  public imageConfigData:any;
+  public ErrCode:boolean = false;
+  public flag: boolean;
+  public img_var: any;
+  public header_name: any;
+  public image_name: any;
+  public image_type: any;
+  public youtube_suffix:any="https://www.youtube.com/embed/";  
+  public editorconfig : any = {};
   // ==================================================================================================
 
 
   constructor(private formBuilder: FormBuilder, private testiService: TestimonialService,
-    private router: Router, public dialog: MatDialog , private sanitizer: DomSanitizer) { }
+    private router: Router, public dialog: MatDialog , private sanitizer: DomSanitizer) {
+      this.editorconfig.extraAllowedContent = '*[class](*),span;ul;li;table;td;style;*[id];*(*);*{*}';
+     }
 
   ngOnInit() {
     this.loader = false;
@@ -204,9 +207,7 @@ export class AddeditComponent implements OnInit {
 
 //  =====================preview video================
   preview_video()
-  {
-     console.log("********",this.youtube_suffix +this.testimonialForm.value.video_url);
-    //  this.safeSrc =  this.sanitizer.bypassSecurityTrustResourceUrl(this.youtube_suffix+this.testimonialForm.value.video_url);
+  {    
     this.dialogRef = this.dialog.open(PreviewComponent, {
       width: '850px',
       height:'500px',
@@ -280,8 +281,7 @@ export class PreviewComponent {
   safeSrc: SafeResourceUrl;
   constructor(
     public dialogRef: MatDialogRef<PreviewComponent>,
-    @Inject(MAT_DIALOG_DATA) public data: PreviewDialog , private sanitizer: DomSanitizer) { 
-      console.log("data",data);      
+    @Inject(MAT_DIALOG_DATA) public data: PreviewDialog , private sanitizer: DomSanitizer) {    
       this.safeSrc =  this.sanitizer.bypassSecurityTrustResourceUrl(data.msg);
     }
 

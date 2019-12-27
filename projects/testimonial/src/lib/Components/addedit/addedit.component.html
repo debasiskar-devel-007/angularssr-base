@@ -41,9 +41,10 @@
 
 
         <!-- ----------------------------------testimonial----------------------------------- -->
-        <ckeditor [editor]="Editor" [config]="editorConfig" formControlName="description"
-          (blur)="inputBlur('description')"></ckeditor>
-          <mat-error *ngIf="!testimonialForm.controls['description'].valid
+          <mat-label>Please write a testimonial...</mat-label>
+          <ck-editor formControlName="description" [config]="editorconfig" (blur)="inputBlur('description')">
+          </ck-editor>
+         <mat-error *ngIf="!testimonialForm.controls['description'].valid
           && testimonialForm.controls['description'].errors.required && testimonialForm.controls['description'].touched  " >Description is required.</mat-error>
         <br>
         <!-- -------------------------------------------------------------------------------- -->
@@ -76,8 +77,23 @@
         <!-- ---------------------------------------------Image Uploader--------------------- -->
         <h1>Testimonial Image:</h1>
         <lib-file-upload [config]="imageConfigData"></lib-file-upload>
-        <mat-error *ngIf="ErrCode==true">Please add just one testimonial image.</mat-error>
+        <div *ngIf="ErrCode==true" class="desc_error">
+          <mat-icon>error</mat-icon>
+          <p>Please add just one testimonial image.</p>
+        </div>
         <!-- -------------------------------------------------------------------------------- -->
+
+        <!-- CARD VIEW  -->
+        <mat-card-content class="files-view" *ngIf="flag==true">
+          <mat-card class="example-card">
+            <img mat-card-image [attr.src]="img_var">
+            <mat-card-title>{{ image_name }}</mat-card-title>
+            <mat-card-subtitle>{{ image_type }}</mat-card-subtitle>
+            <span class="closecard" (click)="clear_image()"><i class="material-icons">clear</i></span>
+          </mat-card>
+        </mat-card-content>
+        <!-- ---------  -->
+
 
 
 
@@ -106,16 +122,7 @@
         <!-- ------------------------------------------------------------------- -->
 
 
-        <!-- CARD VIEW  -->
-        <mat-card-content class="files-view" *ngIf="flag==true">
-          <mat-card class="example-card">
-            <img mat-card-image [attr.src]="img_var">
-            <mat-card-title>{{ image_name }}</mat-card-title>
-            <mat-card-subtitle>{{ image_type }}</mat-card-subtitle>
-            <span class="closecard" (click)="clear_image()"><i class="material-icons">clear</i></span>
-          </mat-card>
-        </mat-card-content>
-        <!-- ---------  -->
+        
 
 
 

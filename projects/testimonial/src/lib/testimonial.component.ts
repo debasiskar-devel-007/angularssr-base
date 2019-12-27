@@ -25,8 +25,8 @@ export class TestimonialComponent implements OnInit {
       listEndPoint: receivedData.listEndPoint,
       datasource: receivedData.datasource,
       tableName: receivedData.tableName,
-      listArray_skip: ["_id", "userId", "created_at", "id", "updated_at","image","description"],
-      listArray_modify_header: { "name": "Customer/User Name", "email": "Customer/User Email", "description_html": "Testimonial", "priority": "Priority", "status": "Status" },
+      listArray_skip: ["_id", "userId", "created_at", "id", "updated_at","image","description","name"],
+      listArray_modify_header: { "name copy": "Customer/User Name", "email": "Customer/User Email", "description html": "Testimonial", "priority": "Priority", "status": "Status" },
       admintablenameTableName: "admin",
       statusarr: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }],
       updateurl: receivedData.updateEndpoint,
@@ -44,6 +44,7 @@ export class TestimonialComponent implements OnInit {
         value: 'image',
         fileurl: 'https://s3.us-east-2.amazonaws.com/crmfiles.influxhostserver/testimonial/'             // Image path 
       }],
+      detail_header:['_id']
     }
     this.loader = false;
   }

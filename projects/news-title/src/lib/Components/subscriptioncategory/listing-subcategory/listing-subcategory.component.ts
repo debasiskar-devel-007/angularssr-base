@@ -42,6 +42,7 @@ set config(receivedData: any) {
       value: 'image',
       fileurl: 'https://s3.us-east-2.amazonaws.com/crmfiles.influxhostserver/testimonial/'             // Image path 
     }],
+    detail_header:['_id']
   }
   this.loader = false;
 }
