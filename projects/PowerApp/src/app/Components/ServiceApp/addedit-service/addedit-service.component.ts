@@ -10,7 +10,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class AddeditServiceComponent implements OnInit {
   public configAddEdit: any = {
     action: "add",
-    endpoint: "https://o820cv2lu8.execute-api.us-east-2.amazonaws.com/production/api/addorupdatedata",
+    endpoint: "https://r245816wug.execute-api.us-east-1.amazonaws.com/dev/api/addorupdatedata",
     source: "services",
     condition: {},
     defaultData: null,
@@ -20,13 +20,25 @@ export class AddeditServiceComponent implements OnInit {
   }
   
   public configData: any = {
-    baseUrl: "http://3.15.236.141:5005/",
+    // baseUrl: "http://3.15.236.141:5005/"
+    baseUrl:"https://fileupload.influxhostserver.com/",
     endpoint: "uploads",
     size: "51200", // kb
     format: ["jpg", "jpeg", "png"], // use all small font
     type: "service-image",
     path: "services",
     prefix: "service-image_"
+  }
+
+
+  public configData2: any = {
+    baseUrl: "https://fileupload.influxhostserver.com/",
+    endpoint: "uploads",
+    size: "51200", // kb
+    format: ["jpg", "jpeg", "png"], // use all small font
+    type: "additional-image",
+    path: "services",
+    prefix: "additional-image_"
   }
 
   constructor(private router : Router , private activatedRoute : ActivatedRoute ,private cookieService : CookieService) { }

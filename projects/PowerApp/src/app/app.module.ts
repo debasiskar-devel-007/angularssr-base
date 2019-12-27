@@ -32,6 +32,8 @@ import { ResourcelibModule } from 'resourcelib';
 import { AddeditResourceComponent } from './Components/ResourceApp/addedit-resource/addedit-resource.component';
 import { ListingResourceComponent } from './Components/ResourceApp/listing-resource/listing-resource.component';
 
+
+//_______________________________NEWS LETTER____________________________________
 import { NewsTitleModule } from 'news-title';
 import { AddEditSubcategoryComponent } from './Components/NewsletterApp/add-edit-subcategory/add-edit-subcategory.component';
 import { ListingSubcategoryComponent } from './Components/NewsletterApp/listing-subcategory/listing-subcategory.component';

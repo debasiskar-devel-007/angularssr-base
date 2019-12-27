@@ -124,3 +124,9 @@ h1{
 
 
 .closecard i{font-size: 18px; line-height: 27px;}
+ 
+.clickable{
+  cursor:pointer;
+  position: relative;
+  z-index: 999;
+}

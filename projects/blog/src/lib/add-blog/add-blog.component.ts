@@ -34,7 +34,7 @@ export class AddBlogComponent implements OnInit {
   buttonText: any = "SUBMIT";
   configData: any;
   loader: boolean = false;
-  successMessage: any = "Submitted Successfully!!!"
+  successMessage: any = "Category Added Successfully!!!"
   getParentCatArr: any = [];
   dialogRef:any;
   // ==================================================
@@ -58,7 +58,7 @@ export class AddBlogComponent implements OnInit {
       case 'edit':
         /* Button text */
         this.buttonText = "UPDATE";
-        this.successMessage = "One row updated";
+        this.successMessage = "One row updated!!!";
         this.setDefaultValue(this.configData.defaultData);
         this.header_txt = "EDIT";
         break;

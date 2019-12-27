@@ -1,19 +1,34 @@
 {
-  "name": "blog",
-  "version": "0.0.1",
-  "peerDependencies": {
-    "@angular/common": "^7.2.0",
-    "@angular/core": "^7.2.0"
+  "name": "blog-lib-influxiq",
+  "version": "0.0.3",
+  "bugs": "https://github.com/debasiskar-devel-007/blog/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/debasiskar-devel-007/blog.git"
   },
-  "main": "bundles/blog.umd.js",
-  "module": "fesm5/blog.js",
-  "es2015": "fesm2015/blog.js",
-  "esm5": "esm5/blog.js",
-  "esm2015": "esm2015/blog.js",
-  "fesm5": "fesm5/blog.js",
-  "fesm2015": "fesm2015/blog.js",
-  "typings": "blog.d.ts",
-  "metadata": "blog.metadata.json",
+  "devDependencies": {
+    "@angular/common": "^7.2.0",
+    "@angular/core": "^7.2.0",
+    "@angular/material": "^7.3.7 ",
+    "@angular/cdk": "~7.3.7",
+    "@ckeditor/ckeditor5-angular": "^1.1.0",
+    "@ckeditor/ckeditor5-build-classic": "^12.4.0",
+    "@ckeditor/ckeditor5-editor-decoupled": "^12.2.2",
+    "ngx-ckeditor": "^8.0.0",
+    "ckeditor4-angular": "^1.0.0-beta.2",
+    "@angular/animations": "~7.3.7",
+    "file-upload-lib-influxiq": "0.0.1",
+    "listing-angular7": "0.0.96"
+  },
+  "main": "bundles/blog-lib-influxiq.umd.js",
+  "module": "fesm5/blog-lib-influxiq.js",
+  "es2015": "fesm2015/blog-lib-influxiq.js",
+  "esm5": "esm5/blog-lib-influxiq.js",
+  "esm2015": "esm2015/blog-lib-influxiq.js",
+  "fesm5": "fesm5/blog-lib-influxiq.js",
+  "fesm2015": "fesm2015/blog-lib-influxiq.js",
+  "typings": "blog-lib-influxiq.d.ts",
+  "metadata": "blog-lib-influxiq.metadata.json",
   "sideEffects": false,
   "dependencies": {
     "tslib": "^1.9.0"

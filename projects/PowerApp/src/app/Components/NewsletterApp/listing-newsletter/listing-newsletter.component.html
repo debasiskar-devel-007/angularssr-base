@@ -1,3 +1,18 @@
-<p>
-  listing-newsletter works!
-</p>
+
+<mat-card>
+  <mat-toolbar color="primary" style="justify-content: center; align-items: center;">
+      <h2 class="headerSpan">Newsletters</h2>
+  </mat-toolbar>
+
+  <!-- ---------------------Button for adding new role------------------------------ -->
+  <mat-toolbar class="buttonsetToolbar">
+      <button class="singleButton" mat-raised-button color="primary" [routerLink]="['/newsletter/add']">Add Newsletter</button>
+  </mat-toolbar>
+  
+
+  <!-- to listing library -->
+  
+  <lib-listing-newsletterlib [config]="newsConfigForm"></lib-listing-newsletterlib>
+
+</mat-card>
+
