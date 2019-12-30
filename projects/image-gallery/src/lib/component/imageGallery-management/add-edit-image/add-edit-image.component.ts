@@ -28,10 +28,28 @@ export class AddEditImageComponent implements OnInit {
   public ErrCode: boolean;
   public spinnerLoader: boolean;
   public parameter_id: any = '';
+  public sourceName:any='';
+  public categorySourceName:any='';
+
   @Input()
   set imageUpload(getConfig: any) {
     this.imageConfigData = getConfig;
+    console.log("image data",this.imageConfigData);
   }
+
+  @Input()
+  set SourceName(val : any){
+    this.sourceName = (val) || '<no name set>';
+    this.sourceName = val;
+    console.log("Source nameeeee",this.sourceName);
+  }
+  @Input()
+  set ImageCategorySourceName(val : any){
+    this.categorySourceName = (val) || '<no name set>';
+    this.categorySourceName = val;
+    console.log("Source nameeeee",this.sourceName);
+  }
+
   @Input()          //setting the server url from project
   set serverUrl(serverUrlval: any) {
     this.serverUrlData = (serverUrlval) || '<no name set>';
@@ -64,11 +82,11 @@ export class AddEditImageComponent implements OnInit {
       this.headerText = "Edit Image";
       this.buttonText = "Update";
       this.parameter_id = this.activeroute.snapshot.params._id;
-      this.imageGalleryManagementForm.controls['parent_category'].patchValue(val[0].parent_category);
+      this.imageGalleryManagementForm.controls['category_name'].patchValue(val[0].category_name);
       this.imageGalleryManagementForm.controls['img_gallery'].patchValue(val[0].img_gallery);
        
       for (let i = 0; i < val[0].img_gallery.length; i++) {
-        this.img_var = val[0].img_gallery[i].basepath + val[0].img_gallery[i].image;
+        this.img_var = val[0].img_gallery[i].basepath + val[0].img_gallery[i].fileservername;
         this.image_name = val[0].img_gallery[i].name;
         this.image_type = val[0].img_gallery[i].type;
         this.images_array_edit.push({
@@ -90,7 +108,7 @@ export class AddEditImageComponent implements OnInit {
   constructor(public apiService: ApiService, public fb: FormBuilder, public activeroute: ActivatedRoute,
     public _http: HttpClient, public router: Router) {
     this.imageGalleryManagementForm = this.fb.group({
-      parent_category: [''],
+      category_name: [''],
       img_gallery: ['']
     })
   }
@@ -115,36 +133,38 @@ export class AddEditImageComponent implements OnInit {
   }
   getDropdownData() {
     let data: any = {
-      "source": "imageGallery_category"
+      "source": this.categorySourceName,
+      "condition": {
+        "status": 1
+      },
     }
     this.apiService.getData(data).subscribe(response => {
       let result: any = response;
       this.DataList = result.res;
     })
   }
-  resetImageForm() {
-    this.imageGalleryManagementForm.reset();
-  }
+  
   clear_image(index: any) {
-    //console.log(this.dataForEdit.img_gallery[0]);
-    //console.log("sb sala faltu",this.dataForEdit.img_gallery[index]);
-    // this.images_array.pop(this.dataForEdit.img_gallery[index]);
     this.images_array_edit.splice(index, 1);
   }
+
+
   ImageAddEditFormSubmit() {
 
-    if (this.imageConfigData) {
-      for (const loop in this.imageConfigData.files) {
+    if (this.imageConfigData.files.length > 0 || this.img_var.length > 0) {
+      for (let loop = 0; loop < this.imageConfigData.files.length; loop++) {
         this.images_array =
           this.images_array.concat({
-            "basepath": this.imageConfigData.files[loop].upload.data.basepath + '/'
-              + this.imageConfigData.path + '/',
-            "image": this.imageConfigData.files[loop].upload.data.data.fileservername,
+            "upload_server_id": this.imageConfigData.files[loop].upload.data._id,
+            "basepath": this.imageConfigData.files[loop].upload.data.basepath + '/' + this.imageConfigData.path + '/',
+            "fileservername": this.imageConfigData.files[loop].upload.data.data.fileservername,
             "name": this.imageConfigData.files[loop].name,
-            "type": this.imageConfigData.files[loop].type
+            "type": this.imageConfigData.files[loop].type,
+            "bucketname": this.imageConfigData.bucketName
           });
       }
-      this.imageGalleryManagementForm.value.img_gallery = this.images_array;
+
+      this.imageGalleryManagementForm.controls['img_gallery'].patchValue(this.images_array);
     } else {
       this.imageGalleryManagementForm.value.img_gallery = false;
     }
@@ -157,20 +177,20 @@ export class AddEditImageComponent implements OnInit {
       var data: any;
       if (this.activeroute.snapshot.params._id) { 
         data = {                                        //update part
-          "source": "imageGallery_management",
+          "source": this.sourceName,
           'data': {
             "id": this.parameter_id,
-            "parent_category": this.imageGalleryManagementForm.value.parent_category,
+            "category_name": this.imageGalleryManagementForm.value.category_name,
             "img_gallery": this.imageGalleryManagementForm.value.img_gallery,
           },
-          "sourceobj": ["parent_category"]
+          "sourceobj": ["category_name"]
         }
       } else {
 
         data = {                                         //add part
-          "source": "imageGallery_management",
+          "source": this.sourceName,
           "data": this.imageGalleryManagementForm.value,
-          "sourceobj": ["parent_category"]
+          "sourceobj": ["category_name"]
         }
       }
     }

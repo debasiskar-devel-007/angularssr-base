@@ -20,7 +20,7 @@ export class VideoComponent implements OnInit {
   ;  /**lib-listing start here **/
   public allDataList: any = [];
 
-  public allDataList_skip: any = ["_id", "description", "parent_id", "pc"];
+  public allDataList_skip: any = ["_id", "description", "parent_id", "title_search","parentvideocategory_search"];
   public allDataList_modify_header: any = {
     'title': "Title", 'description': "Description",
     "status": "Status", "priority": "Priority", "parentvideocategory": "Parent Category"
@@ -29,8 +29,7 @@ export class VideoComponent implements OnInit {
   public search_settings: any =
     {
       selectsearch: [{ label: 'Search By Status', field: 'status', values: this.status }],
-      textsearch: [{ label: "Search By Title", field: 'title' }],
-      search: [{ label: "Search By Parent Category", field: 'parentvideocategory' }]
+      textsearch: [{ label: "Search By Title", field: 'title_search' },{ label: "Search By Parent Category", field: 'parentvideocategory_search' }],
     };
     public previewModal_detail_skip: any = ['_id'];
 
@@ -95,7 +94,6 @@ export class VideoComponent implements OnInit {
   set DeleteEndpoint(val: any) {
     this.deleteEndpointViaApp = (val) || '<no name set>';
     this.deleteEndpointViaApp = val;
-    console.log("delete endpoint",this.deleteEndpointViaApp);
   }
   constructor(public activeRoute: ActivatedRoute, public router: Router) { }
 

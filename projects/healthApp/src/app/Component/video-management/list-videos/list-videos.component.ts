@@ -20,7 +20,7 @@ export class ListVideosComponent implements OnInit {
   public EditRoute:any="video-category/edit/";
   public addButtonRoute:any="video-category/add";
   public videoManagementRoute:any="video-library-management/list";
-  public searchEndpoint:any="dalalist";
+  public searchEndpoint:any="datalist";
   public searchSourcename:any="video_category_view";
   constructor(public activatedRoute: ActivatedRoute, public cookies :CookieService) { }
 

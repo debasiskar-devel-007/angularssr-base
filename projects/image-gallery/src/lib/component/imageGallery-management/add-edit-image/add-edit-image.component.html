@@ -8,8 +8,8 @@
         <form class="example-form" autocomplete="off" name="imageGalleryManagementForm"
           (ngSubmit)="ImageAddEditFormSubmit()" [formGroup]="imageGalleryManagementForm">
           <mat-form-field class="parent_cat">
-            <mat-label>Parent Category</mat-label>
-            <mat-select formControlName="parent_category">
+            <mat-label>Category Name</mat-label>
+            <mat-select formControlName="category_name">
               <mat-option [value]=0>
                 Select a category
               </mat-option>
@@ -40,8 +40,8 @@
           </ng-container>
 
           <button class="submitbtn" mat-raised-button color="primary" type="submit">{{buttonText}}</button>
-          <button class="submitbtn" (click)="resetImageForm()" mat-raised-button color="primary"
-            type="submit">Reset</button>
+          <button class="submitbtn" mat-raised-button color="primary"
+            type="reset">Reset</button>
         </form>
       </mat-card-content>
     </span>

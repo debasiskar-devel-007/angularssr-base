@@ -124,7 +124,7 @@ const appRoutes: Routes = [
       path:'video-library-management/list',
       component: ListVideoManagementComponent,
       resolve:{ videoData : ResolveService },
-      data : {requestcondition : {source :'video_management',condition : {} }, endpoint : 'datalist'}
+      data : {requestcondition : {source :'video_management_view',condition : {} }, endpoint : 'datalist'}
     },
 
     /**Team Library start here**/

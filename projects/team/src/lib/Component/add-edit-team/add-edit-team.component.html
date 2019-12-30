@@ -17,8 +17,11 @@
                        && teamForm.controls['membername'].errors.required">
                 Category Name field can not be blank</mat-error>
             </mat-form-field><br>
+
+          <!-- description(ckeditor) -->
             <ck-editor formControlName="description" [config]="editorconfig">
             </ck-editor>
+
             <mat-form-field>
               <mat-label>Category Name</mat-label>
               <mat-select formControlName="categoryname">
@@ -116,7 +119,7 @@
           </mat-card-content>
           <!-- file upload end here -->
           <button mat-raised-button color="primary" mat-button class="submitbtn" type="submit">{{ButtonText}}</button>
-          <button type="button" class="submitbtn" mat-raised-button color="primary" (click)="ResetForm()">Reset</button>
+          <button type="reset" class="submitbtn" mat-raised-button color="primary" >Reset</button>
         </form>
       </mat-card-content>
     </span>

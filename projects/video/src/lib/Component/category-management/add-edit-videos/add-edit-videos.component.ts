@@ -17,11 +17,11 @@ export class AddEditVideosComponent implements OnInit {
   // editorConfig = {
   //   placeholder: 'Type the content here!',
   // };
-   /**ckeditor end here*/
+  /**ckeditor end here*/
   public model = {
     editorData: ''
   };
- 
+
   videolibAddEditForm: FormGroup;
   public serverUrlData: any;
   public getDataEndpointData: any;
@@ -30,11 +30,11 @@ export class AddEditVideosComponent implements OnInit {
   public listUrl: any;
   public parameter_id: any;
   public VideolistingArray: any = [];
-  public getSourceName :any;
+  public getSourceName: any;
   public editedListData: any = [];
-  public allCategoryName :any=[];
+  public allCategoryName: any = [];
   public spinnerloader: boolean; // for spinner loader
-  public editorconfig:any={};
+  public editorconfig: any = {};
 
   @Input()          //setting the server url from project
   set serverUrl(serverUrlval: any) {
@@ -60,11 +60,11 @@ export class AddEditVideosComponent implements OnInit {
     this.listUrl = Urlval;
 
   }
-  @Input()          
+  @Input()
   set SourceName(val: any) {
     this.getSourceName = (val) || '<no name set>';
     this.getSourceName = val;
-    console.log("ddfdfdfdfdfd",this.getSourceName);
+    console.log("ddfdfdfdfdfd", this.getSourceName);
   }
   @Input()          //getting the listing url
   set EditList(val: any) {
@@ -124,26 +124,26 @@ export class AddEditVideosComponent implements OnInit {
   }
   /**for validation purpose**/
 
-  getAllCategoryName(){
-    let data : any = {
-      "source" : this.getSourceName,
+  getAllCategoryName() {
+    let data: any = {
+      "source": this.getSourceName,
       "condition": {
         "status": 1
       },
     }
     this.apiService.getData(data).subscribe(response => {
-      let result :any=response;
+      let result: any = response;
       this.allCategoryName = result.res;
-      console.log("parent category",this.allCategoryName);
+      console.log("parent category", this.allCategoryName);
     })
   }
 
   /**form submission start here**/
   videoAddEditFormSubmit() {
 
-    this.videolibAddEditForm.patchValue({
-      description: this.model.editorData
-    });
+    // this.videolibAddEditForm.patchValue({
+    //   description: this.model.editorData
+    // });
     let x: any;
     for (x in this.videolibAddEditForm.controls) {
       this.videolibAddEditForm.controls[x].markAsTouched();

@@ -88,7 +88,6 @@ export class AddEditTeamComponent implements OnInit {
   set SourceName(val: any) {
     this.sourceName = (val) || '<no name set>';
     this.sourceName = val;
-    console.log("source nameeeeee", this.sourceName);
   }
 
   @Input()
@@ -206,10 +205,6 @@ export class AddEditTeamComponent implements OnInit {
   }
   /*getting all category name function end here*/
 
-  /**resetting the form**/
-  ResetForm() {
-    this.teamForm.reset();
-  }
 
   /**bullet list function start here**/
   addBulletListData(a: any, b: any) {
@@ -231,8 +226,7 @@ export class AddEditTeamComponent implements OnInit {
   clear_image(index) {
     this.flag = false;
     var imageData:any = [] = this.SingleDataList[0].team_img;
-    console.log("imagedata frst",imageData);
-    console.log("indexed data",index);
+
      imageData.splice(index,1);
      console.log("imagedata 2nd",imageData);
   }
@@ -283,8 +277,6 @@ export class AddEditTeamComponent implements OnInit {
     if (this.teamForm.valid) {
       var data: any;
       if (this.activeroute.snapshot.params._id) {     //update part
-        //console.log("firsttt img array",this.images_array);
-        //console.log("sdddedsd",this.SingleDataList[0].team_img);
         var imageData:any = [] = this.SingleDataList[0].team_img;
         imageData = imageData.concat(this.images_array);
         
@@ -313,7 +305,6 @@ export class AddEditTeamComponent implements OnInit {
       this.spinnerLoader = true;
       this.apiservice.addData(data).subscribe(response => {
         this.spinnerLoader = false;
-        this.ResetForm();
         setTimeout(() => {
           this.router.navigateByUrl('/' + this.listrouteData);
         }, 100);

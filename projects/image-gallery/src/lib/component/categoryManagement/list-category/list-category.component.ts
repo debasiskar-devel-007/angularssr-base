@@ -15,6 +15,7 @@ export class ListCategoryComponent implements OnInit {
   public DeleteendpointViaApp: any = '';
   public editRouteViaApp: any = '';
   public AddButtonRouteViaApp: any = '';
+  public manageButtonRouteViaApp: any = '';
   public searchEndpointval: any = '';
   public searchSourceval: any = '';
 
@@ -55,7 +56,11 @@ export class ListCategoryComponent implements OnInit {
   set AddButtonRoute(Val: any) {
     this.AddButtonRouteViaApp = (Val) || '<no name set>';
     this.AddButtonRouteViaApp = Val;
-    console.log(this.AddButtonRouteViaApp);
+  }
+  @Input()
+  set ManageImageButtonRoute(val : any){
+    this.manageButtonRouteViaApp = (val) || '<no name set>';
+    this.manageButtonRouteViaApp = val;
   }
   @Input()          //getting edit route
   set editRoute(Val: any) {
@@ -94,5 +99,8 @@ export class ListCategoryComponent implements OnInit {
   }
   AddButton() {
     this.router.navigateByUrl('/' + this.AddButtonRouteViaApp);
+  }
+  manageButton(){
+    this.router.navigateByUrl('/' + this.manageButtonRouteViaApp);
   }
 }

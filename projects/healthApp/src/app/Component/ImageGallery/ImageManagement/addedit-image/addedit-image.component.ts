@@ -8,19 +8,26 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class AddeditImageComponent implements OnInit {
   public serverUrl:any="https://9ozbyvv5v0.execute-api.us-east-1.amazonaws.com/production/api/";
+  public sourceName : any = "imageGallery_management";
+  public imageCategorySourceName:any="imageGallery_category";
   public getDataEndpoint:any="datalist";
   public addEndpoint:any="addorupdatedata";
   public ListingPageUrl:any='image-gallery/list';
   public editedData:any=[];
+
   public configData: any = {
-    baseUrl: "http://3.15.236.141:5005/",
+    baseUrl: "https://fileupload.influxhostserver.com/",
     endpoint: "uploads",
     size: "51200", // kb
-    format: ["jpg", "jpeg", "png", "bmp", "zip", 'html'], // use all small font
+    format:["jpg", "jpeg", "png", "bmp", "zip", 'html'],  // use all small font
     type: "imageGallery-picture",
     path: "imageGallery",
-    prefix: "imageGallery_picture_"
+    prefix: "imageGallery-picture_",
+    formSubmit: false,
+    conversionNeeded: 0,
+    bucketName: "image-gallery-bucket"
   }
+
   constructor(public activeRoute :ActivatedRoute) { }
 
   ngOnInit() {

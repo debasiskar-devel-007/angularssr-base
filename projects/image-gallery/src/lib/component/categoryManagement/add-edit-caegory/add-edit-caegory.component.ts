@@ -23,19 +23,22 @@ export class AddEditCaegoryComponent implements OnInit {
   public VideolistingArray: any = [];
   public editedListData: any = [];
   public spinnerloader: boolean;
-  public allData: any = [];
+  public allCategoryData: any = [];
   public singleDatalist: any = [];
+  public editorconfig:any={};
+  public sourceName:any='';
 
   @Input()          //setting the server url from project
   set serverUrl(serverUrlval: any) {
     this.serverUrlData = (serverUrlval) || '<no name set>';
     this.serverUrlData = serverUrlval;
-
   }
+
   @Input()
   set singleData(val: any) {
     this.singleDatalist = (val) || '<no name set>';
     this.singleDatalist = val;
+    console.log("all edited data",this.singleDatalist);
     if (this.activeroute.snapshot.params._id) {
       this.headerText = "Edit Image";
       this.buttonText = "Update";
@@ -49,8 +52,13 @@ export class AddEditCaegoryComponent implements OnInit {
 
     }
   }
+  @Input()
+  set SourceName(val:any){
+    this.sourceName = (val) || '<no name set>' ; 
+    this.sourceName = val;
+  }
 
-  @Input()          //setting the getdat endpoint from project
+  @Input()          //setting the getdata endpoint from project
   set getDataEndpoint(endpointUrlval: any) {
     this.getDataEndpointData = (endpointUrlval) || '<no name set>';
     this.getDataEndpointData = endpointUrlval;
@@ -72,11 +80,7 @@ export class AddEditCaegoryComponent implements OnInit {
     this.VideolistingArray = (val) || '<no name set>';
     this.VideolistingArray = val;
   }
-  /**ckeditor start here*/
-  public Editor = ClassicEditor;  //for ckeditor
-  editorConfig = {
-    placeholder: 'Type the content here!',
-  };
+
   public model = {
     editorData: ''
   };
@@ -92,6 +96,7 @@ export class AddEditCaegoryComponent implements OnInit {
       parent_category: ['']
     })
     /**formgroup end here**/
+    this.editorconfig.extraAllowedContent = '*[class](*),span;ul;li;table;td;style;*[id];*(*);*{*}';
   }
 
   ngOnInit() {
@@ -109,7 +114,7 @@ export class AddEditCaegoryComponent implements OnInit {
       this.apiService.setaddEndpoint(this.addEndpointData);
     }, 50);
     setTimeout(() => {
-      this.getData();
+      this.getCategoryData();
     }, 50);
     /**Observable end here**/
   }
@@ -117,24 +122,21 @@ export class AddEditCaegoryComponent implements OnInit {
 
     form.controls[val].markAsUntouched();
   }
-  resetImageForm() {
-    this.imageGalleryAddEditForm.reset();
-  }
-  getData() {
+  
+  getCategoryData() {
     let data: any = {
-      "source": "video_category"
+      "source":  this.sourceName,
+      "condition": {
+        "status": 1
+      },
     }
     this.apiService.getData(data).subscribe(response => {
       let result: any = response;
-      this.allData = result.res;
+      this.allCategoryData = result.res;
       
     })
   }
   ImageAddEditFormSubmit() {
-    console.log(this.imageGalleryAddEditForm.value, "okkkkkk");
-    this.imageGalleryAddEditForm.patchValue({
-      description: this.model.editorData
-    });
     let x: any;
     for (x in this.imageGalleryAddEditForm.controls) {
       this.imageGalleryAddEditForm.controls[x].markAsTouched();
@@ -147,7 +149,7 @@ export class AddEditCaegoryComponent implements OnInit {
 
       if (this.activeroute.snapshot.params._id) {
         data = {
-          "source": "imageGallery_category",
+          "source": this.sourceName,
           'data': {
             "id": this.parameter_id,
             "title": this.imageGalleryAddEditForm.value.title,
@@ -161,7 +163,7 @@ export class AddEditCaegoryComponent implements OnInit {
       } else {
         var data: any;
         data = {                                         //add part
-          "source": "imageGallery_category",
+          "source": this.sourceName,
           "data": this.imageGalleryAddEditForm.value,
           "sourceobj": ["parent_category"]
         }
@@ -169,10 +171,7 @@ export class AddEditCaegoryComponent implements OnInit {
     }
     this.spinnerloader = true;
     this.apiService.addData(data).subscribe(response => {
-
-      console.log(response);
       this.spinnerloader = false;
-      this.resetImageForm();
       setTimeout(() => {
         this.router.navigateByUrl('/' + this.listUrl);
       }, 100);

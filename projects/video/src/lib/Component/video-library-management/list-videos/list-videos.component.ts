@@ -10,6 +10,7 @@ export class ListVideosComponent implements OnInit {
   public tableName: any = '';
   public Tokenval: any = '';
   public searchEndpoint: any = '';
+  public searchSourceName: any = '';
   public deleteEndpointUrl: any = '';
   public addvideoUrl: any = '';
   public addupdate: any = '';
@@ -30,7 +31,6 @@ export class ListVideosComponent implements OnInit {
   set SourceName(val: any) {
     this.tableName = (val) || '<no name set>';
     this.tableName = val;
-    console.log("souresh source name",this.tableName);
   }
   @Input()     //getting token via App    
   set Token(val: any) {
@@ -42,7 +42,11 @@ export class ListVideosComponent implements OnInit {
   set SearchingEndpoint(val: any) {
     this.searchEndpoint = (val) || '<no name set>';
     this.searchEndpoint = val;
-   console.log("souresh searching endpoint ",this.searchEndpoint);
+  }
+  @Input()
+  set SearchSourceName(val:any){
+   this.searchSourceName = (val) || '<no name set>';
+   this.searchSourceName = val;
   }
   @Input()     //getting delete endpoint via App    
   set DeleteEndpoint(val: any) {
@@ -60,17 +64,15 @@ export class ListVideosComponent implements OnInit {
   set AddUpdateEndpoint(val: any) {   //add or update endpoint
     this.addupdate = (val) || '<no name set>';
     this.addupdate = val;
-    
   }
    @Input()    //getting edit page route
    set EditRoute(val:any){
       this.editUrl =(val) || '<no name set>'
       this.editUrl =val;
-      
    }
   /** lib-listing start here**/
   public VideoDataListing: any = [];
-  public VideoDataListing_skip: any = ["_id", "description", "created_at","updated_at","id","description_html"];
+  public VideoDataListing_skip: any = ["_id", "description", "created_at","updated_at","id","description_html","parent_category_search","title_search"];
   public VideoDataListing_modify_header: any = {
     "title": "Title", "priority": "Priority",
     "status": "Status", "videoUrl": "Video Url","parent_category" : "Parent Category"
@@ -80,7 +82,7 @@ export class ListVideosComponent implements OnInit {
   public search_settings: any =
     {
       selectsearch: [{ label: 'Search By Status', field: 'status', values: this.status }],
-      textsearch: [{ label: "Search By Title", field: 'title' }],
+      textsearch: [{ label: "Search By Title", field: 'title_search' },{ label: "Search By Parent Category", field: 'parent_category_search' }],
 
     };
 

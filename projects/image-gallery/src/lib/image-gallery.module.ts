@@ -3,7 +3,6 @@ import { ImageGalleryComponent } from './image-gallery.component';
 import { AddEditCaegoryComponent } from './component/categoryManagement/add-edit-caegory/add-edit-caegory.component';
 import { ListCategoryComponent } from './component/categoryManagement/list-category/list-category.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { BrowserModule } from '@angular/platform-browser';
 import { ApiService } from './Service/api.service';
 import { FileUploadModule} from 'file-upload-lib-influxiq';
@@ -12,6 +11,7 @@ import { AddEditImageComponent } from './component/imageGallery-management/add-e
 import { ImagelistingComponent } from './component/imageGallery-management/imagelisting/imagelisting.component';    
 import { ListingModule } from 'listing-angular7';
 import { from } from 'rxjs';
+import { CKEditorModule } from 'ngx-ckeditor';
 
 @NgModule({
   imports: [

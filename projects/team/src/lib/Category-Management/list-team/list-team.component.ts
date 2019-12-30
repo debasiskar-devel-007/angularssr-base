@@ -40,7 +40,7 @@ export class ListTeamComponent implements OnInit {
   set EditRoute(val: any) {
     this.editRouteval = (val) || '<no name set>';
     this.editRouteval = val;
-    console.log(this.editRouteval);
+
   }
   @Input()
   set addButtonRoute(val: any) {
@@ -56,37 +56,37 @@ export class ListTeamComponent implements OnInit {
   set UpdateRoute(val: any) {
     this.addupdate = (val) || '<no name set>';
     this.addupdate = val;
-    console.log(this.addupdate);
+    
   }
   @Input()
   set Token(val: any) {
     this.tokenVal = (val) || '<no name set>';
     this.tokenVal = val;
-    console.log(this.tokenVal);
+   
   }
   @Input()
   set SourceName(val: any) {
     this.sourcenameViaapp = (val) || '<no name set>';
     this.sourcenameViaapp = val;
-    console.log(this.sourcenameViaapp);
+
   }
   @Input()
   set SearchEndpoint(val: any) {
     this.searchingendpoint = (val) || '<no name set>';
     this.searchingendpoint = val;
-    console.log("searching endpoint",this.searchingendpoint);
+
   }
   @Input()
   set DeleteEndpoint(val: any) {
     this.deleteendpointVal = (val) || '<no name set>';
     this.deleteendpointVal = val;
-    console.log(this.deleteendpointVal);
+   
   }
   @Input()          //setting the server url from project
   set serverUrl(serverUrlval: any) {
     this.serverUrlData = (serverUrlval) || '<no name set>';
     this.serverUrlData = serverUrlval;
-    console.log("sserver urlllll",this.serverUrlData);
+    
   }
   constructor(public router: Router) { }
 

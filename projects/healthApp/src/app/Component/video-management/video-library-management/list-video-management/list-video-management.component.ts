@@ -11,6 +11,7 @@ export class ListVideoManagementComponent implements OnInit {
   public VideoDataList : any = [];
   public serverurl :any="https://9ozbyvv5v0.execute-api.us-east-1.amazonaws.com/production/api/"
   public SourceName:any="video_management";
+  public searchSourcename:any="video_management_view";
   public searchEndpoint:any="datalist";
   public AddorUpdateEndpoint:any="addorupdatedata";
   public token:any=this.cookies.get('jwtToken');

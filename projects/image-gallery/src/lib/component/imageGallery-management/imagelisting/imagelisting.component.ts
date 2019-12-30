@@ -18,22 +18,6 @@ export class ImagelistingComponent implements OnInit {
   public searchEndpointval: any = '';
   public searchSourceval: any = '';
   public listingData: any = [];
-  public data_skip: any = ["_id"];
-  data_modify_header: any =
-    {
-      'parent_category_image': "Parent Category",
-      'images': "Images"
-    };
-  search_settings: any =
-    {
-      textsearch: [
-        { label: "Search By Parent Category", field: 'parent_category_image' }],
-    };
-    pendingmodelapplicationarray_detail_datatype:any=[{
-      key: "images",
-      value: 'image',
-      fileurl: 'https://s3.us-east-2.amazonaws.com/crmfiles.influxhostserver/imageGallery/'    // Image path 
-    }];
   @Input()           //getting all data from application
   set allDataList(val: any) {
     this.listingData = (val) || 'no name set';
@@ -43,7 +27,7 @@ export class ImagelistingComponent implements OnInit {
   set AddButtonRoute(Val: any) {
     this.AddButtonRouteViaApp = (Val) || '<no name set>';
     this.AddButtonRouteViaApp = Val;
-   
+
   }
   @Input()          //getting edit route
   set editRoute(Val: any) {
@@ -85,6 +69,28 @@ export class ImagelistingComponent implements OnInit {
     this.searchSourceval = (Val) || '<no name set>';
     this.searchSourceval = Val;
   }
+  public data_skip: any = ["_id"];
+
+  public data_modify_header: any =
+    {
+      'category_name': "Category Name",
+      'images': "Images",
+      'date_added': "Added Date"
+    };
+  public previewModal_detail_skip: any = ['_id'];
+
+  public search_settings: any =
+    {
+      textsearch: [
+        { label: "Search By Category", field: 'parent_category_image' }],
+    };
+  public pendingmodelapplicationarray_detail_datatype: any = [{
+    key: "images",
+    value: 'image',
+    fileurl: 'https://s3.us-east-2.amazonaws.com/image-gallery-bucket/imageGallery/'    // Image path 
+  }];
+
+
   constructor(public router: Router) { }
 
   ngOnInit() {

@@ -8,12 +8,13 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class ListingCategoryComponent implements OnInit {
   public imageGalleryList: any = [];
-  public serverUrl:any="https://o820cv2lu8.execute-api.us-east-2.amazonaws.com/production/api/";
+  public serverUrl:any="https://9ozbyvv5v0.execute-api.us-east-1.amazonaws.com/production/api/";
   public updatedEndpoint:any="addorupdatedata";
   public SourceName:any="imageGallery_category";
   public DeleteEndpoint:any="deletesingledata";
   public EditRoute:any="image-gallery/category-management/edit";
   public addButtonRoute:any="image-gallery/category-management/add";
+  public manageImageButtonRoute:any="image-gallery/list";
   public searchEndpoint:any="datalist";
   public searchSourcename:any="imageGallery_category_view";
   public token=this.cookies.get('jwtToken');
