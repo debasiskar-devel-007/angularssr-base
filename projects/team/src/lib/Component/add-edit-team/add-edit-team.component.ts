@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FormBuilder, FormControl, FormArray, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit, Input,ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormArray, FormGroup, Validators ,FormGroupDirective} from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from '../../Service/api.service';
 import { HttpClient } from '@angular/common/http';
@@ -34,8 +34,10 @@ export class AddEditTeamComponent implements OnInit {
   public sourceName: any;
   public categorySourceName: any;
   public images_array: any = [];
+  public images_array_edit:any=[];
   public editorconfig : any = {};
-
+  @ViewChild(FormGroupDirective, { static: false }) formDirective: FormGroupDirective;
+  
   /* Config Upload file lib */
   @Input()
   set imageUpload(getConfig: any) {
@@ -62,6 +64,11 @@ export class AddEditTeamComponent implements OnInit {
         this.img_var.push(this.SingleDataList[0].team_img[i].basepath + this.SingleDataList[0].team_img[i].fileservername);
         this.image_name = this.SingleDataList[0].team_img[i].name;
         this.image_type = this.SingleDataList[0].team_img[i].type;
+
+        // this.images_array_edit.push({
+        //   'img_var': this.img_var,
+          
+        // });
        
       }
       for (const i in this.SingleDataList[0].bulletarray) {
@@ -224,34 +231,12 @@ export class AddEditTeamComponent implements OnInit {
   }
   /**bullet list function end here**/
   clear_image(index) {
+    // this.img_var.splice(index, 1);
     this.flag = false;
     var imageData:any = [] = this.SingleDataList[0].team_img;
-
      imageData.splice(index,1);
-     console.log("imagedata 2nd",imageData);
   }
   TeamFormSubmit() {
-    /**old file upload adding code start here**/
-
-    // if (this.imageConfigData.files) {
-    //   if (this.imageConfigData.files.length > 1) {
-    //     this.ErrCode = true;
-    //     return;
-    //   }
-    //   this.teamForm.value.team_img =
-    //     {
-    //       "basepath": this.imageConfigData.files[0].upload.data.basepath + '/'
-    //         + this.imageConfigData.path + '/',
-    //       "image": this.imageConfigData.files[0].upload.data.data.fileservername,
-    //       "name": this.imageConfigData.files[0].name,
-    //       "type": this.imageConfigData.files[0].type
-    //     };
-    // } else {
-    //   this.teamForm.value.team_img = false;
-    // }
-
-    /**old file upload adding code end here**/
-
     if (this.imageConfigData.files.length > 0 || this.img_var.length > 0) {
       for (let loop = 0; loop < this.imageConfigData.files.length; loop++) {
         this.images_array =
@@ -305,6 +290,7 @@ export class AddEditTeamComponent implements OnInit {
       this.spinnerLoader = true;
       this.apiservice.addData(data).subscribe(response => {
         this.spinnerLoader = false;
+        this.formDirective.resetForm();
         setTimeout(() => {
           this.router.navigateByUrl('/' + this.listrouteData);
         }, 100);

@@ -17,13 +17,13 @@ export class ListTeamComponent implements OnInit {
   public serverUrlData: any = '';
   public editRouteval: any = '';
   public manageRoute: any;
-  public alldata_skip: any = ["_id", "created_at","description_html","description"];
+  public alldata_skip: any = ["_id","id","updated_at", "created_at","description_html","description"];
   public alldata_modify_header: any = {
     "categoryName": "Category Name", "description": "Description",
     "rolename": "Role Name", "status": "Status","role" : "Role"
   };
   public status: any = [{ val: 1, 'name': 'Active' }, { val: 0, 'name': 'Inactive' }];
-  public previewModal_detail_skip: any = ['_id'];
+  public previewModal_detail_skip: any = ['_id',"id","updated_at","created_at"];
   public search_settings: any =
     {
       selectsearch: [{ label: 'Search By Status', field: 'status', values: this.status }],

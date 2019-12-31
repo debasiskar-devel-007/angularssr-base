@@ -1,6 +1,7 @@
-import { Component, OnInit, Input } from '@angular/core';
+
+import { Component, OnInit,Input, ViewChild, Inject } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators, FormGroupDirective } from '@angular/forms';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { ApiService } from 'projects/image-gallery/src/lib/Service/api.service';
@@ -27,6 +28,7 @@ export class AddEditCaegoryComponent implements OnInit {
   public singleDatalist: any = [];
   public editorconfig:any={};
   public sourceName:any='';
+  @ViewChild(FormGroupDirective, { static: false }) formDirective: FormGroupDirective;
 
   @Input()          //setting the server url from project
   set serverUrl(serverUrlval: any) {
@@ -87,6 +89,7 @@ export class AddEditCaegoryComponent implements OnInit {
   /**ckeditor end here*/
   constructor(public apiService: ApiService, public fb: FormBuilder, public activeroute: ActivatedRoute,
     public _http: HttpClient, public router: Router) {
+
     /**formgroup start here**/
     this.imageGalleryAddEditForm = this.fb.group({
       title: ['', Validators.required],
@@ -96,6 +99,7 @@ export class AddEditCaegoryComponent implements OnInit {
       parent_category: ['']
     })
     /**formgroup end here**/
+
     this.editorconfig.extraAllowedContent = '*[class](*),span;ul;li;table;td;style;*[id];*(*);*{*}';
   }
 
@@ -172,6 +176,7 @@ export class AddEditCaegoryComponent implements OnInit {
     this.spinnerloader = true;
     this.apiService.addData(data).subscribe(response => {
       this.spinnerloader = false;
+      this.formDirective.resetForm();
       setTimeout(() => {
         this.router.navigateByUrl('/' + this.listUrl);
       }, 100);

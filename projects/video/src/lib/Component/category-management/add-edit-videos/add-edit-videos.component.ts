@@ -1,7 +1,6 @@
-import { Component, OnInit, Input } from '@angular/core';
-// import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { Component, OnInit, Input,ViewChild } from '@angular/core';
+import { FormBuilder, FormControl, FormArray, FormGroup, Validators ,FormGroupDirective} from '@angular/forms';
 import { ApiService } from 'projects/video/src/lib/Service/api.service';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 @Component({
@@ -35,6 +34,9 @@ export class AddEditVideosComponent implements OnInit {
   public allCategoryName: any = [];
   public spinnerloader: boolean; // for spinner loader
   public editorconfig: any = {};
+  @ViewChild(FormGroupDirective, { static: false }) formDirective: FormGroupDirective;
+
+
 
   @Input()          //setting the server url from project
   set serverUrl(serverUrlval: any) {
@@ -186,7 +188,7 @@ export class AddEditVideosComponent implements OnInit {
         result = resp;
         this.videoStatusArr = result.status;
         this.spinnerloader = false;
-        this.resetVideoCategoryForm();
+        this.formDirective.resetForm();
         setTimeout(() => {
           this.router.navigateByUrl('/' + this.listUrl);
         }, 100)
@@ -198,10 +200,4 @@ export class AddEditVideosComponent implements OnInit {
 
   }
   /**form submission end here**/
-
-  resetVideoCategoryForm() {
-    this.videolibAddEditForm.reset();
-
-  }
-
 }

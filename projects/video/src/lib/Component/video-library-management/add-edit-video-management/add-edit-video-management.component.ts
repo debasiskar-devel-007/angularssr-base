@@ -1,7 +1,7 @@
-import { Component, OnInit, Inject, Input } from '@angular/core';
+import { Component, OnInit, Input,ViewChild ,Inject} from '@angular/core';
+import { FormBuilder, FormControl, FormArray, FormGroup, Validators ,FormGroupDirective} from '@angular/forms';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from "@angular/material";
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ApiService } from 'projects/video/src/lib/Service/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 export interface DialogData {
@@ -39,6 +39,10 @@ export class AddEditVideoManagementComponent implements OnInit {
   };
   /**ckeditor end here*/
   public video_prefix: any = "https://www.youtube.com/watch?v=";
+
+  @ViewChild(FormGroupDirective, { static: false }) formDirective: FormGroupDirective;
+
+
   @Input()          //setting the server url from project
   set serverUrl(serverUrlval: any) {
     this.serverUrlData = (serverUrlval) || '<no name set>';
@@ -205,7 +209,7 @@ export class AddEditVideoManagementComponent implements OnInit {
       this.apiService.addData(data).subscribe((resp) => {
         this.spinnerloader = false;
         let result: any = resp;
-        this.resetForm();
+        this.formDirective.resetForm();
         setTimeout(() => {
           this.router.navigateByUrl('/' + this.ListingRoute)
         }, 100);
@@ -213,9 +217,7 @@ export class AddEditVideoManagementComponent implements OnInit {
       })
     }
   }
-  resetForm() {
-    this.videoManagementForm.reset();
-  }
+ 
 }
 @Component({
   selector: 'dialogtest',

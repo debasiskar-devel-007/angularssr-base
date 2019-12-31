@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit,Input, ViewChild, Inject } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators, FormGroupDirective } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { ApiService } from '../../Service/api.service';
@@ -25,6 +25,8 @@ export class AddeditTeamComponent implements OnInit {
   public ButtonText: any = "Submit";
   public allCategoryName : any=[];
   public editorconfig:any={};
+  @ViewChild(FormGroupDirective, { static: false }) formDirective: FormGroupDirective;
+
   @Input()          //getting all data list via resolve call from app
   set TeamData(val: any) {
     this.DataListViaResolve = (val) || '<no name set>';
@@ -157,6 +159,7 @@ export class AddeditTeamComponent implements OnInit {
       this.spinnerLoader = true;
       this.apiService.addData(data).subscribe(response => {
         this.spinnerLoader = false;
+        this.formDirective.resetForm();
         setTimeout(() => {
           this.router.navigateByUrl('/' + this.listingPageUrl);
         }, 100);
@@ -186,7 +189,5 @@ export class AddeditTeamComponent implements OnInit {
     })
   }
 
-  ResetTeamForm() {
-    this.CategoryManagementTeamForm.reset();
-  }
+ 
 }

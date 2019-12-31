@@ -14,7 +14,7 @@ export class ListTeamComponent implements OnInit {
    public deleteendpoint:any="deletesingledata";
    public editUrl="team/edit";
    public collectionName="team_management";
-   public searchSourceName="team_management";
+   public searchSourceName="team_management_view";
    public searchingEndpoint="datalist";
    public addPageRoute = "team/add";
   constructor(public activateRoute : ActivatedRoute,public cookies :CookieService) { }

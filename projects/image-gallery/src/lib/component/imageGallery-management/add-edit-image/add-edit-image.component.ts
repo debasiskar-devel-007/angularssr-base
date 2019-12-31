@@ -1,5 +1,5 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Component, OnInit,Input, ViewChild, Inject } from '@angular/core';
+import { FormBuilder, FormControl, FormGroup, Validators, FormGroupDirective } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { ApiService } from 'projects/image-gallery/src/lib/Service/api.service';
@@ -30,24 +30,22 @@ export class AddEditImageComponent implements OnInit {
   public parameter_id: any = '';
   public sourceName:any='';
   public categorySourceName:any='';
+  @ViewChild(FormGroupDirective, { static: false }) formDirective: FormGroupDirective;
 
   @Input()
   set imageUpload(getConfig: any) {
     this.imageConfigData = getConfig;
-    console.log("image data",this.imageConfigData);
   }
 
   @Input()
   set SourceName(val : any){
     this.sourceName = (val) || '<no name set>';
     this.sourceName = val;
-    console.log("Source nameeeee",this.sourceName);
   }
   @Input()
   set ImageCategorySourceName(val : any){
     this.categorySourceName = (val) || '<no name set>';
     this.categorySourceName = val;
-    console.log("Source nameeeee",this.sourceName);
   }
 
   @Input()          //setting the server url from project
@@ -78,6 +76,7 @@ export class AddEditImageComponent implements OnInit {
   set singleData(val: any) {
     this.dataForEdit = (val) || '<no name set>';
     this.dataForEdit = val;
+    console.log("total edit data",this.dataForEdit);
     if (this.activeroute.snapshot.params._id) {
       this.headerText = "Edit Image";
       this.buttonText = "Update";
@@ -146,6 +145,7 @@ export class AddEditImageComponent implements OnInit {
   
   clear_image(index: any) {
     this.images_array_edit.splice(index, 1);
+
   }
 
 
@@ -176,6 +176,11 @@ export class AddEditImageComponent implements OnInit {
     if (this.imageGalleryManagementForm.valid) {
       var data: any;
       if (this.activeroute.snapshot.params._id) { 
+
+        // var imageData : any=[]=this.dataForEdit[0].img_gallery;
+        // imageData = imageData.concat(this.images_array_edit);
+        // console.log("image data for update",imageData);
+
         data = {                                        //update part
           "source": this.sourceName,
           'data': {
@@ -196,8 +201,8 @@ export class AddEditImageComponent implements OnInit {
     }
     this.spinnerLoader = true;
     this.apiService.addData(data).subscribe(response => {
-      console.log(response);
       this.spinnerLoader = false;
+      this.formDirective.resetForm();
       setTimeout(() => {
         this.router.navigateByUrl('/' + this.listUrl);
       }, 100);

@@ -69,7 +69,7 @@ export class ImagelistingComponent implements OnInit {
     this.searchSourceval = (Val) || '<no name set>';
     this.searchSourceval = Val;
   }
-  public data_skip: any = ["_id"];
+  public data_skip: any = ["_id","category_name_search"];
 
   public data_modify_header: any =
     {
@@ -77,12 +77,12 @@ export class ImagelistingComponent implements OnInit {
       'images': "Images",
       'date_added': "Added Date"
     };
-  public previewModal_detail_skip: any = ['_id'];
+  public previewModal_detail_skip: any = ["_id","category_name_search"];
 
   public search_settings: any =
     {
       textsearch: [
-        { label: "Search By Category", field: 'parent_category_image' }],
+        { label: "Search By Category", field: 'category_name_search' }],
     };
   public pendingmodelapplicationarray_detail_datatype: any = [{
     key: "images",

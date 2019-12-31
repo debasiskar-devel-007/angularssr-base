@@ -9,95 +9,94 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class TeamListComponent implements OnInit {
   public DataList: any = [];
   public serverUrlData: any = '';
-  public tokenVal:any='';
-  public DelEndpoint:any='';
-  public editroute :any='';
-  public updatendpoint:any='';
-  public collectionName:any='';
-  public searchingSource:any='';
-  public searchingEndpoint:any='';
-  public addPageRoute:any='';
+  public tokenVal: any = '';
+  public DelEndpoint: any = '';
+  public editroute: any = '';
+  public updatendpoint: any = '';
+  public collectionName: any = '';
+  public searchingSource: any = '';
+  public searchingEndpoint: any = '';
+  public addPageRoute: any = '';
 
- 
+
   @Input()    //getting all data via resolve call from app
   set allData(val: any) {
     this.DataList = (val) || '<no name set>';
     this.DataList = val;
   }
-  public data_skip: any = ["_id","multipleemail","bulletarray","created_at","description_html","description","updated_at","id"];
-  public data_modify_header: any = { "membername" : "Member Name","date_added":"Date Added"
-,  "categoryname":"Category Name","multiplephone":"Phone Numbers","team_img":"Images"
- };
-//  pendingmodelapplicationarray_detail_datatype: any = [{
-//   key: "image",  
-//   value: 'image',
-//   fileurl: ""             // Image path 
-// }];
- public search_settings: any =
+  public data_skip: any = ["_id", "multipleemail", "bulletarray", "created_at", "description_html", "description", "updated_at", "id","categoryname_search","membername_search"];
+  public data_modify_header: any = {
+    "membername": "Member Name", "date_added": "Date Added"
+    , "categoryname": "Category Name", "multiplephone": "Phone Numbers", "image": "Images"
+  };
+  public pendingmodelapplicationarray_detail_datatype: any = [{
+    key: "images",
+    value: 'image',
+    fileurl: 'https://s3.us-east-2.amazonaws.com/teammanagement-files/team/'    // Image path 
+  }];
+  public search_settings: any =
     {
-      textsearch: [{ label: "Search By Category Name", field: 'categoryname' },
-      { label: "Search By Member Name" , field:'membername'},
-      { label: "Search By E-Mail" , field:'multipleemail'}],
+      textsearch: [{ label: "Search By Category Name", field: 'categoryname_search' },
+      { label: "Search By Member Name", field: 'membername_search' }],
       // selectsearch:[{label:'Search By email',field:''}],
       // search:[{label:"Search By E-Mails",field:'multipleemail'}]
     };
-    // public status: any = [{ val: 1, 'name': 'Active' }, { val: 0, 'name': 'Inactive' }];
-    public previewModal_detail_skip: any = ['_id'];
-  
+  // public status: any = [{ val: 1, 'name': 'Active' }, { val: 0, 'name': 'Inactive' }];
+  public previewModal_detail_skip: any = ['_id'];
+
   @Input()          //setting the server url from project
   set serverUrl(serverUrlval: any) {
     this.serverUrlData = (serverUrlval) || '<no name set>';
     this.serverUrlData = serverUrlval;
   }
   @Input()         //getting token from application
-  set Token(val:any){
+  set Token(val: any) {
     this.tokenVal = (val) || '<no name set>';
     this.tokenVal = val;
 
   }
   @Input()       //getting delete endpoint from application
-  set DeleteEndpoint(val:any){
+  set DeleteEndpoint(val: any) {
     this.DelEndpoint = (val) || '<no name set>';
     this.DelEndpoint = val;
   }
   @Input()      //getting edit route from application
-  set EditRoute(val:any){
+  set EditRoute(val: any) {
     this.editroute = (val) || '<no name set>';
     this.editroute = val;
   }
   @Input()      //getting the update endpoint from application
-  set UpdateEndpoint(val:any){
+  set UpdateEndpoint(val: any) {
     this.updatendpoint = (val) || '<no name set>';
     this.updatendpoint = val;
   }
   @Input()      //getting the source name from application
-  set SourceName(val:any){
+  set SourceName(val: any) {
     this.collectionName = (val) || '<no name set>';
     this.collectionName = val;
-  } 
+  }
   @Input()      //getting the searching endpoint from the application
-  set SearchSourceName(val:any){
+  set SearchSourceName(val: any) {
     this.searchingSource = (val) || '<no name set>';
     this.searchingSource = val;
   }
   @Input()     //getting the search endpoint from endpoint
-  set SearchEndpoint(val:any){
+  set SearchEndpoint(val: any) {
     this.searchingEndpoint = (val) || '<no name set>';
     this.searchingEndpoint = val;
   }
   @Input()   //getting the add page route from application
-  set AddPageRoute(val:any){
+  set AddPageRoute(val: any) {
     this.addPageRoute = (val) || '<no name set>';
     this.addPageRoute = val;
   }
- 
-  constructor(public router : Router) { }
+
+  constructor(public router: Router) { }
 
   ngOnInit() {
-    console.log('this.preview_detail_listing')
-    // console.log(this.pendingmodelapplicationarray_detail_datatype)
+   
   }
-  addButton(){
+  addButton() {
     this.router.navigateByUrl('/' + this.addPageRoute);
   }
 
