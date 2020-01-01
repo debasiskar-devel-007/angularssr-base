@@ -20,19 +20,20 @@ export class ListCategoryComponent implements OnInit {
   public searchSourceval: any = '';
 
   public allDataList: any = [];
-  public data_skip: any = ["_id", "description"];
+  public data_skip: any = ["_id", "description","title_search","parent_category_search"];
   public data_modify_header: any = {
-    "parent_category": "Parent Category", "title": "Title",
+    "parent category": "Parent Category", "title": "Title",
     "priority": "Priority", "status": "Status"
   };
+  public previewModal_detail_skip: any = ["_id","title_search","parent_category_search"];
+
   public status: any = [{ val: 1, 'name': 'Active' }, { val: 0, 'name': 'Inactive' }];
   public search_settings: any =
     {
       selectsearch: [{ label: 'Search By Status', field: 'status', values: this.status }],
       textsearch: [{ 
-        label: "Search By Title", field: 'title' },
+        label: "Search By Title", field: 'title_search' },
       { label: "Search By Parent Category", field: 'parent_category' }],
-      // search: [{ label: "Search By Parent Category", field: 'parent_category' }]
     };
   @Input()          //getting search endpoint 
   set SearchEndpoint(Val: any) {
@@ -43,16 +44,15 @@ export class ListCategoryComponent implements OnInit {
   set SearchSourceName(Val: any) {
     this.searchSourceval = (Val) || '<no name set>';
     this.searchSourceval = Val;
-    console.log(this.searchSourceval);
   }
 
   @Input()          //getting all video data via resolve
   set listingViaResolve(DataVal: any) {
     this.allDataList = (DataVal) || '<no name set>';
     this.allDataList = DataVal;
-    console.log("listing", this.allDataList);
+   
   }
-  @Input()          //gettingadd button route 
+  @Input()          //getting add button route 
   set AddButtonRoute(Val: any) {
     this.AddButtonRouteViaApp = (Val) || '<no name set>';
     this.AddButtonRouteViaApp = Val;
@@ -71,8 +71,6 @@ export class ListCategoryComponent implements OnInit {
   set serverUrl(serverUrlval: any) {
     this.serverUrlData = (serverUrlval) || '<no name set>';
     this.serverUrlData = serverUrlval;
-    console.log("this", this.serverUrlData);
-
   }
   @Input()          //setting the server url from project
   set Token(tokenval: any) {

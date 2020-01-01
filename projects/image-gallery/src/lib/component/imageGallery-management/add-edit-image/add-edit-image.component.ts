@@ -76,7 +76,6 @@ export class AddEditImageComponent implements OnInit {
   set singleData(val: any) {
     this.dataForEdit = (val) || '<no name set>';
     this.dataForEdit = val;
-    console.log("total edit data",this.dataForEdit);
     if (this.activeroute.snapshot.params._id) {
       this.headerText = "Edit Image";
       this.buttonText = "Update";

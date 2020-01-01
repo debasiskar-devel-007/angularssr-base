@@ -11,12 +11,7 @@ import { HttpClient } from '@angular/common/http';
 export class AddEditVideosComponent implements OnInit {
   public buttonText: any = "Submit";
   public headerText: any = "Add Video Category";
-  /**ckeditor start here*/
-  // public Editor = ClassicEditor;  
-  // editorConfig = {
-  //   placeholder: 'Type the content here!',
-  // };
-  /**ckeditor end here*/
+
   public model = {
     editorData: ''
   };
@@ -66,7 +61,6 @@ export class AddEditVideosComponent implements OnInit {
   set SourceName(val: any) {
     this.getSourceName = (val) || '<no name set>';
     this.getSourceName = val;
-    console.log("ddfdfdfdfdfd", this.getSourceName);
   }
   @Input()          //getting the listing url
   set EditList(val: any) {
@@ -81,7 +75,6 @@ export class AddEditVideosComponent implements OnInit {
       this.videolibAddEditForm.controls['priority'].patchValue(val[0].priority);
       this.videolibAddEditForm.controls['status'].patchValue(val[0].status);
       this.videolibAddEditForm.controls['description'].patchValue(val[0].description);
-      this.model.editorData = val[0].description;
       this.videolibAddEditForm.controls['parent_id'].patchValue(val[0].parent_id);
 
     }
@@ -136,16 +129,11 @@ export class AddEditVideosComponent implements OnInit {
     this.apiService.getData(data).subscribe(response => {
       let result: any = response;
       this.allCategoryName = result.res;
-      console.log("parent category", this.allCategoryName);
     })
   }
 
   /**form submission start here**/
   videoAddEditFormSubmit() {
-
-    // this.videolibAddEditForm.patchValue({
-    //   description: this.model.editorData
-    // });
     let x: any;
     for (x in this.videolibAddEditForm.controls) {
       this.videolibAddEditForm.controls[x].markAsTouched();

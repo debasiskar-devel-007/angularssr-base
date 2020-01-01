@@ -11,6 +11,7 @@ export class ListComponent implements OnInit {
  public allTeamData:any=[];
  public sourceName:any="team_category";
  public updateendpoint:any="addorupdatedata";
+ public searchSourceName:any="team_category_view";
  public searchendpoint:any="datalist";
  public deleteEndpoint:any="deletesingledata";
  public addPageRoute:any='team/category-management/add';

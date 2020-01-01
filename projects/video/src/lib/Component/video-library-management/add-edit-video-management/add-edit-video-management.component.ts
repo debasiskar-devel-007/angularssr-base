@@ -6,6 +6,7 @@ import { ApiService } from 'projects/video/src/lib/Service/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 export interface DialogData {
   message: string;
+  type:string;
 }
 @Component({
   selector: 'lib-add-edit-video-management',
@@ -14,6 +15,7 @@ export interface DialogData {
 })
 
 export class AddEditVideoManagementComponent implements OnInit {
+  public type:string;
   public dialogRef: any;
   public videoManagementForm: any = FormGroup;
   public serverUrlData: any = '';
@@ -29,16 +31,12 @@ export class AddEditVideoManagementComponent implements OnInit {
   public allCategoryName:any=[];
   public getDataEndpointData: any;
   public categorySourceName:any;
-  /**ckeditor start here*/
-  public Editor = ClassicEditor;  //for ckeditor
-  editorConfig = {
-    placeholder: 'Type the content here!',
-  };
+ 
   public model = {
     editorData: ''
   };
-  /**ckeditor end here*/
   public video_prefix: any = "https://www.youtube.com/watch?v=";
+  public vimeoPrefix:any="https://player.vimeo.com/video/" ;
 
   @ViewChild(FormGroupDirective, { static: false }) formDirective: FormGroupDirective;
 
@@ -83,7 +81,6 @@ export class AddEditVideoManagementComponent implements OnInit {
       this.params_id = this.activeRoute.snapshot.params._id;
       this.videoManagementForm.controls['title'].patchValue(Videodata[0].title);
       this.videoManagementForm.controls['description'].patchValue(Videodata[0].description);
-      this.model.editorData = Videodata[0].description;
       this.videoManagementForm.controls['videoUrl'].patchValue(Videodata[0].videoUrl);
       this.videoManagementForm.controls['parent_category'].patchValue(Videodata[0].parent_category);
       this.videoManagementForm.controls['priority'].patchValue(Videodata[0].priority);
@@ -97,6 +94,7 @@ export class AddEditVideoManagementComponent implements OnInit {
       title: ['', Validators.required],
       description: ['', Validators.required],
       videoUrl: ['', Validators.required],
+      vimeo_url:['',Validators.required],
       priority: ['', Validators.required],
       parent_category:[''],
       status: [true,]
@@ -129,12 +127,12 @@ export class AddEditVideoManagementComponent implements OnInit {
   }
   /**for validation purpose**/
   /*modal start here*/
-  openDialog(x: any): void {
+  openDialog(x: any,y:any): void {
+    console.log("modal values",x,y);
     this.dialogRef = this.dialog.open(Dialogtest, {
       width: '45%',
       height: '500px',
-
-      data: { message: x }
+      data: { message: x,type:y }
     });
 
     this.dialogRef.afterClosed().subscribe(result => {
@@ -157,17 +155,37 @@ export class AddEditVideoManagementComponent implements OnInit {
      
     })
   }
-  previewUrl() {
+  // previewUrl(value:any) {
 
-    this.openDialog(this.videoManagementForm.value.videoUrl);
+  //   this.openDialog(this.videoManagementForm.value.videoUrl);
 
-  }
+  // }
+  previewUrl(value:any) {
+  
+    switch (value) {
+      case "youtube":
+       // console.log("youtybeeeee",value);
+ 
+       this.openDialog(this.videoManagementForm.value.videoUrl,value);
+        break;
+ 
+        case "vimeo":
+         // console.log("vimeooooooooooooooo",value);
+ 
+       this.openDialog(this.videoManagementForm.value.vimeo_url,value);
+        break;
+    
+      default:
+        break;
+    }
+ 
+ 
+   }
+ 
   /**preview url end here **/
   /**modal end here */
   VideoManagementFormSubmit() {
-    // this.videoManagementForm.patchValue({
-    //   description: this.model.editorData
-    // });
+   
     let x: any;
     for (x in this.videoManagementForm.controls) {
       this.videoManagementForm.controls[x].markAsTouched();
@@ -191,12 +209,8 @@ export class AddEditVideoManagementComponent implements OnInit {
             'description': this.videoManagementForm.value.description
           },
           "sourceobj": ["parent_category"]
-
         }
-
       } else {
-
-
         data = {                                         //add part
           "source":this.getSourceName,
           "data": this.videoManagementForm.value,
@@ -225,9 +239,11 @@ export class AddEditVideoManagementComponent implements OnInit {
 })
 export class Dialogtest {
   public is_error: any;
+  public is_error1: any;
 
   constructor(public dialogRef: MatDialogRef<Dialogtest>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {
     this.is_error = data.message;
+    this.is_error1=data.type;
   }
 }

@@ -11,23 +11,24 @@ export class ListTeamComponent implements OnInit {
   public addPageVal: any = '';
   public searchingendpoint: any = '';
   public sourcenameViaapp: any ='';
+  public searchSourcenameViaapp:any='';
   public tokenVal: any = '';
   public deleteendpointVal: any="";
   public addupdate: any = '';
   public serverUrlData: any = '';
   public editRouteval: any = '';
   public manageRoute: any;
-  public alldata_skip: any = ["_id","id","updated_at", "created_at","description_html","description"];
+  public alldata_skip: any = ["_id","id","updated_at", "created_at","description_html","description","categoryName_search"];
   public alldata_modify_header: any = {
     "categoryName": "Category Name", "description": "Description",
     "rolename": "Role Name", "status": "Status","role" : "Role"
   };
   public status: any = [{ val: 1, 'name': 'Active' }, { val: 0, 'name': 'Inactive' }];
-  public previewModal_detail_skip: any = ['_id',"id","updated_at","created_at"];
+  public previewModal_detail_skip: any = ['_id',"id","updated_at","created_at","categoryName_search"];
   public search_settings: any =
     {
       selectsearch: [{ label: 'Search By Status', field: 'status', values: this.status }],
-      textsearch: [{ label: "Search By Category Name", field: 'categoryName' }],
+      textsearch: [{ label: "Search By Category Name", field: 'categoryName_search' }],
 
     };
 
@@ -68,7 +69,11 @@ export class ListTeamComponent implements OnInit {
   set SourceName(val: any) {
     this.sourcenameViaapp = (val) || '<no name set>';
     this.sourcenameViaapp = val;
-
+  }
+  @Input()
+  set SearchSourceName(val: any) {
+    this.searchSourcenameViaapp = (val) || '<no name set>';
+    this.searchSourcenameViaapp = val;
   }
   @Input()
   set SearchEndpoint(val: any) {

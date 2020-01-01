@@ -24,7 +24,6 @@ export class ListTeamComponent implements OnInit {
       let result: any;
       result = data.teamdata.res;
       this.allDataList = result;
-      console.log(this.allDataList);
     })
   }
 

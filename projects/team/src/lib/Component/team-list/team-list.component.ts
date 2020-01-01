@@ -7,7 +7,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./team-list.component.css']
 })
 export class TeamListComponent implements OnInit {
-  public DataList: any = [];
+  public allDataList: any = [];
   public serverUrlData: any = '';
   public tokenVal: any = '';
   public DelEndpoint: any = '';
@@ -21,12 +21,12 @@ export class TeamListComponent implements OnInit {
 
   @Input()    //getting all data via resolve call from app
   set allData(val: any) {
-    this.DataList = (val) || '<no name set>';
-    this.DataList = val;
+    this.allDataList = (val) || '<no name set>';
+    this.allDataList = val;
   }
   public data_skip: any = ["_id", "multipleemail", "bulletarray", "created_at", "description_html", "description", "updated_at", "id","categoryname_search","membername_search"];
   public data_modify_header: any = {
-    "membername": "Member Name", "date_added": "Date Added"
+    "membername": "Member Name", "date added": "Added Date"
     , "categoryname": "Category Name", "multiplephone": "Phone Numbers", "image": "Images"
   };
   public pendingmodelapplicationarray_detail_datatype: any = [{
@@ -38,8 +38,7 @@ export class TeamListComponent implements OnInit {
     {
       textsearch: [{ label: "Search By Category Name", field: 'categoryname_search' },
       { label: "Search By Member Name", field: 'membername_search' }],
-      // selectsearch:[{label:'Search By email',field:''}],
-      // search:[{label:"Search By E-Mails",field:'multipleemail'}]
+
     };
   // public status: any = [{ val: 1, 'name': 'Active' }, { val: 0, 'name': 'Inactive' }];
   public previewModal_detail_skip: any = ['_id'];

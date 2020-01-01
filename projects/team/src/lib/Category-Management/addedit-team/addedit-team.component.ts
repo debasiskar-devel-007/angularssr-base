@@ -51,7 +51,6 @@ export class AddeditTeamComponent implements OnInit {
   set RoleSourceName (roleSourceName : any) {
      this.roleSourceName = (roleSourceName) || '<no name set>' ; 
      this.roleSourceName = roleSourceName ; 
-     console.log("role ", this.roleSourceName);
   }
 
   @Input()
@@ -64,8 +63,8 @@ export class AddeditTeamComponent implements OnInit {
       this.CategoryManagementTeamForm.controls['categoryName'].patchValue(val[0].categoryName);
       this.CategoryManagementTeamForm.controls['description'].patchValue(val[0].description);
       this.CategoryManagementTeamForm.controls['status'].patchValue(val[0].status);
-
-      //this.CategoryManagementTeamForm.controls['role'].patchValue(val[0].role);
+      this.CategoryManagementTeamForm.controls['role'].patchValue(val[0].role);
+      this.CategoryManagementTeamForm.controls['parent_category'].patchValue(val[0].parent_category);
       // for (const i in this.SingledataEdit[0].role) {
 
       //     this.CategoryManagementTeamForm.controls['role'].patchValue(this.SingledataEdit[i].role)
@@ -143,7 +142,8 @@ export class AddeditTeamComponent implements OnInit {
             'categoryName': this.CategoryManagementTeamForm.value.categoryName,
             'description': this.CategoryManagementTeamForm.value.description,
             'status': this.CategoryManagementTeamForm.value.status,
-            'role': this.CategoryManagementTeamForm.value.role
+            'role': this.CategoryManagementTeamForm.value.role,
+            'parent_category':this.CategoryManagementTeamForm.value.parent_category
           },
           "sourceobj": ["parent_category"]
         }

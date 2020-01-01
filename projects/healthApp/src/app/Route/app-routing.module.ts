@@ -167,17 +167,17 @@ const appRoutes: Routes = [
       path :'team/category-management/list',
       component : ListComponent,
       resolve : {teamdata : ResolveService},
-      data : { requestcondition : { source : 'team_category',condition : {}}, endpoint : 'datalist'}
+      data : { requestcondition : { source : 'team_category_view',condition : {}}, endpoint : 'datalist'}
     },
     /**share-tool library start here**/
     {
       path : 'sharetool/home',
       component : ShareToolComponent 
     },
-    {
-      path : '',
-      component : ShareToolComponent 
-    },
+    // {
+    //   path : '',
+    //   component : ShareToolComponent 
+    // },
     /**Image Gallery start here**/
     {
       path : 'image-gallery/category-management/add',

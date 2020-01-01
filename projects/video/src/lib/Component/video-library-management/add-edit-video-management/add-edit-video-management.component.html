@@ -39,12 +39,25 @@
           </mat-form-field>
 
           <mat-checkbox [formControl]="videoManagementForm.controls['status']">Active</mat-checkbox><br>
-          <mat-label>Enter Video Url</mat-label>
+          <!-- youtube url -->
+          <mat-label>Enter YouTube Video Url</mat-label>
           <mat-form-field>
-            <mat-icon matSuffix (click)="previewUrl()">remove_red_eye</mat-icon>
+            <mat-icon matSuffix (click)="previewUrl('youtube')">remove_red_eye</mat-icon>
             <span matPrefix>{{ video_prefix }}</span>
-            <input matInput type="text" [formControl]="videoManagementForm.controls['videoUrl']" >
-
+            <input matInput type="text" [formControl]="videoManagementForm.controls['videoUrl']" (blur)="inputUntouch(videoManagementForm,'videoUrl')" >
+            <mat-error *ngIf="videoManagementForm.controls['videoUrl'].touched && !videoManagementForm.controls['videoUrl'].valid
+            && videoManagementForm.controls['videoUrl'].errors.required">
+            Video Url field can not be blank</mat-error> <br>
+          </mat-form-field>
+          <!-- vimeo url -->
+          <mat-label>Enter Vimeo Video Url</mat-label>
+          <mat-form-field>
+            <mat-icon matSuffix (click)="previewUrl('vimeo')">remove_red_eye</mat-icon>
+            <span matPrefix>{{ vimeoPrefix }}</span>
+            <input matInput type="text" [formControl]="videoManagementForm.controls['vimeo_url']" (blur)="inputUntouch(videoManagementForm,'vimeo_url')" >
+            <mat-error *ngIf="videoManagementForm.controls['vimeo_url'].touched && !videoManagementForm.controls['vimeo_url'].valid
+            && videoManagementForm.controls['vimeo_url'].errors.required">
+            Video Url field can not be blank</mat-error> <br>
           </mat-form-field>
 
           <!-- ckeditor using start here -->
@@ -54,7 +67,7 @@
           <mat-error *ngIf="videoManagementForm.controls['description'].touched && !videoManagementForm.controls['description'].valid
                && videoManagementForm.controls['description'].errors.required">
             Description field can not be blank</mat-error> -->
-            <mat-label>Description</mat-label>
+            <mat-label>Description:-</mat-label>
             <ck-editor formControlName="description" [config]="editorconfig">
             </ck-editor>
           <!-- ckeditor using end here -->

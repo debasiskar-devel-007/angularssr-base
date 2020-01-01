@@ -19,11 +19,9 @@ export class AddeditImageCategoryComponent implements OnInit {
   ngOnInit() {
     if(this.activeRoute.snapshot.params._id){
       this.activeRoute.data.forEach(data=>{
-        console.log(data);
         let result:any;
         result=data.ImageData.res;
         this.editedData=result;
-        console.log("okk123456789",this.editedData);
       })
     }
   }

@@ -73,9 +73,9 @@ export class ImagelistingComponent implements OnInit {
 
   public data_modify_header: any =
     {
-      'category_name': "Category Name",
+      'category name': "Category Name",
       'images': "Images",
-      'date_added': "Added Date"
+      'date added': "Added Date"
     };
   public previewModal_detail_skip: any = ["_id","category_name_search"];
 

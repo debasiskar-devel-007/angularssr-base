@@ -10,8 +10,8 @@
 </mat-toolbar>
 <!-- adding button end here -->
 <mat-card-content class="listing-content-admin">
-  <lib-listing class="formfilterdiv formfilterdivnew" *ngIf="DataList.length>0" 
-    [datasource]="DataList"
+  <lib-listing class="formfilterdiv formfilterdivnew" *ngIf="allDataList.length>0" 
+    [datasource]="allDataList"
     [jwttoken]="tokenVal" 
     [skip]="data_skip" 
     [modify_header_array]="data_modify_header" 

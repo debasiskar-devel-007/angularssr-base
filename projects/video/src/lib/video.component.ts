@@ -19,7 +19,6 @@ export class VideoComponent implements OnInit {
   public searchSourceval:any='';
   ;  /**lib-listing start here **/
   public allDataList: any = [];
-
   public allDataList_skip: any = ["_id", "description", "parent_id", "title_search","parentvideocategory_search"];
   public allDataList_modify_header: any = {
     'title': "Title", 'description': "Description",

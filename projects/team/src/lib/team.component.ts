@@ -4,7 +4,6 @@ import { Component, OnInit } from '@angular/core';
   selector: 'lib-Team',
   templateUrl: 'team.component.html',
   styleUrls: ['style.css']
- 
 
 })
 export class TeamComponent implements OnInit {

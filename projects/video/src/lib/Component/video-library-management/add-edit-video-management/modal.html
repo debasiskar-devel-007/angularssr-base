@@ -1,10 +1,11 @@
 <h1 mat-dialog-title>YOUTUBE VIDEO PREVIEW</h1>
-<div mat-dialog-content>
- 
+<p>{{(data.type)}}</p>
+<div *ngIf="data.type=== 'youtube'" mat-dialog-content>
    <p>https://www.youtube.com/watch?v={{ (data.message) }}</p> 
-  
-   
    <lib-youtube-viewer [videoid]="data.message"></lib-youtube-viewer>
-   
-
+</div >
+<div *ngIf="data.type=== 'vimeo'" mat-dialog-content>
+   <p>testinggggg</p>
+   <p>https://player.vimeo.com/video/{{ (data.message) }}</p> 
+   <lib-youtube-viewer [videoid]="data.message"></lib-youtube-viewer>
 </div>
