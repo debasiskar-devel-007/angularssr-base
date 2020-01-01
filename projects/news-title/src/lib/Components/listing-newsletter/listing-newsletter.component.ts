@@ -31,7 +31,7 @@ export class ListingNewsletterComponent implements OnInit {
       listEndPoint: receivedData.listEndPoint,
       datasource: receivedData.datasource,
       tableName: receivedData.tableName,
-      listArray_skip: ["_id", "userId", "created_at", "id", "updated_at", "image"],
+      listArray_skip: ["_id", "userId", "created_at", "id", "updated_at", "image","fullname_search"],
       listArray_modify_header: { "fullname": "Full Name", "phone": "Phone", "company": "Company", "email": "Email","group":"Group" },
       admintablenameTableName: "admin",
       statusarr: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }],
@@ -41,7 +41,7 @@ export class ListingNewsletterComponent implements OnInit {
       deleteEndPoint: receivedData.deleteEndPoint,
       view: receivedData.view,
       search_settings: {
-        textsearch: [{ label: "Search by customer name...", field: 'fullname' },{ label: "Search by email...", field: 'email' }],
+        textsearch: [{ label: "Search by customer name...", field: 'fullname_search' },{ label: "Search by email...", field: 'email' }],
        
       },
       detail_header:['_id']

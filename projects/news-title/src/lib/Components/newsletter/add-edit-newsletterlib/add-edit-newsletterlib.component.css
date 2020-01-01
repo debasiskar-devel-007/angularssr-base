@@ -128,3 +128,12 @@ h1{
 
 .closecard i{font-size: 18px; line-height: 27px;}
 .date_wrapper .mat-checkbox{ margin-right: 15px;}
+.desc_error{
+  color: #D8000C;
+  border :2px solid #D8000C;  
+    background-color: #ff97ce;
+    padding:0px 10px;
+    display: inline-flex;
+    align-items: center;
+}
+.desc_error .mat-icon{ margin-right: 10px;}

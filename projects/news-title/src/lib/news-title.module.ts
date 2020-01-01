@@ -22,6 +22,7 @@ import { AmazingTimePickerModule } from 'amazing-time-picker';
 // import {NgxMaterialTimepickerModule} from 'ngx-material-timepicker';
 import { DatePipe} from '@angular/common';
 import { CKEditorModule } from 'ngx-ckeditor';
+import { MomentModule } from 'ngx-moment';
 
 
 @NgModule({
@@ -41,6 +42,7 @@ import { CKEditorModule } from 'ngx-ckeditor';
     AmazingTimePickerModule,
     // NgxMaterialTimepickerModule,
     CKEditorModule,
+    MomentModule
     
   ],
   exports: [AddEditSenderComponent,AddEditNewsletterlibComponent,AddEditSubscriptiongroupComponent,

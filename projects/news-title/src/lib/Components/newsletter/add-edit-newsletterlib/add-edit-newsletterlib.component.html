@@ -100,6 +100,10 @@
           <mat-card-content class="date_wrapper" *ngFor="let day of days_json;let i = index">            
             <mat-checkbox  [checked]="day.isSelected" [value]="day.value" (change)="getDays(day)"> {{day.day}}</mat-checkbox>         
           </mat-card-content>
+          <div *ngIf="false_count==7" class="desc_error">
+            <mat-icon>error</mat-icon>
+            <p>Please select at least one day.</p>
+          </div>
         </div>
        
 

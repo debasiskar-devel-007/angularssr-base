@@ -21,7 +21,7 @@ export class ListingSubscriptionComponent implements OnInit {
     jwtToken: "",
     deleteEndPoint: "deletesingledata",
     addLink: "",
-    view: "subscriptions"
+    view: "subscriptions_view"
 
   }
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private cookieService: CookieService) {

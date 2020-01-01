@@ -23,7 +23,7 @@ export class ListingNewsletterlibComponent implements OnInit {
       listEndPoint: receivedData.listEndPoint,
       datasource: receivedData.datasource,
       tableName: receivedData.tableName,
-      listArray_skip: ["_id", "userId", "created_at", "id", "updated_at"],
+      listArray_skip: ["_id", "userId", "created_at", "id", "updated_at","title_search"],
       listArray_modify_header: {
         'title': 'Title', 'subject': 'Subject', 'userGroup': 'User Group', 'time': 'Publish Time',
         'publishdate': 'Publish Date', 'status': 'Status'
@@ -36,11 +36,13 @@ export class ListingNewsletterlibComponent implements OnInit {
       deleteEndPoint: receivedData.deleteEndPoint,
       view: receivedData.view,
       detail_header: ['_id'],
+      date_search_source:receivedData.view,
+      date_search_endpoint:'datalist',
       search_settings: {
-        textsearch: [{ label: "Search by title...", field: 'title' },
+        textsearch: [{ label: "Search by title...", field: 'title_search' },
         { label: "Search by subject...", field: 'subject' }],
-        search: [{ label: "Search By group", field: '' }]
-
+        datesearch:[{startdatelabel:"Start Date",enddatelabel:"End Date",submit:"Search By Date",  field:"publishdate_normal_format"}],
+        // search: [{ label: "Search By group", field: '' }]
       },
 
     }

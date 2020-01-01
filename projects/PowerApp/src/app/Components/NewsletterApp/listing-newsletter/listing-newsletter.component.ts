@@ -22,11 +22,9 @@ export class ListingNewsletterComponent implements OnInit {
     view: "newsletters_view"
   }
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private cookieService: CookieService) {
-
     this.activatedRoute.data.subscribe(resolveData => {
       this.newsConfigForm.datasource = resolveData.newsData.res;
       this.newsConfigForm.jwtToken = this.cookieService.get('jwtToken');
-
     });
   }
 

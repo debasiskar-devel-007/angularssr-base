@@ -27,6 +27,8 @@ export declare class AddEditNewsletterlibComponent implements OnInit {
     editorconfig: any;
     days_json: any;
     message: string;
+    tmp_date: any;
+    false_count: number;
     /**ckeditor start here*/
     Editor: any;
     editorConfig: {
@@ -38,6 +40,7 @@ export declare class AddEditNewsletterlibComponent implements OnInit {
     /**ckeditor end here*/
     config: any;
     constructor(atp: AmazingTimePickerService, newsService: NewsTitleService, datepipe: DatePipe, cookieService: CookieService, formBuilder: FormBuilder, router: Router, snackBar: MatSnackBar);
+    unix_timestamp(t: any): any;
     ngOnInit(): void;
     /** mat snackbar **/
     openSnackBar(message: string, action: string): void;
