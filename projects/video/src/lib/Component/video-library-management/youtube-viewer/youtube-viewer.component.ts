@@ -11,7 +11,6 @@ export class YoutubeViewerComponent implements OnInit {
   public isVimeo:boolean=false;
   @Input()          
   set videoid(id: any) {
-    console.log("data",id);
     this.id = (id) || '<no name set>';
     this.id = this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/'+id);
   }

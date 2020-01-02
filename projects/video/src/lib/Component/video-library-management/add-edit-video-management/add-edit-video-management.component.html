@@ -61,12 +61,6 @@
           </mat-form-field>
 
           <!-- ckeditor using start here -->
-          <!-- <mat-label>Description</mat-label>
-          <ckeditor [editor]="Editor" [config]="editorConfig" [formControl]="videoManagementForm.controls['description']" [(ngModel)]="model.editorData"
-            ></ckeditor>
-          <mat-error *ngIf="videoManagementForm.controls['description'].touched && !videoManagementForm.controls['description'].valid
-               && videoManagementForm.controls['description'].errors.required">
-            Description field can not be blank</mat-error> -->
             <mat-label>Description:-</mat-label>
             <ck-editor formControlName="description" [config]="editorconfig">
             </ck-editor>

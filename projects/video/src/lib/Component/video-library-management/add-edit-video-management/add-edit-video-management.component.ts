@@ -1,10 +1,8 @@
 import { Component, OnInit, Input,ViewChild ,Inject} from '@angular/core';
 import { FormBuilder, FormControl, FormArray, FormGroup, Validators ,FormGroupDirective} from '@angular/forms';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from "@angular/material";
 import { ApiService } from 'projects/video/src/lib/Service/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { DomSanitizer } from '@angular/platform-browser'
 
 export interface DialogData {
   message: string;
@@ -37,8 +35,8 @@ export class AddEditVideoManagementComponent implements OnInit {
   public model = {
     editorData: ''
   };
-  public video_prefix: any = "https://www.youtube.com/watch?v=";
-  public vimeoPrefix:any="https://player.vimeo.com/video/" ;
+  public video_prefix: any  ="https://www.youtube.com/watch?v=";
+  public vimeoPrefix:  any  ="https://player.vimeo.com/video/" ;
 
   @ViewChild(FormGroupDirective, { static: false }) formDirective: FormGroupDirective;
 
@@ -90,7 +88,7 @@ export class AddEditVideoManagementComponent implements OnInit {
     }
   }
   constructor(public dialog: MatDialog, public fb: FormBuilder, public apiService: ApiService,
-    public activeRoute: ActivatedRoute, public router: Router,public sanitizer: DomSanitizer) {
+    public activeRoute: ActivatedRoute, public router: Router) {
     this.videoManagementForm = this.fb.group({
 
       title: ['', Validators.required],
@@ -156,30 +154,18 @@ export class AddEditVideoManagementComponent implements OnInit {
      
     })
   }
-  // previewUrl(value:any) {
-
-  //   this.openDialog(this.videoManagementForm.value.videoUrl);
-
-  // }
-  previewUrl(value:any) {
   
+  previewUrl(value:any) {
     switch (value) {
       case "youtube":
-       // console.log("youtybeeeee",value);
-
        this.openDialog(this.videoManagementForm.value.videoUrl,value);
-        break;
- 
+        break
         case "vimeo":
-         // console.log("vimeooooooooooooooo",value);
- 
        this.openDialog(this.videoManagementForm.value.vimeo_url,value);
         break;
-    
       default:
         break;
     }
- 
  
    }
  
@@ -211,7 +197,7 @@ export class AddEditVideoManagementComponent implements OnInit {
           },
           "sourceobj": ["parent_category"]
         }
-      } else {
+      } else { 
         data = {                                         //add part
           "source":this.getSourceName,
           "data": this.videoManagementForm.value,
