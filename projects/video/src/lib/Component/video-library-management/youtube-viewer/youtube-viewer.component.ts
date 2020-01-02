@@ -7,18 +7,20 @@ import { DomSanitizer } from '@angular/platform-browser'
 })
 export class YoutubeViewerComponent implements OnInit {
   id:any;
-  
-
+  vimeo:any;
+  public isVimeo:boolean=false;
   @Input()          
   set videoid(id: any) {
+    console.log("data",id);
     this.id = (id) || '<no name set>';
     this.id = this.sanitizer.bypassSecurityTrustResourceUrl('https://www.youtube.com/embed/'+id);
   }
-  set Vimeovideoid(id: any) {
-    this.id = (id) || '<no name set>';
-    this.id = this.sanitizer.bypassSecurityTrustResourceUrl("https://player.vimeo.com/video/"+id);
-    console.log("vvvvvvvvvvvvvvvvvvvvvv",this.id);
 
+  @Input()          
+  set Vimeovideoid(vimeo: any) {
+    this.vimeo = (vimeo) || '<no name set>';
+    this.vimeo = this.sanitizer.bypassSecurityTrustResourceUrl("https://player.vimeo.com/video/"+vimeo);
+    this.isVimeo=true;
   }
   constructor(public sanitizer: DomSanitizer) { 
   }

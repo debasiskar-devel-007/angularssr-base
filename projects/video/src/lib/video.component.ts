@@ -11,15 +11,15 @@ export class VideoComponent implements OnInit {
   public tokenViaApp: any = '';
   public addupdateRouteUrl: any = '';
   public TableNameViaApp: any = '';
-  public deleteEndpointViaApp: any ='';
+  public deleteEndpointViaApp: any = '';
   public editRouteViaApp: any = '';
   public AddButtonRouteViaApp: any = '';
   public manageVideoRouteViaApp: any = '';
-  public searchEndpointval:any='';
-  public searchSourceval:any='';
+  public searchEndpointval: any = '';
+  public searchSourceval: any = '';
   ;  /**lib-listing start here **/
   public allDataList: any = [];
-  public allDataList_skip: any = ["_id", "description", "parent_id", "title_search","parentvideocategory_search"];
+  public allDataList_skip: any = ["_id", "description", "parent_id", "title_search", "parentvideocategory_search"];
   public allDataList_modify_header: any = {
     'title': "Title", 'description': "Description",
     "status": "Status", "priority": "Priority", "parentvideocategory": "Parent Category"
@@ -28,16 +28,16 @@ export class VideoComponent implements OnInit {
   public search_settings: any =
     {
       selectsearch: [{ label: 'Search By Status', field: 'status', values: this.status }],
-      textsearch: [{ label: "Search By Title", field: 'title_search' },{ label: "Search By Parent Category", field: 'parentvideocategory_search' }],
+      textsearch: [{ label: "Search By Title", field: 'title_search' }, { label: "Search By Parent Category", field: 'parentvideocategory_search' }],
     };
-    public previewModal_detail_skip: any = ['_id'];
+  public previewModal_detail_skip: any = ['_id', 'title_search', 'parentvideocategory_search'];
 
   /**lib-listing end here **/
   @Input()          //getting search endpoint 
   set SearchEndpoint(Val: any) {
     this.searchEndpointval = (Val) || '<no name set>';
     this.searchEndpointval = Val;
-    
+
   }
   @Input()          //getting search sourcename 
   set SearchSourceName(Val: any) {
@@ -50,7 +50,7 @@ export class VideoComponent implements OnInit {
   set listingViaResolve(DataVal: any) {
     this.allDataList = (DataVal) || '<no name set>';
     this.allDataList = DataVal;
-   
+
   }
   @Input()          //gettingadd button route 
   set AddButtonRoute(Val: any) {
@@ -59,7 +59,7 @@ export class VideoComponent implements OnInit {
 
   }
   @Input()
-  set VideoManagementRoute(val:any){
+  set VideoManagementRoute(val: any) {
     this.manageVideoRouteViaApp = (val) || '<no name set>';
     this.manageVideoRouteViaApp = val;
   }

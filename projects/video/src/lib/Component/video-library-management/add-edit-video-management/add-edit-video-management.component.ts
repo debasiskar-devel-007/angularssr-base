@@ -4,6 +4,8 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from "@angular/material";
 import { ApiService } from 'projects/video/src/lib/Service/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { DomSanitizer } from '@angular/platform-browser'
+
 export interface DialogData {
   message: string;
   type:string;
@@ -88,7 +90,7 @@ export class AddEditVideoManagementComponent implements OnInit {
     }
   }
   constructor(public dialog: MatDialog, public fb: FormBuilder, public apiService: ApiService,
-    public activeRoute: ActivatedRoute, public router: Router) {
+    public activeRoute: ActivatedRoute, public router: Router,public sanitizer: DomSanitizer) {
     this.videoManagementForm = this.fb.group({
 
       title: ['', Validators.required],
@@ -128,7 +130,6 @@ export class AddEditVideoManagementComponent implements OnInit {
   /**for validation purpose**/
   /*modal start here*/
   openDialog(x: any,y:any): void {
-    console.log("modal values",x,y);
     this.dialogRef = this.dialog.open(Dialogtest, {
       width: '45%',
       height: '500px',
@@ -165,7 +166,7 @@ export class AddEditVideoManagementComponent implements OnInit {
     switch (value) {
       case "youtube":
        // console.log("youtybeeeee",value);
- 
+
        this.openDialog(this.videoManagementForm.value.videoUrl,value);
         break;
  
@@ -240,6 +241,7 @@ export class AddEditVideoManagementComponent implements OnInit {
 export class Dialogtest {
   public is_error: any;
   public is_error1: any;
+  
 
   constructor(public dialogRef: MatDialogRef<Dialogtest>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {

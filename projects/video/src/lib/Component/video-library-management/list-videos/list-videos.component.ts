@@ -75,9 +75,9 @@ export class ListVideosComponent implements OnInit {
   public VideoDataListing_skip: any = ["_id", "description", "created_at","updated_at","id","description_html","parent_category_search","title_search"];
   public VideoDataListing_modify_header: any = {
     "title": "Title", "priority": "Priority",
-    "status": "Status", "videoUrl": "Video Url","parent_category" : "Parent Category"
+    "status": "Status", "videoUrl": "Video Url","parent category" : "Parent Category","vimeo url":"Vimeo Url"
   };
-  public previewModal_detail_skip: any = ['_id','created_at','id','updated_at'];
+  public previewModal_detail_skip: any = ['_id','created_at','id','updated_at','title_search','parent_category_search'];
   public status: any = [{ val: 1, 'name': 'Active' }, { val: 0, 'name': 'Inactive' }];
   public search_settings: any =
     {

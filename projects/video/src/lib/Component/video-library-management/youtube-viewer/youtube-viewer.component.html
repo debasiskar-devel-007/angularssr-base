@@ -1,9 +1,14 @@
-
- <iframe width="560" height="300"
-[src]="id" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope;
+<mat-card-content class="video_wrapper">
+    <ng-container *ngIf="!isVimeo">
+        <iframe width="560" height="300" [src]="id" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope;
 picture-in-picture" allowfullscreen>
-</iframe>
+        </iframe>
+    </ng-container>
 
+    <ng-container *ngIf="isVimeo">
+        <iframe width="560" height="300" [src]="vimeo" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope;
+        picture-in-picture" allowfullscreen>
+        </iframe>
+    </ng-container>
 
-
-
+</mat-card-content>
