@@ -40,16 +40,30 @@
 
           <mat-checkbox [formControl]="videoManagementForm.controls['status']">Active</mat-checkbox><br>
           <!-- youtube url -->
+          <mat-form-field>
+            <mat-label >Select Video Url</mat-label>
+            <mat-select (selectionChange)="getVideoValue($event.value);"> 
+              <mat-option value="youtube">
+               YouTube
+              </mat-option>
+              <mat-option value="vimeo">
+               Vimeo
+              </mat-option>
+            </mat-select>
+          </mat-form-field>
+          <ng-container *ngIf="videoValue=='youtube'" >
           <mat-label>Enter YouTube Video Url</mat-label>
           <mat-form-field>
             <mat-icon matSuffix (click)="previewUrl('youtube')">remove_red_eye</mat-icon>
             <span matPrefix>{{ video_prefix }}</span>
-            <input matInput type="text" [formControl]="videoManagementForm.controls['videoUrl']" (blur)="inputUntouch(videoManagementForm,'videoUrl')" >
-            <mat-error *ngIf="videoManagementForm.controls['videoUrl'].touched && !videoManagementForm.controls['videoUrl'].valid
-            && videoManagementForm.controls['videoUrl'].errors.required">
+            <input matInput type="text" [formControl]="videoManagementForm.controls['youtube_Url']" (blur)="inputUntouch(videoManagementForm,'youtube_Url')" >
+            <mat-error *ngIf="videoManagementForm.controls['youtube_Url'].touched && !videoManagementForm.controls['youtube_Url'].valid
+            && videoManagementForm.controls['youtube_Url'].errors.required">
             Video Url field can not be blank</mat-error> <br>
           </mat-form-field>
+        </ng-container>
           <!-- vimeo url -->
+          <ng-container *ngIf="videoValue=='vimeo'">
           <mat-label>Enter Vimeo Video Url</mat-label>
           <mat-form-field>
             <mat-icon matSuffix (click)="previewUrl('vimeo')">remove_red_eye</mat-icon>
@@ -59,7 +73,7 @@
             && videoManagementForm.controls['vimeo_url'].errors.required">
             Video Url field can not be blank</mat-error> <br>
           </mat-form-field>
-
+        </ng-container>
           <!-- ckeditor using start here -->
             <mat-label>Description:-</mat-label>
             <ck-editor formControlName="description" [config]="editorconfig">

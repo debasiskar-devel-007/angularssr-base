@@ -21,7 +21,7 @@ export class ListTeamComponent implements OnInit {
   public alldata_skip: any = ["_id","id","updated_at", "created_at","description_html","description","categoryName_search"];
   public alldata_modify_header: any = {
     "categoryName": "Category Name", "description": "Description",
-    "rolename": "Role Name", "status": "Status","role" : "Role"
+    "rolename": "Role Name", "status": "Status","role" : "Role","parent category":"Parent Category"
   };
   public status: any = [{ val: 1, 'name': 'Active' }, { val: 0, 'name': 'Inactive' }];
   public previewModal_detail_skip: any = ['_id',"id","updated_at","created_at","categoryName_search"];
