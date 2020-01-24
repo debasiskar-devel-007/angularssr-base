@@ -40,7 +40,8 @@
 
         <!-- ckeditor using start here -->
         <mat-label>Description</mat-label>
-        <ckeditor [editor]="Editor" [config]="editorConfig" formControlName="description" ></ckeditor>
+        <ck-editor formControlName="description" [config]="editorconfig">
+            </ck-editor>
         <mat-error *ngIf="!blogCatForm.controls['description'].valid
         && blogCatForm.controls['description'].errors.required && blogCatForm.controls['description'].touched" > Please describe.</mat-error>
           <mat-error
@@ -58,12 +59,7 @@
             <mat-option [value]=0>
               Select a category
             </mat-option>
-<<<<<<< HEAD
-            <mat-option *ngFor=" let f of blogDataarray" [value]="f._id">
-              {{f.title}}
-=======
             <mat-option *ngFor="let parCat of getParentCatArr" value="{{ parCat._id }}"> {{ parCat.blogtitle }}
->>>>>>> f5c94d362a5902414edc831d0f2ede0f73ae81c4
             </mat-option>
 
           </mat-select>

@@ -1,6 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { environment } from '../../environments/environment';
+
+
 @Component({
   selector: 'app-addedit-blogmanagement',
   templateUrl: './addedit-blogmanagement.component.html',
@@ -8,8 +11,10 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class AddeditBlogmanagementComponent implements OnInit {
 
-    server: any ='https://r245816wug.execute-api.us-east-1.amazonaws.com/dev/api/';
+    server: any =environment.apiBaseUrl;
     addUrl: any = 'addorupdatedata';
+    // endpoint: environment.apiBaseUrl+ 'addorupdatedata';
+    // endpoint2: environment.apiBaseUrl;
     getDataUrl: any= 'datalist';
     public editdata: any = [];
     action:any="add";
@@ -17,24 +22,32 @@ export class AddeditBlogmanagementComponent implements OnInit {
   
 
     public configData: any = {
-      baseUrl: "http://3.15.236.141:5005/",
+      baseUrl: "https://fileupload.influxhostserver.com/",
       endpoint: "uploads",
       size: "51200", // kb
-      format: ["jpg", "jpeg", "png"], // use all small font
+      format: ["jpg", "jpeg","png"], // use all small font
       type: "blogs-image",
       path: "blogs",
-      prefix: "blogs-image_"
+      prefix: "blogs-image_",
+      formSubmit: false,
+      conversionNeeded: 0,
+      bucketName: "crmfiles.influxhostserver"
     }
 
+
     public configFileData: any = {
-      baseUrl: "http://3.15.236.141:5005/",
+      baseUrl: "https://fileupload.influxhostserver.com/",
       endpoint: "uploads",
       size: "51200", // kb
       format: ["pdf", "doc", "docx","docxx"], // use all small font
       type: "blogs-file",
       path: "blogs",
-      prefix: "blogs-file"
+      prefix: "blogs-file",
+      formSubmit: false,
+      conversionNeeded: 0,
+      bucketName: "crmfiles.influxhostserver"
     }
+
   constructor(private cookieService: CookieService, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {

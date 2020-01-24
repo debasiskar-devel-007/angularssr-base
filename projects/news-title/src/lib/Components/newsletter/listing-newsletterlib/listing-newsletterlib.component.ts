@@ -23,7 +23,7 @@ export class ListingNewsletterlibComponent implements OnInit {
       listEndPoint: receivedData.listEndPoint,
       datasource: receivedData.datasource,
       tableName: receivedData.tableName,
-      listArray_skip: ["_id", "userId", "created_at", "id", "updated_at","title_search"],
+      listArray_skip: ["_id", "userId", "created_at", "id", "updated_at","title_search","publishdate_normal_format"],
       listArray_modify_header: {
         'title': 'Title', 'subject': 'Subject', 'userGroup': 'User Group', 'time': 'Publish Time',
         'publishdate': 'Publish Date', 'status': 'Status'
@@ -35,7 +35,7 @@ export class ListingNewsletterlibComponent implements OnInit {
       jwtToken: receivedData.jwtToken,
       deleteEndPoint: receivedData.deleteEndPoint,
       view: receivedData.view,
-      detail_header: ['_id'],
+      detail_header: ['_id','publishdate_normal_format','title_search'],
       date_search_source:receivedData.view,
       date_search_endpoint:'datalist',
       search_settings: {
@@ -43,8 +43,7 @@ export class ListingNewsletterlibComponent implements OnInit {
         { label: "Search by subject...", field: 'subject' }],
         datesearch:[{startdatelabel:"Start Date",enddatelabel:"End Date",submit:"Search By Date",  field:"publishdate_normal_format"}],
         // search: [{ label: "Search By group", field: '' }]
-      },
-
+      },  
     }
     this.loader = false;
   }

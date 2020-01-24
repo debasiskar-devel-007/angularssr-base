@@ -19,13 +19,6 @@ const appRoutes: Routes = [
     resolve: { blogCatList: ResolveService },
     data: { requestcondition: { source: 'blog_category_view', condition: {} }, endpoint: 'datalist' }
   },
-<<<<<<< HEAD
-  { 
-    path: 'blog/add', component: AddComponent,resolve :{results :ResolveService},
-    data:{requestcondition:{source:'blog_category_view',condition:{}},endpoint:'datalist'} 
-  },
-=======
->>>>>>> f5c94d362a5902414edc831d0f2ede0f73ae81c4
   {
     path: 'blog-category/edit/:_id',
     component: AddComponent,

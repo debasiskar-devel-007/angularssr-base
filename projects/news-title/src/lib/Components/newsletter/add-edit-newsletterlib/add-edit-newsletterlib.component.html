@@ -30,8 +30,8 @@
           <mat-label>Share newsletter with group:</mat-label>
           <mat-select matNativeControl required formControlName="share_news">
             <mat-option value=0>Select a group</mat-option>
-            <mat-option value="{{i._id}}" *ngFor="let i of group_name_array">{{ i.name }}</mat-option>
-          </mat-select>
+            <mat-option value="{{i._id}}" *ngFor="let i of group_name_array" (click)="share_with_group=i.name">{{ i.name }}</mat-option>
+            </mat-select>
         </mat-form-field>
 
         <!-- sender's address  -->
@@ -39,7 +39,7 @@
           <mat-label>Sender's address</mat-label>
           <mat-select matNativeControl required formControlName="senderaddress">
             <mat-option value=0>Select a sender</mat-option>
-            <mat-option value="{{ i._id }}" *ngFor='let i of sender_name_array'>{{ i.email }}</mat-option>
+            <mat-option value="{{ i._id }}" *ngFor='let i of sender_name_array' (click)="senders_address_to=i.email">{{ i.email }}</mat-option>
           </mat-select>
         </mat-form-field>
 
@@ -79,7 +79,7 @@
           <mat-label>Automatically send newsletter to members:</mat-label>
           <mat-select matNativeControl required formControlName="sendnews" (blur)="inputBlur('sendnews')">
             <mat-option value=0>Select a group</mat-option>
-            <mat-option value="{{i._id}}" *ngFor="let i of group_name_array">{{ i.name }}</mat-option>
+            <mat-option value="{{i._id}}" *ngFor="let i of group_name_array" (click)="automatic_newsletter_to=i.name">{{ i.name }}</mat-option>
           </mat-select>
         </mat-form-field>
 
@@ -88,14 +88,14 @@
         <mat-form-field>
           <mat-label>Newsletter Frequency:</mat-label>
           <mat-select matNativeControl required formControlName="newsfrequency">
-            <mat-option value="daily" (click)="frequency_flag=false">Daily</mat-option>
-            <mat-option value="weekly" (click)="frequency_flag=true">Weekly</mat-option>
+            <mat-option value="daily" (click)="frequency_flag=false;days_json={}">Daily</mat-option>
+            <mat-option value="weekly" (click)="weekdays();frequency_flag=true">Weekly</mat-option>
           </mat-select>
         </mat-form-field>
 
 
         <!-- News letter Day of the week  -->
-        <div class="dayofweek" *ngIf="frequency_flag===true">
+        <div class="dayofweek" *ngIf="frequency_flag==true">
           <h5>NewsLetter day of the week</h5>
           <mat-card-content class="date_wrapper" *ngFor="let day of days_json;let i = index">            
             <mat-checkbox  [checked]="day.isSelected" [value]="day.value" (change)="getDays(day)"> {{day.day}}</mat-checkbox>         
@@ -153,7 +153,7 @@
           <mat-label>Reply address</mat-label>
           <mat-select matNativeControl required formControlName="reply">
             <mat-option value=0>Select a sender</mat-option>
-            <mat-option value="{{ i._id }}" *ngFor='let i of sender_name_array'>{{ i.email }}</mat-option>
+            <mat-option value="{{ i._id }}" *ngFor='let i of sender_name_array' (click)="reply_address_to=i.email">{{ i.email }}</mat-option>
           </mat-select>
         </mat-form-field>
 
@@ -163,7 +163,7 @@
 
 
         <!-- Buttons  -->
-        <button type="submit" class="submitbtn" class="submitbtn" mat-raised-button color="primary">PREVIEW</button>
+        <button *ngIf="this.configData.action=='add'" [disabled]="!newsForm.valid" type="button" class="submitbtn" class="submitbtn" mat-raised-button color="primary" (click)="preview_all()">PREVIEW</button>
         <button type="submit" class="submitbtn" class="submitbtn" mat-raised-button
           color="primary" (click)="onSubmit()">{{buttonText}}</button>
         <button type="reset" class="submitbtn" class="submitbtn" mat-raised-button color="primary">RESET</button>

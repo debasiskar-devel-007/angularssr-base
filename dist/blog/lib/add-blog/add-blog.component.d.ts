@@ -30,6 +30,7 @@ export declare class AddBlogComponent implements OnInit {
     successMessage: any;
     getParentCatArr: any;
     dialogRef: any;
+    editorconfig: any;
     constructor(formBuilder: FormBuilder, blogService: BlogService, router: Router, cookieService: CookieService, dialog: MatDialog);
     ngOnInit(): void;
     setDefaultValue(defaultValue: any): void;

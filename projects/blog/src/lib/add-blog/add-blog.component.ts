@@ -27,38 +27,6 @@ export class AddBlogComponent implements OnInit {
   };
   /**ckeditor end here*/
 
-<<<<<<< HEAD
-  /**blog varibles declaration start here**/
-  public dialogRef: any;
-  public getDataEndpointData: any;
-  public addEndpointData: any;
-  public serverUrlData: any;
-  public listUrl: any;
-  public blogarray: any = [];
-  public blogDataarray: any = [];
-  isSubmitted = false;
-  blogAddEditForm: FormGroup;
-  public params_id: any;
-  public editarray: any = [];
-  public statusarray: any = [];
-  public allData: any = [];
-  /**blog varibles declaration end here**/
-  public headerText: any = 'Add Blogs';
-  public buttonText: any = 'Submit';
-  public messageText: any = 'Successfully Submitted';
-
-  @Input()         //setting the listing url form the application
-  set listRoute(listval: any) {
-    this.listUrl = (listval) || '<no name set>';
-    this.listUrl = listval;
-  }
-  @Input()          //resolve list
-  set listResolve(listresolveUrlval: any) {
-    this.blogDataarray = (listresolveUrlval) || '<no name set>';
-    this.blogDataarray = listresolveUrlval;
-  }
-=======
->>>>>>> f5c94d362a5902414edc831d0f2ede0f73ae81c4
 
   // ====================declarations==================
   blogCatForm: FormGroup;
@@ -68,30 +36,17 @@ export class AddBlogComponent implements OnInit {
   loader: boolean = false;
   successMessage: any = "Category Added Successfully!!!"
   getParentCatArr: any = [];
-  dialogRef:any;
+  dialogRef: any;
+  public editorconfig: any = {};
   // ==================================================
 
 
 
   constructor(private formBuilder: FormBuilder, private blogService: BlogService, private router: Router,
-    private cookieService: CookieService,public dialog: MatDialog) { }
-
-<<<<<<< HEAD
+    private cookieService: CookieService, public dialog: MatDialog) {
+    this.editorconfig.extraAllowedContent = '*[class](*),span;ul;li;table;td;style;*[id];*(*);*{*}';
   }
-  @Input()          //single data from resolve call  & set the value for edit
-  set singleData(allData: any) {
-    this.allData = allData;
-    if (this.activeroute.snapshot.params.id) {
-      this.params_id = this.activeroute.snapshot.params.id;
-      this.headerText = "Edit Blogs";
-      this.buttonText = "Update";
-      this.blogAddEditForm.controls['title'].patchValue(allData[0].title);
-      this.blogAddEditForm.controls['priority'].patchValue(allData[0].priority);
-      this.blogAddEditForm.controls['status'].patchValue(allData[0].status);
-      this.blogAddEditForm.controls['description'].patchValue(allData[0].description);
-      this.model.editorData = allData[0].description;
-      this.blogAddEditForm.controls['parent_id'].patchValue(allData[0].parent_id);
-=======
+
   ngOnInit() {
     //generating the form
     this.generateForm();
@@ -110,27 +65,11 @@ export class AddBlogComponent implements OnInit {
         this.setDefaultValue(this.configData.defaultData);
         this.header_txt = "EDIT";
         break;
->>>>>>> f5c94d362a5902414edc831d0f2ede0f73ae81c4
     }
     // --------------------------------------------------------------------------
 
   }
 
-<<<<<<< HEAD
-  constructor(public fb: FormBuilder, public activeroute: ActivatedRoute,
-    public apiservice: ApiService, public _http: HttpClient, public router: Router
-    , public dialog: MatDialog) {
-
-    /**Formgroup create start here**/
-    this.blogAddEditForm = this.fb.group({
-      title: ['', Validators.required],
-      description: ['', Validators.required],
-      priority: ['', Validators.required],
-      status: [true,],
-      parent_id: []
-    })
-    /**Formgroup create end here**/
-=======
 
   // ================================================Default value======================================
   setDefaultValue(defaultValue) {
@@ -142,47 +81,28 @@ export class AddBlogComponent implements OnInit {
       parent_id: defaultValue.parent_id
     });
 
->>>>>>> f5c94d362a5902414edc831d0f2ede0f73ae81c4
   }
   // ==================================================================================================
 
 
-<<<<<<< HEAD
-    /**Observable start here**/
-    this.apiservice.clearServerUrl();
-    setTimeout(() => {
-      this.apiservice.setServerUrl(this.serverUrlData);
-    }, 50);
-    this.apiservice.cleargetdataEndpoint();
-    setTimeout(() => {
-      this.apiservice.setgetdataEndpoint(this.getDataEndpointData);
-    }, 50);
-    this.apiservice.clearaddEndpoint();
-    setTimeout(() => {
-      this.apiservice.setaddEndpoint(this.addEndpointData);
-    }, 50);
-    /**Observable end here**/
-
-=======
   //  ============================GENERATING THE FORM=======================
   generateForm() {
     this.blogCatForm = this.formBuilder.group({
-      blogtitle: ['',[Validators.required,Validators.maxLength(50)]],
-      priority: ['',[Validators.required,Validators.maxLength(2)]],
+      blogtitle: ['', [Validators.required, Validators.maxLength(50)]],
+      priority: ['', [Validators.required, Validators.maxLength(2)]],
       status: [true,],
-      description: ['',[Validators.required,Validators.maxLength(100)]],
+      description: ['', [Validators.required, Validators.maxLength(100)]],
       parent_id: [0,]
     });
   }
   // ========================================================================
->>>>>>> f5c94d362a5902414edc831d0f2ede0f73ae81c4
 
 
   //  Getting the input Configuration 
   @Input()
   set config(getConfig: any) {
     this.configData = getConfig;
-   
+
   }
 
   // =========================================MODAL functions==========================================
@@ -198,78 +118,10 @@ export class AddBlogComponent implements OnInit {
   }
   // ===================================================================================================
 
-<<<<<<< HEAD
-  /**validation for untouch purpose start here **/
-  inputUntouch(form: any, val: any) {
-
-    form.controls[val].markAsUntouched();
-  }
-  /*validation untouch purpose end here*/
-
-  /**add & update* blogs submitting form start here**/
-  blogAddEditFormSubmit() {
-    this.blogAddEditForm.patchValue({
-      description: this.model.editorData
-    });
-    this.isSubmitted = true;
-    let x: any;
-    for (x in this.blogAddEditForm.controls) {
-      this.blogAddEditForm.controls[x].markAsTouched();
-    }
-    if (this.blogAddEditForm.valid) {
-      if (this.blogAddEditForm.value.status)
-        this.blogAddEditForm.value.status = parseInt("1");
-      else
-        this.blogAddEditForm.value.status = parseInt("0");
-      var data: any;
-      if (this.activeroute.snapshot.params.id != null) {    //update part
-        this.messageText = "One row updated!!!";
-        data = {
-          "source": "blog_category",
-          "data": {
-            "id": this.params_id,
-            "parent_id": this.blogAddEditForm.value.parent_id,
-            'title': this.blogAddEditForm.value.title,
-            'priority': this.blogAddEditForm.value.priority,
-            'status': this.blogAddEditForm.value.status,
-            'description': this.blogAddEditForm.value.description
-          },
-          "sourceobj": ["parent_id"]
-        };
-      } else {
-        data = {                                         //add part
-          "source": "blog_category",
-          "data": {
-            "parent_id": this.blogAddEditForm.value.parent_id,
-            'title': this.blogAddEditForm.value.title,
-            'priority': this.blogAddEditForm.value.priority,
-            'status': this.blogAddEditForm.value.status,
-            'description': this.blogAddEditForm.value.description
-
-          },
-          "sourceobj": ["parent_id"]
-        };
-      }
-      this.apiservice.addData(data).subscribe(response => {
-        let result: any;
-        result = response;
-        this.statusarray = result.status;
-        if (result.status == "success")
-          this.openDialog(this.messageText);
-        setTimeout(() => {
-          this.dialogRef.close();
-        }, 1000);
-
-        setTimeout(() => {
-          this.router.navigateByUrl('/' + this.listUrl);
-        }, 2000);
-      });
-
-=======
 
 
 
-//Getting the parent category
+  //Getting the parent category
   getParentData() {
     let postData: any = {
       source: this.configData.source,
@@ -288,7 +140,7 @@ export class AddBlogComponent implements OnInit {
   // =========================SUBMIT function==================
   onSubmit() {
     this.blogCatForm.controls['description'].markAsTouched();
-   
+
     this.loader = true;
     /* stop here if form is invalid */
     if (this.blogCatForm.invalid) {
@@ -306,10 +158,10 @@ export class AddBlogComponent implements OnInit {
         data: Object.assign(this.blogCatForm.value, this.configData.condition),
         "sourceobj": ["parent_id"]
       };
-      
+
       this.blogService.addData(this.configData.endpoint, postData).subscribe((response: any) => {
         if (response.status == "success") {
-         
+
           this.openDialog(this.successMessage);
           setTimeout(() => {
             this.dialogRef.close();
@@ -322,7 +174,6 @@ export class AddBlogComponent implements OnInit {
       }, (error) => {
         alert("Some error occurred. Please try again.");
       });
->>>>>>> f5c94d362a5902414edc831d0f2ede0f73ae81c4
     }
   }
   // ==========================================================

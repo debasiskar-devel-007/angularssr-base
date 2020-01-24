@@ -7,6 +7,8 @@ import { Observable } from 'rxjs';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog, MatSnackBar } from "@angular/material";
 import { map, startWith } from 'rxjs/operators';
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+import { BlogService } from '../blog.service';
+// import { DemoMaterialModule } from '../material-module';
 
 
 
@@ -25,19 +27,16 @@ export interface DialogData {
 
 export class AddeditBlogmanagementComponent implements OnInit {
 
-  /**ckeditor start here*/
-  public Editor = ClassicEditor;  //for ckeditor
-  editorConfig = {
-    placeholder: 'Description*',
-  };
-  public model = {
-    editorData: ''
-  };
-  /**ckeditor end here*/
 
-
-
-
+/**ckeditor start here*/
+public Editor = ClassicEditor;  //for ckeditor
+editorConfig = {
+  placeholder: 'Write testimonial...',
+};
+public model = {
+  editorData: ''
+};
+/**ckeditor end here*/
 
   // ---------------------declarations-------------------------------------
   public headerText: any = 'Add Blog Management Data';
@@ -53,25 +52,26 @@ export class AddeditBlogmanagementComponent implements OnInit {
   options: any = [''];
   filteredOptions: Observable<string[]>;
   myControl = new FormControl();
-  tags_array: any = [];
-  dialogRef: any;
+  public tags_array: any = [];
+  public dialogRef: any;
   public params_id: any;
-  setData: any;
-  messageText: any;
-  listUrl: any;
-  testTag: any = [];
-  imageConfigData: any;
-  ErrCode: any;
-  img_var: any;
-  image_name: any;
-  image_type: any;
-  flag: boolean = false;
-  images_array: any = [];
-  images_array_edit: any = [];
-  fileConfigData: any;
-  file_array: any = [];
-  file_array_edit: any = [];
-  action2:any;
+  public setData: any;
+  public messageText: any;
+  public listUrl: any;
+  public testTag: any = [];
+  public imageConfigData: any;
+  public ErrCode: any;
+  public img_var: any;
+  public image_name: any;
+  public image_type: any;
+  public flag: boolean = false;
+  public images_array: any = [];
+  public images_array_edit: any = [];
+  public fileConfigData: any;
+  public file_array: any = [];
+  public file_array_edit: any = [];
+  public action2: any;
+  public editorconfig: any = {};
   // -----------------------------------------------------------------------
 
 
@@ -91,6 +91,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
   set serverUrl(serverUrl: any) {
     this.serverUrlData = (serverUrl) || '<no name set>';
     this.serverUrlData = serverUrl;
+
   }
 
   @Input()          //setting the server url from project
@@ -104,7 +105,6 @@ export class AddeditBlogmanagementComponent implements OnInit {
   set addEndpoint(endpointUrlval: any) {
     this.addEndpointData = (endpointUrlval) || '<no name set>';
     this.addEndpointData = endpointUrlval;
-
   }
 
 
@@ -119,21 +119,25 @@ export class AddeditBlogmanagementComponent implements OnInit {
   constructor(private http: HttpClient, private apiservice: ApiService,
     private activatedRoute: ActivatedRoute, private router: Router,
     private formBuilder: FormBuilder, public dialog: MatDialog,
-    public snackBar: MatSnackBar) {
+    public snackBar: MatSnackBar, private blogService: BlogService) {
+    
+      this.editorconfig.extraAllowedContent = '*[class](*),span;ul;li;table;td;style;*[id];*(*);*{*}';
+
     this.blogManagementForm = this.formBuilder.group({
       blogtitle: ['', [Validators.required]],
-      blogcat: ['', ],
+      blogcat: ['',],
       description: ['', [Validators.required]],
       priority: ['', [Validators.required]],
       status: ['true',],
       // metatitle: ['', [Validators.required]],
       // metadesc: ['', [Validators.required]],
-      author:['',[Validators.required]],
+      author: ['', [Validators.required]],
       credentials: this.formBuilder.array([]),
       tags: [''],
       blogs_image: [''],
       blogs_file: ['']
     });
+    
   }
 
 
@@ -153,7 +157,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
     }, 50);
     /**Observable end here**/
 
-    if (this.action2!='edit')
+    if (this.action2 != 'edit')
       setTimeout(() => {
         this.addYoutubeVideo('', '', '');
       }, 500)
@@ -168,8 +172,8 @@ export class AddeditBlogmanagementComponent implements OnInit {
     }, 50)
 
 
-    if (this.action2=='edit') {
-      this.headerText="Edit Blog Management Data";
+    if (this.action2 == 'edit') {
+      this.headerText = "Edit Blog Management Data";
       this.flag = true;
       this.params_id = this.setData._id;
       this.buttonText = "Update";
@@ -177,7 +181,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
       this.blogManagementForm.controls['blogcat'].patchValue(this.setData.blogcat);
       this.blogManagementForm.controls['description'].patchValue(this.setData.description);
       this.blogManagementForm.controls['priority'].patchValue(this.setData.priority);
-      this.blogManagementForm.controls['status'].patchValue(this.setData.status);  
+      this.blogManagementForm.controls['status'].patchValue(this.setData.status);
       this.blogManagementForm.controls['blogs_image'].patchValue(this.setData.blogs_image);
       this.blogManagementForm.controls['blogs_file'].patchValue(this.setData.blogs_file);
       this.blogManagementForm.controls['author'].patchValue(this.setData.author);
@@ -318,7 +322,6 @@ export class AddeditBlogmanagementComponent implements OnInit {
 
 
 
-
   // ---------------------------------Delete Credetial Fucntions----------------
   deleteCreds() {
     const creds = this.blogManagementForm.controls.credentials as FormArray;
@@ -360,12 +363,8 @@ export class AddeditBlogmanagementComponent implements OnInit {
     this.apiservice.getData(data).subscribe(response => {
       let result: any;
       result = response;
-      if (result != null && result.res != null && result.res[0] != null)      
-        this.options=result.res[0].tags;
-      
-       
-
-
+      if (result != null && result.res != null && result.res[0] != null)
+        this.options = result.res[0].tags;
     });
   }
   // ----------------------------------------------------------------------------------
@@ -384,7 +383,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
 
   // ---------------------------------SUBMIT----------------------------------------
   onSubmit() {
-     
+
     /*__________________________IMAGE UPLOADER________________________________________*/
     if (this.imageConfigData) {
       for (const loop in this.imageConfigData.files) {
@@ -430,7 +429,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
         this.blogManagementForm.value.status = parseInt("1");
       else
         this.blogManagementForm.value.status = parseInt("0");
-      if (this.params_id!= null) {    //update part
+      if (this.params_id != null) {    //update part
         this.messageText = "One row updated!!!";
         this.blogManagementForm.value.tags = this.tags_array;
         data = {
@@ -448,11 +447,12 @@ export class AddeditBlogmanagementComponent implements OnInit {
             "credentials": this.blogManagementForm.value.credentials,
             "blogs_image": this.blogManagementForm.value.blogs_image,
             "blogs_file": this.blogManagementForm.value.blogs_file,
-            "author":this.blogManagementForm.value.author
+            "author": this.blogManagementForm.value.author
 
           },
           "sourceobj": ["blogcat"]
         };
+        this.openSnackBar2("Blog Details Updated Successfully!!!", "OK");
       } else {
         this.isSubmitted = true;
         var data: any;
@@ -461,9 +461,10 @@ export class AddeditBlogmanagementComponent implements OnInit {
           "data": this.blogManagementForm.value,
           "sourceobj": ["blogcat"]
         };
+        this.openSnackBar2("Blog Details Added Successfully!!!", "OK");
       }
 
-      this.apiservice.addData(data).subscribe(response => {
+      this.blogService.addData(this.serverUrlData + this.addEndpointData, data).subscribe(response => {
         let result: any;
         result = response;
 
@@ -471,15 +472,15 @@ export class AddeditBlogmanagementComponent implements OnInit {
 
         setTimeout(() => {
           this.router.navigateByUrl('/' + this.listUrl);
-        }, 3000);
+        }, 1000);
 
       });
 
 
     }
     else
-    console.log("Form is invalid");
-    
+      console.log("Form is invalid");
+
   }
 
 
@@ -499,14 +500,14 @@ export class AddeditBlogmanagementComponent implements OnInit {
 
 
 
-  
+
 
 
 
 
   // -------------------------------Select Tags AutoComplete Field-----------------------
   showval(event: any) {
-    
+
     if (event.keyCode == 13) {
       this.tags_array.push(event.target.value);
       this.blogManagementForm.controls['tags'].patchValue("");
@@ -516,7 +517,11 @@ export class AddeditBlogmanagementComponent implements OnInit {
   }
   // ------------------------------------------------------------------------------------
 
-
+  openSnackBar2(message: string, action: string) {
+    this.snackBar.open(message, action, {
+      duration: 2000,
+    });
+  }
 
 
   // ---------------------------------------VIDEO URL PREVIEW-----------------------------

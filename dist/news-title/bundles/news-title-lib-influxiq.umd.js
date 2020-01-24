@@ -1336,7 +1336,7 @@
                     search_settings: {
                         textsearch: [{ label: "Search by customer name...", field: 'fullname_search' }, { label: "Search by email...", field: 'email' }],
                     },
-                    detail_header: ['_id']
+                    detail_header: ['_id', 'fullname_search']
                 };
                 this.loader = false;
             },
@@ -1649,7 +1649,7 @@
                             value: 'image',
                             fileurl: 'https://s3.us-east-2.amazonaws.com/crmfiles.influxhostserver/testimonial/' // Image path 
                         }],
-                    detail_header: ['_id']
+                    detail_header: ['_id', 'name_search']
                 };
                 this.loader = false;
             },
@@ -1959,11 +1959,10 @@
      * Generated from: lib/Components/newsletter/add-edit-newsletterlib/add-edit-newsletterlib.component.ts
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
-    // import { Moment } from 'moment';
     /** @type {?} */
     var moment = moment_;
     var AddEditNewsletterlibComponent = /** @class */ (function () {
-        function AddEditNewsletterlibComponent(atp, newsService, datepipe, cookieService, formBuilder, router$$1, snackBar$$1) {
+        function AddEditNewsletterlibComponent(atp, newsService, datepipe, cookieService, formBuilder, router$$1, snackBar$$1, dialog$$1) {
             this.atp = atp;
             this.newsService = newsService;
             this.datepipe = datepipe;
@@ -1971,6 +1970,7 @@
             this.formBuilder = formBuilder;
             this.router = router$$1;
             this.snackBar = snackBar$$1;
+            this.dialog = dialog$$1;
             // =================declaration==================
             this.header_name = "Newsletter";
             this.buttonText = "SAVE";
@@ -1991,45 +1991,6 @@
             this.model = {
                 editorData: ''
             };
-            // console.log(this.configData.action);
-            // if(this.configData.action=='add')
-            this.days_json = [
-                {
-                    "day": "Sunday",
-                    "value": 1,
-                    isSelected: false
-                },
-                {
-                    "day": "Monday",
-                    "value": 2,
-                    isSelected: false
-                },
-                {
-                    "day": "Tuesday",
-                    "value": 3,
-                    isSelected: false
-                },
-                {
-                    "day": "Wednesday",
-                    "value": 4,
-                    isSelected: false
-                },
-                {
-                    "day": "Thursday",
-                    "value": 5,
-                    isSelected: true
-                },
-                {
-                    "day": "Friday",
-                    "value": 6,
-                    isSelected: false
-                },
-                {
-                    "day": "Saturday",
-                    "value": 7,
-                    isSelected: false
-                }
-            ];
             this.editorconfig.extraAllowedContent = '*[class](*),span;ul;li;table;td;style;*[id];*(*);*{*}';
         }
         Object.defineProperty(AddEditNewsletterlibComponent.prototype, "config", {
@@ -2044,42 +2005,48 @@
             enumerable: true,
             configurable: true
         });
-        /**
-         * @param {?} t
-         * @return {?}
-         */
-        AddEditNewsletterlibComponent.prototype.unix_timestamp = /**
-         * @param {?} t
-         * @return {?}
-         */
-            function (t) {
-                /** @type {?} */
-                var d = new Date(t * 1000);
-                /** @type {?} */
-                var // Convert the passed timestamp to milliseconds
-                yyyy = d.getFullYear();
-                /** @type {?} */
-                var mm = ('0' + (d.getMonth() + 1)).slice(-2);
-                /** @type {?} */
-                var // Months are zero based. Add leading 0.
-                dd = ('0' + d.getDate()).slice(-2);
-                /** @type {?} */
-                var // Add leading 0.	
-                time;
-                // ie: 2013-02-18, 8:35 AM	
-                time = mm + "/" + dd + "/" + yyyy;
-                return time;
-            };
+        // unix_timestamp(t) {
+        //   var d = new Date(t * 1000),	// Convert the passed timestamp to milliseconds
+        //     yyyy = d.getFullYear(),
+        //     mm = ('0' + (d.getMonth() + 1)).slice(-2),	// Months are zero based. Add leading 0.
+        //     dd = ('0' + d.getDate()).slice(-2),			// Add leading 0.	
+        //     time;
+        //   // ie: 2013-02-18, 8:35 AM	
+        //   time = mm + "/" + dd + "/" + yyyy;
+        //   return time;
+        // }
+        // unix_timestamp(t) {
+        //   var d = new Date(t * 1000),	// Convert the passed timestamp to milliseconds
+        //     yyyy = d.getFullYear(),
+        //     mm = ('0' + (d.getMonth() + 1)).slice(-2),	// Months are zero based. Add leading 0.
+        //     dd = ('0' + d.getDate()).slice(-2),			// Add leading 0.	
+        //     time;
+        //   // ie: 2013-02-18, 8:35 AM	
+        //   time = mm + "/" + dd + "/" + yyyy;
+        //   return time;
+        // }
         /**
          * @return {?}
          */
-        AddEditNewsletterlibComponent.prototype.ngOnInit = /**
-         * @return {?}
-         */
+        AddEditNewsletterlibComponent.prototype.ngOnInit =
+            // unix_timestamp(t) {
+            //   var d = new Date(t * 1000),	// Convert the passed timestamp to milliseconds
+            //     yyyy = d.getFullYear(),
+            //     mm = ('0' + (d.getMonth() + 1)).slice(-2),	// Months are zero based. Add leading 0.
+            //     dd = ('0' + d.getDate()).slice(-2),			// Add leading 0.	
+            //     time;
+            //   // ie: 2013-02-18, 8:35 AM	
+            //   time = mm + "/" + dd + "/" + yyyy;
+            //   return time;
+            // }
+            /**
+             * @return {?}
+             */
             function () {
                 var _this = this;
+                this.weekdays();
                 if (this.configData.action == 'add')
-                    this.time = this.datepipe.transform(new Date(), 'h:mm');
+                    this.time = this.datepipe.transform(new Date(), 'H:mm');
                 //Calling the group name
                 this.getGroupName();
                 //Get sender's getGroupName
@@ -2103,6 +2070,10 @@
                         this.buttonText = "UPDATE";
                         this.time = "";
                         this.message = "Newsletter Information Updated!!!";
+                        if (this.configData.defaultData.newsfrequency == "daily")
+                            this.frequency_flag = false;
+                        else
+                            this.frequency_flag = true;
                         setTimeout(( /**
                          * @return {?}
                          */function () {
@@ -2117,6 +2088,51 @@
                         }), 1000);
                         break;
                 }
+            };
+        /**
+         * @return {?}
+         */
+        AddEditNewsletterlibComponent.prototype.weekdays = /**
+         * @return {?}
+         */
+            function () {
+                this.days_json = [
+                    {
+                        "day": "Sunday",
+                        "value": 1,
+                        isSelected: false
+                    },
+                    {
+                        "day": "Monday",
+                        "value": 2,
+                        isSelected: false
+                    },
+                    {
+                        "day": "Tuesday",
+                        "value": 3,
+                        isSelected: false
+                    },
+                    {
+                        "day": "Wednesday",
+                        "value": 4,
+                        isSelected: false
+                    },
+                    {
+                        "day": "Thursday",
+                        "value": 5,
+                        isSelected: true
+                    },
+                    {
+                        "day": "Friday",
+                        "value": 6,
+                        isSelected: false
+                    },
+                    {
+                        "day": "Saturday",
+                        "value": 7,
+                        isSelected: false
+                    }
+                ];
             };
         /** mat snackbar **/
         /**
@@ -2153,6 +2169,46 @@
                  * @return {?}
                  */function (time) {
                 }));
+            };
+        /** open Modal **/
+        /**
+         * open Modal *
+         * @param {?} x
+         * @return {?}
+         */
+        AddEditNewsletterlibComponent.prototype.openDialog = /**
+         * open Modal *
+         * @param {?} x
+         * @return {?}
+         */
+            function (x) {
+                this.dialogRef = this.dialog.open(PREVIEW, {
+                    width: '1000px',
+                    data: {
+                        msg: x,
+                        share_group: this.share_with_group,
+                        automatic_newsletter: this.automatic_newsletter_to,
+                        senders_address: this.senders_address_to,
+                        reply_address: this.reply_address_to
+                    }
+                });
+                this.dialogRef.afterClosed().subscribe(( /**
+                 * @param {?} result
+                 * @return {?}
+                 */function (result) {
+                }));
+            };
+        /** preview all **/
+        /**
+         * preview all *
+         * @return {?}
+         */
+        AddEditNewsletterlibComponent.prototype.preview_all = /**
+         * preview all *
+         * @return {?}
+         */
+            function () {
+                this.openDialog(Object.values(this.newsForm.value));
             };
         /*getting the group name*/
         /*getting the group name*/
@@ -2244,34 +2300,34 @@
              * @return {?}
              */
             function (defaultValue) {
-                this.tmp_date = (this.unix_timestamp(defaultValue.publishdate));
+                this.tmp_date = defaultValue.publishdate;
                 /** @type {?} */
                 var date = new Date(this.tmp_date);
                 defaultValue.publishdate = date,
-                    this.tmp_date = (this.unix_timestamp(defaultValue.startdate));
+                    this.tmp_date = defaultValue.startdate;
                 date = new Date(this.tmp_date);
                 defaultValue.startdate = date,
-                    this.tmp_date = (this.unix_timestamp(defaultValue.enddate));
+                    this.tmp_date = defaultValue.enddate;
                 date = new Date(this.tmp_date);
                 defaultValue.enddate = date,
-                    console.log(typeof date);
-                this.newsForm.patchValue({
-                    newstitle: defaultValue.newstitle,
-                    newssubject: defaultValue.newssubject,
-                    share_news: defaultValue.share_news,
-                    senderaddress: defaultValue.senderaddress,
-                    publishdate: defaultValue.publishdate,
-                    settime: defaultValue.settime,
-                    content: defaultValue.content,
-                    days_of_weeks: defaultValue.days_of_weeks,
-                    sendnews: defaultValue.sendnews,
-                    newsfrequency: defaultValue.newsfrequency,
-                    timeofday: defaultValue.timeofday,
-                    timezone: defaultValue.timezone,
-                    startdate: defaultValue.startdate,
-                    enddate: defaultValue.enddate,
-                    reply: defaultValue.reply
-                });
+                    this.newsForm.patchValue({
+                        newstitle: defaultValue.newstitle,
+                        newssubject: defaultValue.newssubject,
+                        share_news: defaultValue.share_news,
+                        senderaddress: defaultValue.senderaddress,
+                        publishdate: defaultValue.publishdate,
+                        settime: defaultValue.settime,
+                        content: defaultValue.content,
+                        days_of_weeks: defaultValue.days_of_weeks,
+                        sendnews: defaultValue.sendnews,
+                        newsfrequency: defaultValue.newsfrequency,
+                        timeofday: defaultValue.timeofday,
+                        timezone: defaultValue.timezone,
+                        startdate: defaultValue.startdate,
+                        enddate: defaultValue.enddate,
+                        reply: defaultValue.reply
+                    });
+                // this.share_with_group = defaultValue.share_news;   
             };
         /** blur function **/
         /**
@@ -2318,27 +2374,31 @@
                 var _this = this;
                 this.days_array = [];
                 this.false_count = 0;
-                for (var i = 0; i < this.days_json.length; i++) {
-                    if (this.days_json[i].isSelected) {
-                        this.days_array.push(this.days_json[i]);
-                        this.false_count--;
+                if (this.frequency_flag != false)
+                    for (var i = 0; i < this.days_json.length; i++) {
+                        if (this.days_json[i].isSelected) {
+                            this.days_array.push(this.days_json[i]);
+                            this.false_count--;
+                        }
+                        else
+                            this.days_array.push(this.days_json[i]);
+                        this.false_count++;
                     }
-                    else
-                        this.days_array.push(this.days_json[i]);
-                    this.false_count++;
-                }
-                console.log("false_count", this.false_count);
                 if (this.false_count == 7)
                     return;
-                this.newsForm.value.days_of_weeks = this.days_array;
-                this.newsForm.value.publishdate = moment(this.newsForm.value.publishdate).unix();
-                this.newsForm.value.startdate = moment(this.newsForm.value.startdate).unix();
-                this.newsForm.value.enddate = moment(this.newsForm.value.enddate).unix();
-                this.newsForm.value.publishdate_normal_format = moment(parseInt(this.newsForm.value.publishdate) * 1000).format('x');
-                console.log(this.newsForm.value);
+                if (this.frequency_flag == true)
+                    this.newsForm.value.days_of_weeks = this.days_array;
+                else
+                    this.newsForm.value.days_of_weeks = null;
+                this.newsForm.value.publishdate = moment(this.newsForm.value.publishdate).format('MM/DD/YYYY');
+                this.newsForm.value.startdate = moment(this.newsForm.value.startdate).format('MM/DD/YYYY');
+                this.newsForm.value.enddate = moment(this.newsForm.value.enddate).format('MM/DD/YYYY');
+                /** @type {?} */
+                var x = moment(this.newsForm.value.publishdate).unix();
+                this.newsForm.value.publishdate_normal_format = parseInt(x) * 1000;
                 /** marking as untouched **/
-                for (var x in this.newsForm.controls) {
-                    this.newsForm.controls[x].markAsTouched();
+                for (var x_1 in this.newsForm.controls) {
+                    this.newsForm.controls[x_1].markAsTouched();
                 }
                 /* stop here if form is invalid */
                 if (this.newsForm.invalid) {
@@ -2374,8 +2434,8 @@
         AddEditNewsletterlibComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'lib-add-edit-newsletterlib',
-                        template: "<mat-card>\n  <mat-toolbar color=\"primary\" style=\"justify-content: center; align-items: center;\">\n    <h2 class=\"headerSpan\">{{ header_name }}</h2>\n  </mat-toolbar>\n  <span class=\"formspan\">\n    <mat-card-content class=\"example-container\">\n      <form autocomplete=\"off\" [formGroup]=\"newsForm\">\n\n\n\n        <!-- Newsletter title  -->\n        <mat-form-field>\n          <mat-label>Newsletter Title:</mat-label>\n          <input matInput formControlName=\"newstitle\" (blur)=\"inputBlur('newstitle')\">\n          <mat-error *ngIf=\"!newsForm.controls['newstitle'].valid\n          && newsForm.controls['newstitle'].errors.required\" > Title is required.</mat-error>\n        </mat-form-field>\n\n        <!-- Newsletter Subject  -->\n        <mat-form-field>\n          <mat-label>Newsletter Subject:</mat-label>\n          <input matInput formControlName=\"newssubject\" (blur)=\"inputBlur('newssubject')\">\n          <mat-error *ngIf=\"!newsForm.controls['newssubject'].valid\n          && newsForm.controls['newssubject'].errors.required\"> Subject is required.</mat-error>\n        </mat-form-field>\n\n\n        <!-- share newsletter with -->\n        <mat-form-field>\n          <mat-label>Share newsletter with group:</mat-label>\n          <mat-select matNativeControl required formControlName=\"share_news\">\n            <mat-option value=0>Select a group</mat-option>\n            <mat-option value=\"{{i._id}}\" *ngFor=\"let i of group_name_array\">{{ i.name }}</mat-option>\n          </mat-select>\n        </mat-form-field>\n\n        <!-- sender's address  -->\n        <mat-form-field>\n          <mat-label>Sender's address</mat-label>\n          <mat-select matNativeControl required formControlName=\"senderaddress\">\n            <mat-option value=0>Select a sender</mat-option>\n            <mat-option value=\"{{ i._id }}\" *ngFor='let i of sender_name_array'>{{ i.email }}</mat-option>\n          </mat-select>\n        </mat-form-field>\n\n\n        <!-- Set Publish Date  -->\n        <mat-form-field>\n          <input matInput [matDatepicker]=\"picker\" placeholder=\"Set publish date:\" formControlName=\"publishdate\" (blur)=\"inputBlur('publishdate')\">\n          <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\n          <mat-datepicker #picker></mat-datepicker>\n          <mat-error *ngIf=\"!newsForm.controls['publishdate'].valid\n          && newsForm.controls['publishdate'].errors.required\"> Publish Date is required.</mat-error>\n        </mat-form-field>\n\n\n        <!-- Time Picker  -->\n        <mat-form-field>\n          <mat-label>Set time:</mat-label>\n          <input matInput atp-time-picker  formControlName=\"settime\"/>\n        </mat-form-field>\n       \n\n\n        <!-- Content  -->\n        <ck-editor formControlName=\"content\" [config]=\"editorconfig\" (blur)=\"inputBlur('content')\">        \n        </ck-editor>\n        <mat-error *ngIf=\"!newsForm.controls['content'].valid\n        && newsForm.controls['content'].errors.required && newsForm.controls['content'].touched\"> Content is required.</mat-error>\n\n\n\n        <h1> SET FREQUENCY </h1>\n        <hr>\n\n\n        <!-- Automatically send newsletters to -->\n        <mat-form-field>\n          <mat-label>Automatically send newsletter to members:</mat-label>\n          <mat-select matNativeControl required formControlName=\"sendnews\" (blur)=\"inputBlur('sendnews')\">\n            <mat-option value=0>Select a group</mat-option>\n            <mat-option value=\"{{i._id}}\" *ngFor=\"let i of group_name_array\">{{ i.name }}</mat-option>\n          </mat-select>\n        </mat-form-field>\n\n\n        <!-- Newsletter frequency  -->\n        <mat-form-field>\n          <mat-label>Newsletter Frequency:</mat-label>\n          <mat-select matNativeControl required formControlName=\"newsfrequency\">\n            <mat-option value=\"daily\" (click)=\"frequency_flag=false\">Daily</mat-option>\n            <mat-option value=\"weekly\" (click)=\"frequency_flag=true\">Weekly</mat-option>\n          </mat-select>\n        </mat-form-field>\n\n\n        <!-- News letter Day of the week  -->\n        <div class=\"dayofweek\" *ngIf=\"frequency_flag===true\">\n          <h5>NewsLetter day of the week</h5>\n          <mat-card-content class=\"date_wrapper\" *ngFor=\"let day of days_json;let i = index\">            \n            <mat-checkbox  [checked]=\"day.isSelected\" [value]=\"day.value\" (change)=\"getDays(day)\"> {{day.day}}</mat-checkbox>         \n          </mat-card-content>\n          <div *ngIf=\"false_count==7\" class=\"desc_error\">\n            <mat-icon>error</mat-icon>\n            <p>Please select at least one day.</p>\n          </div>\n        </div>\n       \n\n\n        <!-- News Letter time of the day -->\n        <mat-form-field>\n          <mat-label>News Letter time of the day:</mat-label>\n          <input matInput atp-time-picker formControlName=\"timeofday\" />\n        </mat-form-field>\n\n\n\n        <!-- News Letter Time Zone -->\n        <mat-form-field>\n          <mat-label>News Letter Time Zone</mat-label>\n          <mat-select matNativeControl required formControlName=\"timezone\">\n            <mat-option value=\"Hawaii Standard Time\">Hawaii Standard Time</mat-option>\n            <mat-option value=\"Alaska Standard Time\">Alaska Standard Time</mat-option>\n            <mat-option value=\"Pacific Standard Time\">Pacific Standard Time</mat-option>\n            <mat-option value=\"Mountain Standard Time\">Mountain Standard Time</mat-option>\n            <mat-option value=\"Central Standard Time\">Central Standard Time</mat-option>\n            <mat-option value=\"Eastern Standard Time\">Eastern Standard Time</mat-option>\n          </mat-select>\n        </mat-form-field>\n\n        <!-- News letter start Date -->\n        <mat-form-field>\n          <input matInput [matDatepicker]=\"picker2\" placeholder=\"Newsletter start date\" formControlName=\"startdate\" (blur)=\"inputBlur('startdate')\">\n          <mat-datepicker-toggle matSuffix [for]=\"picker2\"></mat-datepicker-toggle>\n          <mat-datepicker #picker2></mat-datepicker>\n          <mat-error *ngIf=\"!newsForm.controls['startdate'].valid\n          && newsForm.controls['startdate'].errors.required\"> Start Date is required.</mat-error>\n        </mat-form-field>\n\n        <!-- News letter end Date -->\n        <mat-form-field>\n          <input matInput [matDatepicker]=\"picker3\" placeholder=\"Newsletter end date\" formControlName=\"enddate\" (blur)=\"inputBlur('enddate')\">\n          <mat-datepicker-toggle matSuffix [for]=\"picker3\"></mat-datepicker-toggle>\n          <mat-datepicker #picker3></mat-datepicker>\n          <mat-error *ngIf=\"!newsForm.controls['enddate'].valid\n          && newsForm.controls['enddate'].errors.required\"> End Date is required.</mat-error>\n        </mat-form-field>\n\n        <!-- NewsLetter reply to email address  -->\n\n        <mat-form-field>\n          <mat-label>Reply address</mat-label>\n          <mat-select matNativeControl required formControlName=\"reply\">\n            <mat-option value=0>Select a sender</mat-option>\n            <mat-option value=\"{{ i._id }}\" *ngFor='let i of sender_name_array'>{{ i.email }}</mat-option>\n          </mat-select>\n        </mat-form-field>\n\n\n\n\n\n\n        <!-- Buttons  -->\n        <button type=\"submit\" class=\"submitbtn\" class=\"submitbtn\" mat-raised-button color=\"primary\">PREVIEW</button>\n        <button type=\"submit\" class=\"submitbtn\" class=\"submitbtn\" mat-raised-button\n          color=\"primary\" (click)=\"onSubmit()\">{{buttonText}}</button>\n        <button type=\"reset\" class=\"submitbtn\" class=\"submitbtn\" mat-raised-button color=\"primary\">RESET</button>\n\n\n\n\n      </form>\n      <!-- ---------------------------------------FORM ENDS HERE----------------------------- -->\n    </mat-card-content>\n  </span>\n</mat-card>",
-                        styles: [".example-container{display:flex;flex-direction:column}.example-container>*{width:100%}.main-class .submitbtn{display:block;width:170px;margin:10px auto;background:#3f50b5!important;color:#fff}.main-class .material-icons{cursor:pointer}.formspan{background-color:#e7e9ea;border:6px solid #fff;border-bottom:10px solid #fff;display:inline-block;width:100%;position:relative;z-index:9}.formspan .example-container{display:flex;flex-direction:column;width:98%;padding:14px;margin-bottom:0}.formspan .form-field-span,.formspan .mat-form-field{display:inline-block;position:relative;text-align:left;width:98%;background:#fff;margin-bottom:9px;padding:1px 14px}.formspan .form-field-span .mat-checkbox,.formspan .form-field-span .mat-radio-button{padding-right:15px;padding-bottom:15px;display:inline-block}.formspan .mat-form-field-wrapper{padding-bottom:0!important}.form-field-span .mat-error{font-size:13px!important}.mat-error{color:#f44336;font-size:13px!important}button.submitbtn.mat-raised-button.mat-primary{margin-right:15px}h1{color:#3f50b4}.files-view{background-repeat:no-repeat;background-size:cover;background-position:center;height:auto!important;width:82%;margin:20px auto;border-radius:10px;display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap}.files-view .mat-card{z-index:9;margin:10px!important;display:flex;flex-wrap:wrap;justify-content:center;width:27%;position:relative}.files-view .mat-card .mat-card-actions,.files-view .mat-card .mat-card-titlt{display:inline-block;width:100%}.files-view .mat-card .mat-card-subtitle{display:inline-block;width:100%;text-align:center}.closecard{position:absolute;top:-10px;right:-8px;background:#464545;height:25px;width:25px;border-radius:50%;border:1px solid #696969;color:#fff;text-align:center;box-shadow:0 2px 6px #00000070;cursor:pointer}.dayofweek{border:5px solid #663399;padding:10px}.closecard i{font-size:18px;line-height:27px}.date_wrapper .mat-checkbox{margin-right:15px}.desc_error{color:#d8000c;border:2px solid #d8000c;background-color:#ff97ce;padding:0 10px;display:inline-flex;align-items:center}.desc_error .mat-icon{margin-right:10px}"]
+                        template: "<mat-card>\n  <mat-toolbar color=\"primary\" style=\"justify-content: center; align-items: center;\">\n    <h2 class=\"headerSpan\">{{ header_name }}</h2>\n  </mat-toolbar>\n  <span class=\"formspan\">\n    <mat-card-content class=\"example-container\">\n      <form autocomplete=\"off\" [formGroup]=\"newsForm\">\n\n\n\n        <!-- Newsletter title  -->\n        <mat-form-field>\n          <mat-label>Newsletter Title:</mat-label>\n          <input matInput formControlName=\"newstitle\" (blur)=\"inputBlur('newstitle')\">\n          <mat-error *ngIf=\"!newsForm.controls['newstitle'].valid\n          && newsForm.controls['newstitle'].errors.required\" > Title is required.</mat-error>\n        </mat-form-field>\n\n        <!-- Newsletter Subject  -->\n        <mat-form-field>\n          <mat-label>Newsletter Subject:</mat-label>\n          <input matInput formControlName=\"newssubject\" (blur)=\"inputBlur('newssubject')\">\n          <mat-error *ngIf=\"!newsForm.controls['newssubject'].valid\n          && newsForm.controls['newssubject'].errors.required\"> Subject is required.</mat-error>\n        </mat-form-field>\n\n\n        <!-- share newsletter with -->\n        <mat-form-field>\n          <mat-label>Share newsletter with group:</mat-label>\n          <mat-select matNativeControl required formControlName=\"share_news\">\n            <mat-option value=0>Select a group</mat-option>\n            <mat-option value=\"{{i._id}}\" *ngFor=\"let i of group_name_array\" (click)=\"share_with_group=i.name\">{{ i.name }}</mat-option>\n            </mat-select>\n        </mat-form-field>\n\n        <!-- sender's address  -->\n        <mat-form-field>\n          <mat-label>Sender's address</mat-label>\n          <mat-select matNativeControl required formControlName=\"senderaddress\">\n            <mat-option value=0>Select a sender</mat-option>\n            <mat-option value=\"{{ i._id }}\" *ngFor='let i of sender_name_array' (click)=\"senders_address_to=i.email\">{{ i.email }}</mat-option>\n          </mat-select>\n        </mat-form-field>\n\n\n        <!-- Set Publish Date  -->\n        <mat-form-field>\n          <input matInput [matDatepicker]=\"picker\" placeholder=\"Set publish date:\" formControlName=\"publishdate\" (blur)=\"inputBlur('publishdate')\">\n          <mat-datepicker-toggle matSuffix [for]=\"picker\"></mat-datepicker-toggle>\n          <mat-datepicker #picker></mat-datepicker>\n          <mat-error *ngIf=\"!newsForm.controls['publishdate'].valid\n          && newsForm.controls['publishdate'].errors.required\"> Publish Date is required.</mat-error>\n        </mat-form-field>\n\n\n        <!-- Time Picker  -->\n        <mat-form-field>\n          <mat-label>Set time:</mat-label>\n          <input matInput atp-time-picker  formControlName=\"settime\"/>\n        </mat-form-field>\n       \n\n\n        <!-- Content  -->\n        <ck-editor formControlName=\"content\" [config]=\"editorconfig\" (blur)=\"inputBlur('content')\">        \n        </ck-editor>\n        <mat-error *ngIf=\"!newsForm.controls['content'].valid\n        && newsForm.controls['content'].errors.required && newsForm.controls['content'].touched\"> Content is required.</mat-error>\n\n\n\n        <h1> SET FREQUENCY </h1>\n        <hr>\n\n\n        <!-- Automatically send newsletters to -->\n        <mat-form-field>\n          <mat-label>Automatically send newsletter to members:</mat-label>\n          <mat-select matNativeControl required formControlName=\"sendnews\" (blur)=\"inputBlur('sendnews')\">\n            <mat-option value=0>Select a group</mat-option>\n            <mat-option value=\"{{i._id}}\" *ngFor=\"let i of group_name_array\" (click)=\"automatic_newsletter_to=i.name\">{{ i.name }}</mat-option>\n          </mat-select>\n        </mat-form-field>\n\n\n        <!-- Newsletter frequency  -->\n        <mat-form-field>\n          <mat-label>Newsletter Frequency:</mat-label>\n          <mat-select matNativeControl required formControlName=\"newsfrequency\">\n            <mat-option value=\"daily\" (click)=\"frequency_flag=false;days_json={}\">Daily</mat-option>\n            <mat-option value=\"weekly\" (click)=\"weekdays();frequency_flag=true\">Weekly</mat-option>\n          </mat-select>\n        </mat-form-field>\n\n\n        <!-- News letter Day of the week  -->\n        <div class=\"dayofweek\" *ngIf=\"frequency_flag==true\">\n          <h5>NewsLetter day of the week</h5>\n          <mat-card-content class=\"date_wrapper\" *ngFor=\"let day of days_json;let i = index\">            \n            <mat-checkbox  [checked]=\"day.isSelected\" [value]=\"day.value\" (change)=\"getDays(day)\"> {{day.day}}</mat-checkbox>         \n          </mat-card-content>\n          <div *ngIf=\"false_count==7\" class=\"desc_error\">\n            <mat-icon>error</mat-icon>\n            <p>Please select at least one day.</p>\n          </div>\n        </div>\n       \n\n\n        <!-- News Letter time of the day -->\n        <mat-form-field>\n          <mat-label>News Letter time of the day:</mat-label>\n          <input matInput atp-time-picker formControlName=\"timeofday\" />\n        </mat-form-field>\n\n\n\n        <!-- News Letter Time Zone -->\n        <mat-form-field>\n          <mat-label>News Letter Time Zone</mat-label>\n          <mat-select matNativeControl required formControlName=\"timezone\">\n            <mat-option value=\"Hawaii Standard Time\">Hawaii Standard Time</mat-option>\n            <mat-option value=\"Alaska Standard Time\">Alaska Standard Time</mat-option>\n            <mat-option value=\"Pacific Standard Time\">Pacific Standard Time</mat-option>\n            <mat-option value=\"Mountain Standard Time\">Mountain Standard Time</mat-option>\n            <mat-option value=\"Central Standard Time\">Central Standard Time</mat-option>\n            <mat-option value=\"Eastern Standard Time\">Eastern Standard Time</mat-option>\n          </mat-select>\n        </mat-form-field>\n\n        <!-- News letter start Date -->\n        <mat-form-field>\n          <input matInput [matDatepicker]=\"picker2\" placeholder=\"Newsletter start date\" formControlName=\"startdate\" (blur)=\"inputBlur('startdate')\">\n          <mat-datepicker-toggle matSuffix [for]=\"picker2\"></mat-datepicker-toggle>\n          <mat-datepicker #picker2></mat-datepicker>\n          <mat-error *ngIf=\"!newsForm.controls['startdate'].valid\n          && newsForm.controls['startdate'].errors.required\"> Start Date is required.</mat-error>\n        </mat-form-field>\n\n        <!-- News letter end Date -->\n        <mat-form-field>\n          <input matInput [matDatepicker]=\"picker3\" placeholder=\"Newsletter end date\" formControlName=\"enddate\" (blur)=\"inputBlur('enddate')\">\n          <mat-datepicker-toggle matSuffix [for]=\"picker3\"></mat-datepicker-toggle>\n          <mat-datepicker #picker3></mat-datepicker>\n          <mat-error *ngIf=\"!newsForm.controls['enddate'].valid\n          && newsForm.controls['enddate'].errors.required\"> End Date is required.</mat-error>\n        </mat-form-field>\n\n        <!-- NewsLetter reply to email address  -->\n\n        <mat-form-field>\n          <mat-label>Reply address</mat-label>\n          <mat-select matNativeControl required formControlName=\"reply\">\n            <mat-option value=0>Select a sender</mat-option>\n            <mat-option value=\"{{ i._id }}\" *ngFor='let i of sender_name_array' (click)=\"reply_address_to=i.email\">{{ i.email }}</mat-option>\n          </mat-select>\n        </mat-form-field>\n\n\n\n\n\n\n        <!-- Buttons  -->\n        <button *ngIf=\"this.configData.action=='add'\" [disabled]=\"!newsForm.valid\" type=\"button\" class=\"submitbtn\" class=\"submitbtn\" mat-raised-button color=\"primary\" (click)=\"preview_all()\">PREVIEW</button>\n        <button type=\"submit\" class=\"submitbtn\" class=\"submitbtn\" mat-raised-button\n          color=\"primary\" (click)=\"onSubmit()\">{{buttonText}}</button>\n        <button type=\"reset\" class=\"submitbtn\" class=\"submitbtn\" mat-raised-button color=\"primary\">RESET</button>\n\n\n\n\n      </form>\n      <!-- ---------------------------------------FORM ENDS HERE----------------------------- -->\n    </mat-card-content>\n  </span>\n</mat-card>",
+                        styles: [".example-container{display:flex;flex-direction:column}.example-container>*{width:100%}.main-class .submitbtn{display:block;width:170px;margin:10px auto;background:#3f50b5!important;color:#fff}.main-class .material-icons{cursor:pointer}.formspan{background-color:#e7e9ea;border:6px solid #fff;border-bottom:10px solid #fff;display:inline-block;width:100%;position:relative;z-index:9}.formspan .example-container{display:flex;flex-direction:column;width:98%;padding:14px;margin-bottom:0}.formspan .form-field-span,.formspan .mat-form-field{display:inline-block;position:relative;text-align:left;width:98%;background:#fff;margin-bottom:9px;padding:1px 14px}.formspan .form-field-span .mat-checkbox,.formspan .form-field-span .mat-radio-button{padding-right:15px;padding-bottom:15px;display:inline-block}.formspan .mat-form-field-wrapper{padding-bottom:0!important}.form-field-span .mat-error{font-size:13px!important}.mat-error{color:#f44336;font-size:13px!important}button.submitbtn.mat-raised-button.mat-primary{margin-right:15px}h1{color:#3f50b4}.files-view{background-repeat:no-repeat;background-size:cover;background-position:center;height:auto!important;width:82%;margin:20px auto;border-radius:10px;display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap}.files-view .mat-card{z-index:9;margin:10px!important;display:flex;flex-wrap:wrap;justify-content:center;width:27%;position:relative}.files-view .mat-card .mat-card-actions,.files-view .mat-card .mat-card-titlt{display:inline-block;width:100%}.files-view .mat-card .mat-card-subtitle{display:inline-block;width:100%;text-align:center}.closecard{position:absolute;top:-10px;right:-8px;background:#464545;height:25px;width:25px;border-radius:50%;border:1px solid #696969;color:#fff;text-align:center;box-shadow:0 2px 6px #00000070;cursor:pointer}.dayofweek{border:5px solid #663399;padding:10px}.closecard i{font-size:18px;line-height:27px}.date_wrapper .mat-checkbox{margin-right:15px}.desc_error{color:#d8000c;border:2px solid #d8000c;background-color:#ff97ce;padding:0 10px;display:inline-flex;align-items:center}.desc_error .mat-icon{margin-right:10px}table{border-collapse:collapse;width:100%;border:1px solid #ddd}td,th{text-align:left;padding:8px;border:1px solid #ddd;color:#0b0a41}tr:nth-child(even){background-color:#f2f2f2}th{background-color:#4caf50;color:#fff}"]
                     }] }
         ];
         /** @nocollapse */
@@ -2387,13 +2447,45 @@
                 { type: i2.CookieService },
                 { type: forms.FormBuilder },
                 { type: router.Router },
-                { type: snackBar.MatSnackBar }
+                { type: snackBar.MatSnackBar },
+                { type: dialog.MatDialog }
             ];
         };
         AddEditNewsletterlibComponent.propDecorators = {
             config: [{ type: i0.Input }]
         };
         return AddEditNewsletterlibComponent;
+    }());
+    // ============================================MODAL COMPONENT===========================================
+    var PREVIEW = /** @class */ (function () {
+        function PREVIEW(dialogRef, data) {
+            this.dialogRef = dialogRef;
+            this.data = data;
+        }
+        /**
+         * @return {?}
+         */
+        PREVIEW.prototype.onNoClick = /**
+         * @return {?}
+         */
+            function () {
+                this.dialogRef.close();
+            };
+        PREVIEW.decorators = [
+            { type: i0.Component, args: [{
+                        selector: 'app-preview',
+                        template: "<h1 mat-dialog-title>PREVIEW DETAILS</h1>\n<div mat-dialog-content>\n\n   <table >\n     \n      <tr>\n         <td>Newsletter Title</td>\n         <td>:</td>\n         <td>{{ data.msg[0] }}</td>\n     \n         <td> Newsletter Subject </td>\n         <td>:</td>\n         <td>{{ data.msg[1] }}</td>\n      </tr>\n\n      <tr>\n         <td> Share Newsletter With Group </td>\n         <td>:</td>\n         <td> {{ data.share_group }}</td>\n    \n         <td> Sender's Address </td>\n         <td>:</td>\n         <td>{{ data.senders_address }}</td>\n      </tr>\n\n      <tr>\n         <td> Publish Date </td>\n         <td>:</td>\n         <td>{{ data.msg[5] | date:'shortDate' }}</td>\n     \n         <td> Set Time </td>\n         <td>:</td>\n         <td>{{ data.msg[6] }}</td>\n      </tr>\n\n      <tr>\n         <td> Content </td>\n         <td>:</td>\n         <td>{{ data.msg[7] }}</td>\n  \n            <td> Automatically Send Newsletter To Members</td>\n            <td>:</td>\n            <td>{{ data.automatic_newsletter }}</td>\n         </tr>\n\n         <tr>\n            <td> Newsletter Frequency</td>\n            <td>:</td>\n            <td>{{ data.msg[9] }}</td>\n      \n            <td> News Letter Time Of The Day </td>\n            <td>:</td>\n            <td>{{ data.msg[11] }}</td>\n         </tr>\n\n         <tr>\n            <td> News Letter Time Zone </td>\n            <td>:</td>\n            <td>{{ data.msg[12] }}</td>\n        \n            <td> Newsletter Start Date </td>\n            <td>:</td>\n            <td>{{ data.msg[13]  | date:'shortDate'}}</td>\n         </tr>\n\n         <tr>\n            <td> Newsletter End Date </td>\n            <td>:</td>\n            <td>{{ data.msg[14]  | date:'shortDate'}}</td>\n       \n            <td> Reply address </td>\n            <td>:</td>\n            <td>{{  data.reply_address }}</td>\n         </tr>\n\n    \n    \n   </table>\n\n</div>",
+                        styles: [".example-container{display:flex;flex-direction:column}.example-container>*{width:100%}.main-class .submitbtn{display:block;width:170px;margin:10px auto;background:#3f50b5!important;color:#fff}.main-class .material-icons{cursor:pointer}.formspan{background-color:#e7e9ea;border:6px solid #fff;border-bottom:10px solid #fff;display:inline-block;width:100%;position:relative;z-index:9}.formspan .example-container{display:flex;flex-direction:column;width:98%;padding:14px;margin-bottom:0}.formspan .form-field-span,.formspan .mat-form-field{display:inline-block;position:relative;text-align:left;width:98%;background:#fff;margin-bottom:9px;padding:1px 14px}.formspan .form-field-span .mat-checkbox,.formspan .form-field-span .mat-radio-button{padding-right:15px;padding-bottom:15px;display:inline-block}.formspan .mat-form-field-wrapper{padding-bottom:0!important}.form-field-span .mat-error{font-size:13px!important}.mat-error{color:#f44336;font-size:13px!important}button.submitbtn.mat-raised-button.mat-primary{margin-right:15px}h1{color:#3f50b4}.files-view{background-repeat:no-repeat;background-size:cover;background-position:center;height:auto!important;width:82%;margin:20px auto;border-radius:10px;display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap}.files-view .mat-card{z-index:9;margin:10px!important;display:flex;flex-wrap:wrap;justify-content:center;width:27%;position:relative}.files-view .mat-card .mat-card-actions,.files-view .mat-card .mat-card-titlt{display:inline-block;width:100%}.files-view .mat-card .mat-card-subtitle{display:inline-block;width:100%;text-align:center}.closecard{position:absolute;top:-10px;right:-8px;background:#464545;height:25px;width:25px;border-radius:50%;border:1px solid #696969;color:#fff;text-align:center;box-shadow:0 2px 6px #00000070;cursor:pointer}.dayofweek{border:5px solid #663399;padding:10px}.closecard i{font-size:18px;line-height:27px}.date_wrapper .mat-checkbox{margin-right:15px}.desc_error{color:#d8000c;border:2px solid #d8000c;background-color:#ff97ce;padding:0 10px;display:inline-flex;align-items:center}.desc_error .mat-icon{margin-right:10px}table{border-collapse:collapse;width:100%;border:1px solid #ddd}td,th{text-align:left;padding:8px;border:1px solid #ddd;color:#0b0a41}tr:nth-child(even){background-color:#f2f2f2}th{background-color:#4caf50;color:#fff}"]
+                    }] }
+        ];
+        /** @nocollapse */
+        PREVIEW.ctorParameters = function () {
+            return [
+                { type: dialog.MatDialogRef },
+                { type: undefined, decorators: [{ type: i0.Inject, args: [dialog.MAT_DIALOG_DATA,] }] }
+            ];
+        };
+        return PREVIEW;
     }());
 
     /**
@@ -2422,7 +2514,7 @@
                     listEndPoint: receivedData.listEndPoint,
                     datasource: receivedData.datasource,
                     tableName: receivedData.tableName,
-                    listArray_skip: ["_id", "userId", "created_at", "id", "updated_at", "title_search"],
+                    listArray_skip: ["_id", "userId", "created_at", "id", "updated_at", "title_search", "publishdate_normal_format"],
                     listArray_modify_header: {
                         'title': 'Title', 'subject': 'Subject', 'userGroup': 'User Group', 'time': 'Publish Time',
                         'publishdate': 'Publish Date', 'status': 'Status'
@@ -2434,7 +2526,7 @@
                     jwtToken: receivedData.jwtToken,
                     deleteEndPoint: receivedData.deleteEndPoint,
                     view: receivedData.view,
-                    detail_header: ['_id'],
+                    detail_header: ['_id', 'publishdate_normal_format', 'title_search'],
                     date_search_source: receivedData.view,
                     date_search_endpoint: 'datalist',
                     search_settings: {
@@ -3091,7 +3183,7 @@
                         declarations: [Modal4, Modal2, Modal, NewsTitleComponent, modalData, ListingNewsletterComponent,
                             AddEditSubcategoryComponent, ListingSubcategoryComponent, AddEditSubscriptiongroupComponent,
                             AddEditNewsletterlibComponent, ListingNewsletterlibComponent, AddEditSenderComponent,
-                            ListingSenderComponent, Modal3, AddEditTestemaillibComponent, ListingTestemaillibComponent,
+                            ListingSenderComponent, Modal3, AddEditTestemaillibComponent, ListingTestemaillibComponent, PREVIEW
                         ],
                         imports: [
                             DemoMaterialModule,
@@ -3112,7 +3204,7 @@
                             ListingSenderComponent],
                         schemas: [i0.CUSTOM_ELEMENTS_SCHEMA],
                         providers: [ApiService, common.DatePipe],
-                        entryComponents: [Modal4, Modal3, NewsTitleComponent, modalData, Modal, Modal2]
+                        entryComponents: [PREVIEW, Modal4, Modal3, NewsTitleComponent, modalData, Modal, Modal2]
                     },] }
         ];
         return NewsTitleModule;
@@ -3138,18 +3230,19 @@
     exports.ɵe = Modal2;
     exports.ɵh = ListingNewsletterComponent;
     exports.ɵj = AddEditNewsletterlibComponent;
-    exports.ɵk = ListingNewsletterlibComponent;
-    exports.ɵl = AddEditSenderComponent;
-    exports.ɵm = Modal3;
-    exports.ɵn = ListingSenderComponent;
+    exports.ɵk = PREVIEW;
+    exports.ɵl = ListingNewsletterlibComponent;
+    exports.ɵm = AddEditSenderComponent;
+    exports.ɵn = Modal3;
+    exports.ɵo = ListingSenderComponent;
     exports.ɵf = AddEditSubcategoryComponent;
     exports.ɵg = Modal;
     exports.ɵi = ListingSubcategoryComponent;
     exports.ɵb = AddEditTestemaillibComponent;
     exports.ɵc = Modal4;
-    exports.ɵo = ListingTestemaillibComponent;
+    exports.ɵp = ListingTestemaillibComponent;
     exports.ɵa = ApiService;
-    exports.ɵp = DemoMaterialModule;
+    exports.ɵq = DemoMaterialModule;
 
     Object.defineProperty(exports, '__esModule', { value: true });
 

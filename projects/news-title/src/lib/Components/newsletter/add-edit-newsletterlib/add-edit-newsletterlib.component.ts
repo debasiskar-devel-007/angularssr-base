@@ -7,8 +7,16 @@ import { CookieService } from 'ngx-cookie-service';
 import { FormGroup, FormControl, FormArray, FormBuilder, Validators } from "@angular/forms";
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+export interface DialogData {
+  msg: string;
+  share_group: string;
+  automatic_newsletter: string;
+  reply_address: string;
+  senders_address: string;
+}
+
 import * as moment_ from 'moment';
-// import { Moment } from 'moment';
 const moment = moment_;
 
 @Component({
@@ -34,7 +42,12 @@ export class AddEditNewsletterlibComponent implements OnInit {
   days_json: any;
   public message: string;
   public tmp_date: any;
-  public false_count:number;
+  public false_count: number;
+  public dialogRef: any;
+  public share_with_group: any;
+  public automatic_newsletter_to: any;
+  public reply_address_to: any
+  public senders_address_to: any;
 
 
   // ==============================================
@@ -59,69 +72,34 @@ export class AddEditNewsletterlibComponent implements OnInit {
 
   constructor(private atp: AmazingTimePickerService, private newsService: NewsTitleService,
     public datepipe: DatePipe, public cookieService: CookieService, private formBuilder: FormBuilder,
-    public router: Router, private snackBar: MatSnackBar) {
-      
-      // console.log(this.configData.action);
-      // if(this.configData.action=='add')
-      this.days_json = [
-        {
-          "day": "Sunday",
-          "value": 1,
-          isSelected: false
-        },
-        {
-          "day": "Monday",
-          "value": 2,
-          isSelected: false
-        },
-        {
-          "day": "Tuesday",
-          "value": 3,
-          isSelected: false
-        },
-        {
-          "day": "Wednesday",
-          "value": 4,
-          isSelected: false
-        },
-        {
-          "day": "Thursday",
-          "value": 5,
-          isSelected: true
-        },
-        {
-          "day": "Friday",
-          "value": 6,
-          isSelected: false
-        },
-        {
-          "day": "Saturday",
-          "value": 7,
-          isSelected: false
-        }
-      ];
+    public router: Router, private snackBar: MatSnackBar, public dialog: MatDialog) {
+
+
+
 
     this.editorconfig.extraAllowedContent = '*[class](*),span;ul;li;table;td;style;*[id];*(*);*{*}';
 
   }
 
-  unix_timestamp(t) {
-    var d = new Date(t*1000),	// Convert the passed timestamp to milliseconds
-      yyyy = d.getFullYear(),
-      mm = ('0' + (d.getMonth() + 1)).slice(-2),	// Months are zero based. Add leading 0.
-      dd = ('0' + d.getDate()).slice(-2),			// Add leading 0.	
-      time;
+  // unix_timestamp(t) {
+  //   var d = new Date(t * 1000),	// Convert the passed timestamp to milliseconds
+  //     yyyy = d.getFullYear(),
+  //     mm = ('0' + (d.getMonth() + 1)).slice(-2),	// Months are zero based. Add leading 0.
+  //     dd = ('0' + d.getDate()).slice(-2),			// Add leading 0.	
+  //     time;
 
-    // ie: 2013-02-18, 8:35 AM	
-    time = mm + "/" + dd + "/" + yyyy;
+  //   // ie: 2013-02-18, 8:35 AM	
+  //   time = mm + "/" + dd + "/" + yyyy;
 
-    return time;
-  }
+  //   return time;
+  // }
 
   ngOnInit() {
 
+    this.weekdays();
+
     if (this.configData.action == 'add')
-      this.time = this.datepipe.transform(new Date(), 'h:mm');
+      this.time = this.datepipe.transform(new Date(), 'H:mm');
 
 
 
@@ -146,7 +124,7 @@ export class AddEditNewsletterlibComponent implements OnInit {
         this.buttonText = "SUBMIT";
         this.header_name = "Add a Newsletter";
         this.message = "Newsletter Added Successfully!!!";
-        
+
         break;
       case 'edit':
         this.days_json = null;
@@ -154,8 +132,14 @@ export class AddEditNewsletterlibComponent implements OnInit {
         this.buttonText = "UPDATE";
         this.time = "";
         this.message = "Newsletter Information Updated!!!";
-       
+        if (this.configData.defaultData.newsfrequency == "daily")
+          this.frequency_flag = false;
+        else
+          this.frequency_flag = true;
+
+
         setTimeout(() => {
+
           this.setDefaultValue(this.configData.defaultData);
         }, 1000);
 
@@ -176,6 +160,49 @@ export class AddEditNewsletterlibComponent implements OnInit {
 
 
 
+  weekdays() {
+
+    this.days_json = [
+      {
+        "day": "Sunday",
+        "value": 1,
+        isSelected: false
+      },
+      {
+        "day": "Monday",
+        "value": 2,
+        isSelected: false
+      },
+      {
+        "day": "Tuesday",
+        "value": 3,
+        isSelected: false
+      },
+      {
+        "day": "Wednesday",
+        "value": 4,
+        isSelected: false
+      },
+      {
+        "day": "Thursday",
+        "value": 5,
+        isSelected: true
+      },
+      {
+        "day": "Friday",
+        "value": 6,
+        isSelected: false
+      },
+      {
+        "day": "Saturday",
+        "value": 7,
+        isSelected: false
+      }
+    ];
+  }
+
+
+
 
   /** mat snackbar **/
   openSnackBar(message: string, action: string) {
@@ -192,6 +219,29 @@ export class AddEditNewsletterlibComponent implements OnInit {
     });
   }
 
+
+  /** open Modal **/
+  openDialog(x: any): void {
+    this.dialogRef = this.dialog.open(PREVIEW, {
+      width: '1000px',
+      data: {
+        msg: x,
+        share_group: this.share_with_group,
+        automatic_newsletter: this.automatic_newsletter_to,
+        senders_address: this.senders_address_to,
+        reply_address: this.reply_address_to
+      }
+    });
+
+    this.dialogRef.afterClosed().subscribe(result => {
+    });
+  }
+
+
+  /** preview all **/
+  preview_all() {
+    this.openDialog(Object.values(this.newsForm.value));
+  }
 
 
   /*getting the group name*/
@@ -221,7 +271,7 @@ export class AddEditNewsletterlibComponent implements OnInit {
       newstitle: ['', [Validators.required]],
       newssubject: ['', [Validators.required]],
       share_news: [],
-      publishdate_normal_format:[],
+      publishdate_normal_format: [],
       senderaddress: [],
       publishdate: ['', [Validators.required]],
       settime: [this.time],
@@ -243,19 +293,18 @@ export class AddEditNewsletterlibComponent implements OnInit {
 
   //setting the default value
   setDefaultValue(defaultValue) {
-    this.tmp_date = (this.unix_timestamp(defaultValue.publishdate));
+    this.tmp_date = defaultValue.publishdate;
     let date = new Date(this.tmp_date);
     defaultValue.publishdate = date,
 
-    this.tmp_date = (this.unix_timestamp(defaultValue.startdate));
+      this.tmp_date = defaultValue.startdate;
     date = new Date(this.tmp_date);
     defaultValue.startdate = date,
 
-    this.tmp_date = (this.unix_timestamp(defaultValue.enddate));
+      this.tmp_date = defaultValue.enddate;
     date = new Date(this.tmp_date);
     defaultValue.enddate = date,
 
-    console.log(typeof date);
     this.newsForm.patchValue({
       newstitle: defaultValue.newstitle,
       newssubject: defaultValue.newssubject,
@@ -273,6 +322,7 @@ export class AddEditNewsletterlibComponent implements OnInit {
       enddate: defaultValue.enddate,
       reply: defaultValue.reply
     });
+    // this.share_with_group = defaultValue.share_news;   
 
   }
 
@@ -296,31 +346,36 @@ export class AddEditNewsletterlibComponent implements OnInit {
 
     this.days_array = [];
     this.false_count = 0;
-    for (var i = 0; i < this.days_json.length; i++) {
-      if (this.days_json[i].isSelected)
-      {
-        this.days_array.push(this.days_json[i]);
-        this.false_count--;
-      }
-      else
-        this.days_array.push(this.days_json[i]);
+    if (this.frequency_flag != false)
+      for (var i = 0; i < this.days_json.length; i++) {
+        if (this.days_json[i].isSelected) {
+          this.days_array.push(this.days_json[i]);
+          this.false_count--;
+        }
+        else
+          this.days_array.push(this.days_json[i]);
         this.false_count++;
-    }
-    console.log("false_count",this.false_count);
-    if(this.false_count == 7)
-   return;
+      }
 
-    this.newsForm.value.days_of_weeks = this.days_array;
+    if (this.false_count == 7)
+      return;
 
-
-
-    this.newsForm.value.publishdate = moment(this.newsForm.value.publishdate).unix();
-    this.newsForm.value.startdate = moment(this.newsForm.value.startdate).unix();
-    this.newsForm.value.enddate = moment(this.newsForm.value.enddate).unix();
-    this.newsForm.value.publishdate_normal_format = moment(parseInt(this.newsForm.value.publishdate)*1000).format('x');
+  
+    if (this.frequency_flag == true)
+      this.newsForm.value.days_of_weeks = this.days_array;
+    else
+      this.newsForm.value.days_of_weeks = null;
 
 
-    console.log(this.newsForm.value);
+
+
+    this.newsForm.value.publishdate = moment(this.newsForm.value.publishdate).format('MM/DD/YYYY');
+    this.newsForm.value.startdate = moment(this.newsForm.value.startdate).format('MM/DD/YYYY');
+    this.newsForm.value.enddate = moment(this.newsForm.value.enddate).format('MM/DD/YYYY');
+
+    let x: any = moment(this.newsForm.value.publishdate).unix();
+    this.newsForm.value.publishdate_normal_format = parseInt(x)*1000;
+
 
 
     /** marking as untouched **/
@@ -354,4 +409,28 @@ export class AddEditNewsletterlibComponent implements OnInit {
       });
     }
   }
+
+
 }
+
+
+// ============================================MODAL COMPONENT===========================================
+@Component({
+  selector: 'app-preview',
+  templateUrl: 'preview_all_data.html',
+  styleUrls: ['./add-edit-newsletterlib.component.css'],
+})
+export class PREVIEW {
+
+
+  constructor(
+    public dialogRef: MatDialogRef<PREVIEW>,
+    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+
+  onNoClick(): void {
+    this.dialogRef.close();
+  }
+
+
+}
+// ======================================================================================================

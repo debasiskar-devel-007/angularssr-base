@@ -1,38 +1,6 @@
-<<<<<<< HEAD
-<!-- header start here -->
-<mat-card>
-    <mat-toolbar color="primary" style="justify-content: center; align-items: center;">
-        <h2 class="headerSpan">Blog</h2>
-    </mat-toolbar>
-    <!-- header end here -->
-    <!-- add button start here -->
-    <mat-toolbar class="buttonsetToolbar">
-        <button class="singleButton" mat-raised-button color="primary" (click)="addButton()"> Add Blogs</button>
-    </mat-toolbar>
-    <!-- adding button end here -->
-    <!--lib-listing start here -->
-    <mat-card-content class="listing-content-admin">
-        <lib-listing class="formfilterdiv formfilterdivnew" *ngIf="blogDataarray.length>0" 
-            [datasource]="blogDataarray"
-            [skip]="Bloglist_skip" 
-            [modify_header_array]="Bloglist_modify_header" 
-            [sourcedata]="Blogtablename"
-            [statusarr]="status" 
-            [editroute]="editRouteUrl" 
-            [apiurl]="serverUrlData" 
-            [jwttoken]="tokenViaapp"
-            [deleteendpoint]="deleteRouteUrl"
-            [updateendpoint]="addupdateRouteUrl"    
-            [date_search_source]="SearchSourcenameViaapp"
-            [date_search_endpoint]="searchEndpointViaApp"
-            [search_settings]="search_settings">
-        </lib-listing>
-        <!--lib-listing end here -->
-=======
 <mat-card *ngIf="loader==true">
     <mat-spinner class="spinner"></mat-spinner>
 </mat-card>
->>>>>>> f5c94d362a5902414edc831d0f2ede0f73ae81c4
 
 
 

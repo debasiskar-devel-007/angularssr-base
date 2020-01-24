@@ -35,7 +35,7 @@ export class TestimonialComponent implements OnInit {
       deleteEndPoint: receivedData.deleteEndPoint,
       view: receivedData.view,
       search_settings:{
-        textsearch: [{ label: "customer name...", field: 'name' },{ label: "customer email...", field: 'email' }],
+        textsearch: [{ label: "Search By Customer Name", field: 'name' },{ label: "Search By Customer Email", field: 'email' }],
         selectsearch: [{ label: 'Search By Status', field: 'status', values: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }] }],
       },
        /*Showing Image in the Modal*/

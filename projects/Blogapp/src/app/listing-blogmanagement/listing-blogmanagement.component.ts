@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-listing-blogmanagement',
@@ -11,7 +12,7 @@ export class ListingBlogmanagementComponent implements OnInit {
 
   //Blogs Lib List
   public blogListConfig: any = {
-    apiBaseUrl: "https://r245816wug.execute-api.us-east-1.amazonaws.com/dev/api/",
+    apiBaseUrl: environment.apiBaseUrl,
     listEndPoint: "datalist",
     datasource: "",
     tableName: "blogs",
@@ -20,7 +21,7 @@ export class ListingBlogmanagementComponent implements OnInit {
     jwtToken: "",
     deleteEndPoint: "deletesingledata",
     addLink: "/blog-management/add",
-    view: "blogs"
+    view: "blogs_view"
 
   }
 
