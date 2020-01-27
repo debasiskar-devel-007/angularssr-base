@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('rxjs/operators'), require('rxjs'), require('ngx-cookie-service'), require('@angular/cdk/a11y'), require('@angular/cdk/drag-drop'), require('@angular/cdk/portal'), require('@angular/cdk/scrolling'), require('@angular/cdk/stepper'), require('@angular/cdk/table'), require('@angular/cdk/tree'), require('@angular/material/autocomplete'), require('@angular/material/badge'), require('@angular/material/bottom-sheet'), require('@angular/material/button'), require('@angular/material/button-toggle'), require('@angular/material/card'), require('@angular/material/checkbox'), require('@angular/material/chips'), require('@angular/material/stepper'), require('@angular/material/datepicker'), require('@angular/material/dialog'), require('@angular/material/divider'), require('@angular/material/expansion'), require('@angular/material/grid-list'), require('@angular/material/icon'), require('@angular/material/input'), require('@angular/material/list'), require('@angular/material/menu'), require('@angular/material/core'), require('@angular/material/paginator'), require('@angular/material/progress-bar'), require('@angular/material/progress-spinner'), require('@angular/material/radio'), require('@angular/material/select'), require('@angular/material/sidenav'), require('@angular/material/slider'), require('@angular/material/slide-toggle'), require('@angular/material/snack-bar'), require('@angular/material/sort'), require('@angular/material/table'), require('@angular/material/tabs'), require('@angular/material/toolbar'), require('@angular/material/tooltip'), require('@angular/material/tree'), require('@angular/platform-browser/animations'), require('@angular/common'), require('@angular/core'), require('@angular/forms'), require('@angular/common/http'), require('@angular/router'), require('@angular/material')) :
-    typeof define === 'function' && define.amd ? define('login', ['exports', 'rxjs/operators', 'rxjs', 'ngx-cookie-service', '@angular/cdk/a11y', '@angular/cdk/drag-drop', '@angular/cdk/portal', '@angular/cdk/scrolling', '@angular/cdk/stepper', '@angular/cdk/table', '@angular/cdk/tree', '@angular/material/autocomplete', '@angular/material/badge', '@angular/material/bottom-sheet', '@angular/material/button', '@angular/material/button-toggle', '@angular/material/card', '@angular/material/checkbox', '@angular/material/chips', '@angular/material/stepper', '@angular/material/datepicker', '@angular/material/dialog', '@angular/material/divider', '@angular/material/expansion', '@angular/material/grid-list', '@angular/material/icon', '@angular/material/input', '@angular/material/list', '@angular/material/menu', '@angular/material/core', '@angular/material/paginator', '@angular/material/progress-bar', '@angular/material/progress-spinner', '@angular/material/radio', '@angular/material/select', '@angular/material/sidenav', '@angular/material/slider', '@angular/material/slide-toggle', '@angular/material/snack-bar', '@angular/material/sort', '@angular/material/table', '@angular/material/tabs', '@angular/material/toolbar', '@angular/material/tooltip', '@angular/material/tree', '@angular/platform-browser/animations', '@angular/common', '@angular/core', '@angular/forms', '@angular/common/http', '@angular/router', '@angular/material'], factory) :
-    (factory((global.login = {}),global.rxjs.operators,global.rxjs,global.i2,global.ng.cdk.a11y,global.ng.cdk['drag-drop'],global.ng.cdk.portal,global.ng.cdk.scrolling,global.ng.cdk.stepper,global.ng.cdk.table,global.ng.cdk.tree,global.ng.material.autocomplete,global.ng.material.badge,global.ng.material['bottom-sheet'],global.ng.material.button,global.ng.material['button-toggle'],global.ng.material.card,global.ng.material.checkbox,global.ng.material.chips,global.ng.material.stepper,global.ng.material.datepicker,global.ng.material.dialog,global.ng.material.divider,global.ng.material.expansion,global.ng.material['grid-list'],global.ng.material.icon,global.ng.material.input,global.ng.material.list,global.ng.material.menu,global.ng.material.core,global.ng.material.paginator,global.ng.material['progress-bar'],global.ng.material['progress-spinner'],global.ng.material.radio,global.ng.material.select,global.ng.material.sidenav,global.ng.material.slider,global.ng.material['slide-toggle'],global.ng.material['snack-bar'],global.ng.material.sort,global.ng.material.table,global.ng.material.tabs,global.ng.material.toolbar,global.ng.material.tooltip,global.ng.material.tree,global.ng.platformBrowser.animations,global.ng.common,global.ng.core,global.ng.forms,global.ng.common.http,global.ng.router,global.ng.material));
-}(this, (function (exports,operators,rxjs,i2,a11y,dragDrop,portal,scrolling,stepper,table,tree,autocomplete,badge,bottomSheet,button,buttonToggle,card,checkbox,chips,stepper$1,datepicker,dialog,divider,expansion,gridList,icon,input,list,menu,core,paginator,progressBar,progressSpinner,radio,select,sidenav,slider,slideToggle,snackBar,sort,table$1,tabs,toolbar,tooltip,tree$1,animations,common,i0,forms,i1,router,material) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('rxjs/operators'), require('rxjs'), require('ngx-cookie-service'), require('@angular/cdk/a11y'), require('@angular/cdk/drag-drop'), require('@angular/cdk/portal'), require('@angular/cdk/scrolling'), require('@angular/cdk/stepper'), require('@angular/cdk/table'), require('@angular/cdk/tree'), require('@angular/material/autocomplete'), require('@angular/material/badge'), require('@angular/material/bottom-sheet'), require('@angular/material/button'), require('@angular/material/button-toggle'), require('@angular/material/card'), require('@angular/material/checkbox'), require('@angular/material/chips'), require('@angular/material/stepper'), require('@angular/material/datepicker'), require('@angular/material/dialog'), require('@angular/material/divider'), require('@angular/material/expansion'), require('@angular/material/grid-list'), require('@angular/material/icon'), require('@angular/material/input'), require('@angular/material/list'), require('@angular/material/menu'), require('@angular/material/core'), require('@angular/material/paginator'), require('@angular/material/progress-bar'), require('@angular/material/progress-spinner'), require('@angular/material/radio'), require('@angular/material/select'), require('@angular/material/sidenav'), require('@angular/material/slider'), require('@angular/material/slide-toggle'), require('@angular/material/snack-bar'), require('@angular/material/sort'), require('@angular/material/table'), require('@angular/material/tabs'), require('@angular/material/toolbar'), require('@angular/material/tooltip'), require('@angular/material/tree'), require('@angular/platform-browser/animations'), require('@angular/common'), require('@angular/forms'), require('@angular/common/http'), require('@angular/material'), require('@angular/core'), require('@angular/router')) :
+    typeof define === 'function' && define.amd ? define('login-lib-influxiq', ['exports', 'rxjs/operators', 'rxjs', 'ngx-cookie-service', '@angular/cdk/a11y', '@angular/cdk/drag-drop', '@angular/cdk/portal', '@angular/cdk/scrolling', '@angular/cdk/stepper', '@angular/cdk/table', '@angular/cdk/tree', '@angular/material/autocomplete', '@angular/material/badge', '@angular/material/bottom-sheet', '@angular/material/button', '@angular/material/button-toggle', '@angular/material/card', '@angular/material/checkbox', '@angular/material/chips', '@angular/material/stepper', '@angular/material/datepicker', '@angular/material/dialog', '@angular/material/divider', '@angular/material/expansion', '@angular/material/grid-list', '@angular/material/icon', '@angular/material/input', '@angular/material/list', '@angular/material/menu', '@angular/material/core', '@angular/material/paginator', '@angular/material/progress-bar', '@angular/material/progress-spinner', '@angular/material/radio', '@angular/material/select', '@angular/material/sidenav', '@angular/material/slider', '@angular/material/slide-toggle', '@angular/material/snack-bar', '@angular/material/sort', '@angular/material/table', '@angular/material/tabs', '@angular/material/toolbar', '@angular/material/tooltip', '@angular/material/tree', '@angular/platform-browser/animations', '@angular/common', '@angular/forms', '@angular/common/http', '@angular/material', '@angular/core', '@angular/router'], factory) :
+    (factory((global['login-lib-influxiq'] = {}),global.rxjs.operators,global.rxjs,global.i2,global.ng.cdk.a11y,global.ng.cdk['drag-drop'],global.ng.cdk.portal,global.ng.cdk.scrolling,global.ng.cdk.stepper,global.ng.cdk.table,global.ng.cdk.tree,global.ng.material.autocomplete,global.ng.material.badge,global.ng.material['bottom-sheet'],global.ng.material.button,global.ng.material['button-toggle'],global.ng.material.card,global.ng.material.checkbox,global.ng.material.chips,global.ng.material.stepper,global.ng.material.datepicker,global.ng.material.dialog,global.ng.material.divider,global.ng.material.expansion,global.ng.material['grid-list'],global.ng.material.icon,global.ng.material.input,global.ng.material.list,global.ng.material.menu,global.ng.material.core,global.ng.material.paginator,global.ng.material['progress-bar'],global.ng.material['progress-spinner'],global.ng.material.radio,global.ng.material.select,global.ng.material.sidenav,global.ng.material.slider,global.ng.material['slide-toggle'],global.ng.material['snack-bar'],global.ng.material.sort,global.ng.material.table,global.ng.material.tabs,global.ng.material.toolbar,global.ng.material.tooltip,global.ng.material.tree,global.ng.platformBrowser.animations,global.ng.common,global.ng.forms,global.ng.common.http,global.ng.material,global.ng.core,global.ng.router));
+}(this, (function (exports,operators,rxjs,i2,a11y,dragDrop,portal,scrolling,stepper,table,tree,autocomplete,badge,bottomSheet,button,buttonToggle,card,checkbox,chips,stepper$1,datepicker,dialog,divider,expansion,gridList,icon,input,list,menu,core,paginator,progressBar,progressSpinner,radio,select,sidenav,slider,slideToggle,snackBar,sort,table$1,tabs,toolbar,tooltip,tree$1,animations,common,forms,i1,material,i0,router) { 'use strict';
 
     /**
      * @fileoverview added by tsickle
@@ -691,12 +691,14 @@
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var LoginComponent = /** @class */ (function () {
-        function LoginComponent(fb, http, router$$1, apiService, cookieService) {
+        function LoginComponent(fb, http, router$$1, apiService, cookieService, route) {
+            var _this = this;
             this.fb = fb;
             this.http = http;
             this.router = router$$1;
             this.apiService = apiService;
             this.cookieService = cookieService;
+            this.route = route;
             this.message = '';
             this.fromTitleValue = '';
             this.serverURL = '';
@@ -706,12 +708,53 @@
             this.logoValue = '';
             this.cookieSetValue = '';
             this.buttonNameValue = '';
+            this.defaultUrlValue = '';
+            this.loader = null;
             this.project_name = '';
+            this.redirect_url = '';
+            this.previousUrl = undefined;
+            this.currentUrl = undefined;
+            this.currentUrl = this.router.url;
+            router$$1.events.subscribe(( /**
+             * @param {?} event
+             * @return {?}
+             */function (event) {
+                if (event instanceof router.NavigationEnd) {
+                    _this.previousUrl = _this.currentUrl;
+                    _this.currentUrl = event.url;
+                }
+            }));
+            // console.log("++++++++++++++++++++++++++++=________+++++ this.previousUrl",this.previousUrl)
+            // console.log("++++++++++++++++++++++++++++=________+++++ this.currentUrl",this.currentUrl)
+            this.route.params.subscribe(( /**
+             * @param {?} params
+             * @return {?}
+             */function (params) {
+                // console.log('++++++',params['id']);
+                _this.redirect_url = params['path'];
+                // if (params['id'] != '' || params['id'] != null) {
+                //   this.redirect_url = params['id'];
+                // }
+                // console.log('redirect_url',this.redirect_url)
+            }));
             this.loginForm = this.fb.group({
                 email: ['', forms.Validators.compose([forms.Validators.required, forms.Validators.pattern(/^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/)])],
                 password: ['', forms.Validators.required]
             });
         }
+        Object.defineProperty(LoginComponent.prototype, "forLoader", {
+            set: /**
+             * @param {?} forLoaderVal
+             * @return {?}
+             */ function (forLoaderVal) {
+                this.loader = (forLoaderVal) || '<no name set>';
+                this.loader = forLoaderVal;
+                // console.log('++++',this.loader)
+                console.log('++++-----', this.loader);
+            },
+            enumerable: true,
+            configurable: true
+        });
         Object.defineProperty(LoginComponent.prototype, "fromTitle", {
             set: /**
              * @param {?} fromTitleVal
@@ -771,10 +814,6 @@
              * @return {?}
              */ function (v) {
                 this.cookieSetValue = v;
-                // console.log(this.cookieSetValue.cookie);
-                // for (const key in this.cookieSetValue.cookie) {
-                //   console.log(this.cookieSetValue.cookie[key]);
-                // }
             },
             enumerable: true,
             configurable: true
@@ -786,7 +825,7 @@
              */ function (routeingUrlval) {
                 this.signUpRouteingUrlValue = (routeingUrlval) || '<no name set>';
                 this.signUpRouteingUrlValue = routeingUrlval;
-                console.log(this.signUpRouteingUrlValue);
+                // console.log(this.signUpRouteingUrlValue)
             },
             enumerable: true,
             configurable: true
@@ -798,7 +837,7 @@
              */ function (routeingUrlval) {
                 this.forgetRouteingUrlValue = (routeingUrlval) || '<no name set>';
                 this.forgetRouteingUrlValue = routeingUrlval;
-                console.log(this.forgetRouteingUrlValue);
+                // console.log(this.forgetRouteingUrlValue)
             },
             enumerable: true,
             configurable: true
@@ -810,8 +849,18 @@
              */ function (routerStatusval) {
                 this.routerStatusValue = (routerStatusval) || '<no name set>';
                 this.routerStatusValue = routerStatusval;
-                // console.log(this.routerStatusValue);
-                // console.log(this.routerStatusValue.data.length);
+            },
+            enumerable: true,
+            configurable: true
+        });
+        Object.defineProperty(LoginComponent.prototype, "defaultLoginUrl", {
+            set: /**
+             * @param {?} defaultUrlVal
+             * @return {?}
+             */ function (defaultUrlVal) {
+                this.defaultUrlValue = (defaultUrlVal) || '<no name set>';
+                this.defaultUrlValue = defaultUrlVal;
+                // console.log(this.defaultUrlValue)
             },
             enumerable: true,
             configurable: true
@@ -850,15 +899,10 @@
          */
             function () {
                 var _this = this;
+                this.loader = 1;
+                console.log(this.loader);
                 /** @type {?} */
                 var x;
-                /****************** test*******************/
-                // for (const key in this.cookieSetValue.cookie) {
-                //   console.log(this.cookieSetValue.cookie[key].type);
-                //   if (result.token == this.cookieSetValue.cookie[key].type) {
-                //     console.log('+++++++++++++++');
-                //   }
-                // }
                 // use for validation checking
                 for (x in this.loginForm.controls) {
                     this.loginForm.controls[x].markAsTouched();
@@ -870,53 +914,27 @@
                      * @param {?} response
                      * @return {?}
                      */function (response) {
-                        // console.log(response);
                         /** @type {?} */
                         var result = {};
                         result = response;
-                        //   let cookiekeyarr:any = [];
-                        //   let cookievaluearr:any = [];
-                        //   for(let j in result.item){
-                        //     // console.log(Object.values(result.item[j]));
-                        //     // cookiekeyarr = Object.keys(result.item[j]);
-                        //     // cookievaluearr = Object.values(result.item[j]);
-                        //     cookievaluearr.push(Object.keys(result.item[j]), Object.values(result.item[j]));
-                        //   }
-                        //   // console.log('cookiekeyarr'+cookiekeyarr);
-                        //   console.log(cookievaluearr);
-                        // //   setTimeout(()=>{
-                        //   // for (let key in cookiekeyarr){
-                        //     for(let value in cookievaluearr[0]){
-                        //       console.log('hi'+value);
-                        //       // this.cookieService.set(cookiekeyarr[key],cookievaluearr[value]);
-                        //     }
-                        //   // }
-                        // // },2000);
-                        //   // setTimeout(()=>{
-                        //   //   console.log(this.cookieService.getAll());
-                        //   // },4000);
                         if (result.status == "success") {
-                            // for (const key in this.cookieSetValue.cookie) {
-                            //   console.log(this.cookieSetValue.cookie[key].type);
-                            //   if (result == this.cookieSetValue.cookie[key].type) {
-                            //     console.log('+++++++++++++++');
-                            //   }
-                            // }
                             _this.cookieService.set('user_details', JSON.stringify(result.item[0]));
                             _this.cookieService.set('jwtToken', result.token);
-                            setTimeout(( /**
-                             * @return {?}
-                             */function () {
-                                // console.log(this.cookieService.getAll());
-                            }), 1000);
-                            // console.log('result')
-                            // console.log(result.item[0].type)
-                            for (var key in _this.routerStatusValue.data) {
-                                // console.log(this.routerStatusValue.data[key].type);
-                                if (result.item[0].type === _this.routerStatusValue.data[key].type) {
-                                    _this.router.navigateByUrl('/' + _this.routerStatusValue.data[key].routerNav); // navigate to dashboard url 
+                            if (_this.router.url == _this.defaultUrlValue) {
+                                for (var key in _this.routerStatusValue.data) {
+                                    if (result.item[0].type === _this.routerStatusValue.data[key].type) {
+                                        _this.router.navigateByUrl('/' + _this.routerStatusValue.data[key].routerNav);
+                                        _this.loader = 0; // navigate to dashboard url 
+                                        console.log(_this.loader);
+                                    }
                                 }
                             }
+                            else {
+                                _this.loader = 0;
+                                // console.log('++++++ redirect_url//',this.redirect_url);
+                                _this.router.navigateByUrl(_this.redirect_url);
+                            }
+                            _this.loader = 0;
                             // this is use for reset the from
                             _this.formDirective.resetForm();
                             _this.message = '';
@@ -990,11 +1008,13 @@
                 { type: i1.HttpClient },
                 { type: router.Router },
                 { type: ApiService },
-                { type: i2.CookieService }
+                { type: i2.CookieService },
+                { type: router.ActivatedRoute }
             ];
         };
         LoginComponent.propDecorators = {
             formDirective: [{ type: i0.ViewChild, args: [forms.FormGroupDirective,] }],
+            forLoader: [{ type: i0.Input }],
             fromTitle: [{ type: i0.Input }],
             logo: [{ type: i0.Input }],
             buttonName: [{ type: i0.Input }],
@@ -1003,7 +1023,8 @@
             cookieSet: [{ type: i0.Input }],
             signUpRouteingUrl: [{ type: i0.Input }],
             forgetRouteingUrl: [{ type: i0.Input }],
-            routerStatus: [{ type: i0.Input }]
+            routerStatus: [{ type: i0.Input }],
+            defaultLoginUrl: [{ type: i0.Input }]
         };
         return LoginComponent;
     }());
@@ -1949,6 +1970,55 @@
      * @fileoverview added by tsickle
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
+    /**
+     * A router wrapper, adding extra functions.
+     */
+    var prevroute = /** @class */ (function () {
+        function prevroute(router$$1) {
+            var _this = this;
+            this.router = router$$1;
+            this.previousUrl = undefined;
+            this.currentUrl = undefined;
+            this.currentUrl = this.router.url;
+            router$$1.events.subscribe(( /**
+             * @param {?} event
+             * @return {?}
+             */function (event) {
+                if (event instanceof router.NavigationEnd) {
+                    _this.previousUrl = _this.currentUrl;
+                    _this.currentUrl = event.url;
+                }
+            }));
+        }
+        /**
+         * @return {?}
+         */
+        prevroute.prototype.getPreviousUrl = /**
+         * @return {?}
+         */
+            function () {
+                console.log('=========================');
+                console.log('prev- ' + this.previousUrl);
+                console.log('currnt- ' + this.currentUrl);
+                console.log('=========================');
+                return this.previousUrl;
+            };
+        prevroute.decorators = [
+            { type: i0.Injectable }
+        ];
+        /** @nocollapse */
+        prevroute.ctorParameters = function () {
+            return [
+                { type: router.Router }
+            ];
+        };
+        return prevroute;
+    }());
+
+    /**
+     * @fileoverview added by tsickle
+     * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
     var LoginModule = /** @class */ (function () {
         function LoginModule() {
         }
@@ -1972,7 +2042,7 @@
                             i1.HttpClientModule
                         ],
                         exports: [LoginComponent, SignUpComponent, ForgetPasswordComponent, ResetPasswordComponent],
-                        providers: [ApiService],
+                        providers: [ApiService, prevroute],
                         bootstrap: [],
                         schemas: [i0.CUSTOM_ELEMENTS_SCHEMA, i0.NO_ERRORS_SCHEMA],
                         entryComponents: [successModalComponent, snackBarComponent, snackBarResetComponent]
@@ -1998,6 +2068,7 @@
     exports.ɵd = ForgetPasswordComponent;
     exports.ɵe = snackBarComponent;
     exports.ɵh = DemoMaterialModule;
+    exports.ɵi = prevroute;
     exports.ɵf = ResetPasswordComponent;
     exports.ɵg = snackBarResetComponent;
     exports.ɵb = SignUpComponent;
@@ -2007,4 +2078,4 @@
 
 })));
 
-//# sourceMappingURL=login.umd.js.map
+//# sourceMappingURL=login-lib-influxiq.umd.js.map

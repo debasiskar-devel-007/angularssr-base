@@ -1,19 +1,28 @@
 {
-  "name": "login",
-  "version": "0.0.1",
-  "peerDependencies": {
-    "@angular/common": "^7.2.0",
-    "@angular/core": "^7.2.0"
+  "name": "login-lib-influxiq",
+  "version": "0.0.13",
+  "bugs": "https://github.com/debasiskar-devel-007/login-lib/issues",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/debasiskar-devel-007/login-lib.git"
   },
-  "main": "bundles/login.umd.js",
-  "module": "fesm5/login.js",
-  "es2015": "fesm2015/login.js",
-  "esm5": "esm5/login.js",
-  "esm2015": "esm2015/login.js",
-  "fesm5": "fesm5/login.js",
-  "fesm2015": "fesm2015/login.js",
-  "typings": "login.d.ts",
-  "metadata": "login.metadata.json",
+  "devDependencies": {
+    "@angular/common": "^7.2.0",
+    "@angular/core": "^7.2.0",
+    "@angular/material": "^7.3.7 ",
+    "@angular/cdk": "~7.3.7",
+    "@angular/animations": "~7.3.7",
+    "ngx-cookie-service": "^2.2.0"
+  },
+  "main": "bundles/login-lib-influxiq.umd.js",
+  "module": "fesm5/login-lib-influxiq.js",
+  "es2015": "fesm2015/login-lib-influxiq.js",
+  "esm5": "esm5/login-lib-influxiq.js",
+  "esm2015": "esm2015/login-lib-influxiq.js",
+  "fesm5": "fesm5/login-lib-influxiq.js",
+  "fesm2015": "fesm2015/login-lib-influxiq.js",
+  "typings": "login-lib-influxiq.d.ts",
+  "metadata": "login-lib-influxiq.metadata.json",
   "sideEffects": false,
   "dependencies": {
     "tslib": "^1.9.0"

@@ -23,7 +23,7 @@ const appRoutes: Routes = [
         }
     },
     {
-        path: '', component: AboutusComponent, data: {
+        path: 'about', component: AboutusComponent, data: {
             meta: {
                 title: 'About US',
                 description: 'Have you seen my rubber duckie?'
@@ -64,6 +64,24 @@ const appRoutes: Routes = [
 
     {
         path: 'login', component: LoginComponent,
+        data: {
+            meta: {
+                title: 'Home',
+                description: 'Have you seen my rubber duckie?'
+            }
+        }
+    },
+    {
+        path: 'login/:path', component: LoginComponent,
+        data: {
+            meta: {
+                title: 'Home',
+                description: 'Have you seen my rubber duckie?'
+            }
+        }
+    },
+    {
+        path: 'login/:path/:id', component: LoginComponent,
         data: {
             meta: {
                 title: 'Home',

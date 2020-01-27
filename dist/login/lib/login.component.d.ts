@@ -1,7 +1,7 @@
 import { OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, FormGroupDirective } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 import { ApiService } from './api.service';
 import { CookieService } from 'ngx-cookie-service';
 export declare class LoginComponent implements OnInit {
@@ -10,6 +10,7 @@ export declare class LoginComponent implements OnInit {
     router: Router;
     apiService: ApiService;
     cookieService: CookieService;
+    route: ActivatedRoute;
     message: any;
     formDirective: FormGroupDirective;
     fromTitleValue: any;
@@ -21,6 +22,9 @@ export declare class LoginComponent implements OnInit {
     logoValue: any;
     cookieSetValue: any;
     buttonNameValue: any;
+    defaultUrlValue: string;
+    private loader;
+    forLoader: any;
     fromTitle: any;
     logo: any;
     buttonName: any;
@@ -30,9 +34,13 @@ export declare class LoginComponent implements OnInit {
     signUpRouteingUrl: any;
     forgetRouteingUrl: any;
     routerStatus: any;
+    defaultLoginUrl: any;
     loginForm: FormGroup;
     project_name: any;
-    constructor(fb: FormBuilder, http: HttpClient, router: Router, apiService: ApiService, cookieService: CookieService);
+    redirect_url: any;
+    private previousUrl;
+    private currentUrl;
+    constructor(fb: FormBuilder, http: HttpClient, router: Router, apiService: ApiService, cookieService: CookieService, route: ActivatedRoute);
     ngOnInit(): void;
     /********* Login Form Submit start here*********/
     loginFormSubmit(): void;

@@ -9,6 +9,7 @@ import { SignUpComponent, successModalComponent } from './sign-up/sign-up.compon
 import { ForgetPasswordComponent, snackBarComponent } from './forget-password/forget-password.component';
 import { ResetPasswordComponent, snackBarResetComponent } from './reset-password/reset-password.component';
 import { ApiService } from './api.service';
+import { prevroute } from './prevroute';
 
 @NgModule({
   declarations: [
@@ -31,7 +32,7 @@ import { ApiService } from './api.service';
     HttpClientModule
   ],
   exports: [LoginComponent, SignUpComponent, ForgetPasswordComponent, ResetPasswordComponent],
-  providers: [ApiService],
+  providers: [ApiService, prevroute],
   bootstrap: [],
   schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
   entryComponents: [ successModalComponent, snackBarComponent, snackBarResetComponent]

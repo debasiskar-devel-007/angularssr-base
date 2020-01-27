@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -21,9 +22,18 @@ export class HomeComponent implements OnInit {
   // public getDataUrl: any = 'datalist';
   public contactUsAllDataHeaderSkip: any = ['_id'];
   public contactUsAllDataModifyHeader: any = { addresses: 'Addresses', emails: 'Emails', locationname: 'Location Name', phones: 'Phones' };
-  constructor() { }
+  constructor(public route: ActivatedRoute, public router: Router) {
+    this.route.params.subscribe(params=>{
+      console.log('++++++',params['id']);
+    });
+    console.log('--------------',this.router.url)
+   }
 
   ngOnInit() {
+  }
+  gotologin(){
+    this.router.navigateByUrl('/login'+this.router.url)
+    console.log('/login'+this.router.url)
   }
 
 }

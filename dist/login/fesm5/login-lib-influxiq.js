@@ -44,11 +44,11 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
-import { Injectable, NgModule, Component, Input, ViewChild, Inject, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA, defineInjectable, inject } from '@angular/core';
 import { FormBuilder, Validators, FormGroupDirective, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpHeaders, HttpClientModule } from '@angular/common/http';
-import { Router, ActivatedRoute } from '@angular/router';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog, MatSnackBar } from '@angular/material';
+import { Injectable, NgModule, Component, Input, ViewChild, Inject, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA, defineInjectable, inject } from '@angular/core';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 
 /**
  * @fileoverview added by tsickle
@@ -754,12 +754,14 @@ var ApiService = /** @class */ (function () {
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var LoginComponent = /** @class */ (function () {
-    function LoginComponent(fb, http, router, apiService, cookieService) {
+    function LoginComponent(fb, http, router, apiService, cookieService, route) {
+        var _this = this;
         this.fb = fb;
         this.http = http;
         this.router = router;
         this.apiService = apiService;
         this.cookieService = cookieService;
+        this.route = route;
         this.message = '';
         this.fromTitleValue = '';
         this.serverURL = '';
@@ -769,12 +771,56 @@ var LoginComponent = /** @class */ (function () {
         this.logoValue = '';
         this.cookieSetValue = '';
         this.buttonNameValue = '';
+        this.defaultUrlValue = '';
+        this.loader = null;
         this.project_name = '';
+        this.redirect_url = '';
+        this.previousUrl = undefined;
+        this.currentUrl = undefined;
+        this.currentUrl = this.router.url;
+        router.events.subscribe((/**
+         * @param {?} event
+         * @return {?}
+         */
+        function (event) {
+            if (event instanceof NavigationEnd) {
+                _this.previousUrl = _this.currentUrl;
+                _this.currentUrl = event.url;
+            }
+        }));
+        // console.log("++++++++++++++++++++++++++++=________+++++ this.previousUrl",this.previousUrl)
+        // console.log("++++++++++++++++++++++++++++=________+++++ this.currentUrl",this.currentUrl)
+        this.route.params.subscribe((/**
+         * @param {?} params
+         * @return {?}
+         */
+        function (params) {
+            // console.log('++++++',params['id']);
+            _this.redirect_url = params['path'];
+            // if (params['id'] != '' || params['id'] != null) {
+            //   this.redirect_url = params['id'];
+            // }
+            // console.log('redirect_url',this.redirect_url)
+        }));
         this.loginForm = this.fb.group({
             email: ['', Validators.compose([Validators.required, Validators.pattern(/^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/)])],
             password: ['', Validators.required]
         });
     }
+    Object.defineProperty(LoginComponent.prototype, "forLoader", {
+        set: /**
+         * @param {?} forLoaderVal
+         * @return {?}
+         */
+        function (forLoaderVal) {
+            this.loader = (forLoaderVal) || '<no name set>';
+            this.loader = forLoaderVal;
+            // console.log('++++',this.loader)
+            console.log('++++-----', this.loader);
+        },
+        enumerable: true,
+        configurable: true
+    });
     Object.defineProperty(LoginComponent.prototype, "fromTitle", {
         set: /**
          * @param {?} fromTitleVal
@@ -840,10 +886,6 @@ var LoginComponent = /** @class */ (function () {
          */
         function (v) {
             this.cookieSetValue = v;
-            // console.log(this.cookieSetValue.cookie);
-            // for (const key in this.cookieSetValue.cookie) {
-            //   console.log(this.cookieSetValue.cookie[key]);
-            // }
         },
         enumerable: true,
         configurable: true
@@ -856,7 +898,7 @@ var LoginComponent = /** @class */ (function () {
         function (routeingUrlval) {
             this.signUpRouteingUrlValue = (routeingUrlval) || '<no name set>';
             this.signUpRouteingUrlValue = routeingUrlval;
-            console.log(this.signUpRouteingUrlValue);
+            // console.log(this.signUpRouteingUrlValue)
         },
         enumerable: true,
         configurable: true
@@ -869,7 +911,7 @@ var LoginComponent = /** @class */ (function () {
         function (routeingUrlval) {
             this.forgetRouteingUrlValue = (routeingUrlval) || '<no name set>';
             this.forgetRouteingUrlValue = routeingUrlval;
-            console.log(this.forgetRouteingUrlValue);
+            // console.log(this.forgetRouteingUrlValue)
         },
         enumerable: true,
         configurable: true
@@ -882,8 +924,19 @@ var LoginComponent = /** @class */ (function () {
         function (routerStatusval) {
             this.routerStatusValue = (routerStatusval) || '<no name set>';
             this.routerStatusValue = routerStatusval;
-            // console.log(this.routerStatusValue);
-            // console.log(this.routerStatusValue.data.length);
+        },
+        enumerable: true,
+        configurable: true
+    });
+    Object.defineProperty(LoginComponent.prototype, "defaultLoginUrl", {
+        set: /**
+         * @param {?} defaultUrlVal
+         * @return {?}
+         */
+        function (defaultUrlVal) {
+            this.defaultUrlValue = (defaultUrlVal) || '<no name set>';
+            this.defaultUrlValue = defaultUrlVal;
+            // console.log(this.defaultUrlValue)
         },
         enumerable: true,
         configurable: true
@@ -924,15 +977,10 @@ var LoginComponent = /** @class */ (function () {
      */
     function () {
         var _this = this;
+        this.loader = 1;
+        console.log(this.loader);
         /** @type {?} */
         var x;
-        /****************** test*******************/
-        // for (const key in this.cookieSetValue.cookie) {
-        //   console.log(this.cookieSetValue.cookie[key].type);
-        //   if (result.token == this.cookieSetValue.cookie[key].type) {
-        //     console.log('+++++++++++++++');
-        //   }
-        // }
         // use for validation checking
         for (x in this.loginForm.controls) {
             this.loginForm.controls[x].markAsTouched();
@@ -945,54 +993,27 @@ var LoginComponent = /** @class */ (function () {
              * @return {?}
              */
             function (response) {
-                // console.log(response);
                 /** @type {?} */
                 var result = {};
                 result = response;
-                //   let cookiekeyarr:any = [];
-                //   let cookievaluearr:any = [];
-                //   for(let j in result.item){
-                //     // console.log(Object.values(result.item[j]));
-                //     // cookiekeyarr = Object.keys(result.item[j]);
-                //     // cookievaluearr = Object.values(result.item[j]);
-                //     cookievaluearr.push(Object.keys(result.item[j]), Object.values(result.item[j]));
-                //   }
-                //   // console.log('cookiekeyarr'+cookiekeyarr);
-                //   console.log(cookievaluearr);
-                // //   setTimeout(()=>{
-                //   // for (let key in cookiekeyarr){
-                //     for(let value in cookievaluearr[0]){
-                //       console.log('hi'+value);
-                //       // this.cookieService.set(cookiekeyarr[key],cookievaluearr[value]);
-                //     }
-                //   // }
-                // // },2000);
-                //   // setTimeout(()=>{
-                //   //   console.log(this.cookieService.getAll());
-                //   // },4000);
                 if (result.status == "success") {
-                    // for (const key in this.cookieSetValue.cookie) {
-                    //   console.log(this.cookieSetValue.cookie[key].type);
-                    //   if (result == this.cookieSetValue.cookie[key].type) {
-                    //     console.log('+++++++++++++++');
-                    //   }
-                    // }
                     _this.cookieService.set('user_details', JSON.stringify(result.item[0]));
                     _this.cookieService.set('jwtToken', result.token);
-                    setTimeout((/**
-                     * @return {?}
-                     */
-                    function () {
-                        // console.log(this.cookieService.getAll());
-                    }), 1000);
-                    // console.log('result')
-                    // console.log(result.item[0].type)
-                    for (var key in _this.routerStatusValue.data) {
-                        // console.log(this.routerStatusValue.data[key].type);
-                        if (result.item[0].type === _this.routerStatusValue.data[key].type) {
-                            _this.router.navigateByUrl('/' + _this.routerStatusValue.data[key].routerNav); // navigate to dashboard url 
+                    if (_this.router.url == _this.defaultUrlValue) {
+                        for (var key in _this.routerStatusValue.data) {
+                            if (result.item[0].type === _this.routerStatusValue.data[key].type) {
+                                _this.router.navigateByUrl('/' + _this.routerStatusValue.data[key].routerNav);
+                                _this.loader = 0; // navigate to dashboard url 
+                                console.log(_this.loader);
+                            }
                         }
                     }
+                    else {
+                        _this.loader = 0;
+                        // console.log('++++++ redirect_url//',this.redirect_url);
+                        _this.router.navigateByUrl(_this.redirect_url);
+                    }
+                    _this.loader = 0;
                     // this is use for reset the from
                     _this.formDirective.resetForm();
                     _this.message = '';
@@ -1065,10 +1086,12 @@ var LoginComponent = /** @class */ (function () {
         { type: HttpClient },
         { type: Router },
         { type: ApiService },
-        { type: CookieService }
+        { type: CookieService },
+        { type: ActivatedRoute }
     ]; };
     LoginComponent.propDecorators = {
         formDirective: [{ type: ViewChild, args: [FormGroupDirective,] }],
+        forLoader: [{ type: Input }],
         fromTitle: [{ type: Input }],
         logo: [{ type: Input }],
         buttonName: [{ type: Input }],
@@ -1077,7 +1100,8 @@ var LoginComponent = /** @class */ (function () {
         cookieSet: [{ type: Input }],
         signUpRouteingUrl: [{ type: Input }],
         forgetRouteingUrl: [{ type: Input }],
-        routerStatus: [{ type: Input }]
+        routerStatus: [{ type: Input }],
+        defaultLoginUrl: [{ type: Input }]
     };
     return LoginComponent;
 }());
@@ -2050,6 +2074,54 @@ var snackBarResetComponent = /** @class */ (function () {
  * @fileoverview added by tsickle
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
+/**
+ * A router wrapper, adding extra functions.
+ */
+var prevroute = /** @class */ (function () {
+    function prevroute(router) {
+        var _this = this;
+        this.router = router;
+        this.previousUrl = undefined;
+        this.currentUrl = undefined;
+        this.currentUrl = this.router.url;
+        router.events.subscribe((/**
+         * @param {?} event
+         * @return {?}
+         */
+        function (event) {
+            if (event instanceof NavigationEnd) {
+                _this.previousUrl = _this.currentUrl;
+                _this.currentUrl = event.url;
+            }
+        }));
+    }
+    /**
+     * @return {?}
+     */
+    prevroute.prototype.getPreviousUrl = /**
+     * @return {?}
+     */
+    function () {
+        console.log('=========================');
+        console.log('prev- ' + this.previousUrl);
+        console.log('currnt- ' + this.currentUrl);
+        console.log('=========================');
+        return this.previousUrl;
+    };
+    prevroute.decorators = [
+        { type: Injectable }
+    ];
+    /** @nocollapse */
+    prevroute.ctorParameters = function () { return [
+        { type: Router }
+    ]; };
+    return prevroute;
+}());
+
+/**
+ * @fileoverview added by tsickle
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
 var LoginModule = /** @class */ (function () {
     function LoginModule() {
     }
@@ -2073,7 +2145,7 @@ var LoginModule = /** @class */ (function () {
                         HttpClientModule
                     ],
                     exports: [LoginComponent, SignUpComponent, ForgetPasswordComponent, ResetPasswordComponent],
-                    providers: [ApiService],
+                    providers: [ApiService, prevroute],
                     bootstrap: [],
                     schemas: [CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA],
                     entryComponents: [successModalComponent, snackBarComponent, snackBarResetComponent]
@@ -2092,6 +2164,6 @@ var LoginModule = /** @class */ (function () {
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { LoginService, LoginComponent, LoginModule, ApiService as ɵa, ForgetPasswordComponent as ɵd, snackBarComponent as ɵe, DemoMaterialModule as ɵh, ResetPasswordComponent as ɵf, snackBarResetComponent as ɵg, SignUpComponent as ɵb, successModalComponent as ɵc };
+export { LoginService, LoginComponent, LoginModule, ApiService as ɵa, ForgetPasswordComponent as ɵd, snackBarComponent as ɵe, DemoMaterialModule as ɵh, prevroute as ɵi, ResetPasswordComponent as ɵf, snackBarResetComponent as ɵg, SignUpComponent as ɵb, successModalComponent as ɵc };
 
-//# sourceMappingURL=login.js.map
+//# sourceMappingURL=login-lib-influxiq.js.map

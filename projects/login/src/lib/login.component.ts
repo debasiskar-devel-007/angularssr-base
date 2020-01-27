@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewChild } from '@angular/core';
 import { FormArray, FormBuilder, FormGroup, Validators, MinLengthValidator, FormGroupDirective } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 import { ApiService } from './api.service';
 import { CookieService } from 'ngx-cookie-service';
 
@@ -27,6 +27,16 @@ export class LoginComponent implements OnInit {
   public logoValue: any = '';
   public cookieSetValue: any = '';
   public buttonNameValue: any = '';
+  public defaultUrlValue = '';
+  private loader: any = null;
+
+  @Input()
+  set forLoader(forLoaderVal: any) {
+    this.loader = (forLoaderVal) || '<no name set>';
+    this.loader = forLoaderVal;
+    // console.log('++++',this.loader)
+    console.log('++++-----',this.loader)
+  }
 
   @Input()         // Set the project name
   set fromTitle(fromTitleVal: any) {
@@ -35,10 +45,9 @@ export class LoginComponent implements OnInit {
 
   }
   @Input()      // set the from logo
-
-set logo(logoVal : any) {
-  this.logoValue = logoVal;
-}
+  set logo(logoVal : any) {
+    this.logoValue = logoVal;
+  }
 @Input()
 set buttonName (buttonNameVal :any){
   this.buttonNameValue = (buttonNameVal) || '<no name set>';
@@ -61,12 +70,6 @@ set buttonName (buttonNameVal :any){
 
 public set cookieSet(v : any) {
   this.cookieSetValue = v;
-  // console.log(this.cookieSetValue.cookie);
-  // for (const key in this.cookieSetValue.cookie) {
-            
-  //   console.log(this.cookieSetValue.cookie[key]);
-  // }
-
 }
 
 
@@ -75,7 +78,7 @@ public set cookieSet(v : any) {
   set signUpRouteingUrl(routeingUrlval: any) {
     this.signUpRouteingUrlValue = (routeingUrlval) || '<no name set>';
     this.signUpRouteingUrlValue = routeingUrlval;
-    console.log(this.signUpRouteingUrlValue)
+    // console.log(this.signUpRouteingUrlValue)
   }
 
 
@@ -83,24 +86,58 @@ public set cookieSet(v : any) {
   set forgetRouteingUrl(routeingUrlval: any) {
     this.forgetRouteingUrlValue = (routeingUrlval) || '<no name set>';
     this.forgetRouteingUrlValue = routeingUrlval;
-    console.log(this.forgetRouteingUrlValue)
+    // console.log(this.forgetRouteingUrlValue)
   }
 
   @Input()          // setting the navigate By Forget Password Url from project
   set routerStatus(routerStatusval: any) {
     this.routerStatusValue = (routerStatusval) || '<no name set>';
     this.routerStatusValue = routerStatusval;
-    // console.log(this.routerStatusValue);
-    // console.log(this.routerStatusValue.data.length);
   }
+
+  @Input()
+  set defaultLoginUrl(defaultUrlVal: any) {
+    this.defaultUrlValue = (defaultUrlVal) || '<no name set>';
+    this.defaultUrlValue = defaultUrlVal;
+    // console.log(this.defaultUrlValue)
+  }
+ 
 
 
 
 
   public loginForm: FormGroup;
   public project_name: any = '';
+  public redirect_url:any = '';
+  private previousUrl: string = undefined;
+  private currentUrl: string = undefined;
 
-  constructor(public fb: FormBuilder, public http: HttpClient, public router: Router, public apiService: ApiService, public cookieService: CookieService) {
+
+  constructor(public fb: FormBuilder,
+     public http: HttpClient,
+     public router: Router,
+     public apiService: ApiService,
+     public cookieService: CookieService,
+     public route: ActivatedRoute) {
+       
+      this.currentUrl = this.router.url;
+      router.events.subscribe(event => {
+        if (event instanceof NavigationEnd) {
+          this.previousUrl = this.currentUrl;
+          this.currentUrl = event.url;
+        };
+      });
+    // console.log("++++++++++++++++++++++++++++=________+++++ this.previousUrl",this.previousUrl)
+    // console.log("++++++++++++++++++++++++++++=________+++++ this.currentUrl",this.currentUrl)
+    this.route.params.subscribe(params=>{
+      // console.log('++++++',params['id']);
+      this.redirect_url = params['path'];
+      // if (params['id'] != '' || params['id'] != null) {
+      //   this.redirect_url = params['id'];
+      // }
+      // console.log('redirect_url',this.redirect_url)
+    });
+
     this.loginForm = this.fb.group({
       email: ['', Validators.compose([Validators.required, Validators.pattern(/^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/)])],
       password: ['', Validators.required]
@@ -123,18 +160,12 @@ public set cookieSet(v : any) {
 
   }
 
+ 
 /********* Login Form Submit start here*********/ 
   loginFormSubmit() {
+    this.loader = 1;
+    console.log(this.loader)
     let x: any;
-/****************** test*******************/ 
-// for (const key in this.cookieSetValue.cookie) {
-//   console.log(this.cookieSetValue.cookie[key].type);
-//   if (result.token == this.cookieSetValue.cookie[key].type) {
-//     console.log('+++++++++++++++');
-//   }
-// }
-
-
     // use for validation checking
 
     for (x in this.loginForm.controls) {
@@ -142,57 +173,32 @@ public set cookieSet(v : any) {
     }
 
     if (this.loginForm.valid) {
+
+     
       let data: any = this.loginForm.value;
       this.apiService.addLogin(data).subscribe((response) => {
-        // console.log(response);
         let result: any = {};
         result = response;
-      //   let cookiekeyarr:any = [];
-      //   let cookievaluearr:any = [];
-      //   for(let j in result.item){
-      //     // console.log(Object.values(result.item[j]));
-      //     // cookiekeyarr = Object.keys(result.item[j]);
-      //     // cookievaluearr = Object.values(result.item[j]);
-      //     cookievaluearr.push(Object.keys(result.item[j]), Object.values(result.item[j]));
-      //   }
-      //   // console.log('cookiekeyarr'+cookiekeyarr);
-      //   console.log(cookievaluearr);
-      // //   setTimeout(()=>{
-      //   // for (let key in cookiekeyarr){
-      //     for(let value in cookievaluearr[0]){
-      //       console.log('hi'+value);
-      //       // this.cookieService.set(cookiekeyarr[key],cookievaluearr[value]);
-      //     }
-      //   // }
-      // // },2000);
-      //   // setTimeout(()=>{
-      //   //   console.log(this.cookieService.getAll());
-      //   // },4000);
-        
 
         if (result.status == "success") {
-          // for (const key in this.cookieSetValue.cookie) {
-          //   console.log(this.cookieSetValue.cookie[key].type);
-          //   if (result == this.cookieSetValue.cookie[key].type) {
-          //     console.log('+++++++++++++++');
-          //   }
-          // }
+         
           this.cookieService.set('user_details', JSON.stringify(result.item[0]));
           this.cookieService.set('jwtToken', result.token);
-
-          setTimeout(() => {
-            // console.log(this.cookieService.getAll());
-          }, 1000);
-
-          // console.log('result')
-          // console.log(result.item[0].type)
-          for (const key in this.routerStatusValue.data) {
-            // console.log(this.routerStatusValue.data[key].type);
-
-            if (result.item[0].type === this.routerStatusValue.data[key].type) {
-              this.router.navigateByUrl('/' + this.routerStatusValue.data[key].routerNav)     // navigate to dashboard url 
+          if (this.router.url == this.defaultUrlValue) {
+            for (const key in this.routerStatusValue.data) {
+              if (result.item[0].type === this.routerStatusValue.data[key].type) {
+                this.router.navigateByUrl('/' + this.routerStatusValue.data[key].routerNav);
+                this.loader = 0;     // navigate to dashboard url 
+                console.log(this.loader)
+              }
             }
-          }
+            
+          } else {
+            this.loader = 0; 
+            // console.log('++++++ redirect_url//',this.redirect_url);
+            this.router.navigateByUrl(this.redirect_url);
+        }
+        this.loader = 0;
 
 
           // this is use for reset the from

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-login',
@@ -9,11 +11,10 @@ export class LoginComponent implements OnInit {
 
   public logo: any = '../../assets/favicon.ico';
   public fromTitle: any = "Login Form";    // This is a From Title 
-  public fullUrl: any = "https://o820cv2lu8.execute-api.us-east-2.amazonaws.com/production/api/";  // server url
+  public fullUrl: any = "https://9ozbyvv5v0.execute-api.us-east-1.amazonaws.com/production/api/";  // server url
   public endpoint: any = "login";
   public buttonName:any= 'Login Button';
   public signUpRouteingUrl: any = { 
-    // "path":"sign-up",
     "path":"",
     "buttonName":"sign-up",
     "customLink":"",
@@ -27,23 +28,16 @@ export class LoginComponent implements OnInit {
     "customLink":"/forget-password",
     "customURl":"http://www.fjhj.lkj/cx"
   };
+  public defaultLoginUrl = '/login';
   public routerStatus: any;
-  // public cookieSet: any = {
-  //   "cookie": [
-  //     {
-  //       "type": "token",
-  //       "name": "jwtToken"
-  //     },
-  //     {
-  //       "type": "email",
-  //       "name": "Username"
-  //     },
-  //     {
-  //       "type": "_id",
-  //       "name": "_id"
-  //     }]
-  // };
-  constructor() {
+  constructor(public route: ActivatedRoute,  public router: Router, public appLoder: AppComponent) {
+
+    console.log("++++++++++++++++++++++++++++=________",router.url)
+    this.route.params.subscribe(params=>{
+      console.log('++++++',params['id']);
+    });
+
+
     this.routerStatus = {           // this is use for if login succcess then navigate which page 
       "data": [
         {
@@ -51,8 +45,8 @@ export class LoginComponent implements OnInit {
           "routerNav": "forget-password"
         },
         {
-          "type": "user",
-          "routerNav": "userDashbord"
+          "type": "rep",
+          "routerNav": "home"
         },
         {
           "type": "model",
