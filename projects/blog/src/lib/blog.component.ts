@@ -23,8 +23,8 @@ export class BlogComponent implements OnInit {
       listEndPoint: receivedData.listEndPoint,
       datasource: receivedData.datasource,
       tableName: receivedData.tableName,
-      listArray_skip: ["_id", "userId", "created_at", "updated_at","image","description_html"],
-      listArray_modify_header: { "blogtitle":"Blog Title", "description": "Description", "priority": "Priority", "status": "Status" ,"parentcategoryname":"Parent Category Name"},
+      listArray_skip: ["_id", "userId", "created_at", "updated_at","image","description_html",""],
+      listArray_modify_header: { "blogtitle":"Category Name", "description": "Description", "priority": "Priority", "status": "Status" ,"parentcategoryname":"Parent Category Name"},
       admintablenameTableName: "admin",
       statusarr: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }],
       updateurl: receivedData.updateEndpoint,
@@ -33,7 +33,7 @@ export class BlogComponent implements OnInit {
       deleteEndPoint: receivedData.deleteEndPoint,
       view: receivedData.view,
       search_settings:{
-        textsearch: [{ label: "Search by blog title...", field: 'blogtitle' },{ label: "Search by parent category...", field: 'parentcategoryname' }],
+        textsearch: [{ label: "Search by blog title...", field: 'blogtitle' },{ label: "Search by parent category...", field: 'parentcategoryname_search' }],
         selectsearch: [{ label: 'Search By status', field: 'status', values: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }] }]
       }
       //  /*Showing Image in the Modal*/

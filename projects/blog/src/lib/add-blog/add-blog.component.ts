@@ -127,6 +127,7 @@ export class AddBlogComponent implements OnInit {
     };
     this.blogService.getData(this.configData.endpoint2 + 'datalist', postData).subscribe((response: any) => {
       this.getParentCatArr = response.res;
+      //console.log('parent category',response.res);
     })
   }
 

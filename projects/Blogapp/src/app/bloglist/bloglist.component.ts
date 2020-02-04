@@ -12,7 +12,7 @@ export class BloglistComponent implements OnInit {
 
     /************** lib list setup start here *************/
     public blogListConfig:any = {
-      apiBaseUrl: "https://r245816wug.execute-api.us-east-1.amazonaws.com/dev/api/",
+      apiBaseUrl: "https://9ozbyvv5v0.execute-api.us-east-1.amazonaws.com/production/api/",
       listEndPoint: "datalist",
       datasource: "",
       tableName: "blog_category",
@@ -27,6 +27,7 @@ export class BloglistComponent implements OnInit {
     constructor( private router: Router, private activatedRoute: ActivatedRoute, private cookieService: CookieService ) { 
 
       this.activatedRoute.data.subscribe(resolveData => {
+        console.warn(resolveData);
         this.blogListConfig.datasource = resolveData.blogCatList.res;
         this.blogListConfig.jwtToken = this.cookieService.get('jwtToken');
         

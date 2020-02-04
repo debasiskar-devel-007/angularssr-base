@@ -11,7 +11,7 @@ export class ListingBlogmanagementComponent implements OnInit {
 
   //Blogs Lib List
   public blogListConfig: any = {
-    apiBaseUrl: "https://r245816wug.execute-api.us-east-1.amazonaws.com/dev/api/",
+    apiBaseUrl: "https://9ozbyvv5v0.execute-api.us-east-1.amazonaws.com/production/api/",
     listEndPoint: "datalist",
     datasource: "",
     tableName: "blogs",
@@ -20,7 +20,7 @@ export class ListingBlogmanagementComponent implements OnInit {
     jwtToken: "",
     deleteEndPoint: "deletesingledata",
     addLink: "/blog-management/add",
-    view: "blogs"
+    view: "blogs_view"
 
   }
 

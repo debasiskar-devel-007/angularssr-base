@@ -17,7 +17,7 @@ export class ApiService {
   public uploaderror: any = '';
   public accesstoken:any=this.cookieService.get('jwtToken');
   fileservername: any = [];
-  serverUrl: any='https://r245816wug.execute-api.us-east-1.amazonaws.com/dev/api/';
+  serverUrl: any='https://9ozbyvv5v0.execute-api.us-east-1.amazonaws.com/production/api/';
   addendpointUrl: any;
   uploadEndpointUrl:any; //souresh
   updateendpointUrl: any;

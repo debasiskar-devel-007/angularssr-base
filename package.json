@@ -70,6 +70,7 @@
     "ngx-moment": "^3.5.0",
     "ngx-uploader": "^7.1.0",
     "node-fetch": "^2.6.0",
+    "node-sass": "^4.13.1",
     "npm-upgrade": "^2.0.2",
     "protractor": "~5.4.0",
     "rxjs": "~6.3.3",

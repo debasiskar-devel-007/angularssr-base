@@ -277,8 +277,8 @@
                     listEndPoint: receivedData.listEndPoint,
                     datasource: receivedData.datasource,
                     tableName: receivedData.tableName,
-                    listArray_skip: ["_id", "userId", "created_at", "updated_at", "image", "description_html"],
-                    listArray_modify_header: { "blogtitle": "Blog Title", "description": "Description", "priority": "Priority", "status": "Status", "parentcategoryname": "Parent Category Name" },
+                    listArray_skip: ["_id", "userId", "created_at", "updated_at", "image", "description_html", ""],
+                    listArray_modify_header: { "blogtitle": "Category Name", "description": "Description", "priority": "Priority", "status": "Status", "parentcategoryname": "Parent Category Name" },
                     admintablenameTableName: "admin",
                     statusarr: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }],
                     updateurl: receivedData.updateEndpoint,
@@ -287,7 +287,7 @@
                     deleteEndPoint: receivedData.deleteEndPoint,
                     view: receivedData.view,
                     search_settings: {
-                        textsearch: [{ label: "Search by blog title...", field: 'blogtitle' }, { label: "Search by parent category...", field: 'parentcategoryname' }],
+                        textsearch: [{ label: "Search by blog title...", field: 'blogtitle' }, { label: "Search by parent category...", field: 'parentcategoryname_search' }],
                         selectsearch: [{ label: 'Search By status', field: 'status', values: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }] }]
                     }
                     //  /*Showing Image in the Modal*/
@@ -547,6 +547,7 @@
                  * @return {?}
                  */function (response) {
                     _this.getParentCatArr = response.res;
+                    //console.log('parent category',response.res);
                 }));
             };
         // =========================SUBMIT function==================
@@ -2100,9 +2101,9 @@
                     listEndPoint: receivedData.listEndPoint,
                     datasource: receivedData.datasource,
                     tableName: receivedData.tableName,
-                    listArray_skip: ["_id", "userId", "created_at", "updated_at", "image", "metatitle", "metadesc", "description_html", "credentials", "blogs_file", "blogs_image"],
+                    listArray_skip: ["_id", "blogcat", "userId", "author_search", "blogtitle_search", "created_at", "updated_at", "image", "metatitle", "metadesc", "description_html", "credentials", "blogs_file", "blogs_image"],
                     listArray_modify_header: {
-                        "blogtitle": "Blog Title", "description": "Description",
+                        "blogtitle": "Blog Title", "description": "Description", "date added": "Date", "profile picture": "Profile Picture", "tags": "Tags",
                         "priority": "Priority", "status": "Status", "parentcategoryname": "Parent Category Name",
                         "author": "Author"
                     },
@@ -2116,6 +2117,7 @@
                     search_settings: {
                         textsearch: [{ label: "blog title...", field: 'blogtitle' }, { label: "author...", field: 'author' }],
                         selectsearch: [{ label: 'status...', field: 'status', values: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }] }],
+                        datesearch: [{ startdatelabel: "Start Date", enddatelabel: "End Date", submit: "Search By Date", field: "created_at" }],
                     },
                 };
                 this.loader = false;
