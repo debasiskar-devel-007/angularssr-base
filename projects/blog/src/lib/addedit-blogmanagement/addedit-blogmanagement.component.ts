@@ -6,7 +6,7 @@ import { ApiService } from '../api.service';
 import { Observable } from 'rxjs';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog, MatSnackBar } from "@angular/material";
 import { map, startWith } from 'rxjs/operators';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+// import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { BlogService } from '../blog.service';
 // import { DemoMaterialModule } from '../material-module';
 
@@ -29,7 +29,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
 
 
 /**ckeditor start here*/
-public Editor = ClassicEditor;  //for ckeditor
+// public Editor = ClassicEditor;  //for ckeditor
 editorConfig = {
   placeholder: 'Write testimonial...',
 };

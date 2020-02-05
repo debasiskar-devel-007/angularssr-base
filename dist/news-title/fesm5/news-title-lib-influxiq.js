@@ -2600,10 +2600,10 @@ var ListingNewsletterlibComponent = /** @class */ (function () {
                 listEndPoint: receivedData.listEndPoint,
                 datasource: receivedData.datasource,
                 tableName: receivedData.tableName,
-                listArray_skip: ["_id", "userId", "created_at", "id", "updated_at", "title_search", "publishdate_normal_format"],
+                listArray_skip: ["_id", "userId", "created_at", "id", "updated_at", "title_search", "publishdate_normal_format", "subject_search"],
                 listArray_modify_header: {
                     'title': 'Title', 'subject': 'Subject', 'userGroup': 'User Group', 'time': 'Publish Time',
-                    'publishdate': 'Publish Date', 'status': 'Status'
+                    'publishdate': 'Publish Date', 'status': 'Status', 'date added': 'Date Added'
                 },
                 admintablenameTableName: "admin",
                 statusarr: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }],
@@ -2617,7 +2617,7 @@ var ListingNewsletterlibComponent = /** @class */ (function () {
                 date_search_endpoint: 'datalist',
                 search_settings: {
                     textsearch: [{ label: "Search by title...", field: 'title_search' },
-                        { label: "Search by subject...", field: 'subject' }],
+                        { label: "Search by subject...", field: 'subject_search' }],
                     datesearch: [{ startdatelabel: "Start Date", enddatelabel: "End Date", submit: "Search By Date", field: "publishdate_normal_format" }],
                 },
             };
@@ -2808,7 +2808,6 @@ var AddEditSenderComponent = /** @class */ (function () {
             var postData = {
                 source: this.configData.source,
                 data: Object.assign(this.senderForm.value, this.configData.condition),
-                "sourceobj": ["group"]
             };
             this.newsService.addData(this.configData.endpoint, postData).subscribe((/**
              * @param {?} response

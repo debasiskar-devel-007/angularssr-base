@@ -14,7 +14,6 @@ export declare class AddBlogComponent implements OnInit {
     private cookieService;
     dialog: MatDialog;
     /**ckeditor start here*/
-    Editor: any;
     editorConfig: {
         placeholder: string;
     };

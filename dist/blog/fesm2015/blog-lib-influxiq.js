@@ -49,7 +49,6 @@ import { HttpClient, HttpHeaders, HttpClientModule } from '@angular/common/http'
 import { FormBuilder, Validators, FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MAT_DIALOG_DATA as MAT_DIALOG_DATA$1, MatDialogRef as MatDialogRef$1, MatDialog as MatDialog$1, MatSnackBar } from '@angular/material';
 import { map, startWith } from 'rxjs/operators';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { DomSanitizer, BrowserModule } from '@angular/platform-browser';
 import { Injectable, NgModule, Component, Input, Inject, defineInjectable, inject } from '@angular/core';
 import { CKEditorModule } from 'ngx-ckeditor';
@@ -414,8 +413,7 @@ class AddBlogComponent {
         /**
          * ckeditor start here
          */
-        this.Editor = ClassicEditor; //for ckeditor
-        //for ckeditor
+        // public Editor = ClassicEditor;  //for ckeditor
         this.editorConfig = {
             placeholder: 'Type the content here!',
         };
@@ -1165,8 +1163,7 @@ class AddeditBlogmanagementComponent {
         /**
          * ckeditor start here
          */
-        this.Editor = ClassicEditor; //for ckeditor
-        //for ckeditor
+        // public Editor = ClassicEditor;  //for ckeditor
         this.editorConfig = {
             placeholder: 'Write testimonial...',
         };

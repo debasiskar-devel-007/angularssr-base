@@ -289,7 +289,7 @@
                     deleteEndPoint: receivedData.deleteEndPoint,
                     view: receivedData.view,
                     search_settings: {
-                        textsearch: [{ label: "Search By Customer Name", field: 'name' }, { label: "Search By Customer Email", field: 'email' }],
+                        textsearch: [{ label: "Search By Customer Name", field: 'name_copy' }, { label: "Search By Customer Email", field: 'email' }],
                         selectsearch: [{ label: 'Search By Status', field: 'status', values: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }] }],
                     },
                     /*Showing Image in the Modal*/
@@ -465,9 +465,6 @@
                             "type": this.imageConfigData.files[0].type
                         };
                 }
-                else {
-                    this.testimonialForm.value.testimonial_img = false;
-                }
                 this.testimonialForm.controls['description'].markAsTouched();
                 this.loader = true;
                 /* stop here if form is invalid */
@@ -542,6 +539,7 @@
                 this.img_var = defaultValue.testimonial_img.basepath + defaultValue.testimonial_img.image;
                 this.image_name = defaultValue.testimonial_img.name;
                 this.image_type = defaultValue.testimonial_img.type;
+                console.log(">>>", this.img_var);
             };
         // ==================================================================================================
         // =========================================MODAL functions==========================================

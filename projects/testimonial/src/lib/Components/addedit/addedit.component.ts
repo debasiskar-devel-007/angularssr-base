@@ -128,7 +128,7 @@ export class AddeditComponent implements OnInit {
           "type": this.imageConfigData.files[0].type
         };
     } else {
-      this.testimonialForm.value.testimonial_img = false;
+      // this.testimonialForm.value.testimonial_img = false;
     }
 
 
@@ -171,6 +171,7 @@ export class AddeditComponent implements OnInit {
 
   // ================================================Default value======================================
   setDefaultValue(defaultValue) {
+   
     this.testimonialForm.patchValue({
       name: defaultValue.name,
       email: defaultValue.email,
@@ -186,6 +187,7 @@ export class AddeditComponent implements OnInit {
     this.img_var = defaultValue.testimonial_img.basepath + defaultValue.testimonial_img.image;
     this.image_name = defaultValue.testimonial_img.name;
     this.image_type = defaultValue.testimonial_img.type
+    console.log(">>>",this.img_var);
   }
   // ==================================================================================================
 

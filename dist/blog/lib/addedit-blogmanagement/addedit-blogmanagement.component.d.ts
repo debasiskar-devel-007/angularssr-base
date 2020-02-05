@@ -20,7 +20,6 @@ export declare class AddeditBlogmanagementComponent implements OnInit {
     snackBar: MatSnackBar;
     private blogService;
     /**ckeditor start here*/
-    Editor: any;
     editorConfig: {
         placeholder: string;
     };

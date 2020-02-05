@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router';
 import { BlogService } from '../blog.service';
 
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+// import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { CookieService } from 'ngx-cookie-service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 export interface DialogData {
@@ -18,7 +18,7 @@ export interface DialogData {
 export class AddBlogComponent implements OnInit {
 
   /**ckeditor start here*/
-  public Editor = ClassicEditor;  //for ckeditor
+  // public Editor = ClassicEditor;  //for ckeditor
   editorConfig = {
     placeholder: 'Type the content here!',
   };

@@ -118,7 +118,6 @@ export class AddEditSenderComponent implements OnInit {
       let postData: any = {
         source: this.configData.source,
         data: Object.assign(this.senderForm.value, this.configData.condition),
-        "sourceobj": ["group"]
       };
       this.newsService.addData(this.configData.endpoint, postData).subscribe((response: any) => {
         if (response.status == "success") {
