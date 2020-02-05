@@ -30,7 +30,7 @@ export class ListingBlogmanagementlibComponent implements OnInit {
       listArray_modify_header: {
         "blogtitle": "Blog Title", "description": "Description","date added":"Date","profile picture":"Profile Picture","tags":"Tags",
         "priority": "Priority", "status": "Status", "parentcategoryname": "Parent Category Name",
-        "author": "Author"
+        "author": "Author","blogcategory":"Category"
       },
       admintablenameTableName: "admin",
       statusarr: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }],

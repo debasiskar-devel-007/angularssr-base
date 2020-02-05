@@ -129,7 +129,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
       // metatitle: ['', [Validators.required]],
       // metadesc: ['', [Validators.required]],
       author:['',[Validators.required]],
-      credentials: this.formBuilder.array([]),
+      video: this.formBuilder.array([]),
       tags: [''],
       blogs_image: [''],
       blogs_file: ['']
@@ -209,10 +209,10 @@ export class AddeditBlogmanagementComponent implements OnInit {
       }
 
 
-      for (const vid in this.setData.credentials) {
-        this.addYoutubeVideo(this.setData.credentials[vid].video_url,
-          this.setData.credentials[vid].video_title,
-          this.setData.credentials[vid].video_description);
+      for (const vid in this.setData.video) {
+        this.addYoutubeVideo(this.setData.video[vid].video_url,
+          this.setData.video[vid].video_title,
+          this.setData.video[vid].video_description);
       }
 
       if (this.setData.tags != "")
@@ -304,7 +304,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
 
   // ----------------------------------Add Credential Fucntions-----------------
   addYoutubeVideo(vid_url: any, vid_tit: any, vid_desc: any) {
-    const creds = this.blogManagementForm.controls.credentials as FormArray;
+    const creds = this.blogManagementForm.controls.video as FormArray;
     creds.push(this.formBuilder.group({
       video_url: [vid_url],
       video_title: [vid_tit],
@@ -321,7 +321,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
 
   // ---------------------------------Delete Credetial Fucntions----------------
   deleteCreds() {
-    const creds = this.blogManagementForm.controls.credentials as FormArray;
+    const creds = this.blogManagementForm.controls.video as FormArray;
     creds.removeAt(1);
   }
   // ----------------------------------------------------------------------------
@@ -424,12 +424,13 @@ export class AddeditBlogmanagementComponent implements OnInit {
     this.blogManagementForm.value.tags = this.tags_array;
 
     this.blogManagementForm.controls['description'].markAsTouched();
+    this.blogManagementForm.controls['blogtitle'].markAsTouched();
 
     if (this.blogManagementForm.valid) {
       if (this.blogManagementForm.value.status)
-        this.blogManagementForm.value.status = parseInt("1");
+        this.blogManagementForm.value.status =1;
       else
-        this.blogManagementForm.value.status = parseInt("0");
+        this.blogManagementForm.value.status =0;
       if (this.params_id!= null) {    //update part
         this.messageText = "One row updated!!!";
         this.blogManagementForm.value.tags = this.tags_array;
@@ -441,11 +442,9 @@ export class AddeditBlogmanagementComponent implements OnInit {
             "blogcat": this.blogManagementForm.value.blogcat,
             "description": this.blogManagementForm.value.description,
             "priority": this.blogManagementForm.value.priority,
-            "status": this.blogManagementForm.value.status,
-            "metatitle": this.blogManagementForm.value.metatitle,
-            "metadesc": this.blogManagementForm.value.metadesc,
+            "status": this.blogManagementForm.value.status, 
             "tags": this.blogManagementForm.value.tags,
-            "credentials": this.blogManagementForm.value.credentials,
+            "video": this.blogManagementForm.value.video,
             "blogs_image": this.blogManagementForm.value.blogs_image,
             "blogs_file": this.blogManagementForm.value.blogs_file,
             "author":this.blogManagementForm.value.author
@@ -507,7 +506,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
   // -------------------------------Select Tags AutoComplete Field-----------------------
   showval(event: any) {
     
-    if (event.keyCode == 13) {
+    if (event.keyCode == 13 || event.keyCode == 32) {
       this.tags_array.push(event.target.value);
       this.blogManagementForm.controls['tags'].patchValue("");
       return;
@@ -521,7 +520,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
 
   // ---------------------------------------VIDEO URL PREVIEW-----------------------------
   preview_video(video_index) {
-    this.openDialog(this.blogManagementForm.value.credentials[video_index].video_url);
+    this.openDialog(this.blogManagementForm.value.video[video_index].video_url);
   }
   // -------------------------------------------------------------------------------------
 
