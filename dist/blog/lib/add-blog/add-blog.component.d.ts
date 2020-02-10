@@ -13,14 +13,8 @@ export declare class AddBlogComponent implements OnInit {
     private router;
     private cookieService;
     dialog: MatDialog;
+    editorconfig: any;
     /**ckeditor start here*/
-    Editor: any;
-    editorConfig: {
-        placeholder: string;
-    };
-    model: {
-        editorData: string;
-    };
     /**ckeditor end here*/
     blogCatForm: FormGroup;
     header_txt: any;

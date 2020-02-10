@@ -18,13 +18,6 @@ export declare class AddeditBlogmanagementComponent implements OnInit {
     dialog: MatDialog;
     snackBar: MatSnackBar;
     /**ckeditor start here*/
-    Editor: any;
-    editorConfig: {
-        placeholder: string;
-    };
-    model: {
-        editorData: string;
-    };
     /**ckeditor end here*/
     headerText: any;
     buttonText: any;
@@ -58,6 +51,7 @@ export declare class AddeditBlogmanagementComponent implements OnInit {
     file_array: any;
     file_array_edit: any;
     action2: any;
+    editorconfig: any;
     config: any;
     serverUrl: any;
     getDataEndpoint: any;

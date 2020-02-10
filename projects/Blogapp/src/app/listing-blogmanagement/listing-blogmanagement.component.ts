@@ -30,8 +30,9 @@ export class ListingBlogmanagementComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.activatedRoute.data.subscribe(resolveData => {
-      this.blogListConfig.datasource = resolveData.blogList.res;
+    this.activatedRoute.data.subscribe((resolveData:any) => {
+       this.blogListConfig.datasource = resolveData.blogList.results.blogs;
+      console.warn(resolveData.blogList.results.blogs);
       this.blogListConfig.jwtToken = this.cookieService.get('jwtToken');
 
     });

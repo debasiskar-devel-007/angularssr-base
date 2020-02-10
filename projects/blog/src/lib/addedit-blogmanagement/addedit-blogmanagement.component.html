@@ -51,8 +51,10 @@
 
                 <!-- ------------------------------------Blog Content------------------ -->
 
-                <ckeditor [editor]="Editor" [config]="editorConfig" formControlName="description"
-                  ></ckeditor>
+                <!-- <ckeditor [editor]="Editor" [config]="editorConfig" formControlName="description"
+                  ></ckeditor> -->
+                  <ck-editor formControlName="description" [config]="editorconfig">
+                </ck-editor>
                 <mat-error
                     *ngIf="!blogManagementForm.controls['description'].valid
     && blogManagementForm.controls['description'].errors.required && blogManagementForm.controls['description'].touched">

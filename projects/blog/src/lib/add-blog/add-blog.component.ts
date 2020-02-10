@@ -3,7 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { ActivatedRoute, Router } from '@angular/router';
 import { BlogService } from '../blog.service';
 
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
 import { CookieService } from 'ngx-cookie-service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 export interface DialogData {
@@ -16,15 +16,14 @@ export interface DialogData {
   styleUrls: ['./add-blog.component.css']
 })
 export class AddBlogComponent implements OnInit {
-
+  editorconfig:any={};
   /**ckeditor start here*/
-  public Editor = ClassicEditor;  //for ckeditor
-  editorConfig = {
-    placeholder: 'Type the content here!',
-  };
-  public model = {
-    editorData: ''
-  };
+  // editorConfig = {
+  //   placeholder: 'Type the content here!',
+  // };
+  // public model = {
+  //   editorData: ''
+  // };
   /**ckeditor end here*/
 
 
@@ -42,7 +41,9 @@ export class AddBlogComponent implements OnInit {
 
 
   constructor(private formBuilder: FormBuilder, private blogService: BlogService, private router: Router,
-    private cookieService: CookieService,public dialog: MatDialog) { }
+    private cookieService: CookieService,public dialog: MatDialog) {
+      this.editorconfig.extraAllowedContent = '*[class](*),span;ul;li;table;td;style;*[id];*(*);*{*}';
+     }
 
   ngOnInit() {
     //generating the form

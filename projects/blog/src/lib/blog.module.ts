@@ -9,13 +9,12 @@ import { AddBlogComponent,Modal2 } from './add-blog/add-blog.component';
 import { ListingModule } from 'listing-angular7';
 import { HttpClientModule } from "@angular/common/http";
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { ApiService } from './api.service';
 import { CommonModule } from '@angular/common';
 import { AddeditBlogmanagementComponent,Modal, YoutubeComponent } from './addedit-blogmanagement/addedit-blogmanagement.component';
 import { YoutubeplayerComponent } from './youtubeplayer/youtubeplayer.component';
 import { ListingBlogmanagementlibComponent } from './listing-blogmanagementlib/listing-blogmanagementlib.component';
-
+import { CKEditorModule } from 'ngx-ckeditor';
 
 @NgModule({
   declarations: [
@@ -36,9 +35,9 @@ import { ListingBlogmanagementlibComponent } from './listing-blogmanagementlib/l
     FormsModule,
     ReactiveFormsModule,
     BrowserModule,
-    CKEditorModule,
     FileUploadModule,
     CommonModule,
+    CKEditorModule
   
   ],
   exports: [BlogComponent, AddBlogComponent, AddeditBlogmanagementComponent,ListingBlogmanagementlibComponent],

@@ -6,7 +6,7 @@ import { ApiService } from '../api.service';
 import { Observable } from 'rxjs';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog, MatSnackBar } from "@angular/material";
 import { map, startWith } from 'rxjs/operators';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
+
 
 
 
@@ -26,13 +26,13 @@ export interface DialogData {
 export class AddeditBlogmanagementComponent implements OnInit {
 
   /**ckeditor start here*/
-  public Editor = ClassicEditor;  //for ckeditor
-  editorConfig = {
-    placeholder: 'Description*',
-  };
-  public model = {
-    editorData: ''
-  };
+  // public Editor = ClassicEditor;  //for ckeditor
+  // editorConfig = {
+  //   placeholder: 'Description*',
+  // };
+  // public model = {
+  //   editorData: ''
+  // };
   /**ckeditor end here*/
 
 
@@ -72,6 +72,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
   file_array: any = [];
   file_array_edit: any = [];
   action2:any;
+  editorconfig:any={};
   // -----------------------------------------------------------------------
 
 
@@ -134,6 +135,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
       blogs_image: [''],
       blogs_file: ['']
     });
+    this.editorconfig.extraAllowedContent = '*[class](*),span;ul;li;table;td;style;*[id];*(*);*{*}';
   }
 
 
