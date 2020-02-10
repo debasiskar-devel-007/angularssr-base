@@ -23,7 +23,7 @@ set config(receivedData: any) {
     listEndPoint: receivedData.listEndPoint,
     datasource: receivedData.datasource,
     tableName: receivedData.tableName,
-    listArray_skip: ["_id", "userId", "created_at", "id", "updated_at","image"],
+    listArray_skip: ["_id", "userId", "created_at", "id", "updated_at","image","name_search"],
     listArray_modify_header: { "name": "Name", "priority": "Priority", "status": "Status" ,"date_added":"Date"},
     admintablenameTableName: "admin",
     statusarr: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }],
@@ -33,7 +33,7 @@ set config(receivedData: any) {
     deleteEndPoint: receivedData.deleteEndPoint,
     view: receivedData.view,
     search_settings:{
-      textsearch: [{ label: "name...", field: 'name' }],
+      textsearch: [{ label: "name...", field: 'name_search' }],
       selectsearch: [{ label: 'Search By Status', field: 'status', values: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }] }],
     },
      /*Showing Image in the Modal*/
@@ -42,6 +42,7 @@ set config(receivedData: any) {
       value: 'image',
       fileurl: 'https://s3.us-east-2.amazonaws.com/crmfiles.influxhostserver/testimonial/'             // Image path 
     }],
+    detail_header:['_id','name_search']
   }
   this.loader = false;
 }

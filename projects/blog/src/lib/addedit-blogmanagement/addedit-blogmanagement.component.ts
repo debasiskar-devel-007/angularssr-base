@@ -27,12 +27,12 @@ export class AddeditBlogmanagementComponent implements OnInit {
 
   /**ckeditor start here*/
   // public Editor = ClassicEditor;  //for ckeditor
-  // editorConfig = {
-  //   placeholder: 'Description*',
-  // };
-  // public model = {
-  //   editorData: ''
-  // };
+  editorConfig = {
+    placeholder: 'Description*',
+  };
+  public model = {
+    editorData: ''
+  };
   /**ckeditor end here*/
 
 

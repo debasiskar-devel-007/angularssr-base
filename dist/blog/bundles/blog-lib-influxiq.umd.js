@@ -6,6 +6,7 @@
 
     /**
      * @fileoverview added by tsickle
+     * Generated from: lib/blog.service.ts
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var BlogService = /** @class */ (function () {
@@ -254,6 +255,7 @@
 
     /**
      * @fileoverview added by tsickle
+     * Generated from: lib/blog.component.ts
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var BlogComponent = /** @class */ (function () {
@@ -277,8 +279,8 @@
                     listEndPoint: receivedData.listEndPoint,
                     datasource: receivedData.datasource,
                     tableName: receivedData.tableName,
-                    listArray_skip: ["_id", "userId", "created_at", "updated_at", "image", "description_html", ""],
-                    listArray_modify_header: { "blogtitle": "Category Name", "description": "Description", "priority": "Priority", "status": "Status", "parentcategoryname": "Parent Category Name" },
+                    listArray_skip: ["_id", "userId", "created_at", "updated_at", "image", "description_html", "parentcategoryname_search", "blogtitle_search"],
+                    listArray_modify_header: { "blogtitle": "Blog Title", "description": "Description", "priority": "Priority", "status": "Status", "parentcategoryname": "Parent Category Name", "blogcat": "Blog Category", "date": "Date" },
                     admintablenameTableName: "admin",
                     statusarr: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }],
                     updateurl: receivedData.updateEndpoint,
@@ -327,6 +329,7 @@
 
     /**
      * @fileoverview added by tsickle
+     * Generated from: lib/material-module.ts
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     //import { MatFileUploadModule } from 'angular-material-fileupload';
@@ -386,6 +389,7 @@
 
     /**
      * @fileoverview added by tsickle
+     * Generated from: lib/add-blog/add-blog.component.ts
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var AddBlogComponent = /** @class */ (function () {
@@ -670,6 +674,7 @@
 
     /**
      * @fileoverview added by tsickle
+     * Generated from: lib/app-routing.module.ts
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     /** @type {?} */
@@ -691,6 +696,7 @@
 
     /**
      * @fileoverview added by tsickle
+     * Generated from: lib/api.service.ts
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var ApiService = /** @class */ (function () {
@@ -1272,6 +1278,7 @@
 
     /**
      * @fileoverview added by tsickle
+     * Generated from: lib/addedit-blogmanagement/addedit-blogmanagement.component.ts
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var AddeditBlogmanagementComponent = /** @class */ (function () {
@@ -1284,14 +1291,16 @@
             this.formBuilder = formBuilder;
             this.dialog = dialog$$1;
             this.snackBar = snackBar$$1;
-            /**ckeditor start here*/
+            /**
+             * ckeditor start here
+             */
             // public Editor = ClassicEditor;  //for ckeditor
-            // editorConfig = {
-            //   placeholder: 'Description*',
-            // };
-            // public model = {
-            //   editorData: ''
-            // };
+            this.editorConfig = {
+                placeholder: 'Description*',
+            };
+            this.model = {
+                editorData: ''
+            };
             /**
              * ckeditor end here
              */
@@ -2020,6 +2029,7 @@
 
     /**
      * @fileoverview added by tsickle
+     * Generated from: lib/youtubeplayer/youtubeplayer.component.ts
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var YoutubeplayerComponent = /** @class */ (function () {
@@ -2066,7 +2076,11 @@
 
     /**
      * @fileoverview added by tsickle
+     * Generated from: lib/listing-blogmanagementlib/listing-blogmanagementlib.component.ts
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+     */
+    /**
+     * This is the actuali main blog page *
      */
     var ListingBlogmanagementlibComponent = /** @class */ (function () {
         // ====================================================================================================
@@ -2090,11 +2104,11 @@
                     listEndPoint: receivedData.listEndPoint,
                     datasource: receivedData.datasource,
                     tableName: receivedData.tableName,
-                    listArray_skip: ["_id", "blogcat", "userId", "author_search", "blogtitle_search", "created_at", "updated_at", "image", "metatitle", "metadesc", "description_html", "credentials", "blogs_file", "blogs_image"],
+                    listArray_skip: ["_id", "userId", "created_at", "updated_at", "image", "metatitle", "metadesc", "description_html", "credentials", "blogs_file", "blogs_image", "blogtitle_search", "author_search"],
                     listArray_modify_header: {
                         "blogtitle": "Blog Title", "description": "Description", "date added": "Date", "profile picture": "Profile Picture", "tags": "Tags",
                         "priority": "Priority", "status": "Status", "parentcategoryname": "Parent Category Name",
-                        "author": "Author", "blogcategory": "Category"
+                        "author": "Author", "blogcat": "Blog Category", "date": "Date"
                     },
                     admintablenameTableName: "admin",
                     statusarr: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }],
@@ -2104,7 +2118,7 @@
                     deleteEndPoint: receivedData.deleteEndPoint,
                     view: receivedData.view,
                     search_settings: {
-                        textsearch: [{ label: "blog title...", field: 'blogtitle' }, { label: "author...", field: 'author' }],
+                        textsearch: [{ label: "blog title...", field: 'blogtitle_search' }, { label: "author...", field: 'author_search' }],
                         selectsearch: [{ label: 'status...', field: 'status', values: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }] }],
                         datesearch: [{ startdatelabel: "Start Date", enddatelabel: "End Date", submit: "Search By Date", field: "created_at" }],
                     },
@@ -2143,6 +2157,7 @@
 
     /**
      * @fileoverview added by tsickle
+     * Generated from: lib/blog.module.ts
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var BlogModule = /** @class */ (function () {
@@ -2182,11 +2197,13 @@
 
     /**
      * @fileoverview added by tsickle
+     * Generated from: public-api.ts
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 
     /**
      * @fileoverview added by tsickle
+     * Generated from: blog-lib-influxiq.ts
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
 

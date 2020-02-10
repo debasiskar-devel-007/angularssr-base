@@ -2,8 +2,6 @@ import { Component, OnInit, Input, Inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { BlogService } from '../blog.service';
-
-
 import { CookieService } from 'ngx-cookie-service';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 export interface DialogData {
@@ -18,12 +16,15 @@ export interface DialogData {
 export class AddBlogComponent implements OnInit {
   editorconfig:any={};
   /**ckeditor start here*/
+
   // editorConfig = {
   //   placeholder: 'Type the content here!',
   // };
   // public model = {
   //   editorData: ''
   // };
+
+
   /**ckeditor end here*/
 
 
@@ -35,15 +36,17 @@ export class AddBlogComponent implements OnInit {
   loader: boolean = false;
   successMessage: any = "Category Added Successfully!!!"
   getParentCatArr: any = [];
-  dialogRef:any;
+  dialogRef: any;
+
   // ==================================================
 
 
 
   constructor(private formBuilder: FormBuilder, private blogService: BlogService, private router: Router,
-    private cookieService: CookieService,public dialog: MatDialog) {
-      this.editorconfig.extraAllowedContent = '*[class](*),span;ul;li;table;td;style;*[id];*(*);*{*}';
-     }
+    private cookieService: CookieService, public dialog: MatDialog) {
+    this.editorconfig.extraAllowedContent = '*[class](*),span;ul;li;table;td;style;*[id];*(*);*{*}';
+  }
+
 
   ngOnInit() {
     //generating the form
@@ -86,10 +89,10 @@ export class AddBlogComponent implements OnInit {
   //  ============================GENERATING THE FORM=======================
   generateForm() {
     this.blogCatForm = this.formBuilder.group({
-      blogtitle: ['',[Validators.required,Validators.maxLength(50)]],
-      priority: ['',[Validators.required,Validators.maxLength(2)]],
+      blogtitle: ['', [Validators.required, Validators.maxLength(50)]],
+      priority: ['', [Validators.required, Validators.maxLength(2)]],
       status: [true,],
-      description: ['',[Validators.required,Validators.maxLength(100)]],
+      description: ['', [Validators.required, Validators.maxLength(100)]],
       parent_id: [0,]
     });
   }
@@ -100,7 +103,7 @@ export class AddBlogComponent implements OnInit {
   @Input()
   set config(getConfig: any) {
     this.configData = getConfig;
-   
+
   }
 
   // =========================================MODAL functions==========================================
@@ -119,7 +122,7 @@ export class AddBlogComponent implements OnInit {
 
 
 
-//Getting the parent category
+  //Getting the parent category
   getParentData() {
     let postData: any = {
       source: this.configData.source,
@@ -139,7 +142,7 @@ export class AddBlogComponent implements OnInit {
   // =========================SUBMIT function==================
   onSubmit() {
     this.blogCatForm.controls['description'].markAsTouched();
-   
+
     this.loader = true;
     /* stop here if form is invalid */
     if (this.blogCatForm.invalid) {
@@ -157,10 +160,10 @@ export class AddBlogComponent implements OnInit {
         data: Object.assign(this.blogCatForm.value, this.configData.condition),
         "sourceobj": ["parent_id"]
       };
-      
+
       this.blogService.addData(this.configData.endpoint, postData).subscribe((response: any) => {
         if (response.status == "success") {
-         
+
           this.openDialog(this.successMessage);
           setTimeout(() => {
             this.dialogRef.close();

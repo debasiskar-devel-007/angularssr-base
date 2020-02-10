@@ -10,7 +10,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class AddeditServiceComponent implements OnInit {
   public configAddEdit: any = {
     action: "add",
-    endpoint: "https://r245816wug.execute-api.us-east-1.amazonaws.com/dev/api/addorupdatedata",
+    endpoint: "https://i1kzfac3pe.execute-api.us-east-1.amazonaws.com/dev/api/addorupdatedata",
     source: "services",
     condition: {},
     defaultData: null,
@@ -20,26 +20,32 @@ export class AddeditServiceComponent implements OnInit {
   }
   
   public configData: any = {
-    // baseUrl: "http://3.15.236.141:5005/"
-    baseUrl:"https://fileupload.influxhostserver.com/",
+    baseUrl: "https://fileupload.influxhostserver.com/",
     endpoint: "uploads",
     size: "51200", // kb
-    format: ["jpg", "jpeg", "png"], // use all small font
+    format: ["jpg", "jpeg","png"], // use all small font
     type: "service-image",
     path: "services",
-    prefix: "service-image_"
+    prefix: "service-image_",
+    formSubmit: false,
+    conversionNeeded: 0,
+    bucketName: "crmfiles.influxhostserver"
   }
-
 
   public configData2: any = {
     baseUrl: "https://fileupload.influxhostserver.com/",
     endpoint: "uploads",
     size: "51200", // kb
-    format: ["jpg", "jpeg", "png"], // use all small font
-    type: "additional-image",
+    format: ["jpg", "jpeg","png"], // use all small font
+    type: "additional_service-image",
     path: "services",
-    prefix: "additional-image_"
+    prefix: "additional_service-image_",
+    formSubmit: false,
+    conversionNeeded: 0,
+    bucketName: "crmfiles.influxhostserver"
   }
+
+
 
   constructor(private router : Router , private activatedRoute : ActivatedRoute ,private cookieService : CookieService) { }
 

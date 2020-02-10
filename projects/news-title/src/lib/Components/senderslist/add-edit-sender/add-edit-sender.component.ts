@@ -55,8 +55,8 @@ export class AddEditSenderComponent implements OnInit {
   // ===============generate form====================
   generateForm() {
     this.senderForm = this.formBuilder.group({
-      name: [],
-      email: []
+      name: ['',[Validators.required]],
+      email: ['',[Validators.required,Validators.email]]
     });
   }
   // ================================================
@@ -82,6 +82,10 @@ export class AddEditSenderComponent implements OnInit {
   // =====================================================================================================
 
 
+ /** blur function **/
+ inputBlur(val: any) {
+  this.senderForm.controls[val].markAsUntouched();
+}
 
 
   // ================================================Default value======================================
@@ -100,7 +104,11 @@ export class AddEditSenderComponent implements OnInit {
   // =======================On SUBMIT======================
   onSubmit() {
 
-    console.log("++++++++", this.senderForm.value);
+      /** marking as untouched **/
+      for (let x in this.senderForm.controls) {
+        this.senderForm.controls[x].markAsTouched();
+      }
+
     /* stop here if form is invalid */
     if (this.senderForm.invalid) {
       return;
@@ -110,11 +118,10 @@ export class AddEditSenderComponent implements OnInit {
       let postData: any = {
         source: this.configData.source,
         data: Object.assign(this.senderForm.value, this.configData.condition),
-        "sourceobj": ["group"]
       };
       this.newsService.addData(this.configData.endpoint, postData).subscribe((response: any) => {
         if (response.status == "success") {
-          console.log(response.status);
+          
           this.openDialog(this.successMessage);
           setTimeout(() => {
             this.dialogRef.close();

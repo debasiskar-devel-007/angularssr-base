@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-add-edit-subscription',
@@ -9,9 +10,9 @@ export class AddEditSubscriptionComponent implements OnInit {
 
 
   ///inputs for subscription
-  serverURL: any = "https://r245816wug.execute-api.us-east-1.amazonaws.com/dev/api/";
+  serverURL: any = environment.apiBaseUrl;
   endpoint: any = {'source':'subscriptions','endpoint':'addorupdatedata'};
-  title:any="villain"
+  title:any="Subscribe to Newsletter"
 
   constructor() { }
 

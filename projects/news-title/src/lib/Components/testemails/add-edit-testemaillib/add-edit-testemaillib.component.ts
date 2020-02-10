@@ -17,7 +17,7 @@ export class AddEditTestemaillibComponent implements OnInit {
 
 
   // ===============Declarations================
-  senderForm: FormGroup;
+  senderFormTest: FormGroup;
   buttonText: any = "SUBMIT";
   header_name: any = "Add Sender(Test)"
   configData: any;
@@ -53,9 +53,9 @@ export class AddEditTestemaillibComponent implements OnInit {
 
   // ===============generate form====================
   generateForm() {
-    this.senderForm = this.formBuilder.group({
-      name: [],
-      email: []
+    this.senderFormTest = this.formBuilder.group({
+      name: ['',[Validators.required]],
+      email: ['',[Validators.required,Validators.email]]
     });
   }
   // ================================================
@@ -85,7 +85,7 @@ export class AddEditTestemaillibComponent implements OnInit {
 
   // ================================================Default value======================================
   setDefaultValue(defaultValue) {
-    this.senderForm.patchValue({
+    this.senderFormTest.patchValue({
       name: defaultValue.name,
       email: defaultValue.email
     });
@@ -94,21 +94,30 @@ export class AddEditTestemaillibComponent implements OnInit {
   // ==================================================================================================
 
 
+  /** blur function **/
+  inputBlur(val: any) {
+    this.senderFormTest.controls[val].markAsUntouched();
+  }
+
 
 
   // =======================On SUBMIT======================
   onSubmit() {
 
+     /** marking as untouched **/
+     for (let x in this.senderFormTest.controls) {
+      this.senderFormTest.controls[x].markAsTouched();
+    }
     
     /* stop here if form is invalid */
-    if (this.senderForm.invalid) {
+    if (this.senderFormTest.invalid) {
       return;
     } else {
 
       /* start process to submited data */
       let postData: any = {
         source: this.configData.source,
-        data: Object.assign(this.senderForm.value, this.configData.condition),
+        data: Object.assign(this.senderFormTest.value, this.configData.condition),
       };
       this.newsService.addData(this.configData.endpoint, postData).subscribe((response: any) => {
         if (response.status == "success") {

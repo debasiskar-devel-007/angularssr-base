@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router , ActivatedRoute } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-listing-senderapp',
@@ -10,7 +11,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class ListingSenderappComponent implements OnInit {
 
   public senderConfigForm: any = {
-    apiUrl: "https://r245816wug.execute-api.us-east-1.amazonaws.com/dev/api/",
+    apiUrl: environment.apiBaseUrl,
     listEndPoint: "datalist",
     datasource: "",
     tableName: "senders",
@@ -26,7 +27,7 @@ export class ListingSenderappComponent implements OnInit {
 
     this.activatedRoute.data.subscribe(resolveData => {
       this.senderConfigForm.datasource = resolveData.senderData.res;
-      this.senderConfigForm.jwtToken = this.cookieService.getAll();
+      this.senderConfigForm.jwtToken = this.cookieService.get('jwtToken');
 
     });
   }

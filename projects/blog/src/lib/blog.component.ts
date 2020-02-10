@@ -1,3 +1,6 @@
+
+/** This is the category listing **/
+
 import { Component, OnInit, Input } from '@angular/core';
 import { RouterModule, Routes, Router, ActivatedRoute } from '@angular/router';
 import { ApiService } from './api.service';
@@ -23,8 +26,8 @@ export class BlogComponent implements OnInit {
       listEndPoint: receivedData.listEndPoint,
       datasource: receivedData.datasource,
       tableName: receivedData.tableName,
-      listArray_skip: ["_id", "userId", "created_at", "updated_at","image","description_html",""],
-      listArray_modify_header: { "blogtitle":"Category Name", "description": "Description", "priority": "Priority", "status": "Status" ,"parentcategoryname":"Parent Category Name"},
+      listArray_skip: ["_id", "userId", "created_at", "updated_at","image","description_html","parentcategoryname_search","blogtitle_search"],
+      listArray_modify_header: { "blogtitle":"Blog Title", "description": "Description", "priority": "Priority", "status": "Status" ,"parentcategoryname":"Parent Category Name","blogcat":"Blog Category","date":"Date"},
       admintablenameTableName: "admin",
       statusarr: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }],
       updateurl: receivedData.updateEndpoint,

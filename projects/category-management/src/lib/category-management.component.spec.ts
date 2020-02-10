@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { CategoryManagementComponent } from './category-management.component';
 
 describe('CategoryManagementComponent', () => {

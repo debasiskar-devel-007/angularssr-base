@@ -25,8 +25,8 @@ export class TestimonialComponent implements OnInit {
       listEndPoint: receivedData.listEndPoint,
       datasource: receivedData.datasource,
       tableName: receivedData.tableName,
-      listArray_skip: ["_id", "userId", "created_at", "id", "updated_at","image","description"],
-      listArray_modify_header: { "name": "Customer/User Name", "email": "Customer/User Email", "description_html": "Testimonial", "priority": "Priority", "status": "Status" },
+      listArray_skip: ["_id", "userId", "created_at", "id", "updated_at","image","description","name"],
+      listArray_modify_header: { "name copy": "Customer/User Name", "email": "Customer/User Email", "description html": "Testimonial", "priority": "Priority", "status": "Status" },
       admintablenameTableName: "admin",
       statusarr: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }],
       updateurl: receivedData.updateEndpoint,
@@ -35,7 +35,7 @@ export class TestimonialComponent implements OnInit {
       deleteEndPoint: receivedData.deleteEndPoint,
       view: receivedData.view,
       search_settings:{
-        textsearch: [{ label: "customer name...", field: 'name' },{ label: "customer email...", field: 'email' }],
+        textsearch: [{ label: "Search By Customer Name", field: 'name_copy' },{ label: "Search By Customer Email", field: 'email' }],
         selectsearch: [{ label: 'Search By Status', field: 'status', values: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }] }],
       },
        /*Showing Image in the Modal*/
@@ -44,6 +44,7 @@ export class TestimonialComponent implements OnInit {
         value: 'image',
         fileurl: 'https://s3.us-east-2.amazonaws.com/crmfiles.influxhostserver/testimonial/'             // Image path 
       }],
+      detail_header:['_id']
     }
     this.loader = false;
   }

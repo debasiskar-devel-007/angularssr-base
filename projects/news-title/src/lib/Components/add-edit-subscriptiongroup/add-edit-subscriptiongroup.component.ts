@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
-import { FormGroup, FormControl, FormBuilder } from '@angular/forms';
+import { FormGroup, FormControl, FormBuilder ,Validators} from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import { NewsTitleService } from '../../news-title.service';
 import { Router } from '@angular/router';
@@ -68,10 +68,10 @@ export class AddEditSubscriptiongroupComponent implements OnInit {
   // =====================generate form==============
   generateForm() {
     this.subGroupForm = this.formBuilder.group({
-      fullname: [],
-      phone: [],
-      email: [],
-      company: [],
+      fullname: ['',[Validators.required]],
+      phone: ['',[Validators.required]],
+      email: ['',[Validators.required,Validators.email]],
+      company: ['',[Validators.required]],
       group: []
     });
   }
@@ -108,12 +108,23 @@ export class AddEditSubscriptiongroupComponent implements OnInit {
 
 
 
+   /** blur function **/
+   inputBlur(val: any) {
+    this.subGroupForm.controls[val].markAsUntouched();
+  }
+
+
 
   // ==========================================SUBMIT=================================================
 
 
   onSubmit() {
 
+
+     /** marking as untouched **/
+     for (let x in this.subGroupForm.controls) {
+      this.subGroupForm.controls[x].markAsTouched();
+    }
     if (this.subGroupForm.value.group == 0)
       this.successMessage = "Removed Group!!!";    
     /* stop here if form is invalid */

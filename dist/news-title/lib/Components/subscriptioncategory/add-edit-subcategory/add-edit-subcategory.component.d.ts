@@ -22,6 +22,8 @@ export declare class AddEditSubcategoryComponent implements OnInit {
     ngOnInit(): void;
     openDialog(x: any): void;
     setDefaultValue(defaultValue: any): void;
+    /** blur function **/
+    inputBlur(val: any): void;
     generateForm(): void;
     onSubmit(): void;
 }

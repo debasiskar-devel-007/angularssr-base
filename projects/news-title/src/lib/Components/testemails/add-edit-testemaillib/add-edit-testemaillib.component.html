@@ -4,17 +4,23 @@
   </mat-toolbar>
   <span class="formspan">
     <mat-card-content class="example-container">
-      <form autocomplete="off" [formGroup]="senderForm">
+      <form autocomplete="off" [formGroup]="senderFormTest">
         <!-- Senders name -->
         <mat-form-field>
           <mat-label>Sender's Name</mat-label>
-          <input matInput formControlName="name">
+          <input matInput formControlName="name" (blur)="inputBlur('name')">
+          <mat-error *ngIf="!senderFormTest.controls['name'].valid
+          && senderFormTest.controls['name'].errors.required" > Name is required.</mat-error>
         </mat-form-field>
 
         <!-- Sender's email  -->
         <mat-form-field>
           <mat-label>Email</mat-label>
-          <input matInput formControlName="email">
+          <input matInput formControlName="email" (blur)="inputBlur('email')">
+          <mat-error *ngIf="!senderFormTest.controls['email'].valid
+          && senderFormTest.controls['email'].errors.required" > Email is required.</mat-error>
+          <mat-error *ngIf="!senderFormTest.controls['email'].valid
+          && senderFormTest.controls['email'].errors.email" > Email is not valid.</mat-error>
         </mat-form-field>
 
 

@@ -33,6 +33,7 @@ export class ListingTestemaillibComponent implements OnInit {
       jwtToken: receivedData.jwtToken,
       deleteEndPoint: receivedData.deleteEndPoint,
       view: receivedData.view,
+      detail_header:['_id']
     
     }
     this.loader = false;

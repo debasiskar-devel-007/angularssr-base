@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { TestimonialComponent } from './testimonial.component';
 import { AddeditComponent , Modal, PreviewComponent } from './Components/addedit/addedit.component';
 import { DemoMaterialModule } from './Modules/material-module';
-import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { CKEditorModule } from 'ngx-ckeditor';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';

@@ -21,7 +21,7 @@ export class ListingSenderComponent implements OnInit {
   set config(receivedData: any) {
 
     this.senderConfigForm2 = {
-      apiUrl: receivedData.apiBaseUrl,
+      apiUrl: receivedData.apiUrl,
       listEndPoint: receivedData.listEndPoint,
       datasource: receivedData.datasource,
       tableName: receivedData.tableName,
@@ -34,7 +34,7 @@ export class ListingSenderComponent implements OnInit {
       jwtToken: receivedData.jwtToken,
       deleteEndPoint: receivedData.deleteEndPoint,
       view: receivedData.view,
-
+      detail_header:['_id']
     }
     this.loader = false;
   }

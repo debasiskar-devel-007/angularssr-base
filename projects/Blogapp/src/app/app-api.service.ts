@@ -4,6 +4,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 // for setting observables to get serverurl and endpointurl from app
 import { Observable, Subject, Subscription } from 'rxjs';
 import {CookieService} from 'ngx-cookie-service';
+import { environment } from '../environments/environment';
+
 @Injectable({   
   providedIn: 'root'
 })
@@ -17,7 +19,11 @@ export class ApiService {
   public uploaderror: any = '';
   public accesstoken:any=this.cookieService.get('jwttoken');
   fileservername: any = [];
+
   serverUrl: any='https://9ozbyvv5v0.execute-api.us-east-1.amazonaws.com/production/api/';
+
+  // serverUrl: any=environment.apiBaseUrl;
+
   addendpointUrl: any;
   uploadEndpointUrl:any; //souresh
   updateendpointUrl: any;

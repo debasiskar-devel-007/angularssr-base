@@ -4,6 +4,7 @@ import { FormControl, FormGroup, FormArray, FormBuilder, Validators } from '@ang
 import { ServicelibService } from '../../servicelib.service';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { CookieService } from 'ngx-cookie-service';
 export interface DialogData {
   msg: string;
 }
@@ -18,14 +19,24 @@ export class AddeditServiceComponent implements OnInit {
 
 
 
+  public editorData = '<p>Write description...</p>';
+
+  /**ckeditor for descripiton start here*/
+  // public Editor = ClassicEditor;
+  // editorConfig = {
+  //   placeholder: 'Write description...',
+  // };
+  // public model = {
+  //   editorData: ''
+  // };
 
 
-  /**ckeditor start here*/
-  public Editor = ClassicEditor;  //for ckeditor
-  editorConfig = {
-    placeholder: 'Write description...',
+ /** ckeditor for additional description **/
+  public Editor2 = ClassicEditor;  //for ckeditor
+  editorConfig2 = {
+    placeholder: 'Please provide additional details...',
   };
-  public model = {
+  public model2 = {
     editorData: ''
   };
   /**ckeditor end here*/
@@ -53,15 +64,22 @@ export class AddeditServiceComponent implements OnInit {
   image_name2: any;
   image_type2: any;
   flag2: boolean;
+  ErrCode2:boolean = false;
   img_missing: boolean = false;
+  public editorconfig : any = {};
+  
   // ==============================================================================================
 
 
 
   constructor(private formBuilder: FormBuilder, private servicehttp: ServicelibService,
-    private router: Router, public dialog: MatDialog) { }
+    private router: Router, public dialog: MatDialog , public cookieService : CookieService) { 
+      this.editorconfig.extraAllowedContent = '*[class](*),span;ul;li;table;td;style;*[id];*(*);*{*}';
+    }
 
   ngOnInit() {
+
+
     this.loader = false;
     this.generateForm();
 
@@ -115,6 +133,7 @@ export class AddeditServiceComponent implements OnInit {
     this.serviceForm = this.formBuilder.group({
       service_title: ['', [Validators.required]],
       description: ['', [Validators.required]],
+      additional_details:['',],
       priority: ['', [Validators.required]],
       status: [true,],
       bulletarr: this.formBuilder.array([]),
@@ -138,6 +157,7 @@ export class AddeditServiceComponent implements OnInit {
     this.serviceForm.patchValue({
       service_title: defaultValue.service_title,
       description: defaultValue.description,
+      additional_details: defaultValue.additional_details,
       priority: defaultValue.priority,
       status: defaultValue.status,
       service_img: defaultValue.service_img,
@@ -147,7 +167,6 @@ export class AddeditServiceComponent implements OnInit {
     this.img_var = defaultValue.service_img.basepath + defaultValue.service_img.image;
     this.image_name = defaultValue.service_img.name;
     this.image_type = defaultValue.service_img.type
-    console.log(this.img_var);
 
     /** Additional image **/
     this.img_var2 = defaultValue.additional_img.basepath + defaultValue.additional_img.image;
@@ -178,6 +197,7 @@ export class AddeditServiceComponent implements OnInit {
     bl.removeAt(1);
   }
 
+  
 
   trackByFn(index) {
     return index;
@@ -187,10 +207,17 @@ export class AddeditServiceComponent implements OnInit {
 
   // ================================================SUBMIT============================================
   onSubmit() {
+
+      /** marking as untouched **/
+      for (let x in this.serviceForm.controls) {
+        this.serviceForm.controls[x].markAsTouched();
+      }
+
+ 
     // Service File Upload Works 
     if (this.imageConfigData.files) {
 
-      if (this.imageConfigData.files.length > 1) { this.ErrCode = true; return; }
+      if (this.imageConfigData.files.length > 1) { this.ErrCode = true;this.img_missing = false; return; }
 
       this.serviceForm.value.service_img =
         {
@@ -201,13 +228,18 @@ export class AddeditServiceComponent implements OnInit {
         };
         this.img_missing = false;
     } else {
+
+      if( this.serviceForm.value.service_img == null ||  this.serviceForm.value.service_img == '')
+      {
       this.img_missing = true;
+      this.ErrCode = false;
+      }
     }
 
     /** Additional Image  **/
     if (this.imageConfigData2.files) {
-
-      if (this.imageConfigData2.files.length > 1) { this.ErrCode = true; return; }
+      console.log("length",this.imageConfigData2.files.length); 
+      if (this.imageConfigData2.files.length > 1) { this.ErrCode2 = true; return; }
       this.serviceForm.value.additional_img =
         {
           "basepath": this.imageConfigData2.files[0].upload.data.basepath + '/' + this.imageConfigData2.path + '/',
@@ -236,7 +268,8 @@ export class AddeditServiceComponent implements OnInit {
       /* start process to submited data */
       let postData: any = {
         source: this.configData.source,
-        data: Object.assign(this.serviceForm.value, this.configData.condition)
+        data: Object.assign(this.serviceForm.value, this.configData.condition),
+        token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJleHAiOjE1NzcxNzc4MDIsImlhdCI6MTU3NzA5MTQwMn0.jtwImZIdKK-9WxeQQHef5YLSXvN05CiJeAw-lXCcHtE"
       };
       this.servicehttp.addData(this.configData.endpoint, postData).subscribe((response: any) => {
         if (response.status == "success") {

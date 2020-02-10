@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { environment } from '../../../../environments/environment';
 
 
 @Component({
@@ -11,10 +12,10 @@ import { CookieService } from 'ngx-cookie-service';
 export class ListingSubcategoryComponent implements OnInit {
   /************** lib list setup start here *************/
   public subscriptionCatForm: any = {
-    apiBaseUrl: "https://r245816wug.execute-api.us-east-1.amazonaws.com/dev/api/",
+    apiBaseUrl: environment.apiBaseUrl,
     listEndPoint: "datalist",
     datasource: "",
-    tableName: "resources",
+    tableName: "news_category",
     updateurl: "addorupdatedata",
     editUrl: "newsletter/list-category/edit",
     jwtToken: "",

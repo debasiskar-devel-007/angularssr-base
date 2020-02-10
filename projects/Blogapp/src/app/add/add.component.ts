@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import { environment } from '../../environments/environment';
 
 
 @Component({
@@ -17,6 +18,7 @@ export class AddComponent implements OnInit {
     action: "add",
     endpoint: "https://9ozbyvv5v0.execute-api.us-east-1.amazonaws.com/production/api/addorupdatedata",
     endpoint2:"https://9ozbyvv5v0.execute-api.us-east-1.amazonaws.com/production/api/",
+
     source: "blog_category",
     condition: {},
     defaultData: null,
@@ -41,4 +43,5 @@ export class AddComponent implements OnInit {
   }
 
 
-}
+
+  }
