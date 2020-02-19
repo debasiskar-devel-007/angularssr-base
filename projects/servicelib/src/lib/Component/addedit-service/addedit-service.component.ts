@@ -203,11 +203,13 @@ export class AddeditServiceComponent implements OnInit {
     return index;
   }
   // ==================================================================================================
-
+  openModaltest(){
+    this.openDialog('Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry');
+  }
 
   // ================================================SUBMIT============================================
   onSubmit() {
-
+   
       /** marking as untouched **/
       for (let x in this.serviceForm.controls) {
         this.serviceForm.controls[x].markAsTouched();
@@ -238,7 +240,7 @@ export class AddeditServiceComponent implements OnInit {
 
     /** Additional Image  **/
     if (this.imageConfigData2.files) {
-      console.log("length",this.imageConfigData2.files.length); 
+      //console.log("length",this.imageConfigData2.files.length); 
       if (this.imageConfigData2.files.length > 1) { this.ErrCode2 = true; return; }
       this.serviceForm.value.additional_img =
         {
@@ -260,9 +262,9 @@ export class AddeditServiceComponent implements OnInit {
       return;
     } else {
       if (this.serviceForm.value.status) {
-        this.serviceForm.value.status = parseInt("1");
+        this.serviceForm.value.status = 1;
       } else {
-        this.serviceForm.value.status = parseInt("0");;
+        this.serviceForm.value.status =0;
       }
 
       /* start process to submited data */
@@ -276,7 +278,7 @@ export class AddeditServiceComponent implements OnInit {
           this.openDialog(this.successMessage);
           setTimeout(() => {
             this.dialogRef.close();
-          }, 2000);
+          }, 5000);
           this.router.navigate([this.configData.callBack]);
         } else {
           alert("Some error occurred. Please try again.");
@@ -295,7 +297,8 @@ export class AddeditServiceComponent implements OnInit {
   openDialog(x: any): void {
     this.dialogRef = this.dialog.open(Modal, {
       width: '250px',
-      data: { msg: x }
+      data: { msg: x },
+      panelClass:'success_modal_service'
     });
     this.dialogRef.afterClosed().subscribe(result => {
     });

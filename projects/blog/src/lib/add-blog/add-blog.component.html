@@ -43,6 +43,7 @@
         <!-- <ckeditor [editor]="Editor" [config]="editorConfig" formControlName="description" ></ckeditor> -->
         <ck-editor formControlName="description" [config]="editorconfig">
         </ck-editor>
+        
         <mat-error *ngIf="!blogCatForm.controls['description'].valid
         && blogCatForm.controls['description'].errors.required && blogCatForm.controls['description'].touched" > Please describe.</mat-error>
           <mat-error

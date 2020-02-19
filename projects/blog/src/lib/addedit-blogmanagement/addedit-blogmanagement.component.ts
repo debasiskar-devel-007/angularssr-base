@@ -24,15 +24,14 @@ export interface DialogData {
 })
 
 export class AddeditBlogmanagementComponent implements OnInit {
-
   /**ckeditor start here*/
   // public Editor = ClassicEditor;  //for ckeditor
-  editorConfig = {
-    placeholder: 'Description*',
-  };
-  public model = {
-    editorData: ''
-  };
+  // editorConfig = {
+  //   placeholder: 'Description*',
+  // };
+  // public model = {
+  //   editorData: ''
+  // };
   /**ckeditor end here*/
 
 
@@ -572,7 +571,7 @@ export class Modal {
   constructor(
     public dialogRef: MatDialogRef<Modal>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {
-
+      console.warn('video modal',data)
 
   }
 
