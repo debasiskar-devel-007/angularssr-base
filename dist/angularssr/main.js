@@ -448,7 +448,7 @@ document.addEventListener('DOMContentLoaded', function () {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = __webpack_require__(/*! /var/angular/angularssr-base/src/main.ts */"./src/main.ts");
+module.exports = __webpack_require__(/*! /home/influxiq-03/Downloads/blog_lib/angularssr-base/src/main.ts */"./src/main.ts");
 
 
 /***/ })
