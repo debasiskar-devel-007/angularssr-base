@@ -67,7 +67,9 @@
     font-size: 13px !important;
   }
   
-  
+  .buttonclsnew{display: block;margin-top: 10px;}
+
+
   .mat-error {
     color: #f44336;
     font-size: 13px !important;

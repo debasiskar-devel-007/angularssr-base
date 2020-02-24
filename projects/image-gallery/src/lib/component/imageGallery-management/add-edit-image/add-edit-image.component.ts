@@ -82,6 +82,9 @@ export class AddEditImageComponent implements OnInit {
       this.parameter_id = this.activeroute.snapshot.params._id;
       this.imageGalleryManagementForm.controls['category_name'].patchValue(val[0].category_name);
       this.imageGalleryManagementForm.controls['img_gallery'].patchValue(val[0].img_gallery);
+      this.imageGalleryManagementForm.controls['title'].patchValue(val[0].title);
+      this.imageGalleryManagementForm.controls['decription'].patchValue(val[0].decription);
+      
        
       for (let i = 0; i < val[0].img_gallery.length; i++) {
         this.img_var = val[0].img_gallery[i].basepath + val[0].img_gallery[i].fileservername;
@@ -107,7 +110,10 @@ export class AddEditImageComponent implements OnInit {
     public _http: HttpClient, public router: Router) {
     this.imageGalleryManagementForm = this.fb.group({
       category_name: [''],
-      img_gallery: ['']
+      img_gallery: [''],
+      title:[''],
+      decription:[''],
+      status:[]
     })
   }
 
@@ -150,7 +156,7 @@ export class AddEditImageComponent implements OnInit {
 
   ImageAddEditFormSubmit() {
 
-    if (this.imageConfigData.files.length > 0 || this.img_var.length > 0) {
+    if (this.imageConfigData.files.length >= 1 ) {
       for (let loop = 0; loop < this.imageConfigData.files.length; loop++) {
         this.images_array =
           this.images_array.concat({
@@ -173,8 +179,17 @@ export class AddEditImageComponent implements OnInit {
       this.imageGalleryManagementForm.controls[x].markAsTouched();
     }
     if (this.imageGalleryManagementForm.valid) {
+
+      if(this.imageGalleryManagementForm.value.status){
+        this.imageGalleryManagementForm.value.status = parseInt("1")
+      } else {
+        this.imageGalleryManagementForm.value.status = parseInt("0")
+
+      }
       var data: any;
-      if (this.activeroute.snapshot.params._id) { 
+      if (this.activeroute.snapshot.params._id) {   
+
+       
 
         // var imageData : any=[]=this.dataForEdit[0].img_gallery;
         // imageData = imageData.concat(this.images_array_edit);
@@ -186,6 +201,10 @@ export class AddEditImageComponent implements OnInit {
             "id": this.parameter_id,
             "category_name": this.imageGalleryManagementForm.value.category_name,
             "img_gallery": this.imageGalleryManagementForm.value.img_gallery,
+            "title": this.imageGalleryManagementForm.value.title,
+            "decription":this.imageGalleryManagementForm.value.decription,
+            "status":this.imageGalleryManagementForm.value.status,
+
           },
           "sourceobj": ["category_name"]
         }

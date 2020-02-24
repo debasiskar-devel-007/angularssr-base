@@ -70,12 +70,17 @@ export class ImagelistingComponent implements OnInit {
     this.searchSourceval = Val;
   }
   public data_skip: any = ["_id","category_name_search"];
+  public status: any = [{ val: 1, 'name': 'Active' }, { val: 0, 'name': 'Inactive' }];
+
 
   public data_modify_header: any =
     {
       'category name': "Category Name",
       'images': "Images",
-      'date added': "Added Date"
+      'date added': "Date",
+      'title':"Title",
+      'decription':"Decription",
+      'status':"Status"
     };
   public previewModal_detail_skip: any = ["_id","category_name_search"];
 

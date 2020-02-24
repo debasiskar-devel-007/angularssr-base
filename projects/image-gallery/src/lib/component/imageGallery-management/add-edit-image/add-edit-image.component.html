@@ -7,6 +7,17 @@
       <mat-card-content class="example-container">
         <form class="example-form" autocomplete="off" name="imageGalleryManagementForm"
           (ngSubmit)="ImageAddEditFormSubmit()" [formGroup]="imageGalleryManagementForm">
+
+
+          <mat-form-field >
+            <input matInput formControlName="title" placeholder="Title">
+          </mat-form-field>
+
+          <mat-form-field >
+            <textarea matInput formControlName="decription" placeholder="Decription"></textarea>
+          </mat-form-field>
+
+
           <mat-form-field class="parent_cat">
             <mat-label>Category Name</mat-label>
             <mat-select formControlName="category_name">
@@ -38,10 +49,14 @@
             </mat-card-content>
             <!-- ----CARD VIEW end here-----  -->
           </ng-container>
-
-          <button class="submitbtn" mat-raised-button color="primary" type="submit">{{buttonText}}</button>
-          <button class="submitbtn" mat-raised-button color="primary"
-            type="reset">Reset</button>
+          <!-- <mat-label class="label">Status :</mat-label> -->
+          <mat-checkbox formControlName="status">Active</mat-checkbox>
+          
+          <span class="buttonclsnew"> 
+            <button class="submitbtn" mat-raised-button color="primary" type="submit">{{buttonText}}</button>
+            <button class="submitbtn" mat-raised-button color="primary"
+              type="reset">Reset</button>
+          </span>
         </form>
       </mat-card-content>
     </span>

@@ -7,6 +7,8 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./list-category.component.css']
 })
 export class ListCategoryComponent implements OnInit {
+
+// for category 
   public headerText: any = "Image Category List";
   public serverUrlData: any = '';
   public tokenViaApp: any = '';
@@ -18,8 +20,15 @@ export class ListCategoryComponent implements OnInit {
   public manageButtonRouteViaApp: any = '';
   public searchEndpointval: any = '';
   public searchSourceval: any = '';
+  public AddImageButtonRouteViaApp:any=[];
+  public tableNameImageViaApp:any='';
 
+
+// for image 
   public allDataList: any = [];
+  public dataListForImage:any=[];
+  public tokenForImageViaApp:any;
+
   public data_skip: any = ["_id", "description","title_search","parent_category_search"];
   public data_modify_header: any = {
     "parent category": "Parent Category", "title": "Title",
@@ -35,6 +44,10 @@ export class ListCategoryComponent implements OnInit {
         label: "Search By Title", field: 'title_search' },
       { label: "Search By Parent Category", field: 'parent_category' }],
     };
+
+
+// -------------------image category section-------------- //
+
   @Input()          //getting search endpoint 
   set SearchEndpoint(Val: any) {
     this.searchEndpointval = (Val) || '<no name set>';
@@ -92,8 +105,42 @@ export class ListCategoryComponent implements OnInit {
     this.DeleteendpointViaApp = (val) || '<no name set>';
     this.DeleteendpointViaApp = val;
   }
+
+
+
+// ------------------------image section---------------------- //
+
+@Input()
+set AddImageButtonRoute(val:any){
+  this.AddImageButtonRouteViaApp = (val) || '<no name set>';
+  this.AddImageButtonRouteViaApp=val
+}
+
+@Input()
+set TableNameForImage(val:any){
+  this.tableNameImageViaApp = (val) || '< no name set >' ;
+  this.tableNameImageViaApp = val;
+ }
+
+ @Input()
+ set DataListForImage(val:any){
+   this.dataListForImage = (val) || '< no name set >' ;
+   this.dataListForImage = val;
+  }
+
+  @Input()
+  set TokenForImage(val:any){
+    this.tokenForImageViaApp = (val) || '< no name set>';
+    this.tokenForImageViaApp =val;
+  }
+
+
   constructor(public router : Router) { }
-  ngOnInit() {
+  ngOnInit() {  
+
+  
+
+
   }
   AddButton() {
     this.router.navigateByUrl('/' + this.AddButtonRouteViaApp);
@@ -101,4 +148,9 @@ export class ListCategoryComponent implements OnInit {
   manageButton(){
     this.router.navigateByUrl('/' + this.manageButtonRouteViaApp);
   }
+
+  AddImageButton(){
+    this.router.navigateByUrl('/' + this.AddImageButtonRouteViaApp);
+  }
+  
 }

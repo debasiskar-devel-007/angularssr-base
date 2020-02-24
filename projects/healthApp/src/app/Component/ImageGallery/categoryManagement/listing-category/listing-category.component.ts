@@ -1,12 +1,16 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
+import {HttpService} from '../../../../service/http.service'
+import { from } from 'rxjs';
 @Component({
   selector: 'app-listing-category',
   templateUrl: './listing-category.component.html',
   styleUrls: ['./listing-category.component.css']
 })
 export class ListingCategoryComponent implements OnInit {
+
+  //category setcion
   public imageGalleryList: any = [];
   public serverUrl:any="https://9ozbyvv5v0.execute-api.us-east-1.amazonaws.com/production/api/";
   public updatedEndpoint:any="addorupdatedata";
@@ -19,7 +23,15 @@ export class ListingCategoryComponent implements OnInit {
   public searchSourcename:any="imageGallery_category_view";
   public token=this.cookies.get('jwtToken');
 
-  constructor(public activatedRoute : ActivatedRoute,public cookies :CookieService) { }
+
+
+  // image section 
+
+  public AddImageButtonRoute:any='image-gallery/add';
+  public TableNameForImage:any='imageGallery_management_view';
+  public DataListForImage:any;
+  public TokenForImage:any=this.cookies.get('jwtToken');
+  constructor(public activatedRoute : ActivatedRoute,public cookies :CookieService,public httpService:HttpService) { }
 
   ngOnInit() {
     this.activatedRoute.data.forEach(data => {
@@ -28,6 +40,21 @@ export class ListingCategoryComponent implements OnInit {
       this.imageGalleryList = result;
     })
 
+    let data:any;
+    data={
+      "source":"imageGallery_management_view"
+    }
+    this.httpService.CustomRequest(data,'datalist').subscribe(res=>{
+      console.log(res)
+      let result:any;
+      result=res;
+      this.DataListForImage=result.res;
+      console.log(  this.DataListForImage.length)
+
+    })
+
   }
+
+  
 
 }
