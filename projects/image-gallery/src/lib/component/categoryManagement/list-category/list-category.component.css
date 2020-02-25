@@ -46,3 +46,5 @@
   }
 
 
+  .dataListForImage td.mat-cell, .dataListForImage td.mat-footer-cell, th.mat-header-cell {padding: 6px 8px;}
+  .dataListForImage .mat-table tr td.mat-column-images{width: 45%;}

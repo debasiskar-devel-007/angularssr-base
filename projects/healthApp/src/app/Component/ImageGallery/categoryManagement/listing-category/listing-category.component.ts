@@ -28,9 +28,15 @@ export class ListingCategoryComponent implements OnInit {
   // image section 
 
   public AddImageButtonRoute:any='image-gallery/add';
-  public TableNameForImage:any='imageGallery_management_view';
+  public TableNameForImage:any='imageGallery_management';
   public DataListForImage:any;
   public TokenForImage:any=this.cookies.get('jwtToken');
+  public imageServerUrlData:any='https://9ozbyvv5v0.execute-api.us-east-1.amazonaws.com/production/api/';
+  public imageDeleteendpoint:any='deletesingledata';
+  public imageEditRoute:any='image-gallery/edit';
+  public imageAddupdateRouteUrl:any='addorupdatedata';
+  public imageSearchSourceval:any='imageGallery_management_view';
+  public imageSearchEndpoint:any='https://9ozbyvv5v0.execute-api.us-east-1.amazonaws.com/production/api/datalist';
   constructor(public activatedRoute : ActivatedRoute,public cookies :CookieService,public httpService:HttpService) { }
 
   ngOnInit() {
@@ -45,11 +51,11 @@ export class ListingCategoryComponent implements OnInit {
       "source":"imageGallery_management_view"
     }
     this.httpService.CustomRequest(data,'datalist').subscribe(res=>{
-      console.log(res)
+      // console.log(res)
       let result:any;
       result=res;
       this.DataListForImage=result.res;
-      console.log(  this.DataListForImage.length)
+      // console.log(  this.DataListForImage.length)
 
     })
 

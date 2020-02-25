@@ -11,7 +11,7 @@ import { ApiService } from 'projects/image-gallery/src/lib/Service/api.service';
   styleUrls: ['./add-edit-caegory.component.css']
 })
 export class AddEditCaegoryComponent implements OnInit {
-  public headerText: any = "Add Image";
+  public headerText: any = "Add Image Category";
   public buttonText: any = "Submit";
   imageGalleryAddEditForm: FormGroup;
   public serverUrlData: any;
@@ -42,7 +42,7 @@ export class AddEditCaegoryComponent implements OnInit {
     this.singleDatalist = val;
     console.log("all edited data",this.singleDatalist);
     if (this.activeroute.snapshot.params._id) {
-      this.headerText = "Edit Image";
+      this.headerText = "Edit Image Category";
       this.buttonText = "Update";
       this.parameter_id = this.activeroute.snapshot.params._id;
       this.imageGalleryAddEditForm.controls['title'].patchValue(val[0].title);

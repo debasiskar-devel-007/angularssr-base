@@ -10,17 +10,24 @@
 
 
           <mat-form-field >
-            <input matInput formControlName="title" placeholder="Title">
+            <input matInput formControlName="title" placeholder="Title" 
+            (blur)="inputUntouch(imageGalleryManagementForm,'title')">
+            <mat-error *ngIf="imageGalleryManagementForm.controls['title'].touched && !imageGalleryManagementForm.controls['title'].valid
+         && imageGalleryManagementForm.controls['title'].errors.required">
+             title field can not be blank</mat-error>
           </mat-form-field>
 
           <mat-form-field >
-            <textarea matInput formControlName="decription" placeholder="Decription"></textarea>
+            <textarea matInput formControlName="decription" placeholder="Decription"   (blur)="inputUntouch(imageGalleryManagementForm,'decription')"></textarea>
+            <mat-error *ngIf="imageGalleryManagementForm.controls['decription'].touched && !imageGalleryManagementForm.controls['decription'].valid
+            && imageGalleryManagementForm.controls['decription'].errors.required">
+            decription field can not be blank</mat-error>
           </mat-form-field>
 
 
           <mat-form-field class="parent_cat">
             <mat-label>Category Name</mat-label>
-            <mat-select formControlName="category_name">
+            <mat-select formControlName="category_name"   (blur)="inputUntouch(imageGalleryManagementForm,'category_name')">
               <mat-option [value]=0>
                 Select a category
               </mat-option>
@@ -28,6 +35,9 @@
                 {{f.title}}
               </mat-option>
             </mat-select>
+            <mat-error *ngIf="imageGalleryManagementForm.controls['category_name'].touched && !imageGalleryManagementForm.controls['category_name'].valid
+            && imageGalleryManagementForm.controls['category_name'].errors.required">
+                category field can not be blank</mat-error>
           </mat-form-field>
           <h1>Images:</h1>
           <!-- image upload library -->

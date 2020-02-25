@@ -56,27 +56,25 @@
     </mat-toolbar>
   <!-- adding button end here -->
   <mat-card-content class="listing-content-admin">
-    <lib-listing class="formfilterdiv formfilterdivnew" *ngIf="dataListForImage != null && dataListForImage.length>=0" 
+    <lib-listing class="formfilterdiv formfilterdivnew dataListForImage"  *ngIf="dataListForImage != null && dataListForImage.length>=0" 
       [datasource]="dataListForImage"
       [jwttoken]="tokenForImageViaApp" 
-      [skip]="data_skip" 
-      [statusarr]="status" 
-      [modify_header_array]="data_modify_header" 
+      [skip]="image_data_skip" 
+      [statusarr]="image_status" 
+      [modify_header_array]="image_data_modify_header" 
       [apiurl]="serverUrlData" 
-      [detail_skip_array]="previewModal_detail_skip"
-      [deleteendpoint]="DeleteendpointViaApp"
-      [editroute]="editRouteViaApp"
-      [updateendpoint]="addupdateRouteUrl"
-      [sourcedata]="TableNameViaApp"
-      [date_search_source]="searchSourceval"
+      [detail_skip_array]="image_previewModal_detail_skip"
+      [deleteendpoint]="imageDeleteendpointViaApp"
+      [editroute]="imageEditRouteViaApp"
+      [updateendpoint]="imageAddupdateRouteUrl"
+      [sourcedata]="tableNameImageViaApp"
+      [date_search_source]="imageSearchSourcevalViaApp"
       [date_search_endpoint]="searchEndpointval"
-      [search_settings]="search_settings"
+      [search_settings]="image_search_settings"
+      [detail_datatype]="pendingmodelapplicationarray_detail_datatype"
      >
   </lib-listing>
   </mat-card-content>
-
-    
-
 
   </mat-tab>
   

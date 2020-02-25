@@ -12,7 +12,7 @@ export class AddeditImageComponent implements OnInit {
   public imageCategorySourceName:any="imageGallery_category";
   public getDataEndpoint:any="datalist";
   public addEndpoint:any="addorupdatedata";
-  public ListingPageUrl:any='image-gallery/list';
+  public ListingPageUrl:any='image-gallery/category-management/list';
   public editedData:any=[];
 
   public configData: any = {

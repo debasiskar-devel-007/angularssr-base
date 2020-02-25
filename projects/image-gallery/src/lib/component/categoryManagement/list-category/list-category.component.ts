@@ -8,8 +8,8 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class ListCategoryComponent implements OnInit {
 
-// for category 
-  public headerText: any = "Image Category List";
+  // for category 
+  public headerText: any = "Image & Category Management";
   public serverUrlData: any = '';
   public tokenViaApp: any = '';
   public addupdateRouteUrl: any = '';
@@ -20,33 +20,39 @@ export class ListCategoryComponent implements OnInit {
   public manageButtonRouteViaApp: any = '';
   public searchEndpointval: any = '';
   public searchSourceval: any = '';
-  public AddImageButtonRouteViaApp:any=[];
-  public tableNameImageViaApp:any='';
+  public AddImageButtonRouteViaApp: any = [];
+  public tableNameImageViaApp: any = '';
+  public imageServerUrlDataViaApp: any = '';
+  public imageDeleteendpointViaApp: any = '';
+  public imageEditRouteViaApp: any = '';
+  public imageAddupdateRouteUrlViaApp: any = '';
+  public imageSearchSourcevalViaApp: any = '';
+  public imageSearchEndpointval: any = '';
 
-
-// for image 
+  // for image 
   public allDataList: any = [];
-  public dataListForImage:any=[];
-  public tokenForImageViaApp:any;
+  public dataListForImage: any = [];
+  public tokenForImageViaApp: any;
 
-  public data_skip: any = ["_id", "description","title_search","parent_category_search"];
+  public data_skip: any = ["_id", "description", "title_search", "parent_category_search"];
   public data_modify_header: any = {
     "parent category": "Parent Category", "title": "Title",
     "priority": "Priority", "status": "Status"
   };
-  public previewModal_detail_skip: any = ["_id","title_search","parent_category_search"];
+  public previewModal_detail_skip: any = ["_id", "title_search", "parent_category_search"];
 
   public status: any = [{ val: 1, 'name': 'Active' }, { val: 0, 'name': 'Inactive' }];
   public search_settings: any =
     {
       selectsearch: [{ label: 'Search By Status', field: 'status', values: this.status }],
-      textsearch: [{ 
-        label: "Search By Title", field: 'title_search' },
+      textsearch: [{
+        label: "Search By Title", field: 'title_search'
+      },
       { label: "Search By Parent Category", field: 'parent_category' }],
     };
 
 
-// -------------------image category section-------------- //
+  // -------------------image category section-------------- //
 
   @Input()          //getting search endpoint 
   set SearchEndpoint(Val: any) {
@@ -63,7 +69,7 @@ export class ListCategoryComponent implements OnInit {
   set listingViaResolve(DataVal: any) {
     this.allDataList = (DataVal) || '<no name set>';
     this.allDataList = DataVal;
-   
+
   }
   @Input()          //getting add button route 
   set AddButtonRoute(Val: any) {
@@ -71,7 +77,7 @@ export class ListCategoryComponent implements OnInit {
     this.AddButtonRouteViaApp = Val;
   }
   @Input()
-  set ManageImageButtonRoute(val : any){
+  set ManageImageButtonRoute(val: any) {
     this.manageButtonRouteViaApp = (val) || '<no name set>';
     this.manageButtonRouteViaApp = val;
   }
@@ -108,49 +114,109 @@ export class ListCategoryComponent implements OnInit {
 
 
 
-// ------------------------image section---------------------- //
+  // ------------------------image section---------------------- //
 
-@Input()
-set AddImageButtonRoute(val:any){
-  this.AddImageButtonRouteViaApp = (val) || '<no name set>';
-  this.AddImageButtonRouteViaApp=val
-}
+  public image_data_skip: any = ["_id", "category_name_search",'images'];
+  public image_data_modify_header: any = {
 
-@Input()
-set TableNameForImage(val:any){
-  this.tableNameImageViaApp = (val) || '< no name set >' ;
-  this.tableNameImageViaApp = val;
- }
+    'category name': "Category Name",
+   
+    'date added': "Date",
+    'title': "Title",
+    'decription': "Decription",
+    'status': "Status"
 
- @Input()
- set DataListForImage(val:any){
-   this.dataListForImage = (val) || '< no name set >' ;
-   this.dataListForImage = val;
+  };
+  public image_previewModal_detail_skip: any = ["_id",'category_name_search','images'];
+
+  public image_status: any = [{ val: 1, 'name': 'Active' }, { val: 0, 'name': 'Inactive' }];
+
+  public image_search_settings: any =
+    {
+      selectsearch: [{ label: 'Search By Status', field: 'status', values: this.image_status }],
+      textsearch: [
+        { label: "Search By Category", field: 'category_name_search' }],
+    };
+
+  public pendingmodelapplicationarray_detail_datatype: any = [{
+    key: "images",
+    value: 'image',
+    fileurl: 'https://s3.us-east-2.amazonaws.com/image-gallery-bucket/imageGallery/'    // Image path 
+  }];
+
+  @Input()
+  set AddImageButtonRoute(val: any) {
+    this.AddImageButtonRouteViaApp = (val) || '<no name set>';
+    this.AddImageButtonRouteViaApp = val
   }
 
   @Input()
-  set TokenForImage(val:any){
+  set TableNameForImage(val: any) {
+    this.tableNameImageViaApp = (val) || '< no name set >';
+    this.tableNameImageViaApp = val;
+  }
+
+  @Input()
+  set DataListForImage(val: any) {
+    this.dataListForImage = (val) || '< no name set >';
+    this.dataListForImage = val;
+  }
+
+  @Input()
+  set TokenForImage(val: any) {
     this.tokenForImageViaApp = (val) || '< no name set>';
-    this.tokenForImageViaApp =val;
+    this.tokenForImageViaApp = val;
+  }
+
+  @Input()
+  set imageServerUrlData(val: any) {
+    this.imageServerUrlDataViaApp = (val) || '< no name set>';
+    this.imageServerUrlDataViaApp = val
+  }
+  @Input()
+  set imageDeleteendpoint(val: any) {
+    this.imageDeleteendpointViaApp = (val) || '< no name set>';
+    this.imageDeleteendpointViaApp = val
+  }
+  @Input()
+  set imageEditRoute(val: any) {
+    this.imageEditRouteViaApp = (val) || '< no name set>';
+    this.imageEditRouteViaApp = val
+  }
+  @Input()
+  set imageAddupdateRouteUrl(val: any) {
+    this.imageAddupdateRouteUrlViaApp = (val) || '< no name set>';
+    this.imageAddupdateRouteUrlViaApp = val
+  }
+  @Input()
+  set imageSearchSourceval(val: any) {
+    this.imageSearchSourcevalViaApp = (val) || '< no name set>';
+    this.imageSearchSourcevalViaApp = val
+
+  }
+  @Input()
+  set imageSearchEndpoint(val: any) {
+    this.imageSearchEndpointval = (val) || '< no name set>';
+    this.imageSearchEndpointval = val
   }
 
 
-  constructor(public router : Router) { }
-  ngOnInit() {  
 
-  
+  constructor(public router: Router) { }
 
+
+  ngOnInit() {
 
   }
   AddButton() {
     this.router.navigateByUrl('/' + this.AddButtonRouteViaApp);
   }
-  manageButton(){
+  manageButton() {
     this.router.navigateByUrl('/' + this.manageButtonRouteViaApp);
   }
 
-  AddImageButton(){
+  AddImageButton() {
     this.router.navigateByUrl('/' + this.AddImageButtonRouteViaApp);
   }
-  
+
 }

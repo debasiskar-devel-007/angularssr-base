@@ -84,6 +84,7 @@ export class AddEditImageComponent implements OnInit {
       this.imageGalleryManagementForm.controls['img_gallery'].patchValue(val[0].img_gallery);
       this.imageGalleryManagementForm.controls['title'].patchValue(val[0].title);
       this.imageGalleryManagementForm.controls['decription'].patchValue(val[0].decription);
+      this.imageGalleryManagementForm.controls['status'].patchValue(val[0].status);
       
        
       for (let i = 0; i < val[0].img_gallery.length; i++) {
@@ -109,11 +110,11 @@ export class AddEditImageComponent implements OnInit {
   constructor(public apiService: ApiService, public fb: FormBuilder, public activeroute: ActivatedRoute,
     public _http: HttpClient, public router: Router) {
     this.imageGalleryManagementForm = this.fb.group({
-      category_name: [''],
+      category_name: ['',Validators.required],
       img_gallery: [''],
-      title:[''],
-      decription:[''],
-      status:[]
+      title:['',Validators.required],
+      decription:['',Validators.required],
+      status:[true]
     })
   }
 
@@ -154,9 +155,12 @@ export class AddEditImageComponent implements OnInit {
   }
 
 
+
   ImageAddEditFormSubmit() {
 
-    if (this.imageConfigData.files.length >= 1 ) {
+    // console.log(this.imageGalleryManagementForm.value.title)
+
+    if (typeof(this.imageConfigData.files) != 'undefined' && this.imageConfigData.files.length >= 1) {
       for (let loop = 0; loop < this.imageConfigData.files.length; loop++) {
         this.images_array =
           this.images_array.concat({
@@ -171,11 +175,10 @@ export class AddEditImageComponent implements OnInit {
 
       this.imageGalleryManagementForm.controls['img_gallery'].patchValue(this.images_array);
     } else {
-      this.imageGalleryManagementForm.value.img_gallery = false;
+      // this.imageGalleryManagementForm.value.img_gallery = false;
     }
 
-    let x: any;
-    for (x in this.imageGalleryManagementForm.controls) {
+    for (let x in this.imageGalleryManagementForm.controls) {
       this.imageGalleryManagementForm.controls[x].markAsTouched();
     }
     if (this.imageGalleryManagementForm.valid) {
@@ -227,4 +230,9 @@ export class AddEditImageComponent implements OnInit {
     })
 
   }
+  inputUntouch(form: any, val: any) {
+
+    form.controls[val].markAsUntouched();
+  }
+  
 }

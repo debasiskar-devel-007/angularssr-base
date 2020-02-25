@@ -26,7 +26,7 @@
               Priority field can not be blank</mat-error> <br>
           </mat-form-field>
 
-          <mat-checkbox [formControl]="imageGalleryAddEditForm.controls['status']">Active</mat-checkbox><br>
+         
 
           <!-- ckeditor using start here -->
           <mat-label>Description:</mat-label>
@@ -34,6 +34,8 @@
           </ck-editor>
 
           <!-- ckeditor end here -->
+
+          <mat-checkbox [formControl]="imageGalleryAddEditForm.controls['status']">Active</mat-checkbox><br>
 
           <mat-form-field class="parent_cat">
             <mat-label>Parent Category</mat-label>
