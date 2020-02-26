@@ -9,24 +9,69 @@
     <button class="singleButton" mat-raised-button color="primary" (click)="manageTeamButton()" >Manage Team</button>
 
   </mat-toolbar>
-<!-- adding button end here -->
-<mat-card-content class="listing-content-admin">
- 
-  <lib-listing class="formfilterdiv formfilterdivnew" *ngIf="alldata.length>0" 
-    [datasource]="alldata"
-    [sourcedata]="sourcenameViaapp"
-    [skip]="alldata_skip" 
-    [modify_header_array]="alldata_modify_header" 
-    [detail_skip_array]="previewModal_detail_skip"
-    [apiurl]="serverUrlData" 
-    [editroute]="editRouteval"
-    [jwttoken]="tokenVal" 
-    [statusarr]="status" 
-    [updateendpoint]="addupdate"
-    [deleteendpoint]="deleteendpointVal"
-    [date_search_endpoint]="searchingendpoint"
-    [date_search_source]="searchSourcenameViaapp"
-    [search_settings]="search_settings">
-</lib-listing>
-</mat-card-content>
 </mat-card>
+<!-- adding button end here -->
+
+<mat-tab-group>
+  <mat-tab label="Team category Management"> 
+
+    <mat-toolbar class="buttonsetToolbar">
+      <button class="singleButton" mat-raised-button color="primary" (click)="addButton()" >Add Team Category</button>
+    </mat-toolbar>
+    <mat-card-content class="listing-content-admin">
+ 
+      <lib-listing class="formfilterdiv formfilterdivnew" *ngIf="alldata.length>0" 
+        [datasource]="alldata"
+        [sourcedata]="sourcenameViaapp"
+        [skip]="alldata_skip" 
+        [modify_header_array]="alldata_modify_header" 
+        [detail_skip_array]="previewModal_detail_skip"
+        [apiurl]="serverUrlData" 
+        [editroute]="editRouteval"
+        [jwttoken]="tokenVal" 
+        [statusarr]="status" 
+        [updateendpoint]="addupdate"
+        [deleteendpoint]="deleteendpointVal"
+        [date_search_endpoint]="searchingendpoint"
+        [date_search_source]="searchSourcenameViaapp"
+        [search_settings]="search_settings">
+    </lib-listing>
+    </mat-card-content>
+
+     </mat-tab>
+
+
+  <mat-tab label="Team Management"> 
+    <mat-toolbar class="buttonsetToolbar">
+      
+      <button class="singleButton" mat-raised-button color="primary" (click)="manageTeamButton()" >Add Team</button>
+  
+    </mat-toolbar>
+
+    <mat-card-content class="listing-content-admin">
+ 
+      <lib-listing class="formfilterdiv formfilterdivnew" *ngIf="allTeamdata.length>0" 
+        [datasource]="allTeamdata"
+        [sourcedata]="sourcenameTeamViaapp"
+        [skip]="alldata_skip_team" 
+        [modify_header_array]="data_modify_header" 
+        [detail_skip_array]="team_previewModal_detail_skip"
+        [apiurl]="serverUrlTeamData" 
+        [editroute]="editTeamRouteval"
+        [jwttoken]="tokenTeamVal" 
+        [statusarr]="teamStatus" 
+        [updateendpoint]="addTeamupdate"
+        [deleteendpoint]="deleteTeamendpointVal"
+        [date_search_endpoint]="searchingTeamendpoint"
+        [date_search_source]="searchSourcenameTeamViaapp"
+        [search_settings]="team_search_settings">
+    </lib-listing>
+
+    </mat-card-content>
+
+  </mat-tab>
+</mat-tab-group>
+
+
+
+

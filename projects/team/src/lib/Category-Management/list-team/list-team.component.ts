@@ -7,6 +7,8 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./list-team.component.css']
 })
 export class ListTeamComponent implements OnInit {
+
+  // team category section 
   public alldata: any = [];
   public addPageVal: any = '';
   public searchingendpoint: any = '';
@@ -17,7 +19,6 @@ export class ListTeamComponent implements OnInit {
   public addupdate: any = '';
   public serverUrlData: any = '';
   public editRouteval: any = '';
-  public manageRoute: any;
   public alldata_skip: any = ["_id","id","updated_at", "created_at","description_html","description","categoryName_search"];
   public alldata_modify_header: any = {
     "categoryName": "Category Name", "description": "Description",
@@ -31,6 +32,27 @@ export class ListTeamComponent implements OnInit {
       textsearch: [{ label: "Search By Category Name", field: 'categoryName_search' }],
 
     };
+
+
+
+    // team section 
+
+    public allTeamdata: any = '';
+    public searchingTeamendpoint: any = '';
+    public sourcenameTeamViaapp: any ='';
+    public searchSourcenameTeamViaapp:any='';
+    public tokenTeamVal: any = '';
+    public deleteTeamendpointVal: any="";
+    public addTeamupdate: any = '';
+    public serverUrlTeamData: any = '';
+    public editTeamRouteval: any = '';
+    public manageTeamRoute: any;
+
+
+
+
+
+    //team category section
 
   @Input()          //getting all data list via resolve call from app
   set TeamData(val: any) {
@@ -48,11 +70,7 @@ export class ListTeamComponent implements OnInit {
     this.addPageVal = (val) || '<no name set>';
     this.addPageVal = val;
   }
-  @Input()        //manage team button route
-  set ManageButtonRoute(val: any) {
-    this.manageRoute = (val) || '<no name set>';
-    this.manageRoute = (val);
-  }
+
   @Input()
   set UpdateRoute(val: any) {
     this.addupdate = (val) || '<no name set>';
@@ -93,6 +111,98 @@ export class ListTeamComponent implements OnInit {
     this.serverUrlData = serverUrlval;
     
   }
+
+
+
+
+
+
+
+   //team section
+
+   @Input()        //manage team button route
+   set ManageButtonRoute(val: any) {
+     this.manageTeamRoute = (val) || '<no name set>';
+     this.manageTeamRoute = (val);
+   }
+
+   @Input()          //getting all data list via resolve call from app
+   set TeamAllData(val: any) {
+     this.allTeamdata = (val) || '<no name set>';
+     this.allTeamdata = val;
+   }
+   @Input()          //getting edit page route from app
+   set EditTeamRoute(val: any) {
+     this.editTeamRouteval = (val) || '<no name set>';
+     this.editTeamRouteval = val;
+ 
+   }
+
+ 
+   @Input()
+   set UpdateTeamRoute(val: any) {
+     this.addTeamupdate = (val) || '<no name set>';
+     this.addTeamupdate = val;
+     
+   }
+   @Input()
+   set TokenTeam(val: any) {
+     this.tokenTeamVal = (val) || '<no name set>';
+     this.tokenTeamVal = val;
+    
+   }
+   @Input()
+   set SourceNameTeam(val: any) {
+     this.sourcenameTeamViaapp = (val) || '<no name set>';
+     this.sourcenameTeamViaapp = val;
+   }
+   @Input()
+   set SearchSourceNameTeam(val: any) {
+     this.searchSourcenameTeamViaapp = (val) || '<no name set>';
+     this.searchSourcenameTeamViaapp = val;
+   }
+   @Input()
+   set SearchEndpointTeam(val: any) {
+     this.searchingTeamendpoint = (val) || '<no name set>';
+     this.searchingTeamendpoint = val;
+ 
+   }
+   @Input()
+   set DeleteEndpointTeam(val: any) {
+     this.deleteTeamendpointVal = (val) || '<no name set>';
+     this.deleteTeamendpointVal = val;
+    
+   }
+   @Input()          //setting the server url from project
+   set serverUrlTeam(serverUrlval: any) {
+     this.serverUrlTeamData = (serverUrlval) || '<no name set>';
+     this.serverUrlTeamData = serverUrlval;
+     
+   }
+
+   public teamStatus: any = [{ val: 1, 'name': 'Active' }, { val: 0, 'name': 'Inactive' }];
+
+   public alldata_skip_team: any = ["_id", "multipleemail", "bulletarray", "created_at", "description_html", "description", "updated_at", "id","categoryname_search","membername_search"];
+   public data_modify_header: any = {
+     "membername": "Member Name", "date added": "Date"
+     , "categoryname": "Category Name", "multiplephone": "Phone Numbers", "image": "Images"
+   };
+   public pendingmodelapplicationarray_detail_datatype: any = [{
+     key: "images",
+     value: 'image',
+     fileurl: 'https://s3.us-east-2.amazonaws.com/teammanagement-files/team/'    // Image path 
+   }];
+   public team_search_settings: any =
+     {
+       textsearch: [{ label: "Search By Category Name", field: 'categoryname_search' },
+       { label: "Search By Member Name", field: 'membername_search' }],
+      //    
+ 
+     };
+   // public status: any = [{ val: 1, 'name': 'Active' }, { val: 0, 'name': 'Inactive' }];
+   public team_previewModal_detail_skip: any = ['_id'];
+
+
   constructor(public router: Router) { }
 
   ngOnInit() {
@@ -101,6 +211,6 @@ export class ListTeamComponent implements OnInit {
     this.router.navigateByUrl('/' + this.addPageVal);
   }
   manageTeamButton() {
-    this.router.navigateByUrl('/' + this.manageRoute);
+    this.router.navigateByUrl('/' + this.manageTeamRoute);
   }
 }
