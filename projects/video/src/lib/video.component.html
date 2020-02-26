@@ -2,7 +2,7 @@
 <!-- header start here -->
 <mat-card>
   <mat-toolbar color="primary" style="justify-content: center; align-items: center;">
-    <h2 class="headerSpan">Video Category Management</h2>
+    <h2 class="headerSpan">Video & Category Management</h2>
   </mat-toolbar>
   <!-- header end here -->
 
@@ -14,9 +14,22 @@
 </mat-toolbar>
 <!-- adding button end here -->
 
-      <!--lib-listing start here -->
+</mat-card>
+
+<div>
+
+<mat-tab-group>
+
+  <mat-tab label="Video Category Management"> 
+
+    <mat-toolbar class="buttonsetToolbar">
+      <button class="singleButton" mat-raised-button color="primary" (click)="addVideoCategoryButton()" > Add Video Category</button>
+  
+  </mat-toolbar>
+    
+     <!--lib-listing start here -->
   <mat-card-content class="listing-content-admin">
-    <lib-listing class="formfilterdiv formfilterdivnew" *ngIf="allDataList.length>0" 
+    <lib-listing class="formfilterdiv formfilterdivnew" *ngIf="allDataList !=null && allDataList.length>0" 
         [datasource]="allDataList"
         [skip]="allDataList_skip" 
         [modify_header_array]="allDataList_modify_header" 
@@ -35,4 +48,41 @@
     </lib-listing>
     </mat-card-content>
         <!--lib-listing end here -->
-</mat-card>
+    
+  </mat-tab>
+
+
+  <mat-tab label="Video Management"> 
+    <mat-toolbar class="buttonsetToolbar">
+     
+  
+    <button class="singleButton" mat-raised-button color="primary" (click)="videoManagementButton()" > Add Video</button>
+  </mat-toolbar>
+
+
+<mat-card-content class="listing-content-admin">
+    <lib-listing class="formfilterdiv formfilterdivnew" *ngIf="allVideoDataList !=null && allVideoDataList.length>0" 
+        [datasource]="allVideoDataList"
+        [skip]="VideoDataListing_skip" 
+        [modify_header_array]="VideoDataListing_modify_header" 
+        [detail_skip_array]="video_previewModal_detail_skip"
+        [sourcedata]="TableNameVideoViaApp"
+        [apiurl]="serverUrlVideoData" 
+        [jwttoken]="tokenVideoViaApp" 
+        [statusarr]="video_status" 
+        [updateendpoint]="addupdateVideoRouteUrl"
+        [deleteendpoint]="deleteEndpointVideoViaApp"
+        [editroute]="editVideoRouteViaApp" 
+        [date_search_endpoint]="searchVideoEndpointval"
+        [date_search_source]="searchVideoSourceval"
+        [search_settings]="video_search_settings"
+       >
+    </lib-listing>
+    </mat-card-content>
+
+    
+  </mat-tab>
+  
+</mat-tab-group>
+
+     

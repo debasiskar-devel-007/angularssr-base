@@ -10,7 +10,7 @@ export class AddEditVideosComponent implements OnInit {
   public serverUrl: any = "https://9ozbyvv5v0.execute-api.us-east-1.amazonaws.com/production/api/";
   public addUpdateEndpoint: any = "addorupdatedata";
   public getDataEndpoint:any="datalist";
-  public listingRoute: any = "video-library-management/list";
+  public listingRoute: any = "video-category/list";
   public sourceName:any ="video_management";
   public categorySourceName = "video_category";
   public SingleVideoData: any = [];
