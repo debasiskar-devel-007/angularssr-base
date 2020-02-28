@@ -20,16 +20,28 @@
   .gridListWrapper{
     padding: 30px;
   }
-  .buttonsetToolbar{
+    /* .buttonsetToolbar {
     background-color: #f4f3f8;
     text-align: center;
     display: block;
     padding-top: 10px;
+} */
+/* .singleButton {
+  margin: 5px;
+  float: right;
+} */
+
+  .buttonsetToolbar{
+    position: absolute;
+    top: 0;
+    padding: 0;
+    right: 0;
   }
   .singleButton{
-    margin: 5px;
-   
-    float: right;
+    position: absolute;
+    right: 20px;
+    z-index: 9;
+    top: 20px;
   }
   .example-form {
     min-width: 150px;

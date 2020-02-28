@@ -1215,6 +1215,41 @@
           }
         }
       }
+    },
+    "gallery-management": {
+      "projectType": "library",
+      "root": "projects/gallery-management",
+      "sourceRoot": "projects/gallery-management/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-ng-packagr:build",
+          "options": {
+            "tsConfig": "projects/gallery-management/tsconfig.lib.json",
+            "project": "projects/gallery-management/ng-package.json"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/gallery-management/src/test.ts",
+            "tsConfig": "projects/gallery-management/tsconfig.spec.json",
+            "karmaConfig": "projects/gallery-management/karma.conf.js"
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/gallery-management/tsconfig.lib.json",
+              "projects/gallery-management/tsconfig.spec.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        }
+      }
     }
   },
   "defaultProject": "angularssr"

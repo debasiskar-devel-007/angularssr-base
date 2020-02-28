@@ -32,6 +32,8 @@ import { ListingCategoryComponent} from '../Component/ImageGallery/categoryManag
 import { AddeditImageComponent } from '../Component/ImageGallery/ImageManagement/addedit-image/addedit-image.component';
 import { ListImagesComponent } from '../Component/ImageGallery/ImageManagement/list-images/list-images.component';
 import { from } from 'rxjs';
+
+
 const appRoutes: Routes = [
     /* Category Management Routes Start */
     { 
@@ -210,7 +212,8 @@ const appRoutes: Routes = [
       component :ListImagesComponent,
       resolve: { ImageData : ResolveService},
       data :{ requestcondition : {source :'imageGallery_management_view',condition:{}},endpoint :'datalist'}
-    }
+    },
+  
 
 ];
 

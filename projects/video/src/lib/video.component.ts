@@ -40,7 +40,7 @@ public deleteEndpointVideoViaApp:any='';
   public allDataList_skip: any = ["_id", "description", "parent_id", "title_search", "parentvideocategory_search"];
   public allDataList_modify_header: any = {
     'title': "Title", 'description': "Description",
-    "status": "Status", "priority": "Priority", "parentvideocategory": "Parent Category"
+    "status": "Status", "priority": "Priority", "parentvideocategory": "Parent Category","date added":"Date"
   };
   public status: any = [{ val: 1, 'name': 'Active' }, { val: 0, 'name': 'Inactive' }];
   public search_settings: any =
@@ -182,10 +182,10 @@ public deleteEndpointVideoViaApp:any='';
 
 
 
-  public VideoDataListing_skip: any = ["_id", "description", "created_at","updated_at","id","description_html","parent_category_search","title_search"];
+  public VideoDataListing_skip: any = ["_id", "description", "created_at","updated_at","id","description_html","parent_category_search","title_search,video_type"];
   public VideoDataListing_modify_header: any = {
     "title": "Title", "priority": "Priority",
-    "status": "Status", "videoUrl": "Video Url","parent category" : "Parent Category","vimeo url":"Vimeo Url"
+    "status": "Status", "videoUrl": "Video Url","parent category" : "Parent Category","vimeo url":"Vimeo Url","date added":"Date"
   };
   public video_previewModal_detail_skip: any = ['_id','created_at','id','updated_at','title_search','parent_category_search'];
   public video_status: any = [{ val: 1, 'name': 'Active' }, { val: 0, 'name': 'Inactive' }];

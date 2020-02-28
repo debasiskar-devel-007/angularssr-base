@@ -30,7 +30,7 @@
               Priority field can not be blank</mat-error> <br>
           </mat-form-field>
 
-          <mat-checkbox [formControl]="videolibAddEditForm.controls['status']">Active</mat-checkbox><br>
+        
 
 
 
@@ -54,6 +54,10 @@
           </mat-option>
             </mat-select>
           </mat-form-field>
+
+          <mat-checkbox [formControl]="videolibAddEditForm.controls['status']">Active</mat-checkbox><br>
+
+          
           <button class="submitbtn" mat-raised-button color="primary" type="submit">{{buttonText}}</button>
           <button class="submitbtn" mat-raised-button color="primary" type="reset">Reset</button>
         </form>

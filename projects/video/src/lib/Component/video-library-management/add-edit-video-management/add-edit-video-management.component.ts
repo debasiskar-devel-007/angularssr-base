@@ -32,7 +32,7 @@ export class AddEditVideoManagementComponent implements OnInit {
   public getDataEndpointData: any;
   public categorySourceName: any;
   public videoValue: any;
-
+  public alert:any;
   public model = {
     editorData: ''
   };
@@ -161,16 +161,24 @@ export class AddEditVideoManagementComponent implements OnInit {
   }
 
   previewUrl(value: any) {
-    switch (value) {
-      case "youtube":
-        this.openDialog(this.videoManagementForm.value.videoUrl, value);
-        break
-      case "vimeo":
-        this.openDialog(this.videoManagementForm.value.vimeo_url, value);
-        break;
-      default:
-        break;
-    }
+
+    // if (this.videoManagementForm.value.videoUrl != 'undefined' || 
+    // this.videoManagementForm.value.vimeo_url != 'undefined'){
+      switch (value) {
+        case "youtube":
+          this.openDialog(this.videoManagementForm.value.youtube_Url, value);
+          break
+        case "vimeo":
+          this.openDialog(this.videoManagementForm.value.vimeo_url, value);
+          break;
+        default:
+          break;
+      }
+    // } else {
+
+    //   this.alert='please add link';
+
+    // }
 
   }
 

@@ -20,17 +20,7 @@
   .gridListWrapper{
     padding: 30px;
   }
-  .buttonsetToolbar{
-    background-color: #f4f3f8;
-    text-align: center;
-    display: block;
-    padding-top: 10px;
-  }
-  .singleButton{
-    margin: 5px;
-   
-    float: right;
-  }
+  
   .example-form {
     min-width: 150px;
     max-width: 500px;
@@ -45,6 +35,17 @@
     padding-right: 8px;
   }
 
-
+  .buttonsetToolbar{
+    position: absolute;
+    top: 0;
+    right: 0;
+    padding: 0;
+  }
+  .singleButton{
+    position: absolute;
+    right: 20px;
+    z-index: 9;
+    top: 20px;
+  }
   .dataListForImage td.mat-cell, .dataListForImage td.mat-footer-cell, th.mat-header-cell {padding: 6px 8px;}
   .dataListForImage .mat-table tr td.mat-column-images{width: 45%;}

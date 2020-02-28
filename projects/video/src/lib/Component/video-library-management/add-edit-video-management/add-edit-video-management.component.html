@@ -38,7 +38,7 @@
             </mat-select>
           </mat-form-field>
 
-          <mat-checkbox [formControl]="videoManagementForm.controls['status']">Active</mat-checkbox><br>
+         
           <!-- youtube url -->
           <mat-form-field>
             <mat-label >Select Video Url</mat-label>
@@ -54,7 +54,8 @@
           <ng-container *ngIf="videoValue=='youtube'" >
           <mat-label>Enter YouTube Video Url</mat-label>
           <mat-form-field>
-            <mat-icon matSuffix (click)="previewUrl('youtube')">remove_red_eye</mat-icon>
+           <mat-icon matSuffix (click)="previewUrl('youtube')">remove_red_eye</mat-icon>
+            
             <span matPrefix>{{ video_prefix }}</span>
             <input matInput type="text" [formControl]="videoManagementForm.controls['youtube_Url']" (blur)="inputUntouch(videoManagementForm,'youtube_Url')" >
             <mat-error *ngIf="videoManagementForm.controls['youtube_Url'].touched && !videoManagementForm.controls['youtube_Url'].valid
@@ -79,6 +80,10 @@
             <ck-editor formControlName="description" [config]="editorconfig">
             </ck-editor>
           <!-- ckeditor using end here -->
+
+          <mat-checkbox [formControl]="videoManagementForm.controls['status']">Active</mat-checkbox><br>
+
+          
           <button class="submitbtn" mat-raised-button color="primary" type="submit">{{buttonText}}</button>
           <button class="submitbtn" mat-raised-button color="primary" type="reset" >Reset</button>
         </form>

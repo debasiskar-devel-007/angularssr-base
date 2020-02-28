@@ -37,7 +37,7 @@ export class ListCategoryComponent implements OnInit {
   public data_skip: any = ["_id", "description", "title_search", "parent_category_search"];
   public data_modify_header: any = {
     "parent category": "Parent Category", "title": "Title",
-    "priority": "Priority", "status": "Status"
+    "priority": "Priority", "status": "Status","date added": "Date"
   };
   public previewModal_detail_skip: any = ["_id", "title_search", "parent_category_search"];
 
