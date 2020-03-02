@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, ViewChild, Inject } from '@angular/core';
 import { FormBuilder, FormControl, FormArray, FormGroup, Validators, FormGroupDirective } from '@angular/forms';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from "@angular/material";
-import { ApiService } from 'projects/video/src/lib/Service/api.service';
+import { ApiService } from '../../../Service/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 
 export interface DialogData {
@@ -24,7 +24,7 @@ export class AddEditVideoManagementComponent implements OnInit {
   public VideoDataArray: any = [];
   public params_id: any = '';
   public buttonText: any = "Submit";
-  public headerText: any = "Add Video Management";
+  public headerText: any = "Add Video";
   public spinnerloader: boolean; // for spinner loader
   public editorconfig: any = {};
   public getSourceName: any;
@@ -37,7 +37,7 @@ export class AddEditVideoManagementComponent implements OnInit {
     editorData: ''
   };
   public video_prefix: any = "https://www.youtube.com/watch?v=";
-  public vimeoPrefix: any = "https://player.vimeo.com/video/";
+  public vimeoPrefix: any = "https://vimeo.com/";
 
   @ViewChild(FormGroupDirective, { static: false }) formDirective: FormGroupDirective;
 
@@ -78,7 +78,7 @@ export class AddEditVideoManagementComponent implements OnInit {
     this.VideoDataArray = Videodata;
     if (this.activeRoute.snapshot.params._id) {
       this.buttonText = "Update";
-      this.headerText = "Edit Video Management"
+      this.headerText = "Edit Video"
       this.params_id = this.activeRoute.snapshot.params._id;
       this.videoManagementForm.controls['title'].patchValue(Videodata[0].title);
       this.videoManagementForm.controls['description'].patchValue(Videodata[0].description);
@@ -209,7 +209,7 @@ export class AddEditVideoManagementComponent implements OnInit {
             "id": this.params_id,
             'title': this.videoManagementForm.value.title,
             'priority': this.videoManagementForm.value.priority,
-            'videoUrl': this.videoManagementForm.value.youtube_Url,
+            'youtube_Url': this.videoManagementForm.value.youtube_Url,
             'vimeo_url': this.videoManagementForm.value.vimeo_url,
             'status': this.videoManagementForm.value.status,
             'description': this.videoManagementForm.value.description

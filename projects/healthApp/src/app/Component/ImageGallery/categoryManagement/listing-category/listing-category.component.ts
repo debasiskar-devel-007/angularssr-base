@@ -44,6 +44,7 @@ export class ListingCategoryComponent implements OnInit {
       let result: any;
       result = data.ImageData.res;
       this.imageGalleryList = result;
+      
     })
 
     let data:any;

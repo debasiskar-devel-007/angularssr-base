@@ -45,7 +45,19 @@
     position: absolute;
     right: 20px;
     z-index: 9;
-    top: 20px;
+    top: 28px;
   }
   .dataListForImage td.mat-cell, .dataListForImage td.mat-footer-cell, th.mat-header-cell {padding: 6px 8px;}
   .dataListForImage .mat-table tr td.mat-column-images{width: 45%;}
+
+  /* .mat-tab-body .mat-tab-body-content {
+    min-height: 71px !important;
+} */
+
+
+
+:host ::ng-deep .mat-tab-group .mat-tab-body-wrapper .mat-tab-body.mat-tab-body-active {min-height: 70px !important;}
+
+
+ 
+

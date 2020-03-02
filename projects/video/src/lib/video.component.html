@@ -1,33 +1,35 @@
 
 <!-- header start here -->
-<!-- <mat-card>
+<mat-card>
   <mat-toolbar color="primary" style="justify-content: center; align-items: center;">
     <h2 class="headerSpan">Video & Category Management</h2>
   </mat-toolbar>
  
-  <mat-toolbar class="buttonsetToolbar">
+  <!-- <mat-toolbar class="buttonsetToolbar">
     <button class="singleButton" mat-raised-button color="primary" (click)="addVideoCategoryButton()" > Add Video Category</button>
 
   <button class="singleButton" mat-raised-button color="primary" (click)="videoManagementButton()" > Video Management</button>
-</mat-toolbar>
+</mat-toolbar> -->
 
 
-</mat-card> -->
+</mat-card>
 
 <div>
 
-<mat-tab-group>
+<mat-tab-group class="gallery_body">
 
-  <mat-tab label="Video Category Management"> 
+  <mat-tab label="Category Management"> 
 
     <mat-toolbar class="buttonsetToolbar">
-      <button class="singleButton" mat-raised-button color="primary" (click)="addVideoCategoryButton()" > Add Video Category</button>
+      <button class="singleButton" mat-raised-button color="primary" 
+      (click)="addVideoCategoryButton()" > Add Category</button>
   
   </mat-toolbar>
     
      <!--lib-listing start here -->
-  <mat-card-content class="listing-content-admin">
-    <lib-listing class="formfilterdiv formfilterdivnew" *ngIf="allDataList !=null && allDataList.length>0" 
+  <mat-card-content class="listing-content-admin" 
+  *ngIf="allDataList !=null && allDataList.length > 0">
+    <lib-listing class="formfilterdiv formfilterdivnew"  
         [datasource]="allDataList"
         [skip]="allDataList_skip" 
         [modify_header_array]="allDataList_modify_header" 
@@ -58,8 +60,8 @@
   </mat-toolbar>
 
 
-<mat-card-content class="listing-content-admin">
-    <lib-listing class="formfilterdiv formfilterdivnew" *ngIf="allVideoDataList !=null && allVideoDataList.length>0" 
+<mat-card-content class="listing-content-admin" *ngIf="allVideoDataList !=null && allVideoDataList.length > 0" >
+    <lib-listing class="formfilterdiv formfilterdivnew" 
         [datasource]="allVideoDataList"
         [skip]="VideoDataListing_skip" 
         [modify_header_array]="VideoDataListing_modify_header" 

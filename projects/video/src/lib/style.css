@@ -58,3 +58,5 @@
   }
 
 
+  :host ::ng-deep .mat-tab-group .mat-tab-body-wrapper .mat-tab-body.mat-tab-body-active {min-height: 70px !important;}
+

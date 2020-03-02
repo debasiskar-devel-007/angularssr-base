@@ -4,7 +4,7 @@ import { FormBuilder, FormControl, FormGroup, Validators, FormGroupDirective } f
 import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { ApiService } from 'projects/image-gallery/src/lib/Service/api.service';
+import { ApiService } from '../../../Service/api.service';
 @Component({
   selector: 'lib-add-edit-caegory',
   templateUrl: './add-edit-caegory.component.html',

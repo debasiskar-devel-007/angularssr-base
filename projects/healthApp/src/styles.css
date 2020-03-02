@@ -3,3 +3,12 @@
 @import '@angular/material/prebuilt-themes/deeppurple-amber.css';
 
 @import '../../team/src/lib/style.css';
+
+ .gallery_body .mat-toolbar-row{ padding: 0px;}
+
+ .gallery_body .mat-form-field {
+    margin: 0 6px;
+}
+
+
+ 

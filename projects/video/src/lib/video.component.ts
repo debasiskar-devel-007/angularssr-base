@@ -37,7 +37,7 @@ public deleteEndpointVideoViaApp:any='';
 
   ;  /**lib-listing start here **/
   public allDataList: any = [];
-  public allDataList_skip: any = ["_id", "description", "parent_id", "title_search", "parentvideocategory_search"];
+  public allDataList_skip: any = ["_id", "description", "parent_id", "title_search", "parentvideocategory_search","date_unix"];
   public allDataList_modify_header: any = {
     'title': "Title", 'description': "Description",
     "status": "Status", "priority": "Priority", "parentvideocategory": "Parent Category","date added":"Date"
@@ -47,8 +47,9 @@ public deleteEndpointVideoViaApp:any='';
     {
       selectsearch: [{ label: 'Search By Status', field: 'status', values: this.status }],
       textsearch: [{ label: "Search By Title", field: 'title_search' }, { label: "Search By Parent Category", field: 'parentvideocategory_search' }],
+      datesearch:[{startdatelabel:"Start Date",enddatelabel:"End Date", submit:"Search By Date",  field:"date_unix"}]
     };
-  public previewModal_detail_skip: any = ['_id', 'title_search', 'parentvideocategory_search'];
+  public previewModal_detail_skip: any = ['_id', 'title_search', 'parentvideocategory_search',"date_unix"];
 
   /**lib-listing end here **/
 
@@ -182,17 +183,18 @@ public deleteEndpointVideoViaApp:any='';
 
 
 
-  public VideoDataListing_skip: any = ["_id", "description", "created_at","updated_at","id","description_html","parent_category_search","title_search,video_type"];
+  public VideoDataListing_skip: any = ["_id", "description", "created_at","updated_at","id","description_html","parent_category_search","title_search,video_type","date_unix"];
   public VideoDataListing_modify_header: any = {
     "title": "Title", "priority": "Priority",
     "status": "Status", "videoUrl": "Video Url","parent category" : "Parent Category","vimeo url":"Vimeo Url","date added":"Date"
   };
-  public video_previewModal_detail_skip: any = ['_id','created_at','id','updated_at','title_search','parent_category_search'];
+  public video_previewModal_detail_skip: any = ['_id','created_at','id','updated_at','title_search','parent_category_search',"date_unix"];
   public video_status: any = [{ val: 1, 'name': 'Active' }, { val: 0, 'name': 'Inactive' }];
   public video_search_settings: any =
     {
       selectsearch: [{ label: 'Search By Status', field: 'status', values: this.status }],
       textsearch: [{ label: "Search By Title", field: 'title_search' },{ label: "Search By Parent Category", field: 'parent_category_search' }],
+      datesearch:[{startdatelabel:"Start Date",enddatelabel:"End Date", submit:"Search By Date",  field:"date_unix"}]
 
     };
 

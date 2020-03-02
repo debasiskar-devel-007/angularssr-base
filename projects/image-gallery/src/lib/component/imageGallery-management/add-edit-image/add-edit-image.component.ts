@@ -2,7 +2,7 @@ import { Component, OnInit,Input, ViewChild, Inject } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators, FormGroupDirective } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
-import { ApiService } from 'projects/image-gallery/src/lib/Service/api.service';
+import { ApiService } from '../../../Service/api.service';
 @Component({
   selector: 'lib-add-edit-image',
   templateUrl: './add-edit-image.component.html',
@@ -30,6 +30,11 @@ export class AddEditImageComponent implements OnInit {
   public parameter_id: any = '';
   public sourceName:any='';
   public categorySourceName:any='';
+  public fullImagePath:any;
+  public imageName:any;
+  public imageType:any;
+  public img_flag:any=false;
+
   @ViewChild(FormGroupDirective, { static: false }) formDirective: FormGroupDirective;
 
   @Input()
@@ -77,6 +82,8 @@ export class AddEditImageComponent implements OnInit {
     this.dataForEdit = (val) || '<no name set>';
     this.dataForEdit = val;
     if (this.activeroute.snapshot.params._id) {
+      this.img_flag = true;
+
       this.headerText = "Edit Image";
       this.buttonText = "Update";
       this.parameter_id = this.activeroute.snapshot.params._id;
@@ -87,22 +94,25 @@ export class AddEditImageComponent implements OnInit {
       this.imageGalleryManagementForm.controls['status'].patchValue(val[0].status);
       
        
-      for (let i = 0; i < val[0].img_gallery.length; i++) {
-        this.img_var = val[0].img_gallery[i].basepath + val[0].img_gallery[i].fileservername;
-        this.image_name = val[0].img_gallery[i].name;
-        this.image_type = val[0].img_gallery[i].type;
-        this.images_array_edit.push({
-          'img_var': this.img_var,
-          'image_name': this.image_name,
-          'image_type': this.image_type
-        });
-        this.images_array.push({
-          "basepath": val[0].img_gallery[i].basepath,
-          "image": val[0].img_gallery[i].image,
-          "name": val[0].img_gallery[i].name,
-          "type": val[0].img_gallery[i].type
-        });
-      }
+      // for (let i = 0; i < val[0].img_gallery.length; i++) {
+      //   this.img_var = val[0].img_gallery[i].basepath + val[0].img_gallery[i].fileservername;
+      //   this.image_name = val[0].img_gallery[i].name;
+      //   this.image_type = val[0].img_gallery[i].type;
+      //   this.images_array_edit.push({
+      //     'img_var': this.img_var,
+      //     'image_name': this.image_name,
+      //     'image_type': this.image_type
+      //   });
+      //   this.images_array.push({
+      //     "basepath": val[0].img_gallery[i].basepath,
+      //     "image": val[0].img_gallery[i].image,
+      //     "name": val[0].img_gallery[i].name,
+      //     "type": val[0].img_gallery[i].type
+      //   });
+      // }
+      this.fullImagePath=val[0].img_gallery.basepath + val[0].img_gallery.image;
+      this.imageName=val[0].img_gallery.name;
+      this.imageType=val[0].img_gallery.type;
 
     }
 
@@ -149,8 +159,12 @@ export class AddEditImageComponent implements OnInit {
     })
   }
   
-  clear_image(index: any) {
-    this.images_array_edit.splice(index, 1);
+  // clear_image(index: any) {
+  //   this.images_array_edit.splice(index, 1);
+
+  // }
+  clear_image(){
+    this.img_flag=false;
 
   }
 
@@ -160,23 +174,41 @@ export class AddEditImageComponent implements OnInit {
 
     // console.log(this.imageGalleryManagementForm.value.title)
 
-    if (typeof(this.imageConfigData.files) != 'undefined' && this.imageConfigData.files.length >= 1) {
-      for (let loop = 0; loop < this.imageConfigData.files.length; loop++) {
-        this.images_array =
-          this.images_array.concat({
-            "upload_server_id": this.imageConfigData.files[loop].upload.data._id,
-            "basepath": this.imageConfigData.files[loop].upload.data.basepath + '/' + this.imageConfigData.path + '/',
-            "fileservername": this.imageConfigData.files[loop].upload.data.data.fileservername,
-            "name": this.imageConfigData.files[loop].name,
-            "type": this.imageConfigData.files[loop].type,
-            "bucketname": this.imageConfigData.bucketName
-          });
-      }
+    // if (typeof(this.imageConfigData.files) != 'undefined' && this.imageConfigData.files.length >= 1) {
+    //   for (let loop = 0; loop < this.imageConfigData.files.length; loop++) {
+    //     this.images_array =
+    //       this.images_array.concat({
+    //         "upload_server_id": this.imageConfigData.files[loop].upload.data._id,
+    //         "basepath": this.imageConfigData.files[loop].upload.data.basepath + '/' + this.imageConfigData.path + '/',
+    //         "fileservername": this.imageConfigData.files[loop].upload.data.data.fileservername,
+    //         "name": this.imageConfigData.files[loop].name,
+    //         "type": this.imageConfigData.files[loop].type,
+    //         "bucketname": this.imageConfigData.bucketName
+    //       });
+    //   }
 
-      this.imageGalleryManagementForm.controls['img_gallery'].patchValue(this.images_array);
+    //   this.imageGalleryManagementForm.controls['img_gallery'].patchValue(this.images_array);
+    // } else {
+    //   // this.imageGalleryManagementForm.value.img_gallery = false;
+    // }
+
+    // for single image 
+
+    if (this.imageConfigData.files) {
+
+      if (this.imageConfigData.files.length > 1 ) { this.ErrCode = true; return; }
+      this.imageGalleryManagementForm.value.img_gallery =
+        {
+          "basepath": this.imageConfigData.files[0].upload.data.basepath + '/' + this.imageConfigData.path + '/',
+          "image": this.imageConfigData.files[0].upload.data.data.fileservername,
+          "name": this.imageConfigData.files[0].name,
+          "type": this.imageConfigData.files[0].type
+        };
     } else {
-      // this.imageGalleryManagementForm.value.img_gallery = false;
+
     }
+
+
 
     for (let x in this.imageGalleryManagementForm.controls) {
       this.imageGalleryManagementForm.controls[x].markAsTouched();

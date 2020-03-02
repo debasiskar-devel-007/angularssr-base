@@ -34,12 +34,13 @@ export class ListCategoryComponent implements OnInit {
   public dataListForImage: any = [];
   public tokenForImageViaApp: any;
 
-  public data_skip: any = ["_id", "description", "title_search", "parent_category_search"];
+  public data_skip: any = ["_id", "description", "title_search", "parent_category_search",
+  "date_unix"];
   public data_modify_header: any = {
     "parent category": "Parent Category", "title": "Title",
     "priority": "Priority", "status": "Status","date added": "Date"
   };
-  public previewModal_detail_skip: any = ["_id", "title_search", "parent_category_search"];
+  public previewModal_detail_skip: any = ["_id", "title_search", "parent_category_search","date_unix"];
 
   public status: any = [{ val: 1, 'name': 'Active' }, { val: 0, 'name': 'Inactive' }];
   public search_settings: any =
@@ -49,6 +50,7 @@ export class ListCategoryComponent implements OnInit {
         label: "Search By Title", field: 'title_search'
       },
       { label: "Search By Parent Category", field: 'parent_category' }],
+      datesearch:[{startdatelabel:"Start Date",enddatelabel:"End Date", submit:"Search By Date",  field:"date_unix"}]
     };
 
 
@@ -116,7 +118,7 @@ export class ListCategoryComponent implements OnInit {
 
   // ------------------------image section---------------------- //
 
-  public image_data_skip: any = ["_id", "category_name_search",'images'];
+  public image_data_skip: any = ["_id", "category_name_search",'images',"date_unix", "title_search"];
   public image_data_modify_header: any = {
 
     'category name': "Category Name",
@@ -127,7 +129,7 @@ export class ListCategoryComponent implements OnInit {
     'status': "Status"
 
   };
-  public image_previewModal_detail_skip: any = ["_id",'category_name_search','images'];
+  public image_previewModal_detail_skip: any = ["_id",'category_name_search','images',"date_unix", "title_search"];
 
   public image_status: any = [{ val: 1, 'name': 'Active' }, { val: 0, 'name': 'Inactive' }];
 
@@ -135,7 +137,11 @@ export class ListCategoryComponent implements OnInit {
     {
       selectsearch: [{ label: 'Search By Status', field: 'status', values: this.image_status }],
       textsearch: [
-        { label: "Search By Category", field: 'category_name_search' }],
+        { label: "Search By Title", field: 'title_search' },
+        { label: "Search By Category", field: 'category_name_search' }
+        ],
+        datesearch:[{startdatelabel:"Start Date",enddatelabel:"End Date", submit:"Search By Date",  field:"date_unix"}]
+        
     };
 
   public pendingmodelapplicationarray_detail_datatype: any = [{
@@ -206,8 +212,10 @@ export class ListCategoryComponent implements OnInit {
 
 
   ngOnInit() {
-
+    
+   
   }
+  
   AddButton() {
     this.router.navigateByUrl('/' + this.AddButtonRouteViaApp);
   }
@@ -218,5 +226,4 @@ export class ListCategoryComponent implements OnInit {
   AddImageButton() {
     this.router.navigateByUrl('/' + this.AddImageButtonRouteViaApp);
   }
-
 }

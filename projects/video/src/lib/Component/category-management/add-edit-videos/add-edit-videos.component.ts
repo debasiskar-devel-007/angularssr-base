@@ -1,6 +1,6 @@
 import { Component, OnInit, Input,ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormArray, FormGroup, Validators ,FormGroupDirective} from '@angular/forms';
-import { ApiService } from 'projects/video/src/lib/Service/api.service';
+import { ApiService } from '../../../Service/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 @Component({
@@ -10,7 +10,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class AddEditVideosComponent implements OnInit {
   public buttonText: any = "Submit";
-  public headerText: any = "Add Video Category";
+  public headerText: any = "Add Category";
 
   public model = {
     editorData: ''
@@ -68,7 +68,7 @@ export class AddEditVideosComponent implements OnInit {
     this.editedListData = val;
 
     if (this.activeroute.snapshot.params._id) {
-      this.headerText = "Edit Video Category";
+      this.headerText = "Edit Category";
       this.buttonText = "Update";
       this.parameter_id = this.activeroute.snapshot.params._id;
       this.videolibAddEditForm.controls['title'].patchValue(val[0].title);

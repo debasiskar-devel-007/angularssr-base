@@ -42,13 +42,14 @@
           <h1>Images:</h1>
           <!-- image upload library -->
           <lib-file-upload [config]="imageConfigData"></lib-file-upload>
+          <mat-error *ngIf="ErrCode==true">Please add just one image.</mat-error>
           <!-- end -->
 
           <!-- -------------------------------------------------------------------------------- -->
 
           <ng-container >
             <!-- CARD VIEW  -->
-            <mat-card-content class="files-view" *ngFor="let img of images_array_edit; let i2 = index">
+            <!-- <mat-card-content class="files-view" *ngFor="let img of images_array_edit; let i2 = index">
               <mat-card class="example-card">
                 <img mat-card-image [attr.src]="img.img_var">
                 <mat-card-title>{{ img.image_name }}</mat-card-title>
@@ -56,7 +57,21 @@
                 <span class="closecard" (click)="clear_image(i2)"><i class="material-icons">clear</i></span>
 
               </mat-card>
-            </mat-card-content>
+
+            </mat-card-content> -->
+
+            <mat-card-content class="files-view" *ngIf="img_flag==true">
+              <mat-card class="example-card">
+                  <img mat-card-image [attr.src]="fullImagePath">
+                  <mat-card-title>{{ imageName }}</mat-card-title>
+                  <mat-card-subtitle>{{ imageType }}</mat-card-subtitle>
+                  <span class="closecard" (click)="clear_image()"><i
+                          class="material-icons">clear</i></span>
+
+              </mat-card>
+          </mat-card-content>
+
+
             <!-- ----CARD VIEW end here-----  -->
           </ng-container>
           <!-- <mat-label class="label">Status :</mat-label> -->
