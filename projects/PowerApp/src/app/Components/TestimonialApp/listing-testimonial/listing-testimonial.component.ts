@@ -12,10 +12,10 @@ export class ListingTestimonialComponent implements OnInit {
 
   /************** lib list setup start here *************/
   public testimonialListConfig:any = {
-    apiBaseUrl: "https://i1kzfac3pe.execute-api.us-east-1.amazonaws.com/dev/api/",
+    apiBaseUrl: "https://9v41bpikik.execute-api.us-east-1.amazonaws.com/dev/api/",
     listEndPoint: "datalist",
-    datasource: "",
-    tableName: "testimonial",
+    datasource: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJleHAiOjE1ODMyMjIwMzQsImlhdCI6MTU4MzEzNTYzNH0.xAZvv_UbqrKksHklYMClsbqntHE5YXFNEp7uM9f-H0s",
+    tableName: "testimonial_view",
     updateurl: "addorupdatedata",
     editUrl: "testimonial/edit",
     jwtToken: "",   
@@ -27,6 +27,7 @@ export class ListingTestimonialComponent implements OnInit {
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private cookieService: CookieService) { 
 
   this.activatedRoute.data.subscribe(resolveData => {
+    console.warn(resolveData);
     this.testimonialListConfig.datasource = resolveData.testimonialList.res;
     this.testimonialListConfig.jwtToken = this.cookieService.get('jwtToken');
     

@@ -101,7 +101,7 @@ export class AddeditComponent implements OnInit {
       priority: ['', Validators.required],
       status: [true,],
       testimonial_img : ['',],
-      video_url:[],
+      video_url:[null],
       video_name:[],
       video_desc:[],
       userId: [this.configData.userData.id, null]
