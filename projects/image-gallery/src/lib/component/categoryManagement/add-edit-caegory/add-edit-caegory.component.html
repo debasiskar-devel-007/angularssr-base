@@ -35,7 +35,7 @@
 
           <!-- ckeditor end here -->
 
-          <mat-checkbox [formControl]="imageGalleryAddEditForm.controls['status']">Active</mat-checkbox><br>
+          
 
           <mat-form-field class="parent_cat">
             <mat-label>Parent Category</mat-label>
@@ -48,11 +48,14 @@
               </mat-option>
             </mat-select>
           </mat-form-field>
+
+          <mat-checkbox [formControl]="imageGalleryAddEditForm.controls['status']">Active</mat-checkbox><br><br>
+
           <button class="submitbtn" mat-raised-button color="primary" type="submit">{{buttonText}}</button>
           <button class="submitbtn"  mat-raised-button color="primary"
             type="reset">Reset</button>
         </form>
       </mat-card-content>
     </span>
-    <mat-spinner *ngIf="spinnerloader"></mat-spinner>
+    <!-- <mat-spinner *ngIf="spinnerloader"></mat-spinner> -->
   </mat-card>

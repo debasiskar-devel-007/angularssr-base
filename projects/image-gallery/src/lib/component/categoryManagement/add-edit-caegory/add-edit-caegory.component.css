@@ -22,7 +22,7 @@ cursor: pointer;
 
 .formspan {
   background-color: #e7e9ea;
-  border: 6px solid #fff;
+  border: 0px solid #fff;
   border-bottom: 10px solid #fff;
   display: inline-block;
   width: 100%;
@@ -36,7 +36,7 @@ display: flex;
 -webkit-box-direction: normal;
 flex-direction: column;
 width: 100%;
-padding: 14px;
+padding: 0px;
 margin-bottom: 0;
 }
 
@@ -47,7 +47,7 @@ margin-bottom: 0;
   width: 100%;
   background: #fff;
   margin-bottom: 9px;
-  padding: 1px 14px;
+  padding: 1px 0px;
   margin-right: 0px!important;
   margin-left: 0px!important;
 }

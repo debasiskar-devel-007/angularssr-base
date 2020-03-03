@@ -5,13 +5,14 @@ import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { ApiService } from '../../../Service/api.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
 @Component({
   selector: 'lib-add-edit-caegory',
   templateUrl: './add-edit-caegory.component.html',
   styleUrls: ['./add-edit-caegory.component.css']
 })
 export class AddEditCaegoryComponent implements OnInit {
-  public headerText: any = "Add Image Category";
+  public headerText: any = "Add Category";
   public buttonText: any = "Submit";
   imageGalleryAddEditForm: FormGroup;
   public serverUrlData: any;
@@ -28,6 +29,7 @@ export class AddEditCaegoryComponent implements OnInit {
   public singleDatalist: any = [];
   public editorconfig:any={};
   public sourceName:any='';
+  public message:any='Submitted Successfully';
   @ViewChild(FormGroupDirective, { static: false }) formDirective: FormGroupDirective;
 
   @Input()          //setting the server url from project
@@ -42,8 +44,9 @@ export class AddEditCaegoryComponent implements OnInit {
     this.singleDatalist = val;
     console.log("all edited data",this.singleDatalist);
     if (this.activeroute.snapshot.params._id) {
-      this.headerText = "Edit Image Category";
+      this.headerText = "Edit Category";
       this.buttonText = "Update";
+      this.message='Updated Successfully'
       this.parameter_id = this.activeroute.snapshot.params._id;
       this.imageGalleryAddEditForm.controls['title'].patchValue(val[0].title);
       this.imageGalleryAddEditForm.controls['priority'].patchValue(val[0].priority);
@@ -88,7 +91,7 @@ export class AddEditCaegoryComponent implements OnInit {
   };
   /**ckeditor end here*/
   constructor(public apiService: ApiService, public fb: FormBuilder, public activeroute: ActivatedRoute,
-    public _http: HttpClient, public router: Router) {
+    public _http: HttpClient, public router: Router,public _snackBar:MatSnackBar) {
 
     /**formgroup start here**/
     this.imageGalleryAddEditForm = this.fb.group({
@@ -177,6 +180,12 @@ export class AddEditCaegoryComponent implements OnInit {
     this.apiService.addData(data).subscribe(response => {
       this.spinnerloader = false;
       this.formDirective.resetForm();
+
+     
+        this._snackBar.open(this.message, 'OK', {
+          duration: 3000,
+        } )
+         
       setTimeout(() => {
         this.router.navigateByUrl('/' + this.listUrl);
       }, 100);

@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormArray, FormGroup, Validators, FormGroupDi
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog } from "@angular/material";
 import { ApiService } from '../../../Service/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 export interface DialogData {
   message: string;
@@ -38,6 +39,8 @@ export class AddEditVideoManagementComponent implements OnInit {
   };
   public video_prefix: any = "https://www.youtube.com/watch?v=";
   public vimeoPrefix: any = "https://vimeo.com/";
+  public message:any='Submitted Successfully';
+
 
   @ViewChild(FormGroupDirective, { static: false }) formDirective: FormGroupDirective;
 
@@ -78,7 +81,9 @@ export class AddEditVideoManagementComponent implements OnInit {
     this.VideoDataArray = Videodata;
     if (this.activeRoute.snapshot.params._id) {
       this.buttonText = "Update";
-      this.headerText = "Edit Video"
+      this.headerText = "Edit Video";
+      this.message='Updated Successfully';
+
       this.params_id = this.activeRoute.snapshot.params._id;
       this.videoManagementForm.controls['title'].patchValue(Videodata[0].title);
       this.videoManagementForm.controls['description'].patchValue(Videodata[0].description);
@@ -90,7 +95,7 @@ export class AddEditVideoManagementComponent implements OnInit {
     }
   }
   constructor(public dialog: MatDialog, public fb: FormBuilder, public apiService: ApiService,
-    public activeRoute: ActivatedRoute, public router: Router) {
+    public activeRoute: ActivatedRoute, public router: Router,public _snackBar:MatSnackBar) {
     this.videoManagementForm = this.fb.group({
 
       title: ['', Validators.required],
@@ -230,6 +235,9 @@ export class AddEditVideoManagementComponent implements OnInit {
         this.spinnerloader = false;
         let result: any = resp;
         this.formDirective.resetForm();
+        this._snackBar.open(this.message, 'OK', {
+          duration: 3000,
+        } )
         setTimeout(() => {
           this.router.navigateByUrl('/' + this.ListingRoute)
         }, 100);

@@ -22,7 +22,7 @@
   
   .formspan {
     background-color: #e7e9ea;
-    border: 6px solid #fff;
+    border: 0px solid #fff;
     border-bottom: 10px solid #fff;
     display: inline-block;
     width: 100%;
@@ -36,7 +36,7 @@
   -webkit-box-direction: normal;
   flex-direction: column;
   width: 100%;
-  padding: 14px;
+  padding: 0px;
   margin-bottom: 0;
   }
   
@@ -44,10 +44,10 @@
     display: inline-block;
     position: relative;
     text-align: left;
-    width: 100%;
+    width: 98%;
     background: #fff;
     margin-bottom: 9px;
-    padding: 1px 14px;
+    padding: 1px 1%;
     margin-right: 0px!important;
     margin-left: 0px!important;
   }

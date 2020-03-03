@@ -1,10 +1,10 @@
 
 <!-- header start here -->
-<mat-card>
+<!-- <mat-card>
   <mat-toolbar color="primary" style="justify-content: center; align-items: center;">
     <h2 class="headerSpan">Video & Category Management</h2>
   </mat-toolbar>
- 
+</mat-card> -->
   <!-- <mat-toolbar class="buttonsetToolbar">
     <button class="singleButton" mat-raised-button color="primary" (click)="addVideoCategoryButton()" > Add Video Category</button>
 
@@ -12,19 +12,30 @@
 </mat-toolbar> -->
 
 
-</mat-card>
+
 
 <div>
 
 <mat-tab-group class="gallery_body">
 
-  <mat-tab label="Category Management"> 
+  <mat-tab label="Category List"> 
 
-    <mat-toolbar class="buttonsetToolbar">
+    <mat-card-content class="listing_titlebar"> 
+      <span class="titlewrapper">
+        <h2>Category Management</h2>
+      </span>
+      <span class="buttonwrapper">
+        <button  mat-raised-button color="primary" 
+        (click)="addVideoCategoryButton()" > Add Category</button>
+      </span>
+      
+      </mat-card-content>
+
+    <!-- <mat-toolbar class="buttonsetToolbar">
       <button class="singleButton" mat-raised-button color="primary" 
       (click)="addVideoCategoryButton()" > Add Category</button>
   
-  </mat-toolbar>
+  </mat-toolbar> -->
     
      <!--lib-listing start here -->
   <mat-card-content class="listing-content-admin" 
@@ -53,11 +64,21 @@
 
 
   <mat-tab label="Video Management"> 
-    <mat-toolbar class="buttonsetToolbar">
-     
-  
+    <!-- <mat-toolbar class="buttonsetToolbar">
+    
     <button class="singleButton" mat-raised-button color="primary" (click)="videoManagementButton()" > Add Video</button>
-  </mat-toolbar>
+  </mat-toolbar> -->
+
+  <mat-card-content class="listing_titlebar"> 
+    <span class="titlewrapper">
+      <h2>Category Management</h2>
+    </span>
+    <span class="buttonwrapper">
+      <button  mat-raised-button color="primary" 
+      (click)="videoManagementButton()" > Add Video </button>
+    </span>
+    
+    </mat-card-content>
 
 
 <mat-card-content class="listing-content-admin" *ngIf="allVideoDataList !=null && allVideoDataList.length > 0" >

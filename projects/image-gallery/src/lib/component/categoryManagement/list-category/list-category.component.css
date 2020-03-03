@@ -59,5 +59,14 @@
 :host ::ng-deep .mat-tab-group .mat-tab-body-wrapper .mat-tab-body.mat-tab-body-active {min-height: 70px !important;}
 
 
- 
+ .listing_titlebar{
+   display: flex;
+   justify-content: space-between;
+   align-items: center;
+   width: 98%;
+   padding: 1%;
+   background-color: #ddd;
+   margin: 0;
+ }
+ .titlewrapper h2{margin: 0;}
 

@@ -1,10 +1,10 @@
 
 
-<mat-card  >
+<!-- <mat-card  >
     <mat-toolbar color="primary" style="justify-content: center; align-items: center;">
       <h2 class="headerSpan">{{headerText}}</h2>
     </mat-toolbar>
-  </mat-card>
+  </mat-card> -->
   <!-- add button start here -->
   <!-- <mat-toolbar class="buttonsetToolbar">
     <button class="singleButton" mat-raised-button color="primary" (click)="AddButton()" > Add Image Category</button>
@@ -18,10 +18,22 @@
 <mat-tab-group  class="gallery_body">
 
   <!-- tab section for category  -->
-  <mat-tab label="Category Management "> 
-    <mat-toolbar class="buttonsetToolbar ">
+  <mat-tab label="Category List "> 
+
+<mat-card-content class="listing_titlebar"> 
+<span class="titlewrapper">
+  <h2>Category Management</h2>
+</span>
+<span class="buttonwrapper">
+  <button mat-raised-button color="primary" (click)="AddButton()" > Add  Category</button>
+</span>
+
+</mat-card-content>
+
+
+    <!-- <mat-toolbar class="buttonsetToolbar ">
       <button class="singleButton" mat-raised-button color="primary" (click)="AddButton()" > Add  Category</button>
-    </mat-toolbar>
+    </mat-toolbar> -->
 
   <!-- adding button end here -->
   
@@ -51,12 +63,21 @@
 
 
   <!-- tab section for image  -->
-  <mat-tab label="Image Management"> 
-    <mat-toolbar class="buttonsetToolbar">
+  <mat-tab label="Image List"> 
+    <mat-card-content class="listing_titlebar"> 
+      <span class="titlewrapper">
+        <h2>Image Management</h2>
+      </span>
+      <span class="buttonwrapper">
+        <button mat-raised-button color="primary" (click)="AddImageButton()" > Add Image</button>
+      </span>
+      
+      </mat-card-content>
+    <!-- <mat-toolbar class="buttonsetToolbar">
   
-      <!-- <button class="singleButton" mat-raised-button color="primary" (click)="manageButton()" >Image Management</button> -->
-      <button class="singleButton" mat-raised-button color="primary" (click)="AddImageButton()" > Add Image</button>
-    </mat-toolbar>
+      <button class="singleButton" mat-raised-button color="primary" (click)="manageButton()" >Image Management</button> 
+     <button class="singleButton" mat-raised-button color="primary" (click)="AddImageButton()" > Add Image</button> 
+    </mat-toolbar> -->
   <!-- adding button end here -->
   <mat-card-content class="listing-content-admin" 
   *ngIf="dataListForImage !=null && dataListForImage.length > 0">

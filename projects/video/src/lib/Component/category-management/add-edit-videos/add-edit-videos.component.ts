@@ -3,6 +3,8 @@ import { FormBuilder, FormControl, FormArray, FormGroup, Validators ,FormGroupDi
 import { ApiService } from '../../../Service/api.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
+import {MatSnackBar} from '@angular/material/snack-bar';
+
 @Component({
   selector: 'lib-add-edit-videos',
   templateUrl: './add-edit-videos.component.html',
@@ -29,6 +31,8 @@ export class AddEditVideosComponent implements OnInit {
   public allCategoryName: any = [];
   public spinnerloader: boolean; // for spinner loader
   public editorconfig: any = {};
+  public message:any='Submitted Successfully';
+
   @ViewChild(FormGroupDirective, { static: false }) formDirective: FormGroupDirective;
 
 
@@ -70,6 +74,8 @@ export class AddEditVideosComponent implements OnInit {
     if (this.activeroute.snapshot.params._id) {
       this.headerText = "Edit Category";
       this.buttonText = "Update";
+      this.message='Updated Successfully';
+
       this.parameter_id = this.activeroute.snapshot.params._id;
       this.videolibAddEditForm.controls['title'].patchValue(val[0].title);
       this.videolibAddEditForm.controls['priority'].patchValue(val[0].priority);
@@ -80,7 +86,7 @@ export class AddEditVideosComponent implements OnInit {
     }
   }
   constructor(public fb: FormBuilder, public activeroute: ActivatedRoute,
-    public _http: HttpClient, public router: Router, public apiService: ApiService) {
+    public _http: HttpClient, public router: Router, public apiService: ApiService,public _snackBar:MatSnackBar) {
     /**formgroup start here**/
     this.videolibAddEditForm = this.fb.group({
       title: ['', Validators.required],
@@ -177,6 +183,11 @@ export class AddEditVideosComponent implements OnInit {
         this.videoStatusArr = result.status;
         this.spinnerloader = false;
         this.formDirective.resetForm();
+
+        this._snackBar.open(this.message, 'OK', {
+          duration: 3000,
+        } )
+
         setTimeout(() => {
           this.router.navigateByUrl('/' + this.listUrl);
         }, 100)

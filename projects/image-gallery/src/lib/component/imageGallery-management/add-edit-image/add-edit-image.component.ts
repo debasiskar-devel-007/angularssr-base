@@ -3,6 +3,8 @@ import { FormBuilder, FormControl, FormGroup, Validators, FormGroupDirective } f
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { ApiService } from '../../../Service/api.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+
 @Component({
   selector: 'lib-add-edit-image',
   templateUrl: './add-edit-image.component.html',
@@ -34,6 +36,7 @@ export class AddEditImageComponent implements OnInit {
   public imageName:any;
   public imageType:any;
   public img_flag:any=false;
+  public message:any='Submitted Successfully';
 
   @ViewChild(FormGroupDirective, { static: false }) formDirective: FormGroupDirective;
 
@@ -86,6 +89,8 @@ export class AddEditImageComponent implements OnInit {
 
       this.headerText = "Edit Image";
       this.buttonText = "Update";
+      this.message='Updated Successfully'
+
       this.parameter_id = this.activeroute.snapshot.params._id;
       this.imageGalleryManagementForm.controls['category_name'].patchValue(val[0].category_name);
       this.imageGalleryManagementForm.controls['img_gallery'].patchValue(val[0].img_gallery);
@@ -118,7 +123,7 @@ export class AddEditImageComponent implements OnInit {
 
   }
   constructor(public apiService: ApiService, public fb: FormBuilder, public activeroute: ActivatedRoute,
-    public _http: HttpClient, public router: Router) {
+    public _http: HttpClient, public router: Router,public _snackBar:MatSnackBar) {
     this.imageGalleryManagementForm = this.fb.group({
       category_name: ['',Validators.required],
       img_gallery: [''],
@@ -252,10 +257,16 @@ export class AddEditImageComponent implements OnInit {
         }
       }
     }
+    
     this.spinnerLoader = true;
     this.apiService.addData(data).subscribe(response => {
       this.spinnerLoader = false;
       this.formDirective.resetForm();
+
+      this._snackBar.open(this.message, 'OK', {
+        duration: 3000,
+      } )
+       
       setTimeout(() => {
         this.router.navigateByUrl('/' + this.listUrl);
       }, 100);
