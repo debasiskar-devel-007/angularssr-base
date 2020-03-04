@@ -110,18 +110,35 @@
 
         <!-- video name  -->
         <mat-form-field>
-          <input matInput placeholder="Video title" formControlName="video_name">
+          <input matInput placeholder="Video Title" formControlName="video_name">
         </mat-form-field>
 
         <!-- Video description  -->
         <mat-form-field>
-          <input matInput placeholder="Video description" formControlName="video_desc">
+          <input matInput placeholder="Video Description" formControlName="video_desc">
         </mat-form-field>
 
         <br>
         <!-- ------------------------------------------------------------------- -->
 
+                <!-- --------------------------------------Audio Attachment--------------------- -->
+                <h1>Attach a testimonial Audio:</h1>
 
+                <span>
+                  <lib-file-upload  [config]="audioConfigData"></lib-file-upload>
+                </span>
+                <mat-card-content class="files-view" *ngIf="flag2==true">
+                  <mat-card class="example-card">
+                    <audio controls>
+                      <source src="{{ testimonialAudio }}" type="audio/ogg">
+                      <source src="{{ testimonialAudio }}" type="audio/mpeg">
+                    Your browser does not support the audio element.
+                    </audio>
+                    <span class="closecard" (click)="clear_audio()"><i class="material-icons">clear</i></span>
+                  </mat-card>
+                </mat-card-content>
+                <br>
+                <!-- ------------------------------------------------------------------- -->
         
 
 

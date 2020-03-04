@@ -21,6 +21,7 @@ import { NavigationCancel, NavigationEnd, NavigationError, NavigationStart, Rout
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: lib/listing.service.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var ListingService = /** @class */ (function () {
@@ -39,6 +40,7 @@ var ListingService = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: lib/api.service.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var ApiService = /** @class */ (function () {
@@ -650,6 +652,7 @@ var ApiService = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: lib/listing.component.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 /** @type {?} */
@@ -2354,6 +2357,7 @@ var BottomSheet = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: lib/materialmodules.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var DemoMaterialModule = /** @class */ (function () {
@@ -2412,6 +2416,7 @@ var DemoMaterialModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: lib/listing.module.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 //import { SinglepostComponent } from './singlepost/singlepost.component';
@@ -2442,11 +2447,13 @@ var ListingModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: public-api.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: listing-angular7.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
