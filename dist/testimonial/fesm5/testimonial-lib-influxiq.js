@@ -568,7 +568,7 @@ var AddeditComponent = /** @class */ (function () {
                 source: this.configData.source,
                 data: Object.assign(this.testimonialForm.value, this.configData.condition)
             };
-            console.warn(postData);
+            // console.warn(postData);
             this.testiService.addData(this.configData.endpoint, postData).subscribe((/**
              * @param {?} response
              * @return {?}

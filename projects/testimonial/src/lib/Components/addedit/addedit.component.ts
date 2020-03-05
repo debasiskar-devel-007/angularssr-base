@@ -172,7 +172,7 @@ export class AddeditComponent implements OnInit {
         source: this.configData.source,
         data: Object.assign(this.testimonialForm.value, this.configData.condition)
       };
-      console.warn(postData);
+     // console.warn(postData);
       this.testiService.addData(this.configData.endpoint, postData).subscribe((response: any) => {
         if (response.status == "success") {
           this.openDialog(this.successMessage);
