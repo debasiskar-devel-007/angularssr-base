@@ -25,6 +25,7 @@ export class AddeditImageComponent implements OnInit {
     prefix: "imageGallery-picture_",
     formSubmit: false,
     conversionNeeded: 0,
+    aspectratio: [467/638,467/467],
     bucketName: "image-gallery-bucket"
   }
 

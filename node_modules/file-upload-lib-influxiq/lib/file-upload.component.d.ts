@@ -4,6 +4,7 @@ import { FileUploadService } from './file-upload.service';
 import { ActivatedRoute, Router } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog } from '@angular/material/dialog';
+import { ImageCroppedEvent } from 'ngx-image-cropper';
 export declare class FileUploadComponent implements OnInit {
     private formBuilder;
     private fileUploadService;
@@ -18,12 +19,15 @@ export declare class FileUploadComponent implements OnInit {
     totalFile: number;
     dialogRef: any;
     loading: boolean;
+    num: any;
+    imageChangedEvent: any;
+    croppedImage: any;
     imgResultBeforeCompress: string;
     imgResultAfterCompress: string;
     config: any;
     constructor(formBuilder: FormBuilder, fileUploadService: FileUploadService, ActivatedRoute: ActivatedRoute, router: Router, _snackBar: MatSnackBar, dialog: MatDialog);
     ngOnInit(): void;
-    selectFiles(event: any): void;
+    selectFiles(event: any, ev1: any): void;
     viewFiles(count: any, element: any): void;
     checkingValidation(element: any): any;
     uploadAll(getIndex?: any): void;
@@ -34,4 +38,9 @@ export declare class FileUploadComponent implements OnInit {
     openDialog(): void;
     deleteAll(): void;
     previewFiles(index: any): void;
+    fileChangeEvent(event: any): void;
+    imageCropped(event: ImageCroppedEvent, i: any): void;
+    imageLoaded(): void;
+    cropperReady(): void;
+    loadImageFailed(): void;
 }

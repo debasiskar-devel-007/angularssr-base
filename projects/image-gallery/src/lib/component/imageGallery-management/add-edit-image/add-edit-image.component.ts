@@ -43,6 +43,7 @@ export class AddEditImageComponent implements OnInit {
   @Input()
   set imageUpload(getConfig: any) {
     this.imageConfigData = getConfig;
+    console.log( '>>>>>>>>>>>',this.imageConfigData)
   }
 
   @Input()
@@ -207,7 +208,9 @@ export class AddEditImageComponent implements OnInit {
           "basepath": this.imageConfigData.files[0].upload.data.basepath + '/' + this.imageConfigData.path + '/',
           "image": this.imageConfigData.files[0].upload.data.data.fileservername,
           "name": this.imageConfigData.files[0].name,
-          "type": this.imageConfigData.files[0].type
+          "type": this.imageConfigData.files[0].type,
+          "aspectratio":this.imageConfigData.aspectratio,
+          "croppedfiles":this.imageConfigData.croppedfiles
         };
     } else {
 
@@ -277,5 +280,12 @@ export class AddEditImageComponent implements OnInit {
 
     form.controls[val].markAsUntouched();
   }
+
+
+
+
+  // uploadImage(){
+  //   console.log(this.imageConfigData)
+  // }
   
 }
