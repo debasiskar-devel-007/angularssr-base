@@ -1,6 +1,6 @@
 <!-- File Upload -->
-<div class="uploadfilecontainer" (click)="fileInput.click()" libDragDrop (onFileDropped)="selectFiles($event)">
-    <input hidden type="file" #fileInput (change)="selectFiles($event.target.files)" multiple>
+<div class="uploadfilecontainer" (click)="fileInput.click()" libDragDrop (onFileDropped)="selectFiles($event,$event)">
+    <input hidden type="file" #fileInput (change)="selectFiles($event.target.files,$event)" multiple>
     <div class="uploadtextwrapper">
         <h2>Drag and Drop Files</h2>
         <p>Supported Formats:
@@ -43,6 +43,40 @@
                 <mat-progress-bar mode="determinate" *ngIf="file.upload.status == 'progress'"
                     value="{{ file.upload.data.percentage }}"></mat-progress-bar>
                 <mat-progress-bar mode="indeterminate" *ngIf="file.upload.status == 'waiting'"></mat-progress-bar>
+
+                <ng-container *ngIf="configData.aspectratio !=null && configData.aspectratio.length>0" >
+                    <h2> Croped Images :</h2>
+                    <!-- <span>ddd {{configData.aspectratio}}----{{configData.aspectratio.length}}
+
+                    </span>  -->
+
+                    <ng-container *ngFor="let c of configData.aspectratio;let ci=index">
+                        <!-- <span>00aspectratio---{{c}}</span> -->
+
+
+                        <br/>
+                        <span>Croped Image (Asepect Ratio) :{{num[ci]}}</span><br>
+                        <image-cropper
+                        [imageChangedEvent]="imageChangedEvent[i][ci]"
+                        [maintainAspectRatio]="true"
+                        [aspectRatio]=c
+                        [onlyScaleDown]="true"
+                        [roundCropper]="false"
+                        [alignImage]="'left'"
+                        (imageCropped)="imageCropped($event,ci)"
+                    ></image-cropper>
+                    <br/>
+                    <span>Croped Image Output : </span><br>
+                    
+                    <img [src]="croppedImage[ci]" />
+    
+                    </ng-container>
+
+                </ng-container>
+
+                
+
+
             </mat-card-content>
 
             <mat-card-actions>
@@ -55,7 +89,20 @@
 
                 <button mat-raised-button type="button" color="warn" matTooltip="Remove" aria-label="Remove"
                     (click)="removeFiles(i);">Remove</button>
+
+
+                    <!-- <button mat-raised-button type="button" color="warn"
+                    (click)="getdata();">get data</button> -->
             </mat-card-actions>
+
+
         </span>
     </mat-card>
-</div>
+<!-- </div> -->
+
+
+ 
+
+<!-- image cropped section test -->
+<!-- <input type="file" (change)="fileChangeEvent($event)" /> -->
+

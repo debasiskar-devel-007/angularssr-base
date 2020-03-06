@@ -9,6 +9,9 @@ import { DialogBoxComponent } from './component/dialog-box/dialog-box.component'
 import { PreviewFilesComponent } from './component/preview-files/preview-files.component';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { from } from 'rxjs';
+import { ImageCroppedEvent } from 'ngx-image-cropper';
+
+
 
 @Component({
   selector: 'lib-file-upload',
@@ -25,14 +28,34 @@ export class FileUploadComponent implements OnInit {
   public totalFile: number = 0;
   public dialogRef: any;
   public loading: boolean = false;
+  public num: any=[];
 
-  imgResultBeforeCompress:string;
-  imgResultAfterCompress:string;
+  // image cropped section for test 
+
+  imageChangedEvent: any = [];
+  croppedImage: any = [];
+
+  imgResultBeforeCompress: string;
+  imgResultAfterCompress: string;
 
   @Input()
   set config(getConfig: any) {
     this.configData = getConfig;
+    // console.log( '>>>>',this.configData,this.configData.aspectratio.length);
+
+    for (let c in this.configData.aspectratio) {
+      // console.log(this.configData.aspectratio[c])
+      let val = this.configData.aspectratio[c];
+      this.num[c] = val.toFixed(2); 
+      console.log(this.num)
+
+
+    }
   }
+
+
+
+
 
   constructor(private formBuilder: FormBuilder, private fileUploadService: FileUploadService,
     private ActivatedRoute: ActivatedRoute, private router: Router, private _snackBar: MatSnackBar,
@@ -42,11 +65,22 @@ export class FileUploadComponent implements OnInit {
   }
 
   /* Select File Proccess */
-  selectFiles(event) {
+  selectFiles(event: any, ev1: any) {
+    //this.fileChangeEvent(ev1);
+    console.log(event)
+    // this.imageChangedEvent=event;
     this.loading = true;
     for (let index = 0; index < event.length; index++) {
       var count: number = this.files.length;
       const element = event[index];
+      for(let cc in this.configData.aspectratio){
+        console.log('cc',cc,index);
+        if(this.imageChangedEvent[index]==null)
+        this.imageChangedEvent[index]=[]; 
+        this.imageChangedEvent[index][cc] = ev1; 
+      }
+      
+      console.log(event, this.imageChangedEvent, 'img', ev1);
 
       /* Checking Validation */
       let validate: any = this.checkingValidation(element);
@@ -70,7 +104,7 @@ export class FileUploadComponent implements OnInit {
 
   viewFiles(count, element) {
     let format = element.type.split("/");
-    if(format[0] == 'image') {
+    if (format[0] == 'image') {
       var reader = new FileReader();
       let imagePath = this.files[count];
       reader.readAsDataURL(this.files[count]);
@@ -130,6 +164,7 @@ export class FileUploadComponent implements OnInit {
       uploadType: this.configData.uploadType,
       conversion_needed: this.configData.conversionNeeded,
       bucketname: this.configData.bucketName
+
     }
 
     var url: string = this.configData.baseUrl + this.configData.endpoint + '?path=' + this.configData.path + '&prefix=' + this.configData.prefix + '&type=' + this.configData.type + '&rand=' + index;
@@ -212,5 +247,46 @@ export class FileUploadComponent implements OnInit {
       });
     }
   }
+
+
+
+
+
+
+
+
+  fileChangeEvent(event) {
+    console.log('fileChangeEvent', event)
+    this.imageChangedEvent = event
+
+  }
+  imageCropped(event: ImageCroppedEvent, i: any) {
+    console.log('>>>>>>>>>',event,i)
+    this.croppedImage[i] = event.base64;
+    console.log('imageCropped', this.croppedImage);
+    this.configData.croppedfiles=this.croppedImage;
+    // console.log('imageCr..> ',   this.configData.croppedfiles);
+
+  }
+  imageLoaded() {
+    // show cropper
+  }
+  cropperReady() {
+    // cropper ready
+  }
+  loadImageFailed() {
+    // show message
+  }
+
+
+  // getdata(){
+  //   console.log(this.configData)
+  // }
+
+
+
+
+
+
 
 }

@@ -9,6 +9,8 @@ import { DragDropDirective } from './directive/drag-drop.directive';
 import { AlertMessageComponent } from './component/alert-message/alert-message.component';
 import { DialogBoxComponent } from './component/dialog-box/dialog-box.component';
 import { PreviewFilesComponent } from './component/preview-files/preview-files.component';
+import { ImageCropperModule } from 'ngx-image-cropper';
+
 
 @NgModule({
   declarations: [
@@ -25,6 +27,7 @@ import { PreviewFilesComponent } from './component/preview-files/preview-files.c
     ReactiveFormsModule,
     HttpClientModule,
     ListingModule,
+    ImageCropperModule
   ],
   providers: [],
   exports: [FileUploadComponent],

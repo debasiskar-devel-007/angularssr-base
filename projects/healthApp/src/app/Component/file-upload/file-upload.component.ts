@@ -10,7 +10,7 @@ import { CookieService } from 'ngx-cookie-service';
 export class FileUploadComponent implements OnInit {
 
   public configData: any = {
-    baseUrl: "http://3.15.236.141:5005/",
+    baseUrl: "https://fileupload.influxhostserver.com/",
     endpoint: "uploads",
     size: "51200", // kb
     format: ["jpg", "jpeg", "png", "bmp", "zip", 'html'], // use all small font
@@ -18,6 +18,7 @@ export class FileUploadComponent implements OnInit {
     path: "files",
     prefix: "profile_picture_",
     conversionNeeded: 1,
+    aspectratio: [467/638,467/467],
     bucketName: "awsbackend-dev-patient-files"
   }
 
@@ -31,3 +32,5 @@ export class FileUploadComponent implements OnInit {
   }
 
 }
+
+
