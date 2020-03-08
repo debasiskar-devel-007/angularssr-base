@@ -51,6 +51,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: lib/resourcelib.service.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var ResourcelibService = /** @class */ (function () {
@@ -305,6 +306,7 @@ var ResourcelibService = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: lib/resourcelib.component.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var ResourcelibComponent = /** @class */ (function () {
@@ -372,6 +374,7 @@ var ResourcelibComponent = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: lib/Modules/material-module.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 //import { MatFileUploadModule } from 'angular-material-fileupload';
@@ -431,6 +434,7 @@ var DemoMaterialModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: lib/Components/addedit-resourceapp/addedit-resourceapp.component.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var AddeditResourceappComponent = /** @class */ (function () {
@@ -706,6 +710,7 @@ var Modal = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: lib/resourcelib.module.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 var ResourcelibModule = /** @class */ (function () {
@@ -731,11 +736,13 @@ var ResourcelibModule = /** @class */ (function () {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: public-api.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: resourcelib.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 

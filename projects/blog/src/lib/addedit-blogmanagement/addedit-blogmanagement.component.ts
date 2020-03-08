@@ -6,9 +6,7 @@ import { ApiService } from '../api.service';
 import { Observable } from 'rxjs';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog, MatSnackBar } from "@angular/material";
 import { map, startWith } from 'rxjs/operators';
-// import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
-import { BlogService } from '../blog.service';
-// import { DemoMaterialModule } from '../material-module';
+
 
 
 
@@ -26,17 +24,19 @@ export interface DialogData {
 })
 
 export class AddeditBlogmanagementComponent implements OnInit {
+  /**ckeditor start here*/
+  // public Editor = ClassicEditor;  //for ckeditor
+  // editorConfig = {
+  //   placeholder: 'Description*',
+  // };
+  // public model = {
+  //   editorData: ''
+  // };
+  /**ckeditor end here*/
 
 
-/**ckeditor start here*/
-// public Editor = ClassicEditor;  //for ckeditor
-editorConfig = {
-  placeholder: 'Write testimonial...',
-};
-public model = {
-  editorData: ''
-};
-/**ckeditor end here*/
+
+
 
   // ---------------------declarations-------------------------------------
   public headerText: any = 'Add Blog Management Data';
@@ -52,26 +52,26 @@ public model = {
   options: any = [''];
   filteredOptions: Observable<string[]>;
   myControl = new FormControl();
-  public tags_array: any = [];
-  public dialogRef: any;
+  tags_array: any = [];
+  dialogRef: any;
   public params_id: any;
-  public setData: any;
-  public messageText: any;
-  public listUrl: any;
-  public testTag: any = [];
-  public imageConfigData: any;
-  public ErrCode: any;
-  public img_var: any;
-  public image_name: any;
-  public image_type: any;
-  public flag: boolean = false;
-  public images_array: any = [];
-  public images_array_edit: any = [];
-  public fileConfigData: any;
-  public file_array: any = [];
-  public file_array_edit: any = [];
-  public action2: any;
-  public editorconfig: any = {};
+  setData: any;
+  messageText: any;
+  listUrl: any;
+  testTag: any = [];
+  imageConfigData: any;
+  ErrCode: any;
+  img_var: any;
+  image_name: any;
+  image_type: any;
+  flag: boolean = false;
+  images_array: any = [];
+  images_array_edit: any = [];
+  fileConfigData: any;
+  file_array: any = [];
+  file_array_edit: any = [];
+  action2:any;
+  editorconfig:any={};
   // -----------------------------------------------------------------------
 
 
@@ -91,7 +91,6 @@ public model = {
   set serverUrl(serverUrl: any) {
     this.serverUrlData = (serverUrl) || '<no name set>';
     this.serverUrlData = serverUrl;
-
   }
 
   @Input()          //setting the server url from project
@@ -105,6 +104,7 @@ public model = {
   set addEndpoint(endpointUrlval: any) {
     this.addEndpointData = (endpointUrlval) || '<no name set>';
     this.addEndpointData = endpointUrlval;
+
   }
 
 
@@ -119,25 +119,22 @@ public model = {
   constructor(private http: HttpClient, private apiservice: ApiService,
     private activatedRoute: ActivatedRoute, private router: Router,
     private formBuilder: FormBuilder, public dialog: MatDialog,
-    public snackBar: MatSnackBar, private blogService: BlogService) {
-    
-      this.editorconfig.extraAllowedContent = '*[class](*),span;ul;li;table;td;style;*[id];*(*);*{*}';
-
+    public snackBar: MatSnackBar) {
     this.blogManagementForm = this.formBuilder.group({
       blogtitle: ['', [Validators.required]],
-      blogcat: ['',],
+      blogcat: ['', ],
       description: ['', [Validators.required]],
       priority: ['', [Validators.required]],
       status: ['true',],
       // metatitle: ['', [Validators.required]],
       // metadesc: ['', [Validators.required]],
-      author: ['', [Validators.required]],
-      credentials: this.formBuilder.array([]),
+      author:['',[Validators.required]],
+      video: this.formBuilder.array([]),
       tags: [''],
       blogs_image: [''],
       blogs_file: ['']
     });
-    
+    this.editorconfig.extraAllowedContent = '*[class](*),span;ul;li;table;td;style;*[id];*(*);*{*}';
   }
 
 
@@ -157,7 +154,7 @@ public model = {
     }, 50);
     /**Observable end here**/
 
-    if (this.action2 != 'edit')
+    if (this.action2!='edit')
       setTimeout(() => {
         this.addYoutubeVideo('', '', '');
       }, 500)
@@ -172,8 +169,8 @@ public model = {
     }, 50)
 
 
-    if (this.action2 == 'edit') {
-      this.headerText = "Edit Blog Management Data";
+    if (this.action2=='edit') {
+      this.headerText="Edit Blog Management Data";
       this.flag = true;
       this.params_id = this.setData._id;
       this.buttonText = "Update";
@@ -181,7 +178,7 @@ public model = {
       this.blogManagementForm.controls['blogcat'].patchValue(this.setData.blogcat);
       this.blogManagementForm.controls['description'].patchValue(this.setData.description);
       this.blogManagementForm.controls['priority'].patchValue(this.setData.priority);
-      this.blogManagementForm.controls['status'].patchValue(this.setData.status);
+      this.blogManagementForm.controls['status'].patchValue(this.setData.status);  
       this.blogManagementForm.controls['blogs_image'].patchValue(this.setData.blogs_image);
       this.blogManagementForm.controls['blogs_file'].patchValue(this.setData.blogs_file);
       this.blogManagementForm.controls['author'].patchValue(this.setData.author);
@@ -213,10 +210,10 @@ public model = {
       }
 
 
-      for (const vid in this.setData.credentials) {
-        this.addYoutubeVideo(this.setData.credentials[vid].video_url,
-          this.setData.credentials[vid].video_title,
-          this.setData.credentials[vid].video_description);
+      for (const vid in this.setData.video) {
+        this.addYoutubeVideo(this.setData.video[vid].video_url,
+          this.setData.video[vid].video_title,
+          this.setData.video[vid].video_description);
       }
 
       if (this.setData.tags != "")
@@ -308,7 +305,7 @@ public model = {
 
   // ----------------------------------Add Credential Fucntions-----------------
   addYoutubeVideo(vid_url: any, vid_tit: any, vid_desc: any) {
-    const creds = this.blogManagementForm.controls.credentials as FormArray;
+    const creds = this.blogManagementForm.controls.video as FormArray;
     creds.push(this.formBuilder.group({
       video_url: [vid_url],
       video_title: [vid_tit],
@@ -322,9 +319,10 @@ public model = {
 
 
 
+
   // ---------------------------------Delete Credetial Fucntions----------------
   deleteCreds() {
-    const creds = this.blogManagementForm.controls.credentials as FormArray;
+    const creds = this.blogManagementForm.controls.video as FormArray;
     creds.removeAt(1);
   }
   // ----------------------------------------------------------------------------
@@ -363,8 +361,12 @@ public model = {
     this.apiservice.getData(data).subscribe(response => {
       let result: any;
       result = response;
-      if (result != null && result.res != null && result.res[0] != null)
-        this.options = result.res[0].tags;
+      if (result != null && result.res != null && result.res[0] != null)      
+        this.options=result.res[0].tags;
+      
+       
+
+
     });
   }
   // ----------------------------------------------------------------------------------
@@ -383,7 +385,7 @@ public model = {
 
   // ---------------------------------SUBMIT----------------------------------------
   onSubmit() {
-
+     
     /*__________________________IMAGE UPLOADER________________________________________*/
     if (this.imageConfigData) {
       for (const loop in this.imageConfigData.files) {
@@ -423,13 +425,14 @@ public model = {
     this.blogManagementForm.value.tags = this.tags_array;
 
     this.blogManagementForm.controls['description'].markAsTouched();
+    this.blogManagementForm.controls['blogtitle'].markAsTouched();
 
     if (this.blogManagementForm.valid) {
       if (this.blogManagementForm.value.status)
-        this.blogManagementForm.value.status = parseInt("1");
+        this.blogManagementForm.value.status =1;
       else
-        this.blogManagementForm.value.status = parseInt("0");
-      if (this.params_id != null) {    //update part
+        this.blogManagementForm.value.status =0;
+      if (this.params_id!= null) {    //update part
         this.messageText = "One row updated!!!";
         this.blogManagementForm.value.tags = this.tags_array;
         data = {
@@ -440,19 +443,16 @@ public model = {
             "blogcat": this.blogManagementForm.value.blogcat,
             "description": this.blogManagementForm.value.description,
             "priority": this.blogManagementForm.value.priority,
-            "status": this.blogManagementForm.value.status,
-            "metatitle": this.blogManagementForm.value.metatitle,
-            "metadesc": this.blogManagementForm.value.metadesc,
+            "status": this.blogManagementForm.value.status, 
             "tags": this.blogManagementForm.value.tags,
-            "credentials": this.blogManagementForm.value.credentials,
+            "video": this.blogManagementForm.value.video,
             "blogs_image": this.blogManagementForm.value.blogs_image,
             "blogs_file": this.blogManagementForm.value.blogs_file,
-            "author": this.blogManagementForm.value.author
+            "author":this.blogManagementForm.value.author
 
           },
           "sourceobj": ["blogcat"]
         };
-        this.openSnackBar2("Blog Details Updated Successfully!!!", "OK");
       } else {
         this.isSubmitted = true;
         var data: any;
@@ -461,10 +461,9 @@ public model = {
           "data": this.blogManagementForm.value,
           "sourceobj": ["blogcat"]
         };
-        this.openSnackBar2("Blog Details Added Successfully!!!", "OK");
       }
 
-      this.blogService.addData(this.serverUrlData + this.addEndpointData, data).subscribe(response => {
+      this.apiservice.addData(data).subscribe(response => {
         let result: any;
         result = response;
 
@@ -472,15 +471,15 @@ public model = {
 
         setTimeout(() => {
           this.router.navigateByUrl('/' + this.listUrl);
-        }, 1000);
+        }, 3000);
 
       });
 
 
     }
     else
-      console.log("Form is invalid");
-
+    console.log("Form is invalid");
+    
   }
 
 
@@ -500,15 +499,15 @@ public model = {
 
 
 
-
+  
 
 
 
 
   // -------------------------------Select Tags AutoComplete Field-----------------------
   showval(event: any) {
-
-    if (event.keyCode == 13) {
+    
+    if (event.keyCode == 13 || event.keyCode == 32) {
       this.tags_array.push(event.target.value);
       this.blogManagementForm.controls['tags'].patchValue("");
       return;
@@ -517,16 +516,12 @@ public model = {
   }
   // ------------------------------------------------------------------------------------
 
-  openSnackBar2(message: string, action: string) {
-    this.snackBar.open(message, action, {
-      duration: 2000,
-    });
-  }
+
 
 
   // ---------------------------------------VIDEO URL PREVIEW-----------------------------
   preview_video(video_index) {
-    this.openDialog(this.blogManagementForm.value.credentials[video_index].video_url);
+    this.openDialog(this.blogManagementForm.value.video[video_index].video_url);
   }
   // -------------------------------------------------------------------------------------
 
@@ -576,7 +571,7 @@ export class Modal {
   constructor(
     public dialogRef: MatDialogRef<Modal>,
     @Inject(MAT_DIALOG_DATA) public data: DialogData) {
-
+      console.warn('video modal',data)
 
   }
 

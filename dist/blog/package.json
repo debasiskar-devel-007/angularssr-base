@@ -1,6 +1,6 @@
 {
   "name": "blog-lib-influxiq",
-  "version": "0.0.9",
+  "version": "0.0.11",
   "bugs": "https://github.com/debasiskar-devel-007/blog/issues",
   "repository": {
     "type": "git",

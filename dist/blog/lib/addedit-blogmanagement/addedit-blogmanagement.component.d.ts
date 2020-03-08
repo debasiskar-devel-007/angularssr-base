@@ -5,7 +5,6 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ApiService } from '../api.service';
 import { Observable } from 'rxjs';
 import { MatDialogRef, MatDialog, MatSnackBar } from "@angular/material";
-import { BlogService } from '../blog.service';
 export interface DialogData {
     msg: any;
     videourl: any;
@@ -18,14 +17,7 @@ export declare class AddeditBlogmanagementComponent implements OnInit {
     private formBuilder;
     dialog: MatDialog;
     snackBar: MatSnackBar;
-    private blogService;
     /**ckeditor start here*/
-    editorConfig: {
-        placeholder: string;
-    };
-    model: {
-        editorData: string;
-    };
     /**ckeditor end here*/
     headerText: any;
     buttonText: any;
@@ -65,7 +57,7 @@ export declare class AddeditBlogmanagementComponent implements OnInit {
     getDataEndpoint: any;
     addEndpoint: any;
     listRoute: any;
-    constructor(http: HttpClient, apiservice: ApiService, activatedRoute: ActivatedRoute, router: Router, formBuilder: FormBuilder, dialog: MatDialog, snackBar: MatSnackBar, blogService: BlogService);
+    constructor(http: HttpClient, apiservice: ApiService, activatedRoute: ActivatedRoute, router: Router, formBuilder: FormBuilder, dialog: MatDialog, snackBar: MatSnackBar);
     ngOnInit(): void;
     private _filter;
     action: any;
@@ -84,7 +76,6 @@ export declare class AddeditBlogmanagementComponent implements OnInit {
     };
     inputBlur(val: any): void;
     showval(event: any): void;
-    openSnackBar2(message: string, action: string): void;
     preview_video(video_index: any): void;
     clearTags(index: any): void;
     openSnackBar(): void;

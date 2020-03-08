@@ -51,7 +51,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { FormBuilder, Validators, FormGroupDirective, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { MatDialogModule, MatDialog as MatDialog$1, MatDialogRef as MatDialogRef$1, MAT_DIALOG_DATA as MAT_DIALOG_DATA$1 } from '@angular/material/dialog';
-import { Injectable, NgModule, Component, Input, Inject, ViewChild, CUSTOM_ELEMENTS_SCHEMA, defineInjectable, inject } from '@angular/core';
+import { Injectable, NgModule, Component, Input, Inject, CUSTOM_ELEMENTS_SCHEMA, ViewChild, defineInjectable, inject } from '@angular/core';
 import { AmazingTimePickerService, AmazingTimePickerModule } from 'amazing-time-picker';
 import { CKEditorModule } from 'ngx-ckeditor';
 import { MomentModule } from 'ngx-moment';

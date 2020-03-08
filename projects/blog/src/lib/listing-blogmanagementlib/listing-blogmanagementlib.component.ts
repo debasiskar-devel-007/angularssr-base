@@ -28,7 +28,7 @@ export class ListingBlogmanagementlibComponent implements OnInit {
       tableName: receivedData.tableName,
       listArray_skip: ["_id", "userId", "created_at", "updated_at", "image", "metatitle", "metadesc", "description_html", "credentials", "blogs_file", "blogs_image","blogtitle_search","author_search"],
       listArray_modify_header: {
-        "blogtitle": "Blog Title", "description": "Description",
+        "blogtitle": "Blog Title", "description": "Description","date added":"Date","profile picture":"Profile Picture","tags":"Tags",
         "priority": "Priority", "status": "Status", "parentcategoryname": "Parent Category Name",
         "author": "Author","blogcat":"Blog Category","date":"Date"
       },
@@ -42,6 +42,7 @@ export class ListingBlogmanagementlibComponent implements OnInit {
       search_settings: {
         textsearch: [{ label: "blog title...", field: 'blogtitle_search' },{ label: "author...", field: 'author_search' }],
         selectsearch: [{ label: 'status...', field: 'status', values: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }] }],
+        datesearch:[{startdatelabel:"Start Date",enddatelabel:"End Date",submit:"Search By Date",  field:"created_at"}],
       },
       //  /*Showing Image in the Modal*/
       //  pendingmodelapplicationarray_detail_datatype: [{

@@ -11,7 +11,11 @@ import { environment } from '../../environments/environment';
 })
 export class AddeditBlogmanagementComponent implements OnInit {
 
-    server: any =environment.apiBaseUrl;
+
+    server: any ='https://9ozbyvv5v0.execute-api.us-east-1.amazonaws.com/production/api/';
+
+    // server: any =environment.apiBaseUrl;
+
     addUrl: any = 'addorupdatedata';
     // endpoint: environment.apiBaseUrl+ 'addorupdatedata';
     // endpoint2: environment.apiBaseUrl;
@@ -20,6 +24,16 @@ export class AddeditBlogmanagementComponent implements OnInit {
     action:any="add";
     listURL:any="blog-management/list";
   
+
+    // public configData: any = {
+    //   baseUrl: "http://3.15.236.141:5005/",
+    //   endpoint: "uploads",
+    //   size: "51200", // kb
+    //   format: ["jpg", "jpeg", "png"], // use all small font
+    //   type: "blogs-image",
+    //   path: "blogs",
+    //   prefix: "blogs-image_"
+    // }
 
     public configData: any = {
       baseUrl: "https://fileupload.influxhostserver.com/",
@@ -39,7 +53,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
       baseUrl: "https://fileupload.influxhostserver.com/",
       endpoint: "uploads",
       size: "51200", // kb
-      format: ["pdf", "doc", "docx","docxx"], // use all small font
+      format: ["pdf", "doc", "docx","docxx"],  // use all small font
       type: "blogs-file",
       path: "blogs",
       prefix: "blogs-file",

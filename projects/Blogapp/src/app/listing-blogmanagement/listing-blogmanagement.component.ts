@@ -12,7 +12,11 @@ export class ListingBlogmanagementComponent implements OnInit {
 
   //Blogs Lib List
   public blogListConfig: any = {
-    apiBaseUrl: environment.apiBaseUrl,
+
+    apiBaseUrl: "https://9ozbyvv5v0.execute-api.us-east-1.amazonaws.com/production/api/",
+
+    // apiBaseUrl: environment.apiBaseUrl,
+
     listEndPoint: "datalist",
     datasource: "",
     tableName: "blogs",
@@ -31,8 +35,9 @@ export class ListingBlogmanagementComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.activatedRoute.data.subscribe(resolveData => {
-      this.blogListConfig.datasource = resolveData.blogList.res;
+    this.activatedRoute.data.subscribe((resolveData:any) => {
+       this.blogListConfig.datasource = resolveData.blogList.results.blogs;
+      console.warn(resolveData.blogList.results.blogs);
       this.blogListConfig.jwtToken = this.cookieService.get('jwtToken');
 
     });

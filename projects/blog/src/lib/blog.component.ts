@@ -36,7 +36,7 @@ export class BlogComponent implements OnInit {
       deleteEndPoint: receivedData.deleteEndPoint,
       view: receivedData.view,
       search_settings:{
-        textsearch: [{ label: "Search by blog title...", field: 'blogtitle_search' },{ label: "Search by parent category...", field: 'parentcategoryname_search' }],
+        textsearch: [{ label: "Search by blog title...", field: 'blogtitle' },{ label: "Search by parent category...", field: 'parentcategoryname_search' }],
         selectsearch: [{ label: 'Search By status', field: 'status', values: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }] }]
       }
       //  /*Showing Image in the Modal*/

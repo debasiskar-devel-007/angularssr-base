@@ -11,7 +11,7 @@ export class AddeditTestimonialComponent implements OnInit {
 /* Config for add and edit start */
 public configAddEdit: any = {
   action: "add",
-  endpoint: "https://i1kzfac3pe.execute-api.us-east-1.amazonaws.com/dev/api/addorupdatedata",
+  endpoint: "https://9v41bpikik.execute-api.us-east-1.amazonaws.com/dev/api/addorupdatedata",
   source: "testimonial",
   condition: {},
   defaultData: null,
@@ -32,10 +32,24 @@ public configData: any = {
   conversionNeeded: 0,
   bucketName: "crmfiles.influxhostserver"
 }
-
+/**audio config */
+public configAudioFileUpload:any={
+  baseUrl: "https://fileupload.influxhostserver.com/",
+  endpoint: "uploads",
+  size: "51200", // kb
+  format:["jpg", "jpeg", "png", "bmp", "zip", 'html','mp4','mp3','doc','ppt','pptx','pdf','msword'],  // use all small font
+  type: "testimonial-mp3",
+  path: "testimonial",
+  prefix: "testimonial-mp3_",
+  formSubmit: false,
+  conversionNeeded: 1,
+  bucketName: "probidfiles-dev.com"
+}
 /* Config for add and edit end */
 
-  constructor( private router : Router , private activatedRoute : ActivatedRoute ,private cookieService : CookieService) { }
+  constructor( private router : Router , private activatedRoute : ActivatedRoute ,private cookieService : CookieService) { 
+    this.cookieService.set("jwtToken","eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJleHAiOjE1ODMzODg1OTUsImlhdCI6MTU4MzMwMjE5NX0.mq5vjBo_pTRORnNjv9TitAx6zj0gOITDjrbRezjn8Oc");
+  }
 
   ngOnInit() {
     this.activatedRoute.params.subscribe(params => {

@@ -13,13 +13,8 @@ export declare class AddBlogComponent implements OnInit {
     private router;
     private cookieService;
     dialog: MatDialog;
+    editorconfig: any;
     /**ckeditor start here*/
-    editorConfig: {
-        placeholder: string;
-    };
-    model: {
-        editorData: string;
-    };
     /**ckeditor end here*/
     blogCatForm: FormGroup;
     header_txt: any;
@@ -29,7 +24,6 @@ export declare class AddBlogComponent implements OnInit {
     successMessage: any;
     getParentCatArr: any;
     dialogRef: any;
-    editorconfig: any;
     constructor(formBuilder: FormBuilder, blogService: BlogService, router: Router, cookieService: CookieService, dialog: MatDialog);
     ngOnInit(): void;
     setDefaultValue(defaultValue: any): void;

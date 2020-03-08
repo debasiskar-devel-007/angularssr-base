@@ -29,21 +29,25 @@ export declare class AddeditComponent implements OnInit {
     testimonialForm: FormGroup;
     loader: boolean;
     configData: any;
+    testimonialAudio: any;
     successMessage: string;
     dialogRef: any;
     imageConfigData: any;
     ErrCode: boolean;
     flag: boolean;
+    flag2: boolean;
     img_var: any;
     header_name: any;
     image_name: any;
     image_type: any;
     youtube_suffix: any;
     editorconfig: any;
+    audioConfigData: any;
     constructor(formBuilder: FormBuilder, testiService: TestimonialService, router: Router, dialog: MatDialog, sanitizer: DomSanitizer);
     ngOnInit(): void;
     config: any;
     imageUpload: any;
+    audioUpload: any;
     generateForm(): void;
     onSubmit(): void;
     setDefaultValue(defaultValue: any): void;
@@ -51,6 +55,7 @@ export declare class AddeditComponent implements OnInit {
     preview_video(): void;
     inputBlur(val: any): void;
     clear_image(): void;
+    clear_audio(): void;
 }
 export declare class Modal {
     dialogRef: MatDialogRef<Modal>;

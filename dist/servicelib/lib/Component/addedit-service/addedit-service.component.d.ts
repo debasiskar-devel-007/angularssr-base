@@ -57,6 +57,7 @@ export declare class AddeditServiceComponent implements OnInit {
     addBulletList(a: any, b: any): void;
     deleteBulletList(): void;
     trackByFn(index: any): any;
+    openModaltest(): void;
     onSubmit(): void;
     openDialog(x: any): void;
     resetserviceForm(): void;

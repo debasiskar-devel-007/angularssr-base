@@ -51,6 +51,7 @@ import { BrowserModule } from '@angular/platform-browser';
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: lib/resourcelib.service.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ResourcelibService {
@@ -267,6 +268,7 @@ ResourcelibService.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: lib/resourcelib.component.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ResourcelibComponent {
@@ -323,6 +325,7 @@ ResourcelibComponent.propDecorators = {
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: lib/Modules/material-module.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 //import { MatFileUploadModule } from 'angular-material-fileupload';
@@ -379,6 +382,7 @@ DemoMaterialModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: lib/Components/addedit-resourceapp/addedit-resourceapp.component.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class AddeditResourceappComponent {
@@ -606,6 +610,7 @@ Modal.ctorParameters = () => [
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: lib/resourcelib.module.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class ResourcelibModule {
@@ -628,11 +633,13 @@ ResourcelibModule.decorators = [
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: public-api.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
 /**
  * @fileoverview added by tsickle
+ * Generated from: resourcelib.ts
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 

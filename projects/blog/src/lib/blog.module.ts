@@ -35,9 +35,9 @@ import { CKEditorModule } from 'ngx-ckeditor';
     FormsModule,
     ReactiveFormsModule,
     BrowserModule,
-    CKEditorModule,
     FileUploadModule,
     CommonModule,
+    CKEditorModule
   
   ],
   exports: [BlogComponent, AddBlogComponent, AddeditBlogmanagementComponent,ListingBlogmanagementlibComponent],
