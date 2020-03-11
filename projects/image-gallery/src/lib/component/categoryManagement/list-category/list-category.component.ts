@@ -118,7 +118,7 @@ export class ListCategoryComponent implements OnInit {
 
   // ------------------------image section---------------------- //
 
-  public image_data_skip: any = ["_id", "category_name_search",'images',"date_unix", "title_search"];
+  public image_data_skip: any = ["_id", "category_name_search",'images',"date_unix", "title_search","aspectratio","croppedfiles"];
   public image_data_modify_header: any = {
 
     'category name': "Category Name",
@@ -129,7 +129,7 @@ export class ListCategoryComponent implements OnInit {
     'status': "Status"
 
   };
-  public image_previewModal_detail_skip: any = ["_id",'category_name_search','images',"date_unix", "title_search"];
+  public image_previewModal_detail_skip: any = ["_id",'category_name_search','images',"date_unix", "title_search","aspectratio","croppedfiles"];
 
   public image_status: any = [{ val: 1, 'name': 'Active' }, { val: 0, 'name': 'Inactive' }];
 
