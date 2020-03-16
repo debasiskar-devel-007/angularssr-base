@@ -19,7 +19,7 @@ export class AddeditImageComponent implements OnInit {
     baseUrl: "https://fileupload.influxhostserver.com/",
     endpoint: "uploads",
     size: "51200", // kb
-    format:["jpg", "jpeg", "png", "bmp", "zip", 'html'],  // use all small font
+    format:["jpg", "jpeg", "png", "bmp"],  // use all small font
     type: "imageGallery-picture",
     path: "imageGallery",
     prefix: "imageGallery-picture_",
