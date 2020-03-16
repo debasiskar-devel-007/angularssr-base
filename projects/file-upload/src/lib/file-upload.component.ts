@@ -47,7 +47,7 @@ export class FileUploadComponent implements OnInit {
       // console.log(this.configData.aspectratio[c])
       let val = this.configData.aspectratio[c];
       this.num[c] = val.toFixed(2); 
-      console.log(this.num)
+      // console.log(this.num)
 
 
     }
@@ -66,21 +66,27 @@ export class FileUploadComponent implements OnInit {
 
   /* Select File Proccess */
   selectFiles(event: any, ev1: any) {
-    //this.fileChangeEvent(ev1);
-    console.log(event)
+    //this.fileChangeEvent(ev1);,
+    console.log('>>>>event',event)
+    console.log('>>>>ev1',ev1)
+
     // this.imageChangedEvent=event;
     this.loading = true;
     for (let index = 0; index < event.length; index++) {
       var count: number = this.files.length;
+      // console.log('>>>>count length',count)
       const element = event[index];
+      // console.log('>>>>count element',element)
+
       for(let cc in this.configData.aspectratio){
-        console.log('cc',cc,index);
+
+        // console.log('ev1',cc,ev1);
         if(this.imageChangedEvent[index]==null)
         this.imageChangedEvent[index]=[]; 
         this.imageChangedEvent[index][cc] = ev1; 
       }
       
-      console.log(event, this.imageChangedEvent, 'img', ev1);
+      // console.log(event, this.imageChangedEvent, 'img', ev1);
 
       /* Checking Validation */
       let validate: any = this.checkingValidation(element);
@@ -101,6 +107,9 @@ export class FileUploadComponent implements OnInit {
       }
     }
   }
+
+
+
 
   viewFiles(count, element) {
     let format = element.type.split("/");
@@ -256,14 +265,16 @@ export class FileUploadComponent implements OnInit {
 
 
   fileChangeEvent(event) {
+    // console.log('fileChangeEvent', event)
+    this.imageChangedEvent = event;
     console.log('fileChangeEvent', event)
-    this.imageChangedEvent = event
+
 
   }
   imageCropped(event: ImageCroppedEvent, i: any) {
-    console.log('>>>>>>>>>',event,i)
+    // console.log('>>>>>>>>>',event,i)
     this.croppedImage[i] = event.base64;
-    console.log('imageCropped', this.croppedImage);
+    console.log('imageCropped', this.croppedImage);  
     this.configData.croppedfiles=this.croppedImage;
     // console.log('imageCr..> ',   this.configData.croppedfiles);
 

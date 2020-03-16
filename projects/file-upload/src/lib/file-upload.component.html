@@ -1,5 +1,11 @@
 <!-- File Upload -->
-<div class="uploadfilecontainer" (click)="fileInput.click()" libDragDrop (onFileDropped)="selectFiles($event,$event)">
+
+<!-- libDragDrop (onFileDropped)="selectFiles($event,$event)"  -->
+
+<!-- image upload section -->
+
+<div *ngIf="configData.aspectratio =='' || configData.aspectratio == null">
+<div class="uploadfilecontainer" (click)="fileInput.click()"  libDragDrop (onFileDropped)="selectFiles($event,$event)" >
     <input hidden type="file" #fileInput (change)="selectFiles($event.target.files,$event)" multiple>
     <div class="uploadtextwrapper">
         <h2>Drag and Drop Files</h2>
@@ -11,6 +17,41 @@
         <p>MAX Size: {{ configData.size / 1024 | number: '.1-2' }} MB</p>
     </div>
 </div>
+</div>
+
+
+
+
+
+<!-- crop image upload section -->
+
+<div *ngIf="configData.aspectratio !=null && configData.aspectratio.length>0">
+<div class="bodywrapper">
+    <!-- <h2 class="titlecls">Drag and Drop Files <span>( MAX Size: {{ configData.size / 1024 | number: '.1-2' }} MB )</span></h2> -->
+    <!-- <p>Supported Formats:
+        <ng-container *ngFor="let val of configData.format; let i = index">
+            {{ val }}<ng-container *ngIf="i + 1 < configData.format.length">,</ng-container>
+        </ng-container>
+    </p> -->
+    
+</div>
+<div class="uploadfilecontainercls">
+    <input type="file" class="uploadfilecontainerfl"  placeholder="Drag and Drop Files" 
+    (change)="selectFiles($event.target.files,$event)" multiple >
+    <span class="imgformat">Formats: <ng-container *ngFor="let val of configData.format; let i = index">
+        {{ val }}<ng-container *ngIf="i + 1 < configData.format.length">,</ng-container>
+    </ng-container></span>
+</div>
+</div>
+
+
+
+
+<div>
+</div>
+
+
+
 
 <div class="button-group" *ngIf="files.length > 0">
     <button mat-raised-button color="primary" type="button" (click)="uploadAll();">Upload All</button>
@@ -56,13 +97,14 @@
 
                         <br/>
                         <span>Croped Image (Asepect Ratio) :{{num[ci]}}</span><br>
-                        <image-cropper
+                        <image-cropper *ngIf="imageChangedEvent !=null && imageChangedEvent[i] !=null "
                         [imageChangedEvent]="imageChangedEvent[i][ci]"
                         [maintainAspectRatio]="true"
                         [aspectRatio]=c
                         [onlyScaleDown]="true"
                         [roundCropper]="false"
                         [alignImage]="'left'"
+                        (imageLoaded)="imageLoaded()"
                         (imageCropped)="imageCropped($event,ci)"
                     ></image-cropper>
                     <br/>

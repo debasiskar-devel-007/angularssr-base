@@ -11,7 +11,7 @@ if (environment.production) {
 // platformBrowserDynamic().bootstrapModule(AppModule)
 //   .catch(err => console.error(err));
 
-  // const platform = platformBrowserDynamic();
-  // platform.bootstrapModule(AppModule);
+  const platform = platformBrowserDynamic();
+  platform.bootstrapModule(AppModule);
 
   platformBrowserDynamic().bootstrapModule(AppModule);
