@@ -177,10 +177,10 @@ export class ListTeamComponent implements OnInit {
 
    public teamStatus: any = [{ val: 1, 'name': 'Active' }, { val: 0, 'name': 'Inactive' }];
 
-   public alldata_skip_team: any = ["_id", "multipleemail", "bulletarray", "created_at", "updated_at", "id","categoryname_search","membername_search","description"];
+   public alldata_skip_team: any = ["_id", "bulletarray", "created_at", "updated_at", "id","categoryname_search","membername_search","description","categoryid"];
    public data_modify_header: any = {
      "membername": "Member Name", "date added": "Date"
-     , "categoryname": "Category Name", "multiplephone": "Phone Numbers", "image": "Image", "status": "Status","description_html":"Description","description html":"Description"
+     , "categoryname": "Category Name", "multiplephone": "Phone Numbers", "image": "Image", "status": "Status","description_html":"Description","description html":"Description","multipleemail":"Emails"
    };
    public pendingmodelapplicationarray_detail_datatype: any = [{
      key: "images",
@@ -189,9 +189,9 @@ export class ListTeamComponent implements OnInit {
    }];
    public team_search_settings: any =
      {
-       textsearch: [{ label: "Search By Category Name", field: 'categoryname_search' },
+       textsearch: [
        { label: "Search By Member Name", field: 'membername_search' }],
-      selectsearch: [{ label: 'Search By Status', field: 'teamStatus', values: this.status }],
+      selectsearch: [{ label: 'Search By Status', field: 'status', values: this.teamStatus }],
       datesearch:[{startdatelabel:"Start Date",enddatelabel:"End Date", submit:"Search By Date",  field:"created_at"}]
       //    
  

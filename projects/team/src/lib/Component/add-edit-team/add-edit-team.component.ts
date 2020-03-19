@@ -6,6 +6,9 @@ import { HttpClient } from '@angular/common/http';
 import { UploadService } from '../../Service/upload.service';
 import { NgStyle } from '@angular/common';
 import { analyzeAndValidateNgModules } from '@angular/compiler';
+import {MatSnackBar} from '@angular/material/snack-bar';
+
+
 @Component({
   selector: 'lib-add-edit-team',
   templateUrl: './add-edit-team.component.html',
@@ -40,6 +43,8 @@ export class AddEditTeamComponent implements OnInit {
   public imageName:any;
   public imageType:any;
   public img_flag:any=false;
+  public message:any='Submitted Successfully';
+
 
   @ViewChild(FormGroupDirective, { static: false }) formDirective: FormGroupDirective;
   
@@ -133,7 +138,7 @@ export class AddEditTeamComponent implements OnInit {
 
   constructor(public fb: FormBuilder, public activeroute: ActivatedRoute,
     public _http: HttpClient, private uploadService: UploadService,
-    public apiservice: ApiService, public router: Router) {
+    public apiservice: ApiService, public router: Router,public _snackBar:MatSnackBar) {
 
     this.teamForm = this.fb.group({
       categoryname: [""],
@@ -246,20 +251,19 @@ export class AddEditTeamComponent implements OnInit {
     this.img_flag=false;
   }
 
-
+  // { this.ErrCode = true; return; }
+  
   TeamFormSubmit() {
 
     if(this.imageConfigData.files){
-      if (this.imageConfigData.files.length > 1 )  { this.ErrCode = true; return; }
+      if (this.imageConfigData.files.length > 0 )
       
       this.teamForm.value.team_img=
         {
           "basepath": this.imageConfigData.files[0].upload.data.basepath + '/' + this.imageConfigData.path + '/',
           "image": this.imageConfigData.files[0].upload.data.data.fileservername,
           "name": this.imageConfigData.files[0].name,
-          "type": this.imageConfigData.files[0].type,
-          "aspectratio":this.imageConfigData.aspectratio,
-          "croppedfiles":this.imageConfigData.croppedfiles
+          "type": this.imageConfigData.files[0].type
         };
 
 
@@ -297,7 +301,6 @@ export class AddEditTeamComponent implements OnInit {
       if (this.activeroute.snapshot.params._id) {     //update part
         // var imageData:any = [] = this.SingleDataList[0].team_img;
         // imageData = imageData.concat(this.images_array);
-        
         data = {
           "source": this.sourceName,
           "data": {
@@ -320,10 +323,6 @@ export class AddEditTeamComponent implements OnInit {
           "sourceobj": ["categoryname"]
         }
       };
-
-
-
-
       this.spinnerLoader = true;
       this.apiservice.addData(data).subscribe(response => {
         this.spinnerLoader = false;
@@ -331,6 +330,9 @@ export class AddEditTeamComponent implements OnInit {
         setTimeout(() => {
           this.router.navigateByUrl('/' + this.listrouteData);
         }, 100);
+        this._snackBar.open(this.message, 'OK', {
+          duration: 3000,
+        } )
       })
     } else {
       alert("error occured");

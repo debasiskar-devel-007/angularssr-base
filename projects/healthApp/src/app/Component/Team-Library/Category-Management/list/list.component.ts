@@ -56,6 +56,7 @@ public  serverUrlTeam:any='https://9ozbyvv5v0.execute-api.us-east-1.amazonaws.co
       let result:any;
       result=res;
       this.TeamAllData=result.res;
+      console.log('>>>>>',this.TeamAllData)
 
 
     })
