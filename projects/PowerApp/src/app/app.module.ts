@@ -46,6 +46,7 @@ import { AddEditSenderappComponent } from './Components/NewsletterApp/add-edit-s
 import { ListingSenderappComponent } from './Components/NewsletterApp/listing-senderapp/listing-senderapp.component';
 import { AddEditTestemailappComponent } from './Components/NewsletterApp/add-edit-testemailapp/add-edit-testemailapp.component';
 import { LisitngTestemailappComponent } from './Components/NewsletterApp/lisitng-testemailapp/lisitng-testemailapp.component';
+import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -83,7 +84,8 @@ import { LisitngTestemailappComponent } from './Components/NewsletterApp/lisitng
     ServicelibModule,
     FileUploadModule,
     ResourcelibModule,
-    NewsTitleModule
+    NewsTitleModule,
+    FormsModule
    
     
   ],

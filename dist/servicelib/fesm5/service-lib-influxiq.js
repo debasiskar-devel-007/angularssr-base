@@ -333,9 +333,9 @@ var ServicelibComponent = /** @class */ (function () {
                 listEndPoint: receivedData.listEndPoint,
                 datasource: receivedData.datasource,
                 tableName: receivedData.tableName,
-                listArray_skip: ["_id", "userId", "id", "updated_at", "service_desc", "image", "additional_img", "description_html", 'service_title_search'],
+                listArray_skip: ["_id", "userId", "id", "updated_at", "service_desc", "additional_img", "description_html", 'service_title_search', 'additional_description'],
                 listArray_modify_header: { "service title": "Service title", "priority": "Priority",
-                    "status": "Status", "bulletarr": "Number of Bullets", "date added": "Date Added" },
+                    "status": "Status", "bulletarr": "Number of Bullets", "date added": "Date Added", "image": "Image" },
                 admintablenameTableName: "admin",
                 statusarr: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }],
                 updateurl: receivedData.updateEndpoint,
@@ -354,7 +354,7 @@ var ServicelibComponent = /** @class */ (function () {
                 //   value: 'image',
                 //   fileurl: 'https://s3.us-east-2.amazonaws.com/crmfiles.influxhostserver/services/'    
                 // }],
-                detail_header: ['_id']
+                detail_header: ['_id', 'additional_details']
             };
             this.loader = false;
         },
@@ -567,12 +567,12 @@ var AddeditServiceComponent = /** @class */ (function () {
         this.serviceForm = this.formBuilder.group({
             service_title: ['', [Validators.required]],
             description: ['', [Validators.required]],
-            additional_details: ['',],
+            additional_details: [''],
             priority: ['', [Validators.required]],
             status: [true,],
             bulletarr: this.formBuilder.array([]),
-            service_img: ['',],
-            additional_img: ['',]
+            service_img: [''],
+            additional_img: ['']
         });
     };
     // =================================================================================================
@@ -752,7 +752,7 @@ var AddeditServiceComponent = /** @class */ (function () {
             var postData = {
                 source: this.configData.source,
                 data: Object.assign(this.serviceForm.value, this.configData.condition),
-                token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJleHAiOjE1NzcxNzc4MDIsImlhdCI6MTU3NzA5MTQwMn0.jtwImZIdKK-9WxeQQHef5YLSXvN05CiJeAw-lXCcHtE"
+                token: this.configData.jwtToken
             };
             this.servicehttp.addData(this.configData.endpoint, postData).subscribe((/**
              * @param {?} response
@@ -766,8 +766,8 @@ var AddeditServiceComponent = /** @class */ (function () {
                      */
                     function () {
                         _this.dialogRef.close();
-                    }), 5000);
-                    _this.router.navigate([_this.configData.callBack]);
+                    }), 3000);
+                    _this.router.navigateByUrl(_this.configData.callBack);
                 }
                 else {
                     alert("Some error occurred. Please try again.");

@@ -116,6 +116,7 @@ export class AddeditServiceComponent implements OnInit {
   @Input()
   set config(getConfig: any) {
     this.configData = getConfig;
+    
   }
   @Input()
   set imageUpload(getConfig: any) {
@@ -133,12 +134,12 @@ export class AddeditServiceComponent implements OnInit {
     this.serviceForm = this.formBuilder.group({
       service_title: ['', [Validators.required]],
       description: ['', [Validators.required]],
-      additional_details:['',],
+      additional_details:[''],
       priority: ['', [Validators.required]],
       status: [true,],
       bulletarr: this.formBuilder.array([]),
-      service_img: ['',],
-      additional_img: ['',]
+      service_img: [''],
+      additional_img: ['']
     });
   }
   // =================================================================================================
@@ -271,15 +272,15 @@ export class AddeditServiceComponent implements OnInit {
       let postData: any = {
         source: this.configData.source,
         data: Object.assign(this.serviceForm.value, this.configData.condition),
-        token: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJleHAiOjE1NzcxNzc4MDIsImlhdCI6MTU3NzA5MTQwMn0.jtwImZIdKK-9WxeQQHef5YLSXvN05CiJeAw-lXCcHtE"
+        token: this.configData.jwtToken
       };
       this.servicehttp.addData(this.configData.endpoint, postData).subscribe((response: any) => {
         if (response.status == "success") {
           this.openDialog(this.successMessage);
           setTimeout(() => {
             this.dialogRef.close();
-          }, 5000);
-          this.router.navigate([this.configData.callBack]);
+          }, 3000);
+          this.router.navigateByUrl(this.configData.callBack);
         } else {
           alert("Some error occurred. Please try again.");
         }
