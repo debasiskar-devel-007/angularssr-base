@@ -9,7 +9,7 @@ export class AddEditTeamComponent implements OnInit {
 public teamDataList:any=[];
 public serverUrl:any = "https://9ozbyvv5v0.execute-api.us-east-1.amazonaws.com/production/api/";
 public addendpoint:any="addorupdatedata";
-public listPageRoute:any="team/list";
+public listPageRoute:any="team/category-management/list";
 public getdataEndpoint:any="datalist";
 public sourceName :any="team_management";
 public categorySourceName : any = "team_category";

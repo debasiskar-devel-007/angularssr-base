@@ -92,6 +92,12 @@ export class AddEditVideoManagementComponent implements OnInit {
       this.videoManagementForm.controls['parent_category'].patchValue(Videodata[0].parent_category);
       this.videoManagementForm.controls['priority'].patchValue(Videodata[0].priority);
       this.videoManagementForm.controls['status'].patchValue(Videodata[0].status);
+      // this.videoManagementForm.controls['status'].patchValue(Videodata[0].status);
+      // this.videoManagementForm.controls['type'].patchValue(Videodata[0].type);
+
+
+      
+
     }
   }
   constructor(public dialog: MatDialog, public fb: FormBuilder, public apiService: ApiService,
@@ -105,6 +111,7 @@ export class AddEditVideoManagementComponent implements OnInit {
       priority: ['', Validators.required],
       parent_category: [''],
       status: [true,]
+
     })
     this.editorconfig.extraAllowedContent = '*[class](*),span;ul;li;table;td;style;*[id];*(*);*{*}';
   }
@@ -217,16 +224,26 @@ export class AddEditVideoManagementComponent implements OnInit {
             'youtube_Url': this.videoManagementForm.value.youtube_Url,
             'vimeo_url': this.videoManagementForm.value.vimeo_url,
             'status': this.videoManagementForm.value.status,
-            'description': this.videoManagementForm.value.description
+            'description': this.videoManagementForm.value.description,
+            'type': this.videoValue
           },
           "sourceobj": ["parent_category"]
         }
       } else {
         data = {                                         //add part
           "source": this.getSourceName,
-          "data": this.videoManagementForm.value,
+          "data": {
+            'title': this.videoManagementForm.value.title,
+            'priority': this.videoManagementForm.value.priority,
+            'youtube_Url': this.videoManagementForm.value.youtube_Url,
+            'vimeo_url': this.videoManagementForm.value.vimeo_url,
+            'status': this.videoManagementForm.value.status,
+            'description': this.videoManagementForm.value.description,
+            'type': this.videoValue,
+            'parent_category':this.videoManagementForm.value.parent_category
+            
+          },
           "sourceobj": ["parent_category"]
-
         };
       }
       this.spinnerloader = true;

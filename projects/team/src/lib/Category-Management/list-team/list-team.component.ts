@@ -19,18 +19,17 @@ export class ListTeamComponent implements OnInit {
   public addupdate: any = '';
   public serverUrlData: any = '';
   public editRouteval: any = '';
-  public alldata_skip: any = ["_id","id","updated_at", "created_at","description_html","description","categoryName_search"];
+  public alldata_skip: any = ["_id","id","updated_at", "created_at","description","categoryName_search"];
   public alldata_modify_header: any = {
     "categoryName": "Category Name", "description": "Description",
-    "rolename": "Role Name", "status": "Status","role" : "Role","parent category":"Parent Category"
-  };
+    "rolename": "Role Name", "status": "Status","role" : "Role","parent category":"Parent Category","date_added":"Date","date added":"Date","description_html":"Description","description html":"Description"};
   public status: any = [{ val: 1, 'name': 'Active' }, { val: 0, 'name': 'Inactive' }];
   public previewModal_detail_skip: any = ['_id',"id","updated_at","created_at","categoryName_search"];
   public search_settings: any =
     {
       selectsearch: [{ label: 'Search By Status', field: 'status', values: this.status }],
       textsearch: [{ label: "Search By Category Name", field: 'categoryName_search' }],
-
+      datesearch:[{startdatelabel:"Start Date",enddatelabel:"End Date", submit:"Search By Date",  field:"created_at"}]
     };
 
 
@@ -47,10 +46,6 @@ export class ListTeamComponent implements OnInit {
     public serverUrlTeamData: any = '';
     public editTeamRouteval: any = '';
     public manageTeamRoute: any;
-
-
-
-
 
     //team category section
 
@@ -182,10 +177,10 @@ export class ListTeamComponent implements OnInit {
 
    public teamStatus: any = [{ val: 1, 'name': 'Active' }, { val: 0, 'name': 'Inactive' }];
 
-   public alldata_skip_team: any = ["_id", "multipleemail", "bulletarray", "created_at", "description_html", "description", "updated_at", "id","categoryname_search","membername_search"];
+   public alldata_skip_team: any = ["_id", "multipleemail", "bulletarray", "created_at", "updated_at", "id","categoryname_search","membername_search","description"];
    public data_modify_header: any = {
      "membername": "Member Name", "date added": "Date"
-     , "categoryname": "Category Name", "multiplephone": "Phone Numbers", "image": "Images"
+     , "categoryname": "Category Name", "multiplephone": "Phone Numbers", "image": "Image", "status": "Status","description_html":"Description","description html":"Description"
    };
    public pendingmodelapplicationarray_detail_datatype: any = [{
      key: "images",
@@ -196,11 +191,12 @@ export class ListTeamComponent implements OnInit {
      {
        textsearch: [{ label: "Search By Category Name", field: 'categoryname_search' },
        { label: "Search By Member Name", field: 'membername_search' }],
+      selectsearch: [{ label: 'Search By Status', field: 'teamStatus', values: this.status }],
+      datesearch:[{startdatelabel:"Start Date",enddatelabel:"End Date", submit:"Search By Date",  field:"created_at"}]
       //    
  
      };
-   // public status: any = [{ val: 1, 'name': 'Active' }, { val: 0, 'name': 'Inactive' }];
-   public team_previewModal_detail_skip: any = ['_id'];
+   public team_previewModal_detail_skip: any = ['_id',"description"];
 
 
   constructor(public router: Router) { }

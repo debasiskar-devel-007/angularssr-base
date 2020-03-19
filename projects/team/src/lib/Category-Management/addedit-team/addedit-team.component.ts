@@ -89,7 +89,7 @@ export class AddeditTeamComponent implements OnInit {
     this.CategoryManagementTeamForm = this.fb.group({
       categoryName: ['', Validators.required],
       description: ['', Validators.required],
-      status: [true,],
+      status: [true],
       parent_category : [''],
       role: ['']
     })

@@ -26,8 +26,8 @@
       <mat-label>Description :-</mat-label>
       <ck-editor formControlName="description" [config]="editorconfig">
       </ck-editor>
-      <!-- ------status for role-management---------- -->
-      <mat-checkbox [formControl]="CategoryManagementTeamForm.controls['status']" color="primary" >Active</mat-checkbox><br>
+      <!-- ------status for role-management---------- --><br>
+    
 
       <mat-form-field>
         <mat-label>Multiple Role</mat-label>
@@ -51,7 +51,9 @@
         {{f.categoryName}}
       </mat-option>
         </mat-select>
-      </mat-form-field>
+      </mat-form-field><br>
+
+      <mat-checkbox [formControl]="CategoryManagementTeamForm.controls['status']" color="primary" >Active</mat-checkbox><br><br>
 
       <!-- -------------------button form submission----------------------- -->
       <button type="submit" class="submitbtn" mat-raised-button color="primary" >{{ButtonText}}</button>

@@ -1,26 +1,24 @@
-<mat-card>
+<!-- <mat-card>
   <mat-toolbar color="primary" style="justify-content: center; align-items: center;">
     <h2 class="headerSpan">Team Category Management List</h2>
   </mat-toolbar>
-
-  <!-- add button start here -->
-  <!-- <mat-toolbar class="buttonsetToolbar">
-    <button class="singleButton" mat-raised-button color="primary" (click)="addButton()" >Add Team Category</button>
-    <button class="singleButton" mat-raised-button color="primary" (click)="manageTeamButton()" >Manage Team</button>
-
-  </mat-toolbar> -->
-</mat-card>
+</mat-card> -->
 <!-- adding button end here -->
 
-<mat-tab-group>
-  <mat-tab label="Team category Management"> 
 
-    <mat-toolbar class="buttonsetToolbar">
-      <button class="singleButton" mat-raised-button color="primary" (click)="addButton()" >Add Team Category</button>
-    </mat-toolbar>
-    <mat-card-content class="listing-content-admin">
- 
-      <lib-listing class="formfilterdiv formfilterdivnew" *ngIf="alldata.length>0" 
+<mat-tab-group class="gallery_body">
+  <mat-tab label="Category List"> 
+    <mat-card-content class="listing_titlebar">
+      <span class="titlewrapper">
+        <h2>Category Management</h2>
+      </span>
+      <span class="buttonsetToolbar">
+        <button mat-raised-button color="primary" (click)="addButton()" >Add Category</button>
+      </span>
+    </mat-card-content>
+    
+    <mat-card-content  class="listing-content-admin" *ngIf="alldata !=null && alldata.length >0" >
+      <lib-listing class="formfilterdiv formfilterdivnew" 
         [datasource]="alldata"
         [sourcedata]="sourcenameViaapp"
         [skip]="alldata_skip" 
@@ -36,21 +34,23 @@
         [date_search_source]="searchSourcenameViaapp"
         [search_settings]="search_settings">
     </lib-listing>
-    </mat-card-content>
 
+  </mat-card-content>
      </mat-tab>
 
 
-  <mat-tab label="Team Management"> 
-    <mat-toolbar class="buttonsetToolbar">
-      
-      <button class="singleButton" mat-raised-button color="primary" (click)="manageTeamButton()" >Add Team</button>
-  
-    </mat-toolbar>
-
-    <mat-card-content class="listing-content-admin">
+  <mat-tab label="Team List"> 
+<mat-card-content class="listing_titlebar">
+  <span class="titlewrapper">
+    <h2>Team Management</h2>
+  </span>
+  <span class="buttonsetToolbar">
+    <button mat-raised-button color="primary" (click)="manageTeamButton()" >Add Team</button>
+    </span>
+</mat-card-content>
+    <mat-card-content class="listing-content-admin"   *ngIf="allTeamdata !=null && allTeamdata.length >0">
  
-      <lib-listing class="formfilterdiv formfilterdivnew" *ngIf="allTeamdata.length>0" 
+      <lib-listing class="formfilterdiv formfilterdivnew"  
         [datasource]="allTeamdata"
         [sourcedata]="sourcenameTeamViaapp"
         [skip]="alldata_skip_team" 

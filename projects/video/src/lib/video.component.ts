@@ -183,7 +183,7 @@ public deleteEndpointVideoViaApp:any='';
 
 
 
-  public VideoDataListing_skip: any = ["_id", "description", "created_at","updated_at","id","description_html","parent_category_search","title_search,video_type","date_unix","title search"];
+  public VideoDataListing_skip: any = ["_id", "description", "created_at","updated_at","id","description_html","parent_category_search","title_search,video_type","date_unix","title_search"];
   public VideoDataListing_modify_header: any = {
     "title": "Title", "priority": "Priority",
     "status": "Status", "videoUrl": "Video Url","parent category" : "Parent Category","vimeo url":"Vimeo Url","date added":"Date"
