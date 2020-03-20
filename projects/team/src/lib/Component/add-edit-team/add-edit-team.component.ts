@@ -24,7 +24,7 @@ export class AddEditTeamComponent implements OnInit {
   public serverUrlData: any;
   public listrouteData = "";
   public editarray: any = [];
-  public spinnerLoader: boolean;
+  // public spinnerLoader: boolean;
   public imageConfigData: any = '';
   public SingleDataList: any = [];
   public ButtonText: any = "Submit";
@@ -61,6 +61,7 @@ export class AddEditTeamComponent implements OnInit {
     console.log("single dataaaaa", this.SingleDataList);
     if (this.activeroute.snapshot.params._id) {
       this.img_flag=true;
+      this.message='Updated Successfully';
 
       this.ButtonText = "Update";
       this.HeaderText = "Edit Team Member"
@@ -291,7 +292,7 @@ export class AddEditTeamComponent implements OnInit {
     if (this.teamForm.valid) {
       if (this.teamForm.value.status)
         this.teamForm.value.status = parseInt("1");
-      else
+      else 
         this.teamForm.value.status = parseInt("0");
     }
 
@@ -323,9 +324,9 @@ export class AddEditTeamComponent implements OnInit {
           "sourceobj": ["categoryname"]
         }
       };
-      this.spinnerLoader = true;
+      // this.spinnerLoader = true;
       this.apiservice.addData(data).subscribe(response => {
-        this.spinnerLoader = false;
+        // this.spinnerLoader = false;
         this.formDirective.resetForm();
         setTimeout(() => {
           this.router.navigateByUrl('/' + this.listrouteData);
@@ -338,4 +339,8 @@ export class AddEditTeamComponent implements OnInit {
       alert("error occured");
     }
   }
+
+
+
+
 }

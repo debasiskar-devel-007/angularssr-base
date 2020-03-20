@@ -3,6 +3,9 @@ import { FormBuilder, FormControl, FormGroup, Validators, FormGroupDirective } f
 import { ActivatedRoute, Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { ApiService } from '../../Service/api.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+
+
 @Component({
   selector: 'lib-addedit-team',
   templateUrl: './addedit-team.component.html',
@@ -19,12 +22,14 @@ export class AddeditTeamComponent implements OnInit {
   public getCategorySourceName : any;
   public roleSourceName : any;
   public serverUrlData: any;
-  public spinnerLoader: boolean;
+  // public spinnerLoader: boolean;
   public listingPageUrl: any = '';
   public params_id: any;
   public ButtonText: any = "Submit";
   public allCategoryName : any=[];
   public editorconfig:any={};
+  public message:any='Submitted Successfully';
+
   @ViewChild(FormGroupDirective, { static: false }) formDirective: FormGroupDirective;
 
   @Input()          //getting all data list via resolve call from app
@@ -59,11 +64,13 @@ export class AddeditTeamComponent implements OnInit {
     this.SingledataEdit = val;
     if (this.activeroute.snapshot.params._id) {
       this.ButtonText = "Update";
+      this.message='Updated Successfully';
+
       this.params_id = this.activeroute.snapshot.params._id;
       this.CategoryManagementTeamForm.controls['categoryName'].patchValue(val[0].categoryName);
       this.CategoryManagementTeamForm.controls['description'].patchValue(val[0].description);
       this.CategoryManagementTeamForm.controls['status'].patchValue(val[0].status);
-      this.CategoryManagementTeamForm.controls['role'].patchValue(val[0].role);
+      // this.CategoryManagementTeamForm.controls['role'].patchValue(val[0].role);
       this.CategoryManagementTeamForm.controls['parent_category'].patchValue(val[0].parent_category);
       // for (const i in this.SingledataEdit[0].role) {
 
@@ -84,14 +91,13 @@ export class AddeditTeamComponent implements OnInit {
   }
 
   constructor(public fb: FormBuilder, public activeroute: ActivatedRoute,
-    public _http: HttpClient, public router: Router, public apiService: ApiService) {
+    public _http: HttpClient, public router: Router, public apiService: ApiService,public _snackBar:MatSnackBar) {
 
     this.CategoryManagementTeamForm = this.fb.group({
       categoryName: ['', Validators.required],
       description: ['', Validators.required],
       status: [true],
-      parent_category : [''],
-      role: ['']
+      parent_category : ['']
     })
     this.editorconfig.extraAllowedContent = '*[class](*),span;ul;li;table;td;style;*[id];*(*);*{*}';
   }
@@ -113,9 +119,9 @@ export class AddeditTeamComponent implements OnInit {
     setTimeout(() => {
       this.getAllCategoryName();
     }, 50);
-    setTimeout(() => {
-      this.getAllRoleSlugData();
-    }, 50);
+    // setTimeout(() => {
+    //   this.getAllRoleSlugData();
+    // }, 50);
   }
   inputUntouch(form: any, val: any) {
     form.controls[val].markAsUntouched();
@@ -142,7 +148,6 @@ export class AddeditTeamComponent implements OnInit {
             'categoryName': this.CategoryManagementTeamForm.value.categoryName,
             'description': this.CategoryManagementTeamForm.value.description,
             'status': this.CategoryManagementTeamForm.value.status,
-            'role': this.CategoryManagementTeamForm.value.role,
             'parent_category':this.CategoryManagementTeamForm.value.parent_category
           },
           "sourceobj": ["parent_category"]
@@ -156,25 +161,28 @@ export class AddeditTeamComponent implements OnInit {
         }
       }
 
-      this.spinnerLoader = true;
+      // this.spinnerLoader = true;
       this.apiService.addData(data).subscribe(response => {
-        this.spinnerLoader = false;
+        // this.spinnerLoader = false;
         this.formDirective.resetForm();
         setTimeout(() => {
           this.router.navigateByUrl('/' + this.listingPageUrl);
         }, 100);
+        this._snackBar.open(this.message, 'OK', {
+          duration: 3000,
+        } )
       })
     }
   }
-  getAllRoleSlugData() {
-    let data: any = {
-      "source": this.roleSourceName
-    }
-    this.apiService.getData(data).subscribe(response => {
-      let result: any = response;
-      this.allData = result.res;
-    })
-  }
+  // getAllRoleSlugData() {
+  //   let data: any = {
+  //     "source": this.roleSourceName
+  //   }
+  //   this.apiService.getData(data).subscribe(response => {
+  //     let result: any = response;
+  //     this.allData = result.res;
+  //   })
+  // }
 
   getAllCategoryName(){
     let data : any = {

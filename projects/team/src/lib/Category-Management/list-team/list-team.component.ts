@@ -19,7 +19,7 @@ export class ListTeamComponent implements OnInit {
   public addupdate: any = '';
   public serverUrlData: any = '';
   public editRouteval: any = '';
-  public alldata_skip: any = ["_id","id","updated_at", "created_at","description","categoryName_search"];
+  public alldata_skip: any = ["_id","id","updated_at", "created_at","description","categoryName_search","role"];
   public alldata_modify_header: any = {
     "categoryName": "Category Name", "description": "Description",
     "rolename": "Role Name", "status": "Status","role" : "Role","parent category":"Parent Category","date_added":"Date","date added":"Date","description_html":"Description","description html":"Description"};

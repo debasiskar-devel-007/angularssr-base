@@ -48,7 +48,7 @@
     <button mat-raised-button color="primary" (click)="manageTeamButton()" >Add Team</button>
     </span>
 </mat-card-content>
-    <mat-card-content class="listing-content-admin"   *ngIf="allTeamdata !=null && allTeamdata.length >c0">
+    <mat-card-content class="listing-content-admin"   *ngIf="allTeamdata !=null && allTeamdata.length >0">
  
       <lib-listing class="formfilterdiv formfilterdivnew"  
         [datasource]="allTeamdata"
