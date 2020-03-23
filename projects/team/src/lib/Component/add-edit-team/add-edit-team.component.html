@@ -33,7 +33,28 @@
                   {{f.categoryName}}
                 </mat-option>
               </mat-select>
-            </mat-form-field>
+            </mat-form-field><br>
+            
+
+            <mat-form-field>
+              <input matInput placeholder="Designation" [formControl]="teamForm.controls['designation']"
+                (blur)="inputUntouch(teamForm,'designation')">
+              <mat-error *ngIf="teamForm.controls['designation'].touched 
+                && !teamForm.controls['designation'].valid
+                       && teamForm.controls['designation'].errors.required">
+                       Designation field can not be blank</mat-error>
+            </mat-form-field><br>
+
+
+            <mat-form-field>
+              <input matInput placeholder="Priority" type="number" [formControl]="teamForm.controls['priority']"
+                (blur)="inputUntouch(teamForm,'priority')">
+              <mat-error *ngIf="teamForm.controls['priority'].touched 
+                && !teamForm.controls['priority'].valid
+                       && teamForm.controls['priority'].errors.required">
+                       Priority field can not be blank</mat-error>
+            </mat-form-field><br>
+
 
             <!-- bullet list start here -->
             <div formArrayName="bulletarray" class="bulletarr"

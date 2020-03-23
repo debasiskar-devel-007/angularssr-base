@@ -73,6 +73,9 @@ export class AddEditTeamComponent implements OnInit {
 
       this.teamForm.controls['team_img'].patchValue(val[0].team_img);
       this.teamForm.controls['status'].patchValue(val[0].status);
+      this.teamForm.controls['designation'].patchValue(val[0].designation);
+      this.teamForm.controls['priority'].patchValue(val[0].priority)
+
 
       this.fullImagePath=val[0].team_img.basepath + val[0].team_img.image;
       this.imageName=val[0].team_img.name;
@@ -149,7 +152,9 @@ export class AddEditTeamComponent implements OnInit {
       multipleemail: this.fb.array([]),
       bulletarray: this.fb.array([]),
       team_img: [''],
-      status:[true]
+      status:[true],
+      designation:['',Validators.required],
+      priority:['',Validators.required]
     })
     this.editorconfig.extraAllowedContent = '*[class](*),span;ul;li;table;td;style;*[id];*(*);*{*}';
 
@@ -313,7 +318,9 @@ export class AddEditTeamComponent implements OnInit {
             "multipleemail": this.teamForm.value.multipleemail,
             "bulletarray": this.teamForm.value.bulletarray,
             'team_img': this.teamForm.value.team_img,
-            'status':this.teamForm.value.status
+            'status':this.teamForm.value.status,
+            'designation':this.teamForm.value.designation,
+            'priority':this.teamForm.value.priority
           },
           "sourceobj": ["categoryname"]
         };

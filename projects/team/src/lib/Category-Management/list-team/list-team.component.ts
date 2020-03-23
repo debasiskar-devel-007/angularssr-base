@@ -177,10 +177,10 @@ export class ListTeamComponent implements OnInit {
 
    public teamStatus: any = [{ val: 1, 'name': 'Active' }, { val: 0, 'name': 'Inactive' }];
 
-   public alldata_skip_team: any = ["_id", "bulletarray", "created_at", "updated_at", "id","categoryname_search","membername_search","description","categoryid"];
+   public alldata_skip_team: any = ["_id", "bulletarray", "created_at", "updated_at", "id","categoryname_search","membername_search","description","categoryid","teamsearch"];
    public data_modify_header: any = {
      "membername": "Member Name", "date added": "Date"
-     , "categoryname": "Category Name", "multiplephone": "Phone Numbers", "image": "Image", "status": "Status","description_html":"Description","description html":"Description","multipleemail":"Emails"
+     , "categoryname": "Category Name", "multiplephone": "Phone Numbers", "image": "Image", "status": "Status","description_html":"Description","description html":"Description","multipleemail":"Emails","designation":"Designation","priority":"Priority"
    };
    public pendingmodelapplicationarray_detail_datatype: any = [{
      key: "images",
