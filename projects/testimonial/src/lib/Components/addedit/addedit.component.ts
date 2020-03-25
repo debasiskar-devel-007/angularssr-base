@@ -24,13 +24,13 @@ export class AddeditComponent implements OnInit {
 
 
   /**ckeditor start here*/
-  public Editor = ClassicEditor;  //for ckeditor
-  editorConfig = {
-    placeholder: 'Write testimonial...',
-  };
-  public model = {
-    editorData: ''
-  };
+  // public Editor = ClassicEditor;  //for ckeditor
+  // editorConfig = {
+  //   placeholder: 'Write testimonial...',
+  // };
+  // public model = {
+  //   editorData: ''
+  // };
   /**ckeditor end here*/
 
 

@@ -63,7 +63,7 @@
 
 
         <!-- Content  -->
-        <ck-editor formControlName="content" [config]="editorconfig" (blur)="inputBlur('content')">        
+        <ck-editor formControlName="content" skin="moono-lisa" language="en" [fullPage]="true" (blur)="inputBlur('content')">        
         </ck-editor>
         <mat-error *ngIf="!newsForm.controls['content'].valid
         && newsForm.controls['content'].errors.required && newsForm.controls['content'].touched"> Content is required.</mat-error>

@@ -33,7 +33,6 @@ export declare class AddEditNewsletterlibComponent implements OnInit {
     newsForm: FormGroup;
     frequency_flag: boolean;
     days_array: any;
-    editorconfig: any;
     days_json: any;
     message: string;
     tmp_date: any;
@@ -44,13 +43,6 @@ export declare class AddEditNewsletterlibComponent implements OnInit {
     reply_address_to: any;
     senders_address_to: any;
     /**ckeditor start here*/
-    Editor: any;
-    editorConfig: {
-        placeholder: string;
-    };
-    model: {
-        editorData: string;
-    };
     /**ckeditor end here*/
     config: any;
     constructor(atp: AmazingTimePickerService, newsService: NewsTitleService, datepipe: DatePipe, cookieService: CookieService, formBuilder: FormBuilder, router: Router, snackBar: MatSnackBar, dialog: MatDialog);

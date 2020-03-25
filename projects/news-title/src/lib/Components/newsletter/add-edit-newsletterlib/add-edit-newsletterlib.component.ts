@@ -1,6 +1,5 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
 import { AmazingTimePickerService } from 'amazing-time-picker';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { NewsTitleService } from '../../../news-title.service';
 import { DatePipe } from '@angular/common';
 import { CookieService } from 'ngx-cookie-service';
@@ -38,7 +37,7 @@ export class AddEditNewsletterlibComponent implements OnInit {
   public newsForm: FormGroup;
   public frequency_flag: boolean = false;
   public days_array: any = [];
-  public editorconfig: any = {};
+  // public editorconfig: any = {};
   days_json: any;
   public message: string;
   public tmp_date: any;
@@ -53,13 +52,13 @@ export class AddEditNewsletterlibComponent implements OnInit {
   // ==============================================
 
   /**ckeditor start here*/
-  public Editor = ClassicEditor;  //for ckeditor
-  editorConfig = {
-    placeholder: 'Content:',
-  };
-  public model = {
-    editorData: ''
-  };
+  // public Editor = ClassicEditor;  //for ckeditor
+  // editorConfig = {
+  //   placeholder: 'Content:',
+  // };
+  // public model = {
+  //   editorData: ''
+  // };
   /**ckeditor end here*/
 
 
@@ -77,7 +76,7 @@ export class AddEditNewsletterlibComponent implements OnInit {
 
 
 
-    this.editorconfig.extraAllowedContent = '*[class](*),span;ul;li;table;td;style;*[id];*(*);*{*}';
+    // this.editorconfig.extraAllowedContent = '*[class](*),span;ul;li;table;td;style;*[id];*(*);*{*}';
 
   }
 

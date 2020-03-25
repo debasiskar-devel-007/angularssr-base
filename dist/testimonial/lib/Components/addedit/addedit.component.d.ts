@@ -17,13 +17,6 @@ export declare class AddeditComponent implements OnInit {
     dialog: MatDialog;
     private sanitizer;
     /**ckeditor start here*/
-    Editor: any;
-    editorConfig: {
-        placeholder: string;
-    };
-    model: {
-        editorData: string;
-    };
     /**ckeditor end here*/
     buttonText: string;
     testimonialForm: FormGroup;

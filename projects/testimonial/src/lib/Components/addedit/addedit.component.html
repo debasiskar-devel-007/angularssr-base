@@ -41,8 +41,8 @@
 
 
         <!-- ----------------------------------testimonial----------------------------------- -->
-          <mat-label>Please write a testimonial...</mat-label>
-          <ck-editor formControlName="description" [config]="editorconfig" (blur)="inputBlur('description')">
+          <mat-label>write a testimonial :</mat-label>
+          <ck-editor formControlName="description" skin="moono-lisa" language="en" [fullPage]="true"  (blur)="inputBlur('description')">
           </ck-editor>
          <mat-error *ngIf="!testimonialForm.controls['description'].valid
           && testimonialForm.controls['description'].errors.required && testimonialForm.controls['description'].touched  " >Description is required.</mat-error>
