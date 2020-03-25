@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, Inject } from '@angular/core';
-import * as ClassicEditor from '@ckeditor/ckeditor5-build-classic';
 import { FormControl, FormGroup, FormArray, FormBuilder, Validators } from '@angular/forms';
 import { ServicelibService } from '../../servicelib.service';
 import { Router } from '@angular/router';
@@ -19,7 +18,7 @@ export class AddeditServiceComponent implements OnInit {
 
 
 
-  public editorData = '<p>Write description...</p>';
+  // public editorData = '<p>Write description...</p>';
 
   /**ckeditor for descripiton start here*/
   // public Editor = ClassicEditor;
@@ -32,13 +31,13 @@ export class AddeditServiceComponent implements OnInit {
 
 
  /** ckeditor for additional description **/
-  public Editor2 = ClassicEditor;  //for ckeditor
-  editorConfig2 = {
-    placeholder: 'Please provide additional details...',
-  };
-  public model2 = {
-    editorData: ''
-  };
+  // public Editor2 = ClassicEditor;  //for ckeditor
+  // editorConfig2 = {
+  //   placeholder: 'Please provide additional details...',
+  // };
+  // public model2 = {
+  //   editorData: ''
+  // };
   /**ckeditor end here*/
 
 

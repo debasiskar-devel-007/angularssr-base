@@ -22,9 +22,8 @@
 
 
         <!-- --------------------------------description------------------- -->
-        <mat-label>Write Description...</mat-label>
-        <ck-editor formControlName="description"  [config]="editorconfig">
-        </ck-editor>
+        <mat-label>Description :</mat-label>
+        <ck-editor formControlName="description" skin="moono-lisa" language="en" [fullPage]="true"></ck-editor>
         <!-- <ckeditor [data]="editorData" formControlName="description" (blur)="inputBlur('description')"> -->
         <!-- </ckeditor> -->
 
@@ -42,9 +41,8 @@
 
         <!-- --------------------------------additional details------------------- -->
 
-        <mat-label>Additional Details If Any...</mat-label>
-        <ck-editor formControlName="additional_details" [config]="editorconfig">
-        </ck-editor>
+        <mat-label>Additional Description (If Any) :</mat-label>
+        <ck-editor formControlName="additional_details" skin="moono-lisa" language="en" [fullPage]="true"></ck-editor>
 
         <br>
         <!-- -------------------------------------------------------------- -->
@@ -98,12 +96,12 @@
         </div>
         <!-- __________________________________________________________________________________________________________ -->
 
-        <h1>Service Image:</h1>
+        <h1>Image:</h1>
 
-        <div class="warning_reso">
+        <!-- <div class="warning_reso">
           <mat-icon>warning</mat-icon>
           <p>Resolution: 650 x 300</p>
-        </div>
+        </div> -->
 
 
         <lib-file-upload [config]="imageConfigData"></lib-file-upload>

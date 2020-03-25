@@ -7,8 +7,7 @@
       "ngx-cookie-service": "ngxCookieService",
       "ngx-ckeditor" : "ngxCkeditor",
       "file-upload-lib-influxiq":"fileUploadLibInfluxiq",
-      "listing-angular7":"listingAngular7",
-      "@ckeditor/ckeditor5-build-classic":"ClassicEditor"
+      "listing-angular7":"listingAngular7"
     }
   }
 }

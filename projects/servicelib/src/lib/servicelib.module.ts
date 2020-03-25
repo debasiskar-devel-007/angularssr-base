@@ -4,7 +4,6 @@ import { DemoMaterialModule } from './modules/material-module';
 import { AddeditServiceComponent ,Modal} from './Component/addedit-service/addedit-service.component';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
-// import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { CKEditorModule } from 'ngx-ckeditor';
 import { ReactiveFormsModule , FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';

@@ -75,10 +75,10 @@
         "dist/testimonial/*"
       ],
       "servicelib": [
-        "dist/servicelib"
+        "dist/servicelib_old"
       ],
       "servicelib/*": [
-        "dist/servicelib/*"
+        "dist/servicelib_old/*"
       ],
       "file-upload": [
         "dist/file-upload"

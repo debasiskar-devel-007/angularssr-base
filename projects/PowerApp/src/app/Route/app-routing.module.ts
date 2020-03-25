@@ -52,7 +52,7 @@ const appRoutes: Routes = [
     path: 'service/edit/:_id',
     component: AddeditServiceComponent,
     resolve: { serviceList: ResolveService },
-    data: { requestcondition: { source: 'service_test', condition: {} }, endpoint: 'datalist' }
+    data: { requestcondition: { source: 'service', condition: {} }, endpoint: 'datalist' }
   },
 
 

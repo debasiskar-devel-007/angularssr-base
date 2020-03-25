@@ -22,7 +22,7 @@ import { ListingTestimonialComponent } from './Components/TestimonialApp/listing
 
 
 // _____________________________SERVICE LIBRARY_________________________________
-import { ServicelibModule } from 'servicelib';
+import { ServicelibModule } from 'dist/servicelib_old';
 import { AddeditServiceComponent } from './Components/ServiceApp/addedit-service/addedit-service.component';
 import { ListingServiceComponent } from './Components/ServiceApp/listing-service/listing-service.component';
 
