@@ -29,7 +29,7 @@ export class ListingNewsletterlibComponent implements OnInit {
         'publishdate': 'Publish Date', 'status': 'Status','date added':'Date Added'
       },
       admintablenameTableName: "admin",
-      statusarr: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }],
+      status: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }],
       updateurl: receivedData.updateEndpoint,
       editUrl: receivedData.editUrl,
       jwtToken: receivedData.jwtToken,
@@ -41,6 +41,7 @@ export class ListingNewsletterlibComponent implements OnInit {
       search_settings: {
         textsearch: [{ label: "Search by title...", field: 'title_search' },
         { label: "Search by subject...", field: 'subject_search' }],
+        selectsearch: [{ label: 'Search By Status', field: 'status', values: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }] }],
         datesearch:[{startdatelabel:"Start Date",enddatelabel:"End Date",submit:"Search By Date",  field:"publishdate_normal_format"}],
         // search: [{ label: "Search By group", field: '' }]
       },  

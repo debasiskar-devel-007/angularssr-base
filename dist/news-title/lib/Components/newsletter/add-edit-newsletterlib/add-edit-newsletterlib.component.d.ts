@@ -9,10 +9,12 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 export interface DialogData {
     msg: string;
-    share_group: string;
-    automatic_newsletter: string;
-    reply_address: string;
-    senders_address: string;
+    test_mail: any;
+    title: any;
+    subject: any;
+    content: any;
+    testMail: any;
+    flag: any;
 }
 export declare class AddEditNewsletterlibComponent implements OnInit {
     private atp;
@@ -27,6 +29,7 @@ export declare class AddEditNewsletterlibComponent implements OnInit {
     buttonText: any;
     group_name_array: any;
     sender_name_array: any;
+    test_mail: any;
     configData: any;
     time: any;
     cookieValue: any;
@@ -42,6 +45,9 @@ export declare class AddEditNewsletterlibComponent implements OnInit {
     automatic_newsletter_to: any;
     reply_address_to: any;
     senders_address_to: any;
+    reply_data: any;
+    email_address: any;
+    reply_address_id: any;
     /**ckeditor start here*/
     /**ckeditor end here*/
     config: any;
@@ -53,10 +59,11 @@ export declare class AddEditNewsletterlibComponent implements OnInit {
     /** opening up the time picker **/
     open(): void;
     /** open Modal **/
-    openDialog(x: any): void;
+    openDialog(x: any, y: any): void;
     /** preview all **/
     preview_all(): void;
     getGroupName(): void;
+    getReplyAddress(): void;
     getSenderAddress(): void;
     generateForm(): void;
     setDefaultValue(defaultValue: any): void;
@@ -69,6 +76,17 @@ export declare class AddEditNewsletterlibComponent implements OnInit {
 export declare class PREVIEW {
     dialogRef: MatDialogRef<PREVIEW>;
     data: DialogData;
-    constructor(dialogRef: MatDialogRef<PREVIEW>, data: DialogData);
+    newsService: NewsTitleService;
+    cookieService: CookieService;
+    configData: any;
+    config: any;
+    testMail: any;
+    title: AnalyserNode;
+    subject: any;
+    content: any;
+    flag: any;
+    constructor(dialogRef: MatDialogRef<PREVIEW>, data: DialogData, newsService: NewsTitleService, cookieService: CookieService);
     onNoClick(): void;
+    selectOption(val: any): void;
+    testMailSubmit(title: any, subject: any, content: any, testMail: any, flag: any): void;
 }

@@ -17,9 +17,11 @@ export declare class AddEditSubcategoryComponent implements OnInit {
     configData: any;
     successMessage: any;
     dialogRef: any;
+    subscriber_name_array: any;
     config: any;
     constructor(formBuilder: FormBuilder, newsletterService: NewsTitleService, router: Router, dialog: MatDialog);
     ngOnInit(): void;
+    getSubscriberList(): void;
     openDialog(x: any): void;
     setDefaultValue(defaultValue: any): void;
     /** blur function **/

@@ -23,8 +23,8 @@ set config(receivedData: any) {
     listEndPoint: receivedData.listEndPoint,
     datasource: receivedData.datasource,
     tableName: receivedData.tableName,
-    listArray_skip: ["_id", "userId", "created_at", "id", "updated_at","image","name_search"],
-    listArray_modify_header: { "name": "Name", "priority": "Priority", "status": "Status" ,"date_added":"Date"},
+    listArray_skip: ["_id", "userId", "created_at", "id", "updated_at","image","name_search","sub_name_search"],
+    listArray_modify_header: { "name": "Name", "priority": "Priority", "status": "Status" ,"date_added":"Date","date added":"Date","subscriber_name":"Subscriber Name","count":"Count","subscriber name":"Subscriber Name"},
     admintablenameTableName: "admin",
     statusarr: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }],
     updateurl: receivedData.updateEndpoint,
@@ -33,7 +33,7 @@ set config(receivedData: any) {
     deleteEndPoint: receivedData.deleteEndPoint,
     view: receivedData.view,
     search_settings:{
-      textsearch: [{ label: "name...", field: 'name_search' }],
+      textsearch: [{ label: "Search By Name", field: 'name_search' },{ label: "Search By Subscriber Name", field: 'sub_name_search' }],
       selectsearch: [{ label: 'Search By Status', field: 'status', values: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }] }],
     },
      /*Showing Image in the Modal*/

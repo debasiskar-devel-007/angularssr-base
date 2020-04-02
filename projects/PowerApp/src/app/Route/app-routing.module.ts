@@ -95,7 +95,7 @@ const appRoutes: Routes = [
   { path: 'newsletter/add-subscription-admin', component: AddEditGroupComponent },
   {
     path: 'newsletter/list-subscription',
-    component: ListingSubscriptionComponent,
+    component: ListingSubscriptionComponent,  
     resolve: { subscriptionData: ResolveService },
     data: { requestcondition: { source: 'subscriptions_view', condition: {} }, endpoint: 'datalist' }
   },

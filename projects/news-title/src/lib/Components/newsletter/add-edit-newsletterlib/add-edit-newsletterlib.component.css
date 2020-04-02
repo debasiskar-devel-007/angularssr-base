@@ -157,3 +157,17 @@ th {
   background-color: #4CAF50;
   color: white;
 }
+
+.setting_formblock .text-field-new{
+  background: #DDE2E5;
+  padding: 5px;
+  border: 4px solid #646D73;
+  width: 350px;
+  height: 32px;
+ }
+ 
+ .setting_formblock .text-field-new-div {
+  display: inline-block;
+  margin: 0 20px; position: relative;
+  text-align: left;
+ }

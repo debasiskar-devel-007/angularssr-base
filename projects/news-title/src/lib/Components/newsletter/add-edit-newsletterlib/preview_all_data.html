@@ -1,80 +1,39 @@
-<h1 mat-dialog-title>PREVIEW DETAILS</h1>
+<h1 mat-dialog-title>Newsletter Preview</h1>
 <div mat-dialog-content>
 
-   <table >
-     
-      <tr>
-         <td>Newsletter Title</td>
-         <td>:</td>
-         <td>{{ data.msg[0] }}</td>
-     
-         <td> Newsletter Subject </td>
-         <td>:</td>
-         <td>{{ data.msg[1] }}</td>
-      </tr>
+   <!-- <div>
+      <span>Newsletter Title :</span>
+      <span><b>{{ data.msg[0] }}</b></span>
+   </div> <br> -->
 
-      <tr>
-         <td> Share Newsletter With Group </td>
-         <td>:</td>
-         <td> {{ data.share_group }}</td>
-    
-         <td> Sender's Address </td>
-         <td>:</td>
-         <td>{{ data.senders_address }}</td>
-      </tr>
+   <div>
+      <!-- <span>Newsletter Subject :</span> -->
+      <span><b>{{ data.msg[1] }}</b></span>
+   </div><br>
 
-      <tr>
-         <td> Publish Date </td>
-         <td>:</td>
-         <td>{{ data.msg[5] | date:'shortDate' }}</td>
-     
-         <td> Set Time </td>
-         <td>:</td>
-         <td>{{ data.msg[6] }}</td>
-      </tr>
 
-      <tr>
-         <td> Content </td>
-         <td>:</td>
-         <td>{{ data.msg[7] }}</td>
-  
-            <td> Automatically Send Newsletter To Members</td>
-            <td>:</td>
-            <td>{{ data.automatic_newsletter }}</td>
-         </tr>
+   <div>
+      <!-- <span>Newsletter Description :</span> -->
+      <span><b [innerHTML]='data.msg[7]'></b></span>
+   </div>
 
-         <tr>
-            <td> Newsletter Frequency</td>
-            <td>:</td>
-            <td>{{ data.msg[9] }}</td>
-      
-            <td> News Letter Time Of The Day </td>
-            <td>:</td>
-            <td>{{ data.msg[11] }}</td>
-         </tr>
+   <div>
+      <mat-form-field>
+         <mat-label>Select E-mail Address:</mat-label>
+         <mat-select matNativeControl required  multiple (change)="selectOption($event.target.value)"
+         [(ngModel)]="testMail" >
+           <!-- <mat-option value=0>Select a group</mat-option> -->
+           <mat-option *ngFor="let i of data.test_mail" [value]="i._id">{{ i.email }}</mat-option>
+           </mat-select>
+       </mat-form-field>
+   </div>
 
-         <tr>
-            <td> News Letter Time Zone </td>
-            <td>:</td>
-            <td>{{ data.msg[12] }}</td>
-        
-            <td> Newsletter Start Date </td>
-            <td>:</td>
-            <td>{{ data.msg[13]  | date:'shortDate'}}</td>
-         </tr>
 
-         <tr>
-            <td> Newsletter End Date </td>
-            <td>:</td>
-            <td>{{ data.msg[14]  | date:'shortDate'}}</td>
-       
-            <td> Reply address </td>
-            <td>:</td>
-            <td>{{  data.reply_address }}</td>
-         </tr>
 
-    
-    
-   </table>
+<span class="newsbtnclass">
+   <button class="submitbtn" mat-raised-button
+   color="primary" (click)="testMailSubmit(data.msg[0],data.msg[1],data.msg[7],testMail,'yes')" cdkFocusInitial>Send</button>
+ <button class="submitbtn" mat-dialog-close="no" cdkFocusInitial mat-raised-button color="primary">Cancel</button>
+</span>
 
 </div>

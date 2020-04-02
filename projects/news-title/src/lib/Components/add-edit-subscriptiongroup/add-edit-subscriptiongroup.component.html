@@ -7,7 +7,7 @@
       <form autocomplete="off" [formGroup]="subGroupForm">
         <!-- Name -->
         <mat-form-field>
-          <mat-label>Name</mat-label>
+          <mat-label>Name :</mat-label>
           <input matInput formControlName="fullname" (blur)="inputBlur('fullname')">
           <mat-error *ngIf="!subGroupForm.controls['fullname'].valid
           && subGroupForm.controls['fullname'].errors.required"> Name is required.</mat-error>
@@ -15,7 +15,7 @@
 
         <!-- Phone -->
         <mat-form-field>
-          <mat-label>Phone</mat-label>
+          <mat-label>Phone Number :</mat-label>
           <input matInput formControlName="phone" (blur)="inputBlur('phone')">
           <mat-error *ngIf="!subGroupForm.controls['phone'].valid
           && subGroupForm.controls['phone'].errors.required"> Phone is required.</mat-error>
@@ -23,7 +23,7 @@
 
         <!-- Email -->
         <mat-form-field>
-          <mat-label>Email</mat-label>
+          <mat-label>Email :</mat-label>
           <input matInput formControlName="email" (blur)="inputBlur('email')">
           <mat-error *ngIf="!subGroupForm.controls['email'].valid
           && subGroupForm.controls['email'].errors.required"> Email is required.</mat-error>
@@ -33,7 +33,7 @@
 
         <!-- Company -->
         <mat-form-field>
-          <mat-label>Company</mat-label>
+          <mat-label>Company :</mat-label>
           <input matInput formControlName="company" (blur)="inputBlur('company')">
           <mat-error *ngIf="!subGroupForm.controls['company'].valid
           && subGroupForm.controls['company'].errors.required">           <mat-label>Company</mat-label>
@@ -42,13 +42,16 @@
 
         <!-- Group  -->
         <mat-form-field>
-          <mat-label>Group</mat-label>
-          <select matNativeControl formControlName="group" required>
-               <option value=0 selected>Remove Group</option>
-              <option value="{{  item._id }}" *ngFor="let item of group_array">{{ item.name  }}</option>
-            
-            </select>
+          <mat-label>Select Group :</mat-label>
+          <mat-select matNativeControl formControlName="group" multiple>
+               <!-- <option value=0 selected>Select Group</option> -->
+              <mat-option value="{{  item._id }}" *ngFor="let item of group_array">{{ item.name  }}</mat-option>
+            </mat-select> 
         </mat-form-field>
+
+
+        <mat-label>Status :</mat-label>
+        <mat-checkbox formControlName="status">Active</mat-checkbox><br>
 
 
 

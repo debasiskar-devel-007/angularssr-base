@@ -34,7 +34,7 @@ import { ListingResourceComponent } from './Components/ResourceApp/listing-resou
 
 
 //_______________________________NEWS LETTER____________________________________
-import { NewsTitleModule } from 'news-title';
+
 import { AddEditSubcategoryComponent } from './Components/NewsletterApp/add-edit-subcategory/add-edit-subcategory.component';
 import { ListingSubcategoryComponent } from './Components/NewsletterApp/listing-subcategory/listing-subcategory.component';
 import { AddEditSubscriptionComponent } from './Components/NewsletterApp/add-edit-subscription/add-edit-subscription.component';
@@ -47,6 +47,8 @@ import { ListingSenderappComponent } from './Components/NewsletterApp/listing-se
 import { AddEditTestemailappComponent } from './Components/NewsletterApp/add-edit-testemailapp/add-edit-testemailapp.component';
 import { LisitngTestemailappComponent } from './Components/NewsletterApp/lisitng-testemailapp/lisitng-testemailapp.component';
 import { FormsModule } from '@angular/forms';
+import { NewsTitleModule } from 'news-title';
+
 
 @NgModule({
   declarations: [

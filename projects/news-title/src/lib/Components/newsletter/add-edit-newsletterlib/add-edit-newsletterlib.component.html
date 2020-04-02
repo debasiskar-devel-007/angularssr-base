@@ -28,9 +28,8 @@
         <!-- share newsletter with -->
         <mat-form-field>
           <mat-label>Share newsletter with group:</mat-label>
-          <mat-select matNativeControl required formControlName="share_news">
-            <mat-option value=0>Select a group</mat-option>
-            <mat-option value="{{i._id}}" *ngFor="let i of group_name_array" (click)="share_with_group=i.name">{{ i.name }}</mat-option>
+          <mat-select matNativeControl required formControlName="share_news" multiple>
+            <mat-option  *ngFor="let i of group_name_array" [value]="i._id">{{ i.name }}</mat-option>
             </mat-select>
         </mat-form-field>
 
@@ -39,7 +38,7 @@
           <mat-label>Sender's address</mat-label>
           <mat-select matNativeControl required formControlName="senderaddress">
             <mat-option value=0>Select a sender</mat-option>
-            <mat-option value="{{ i._id }}" *ngFor='let i of sender_name_array' (click)="senders_address_to=i.email">{{ i.email }}</mat-option>
+            <mat-option  *ngFor='let i of sender_name_array' [value]="i._id">{{ i.email }}</mat-option>
           </mat-select>
         </mat-form-field>
 
@@ -53,12 +52,24 @@
           && newsForm.controls['publishdate'].errors.required"> Publish Date is required.</mat-error>
         </mat-form-field>
 
-
-        <!-- Time Picker  -->
-        <mat-form-field>
+         <!-- Time Picker  -->
+         <mat-form-field>
           <mat-label>Set time:</mat-label>
           <input matInput atp-time-picker  formControlName="settime"/>
         </mat-form-field>
+
+          <!-- News Letter Time Zone -->
+          <mat-form-field>
+            <mat-label>News Letter Time Zone</mat-label>
+            <mat-select matNativeControl required formControlName="timezone">
+              <mat-option value="Hawaii Standard Time">Hawaii Standard Time</mat-option>
+              <mat-option value="Alaska Standard Time">Alaska Standard Time</mat-option>
+              <mat-option value="Pacific Standard Time">Pacific Standard Time</mat-option>
+              <mat-option value="Mountain Standard Time">Mountain Standard Time</mat-option>
+              <mat-option value="Central Standard Time">Central Standard Time</mat-option>
+              <mat-option value="Eastern Standard Time">Eastern Standard Time</mat-option>
+            </mat-select>
+          </mat-form-field>
        
 
 
@@ -66,22 +77,23 @@
         <ck-editor formControlName="content" skin="moono-lisa" language="en" [fullPage]="true" (blur)="inputBlur('content')">        
         </ck-editor>
         <mat-error *ngIf="!newsForm.controls['content'].valid
-        && newsForm.controls['content'].errors.required && newsForm.controls['content'].touched"> Content is required.</mat-error>
+        && newsForm.controls['content'].errors.required && newsForm.controls['content'].touched"> Description is required.</mat-error><br>
 
 
-
-        <h1> SET FREQUENCY </h1>
+      <button   type="button" class="submitbtn submitbtnpreview" mat-raised-button color="primary"
+       (click)="preview_all()" >Preview For Test Email</button>
+        <!-- <h1> SET FREQUENCY </h1> -->
         <hr>
 
 
         <!-- Automatically send newsletters to -->
-        <mat-form-field>
+        <!-- <mat-form-field>
           <mat-label>Automatically send newsletter to members:</mat-label>
           <mat-select matNativeControl required formControlName="sendnews" (blur)="inputBlur('sendnews')">
             <mat-option value=0>Select a group</mat-option>
             <mat-option value="{{i._id}}" *ngFor="let i of group_name_array" (click)="automatic_newsletter_to=i.name">{{ i.name }}</mat-option>
           </mat-select>
-        </mat-form-field>
+        </mat-form-field> -->
 
 
         <!-- Newsletter frequency  -->
@@ -116,19 +128,6 @@
 
 
 
-        <!-- News Letter Time Zone -->
-        <mat-form-field>
-          <mat-label>News Letter Time Zone</mat-label>
-          <mat-select matNativeControl required formControlName="timezone">
-            <mat-option value="Hawaii Standard Time">Hawaii Standard Time</mat-option>
-            <mat-option value="Alaska Standard Time">Alaska Standard Time</mat-option>
-            <mat-option value="Pacific Standard Time">Pacific Standard Time</mat-option>
-            <mat-option value="Mountain Standard Time">Mountain Standard Time</mat-option>
-            <mat-option value="Central Standard Time">Central Standard Time</mat-option>
-            <mat-option value="Eastern Standard Time">Eastern Standard Time</mat-option>
-          </mat-select>
-        </mat-form-field>
-
         <!-- News letter start Date -->
         <mat-form-field>
           <input matInput [matDatepicker]="picker2" placeholder="Newsletter start date" formControlName="startdate" (blur)="inputBlur('startdate')">
@@ -147,29 +146,29 @@
           && newsForm.controls['enddate'].errors.required"> End Date is required.</mat-error>
         </mat-form-field>
 
+
         <!-- NewsLetter reply to email address  -->
+        <div class="setting_formblock text-field-new-div">
+          <span class="">Reply Email Address:</span>
+          <span class="setting_formblock text-field-new">{{email_address}}</span>
+        </div>
 
+        <!-- {{email_address.email}} -->
+     
+        <!-- <span>Reply Email Address:</span>
         <mat-form-field>
-          <mat-label>Reply address</mat-label>
-          <mat-select matNativeControl required formControlName="reply">
-            <mat-option value=0>Select a sender</mat-option>
-            <mat-option value="{{ i._id }}" *ngFor='let i of sender_name_array' (click)="reply_address_to=i.email">{{ i.email }}</mat-option>
-          </mat-select>
-        </mat-form-field>
+           <input matInput [value]="email_address"  readonly>
+        </mat-form-field>  -->
 
-
-
-
+        
 
 
         <!-- Buttons  -->
-        <button *ngIf="this.configData.action=='add'" [disabled]="!newsForm.valid" type="button" class="submitbtn" class="submitbtn" mat-raised-button color="primary" (click)="preview_all()">PREVIEW</button>
-        <button type="submit" class="submitbtn" class="submitbtn" mat-raised-button
+         <!-- <button *ngIf="this.configData.action=='add'" [disabled]="!newsForm.valid" type="button" class="submitbtn" mat-raised-button color="primary" (click)=" openDialog()">PREVIEW</button> -->
+        <button type="submit" class="submitbtn"  mat-raised-button
           color="primary" (click)="onSubmit()">{{buttonText}}</button>
-        <button type="reset" class="submitbtn" class="submitbtn" mat-raised-button color="primary">RESET</button>
-
-
-
+        <button type="reset" class="submitbtn"
+        mat-raised-button color="primary">RESET</button>
 
       </form>
       <!-- ---------------------------------------FORM ENDS HERE----------------------------- -->

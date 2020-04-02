@@ -22,6 +22,7 @@ export class AddEditSubcategoryComponent implements OnInit {
   configData: any;
   successMessage: any = "Submitted Successfully!!!"
   dialogRef: any;
+  public subscriber_name_array:any;
   // ==================================================
 
 
@@ -38,6 +39,7 @@ export class AddEditSubcategoryComponent implements OnInit {
   ngOnInit() {
     //generating the form
     this.generateForm();
+    this.getSubscriberList();
 
 
     // --------------------------------checking the cases------------------------ 
@@ -55,6 +57,19 @@ export class AddEditSubcategoryComponent implements OnInit {
         break;
     }
     // --------------------------------------------------------------------------
+  }
+
+
+
+  //get subscriber list
+  getSubscriberList() {
+    var data: any = { 'source': this.configData.subscriber_table_name };
+    this.newsletterService.getData(this.configData.endpoint2 + 'datalist', data).subscribe(response => {
+      let result: any;
+      result = response;
+      this.subscriber_name_array = result.res;
+      console.log(this.subscriber_name_array)
+    });
   }
 
 
@@ -77,7 +92,7 @@ export class AddEditSubcategoryComponent implements OnInit {
       name: defaultValue.name,
       priority: defaultValue.priority,
       status: defaultValue.status,
-
+      subscriber:defaultValue.subscriber
     });
 
   }
@@ -96,7 +111,8 @@ export class AddEditSubcategoryComponent implements OnInit {
     this.subscriptionCatForm = this.formBuilder.group({
       name: ['',Validators.required],
       priority: ['',Validators.required],
-      status: []
+      status: [],
+      subscriber:[]
     });
   }
   // ==========================================================

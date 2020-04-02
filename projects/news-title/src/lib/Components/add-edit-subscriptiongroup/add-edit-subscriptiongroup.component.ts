@@ -24,7 +24,7 @@ export class AddEditSubscriptiongroupComponent implements OnInit {
   configData: any;
   group_array: any = [];
   dialogRef: any;
-  successMessage: any = "Group Added!!!"
+  successMessage: any = "Subscription Added Successfully..!!!";
   // ========================================================
 
 
@@ -50,7 +50,7 @@ export class AddEditSubscriptiongroupComponent implements OnInit {
       case 'edit':
         /* Button text */
         this.buttonText = "UPDATE";
-
+        this.successMessage = "Subscription Updated Successfully..!!!";
         this.setDefaultValue(this.configData.defaultData);
         this.header_name = "Change/Remove Group";
         break;
@@ -72,7 +72,8 @@ export class AddEditSubscriptiongroupComponent implements OnInit {
       phone: ['',[Validators.required]],
       email: ['',[Validators.required,Validators.email]],
       company: ['',[Validators.required]],
-      group: []
+      group: [],
+      status:[]
     });
   }
   // ================================================
@@ -84,7 +85,8 @@ export class AddEditSubscriptiongroupComponent implements OnInit {
       phone: defaultValue.phone,
       email: defaultValue.email,
       company: defaultValue.company,
-      group: defaultValue.group
+      group: defaultValue.group,
+      status:defaultValue.status
     });
 
   }
@@ -125,8 +127,19 @@ export class AddEditSubscriptiongroupComponent implements OnInit {
      for (let x in this.subGroupForm.controls) {
       this.subGroupForm.controls[x].markAsTouched();
     }
-    if (this.subGroupForm.value.group == 0)
-      this.successMessage = "Removed Group!!!";    
+
+
+        /* stop here if form is invalid */
+  
+          if (this.subGroupForm.value.status) {
+            this.subGroupForm.value.status = parseInt("1");
+          } else {
+            this.subGroupForm.value.status = parseInt("0");;
+          }
+        
+
+    // if (this.subGroupForm.value.group == 0)
+    //   this.successMessage = "Removed Group!!!";    
     /* stop here if form is invalid */
     if (this.subGroupForm.invalid) {
       return;
@@ -135,8 +148,7 @@ export class AddEditSubscriptiongroupComponent implements OnInit {
       /* start process to submited data */
       let postData: any = {
         source: this.configData.source,
-        data: Object.assign(this.subGroupForm.value, this.configData.condition),
-        "sourceobj": ["group"]
+        data: Object.assign(this.subGroupForm.value, this.configData.condition)
       };
       this.newsService.addData(this.configData.endpoint, postData).subscribe((response: any) => {
         if (response.status == "success") {

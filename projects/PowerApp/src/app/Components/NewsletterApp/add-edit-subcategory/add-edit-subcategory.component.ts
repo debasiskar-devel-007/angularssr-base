@@ -21,7 +21,8 @@ export class AddEditSubcategoryComponent implements OnInit {
     jwtToken: this.cookieService.get('jwtToken'),
     callBack: "newsletter/list-category",
     userData: { id: "18801017007", name: "Admin" },
-    defaultDataAlways: null
+    defaultDataAlways: null,
+    subscriber_table_name:'subscriptions'
   }
   constructor( private cookieService : CookieService, private activatedRoute : ActivatedRoute ) { }
 

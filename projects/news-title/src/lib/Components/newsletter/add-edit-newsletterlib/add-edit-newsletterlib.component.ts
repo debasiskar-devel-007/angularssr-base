@@ -7,12 +7,19 @@ import { FormGroup, FormControl, FormArray, FormBuilder, Validators } from "@ang
 import { Router, ActivatedRoute } from '@angular/router';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+
+
 export interface DialogData {
   msg: string;
-  share_group: string;
-  automatic_newsletter: string;
-  reply_address: string;
-  senders_address: string;
+  test_mail: any;
+  title: any;
+  subject: any;
+  content: any;
+  testMail: any;
+  flag: any;
+
+
+
 }
 
 import * as moment_ from 'moment';
@@ -31,6 +38,7 @@ export class AddEditNewsletterlibComponent implements OnInit {
   public buttonText: any = "SAVE";
   public group_name_array: any = [];
   public sender_name_array: any = [];
+  public test_mail: any;
   public configData: any;
   public time: any;
   public cookieValue: any;
@@ -47,6 +55,9 @@ export class AddEditNewsletterlibComponent implements OnInit {
   public automatic_newsletter_to: any;
   public reply_address_to: any
   public senders_address_to: any;
+  public reply_data:any;
+  public email_address:any;
+  public reply_address_id:any;
 
 
   // ==============================================
@@ -74,8 +85,6 @@ export class AddEditNewsletterlibComponent implements OnInit {
     public router: Router, private snackBar: MatSnackBar, public dialog: MatDialog) {
 
 
-
-
     // this.editorconfig.extraAllowedContent = '*[class](*),span;ul;li;table;td;style;*[id];*(*);*{*}';
 
   }
@@ -97,8 +106,17 @@ export class AddEditNewsletterlibComponent implements OnInit {
 
     this.weekdays();
 
-    if (this.configData.action == 'add')
+    this.getReplyAddress();
+
+
+    if (this.configData.action == 'add'){
       this.time = this.datepipe.transform(new Date(), 'H:mm');
+    }
+
+    if (this.configData.action == 'edit'){
+      this.getReplyAddress();
+    }
+
 
 
 
@@ -131,6 +149,7 @@ export class AddEditNewsletterlibComponent implements OnInit {
         this.buttonText = "UPDATE";
         this.time = "";
         this.message = "Newsletter Information Updated!!!";
+        // this.reply_address=this.reply_data[0].email;
         if (this.configData.defaultData.newsfrequency == "daily")
           this.frequency_flag = false;
         else
@@ -152,7 +171,6 @@ export class AddEditNewsletterlibComponent implements OnInit {
 
         break;
     }
-
 
 
   }
@@ -206,7 +224,7 @@ export class AddEditNewsletterlibComponent implements OnInit {
   /** mat snackbar **/
   openSnackBar(message: string, action: string) {
     this.snackBar.open(message, action, {
-      duration: 2000,
+      duration: 3000,
     });
   }
 
@@ -219,27 +237,91 @@ export class AddEditNewsletterlibComponent implements OnInit {
   }
 
 
+  // getTestMail(){
+  //   var data1: any = { 'source': this.configData.test_mail_table };
+  //   this.newsService.getData(this.configData.endpoint2 + 'datalist', data1).subscribe(response => {
+  //     let result: any;
+  //     result = response;
+  //     this.test_mail = result.res;
+  //      console.log('+++',this.test_mail)
+  //     this.openDialog(this.newsForm.value,this.test_mail)
+  //   })
+  // }
+
+
+
   /** open Modal **/
-  openDialog(x: any): void {
+  openDialog(x: any, y: any): void {
+    // console.log(y)
+
     this.dialogRef = this.dialog.open(PREVIEW, {
-      width: '1000px',
+      panelClass:'newspreview-dialog',
       data: {
         msg: x,
-        share_group: this.share_with_group,
-        automatic_newsletter: this.automatic_newsletter_to,
-        senders_address: this.senders_address_to,
-        reply_address: this.reply_address_to
+        test_mail: y,
+
       }
+
     });
 
     this.dialogRef.afterClosed().subscribe(result => {
+
+      // console.log(result)
+
+
+      let mailData: any = {
+        "title": result.title,
+        "subject": result.subject,
+        "description": result.content,
+        "testMail": result.testMail
+      }
+
+      if (result.flag == "yes") {
+
+        let data1: any = {
+          source: this.configData.source_for_test_mail_add,
+          data: mailData
+        };
+        this.newsService.addData(this.configData.endpoint, data1).subscribe((response: any) => {
+          if (response.status == "success") {
+
+            this.openSnackBar('Email Send Successfully.','OK');
+            // this.dialogRef.close();
+          } else {
+            this.openSnackBar('Error Occure....!','');
+          }
+
+        });
+
+      }
+
     });
+
   }
 
 
   /** preview all **/
   preview_all() {
-    this.openDialog(Object.values(this.newsForm.value));
+
+  if(this.newsForm.value.content == '' || this.newsForm.value.newssubject == '' ) {
+      alert("Subject and Description field is requird for test email....!")
+    } else {
+
+      var data1: any = { 'source': this.configData.test_mail_table };
+      this.newsService.getData(this.configData.endpoint2 + 'datalist', data1).subscribe(response => {
+        let result: any;
+        result = response;
+        this.test_mail = result.res;
+        this.openDialog((Object.values(this.newsForm.value)), (this.test_mail));
+        // console.log('+++', this.test_mail)
+      })
+      // this.openDialog(this.newsForm.value,this.test_mail)
+      // this.openDialog((Object.values(this.newsForm.value)),(this.test_mail));
+
+      // console.log(this.newsForm.value)
+    }
+
+
   }
 
 
@@ -254,12 +336,28 @@ export class AddEditNewsletterlibComponent implements OnInit {
   }
 
   /*getting the sender's email*/
+  getReplyAddress() {
+    var data: any = { 'source': this.configData.reply_address_table };
+    this.newsService.getData(this.configData.endpoint2 + 'datalist', data).subscribe(response => {
+      let result: any;
+      result = response;
+      this.reply_data = result.res;
+      this.email_address=this.reply_data[0].email;
+      this.reply_address_id=this.reply_data[0]._id;
+      // console.log(this.email_address.email)
+
+    });
+  }
+
+  // reply address 
+
   getSenderAddress() {
     var data: any = { 'source': this.configData.sender_table };
     this.newsService.getData(this.configData.endpoint2 + 'datalist', data).subscribe(response => {
       let result: any;
       result = response;
       this.sender_name_array = result.res;
+      // console.log(this.sender_name_array)
     });
   }
 
@@ -275,17 +373,15 @@ export class AddEditNewsletterlibComponent implements OnInit {
       publishdate: ['', [Validators.required]],
       settime: [this.time],
       content: ['', [Validators.required]],
-      sendnews: [],
       newsfrequency: [],
       days_of_weeks: [],
       timeofday: [this.time],
       timezone: [],
       startdate: ['', [Validators.required]],
       enddate: ['', [Validators.required]],
-      reply: [],
+      reply_email: [this.reply_address_id],
       status: [1]
     });
-
   }
 
 
@@ -304,23 +400,22 @@ export class AddEditNewsletterlibComponent implements OnInit {
     date = new Date(this.tmp_date);
     defaultValue.enddate = date,
 
-    this.newsForm.patchValue({
-      newstitle: defaultValue.newstitle,
-      newssubject: defaultValue.newssubject,
-      share_news: defaultValue.share_news,
-      senderaddress: defaultValue.senderaddress,
-      publishdate: defaultValue.publishdate,
-      settime: defaultValue.settime,
-      content: defaultValue.content,
-      days_of_weeks: defaultValue.days_of_weeks,
-      sendnews: defaultValue.sendnews,
-      newsfrequency: defaultValue.newsfrequency,
-      timeofday: defaultValue.timeofday,
-      timezone: defaultValue.timezone,
-      startdate: defaultValue.startdate,
-      enddate: defaultValue.enddate,
-      reply: defaultValue.reply
-    });
+      this.newsForm.patchValue({
+        newstitle: defaultValue.newstitle,
+        newssubject: defaultValue.newssubject,
+        share_news: defaultValue.share_news,
+        senderaddress: defaultValue.senderaddress,
+        publishdate: defaultValue.publishdate,
+        settime: defaultValue.settime,
+        content: defaultValue.content,
+        days_of_weeks: defaultValue.days_of_weeks,
+        newsfrequency: defaultValue.newsfrequency,
+        timeofday: defaultValue.timeofday,
+        timezone: defaultValue.timezone,
+        startdate: defaultValue.startdate,
+        enddate: defaultValue.enddate,
+        reply_email: defaultValue.reply_email
+      });
     // this.share_with_group = defaultValue.share_news;   
 
   }
@@ -359,7 +454,7 @@ export class AddEditNewsletterlibComponent implements OnInit {
     if (this.false_count == 7)
       return;
 
-  
+
     if (this.frequency_flag == true)
       this.newsForm.value.days_of_weeks = this.days_array;
     else
@@ -371,9 +466,10 @@ export class AddEditNewsletterlibComponent implements OnInit {
     this.newsForm.value.publishdate = moment(this.newsForm.value.publishdate).format('MM/DD/YYYY');
     this.newsForm.value.startdate = moment(this.newsForm.value.startdate).format('MM/DD/YYYY');
     this.newsForm.value.enddate = moment(this.newsForm.value.enddate).format('MM/DD/YYYY');
+    this.newsForm.value.reply_email=this.reply_data[0]._id;
 
     let x: any = moment(this.newsForm.value.publishdate).unix();
-    this.newsForm.value.publishdate_normal_format = parseInt(x)*1000;
+    this.newsForm.value.publishdate_normal_format = parseInt(x) * 1000;
 
 
 
@@ -393,7 +489,7 @@ export class AddEditNewsletterlibComponent implements OnInit {
       let postData: any = {
         source: this.configData.source,
         data: Object.assign(this.newsForm.value, this.configData.condition),
-        "sourceobj": ["share_news", "senderaddress"]
+        "sourceobj": ["senderaddress","reply_email"]
       };
       this.newsService.addData(this.configData.endpoint, postData).subscribe((response: any) => {
         if (response.status == "success") {
@@ -421,15 +517,70 @@ export class AddEditNewsletterlibComponent implements OnInit {
 })
 export class PREVIEW {
 
+  public configData: any;
+
+
+  @Input()
+  set config(getConfig: any) {
+    this.configData = getConfig;
+  }
+
+
+  public testMail: any;
+  public title: AnalyserNode;
+  public subject: any;
+  public content: any;
+  public flag: any;
 
   constructor(
     public dialogRef: MatDialogRef<PREVIEW>,
-    @Inject(MAT_DIALOG_DATA) public data: DialogData) { }
+    @Inject(MAT_DIALOG_DATA) public data: DialogData, public newsService: NewsTitleService, public cookieService: CookieService) {
+
+    // console.log('>>', data)
+
+  }
 
   onNoClick(): void {
     this.dialogRef.close();
   }
+  selectOption(val) {
+    // console.log(val)
+  }
+
+  testMailSubmit(title: any, subject: any, content: any, testMail: any, flag: any) {
+    // console.log(title, subject, content, testMail);
+
+    this.data.title = title;
+    this.data.subject = subject;
+    this.data.content = content;
+    this.data.testMail = this.testMail;
+    this.data.flag = flag;
+
+    this.dialogRef.close(this.data);
+
+    // let endpoint:any='https://9ozbyvv5v0.execute-api.us-east-1.amazonaws.com/production/api/addorupdatedata'
+
+    // let mailData: any = {
+    //   source: 'newsTestMailData',
+    //   data: {
+    //     "title":title,
+    //     "subject":subject,
+    //     "content":content,
+    //     "testMail":this.testMail
+    //   },
+    //   "sourceobj": ["testMail"],
+    //   "token":this.cookieService.get('jwtToken')
+    // };
+    // this.newsService.addData(endpoint, mailData).subscribe((response: any) => {
+    //   if (response.status == "success") {
+
+    //     // this.openSnackBar(this.message, "OK");
+    //     this.dialogRef.close();
+
+    //   }
+
+    // });
 
 
+  }
 }
-// ======================================================================================================

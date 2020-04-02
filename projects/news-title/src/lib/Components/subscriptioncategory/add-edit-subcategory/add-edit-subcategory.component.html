@@ -10,7 +10,7 @@
 
         <!-- Name  -->
         <mat-form-field>
-          <mat-label>Name</mat-label>
+          <mat-label>Name :</mat-label>
           <input matInput placeholder="name" formControlName="name" (blur)="inputBlur('name')">
           <mat-error *ngIf="!subscriptionCatForm.controls['name'].valid
           && subscriptionCatForm.controls['name'].errors.required"> Name is required.</mat-error>
@@ -20,15 +20,26 @@
         <!-- Priority -->
 
         <mat-form-field>
-          <mat-label>Priority</mat-label>
+          <mat-label>Priority :</mat-label>
           <input matInput placeholder="priority" type="number" formControlName="priority" (blur)="inputBlur('priority')">
           <mat-error *ngIf="!subscriptionCatForm.controls['priority'].valid
           && subscriptionCatForm.controls['priority'].errors.required"> Priority is required.</mat-error>
         </mat-form-field>
 
-        <!-- Status  -->
-        <mat-label>Status</mat-label>
-        <mat-checkbox formControlName="status">Active</mat-checkbox><br>
+
+        <!-- //subscriber list -->
+
+        <mat-form-field>
+          <mat-label>Select Subscriber :</mat-label>
+          <mat-select matNativeControl  formControlName="subscriber" multiple>
+            <mat-option  *ngFor='let i of subscriber_name_array' [value]="i._id">{{ i.fullname }}</mat-option>
+          </mat-select>
+        </mat-form-field>
+
+
+          <!-- Status  -->
+          <mat-label>Status :</mat-label>
+          <mat-checkbox formControlName="status">Active</mat-checkbox><br>
 
 
         <!-- Button  -->
