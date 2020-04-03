@@ -1,9 +1,15 @@
-import { Component, OnInit, Input, Inject } from '@angular/core';
+import { Component, OnInit, Input, Inject,ViewChild,ElementRef } from '@angular/core';
 import { FormGroup, FormControl, FormBuilder ,Validators} from '@angular/forms';
 import { CookieService } from 'ngx-cookie-service';
 import { NewsTitleService } from '../../news-title.service';
 import { Router } from '@angular/router';
 import { MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import {MatAutocompleteSelectedEvent, MatChipInputEvent} from '@angular/material';
+import {Observable} from 'rxjs';
+import {COMMA, ENTER} from '@angular/cdk/keycodes';
+import {map, startWith} from 'rxjs/operators';
+
+
 export interface DialogData {
   msg: string;
 }
@@ -22,14 +28,36 @@ export class AddEditSubscriptiongroupComponent implements OnInit {
   buttonText: any = "SUBMIT";
   header_name: any = "Add a group to subscriptions";
   configData: any;
-  group_array: any = [];
+  groupname:any;
+
+  nameValForGroup:any='';
+  group_array: any;
   dialogRef: any;
   successMessage: any = "Subscription Added Successfully..!!!";
   // ========================================================
 
+  filtered_group_array: Observable<any[]>;
+
+  // group = new FormControl();
+
+  visible: boolean = true;
+  selectable: boolean = true;
+  removable: boolean = true;
+  addOnBlur: boolean = false;
+
+
+  separatorKeysCodes = [ENTER, COMMA];
+
+  @ViewChild('fruitInput') groupInput: ElementRef;
 
   constructor(private formBuilder: FormBuilder, private cookieService: CookieService,
-    private newsService: NewsTitleService, private router: Router, public dialog: MatDialog) { }
+    private newsService: NewsTitleService, private router: Router, public dialog: MatDialog) {
+
+      // this.filtered_group_array = this.group.valueChanges.pipe(startWith(null),
+      //   map((item: any) => item ? this.filter(item) : this.nameValForGroup.slice()));
+
+        console.log('filtered_group_array--->',this.nameValForGroup)
+     }
 
   ngOnInit() {
 
@@ -93,7 +121,6 @@ export class AddEditSubscriptiongroupComponent implements OnInit {
   // ==================================================================================================
 
 
-
   // =========================================MODAL functions==========================================
   openDialog(x: any): void {
     this.dialogRef = this.dialog.open(Modal2, {
@@ -106,16 +133,10 @@ export class AddEditSubscriptiongroupComponent implements OnInit {
     });
   }
   // =====================================================================================================
-
-
-
-
    /** blur function **/
    inputBlur(val: any) {
     this.subGroupForm.controls[val].markAsUntouched();
   }
-
-
 
   // ==========================================SUBMIT=================================================
 
@@ -168,17 +189,96 @@ export class AddEditSubscriptiongroupComponent implements OnInit {
   }
   // =================================================================================================
 
-  //Getting the parent category
+  // Getting the parent category
   getGroup() {
     let postData: any = {
-      source: this.configData.group,
+      source: this.configData.groupData,
       token: this.cookieService.get('jwtToken')
 
     };
     this.newsService.getData(this.configData.endpoint2 + 'datalist', postData).subscribe((response: any) => {
       this.group_array = response.res;
+      console.log('>>>',this.group_array)
+
+ 
     })
   }
+
+
+
+  // mat chip use for listing 
+
+  filter(name: any) {
+    this.nameValForGroup=this.group_array;
+    for(let i in this.group_array){
+      // console.log(this.group_array[i].name)
+     this.groupname=this.group_array[i].name;
+     return this.groupname.filter(item =>
+      item.toLowerCase().indexOf(name.toLowerCase()) === 0)
+
+    }
+    ;
+  }
+
+ 
+  add(event: MatChipInputEvent): void {
+    const input = event.input;
+    const value = event.value;
+
+    // Add our fruit
+    if ((value || '').trim()) {
+      this.nameValForGroup.push(value.trim());
+    }
+
+    // Reset the input value
+    if (input) {
+      input.value = '';
+    }
+
+    // this.group.setValue(null);
+  }
+
+  remove(item: any,index:any): void {
+    console.log('index-->',item,index)
+
+    this.nameValForGroup=this.group_array;
+    for(let i in this.group_array){
+      // console.log(this.group_array[i].name)
+     this.groupname=this.group_array[i].name;
+
+      if(this.group_array[i]._id == item){
+        this.group_array.splice(index,1);
+      }
+
+      // console.log('>>',this.groupname)
+    }
+
+    // const index = this.nameValForGroup.indexOf(item);
+
+    if (index >= 0) {
+    }
+  }
+
+  // filter(name: string) {
+  //   return this.group_array.filter(fruit =>
+  //       fruit.toLowerCase().indexOf(name.toLowerCase()) === 0);
+  // }
+
+  selected(event: MatAutocompleteSelectedEvent): void {
+    this.nameValForGroup.push(event.option.viewValue);
+    this.groupInput.nativeElement.value = '';
+    // this.group.setValue(null);
+  }
+
+
+
+
+
+
+
+
+
+
 
 
 }

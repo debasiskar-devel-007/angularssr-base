@@ -43,6 +43,7 @@ import { MatTreeModule } from '@angular/material/tree';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ListingModule } from 'listing-angular7';
 import { HttpClient, HttpHeaders, HttpClientModule } from '@angular/common/http';
+import { COMMA, ENTER } from '@angular/cdk/keycodes';
 import { DatePipe, CommonModule } from '@angular/common';
 import { MatSnackBarModule, MatSnackBar as MatSnackBar$1 } from '@angular/material/snack-bar';
 import * as moment_ from 'moment';
@@ -50,7 +51,7 @@ import { CookieService } from 'ngx-cookie-service';
 import { FormBuilder, Validators, FormGroupDirective, ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { MatDialogModule, MatDialog as MatDialog$1, MatDialogRef as MatDialogRef$1, MAT_DIALOG_DATA as MAT_DIALOG_DATA$1 } from '@angular/material/dialog';
-import { Injectable, Component, Input, NgModule, Inject, ViewChild, CUSTOM_ELEMENTS_SCHEMA, defineInjectable, inject } from '@angular/core';
+import { Injectable, NgModule, Component, Input, Inject, ViewChild, CUSTOM_ELEMENTS_SCHEMA, defineInjectable, inject } from '@angular/core';
 import { AmazingTimePickerService, AmazingTimePickerModule } from 'amazing-time-picker';
 import { CKEditorModule } from 'ngx-ckeditor';
 import { MomentModule } from 'ngx-moment';
@@ -1463,7 +1464,6 @@ ListingSubcategoryComponent.propDecorators = {
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 class AddEditSubscriptiongroupComponent {
-    // ========================================================
     /**
      * @param {?} formBuilder
      * @param {?} cookieService
@@ -1472,6 +1472,8 @@ class AddEditSubscriptiongroupComponent {
      * @param {?} dialog
      */
     constructor(formBuilder, cookieService, newsService, router, dialog) {
+        // this.filtered_group_array = this.group.valueChanges.pipe(startWith(null),
+        //   map((item: any) => item ? this.filter(item) : this.nameValForGroup.slice()));
         this.formBuilder = formBuilder;
         this.cookieService = cookieService;
         this.newsService = newsService;
@@ -1479,8 +1481,15 @@ class AddEditSubscriptiongroupComponent {
         this.dialog = dialog;
         this.buttonText = "SUBMIT";
         this.header_name = "Add a group to subscriptions";
-        this.group_array = [];
+        this.nameValForGroup = '';
         this.successMessage = "Subscription Added Successfully..!!!";
+        // group = new FormControl();
+        this.visible = true;
+        this.selectable = true;
+        this.removable = true;
+        this.addOnBlur = false;
+        this.separatorKeysCodes = [ENTER, COMMA];
+        console.log('filtered_group_array--->', this.nameValForGroup);
     }
     /**
      * @return {?}
@@ -1627,14 +1636,14 @@ class AddEditSubscriptiongroupComponent {
         }
     }
     // =================================================================================================
-    //Getting the parent category
+    // Getting the parent category
     /**
      * @return {?}
      */
     getGroup() {
         /** @type {?} */
         let postData = {
-            source: this.configData.group,
+            source: this.configData.groupData,
             token: this.cookieService.get('jwtToken')
         };
         this.newsService.getData(this.configData.endpoint2 + 'datalist', postData).subscribe((/**
@@ -1643,13 +1652,80 @@ class AddEditSubscriptiongroupComponent {
          */
         (response) => {
             this.group_array = response.res;
+            console.log('>>>', this.group_array);
         }));
+    }
+    // mat chip use for listing 
+    /**
+     * @param {?} name
+     * @return {?}
+     */
+    filter(name) {
+        this.nameValForGroup = this.group_array;
+        for (let i in this.group_array) {
+            // console.log(this.group_array[i].name)
+            this.groupname = this.group_array[i].name;
+            return this.groupname.filter((/**
+             * @param {?} item
+             * @return {?}
+             */
+            item => item.toLowerCase().indexOf(name.toLowerCase()) === 0));
+        }
+    }
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    add(event) {
+        /** @type {?} */
+        const input = event.input;
+        /** @type {?} */
+        const value = event.value;
+        // Add our fruit
+        if ((value || '').trim()) {
+            this.nameValForGroup.push(value.trim());
+        }
+        // Reset the input value
+        if (input) {
+            input.value = '';
+        }
+        // this.group.setValue(null);
+    }
+    /**
+     * @param {?} item
+     * @param {?} index
+     * @return {?}
+     */
+    remove(item, index) {
+        console.log('index-->', item, index);
+        this.nameValForGroup = this.group_array;
+        for (let i in this.group_array) {
+            // console.log(this.group_array[i].name)
+            this.groupname = this.group_array[i].name;
+            if (this.group_array[i]._id == item) {
+                this.group_array.splice(index, 1);
+            }
+            // console.log('>>',this.groupname)
+        }
+    }
+    // filter(name: string) {
+    //   return this.group_array.filter(fruit =>
+    //       fruit.toLowerCase().indexOf(name.toLowerCase()) === 0);
+    // }
+    /**
+     * @param {?} event
+     * @return {?}
+     */
+    selected(event) {
+        this.nameValForGroup.push(event.option.viewValue);
+        this.groupInput.nativeElement.value = '';
+        // this.group.setValue(null);
     }
 }
 AddEditSubscriptiongroupComponent.decorators = [
     { type: Component, args: [{
                 selector: 'lib-add-edit-subscriptiongroup',
-                template: "<mat-card>\n  <mat-toolbar color=\"primary\" style=\"justify-content: center; align-items: center;\">\n    <h2 class=\"headerSpan\">{{ header_name }}</h2>\n  </mat-toolbar>\n  <span class=\"formspan\">\n    <mat-card-content class=\"example-container\">\n      <form autocomplete=\"off\" [formGroup]=\"subGroupForm\">\n        <!-- Name -->\n        <mat-form-field>\n          <mat-label>Name :</mat-label>\n          <input matInput formControlName=\"fullname\" (blur)=\"inputBlur('fullname')\">\n          <mat-error *ngIf=\"!subGroupForm.controls['fullname'].valid\n          && subGroupForm.controls['fullname'].errors.required\"> Name is required.</mat-error>\n        </mat-form-field>\n\n        <!-- Phone -->\n        <mat-form-field>\n          <mat-label>Phone Number :</mat-label>\n          <input matInput formControlName=\"phone\" (blur)=\"inputBlur('phone')\">\n          <mat-error *ngIf=\"!subGroupForm.controls['phone'].valid\n          && subGroupForm.controls['phone'].errors.required\"> Phone is required.</mat-error>\n        </mat-form-field>\n\n        <!-- Email -->\n        <mat-form-field>\n          <mat-label>Email :</mat-label>\n          <input matInput formControlName=\"email\" (blur)=\"inputBlur('email')\">\n          <mat-error *ngIf=\"!subGroupForm.controls['email'].valid\n          && subGroupForm.controls['email'].errors.required\"> Email is required.</mat-error>\n          <mat-error *ngIf=\"!subGroupForm.controls['email'].valid\n          && subGroupForm.controls['email'].errors.email\"> Email is not valid.</mat-error>\n        </mat-form-field>\n\n        <!-- Company -->\n        <mat-form-field>\n          <mat-label>Company :</mat-label>\n          <input matInput formControlName=\"company\" (blur)=\"inputBlur('company')\">\n          <mat-error *ngIf=\"!subGroupForm.controls['company'].valid\n          && subGroupForm.controls['company'].errors.required\">           <mat-label>Company</mat-label>\n          is required.</mat-error>\n        </mat-form-field>\n\n        <!-- Group  -->\n        <mat-form-field>\n          <mat-label>Select Group :</mat-label>\n          <mat-select matNativeControl formControlName=\"group\" multiple>\n               <!-- <option value=0 selected>Select Group</option> -->\n              <mat-option value=\"{{  item._id }}\" *ngFor=\"let item of group_array\">{{ item.name  }}</mat-option>\n            </mat-select> \n        </mat-form-field>\n\n\n        <mat-label>Status :</mat-label>\n        <mat-checkbox formControlName=\"status\">Active</mat-checkbox><br>\n\n\n\n        <button type=\"submit\" class=\"submitbtn\" class=\"submitbtn\" mat-raised-button\n          color=\"primary\"  (click)=\"onSubmit()\">{{buttonText}}</button>\n        <button type=\"reset\" class=\"submitbtn\" class=\"submitbtn\" mat-raised-button color=\"primary\">RESET</button>\n\n\n\n\n      </form>\n      <!-- ---------------------------------------FORM ENDS HERE----------------------------- -->\n    </mat-card-content>\n  </span>\n</mat-card>",
+                template: "<mat-card>\n  <mat-toolbar color=\"primary\" style=\"justify-content: center; align-items: center;\">\n    <h2 class=\"headerSpan\">{{ header_name }}</h2>\n  </mat-toolbar>\n  <span class=\"formspan\">\n    <mat-card-content class=\"example-container\">\n      <form autocomplete=\"off\" [formGroup]=\"subGroupForm\">\n        <!-- Name -->\n        <mat-form-field>\n          <mat-label>Name :</mat-label>\n          <input matInput formControlName=\"fullname\" (blur)=\"inputBlur('fullname')\">\n          <mat-error *ngIf=\"!subGroupForm.controls['fullname'].valid\n          && subGroupForm.controls['fullname'].errors.required\"> Name is required.</mat-error>\n        </mat-form-field>\n\n        <!-- Phone -->\n        <mat-form-field>\n          <mat-label>Phone Number :</mat-label>\n          <input matInput formControlName=\"phone\" (blur)=\"inputBlur('phone')\">\n          <mat-error *ngIf=\"!subGroupForm.controls['phone'].valid\n          && subGroupForm.controls['phone'].errors.required\"> Phone is required.</mat-error>\n        </mat-form-field>\n\n        <!-- Email -->\n        <mat-form-field>\n          <mat-label>Email :</mat-label>\n          <input matInput formControlName=\"email\" (blur)=\"inputBlur('email')\">\n          <mat-error *ngIf=\"!subGroupForm.controls['email'].valid\n          && subGroupForm.controls['email'].errors.required\"> Email is required.</mat-error>\n          <mat-error *ngIf=\"!subGroupForm.controls['email'].valid\n          && subGroupForm.controls['email'].errors.email\"> Email is not valid.</mat-error>\n        </mat-form-field>\n\n        <!-- Company -->\n        <mat-form-field>\n          <mat-label>Company :</mat-label>\n          <input matInput formControlName=\"company\" (blur)=\"inputBlur('company')\">\n          <mat-error *ngIf=\"!subGroupForm.controls['company'].valid\n          && subGroupForm.controls['company'].errors.required\">           <mat-label>Company</mat-label>\n          is required.</mat-error>\n        </mat-form-field>\n\n        <!-- Group  -->\n        <mat-form-field>\n          <mat-label>Select Group :</mat-label>\n          <mat-select matNativeControl formControlName=\"group\" multiple>\n              <mat-option value=\"{{  item._id }}\" *ngFor=\"let item of group_array\">{{ item.name  }}</mat-option>\n            </mat-select> \n        </mat-form-field>\n\n\n        <!-- mat-chips  -->\n\n        <!-- <mat-form-field >\n          <mat-chip-list #chipList>\n            <mat-chip\n            *ngFor=\"let item of nameValForGroup;let i=index\"\n              [selectable]=\"selectable\"\n              [removable]=\"removable\"\n              (click)=\"remove(item.id,i)\">\n              {{item.name}}\n              <mat-icon matChipRemove *ngIf=\"removable\" (click)=\"remove(item.id,i)\">cancel</mat-icon>\n            </mat-chip>\n            <input\n              placeholder=\"Select Group....\"\n              #fruitInput\n              formControlName=\"group\"\n              [matAutocomplete]=\"auto\"\n              [matChipInputFor]=\"chipList\"\n              [matChipInputSeparatorKeyCodes]=\"separatorKeysCodes\"\n              [matChipInputAddOnBlur]=\"addOnBlur\"\n              (matChipInputTokenEnd)=\"add($event)\"\n            />\n          </mat-chip-list>\n          <mat-autocomplete #auto=\"matAutocomplete\" (optionSelected)=\"selected($event)\">\n            <mat-option *ngFor=\"let item of filtered_group_array | async\" [value]=\"item\">\n              {{ item }}\n            </mat-option>\n          </mat-autocomplete>\n        </mat-form-field> -->\n\n\n\n\n\n\n\n\n        <mat-label>Status :</mat-label>\n        <mat-checkbox formControlName=\"status\">Active</mat-checkbox><br>\n\n\n\n        <button type=\"submit\" class=\"submitbtn\" class=\"submitbtn\" mat-raised-button\n          color=\"primary\"  (click)=\"onSubmit()\">{{buttonText}}</button>\n        <button type=\"reset\" class=\"submitbtn\" class=\"submitbtn\" mat-raised-button color=\"primary\">RESET</button>\n\n\n\n\n      </form>\n      <!-- ---------------------------------------FORM ENDS HERE----------------------------- -->\n    </mat-card-content>\n  </span>\n</mat-card>",
                 styles: [".example-container{display:flex;flex-direction:column}.example-container>*{width:100%}.main-class .submitbtn{display:block;width:170px;margin:10px auto;background:#3f50b5!important;color:#fff}.main-class .material-icons{cursor:pointer}.formspan{background-color:#e7e9ea;border:6px solid #fff;border-bottom:10px solid #fff;display:inline-block;width:100%;position:relative;z-index:9}.formspan .example-container{display:flex;flex-direction:column;width:98%;padding:14px;margin-bottom:0}.formspan .form-field-span,.formspan .mat-form-field{display:inline-block;position:relative;text-align:left;width:98%;background:#fff;margin-bottom:9px;padding:1px 14px}.formspan .form-field-span .mat-checkbox,.formspan .form-field-span .mat-radio-button{padding-right:15px;padding-bottom:15px;display:inline-block}.formspan .mat-form-field-wrapper{padding-bottom:0!important}.form-field-span .mat-error{font-size:13px!important}.mat-error{color:#f44336;font-size:13px!important}button.submitbtn.mat-raised-button.mat-primary{margin-right:15px}h1{color:#3f50b4}.files-view{background-repeat:no-repeat;background-size:cover;background-position:center;height:auto!important;width:82%;margin:20px auto;border-radius:10px;display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap}.files-view .mat-card{z-index:9;margin:10px!important;display:flex;flex-wrap:wrap;justify-content:center;width:27%;position:relative}.files-view .mat-card .mat-card-actions,.files-view .mat-card .mat-card-titlt{display:inline-block;width:100%}.files-view .mat-card .mat-card-subtitle{display:inline-block;width:100%;text-align:center}.closecard{position:absolute;top:-10px;right:-8px;background:#464545;height:25px;width:25px;border-radius:50%;border:1px solid #696969;color:#fff;text-align:center;box-shadow:0 2px 6px #00000070;cursor:pointer}.closecard i{font-size:18px;line-height:27px}"]
             }] }
 ];
@@ -1662,6 +1738,7 @@ AddEditSubscriptiongroupComponent.ctorParameters = () => [
     { type: MatDialog$1 }
 ];
 AddEditSubscriptiongroupComponent.propDecorators = {
+    groupInput: [{ type: ViewChild, args: ['fruitInput',] }],
     config: [{ type: Input }]
 };
 // ============================================MODAL COMPONENT===========================================

@@ -44,10 +44,46 @@
         <mat-form-field>
           <mat-label>Select Group :</mat-label>
           <mat-select matNativeControl formControlName="group" multiple>
-               <!-- <option value=0 selected>Select Group</option> -->
               <mat-option value="{{  item._id }}" *ngFor="let item of group_array">{{ item.name  }}</mat-option>
             </mat-select> 
         </mat-form-field>
+
+
+        <!-- mat-chips  -->
+
+        <!-- <mat-form-field >
+          <mat-chip-list #chipList>
+            <mat-chip
+            *ngFor="let item of nameValForGroup;let i=index"
+              [selectable]="selectable"
+              [removable]="removable"
+              (click)="remove(item.id,i)">
+              {{item.name}}
+              <mat-icon matChipRemove *ngIf="removable" (click)="remove(item.id,i)">cancel</mat-icon>
+            </mat-chip>
+            <input
+              placeholder="Select Group...."
+              #fruitInput
+              formControlName="group"
+              [matAutocomplete]="auto"
+              [matChipInputFor]="chipList"
+              [matChipInputSeparatorKeyCodes]="separatorKeysCodes"
+              [matChipInputAddOnBlur]="addOnBlur"
+              (matChipInputTokenEnd)="add($event)"
+            />
+          </mat-chip-list>
+          <mat-autocomplete #auto="matAutocomplete" (optionSelected)="selected($event)">
+            <mat-option *ngFor="let item of filtered_group_array | async" [value]="item">
+              {{ item }}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field> -->
+
+
+
+
+
+
 
 
         <mat-label>Status :</mat-label>

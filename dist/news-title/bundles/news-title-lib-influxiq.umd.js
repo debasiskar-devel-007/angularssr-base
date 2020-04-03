@@ -1,8 +1,8 @@
 (function (global, factory) {
-    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('rxjs/operators'), require('rxjs'), require('@angular/material'), require('@angular/cdk/a11y'), require('@angular/cdk/drag-drop'), require('@angular/cdk/portal'), require('@angular/cdk/scrolling'), require('@angular/cdk/stepper'), require('@angular/cdk/table'), require('@angular/cdk/tree'), require('@angular/material/autocomplete'), require('@angular/material/badge'), require('@angular/material/bottom-sheet'), require('@angular/material/button'), require('@angular/material/button-toggle'), require('@angular/material/card'), require('@angular/material/checkbox'), require('@angular/material/chips'), require('@angular/material/stepper'), require('@angular/material/datepicker'), require('@angular/material/divider'), require('@angular/material/expansion'), require('@angular/material/grid-list'), require('@angular/material/icon'), require('@angular/material/input'), require('@angular/material/list'), require('@angular/material/menu'), require('@angular/material/core'), require('@angular/material/paginator'), require('@angular/material/progress-bar'), require('@angular/material/progress-spinner'), require('@angular/material/radio'), require('@angular/material/select'), require('@angular/material/sidenav'), require('@angular/material/slider'), require('@angular/material/slide-toggle'), require('@angular/material/sort'), require('@angular/material/table'), require('@angular/material/tabs'), require('@angular/material/toolbar'), require('@angular/material/tooltip'), require('@angular/material/tree'), require('@angular/platform-browser/animations'), require('listing-angular7'), require('@angular/common/http'), require('@angular/common'), require('@angular/material/snack-bar'), require('moment'), require('ngx-cookie-service'), require('@angular/forms'), require('@angular/router'), require('@angular/material/dialog'), require('@angular/core'), require('amazing-time-picker'), require('ngx-ckeditor'), require('ngx-moment')) :
-    typeof define === 'function' && define.amd ? define('news-title-lib-influxiq', ['exports', 'rxjs/operators', 'rxjs', '@angular/material', '@angular/cdk/a11y', '@angular/cdk/drag-drop', '@angular/cdk/portal', '@angular/cdk/scrolling', '@angular/cdk/stepper', '@angular/cdk/table', '@angular/cdk/tree', '@angular/material/autocomplete', '@angular/material/badge', '@angular/material/bottom-sheet', '@angular/material/button', '@angular/material/button-toggle', '@angular/material/card', '@angular/material/checkbox', '@angular/material/chips', '@angular/material/stepper', '@angular/material/datepicker', '@angular/material/divider', '@angular/material/expansion', '@angular/material/grid-list', '@angular/material/icon', '@angular/material/input', '@angular/material/list', '@angular/material/menu', '@angular/material/core', '@angular/material/paginator', '@angular/material/progress-bar', '@angular/material/progress-spinner', '@angular/material/radio', '@angular/material/select', '@angular/material/sidenav', '@angular/material/slider', '@angular/material/slide-toggle', '@angular/material/sort', '@angular/material/table', '@angular/material/tabs', '@angular/material/toolbar', '@angular/material/tooltip', '@angular/material/tree', '@angular/platform-browser/animations', 'listing-angular7', '@angular/common/http', '@angular/common', '@angular/material/snack-bar', 'moment', 'ngx-cookie-service', '@angular/forms', '@angular/router', '@angular/material/dialog', '@angular/core', 'amazing-time-picker', 'ngx-ckeditor', 'ngx-moment'], factory) :
-    (factory((global['news-title-lib-influxiq'] = {}),global.rxjs.operators,global.rxjs,global.ng.material,global.ng.cdk.a11y,global.ng.cdk['drag-drop'],global.ng.cdk.portal,global.ng.cdk.scrolling,global.ng.cdk.stepper,global.ng.cdk.table,global.ng.cdk.tree,global.ng.material.autocomplete,global.ng.material.badge,global.ng.material['bottom-sheet'],global.ng.material.button,global.ng.material['button-toggle'],global.ng.material.card,global.ng.material.checkbox,global.ng.material.chips,global.ng.material.stepper,global.ng.material.datepicker,global.ng.material.divider,global.ng.material.expansion,global.ng.material['grid-list'],global.ng.material.icon,global.ng.material.input,global.ng.material.list,global.ng.material.menu,global.ng.material.core,global.ng.material.paginator,global.ng.material['progress-bar'],global.ng.material['progress-spinner'],global.ng.material.radio,global.ng.material.select,global.ng.material.sidenav,global.ng.material.slider,global.ng.material['slide-toggle'],global.ng.material.sort,global.ng.material.table,global.ng.material.tabs,global.ng.material.toolbar,global.ng.material.tooltip,global.ng.material.tree,global.ng.platformBrowser.animations,global.listingAngular7,global.ng.common.http,global.ng.common,global.ng.material['snack-bar'],global.moment_,global.i2,global.ng.forms,global.ng.router,global.ng.material.dialog,global.ng.core,global.amazingTimePicker,global.ngxCkeditor,global.ngxMoment));
-}(this, (function (exports,operators,rxjs,material,a11y,dragDrop,portal,scrolling,stepper,table,tree,autocomplete,badge,bottomSheet,button,buttonToggle,card,checkbox,chips,stepper$1,datepicker,divider,expansion,gridList,icon,input,list,menu,core,paginator,progressBar,progressSpinner,radio,select,sidenav,slider,slideToggle,sort,table$1,tabs,toolbar,tooltip,tree$1,animations,listingAngular7,i1,common,snackBar,moment_,i2,forms,router,dialog,i0,amazingTimePicker,ngxCkeditor,ngxMoment) { 'use strict';
+    typeof exports === 'object' && typeof module !== 'undefined' ? factory(exports, require('rxjs/operators'), require('rxjs'), require('@angular/material'), require('@angular/cdk/a11y'), require('@angular/cdk/drag-drop'), require('@angular/cdk/portal'), require('@angular/cdk/scrolling'), require('@angular/cdk/stepper'), require('@angular/cdk/table'), require('@angular/cdk/tree'), require('@angular/material/autocomplete'), require('@angular/material/badge'), require('@angular/material/bottom-sheet'), require('@angular/material/button'), require('@angular/material/button-toggle'), require('@angular/material/card'), require('@angular/material/checkbox'), require('@angular/material/chips'), require('@angular/material/stepper'), require('@angular/material/datepicker'), require('@angular/material/divider'), require('@angular/material/expansion'), require('@angular/material/grid-list'), require('@angular/material/icon'), require('@angular/material/input'), require('@angular/material/list'), require('@angular/material/menu'), require('@angular/material/core'), require('@angular/material/paginator'), require('@angular/material/progress-bar'), require('@angular/material/progress-spinner'), require('@angular/material/radio'), require('@angular/material/select'), require('@angular/material/sidenav'), require('@angular/material/slider'), require('@angular/material/slide-toggle'), require('@angular/material/sort'), require('@angular/material/table'), require('@angular/material/tabs'), require('@angular/material/toolbar'), require('@angular/material/tooltip'), require('@angular/material/tree'), require('@angular/platform-browser/animations'), require('listing-angular7'), require('@angular/common/http'), require('@angular/cdk/keycodes'), require('@angular/common'), require('@angular/material/snack-bar'), require('moment'), require('ngx-cookie-service'), require('@angular/forms'), require('@angular/router'), require('@angular/material/dialog'), require('@angular/core'), require('amazing-time-picker'), require('ngx-ckeditor'), require('ngx-moment')) :
+    typeof define === 'function' && define.amd ? define('news-title-lib-influxiq', ['exports', 'rxjs/operators', 'rxjs', '@angular/material', '@angular/cdk/a11y', '@angular/cdk/drag-drop', '@angular/cdk/portal', '@angular/cdk/scrolling', '@angular/cdk/stepper', '@angular/cdk/table', '@angular/cdk/tree', '@angular/material/autocomplete', '@angular/material/badge', '@angular/material/bottom-sheet', '@angular/material/button', '@angular/material/button-toggle', '@angular/material/card', '@angular/material/checkbox', '@angular/material/chips', '@angular/material/stepper', '@angular/material/datepicker', '@angular/material/divider', '@angular/material/expansion', '@angular/material/grid-list', '@angular/material/icon', '@angular/material/input', '@angular/material/list', '@angular/material/menu', '@angular/material/core', '@angular/material/paginator', '@angular/material/progress-bar', '@angular/material/progress-spinner', '@angular/material/radio', '@angular/material/select', '@angular/material/sidenav', '@angular/material/slider', '@angular/material/slide-toggle', '@angular/material/sort', '@angular/material/table', '@angular/material/tabs', '@angular/material/toolbar', '@angular/material/tooltip', '@angular/material/tree', '@angular/platform-browser/animations', 'listing-angular7', '@angular/common/http', '@angular/cdk/keycodes', '@angular/common', '@angular/material/snack-bar', 'moment', 'ngx-cookie-service', '@angular/forms', '@angular/router', '@angular/material/dialog', '@angular/core', 'amazing-time-picker', 'ngx-ckeditor', 'ngx-moment'], factory) :
+    (factory((global['news-title-lib-influxiq'] = {}),global.rxjs.operators,global.rxjs,global.ng.material,global.ng.cdk.a11y,global.ng.cdk['drag-drop'],global.ng.cdk.portal,global.ng.cdk.scrolling,global.ng.cdk.stepper,global.ng.cdk.table,global.ng.cdk.tree,global.ng.material.autocomplete,global.ng.material.badge,global.ng.material['bottom-sheet'],global.ng.material.button,global.ng.material['button-toggle'],global.ng.material.card,global.ng.material.checkbox,global.ng.material.chips,global.ng.material.stepper,global.ng.material.datepicker,global.ng.material.divider,global.ng.material.expansion,global.ng.material['grid-list'],global.ng.material.icon,global.ng.material.input,global.ng.material.list,global.ng.material.menu,global.ng.material.core,global.ng.material.paginator,global.ng.material['progress-bar'],global.ng.material['progress-spinner'],global.ng.material.radio,global.ng.material.select,global.ng.material.sidenav,global.ng.material.slider,global.ng.material['slide-toggle'],global.ng.material.sort,global.ng.material.table,global.ng.material.tabs,global.ng.material.toolbar,global.ng.material.tooltip,global.ng.material.tree,global.ng.platformBrowser.animations,global.listingAngular7,global.ng.common.http,global.ng.cdk.keycodes,global.ng.common,global.ng.material['snack-bar'],global.moment_,global.i2,global.ng.forms,global.ng.router,global.ng.material.dialog,global.ng.core,global.amazingTimePicker,global.ngxCkeditor,global.ngxMoment));
+}(this, (function (exports,operators,rxjs,material,a11y,dragDrop,portal,scrolling,stepper,table,tree,autocomplete,badge,bottomSheet,button,buttonToggle,card,checkbox,chips,stepper$1,datepicker,divider,expansion,gridList,icon,input,list,menu,core,paginator,progressBar,progressSpinner,radio,select,sidenav,slider,slideToggle,sort,table$1,tabs,toolbar,tooltip,tree$1,animations,listingAngular7,i1,keycodes,common,snackBar,moment_,i2,forms,router,dialog,i0,amazingTimePicker,ngxCkeditor,ngxMoment) { 'use strict';
 
     /**
      * @fileoverview added by tsickle
@@ -1716,8 +1716,9 @@
      * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
      */
     var AddEditSubscriptiongroupComponent = /** @class */ (function () {
-        // ========================================================
         function AddEditSubscriptiongroupComponent(formBuilder, cookieService, newsService, router$$1, dialog$$1) {
+            // this.filtered_group_array = this.group.valueChanges.pipe(startWith(null),
+            //   map((item: any) => item ? this.filter(item) : this.nameValForGroup.slice()));
             this.formBuilder = formBuilder;
             this.cookieService = cookieService;
             this.newsService = newsService;
@@ -1725,8 +1726,15 @@
             this.dialog = dialog$$1;
             this.buttonText = "SUBMIT";
             this.header_name = "Add a group to subscriptions";
-            this.group_array = [];
+            this.nameValForGroup = '';
             this.successMessage = "Subscription Added Successfully..!!!";
+            // group = new FormControl();
+            this.visible = true;
+            this.selectable = true;
+            this.removable = true;
+            this.addOnBlur = false;
+            this.separatorKeysCodes = [keycodes.ENTER, keycodes.COMMA];
+            console.log('filtered_group_array--->', this.nameValForGroup);
         }
         /**
          * @return {?}
@@ -1915,15 +1923,15 @@
                 }
             };
         // =================================================================================================
-        //Getting the parent category
+        // Getting the parent category
         // =================================================================================================
-        //Getting the parent category
+        // Getting the parent category
         /**
          * @return {?}
          */
         AddEditSubscriptiongroupComponent.prototype.getGroup =
             // =================================================================================================
-            //Getting the parent category
+            // Getting the parent category
             /**
              * @return {?}
              */
@@ -1931,7 +1939,7 @@
                 var _this = this;
                 /** @type {?} */
                 var postData = {
-                    source: this.configData.group,
+                    source: this.configData.groupData,
                     token: this.cookieService.get('jwtToken')
                 };
                 this.newsService.getData(this.configData.endpoint2 + 'datalist', postData).subscribe(( /**
@@ -1939,12 +1947,109 @@
                  * @return {?}
                  */function (response) {
                     _this.group_array = response.res;
+                    console.log('>>>', _this.group_array);
                 }));
+            };
+        // mat chip use for listing 
+        // mat chip use for listing 
+        /**
+         * @param {?} name
+         * @return {?}
+         */
+        AddEditSubscriptiongroupComponent.prototype.filter =
+            // mat chip use for listing 
+            /**
+             * @param {?} name
+             * @return {?}
+             */
+            function (name) {
+                this.nameValForGroup = this.group_array;
+                for (var i in this.group_array) {
+                    // console.log(this.group_array[i].name)
+                    this.groupname = this.group_array[i].name;
+                    return this.groupname.filter(( /**
+                     * @param {?} item
+                     * @return {?}
+                     */function (item) {
+                        return item.toLowerCase().indexOf(name.toLowerCase()) === 0;
+                    }));
+                }
+            };
+        /**
+         * @param {?} event
+         * @return {?}
+         */
+        AddEditSubscriptiongroupComponent.prototype.add = /**
+         * @param {?} event
+         * @return {?}
+         */
+            function (event) {
+                /** @type {?} */
+                var input$$1 = event.input;
+                /** @type {?} */
+                var value = event.value;
+                // Add our fruit
+                if ((value || '').trim()) {
+                    this.nameValForGroup.push(value.trim());
+                }
+                // Reset the input value
+                if (input$$1) {
+                    input$$1.value = '';
+                }
+                // this.group.setValue(null);
+            };
+        /**
+         * @param {?} item
+         * @param {?} index
+         * @return {?}
+         */
+        AddEditSubscriptiongroupComponent.prototype.remove = /**
+         * @param {?} item
+         * @param {?} index
+         * @return {?}
+         */
+            function (item, index) {
+                console.log('index-->', item, index);
+                this.nameValForGroup = this.group_array;
+                for (var i in this.group_array) {
+                    // console.log(this.group_array[i].name)
+                    this.groupname = this.group_array[i].name;
+                    if (this.group_array[i]._id == item) {
+                        this.group_array.splice(index, 1);
+                    }
+                    // console.log('>>',this.groupname)
+                }
+            };
+        // filter(name: string) {
+        //   return this.group_array.filter(fruit =>
+        //       fruit.toLowerCase().indexOf(name.toLowerCase()) === 0);
+        // }
+        // filter(name: string) {
+        //   return this.group_array.filter(fruit =>
+        //       fruit.toLowerCase().indexOf(name.toLowerCase()) === 0);
+        // }
+        /**
+         * @param {?} event
+         * @return {?}
+         */
+        AddEditSubscriptiongroupComponent.prototype.selected =
+            // filter(name: string) {
+            //   return this.group_array.filter(fruit =>
+            //       fruit.toLowerCase().indexOf(name.toLowerCase()) === 0);
+            // }
+            /**
+             * @param {?} event
+             * @return {?}
+             */
+            function (event) {
+                this.nameValForGroup.push(event.option.viewValue);
+                this.groupInput.nativeElement.value = '';
+                // this.group.setValue(null);
             };
         AddEditSubscriptiongroupComponent.decorators = [
             { type: i0.Component, args: [{
                         selector: 'lib-add-edit-subscriptiongroup',
-                        template: "<mat-card>\n  <mat-toolbar color=\"primary\" style=\"justify-content: center; align-items: center;\">\n    <h2 class=\"headerSpan\">{{ header_name }}</h2>\n  </mat-toolbar>\n  <span class=\"formspan\">\n    <mat-card-content class=\"example-container\">\n      <form autocomplete=\"off\" [formGroup]=\"subGroupForm\">\n        <!-- Name -->\n        <mat-form-field>\n          <mat-label>Name :</mat-label>\n          <input matInput formControlName=\"fullname\" (blur)=\"inputBlur('fullname')\">\n          <mat-error *ngIf=\"!subGroupForm.controls['fullname'].valid\n          && subGroupForm.controls['fullname'].errors.required\"> Name is required.</mat-error>\n        </mat-form-field>\n\n        <!-- Phone -->\n        <mat-form-field>\n          <mat-label>Phone Number :</mat-label>\n          <input matInput formControlName=\"phone\" (blur)=\"inputBlur('phone')\">\n          <mat-error *ngIf=\"!subGroupForm.controls['phone'].valid\n          && subGroupForm.controls['phone'].errors.required\"> Phone is required.</mat-error>\n        </mat-form-field>\n\n        <!-- Email -->\n        <mat-form-field>\n          <mat-label>Email :</mat-label>\n          <input matInput formControlName=\"email\" (blur)=\"inputBlur('email')\">\n          <mat-error *ngIf=\"!subGroupForm.controls['email'].valid\n          && subGroupForm.controls['email'].errors.required\"> Email is required.</mat-error>\n          <mat-error *ngIf=\"!subGroupForm.controls['email'].valid\n          && subGroupForm.controls['email'].errors.email\"> Email is not valid.</mat-error>\n        </mat-form-field>\n\n        <!-- Company -->\n        <mat-form-field>\n          <mat-label>Company :</mat-label>\n          <input matInput formControlName=\"company\" (blur)=\"inputBlur('company')\">\n          <mat-error *ngIf=\"!subGroupForm.controls['company'].valid\n          && subGroupForm.controls['company'].errors.required\">           <mat-label>Company</mat-label>\n          is required.</mat-error>\n        </mat-form-field>\n\n        <!-- Group  -->\n        <mat-form-field>\n          <mat-label>Select Group :</mat-label>\n          <mat-select matNativeControl formControlName=\"group\" multiple>\n               <!-- <option value=0 selected>Select Group</option> -->\n              <mat-option value=\"{{  item._id }}\" *ngFor=\"let item of group_array\">{{ item.name  }}</mat-option>\n            </mat-select> \n        </mat-form-field>\n\n\n        <mat-label>Status :</mat-label>\n        <mat-checkbox formControlName=\"status\">Active</mat-checkbox><br>\n\n\n\n        <button type=\"submit\" class=\"submitbtn\" class=\"submitbtn\" mat-raised-button\n          color=\"primary\"  (click)=\"onSubmit()\">{{buttonText}}</button>\n        <button type=\"reset\" class=\"submitbtn\" class=\"submitbtn\" mat-raised-button color=\"primary\">RESET</button>\n\n\n\n\n      </form>\n      <!-- ---------------------------------------FORM ENDS HERE----------------------------- -->\n    </mat-card-content>\n  </span>\n</mat-card>",
+                        template: "<mat-card>\n  <mat-toolbar color=\"primary\" style=\"justify-content: center; align-items: center;\">\n    <h2 class=\"headerSpan\">{{ header_name }}</h2>\n  </mat-toolbar>\n  <span class=\"formspan\">\n    <mat-card-content class=\"example-container\">\n      <form autocomplete=\"off\" [formGroup]=\"subGroupForm\">\n        <!-- Name -->\n        <mat-form-field>\n          <mat-label>Name :</mat-label>\n          <input matInput formControlName=\"fullname\" (blur)=\"inputBlur('fullname')\">\n          <mat-error *ngIf=\"!subGroupForm.controls['fullname'].valid\n          && subGroupForm.controls['fullname'].errors.required\"> Name is required.</mat-error>\n        </mat-form-field>\n\n        <!-- Phone -->\n        <mat-form-field>\n          <mat-label>Phone Number :</mat-label>\n          <input matInput formControlName=\"phone\" (blur)=\"inputBlur('phone')\">\n          <mat-error *ngIf=\"!subGroupForm.controls['phone'].valid\n          && subGroupForm.controls['phone'].errors.required\"> Phone is required.</mat-error>\n        </mat-form-field>\n\n        <!-- Email -->\n        <mat-form-field>\n          <mat-label>Email :</mat-label>\n          <input matInput formControlName=\"email\" (blur)=\"inputBlur('email')\">\n          <mat-error *ngIf=\"!subGroupForm.controls['email'].valid\n          && subGroupForm.controls['email'].errors.required\"> Email is required.</mat-error>\n          <mat-error *ngIf=\"!subGroupForm.controls['email'].valid\n          && subGroupForm.controls['email'].errors.email\"> Email is not valid.</mat-error>\n        </mat-form-field>\n\n        <!-- Company -->\n        <mat-form-field>\n          <mat-label>Company :</mat-label>\n          <input matInput formControlName=\"company\" (blur)=\"inputBlur('company')\">\n          <mat-error *ngIf=\"!subGroupForm.controls['company'].valid\n          && subGroupForm.controls['company'].errors.required\">           <mat-label>Company</mat-label>\n          is required.</mat-error>\n        </mat-form-field>\n\n        <!-- Group  -->\n        <mat-form-field>\n          <mat-label>Select Group :</mat-label>\n          <mat-select matNativeControl formControlName=\"group\" multiple>\n              <mat-option value=\"{{  item._id }}\" *ngFor=\"let item of group_array\">{{ item.name  }}</mat-option>\n            </mat-select> \n        </mat-form-field>\n\n\n        <!-- mat-chips  -->\n\n        <!-- <mat-form-field >\n          <mat-chip-list #chipList>\n            <mat-chip\n            *ngFor=\"let item of nameValForGroup;let i=index\"\n              [selectable]=\"selectable\"\n              [removable]=\"removable\"\n              (click)=\"remove(item.id,i)\">\n              {{item.name}}\n              <mat-icon matChipRemove *ngIf=\"removable\" (click)=\"remove(item.id,i)\">cancel</mat-icon>\n            </mat-chip>\n            <input\n              placeholder=\"Select Group....\"\n              #fruitInput\n              formControlName=\"group\"\n              [matAutocomplete]=\"auto\"\n              [matChipInputFor]=\"chipList\"\n              [matChipInputSeparatorKeyCodes]=\"separatorKeysCodes\"\n              [matChipInputAddOnBlur]=\"addOnBlur\"\n              (matChipInputTokenEnd)=\"add($event)\"\n            />\n          </mat-chip-list>\n          <mat-autocomplete #auto=\"matAutocomplete\" (optionSelected)=\"selected($event)\">\n            <mat-option *ngFor=\"let item of filtered_group_array | async\" [value]=\"item\">\n              {{ item }}\n            </mat-option>\n          </mat-autocomplete>\n        </mat-form-field> -->\n\n\n\n\n\n\n\n\n        <mat-label>Status :</mat-label>\n        <mat-checkbox formControlName=\"status\">Active</mat-checkbox><br>\n\n\n\n        <button type=\"submit\" class=\"submitbtn\" class=\"submitbtn\" mat-raised-button\n          color=\"primary\"  (click)=\"onSubmit()\">{{buttonText}}</button>\n        <button type=\"reset\" class=\"submitbtn\" class=\"submitbtn\" mat-raised-button color=\"primary\">RESET</button>\n\n\n\n\n      </form>\n      <!-- ---------------------------------------FORM ENDS HERE----------------------------- -->\n    </mat-card-content>\n  </span>\n</mat-card>",
                         styles: [".example-container{display:flex;flex-direction:column}.example-container>*{width:100%}.main-class .submitbtn{display:block;width:170px;margin:10px auto;background:#3f50b5!important;color:#fff}.main-class .material-icons{cursor:pointer}.formspan{background-color:#e7e9ea;border:6px solid #fff;border-bottom:10px solid #fff;display:inline-block;width:100%;position:relative;z-index:9}.formspan .example-container{display:flex;flex-direction:column;width:98%;padding:14px;margin-bottom:0}.formspan .form-field-span,.formspan .mat-form-field{display:inline-block;position:relative;text-align:left;width:98%;background:#fff;margin-bottom:9px;padding:1px 14px}.formspan .form-field-span .mat-checkbox,.formspan .form-field-span .mat-radio-button{padding-right:15px;padding-bottom:15px;display:inline-block}.formspan .mat-form-field-wrapper{padding-bottom:0!important}.form-field-span .mat-error{font-size:13px!important}.mat-error{color:#f44336;font-size:13px!important}button.submitbtn.mat-raised-button.mat-primary{margin-right:15px}h1{color:#3f50b4}.files-view{background-repeat:no-repeat;background-size:cover;background-position:center;height:auto!important;width:82%;margin:20px auto;border-radius:10px;display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap}.files-view .mat-card{z-index:9;margin:10px!important;display:flex;flex-wrap:wrap;justify-content:center;width:27%;position:relative}.files-view .mat-card .mat-card-actions,.files-view .mat-card .mat-card-titlt{display:inline-block;width:100%}.files-view .mat-card .mat-card-subtitle{display:inline-block;width:100%;text-align:center}.closecard{position:absolute;top:-10px;right:-8px;background:#464545;height:25px;width:25px;border-radius:50%;border:1px solid #696969;color:#fff;text-align:center;box-shadow:0 2px 6px #00000070;cursor:pointer}.closecard i{font-size:18px;line-height:27px}"]
                     }] }
         ];
@@ -1959,6 +2064,7 @@
             ];
         };
         AddEditSubscriptiongroupComponent.propDecorators = {
+            groupInput: [{ type: i0.ViewChild, args: ['fruitInput',] }],
             config: [{ type: i0.Input }]
         };
         return AddEditSubscriptiongroupComponent;

@@ -21,7 +21,7 @@ export class AddEditGroupComponent implements OnInit {
     callBack: "newsletter/list-subscription",
     userData: { id: "18801017007", name: "Admin" },
     defaultDataAlways: null,
-    group:'news_category'
+    groupData:'news_category'
   }
   constructor(private cookieService: CookieService, private activatedRoute: ActivatedRoute) { }
 
