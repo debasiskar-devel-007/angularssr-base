@@ -36,19 +36,19 @@ export class AddEditSubscriptiongroupComponent implements OnInit {
   successMessage: any = "Subscription Added Successfully..!!!";
   // ========================================================
 
-  filtered_group_array: Observable<any[]>;
+  // filtered_group_array: Observable<any[]>;
 
   // group = new FormControl();
 
-  visible: boolean = true;
-  selectable: boolean = true;
-  removable: boolean = true;
-  addOnBlur: boolean = false;
+  // visible: boolean = true;
+  // selectable: boolean = true;
+  // removable: boolean = true;
+  // addOnBlur: boolean = false;
 
 
-  separatorKeysCodes = [ENTER, COMMA];
+  // separatorKeysCodes = [ENTER, COMMA];
 
-  @ViewChild('fruitInput') groupInput: ElementRef;
+  // @ViewChild('fruitInput') groupInput: ElementRef;
 
   constructor(private formBuilder: FormBuilder, private cookieService: CookieService,
     private newsService: NewsTitleService, private router: Router, public dialog: MatDialog) {
@@ -208,78 +208,67 @@ export class AddEditSubscriptiongroupComponent implements OnInit {
 
   // mat chip use for listing 
 
-  filter(name: any) {
-    this.nameValForGroup=this.group_array;
-    for(let i in this.group_array){
-      // console.log(this.group_array[i].name)
-     this.groupname=this.group_array[i].name;
-     return this.groupname.filter(item =>
-      item.toLowerCase().indexOf(name.toLowerCase()) === 0)
+  // filter(name: any) {
+  //   this.nameValForGroup=this.group_array;
+  //   for(let i in this.group_array){
+  //     // console.log(this.group_array[i].name)
+  //    this.groupname=this.group_array[i].name;
+  //    return this.groupname.filter(item =>
+  //     item.toLowerCase().indexOf(name.toLowerCase()) === 0)
 
-    }
-    ;
-  }
-
- 
-  add(event: MatChipInputEvent): void {
-    const input = event.input;
-    const value = event.value;
-
-    // Add our fruit
-    if ((value || '').trim()) {
-      this.nameValForGroup.push(value.trim());
-    }
-
-    // Reset the input value
-    if (input) {
-      input.value = '';
-    }
-
-    // this.group.setValue(null);
-  }
-
-  remove(item: any,index:any): void {
-    console.log('index-->',item,index)
-
-    this.nameValForGroup=this.group_array;
-    for(let i in this.group_array){
-      // console.log(this.group_array[i].name)
-     this.groupname=this.group_array[i].name;
-
-      if(this.group_array[i]._id == item){
-        this.group_array.splice(index,1);
-      }
-
-      // console.log('>>',this.groupname)
-    }
-
-    // const index = this.nameValForGroup.indexOf(item);
-
-    if (index >= 0) {
-    }
-  }
-
-  // filter(name: string) {
-  //   return this.group_array.filter(fruit =>
-  //       fruit.toLowerCase().indexOf(name.toLowerCase()) === 0);
+  //   }
+  //   ;
   // }
 
-  selected(event: MatAutocompleteSelectedEvent): void {
-    this.nameValForGroup.push(event.option.viewValue);
-    this.groupInput.nativeElement.value = '';
-    // this.group.setValue(null);
-  }
+ 
+  // add(event: MatChipInputEvent): void {
+  //   const input = event.input;
+  //   const value = event.value;
 
+  //   // Add our fruit
+  //   if ((value || '').trim()) {
+  //     this.nameValForGroup.push(value.trim());
+  //   }
 
+  //   // Reset the input value
+  //   if (input) {
+  //     input.value = '';
+  //   }
 
+  //   // this.group.setValue(null);
+  // }
 
+  // remove(item: any,index:any): void {
+  //   console.log('index-->',item,index)
 
+  //   this.nameValForGroup=this.group_array;
+  //   for(let i in this.group_array){
+  //     // console.log(this.group_array[i].name)
+  //    this.groupname=this.group_array[i].name;
 
+  //     if(this.group_array[i]._id == item){
+  //       this.group_array.splice(index,1);
+  //     }
 
+  //     // console.log('>>',this.groupname)
+  //   }
 
+  //   // const index = this.nameValForGroup.indexOf(item);
 
+  //   if (index >= 0) {
+  //   }
+  // }
 
+  // // filter(name: string) {
+  // //   return this.group_array.filter(fruit =>
+  // //       fruit.toLowerCase().indexOf(name.toLowerCase()) === 0);
+  // // }
 
+  // selected(event: MatAutocompleteSelectedEvent): void {
+  //   this.nameValForGroup.push(event.option.viewValue);
+  //   this.groupInput.nativeElement.value = '';
+  //   // this.group.setValue(null);
+  // }
 
 }
 
