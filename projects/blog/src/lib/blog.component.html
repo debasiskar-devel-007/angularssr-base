@@ -8,15 +8,41 @@
 <mat-card *ngIf="loader==false">
     <lib-listing class="formfilterdiv"
         *ngIf="blogListConfig.datasource !=null && blogListConfig.datasource.length > 0"
-        [datasource]="blogListConfig.datasource" [skip]="blogListConfig.listArray_skip"
-        [modify_header_array]="blogListConfig.listArray_modify_header" [sourcedata]="blogListConfig.tableName"
-        [statusarr]="blogListConfig.statusarr" [jwttoken]="blogListConfig.jwtToken"
-        [apiurl]="blogListConfig.apiUrl" [editroute]="blogListConfig.editUrl"
+
+        [datasource]="blogListConfig.datasource" 
+
+        [skip]="blogListConfig.listArray_skip"
+
+        [modify_header_array]="blogListConfig.listArray_modify_header" 
+
+        [sourcedata]="blogListConfig.tableName"
+
+        [statusarr]="blogListConfig.statusarr" 
+
+        [jwttoken]="blogListConfig.jwtToken"
+
+        [apiurl]="blogListConfig.apiUrl" 
+
+        [editroute]="blogListConfig.editUrl"
+
         [deleteendpoint]="blogListConfig.deleteEndPoint"
+
         [date_search_source]="blogListConfig.view"
+
        [date_search_endpoint]="blogListConfig.listEndPoint"
+
        [search_settings]="blogListConfig.search_settings"
-       [detail_datatype]="blogListConfig.pendingmodelapplicationarray_detail_datatype">
+
+       [detail_datatype]="blogListConfig.pendingmodelapplicationarray_detail_datatype"
+
+       [sortdata]="sortdata"
+
+       [datacollection]="datacollection"
+
+        [date_search_source_count]="date_search_source_count"
+
+       [limitcond]="limitcond">
+       
     </lib-listing>
 <!-- ----------------------------------------------------------------------------->
 

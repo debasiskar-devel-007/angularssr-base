@@ -20,7 +20,7 @@ export class ApiService {
   public accesstoken:any=this.cookieService.get('jwttoken');
   fileservername: any = [];
 
-  serverUrl: any='https://9ozbyvv5v0.execute-api.us-east-1.amazonaws.com/production/api/';
+  serverUrl: any='https://hntm6xe6of.execute-api.us-east-1.amazonaws.com/dev/api1/';
 
   // serverUrl: any=environment.apiBaseUrl;
 

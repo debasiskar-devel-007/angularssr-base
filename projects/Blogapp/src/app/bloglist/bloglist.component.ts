@@ -14,7 +14,9 @@ export class BloglistComponent implements OnInit {
     /************** lib list setup start here *************/
     public blogListConfig:any = {
 
-      apiBaseUrl: "https://9ozbyvv5v0.execute-api.us-east-1.amazonaws.com/production/api/",
+      apiBaseUrl: "https://hntm6xe6of.execute-api.us-east-1.amazonaws.com/dev/api1/",
+    endpoint: "https://hntm6xe6of.execute-api.us-east-1.amazonaws.com/dev/api1/getbloglistdata",
+    endpointc: "https://hntm6xe6of.execute-api.us-east-1.amazonaws.com/dev/api1/getbloglistdata-count",
       // apiBaseUrl: environment.apiBaseUrl,
 
       listEndPoint: "datalist",
@@ -25,7 +27,7 @@ export class BloglistComponent implements OnInit {
       jwtToken: "",
       deleteEndPoint: "deletesingledata",
       addLink: "/blog-category/add",
-      view: "blog_category_view"
+      view: "blog_category"
       
     }
     constructor( private router: Router, private activatedRoute: ActivatedRoute, private cookieService: CookieService ) { 

@@ -1,3 +1,4 @@
+import { Subject } from 'rxjs';
 import { A11yModule } from '@angular/cdk/a11y';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { PortalModule } from '@angular/cdk/portal';
@@ -39,10 +40,9 @@ import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
 import { FileUploadModule } from 'file-upload-lib-influxiq';
+import { CookieService } from 'ngx-cookie-service';
 import { MatDialogModule, MatDialog, MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ListingModule } from 'listing-angular7';
-import { Subject } from 'rxjs';
-import { CookieService } from 'ngx-cookie-service';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule, ActivatedRoute } from '@angular/router';
 import { HttpClient, HttpHeaders, HttpClientModule } from '@angular/common/http';
@@ -269,380 +269,6 @@ BlogService.ctorParameters = () => [
     { type: CookieService }
 ];
 /** @nocollapse */ BlogService.ngInjectableDef = defineInjectable({ factory: function BlogService_Factory() { return new BlogService(inject(HttpClient), inject(HttpClient), inject(CookieService)); }, token: BlogService, providedIn: "root" });
-
-/**
- * @fileoverview added by tsickle
- * Generated from: lib/blog.component.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class BlogComponent {
-    // ====================================================================================================
-    constructor() {
-        this.loader = false;
-    }
-    // ======================================================================================
-    // ================================================Input For Lib Listing================================
-    /**
-     * @param {?} receivedData
-     * @return {?}
-     */
-    set config(receivedData) {
-        this.blogListConfig = {
-            apiUrl: receivedData.apiBaseUrl,
-            listEndPoint: receivedData.listEndPoint,
-            datasource: receivedData.datasource,
-            tableName: receivedData.tableName,
-            listArray_skip: ["_id", "userId", "created_at", "updated_at", "image", "description_html", "parentcategoryname_search", "blogtitle_search"],
-            listArray_modify_header: { "blogtitle": "Blog Title", "description": "Description", "priority": "Priority", "status": "Status", "parentcategoryname": "Parent Category Name", "blogcat": "Blog Category", "date": "Date" },
-            admintablenameTableName: "admin",
-            statusarr: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }],
-            updateurl: receivedData.updateEndpoint,
-            editUrl: receivedData.editUrl,
-            jwtToken: receivedData.jwtToken,
-            deleteEndPoint: receivedData.deleteEndPoint,
-            view: receivedData.view,
-            search_settings: {
-                textsearch: [{ label: "Search by blog title...", field: 'blogtitle' }, { label: "Search by parent category...", field: 'parentcategoryname_search' }],
-                selectsearch: [{ label: 'Search By status', field: 'status', values: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }] }]
-            }
-            //  /*Showing Image in the Modal*/
-            //  pendingmodelapplicationarray_detail_datatype: [{
-            //   key: "image",
-            //   value: 'image',
-            //   fileurl: 'https://s3.us-east-2.amazonaws.com/crmfiles.influxhostserver/testimonial/'             // Image path 
-            // }],
-        };
-        this.loader = false;
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-    }
-}
-BlogComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'lib-Blog',
-                template: "<mat-card *ngIf=\"loader==true\">\n    <mat-spinner class=\"spinner\"></mat-spinner>\n</mat-card>\n\n\n\n<!-- ------------------------lib listing being called------------------------ -->\n<mat-card *ngIf=\"loader==false\">\n    <lib-listing class=\"formfilterdiv\"\n        *ngIf=\"blogListConfig.datasource !=null && blogListConfig.datasource.length > 0\"\n        [datasource]=\"blogListConfig.datasource\" [skip]=\"blogListConfig.listArray_skip\"\n        [modify_header_array]=\"blogListConfig.listArray_modify_header\" [sourcedata]=\"blogListConfig.tableName\"\n        [statusarr]=\"blogListConfig.statusarr\" [jwttoken]=\"blogListConfig.jwtToken\"\n        [apiurl]=\"blogListConfig.apiUrl\" [editroute]=\"blogListConfig.editUrl\"\n        [deleteendpoint]=\"blogListConfig.deleteEndPoint\"\n        [date_search_source]=\"blogListConfig.view\"\n       [date_search_endpoint]=\"blogListConfig.listEndPoint\"\n       [search_settings]=\"blogListConfig.search_settings\"\n       [detail_datatype]=\"blogListConfig.pendingmodelapplicationarray_detail_datatype\">\n    </lib-listing>\n<!-- ----------------------------------------------------------------------------->\n\n    <h2 *ngIf=\"blogListConfig.datasource.length == 0\">No record found.</h2>\n</mat-card>",
-                styles: [""]
-            }] }
-];
-/** @nocollapse */
-BlogComponent.ctorParameters = () => [];
-BlogComponent.propDecorators = {
-    config: [{ type: Input }]
-};
-
-/**
- * @fileoverview added by tsickle
- * Generated from: lib/material-module.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-//import { MatFileUploadModule } from 'angular-material-fileupload';
-class DemoMaterialModule {
-}
-DemoMaterialModule.decorators = [
-    { type: NgModule, args: [{
-                exports: [
-                    A11yModule,
-                    CdkStepperModule,
-                    CdkTableModule,
-                    CdkTreeModule,
-                    DragDropModule,
-                    MatAutocompleteModule,
-                    MatBadgeModule,
-                    MatBottomSheetModule,
-                    MatButtonModule,
-                    MatButtonToggleModule,
-                    MatCardModule,
-                    MatCheckboxModule,
-                    MatChipsModule,
-                    MatStepperModule,
-                    MatDatepickerModule,
-                    MatDialogModule,
-                    MatDividerModule,
-                    MatExpansionModule,
-                    MatGridListModule,
-                    MatIconModule,
-                    MatInputModule,
-                    MatListModule,
-                    MatMenuModule,
-                    MatNativeDateModule,
-                    MatPaginatorModule,
-                    MatProgressBarModule,
-                    MatProgressSpinnerModule,
-                    MatRadioModule,
-                    MatRippleModule,
-                    MatSelectModule,
-                    MatSidenavModule,
-                    MatSliderModule,
-                    MatSlideToggleModule,
-                    MatSnackBarModule,
-                    MatSortModule,
-                    MatTableModule,
-                    MatTabsModule,
-                    MatToolbarModule,
-                    MatTooltipModule,
-                    MatTreeModule,
-                    PortalModule,
-                    ScrollingModule,
-                ]
-            },] }
-];
-
-/**
- * @fileoverview added by tsickle
- * Generated from: lib/add-blog/add-blog.component.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-class AddBlogComponent {
-    // ==================================================
-    /**
-     * @param {?} formBuilder
-     * @param {?} blogService
-     * @param {?} router
-     * @param {?} cookieService
-     * @param {?} dialog
-     */
-    constructor(formBuilder, blogService, router, cookieService, dialog) {
-        this.formBuilder = formBuilder;
-        this.blogService = blogService;
-        this.router = router;
-        this.cookieService = cookieService;
-        this.dialog = dialog;
-        this.editorconfig = {};
-        this.header_txt = "Add Blog Category";
-        this.buttonText = "SUBMIT";
-        this.loader = false;
-        this.successMessage = "Category Added Successfully!!!";
-        this.getParentCatArr = [];
-        this.editorconfig.extraAllowedContent = '*[class](*),span;ul;li;table;td;style;*[id];*(*);*{*}';
-    }
-    /**
-     * @return {?}
-     */
-    ngOnInit() {
-        //generating the form
-        this.generateForm();
-        //getting the parent category
-        this.getParentData();
-        // --------------------------------checking the cases------------------------ 
-        switch (this.configData.action) {
-            case 'add':
-                /* Button text */
-                this.buttonText = "SUBMIT";
-                break;
-            case 'edit':
-                /* Button text */
-                this.buttonText = "UPDATE";
-                this.successMessage = "One row updated!!!";
-                this.setDefaultValue(this.configData.defaultData);
-                this.header_txt = "EDIT";
-                break;
-        }
-        // --------------------------------------------------------------------------
-    }
-    // ================================================Default value======================================
-    /**
-     * @param {?} defaultValue
-     * @return {?}
-     */
-    setDefaultValue(defaultValue) {
-        this.blogCatForm.patchValue({
-            blogtitle: defaultValue.blogtitle,
-            priority: defaultValue.priority,
-            status: defaultValue.status,
-            description: defaultValue.description,
-            parent_id: defaultValue.parent_id
-        });
-    }
-    // ==================================================================================================
-    //  ============================GENERATING THE FORM=======================
-    /**
-     * @return {?}
-     */
-    generateForm() {
-        this.blogCatForm = this.formBuilder.group({
-            blogtitle: ['', [Validators.required, Validators.maxLength(50)]],
-            priority: ['', [Validators.required, Validators.maxLength(2)]],
-            status: [true,],
-            description: ['', [Validators.required, Validators.maxLength(100)]],
-            parent_id: [0,]
-        });
-    }
-    // ========================================================================
-    //  Getting the input Configuration 
-    /**
-     * @param {?} getConfig
-     * @return {?}
-     */
-    set config(getConfig) {
-        this.configData = getConfig;
-    }
-    // =========================================MODAL functions==========================================
-    /**
-     * @param {?} x
-     * @return {?}
-     */
-    openDialog(x) {
-        this.dialogRef = this.dialog.open(Modal2, {
-            width: '250px',
-            data: { msg: x }
-        });
-        this.dialogRef.afterClosed().subscribe((/**
-         * @param {?} result
-         * @return {?}
-         */
-        result => {
-        }));
-    }
-    // ===================================================================================================
-    //Getting the parent category
-    /**
-     * @return {?}
-     */
-    getParentData() {
-        /** @type {?} */
-        let postData = {
-            source: this.configData.source,
-            token: this.cookieService.get('jwtToken')
-        };
-        this.blogService.getData(this.configData.endpoint2 + 'datalist', postData).subscribe((/**
-         * @param {?} response
-         * @return {?}
-         */
-        (response) => {
-            this.getParentCatArr = response.res;
-            //console.log('parent category',response.res);
-        }));
-    }
-    // =========================SUBMIT function==================
-    /**
-     * @return {?}
-     */
-    onSubmit() {
-        this.blogCatForm.controls['description'].markAsTouched();
-        this.loader = true;
-        /* stop here if form is invalid */
-        if (this.blogCatForm.invalid) {
-            return;
-        }
-        else {
-            if (this.blogCatForm.value.status) {
-                this.blogCatForm.value.status = parseInt("1");
-            }
-            else {
-                this.blogCatForm.value.status = parseInt("0");
-            }
-            /* start process to submited data */
-            /** @type {?} */
-            let postData = {
-                source: this.configData.source,
-                data: Object.assign(this.blogCatForm.value, this.configData.condition),
-                "sourceobj": ["parent_id"]
-            };
-            this.blogService.addData(this.configData.endpoint, postData).subscribe((/**
-             * @param {?} response
-             * @return {?}
-             */
-            (response) => {
-                if (response.status == "success") {
-                    this.openDialog(this.successMessage);
-                    setTimeout((/**
-                     * @return {?}
-                     */
-                    () => {
-                        this.dialogRef.close();
-                    }), 2000);
-                    this.router.navigate([this.configData.callBack]);
-                }
-                else {
-                    alert("Some error occurred. Please try again.");
-                }
-            }), (/**
-             * @param {?} error
-             * @return {?}
-             */
-            (error) => {
-                alert("Some error occurred. Please try again.");
-            }));
-        }
-    }
-    // ==========================================================
-    //Blur function
-    /**
-     * @param {?} val
-     * @return {?}
-     */
-    inputBlur(val) {
-        this.blogCatForm.controls[val].markAsUntouched();
-    }
-}
-AddBlogComponent.decorators = [
-    { type: Component, args: [{
-                selector: 'lib-add-blog',
-                template: "<!-- Form Header -->\n<mat-card>\n  <mat-toolbar color=\"primary\" style=\"justify-content: center; align-items: center;\">\n    <h2 class=\"headerSpan\">{{header_txt}}</h2>\n  </mat-toolbar>\n\n  <!-- Blog Add or Edit Form Start Here -->\n  <span class=\"formspan\">\n    <mat-card-content class=\"example-container\">\n      <form class=\"example-form\" autocomplete=\"off\" [formGroup]=\"blogCatForm\">\n\n\n\n        <!-- Blog title  -->\n        <mat-form-field>\n          <input matInput type=\"text\" placeholder=\"Title\" formControlName=\"blogtitle\" >\n          <mat-error *ngIf=\"!blogCatForm.controls['blogtitle'].valid\n        && blogCatForm.controls['blogtitle'].errors.required\"> Blog title is required.</mat-error>\n          <mat-error\n            *ngIf=\"!blogCatForm.controls['blogtitle'].valid && !blogCatForm.controls['blogtitle'].errors.required\">\n            Max length exceeded</mat-error>\n        </mat-form-field>\n\n\n\n        <!-- Priority   -->\n        <mat-form-field>\n          <input matInput type=\"number\" placeholder=\"Priority\" formControlName=\"priority\">\n          <mat-error *ngIf=\"!blogCatForm.controls['priority'].valid\n        && blogCatForm.controls['priority'].errors.required\"> Priority is required.</mat-error>\n          <mat-error\n            *ngIf=\"!blogCatForm.controls['priority'].valid && !blogCatForm.controls['priority'].errors.required\">\n            Can't have a lower priority</mat-error>\n        </mat-form-field>\n\n        <!-- Status  -->\n\n        <mat-checkbox formControlName=\"status\">Active</mat-checkbox><br>\n\n\n        <!-- ckeditor using start here -->\n        <mat-label>Description</mat-label>\n        <!-- <ckeditor [editor]=\"Editor\" [config]=\"editorConfig\" formControlName=\"description\" ></ckeditor> -->\n        <ck-editor formControlName=\"description\" [config]=\"editorconfig\">\n        </ck-editor>\n        \n        <mat-error *ngIf=\"!blogCatForm.controls['description'].valid\n        && blogCatForm.controls['description'].errors.required && blogCatForm.controls['description'].touched\" > Please describe.</mat-error>\n          <mat-error\n            *ngIf=\"!blogCatForm.controls['description'].valid && !blogCatForm.controls['description'].errors.required\">\n            Max length exceeded</mat-error>\n        <!-- ckeditor end here -->\n\n\n\n\n\n        <mat-form-field>\n          <mat-label>Parent Category</mat-label>\n          <mat-select formControlName=\"parent_id\">\n            <mat-option [value]=0>\n              Select a category\n            </mat-option>\n            <mat-option *ngFor=\"let parCat of getParentCatArr\" value=\"{{ parCat._id }}\"> {{ parCat.blogtitle }}\n            </mat-option>\n\n          </mat-select>\n        </mat-form-field>\n\n\n        <button type=\"submit\" class=\"submitbtn\" class=\"submitbtn\" mat-raised-button color=\"primary\"\n          (click)=\"onSubmit()\">{{buttonText}}</button>\n        <button type=\"reset\" class=\"submitbtn\" class=\"submitbtn\" mat-raised-button color=\"primary\">RESET</button>\n\n\n\n\n      </form>\n    </mat-card-content>\n  </span>\n</mat-card>",
-                styles: [".example-container{display:flex;flex-direction:column}.example-container>*{width:100%}.main-class .submitbtn{display:block;width:170px;margin:10px auto;background:#3f50b5!important;color:#fff}.main-class .material-icons{cursor:pointer}.formspan{background-color:#e7e9ea;border:6px solid #fff;border-bottom:10px solid #fff;display:inline-block;width:100%;position:relative;z-index:9}.formspan .example-container{display:flex;flex-direction:column;width:98%;padding:14px;margin-bottom:0}.formspan .form-field-span,.formspan .mat-form-field{display:inline-block;position:relative;text-align:left;width:98%;background:#fff;margin-bottom:9px;padding:1px 14px}.formspan .form-field-span .mat-checkbox,.formspan .form-field-span .mat-radio-button{padding-right:15px;padding-bottom:15px;display:inline-block}.formspan .mat-form-field-wrapper{padding-bottom:0!important}.form-field-span .mat-error{font-size:13px!important}.mat-error{color:#f44336;font-size:13px!important}button.submitbtn.mat-raised-button.mat-primary{margin-right:15px}h1{color:#3f50b4}.files-view{background-repeat:no-repeat;background-size:cover;background-position:center;height:auto!important;width:82%;margin:20px auto;border-radius:10px;display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap}.files-view .mat-card{z-index:9;margin:10px!important;display:flex;flex-wrap:wrap;justify-content:center;width:27%;position:relative}.files-view .mat-card .mat-card-actions,.files-view .mat-card .mat-card-titlt{display:inline-block;width:100%}.files-view .mat-card .mat-card-subtitle{display:inline-block;width:100%;text-align:center}.closecard{position:absolute;top:-10px;right:-8px;background:#464545;height:25px;width:25px;border-radius:50%;border:1px solid #696969;color:#fff;text-align:center;box-shadow:0 2px 6px #00000070;cursor:pointer}.closecard i{font-size:18px;line-height:27px}"]
-            }] }
-];
-/** @nocollapse */
-AddBlogComponent.ctorParameters = () => [
-    { type: FormBuilder },
-    { type: BlogService },
-    { type: Router },
-    { type: CookieService },
-    { type: MatDialog }
-];
-AddBlogComponent.propDecorators = {
-    config: [{ type: Input }]
-};
-// ============================================MODAL COMPONENT===========================================
-class Modal2 {
-    /**
-     * @param {?} dialogRef
-     * @param {?} data
-     */
-    constructor(dialogRef, data) {
-        this.dialogRef = dialogRef;
-        this.data = data;
-    }
-    /**
-     * @return {?}
-     */
-    onNoClick() {
-        this.dialogRef.close();
-    }
-}
-Modal2.decorators = [
-    { type: Component, args: [{
-                selector: 'app-modal',
-                template: "<h1 mat-dialog-title>MESSAGE</h1>\n<div mat-dialog-content>\n   <p>{{ data.msg }}</p>\n</div>\n\n"
-            }] }
-];
-/** @nocollapse */
-Modal2.ctorParameters = () => [
-    { type: MatDialogRef },
-    { type: undefined, decorators: [{ type: Inject, args: [MAT_DIALOG_DATA,] }] }
-];
-
-/**
- * @fileoverview added by tsickle
- * Generated from: lib/app-routing.module.ts
- * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
- */
-/** @type {?} */
-const appRoutes = [
-    { path: 'add', component: AddBlogComponent },
-    { path: 'edit/:id', component: AddBlogComponent },
-];
-class AppRoutingModule {
-}
-AppRoutingModule.decorators = [
-    { type: NgModule, args: [{
-                imports: [RouterModule.forRoot(appRoutes)],
-                exports: [RouterModule]
-            },] }
-];
 
 /**
  * @fileoverview added by tsickle
@@ -1111,6 +737,26 @@ class ApiService {
         res => res)));
         return result;
     }
+    /**
+     * @param {?} endpoint
+     * @param {?} requestdata
+     * @return {?}
+     */
+    getDataWithoutToken(endpoint, requestdata) {
+        /** @type {?} */
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json'
+            })
+        };
+        /** @type {?} */
+        var result = this._http.post(endpoint, JSON.stringify(requestdata), httpOptions).pipe(map((/**
+         * @param {?} res
+         * @return {?}
+         */
+        res => res)));
+        return result;
+    }
 }
 ApiService.decorators = [
     { type: Injectable, args: [{
@@ -1124,6 +770,443 @@ ApiService.ctorParameters = () => [
     { type: CookieService }
 ];
 /** @nocollapse */ ApiService.ngInjectableDef = defineInjectable({ factory: function ApiService_Factory() { return new ApiService(inject(HttpClient), inject(HttpClient), inject(CookieService)); }, token: ApiService, providedIn: "root" });
+
+/**
+ * @fileoverview added by tsickle
+ * Generated from: lib/blog.component.ts
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class BlogComponent {
+    // ====================================================================================================
+    /**
+     * @param {?} apiService
+     */
+    constructor(apiService) {
+        this.apiService = apiService;
+        // send basic sort data
+        this.sortdata = {
+            "type": 'desc',
+            "field": 'priority',
+            "options": ['priority', 'author', 'category', 'blogtitle']
+        };
+        // datacollection
+        this.datacollection = 'getbloglistdata';
+        this.date_search_source_count = 0;
+        // send basic limit data
+        this.limitcond = {
+            "limit": 10,
+            "skip": 0,
+            "pagecount": 1
+        };
+        this.loader = false;
+    }
+    // ======================================================================================
+    // ================================================Input For Lib Listing================================
+    /**
+     * @param {?} receivedData
+     * @return {?}
+     */
+    set config(receivedData) {
+        this.blogListConfig = {
+            apiUrl: receivedData.apiBaseUrl,
+            endpoint: receivedData.endpoint,
+            endpointc: receivedData.endpointc,
+            listEndPoint: receivedData.listEndPoint,
+            datasource: receivedData.datasource,
+            tableName: receivedData.tableName,
+            listArray_skip: ["_id", "userId", "created_at", "updated_at", "image", "description_html", "parentcategoryname_search", "blogtitle_search"],
+            listArray_modify_header: { "blogtitle": "Blog Title", "description": "Description", "priority": "Priority", "status": "Status", "parentcategoryname": "Parent Category Name", "blogcat": "Blog Category", "date": "Date" },
+            admintablenameTableName: "admin",
+            statusarr: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }],
+            updateurl: receivedData.updateEndpoint,
+            editUrl: receivedData.editUrl,
+            jwtToken: receivedData.jwtToken,
+            deleteEndPoint: receivedData.deleteEndPoint,
+            view: receivedData.view,
+            search_settings: {
+                textsearch: [{ label: "Search by blog title...", field: 'blogtitle' }, { label: "Search by parent category...", field: 'parentcategoryname_search' }],
+                selectsearch: [{ label: 'Search By status', field: 'status', values: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }] }]
+            }
+            //  /*Showing Image in the Modal*/
+            //  pendingmodelapplicationarray_detail_datatype: [{
+            //   key: "image",
+            //   value: 'image',
+            //   fileurl: 'https://s3.us-east-2.amazonaws.com/crmfiles.influxhostserver/testimonial/'             // Image path 
+            // }],
+        };
+        this.loader = false;
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        /** @type {?} */
+        let endpoint = this.blogListConfig.endpoint;
+        /** @type {?} */
+        let endpointc = this.blogListConfig.endpointc;
+        /** @type {?} */
+        let data = {
+            "condition": {
+                "limit": 10,
+                "skip": 0
+            },
+            sort: {
+                "type": 'desc',
+                "field": 'priority'
+            }
+        };
+        this.apiService.getDataWithoutToken(endpointc, data).subscribe((/**
+         * @param {?} res
+         * @return {?}
+         */
+        (res) => {
+            this.date_search_source_count = res.count;
+        }), (/**
+         * @param {?} error
+         * @return {?}
+         */
+        error => {
+            console.log('Oooops!');
+        }));
+        this.apiService.getDataWithoutToken(endpoint, data).subscribe((/**
+         * @param {?} res
+         * @return {?}
+         */
+        (res) => {
+        }), (/**
+         * @param {?} error
+         * @return {?}
+         */
+        error => {
+            console.log('Oooops!');
+        }));
+    }
+}
+BlogComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'lib-Blog',
+                template: "<mat-card *ngIf=\"loader==true\">\n    <mat-spinner class=\"spinner\"></mat-spinner>\n</mat-card>\n\n\n\n<!-- ------------------------lib listing being called------------------------ -->\n<mat-card *ngIf=\"loader==false\">\n    <lib-listing class=\"formfilterdiv\"\n        *ngIf=\"blogListConfig.datasource !=null && blogListConfig.datasource.length > 0\"\n\n        [datasource]=\"blogListConfig.datasource\" \n\n        [skip]=\"blogListConfig.listArray_skip\"\n\n        [modify_header_array]=\"blogListConfig.listArray_modify_header\" \n\n        [sourcedata]=\"blogListConfig.tableName\"\n\n        [statusarr]=\"blogListConfig.statusarr\" \n\n        [jwttoken]=\"blogListConfig.jwtToken\"\n\n        [apiurl]=\"blogListConfig.apiUrl\" \n\n        [editroute]=\"blogListConfig.editUrl\"\n\n        [deleteendpoint]=\"blogListConfig.deleteEndPoint\"\n\n        [date_search_source]=\"blogListConfig.view\"\n\n       [date_search_endpoint]=\"blogListConfig.listEndPoint\"\n\n       [search_settings]=\"blogListConfig.search_settings\"\n\n       [detail_datatype]=\"blogListConfig.pendingmodelapplicationarray_detail_datatype\"\n\n       [sortdata]=\"sortdata\"\n\n       [datacollection]=\"datacollection\"\n\n        [date_search_source_count]=\"date_search_source_count\"\n\n       [limitcond]=\"limitcond\">\n       \n    </lib-listing>\n<!-- ----------------------------------------------------------------------------->\n\n    <h2 *ngIf=\"blogListConfig.datasource.length == 0\">No record found.</h2>\n</mat-card>",
+                styles: [""]
+            }] }
+];
+/** @nocollapse */
+BlogComponent.ctorParameters = () => [
+    { type: ApiService }
+];
+BlogComponent.propDecorators = {
+    config: [{ type: Input }]
+};
+
+/**
+ * @fileoverview added by tsickle
+ * Generated from: lib/material-module.ts
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+//import { MatFileUploadModule } from 'angular-material-fileupload';
+class DemoMaterialModule {
+}
+DemoMaterialModule.decorators = [
+    { type: NgModule, args: [{
+                exports: [
+                    A11yModule,
+                    CdkStepperModule,
+                    CdkTableModule,
+                    CdkTreeModule,
+                    DragDropModule,
+                    MatAutocompleteModule,
+                    MatBadgeModule,
+                    MatBottomSheetModule,
+                    MatButtonModule,
+                    MatButtonToggleModule,
+                    MatCardModule,
+                    MatCheckboxModule,
+                    MatChipsModule,
+                    MatStepperModule,
+                    MatDatepickerModule,
+                    MatDialogModule,
+                    MatDividerModule,
+                    MatExpansionModule,
+                    MatGridListModule,
+                    MatIconModule,
+                    MatInputModule,
+                    MatListModule,
+                    MatMenuModule,
+                    MatNativeDateModule,
+                    MatPaginatorModule,
+                    MatProgressBarModule,
+                    MatProgressSpinnerModule,
+                    MatRadioModule,
+                    MatRippleModule,
+                    MatSelectModule,
+                    MatSidenavModule,
+                    MatSliderModule,
+                    MatSlideToggleModule,
+                    MatSnackBarModule,
+                    MatSortModule,
+                    MatTableModule,
+                    MatTabsModule,
+                    MatToolbarModule,
+                    MatTooltipModule,
+                    MatTreeModule,
+                    PortalModule,
+                    ScrollingModule,
+                ]
+            },] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * Generated from: lib/add-blog/add-blog.component.ts
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+class AddBlogComponent {
+    // ==================================================
+    /**
+     * @param {?} formBuilder
+     * @param {?} blogService
+     * @param {?} router
+     * @param {?} cookieService
+     * @param {?} dialog
+     */
+    constructor(formBuilder, blogService, router, cookieService, dialog) {
+        this.formBuilder = formBuilder;
+        this.blogService = blogService;
+        this.router = router;
+        this.cookieService = cookieService;
+        this.dialog = dialog;
+        this.editorconfig = {};
+        this.header_txt = "Add Blog Category";
+        this.buttonText = "SUBMIT";
+        this.loader = false;
+        this.successMessage = "Category Added Successfully!!!";
+        this.getParentCatArr = [];
+        this.editorconfig.extraAllowedContent = '*[class](*),span;ul;li;table;td;style;*[id];*(*);*{*}';
+    }
+    /**
+     * @return {?}
+     */
+    ngOnInit() {
+        //generating the form
+        this.generateForm();
+        //getting the parent category
+        this.getParentData();
+        // --------------------------------checking the cases------------------------ 
+        switch (this.configData.action) {
+            case 'add':
+                /* Button text */
+                this.buttonText = "SUBMIT";
+                break;
+            case 'edit':
+                /* Button text */
+                this.buttonText = "UPDATE";
+                this.successMessage = "One row updated!!!";
+                this.setDefaultValue(this.configData.defaultData);
+                this.header_txt = "EDIT";
+                break;
+        }
+        // --------------------------------------------------------------------------
+    }
+    // ================================================Default value======================================
+    /**
+     * @param {?} defaultValue
+     * @return {?}
+     */
+    setDefaultValue(defaultValue) {
+        this.blogCatForm.patchValue({
+            blogtitle: defaultValue.blogtitle,
+            priority: defaultValue.priority,
+            status: defaultValue.status,
+            description: defaultValue.description,
+            parent_id: defaultValue.parent_id
+        });
+    }
+    // ==================================================================================================
+    //  ============================GENERATING THE FORM=======================
+    /**
+     * @return {?}
+     */
+    generateForm() {
+        this.blogCatForm = this.formBuilder.group({
+            blogtitle: ['', [Validators.required, Validators.maxLength(50)]],
+            priority: ['', [Validators.required, Validators.maxLength(2)]],
+            status: [true,],
+            description: ['', [Validators.required, Validators.maxLength(100)]],
+            parent_id: [0,]
+        });
+    }
+    // ========================================================================
+    //  Getting the input Configuration 
+    /**
+     * @param {?} getConfig
+     * @return {?}
+     */
+    set config(getConfig) {
+        this.configData = getConfig;
+    }
+    // =========================================MODAL functions==========================================
+    /**
+     * @param {?} x
+     * @return {?}
+     */
+    openDialog(x) {
+        this.dialogRef = this.dialog.open(Modal2, {
+            width: '250px',
+            data: { msg: x }
+        });
+        this.dialogRef.afterClosed().subscribe((/**
+         * @param {?} result
+         * @return {?}
+         */
+        result => {
+        }));
+    }
+    // ===================================================================================================
+    //Getting the parent category
+    /**
+     * @return {?}
+     */
+    getParentData() {
+        /** @type {?} */
+        let postData = {
+            source: this.configData.source,
+            token: this.cookieService.get('jwtToken')
+        };
+        this.blogService.getData(this.configData.endpoint2 + 'datalist', postData).subscribe((/**
+         * @param {?} response
+         * @return {?}
+         */
+        (response) => {
+            this.getParentCatArr = response.res;
+            //console.log('parent category',response.res);
+        }));
+    }
+    // =========================SUBMIT function==================
+    /**
+     * @return {?}
+     */
+    onSubmit() {
+        this.blogCatForm.controls['description'].markAsTouched();
+        this.loader = true;
+        /* stop here if form is invalid */
+        if (this.blogCatForm.invalid) {
+            return;
+        }
+        else {
+            if (this.blogCatForm.value.status) {
+                this.blogCatForm.value.status = parseInt("1");
+            }
+            else {
+                this.blogCatForm.value.status = parseInt("0");
+            }
+            /* start process to submited data */
+            /** @type {?} */
+            let postData = {
+                source: this.configData.source,
+                data: Object.assign(this.blogCatForm.value, this.configData.condition),
+                "sourceobj": ["parent_id"]
+            };
+            this.blogService.addData(this.configData.endpoint, postData).subscribe((/**
+             * @param {?} response
+             * @return {?}
+             */
+            (response) => {
+                if (response.status == "success") {
+                    this.openDialog(this.successMessage);
+                    setTimeout((/**
+                     * @return {?}
+                     */
+                    () => {
+                        this.dialogRef.close();
+                    }), 2000);
+                    this.router.navigate([this.configData.callBack]);
+                }
+                else {
+                    alert("Some error occurred. Please try again.");
+                }
+            }), (/**
+             * @param {?} error
+             * @return {?}
+             */
+            (error) => {
+                alert("Some error occurred. Please try again.");
+            }));
+        }
+    }
+    // ==========================================================
+    //Blur function
+    /**
+     * @param {?} val
+     * @return {?}
+     */
+    inputBlur(val) {
+        this.blogCatForm.controls[val].markAsUntouched();
+    }
+}
+AddBlogComponent.decorators = [
+    { type: Component, args: [{
+                selector: 'lib-add-blog',
+                template: "<!-- Form Header -->\n<mat-card>\n  <mat-toolbar color=\"primary\" style=\"justify-content: center; align-items: center;\">\n    <h2 class=\"headerSpan\">{{header_txt}}</h2>\n  </mat-toolbar>\n\n  <!-- Blog Add or Edit Form Start Here -->\n  <span class=\"formspan\">\n    <mat-card-content class=\"example-container\">\n      <form class=\"example-form\" autocomplete=\"off\" [formGroup]=\"blogCatForm\">\n\n\n\n        <!-- Blog title  -->\n        <mat-form-field>\n          <input matInput type=\"text\" placeholder=\"Title\" formControlName=\"blogtitle\" >\n          <mat-error *ngIf=\"!blogCatForm.controls['blogtitle'].valid\n        && blogCatForm.controls['blogtitle'].errors.required\"> Blog title is required.</mat-error>\n          <mat-error\n            *ngIf=\"!blogCatForm.controls['blogtitle'].valid && !blogCatForm.controls['blogtitle'].errors.required\">\n            Max length exceeded</mat-error>\n        </mat-form-field>\n\n\n\n        <!-- Priority   -->\n        <mat-form-field>\n          <input matInput type=\"number\" placeholder=\"Priority\" formControlName=\"priority\">\n          <mat-error *ngIf=\"!blogCatForm.controls['priority'].valid\n        && blogCatForm.controls['priority'].errors.required\"> Priority is required.</mat-error>\n          <mat-error\n            *ngIf=\"!blogCatForm.controls['priority'].valid && !blogCatForm.controls['priority'].errors.required\">\n            Can't have a lower priority</mat-error>\n        </mat-form-field>\n\n        <!-- Status  -->\n\n        <mat-checkbox formControlName=\"status\">Active</mat-checkbox><br>\n\n\n        <!-- ckeditor using start here -->\n        <mat-label>Description</mat-label>\n        <!-- <ckeditor [editor]=\"Editor\" [config]=\"editorConfig\" formControlName=\"description\" ></ckeditor> -->\n        <ck-editor formControlName=\"description\" [config]=\"editorconfig\">\n        </ck-editor>\n        \n        <mat-error *ngIf=\"!blogCatForm.controls['description'].valid\n        && blogCatForm.controls['description'].errors.required && blogCatForm.controls['description'].touched\" > Please describe.</mat-error>\n          <mat-error\n            *ngIf=\"!blogCatForm.controls['description'].valid && !blogCatForm.controls['description'].errors.required\">\n            Max length exceeded</mat-error>\n        <!-- ckeditor end here -->\n\n\n\n\n\n        <mat-form-field>\n          <mat-label>Parent Category</mat-label>\n          <mat-select formControlName=\"parent_id\">\n            <mat-option [value]=0>\n              Select a category\n            </mat-option>\n            <mat-option *ngFor=\"let parCat of getParentCatArr\" value=\"{{ parCat._id }}\"> {{ parCat.blogtitle }}\n            </mat-option>\n\n          </mat-select>\n        </mat-form-field>\n\n\n        <button type=\"submit\" class=\"submitbtn\" class=\"submitbtn\" mat-raised-button color=\"primary\"\n          (click)=\"onSubmit()\">{{buttonText}}</button>\n        <button type=\"reset\" class=\"submitbtn\" class=\"submitbtn\" mat-raised-button color=\"primary\">RESET</button>\n\n\n\n\n      </form>\n    </mat-card-content>\n  </span>\n</mat-card>",
+                styles: [".example-container{display:flex;flex-direction:column}.example-container>*{width:100%}.main-class .submitbtn{display:block;width:170px;margin:10px auto;background:#3f50b5!important;color:#fff}.main-class .material-icons{cursor:pointer}.formspan{background-color:#e7e9ea;border:6px solid #fff;border-bottom:10px solid #fff;display:inline-block;width:100%;position:relative;z-index:9}.formspan .example-container{display:flex;flex-direction:column;width:98%;padding:14px;margin-bottom:0}.formspan .form-field-span,.formspan .mat-form-field{display:inline-block;position:relative;text-align:left;width:98%;background:#fff;margin-bottom:9px;padding:1px 14px}.formspan .form-field-span .mat-checkbox,.formspan .form-field-span .mat-radio-button{padding-right:15px;padding-bottom:15px;display:inline-block}.formspan .mat-form-field-wrapper{padding-bottom:0!important}.form-field-span .mat-error{font-size:13px!important}.mat-error{color:#f44336;font-size:13px!important}button.submitbtn.mat-raised-button.mat-primary{margin-right:15px}h1{color:#3f50b4}.files-view{background-repeat:no-repeat;background-size:cover;background-position:center;height:auto!important;width:82%;margin:20px auto;border-radius:10px;display:flex;justify-content:center;align-items:stretch;flex-wrap:wrap}.files-view .mat-card{z-index:9;margin:10px!important;display:flex;flex-wrap:wrap;justify-content:center;width:27%;position:relative}.files-view .mat-card .mat-card-actions,.files-view .mat-card .mat-card-titlt{display:inline-block;width:100%}.files-view .mat-card .mat-card-subtitle{display:inline-block;width:100%;text-align:center}.closecard{position:absolute;top:-10px;right:-8px;background:#464545;height:25px;width:25px;border-radius:50%;border:1px solid #696969;color:#fff;text-align:center;box-shadow:0 2px 6px #00000070;cursor:pointer}.closecard i{font-size:18px;line-height:27px}"]
+            }] }
+];
+/** @nocollapse */
+AddBlogComponent.ctorParameters = () => [
+    { type: FormBuilder },
+    { type: BlogService },
+    { type: Router },
+    { type: CookieService },
+    { type: MatDialog }
+];
+AddBlogComponent.propDecorators = {
+    config: [{ type: Input }]
+};
+// ============================================MODAL COMPONENT===========================================
+class Modal2 {
+    /**
+     * @param {?} dialogRef
+     * @param {?} data
+     */
+    constructor(dialogRef, data) {
+        this.dialogRef = dialogRef;
+        this.data = data;
+    }
+    /**
+     * @return {?}
+     */
+    onNoClick() {
+        this.dialogRef.close();
+    }
+}
+Modal2.decorators = [
+    { type: Component, args: [{
+                selector: 'app-modal',
+                template: "<h1 mat-dialog-title>MESSAGE</h1>\n<div mat-dialog-content>\n   <p>{{ data.msg }}</p>\n</div>\n\n"
+            }] }
+];
+/** @nocollapse */
+Modal2.ctorParameters = () => [
+    { type: MatDialogRef },
+    { type: undefined, decorators: [{ type: Inject, args: [MAT_DIALOG_DATA,] }] }
+];
+
+/**
+ * @fileoverview added by tsickle
+ * Generated from: lib/app-routing.module.ts
+ * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
+ */
+/** @type {?} */
+const appRoutes = [
+    { path: 'add', component: AddBlogComponent },
+    { path: 'edit/:id', component: AddBlogComponent },
+];
+class AppRoutingModule {
+}
+AppRoutingModule.decorators = [
+    { type: NgModule, args: [{
+                imports: [RouterModule.forRoot(appRoutes)],
+                exports: [RouterModule]
+            },] }
+];
 
 /**
  * @fileoverview added by tsickle
@@ -1777,16 +1860,34 @@ class ListingBlogmanagementlibComponent {
     constructor(apiService) {
         this.apiService = apiService;
         this.loader = false;
+        // ======================================================================================
+        // send basic sort data
+        this.sortdata = {
+            "type": 'desc',
+            "field": 'priority',
+            "options": ['blog_title', 'author', 'category', 'blogtitle']
+        };
+        // datacollection
+        this.datacollection = 'getadminbloglistdata';
+        this.date_search_source_count = 0;
+        // send basic limit data
+        this.limitcond = {
+            "limit": 10,
+            "skip": 0,
+            "pagecount": 1
+        };
     }
-    // ======================================================================================
     // ================================================Input For Lib Listing================================
     /**
      * @param {?} receivedData
      * @return {?}
      */
     set config(receivedData) {
+        this.value = receivedData;
         this.blogListConfig = {
             apiUrl: receivedData.apiBaseUrl,
+            endpoint: receivedData.endpoint,
+            endpointc: receivedData.endpointc,
             listEndPoint: receivedData.listEndPoint,
             datasource: receivedData.datasource,
             tableName: receivedData.tableName,
@@ -1806,7 +1907,6 @@ class ListingBlogmanagementlibComponent {
             search_settings: {
                 textsearch: [{ label: "blog title...", field: 'blogtitle_search' }, { label: "author...", field: 'author_search' }],
                 selectsearch: [{ label: 'status...', field: 'status', values: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }] }],
-                datesearch: [{ startdatelabel: "Start Date", enddatelabel: "End Date", submit: "Search By Date", field: "created_at" }],
             },
         };
         this.loader = false;
@@ -1815,12 +1915,59 @@ class ListingBlogmanagementlibComponent {
      * @return {?}
      */
     ngOnInit() {
+        /** @type {?} */
+        let endpoint = this.blogListConfig.endpoint;
+        /** @type {?} */
+        let endpointc = this.blogListConfig.endpointc;
+        /** @type {?} */
+        let data = {
+            "condition": {
+                "limit": 10,
+                "skip": 0
+            },
+            sort: {
+                "type": 'desc',
+                "field": 'blog title'
+            }
+        };
+        this.apiService.getDataWithoutToken(endpointc, data).subscribe((/**
+         * @param {?} res
+         * @return {?}
+         */
+        (res) => {
+            // console.log('in constructor');
+            // console.log(result);
+            this.date_search_source_count = res.count;
+            console.warn('blogData c', res);
+        }), (/**
+         * @param {?} error
+         * @return {?}
+         */
+        error => {
+            console.log('Oooops!');
+        }));
+        this.apiService.getDataWithoutToken(endpoint, data).subscribe((/**
+         * @param {?} res
+         * @return {?}
+         */
+        (res) => {
+            // console.log('in constructor');
+            // console.log(result);
+            // this.pendingmodelapplicationarray =res.results.res;
+            //console.warn('blogData',res);
+        }), (/**
+         * @param {?} error
+         * @return {?}
+         */
+        error => {
+            console.log('Oooops!');
+        }));
     }
 }
 ListingBlogmanagementlibComponent.decorators = [
     { type: Component, args: [{
                 selector: 'lib-listing-blogmanagementlib',
-                template: "<mat-card *ngIf=\"loader==true\">\n  <mat-spinner class=\"spinner\"></mat-spinner>\n</mat-card>\n\n\n\n<!-- ------------------------lib listing being called------------------------ -->\n<mat-card *ngIf=\"loader==false\">\n  <lib-listing class=\"formfilterdiv\"\n      *ngIf=\"blogListConfig.datasource !=null && blogListConfig.datasource.length > 0\"\n      [datasource]=\"blogListConfig.datasource\" [skip]=\"blogListConfig.listArray_skip\"\n      [modify_header_array]=\"blogListConfig.listArray_modify_header\" [sourcedata]=\"blogListConfig.tableName\"\n      [statusarr]=\"blogListConfig.statusarr\" [jwttoken]=\"blogListConfig.jwtToken\"\n      [apiurl]=\"blogListConfig.apiUrl\" [editroute]=\"blogListConfig.editUrl\"\n      [deleteendpoint]=\"blogListConfig.deleteEndPoint\"\n      [date_search_source]=\"blogListConfig.view\"\n     [date_search_endpoint]=\"blogListConfig.listEndPoint\"\n     [search_settings]=\"blogListConfig.search_settings\"\n     [detail_datatype]=\"blogListConfig.pendingmodelapplicationarray_detail_datatype\">\n  </lib-listing>\n<!-- ----------------------------------------------------------------------------->\n\n  <h2 *ngIf=\"blogListConfig.datasource.length == 0\">No record found.</h2>\n</mat-card>",
+                template: "<mat-card *ngIf=\"loader==true\">\n  <mat-spinner class=\"spinner\"></mat-spinner>\n</mat-card>\n\n\n\n<!-- ------------------------lib listing being called------------------------ -->\n<mat-card *ngIf=\"loader==false\">\n  <lib-listing class=\"formfilterdiv\"\n      *ngIf=\"blogListConfig.datasource !=null && blogListConfig.datasource.length > 0\"\n      [datasource]=\"blogListConfig.datasource\" [skip]=\"blogListConfig.listArray_skip\"\n      [modify_header_array]=\"blogListConfig.listArray_modify_header\" [sourcedata]=\"blogListConfig.tableName\"\n      [statusarr]=\"blogListConfig.statusarr\" [jwttoken]=\"blogListConfig.jwtToken\"\n      [apiurl]=\"blogListConfig.apiUrl\" [editroute]=\"blogListConfig.editUrl\"\n      [deleteendpoint]=\"blogListConfig.deleteEndPoint\"\n      [date_search_source]=\"blogListConfig.view\"\n     [date_search_endpoint]=\"blogListConfig.listEndPoint\"\n     [search_settings]=\"blogListConfig.search_settings\"\n     [detail_datatype]=\"blogListConfig.pendingmodelapplicationarray_detail_datatype\"\n     [sortdata]=\"sortdata\"\n     [datacollection]=\"datacollection\"\n     [date_search_source_count]=\"date_search_source_count\"\n     [limitcond]=\"limitcond\">\n  </lib-listing>\n<!-- ----------------------------------------------------------------------------->\n\n  <h2 *ngIf=\"blogListConfig.datasource.length == 0\">No record found.</h2>\n</mat-card>",
                 styles: ["body{display:none!important}"]
             }] }
 ];
@@ -1881,6 +2028,6 @@ BlogModule.decorators = [
  * @suppress {checkTypes,constantProperty,extraRequire,missingOverride,missingReturn,unusedPrivateMembers,uselessCode} checked by tsc
  */
 
-export { BlogService, BlogComponent, BlogModule, AddBlogComponent as ɵa, Modal2 as ɵb, AddeditBlogmanagementComponent as ɵc, Modal as ɵd, YoutubeComponent as ɵe, ApiService as ɵf, AppRoutingModule as ɵj, ListingBlogmanagementlibComponent as ɵh, DemoMaterialModule as ɵi, YoutubeplayerComponent as ɵg };
+export { BlogService, BlogComponent, BlogModule, AddBlogComponent as ɵb, Modal2 as ɵc, AddeditBlogmanagementComponent as ɵd, Modal as ɵe, YoutubeComponent as ɵf, ApiService as ɵa, AppRoutingModule as ɵj, ListingBlogmanagementlibComponent as ɵh, DemoMaterialModule as ɵi, YoutubeplayerComponent as ɵg };
 
 //# sourceMappingURL=blog-lib-influxiq.js.map

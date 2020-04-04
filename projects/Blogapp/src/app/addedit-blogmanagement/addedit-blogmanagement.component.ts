@@ -12,7 +12,7 @@ import { environment } from '../../environments/environment';
 export class AddeditBlogmanagementComponent implements OnInit {
 
 
-    server: any ='https://9ozbyvv5v0.execute-api.us-east-1.amazonaws.com/production/api/';
+    server: any ='https://hntm6xe6of.execute-api.us-east-1.amazonaws.com/dev/api1/';
 
     // server: any =environment.apiBaseUrl;
 

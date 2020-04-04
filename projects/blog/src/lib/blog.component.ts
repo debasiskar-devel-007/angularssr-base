@@ -11,7 +11,21 @@ import { ApiService } from './api.service';
   styleUrls: ['style.css']
 })
 export class BlogComponent implements OnInit {
- 
+ // send basic sort data
+ sortdata:any={
+  "type":'desc',
+  "field":'priority',
+  "options":['priority','author','category','blogtitle']
+};
+// datacollection
+datacollection: any='getbloglistdata';
+date_search_source_count: any=0;
+// send basic limit data
+limitcond:any={
+  "limit":10,
+  "skip":0,
+  "pagecount":1
+}; 
   // ===========================================declaration================================
   blogListConfig:any;
   loader:boolean=false;
@@ -23,6 +37,8 @@ export class BlogComponent implements OnInit {
    
     this.blogListConfig = {
       apiUrl: receivedData.apiBaseUrl,
+      endpoint :receivedData.endpoint,
+      endpointc:receivedData.endpointc,
       listEndPoint: receivedData.listEndPoint,
       datasource: receivedData.datasource,
       tableName: receivedData.tableName,
@@ -50,10 +66,38 @@ export class BlogComponent implements OnInit {
   }
   // ====================================================================================================
 
-  constructor() { }
+  constructor(public apiService:ApiService) { }
 
   ngOnInit() {
+    let endpoint=this.blogListConfig.endpoint;
+    let endpointc=this.blogListConfig.endpointc;
+
+    let data:any={
+        "condition":{
+            "limit":10,
+            "skip":0
+        },
+    sort:{
+        "type":'desc',
+        "field":'priority'
+    }
+
+    }
+    this.apiService.getDataWithoutToken(endpointc, data).subscribe((res:any) => {
+        this.date_search_source_count =res.count;
+      
+    }, error => {
+        console.log('Oooops!');
+    });
+
+    this.apiService.getDataWithoutToken(endpoint,data).subscribe((res:any) => {
+    
+    }, error => {
+        console.log('Oooops!');
+    });
+
   }
+  
 
 }
 
