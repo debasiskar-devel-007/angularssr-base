@@ -758,6 +758,7 @@ class LoginComponent {
     set routerStatus(routerStatusval) {
         this.routerStatusValue = (routerStatusval) || '<no name set>';
         this.routerStatusValue = routerStatusval;
+        console.log(this.routerStatusValue);
     }
     /**
      * @param {?} defaultUrlVal
@@ -819,6 +820,7 @@ class LoginComponent {
                     if (this.router.url == this.defaultUrlValue) {
                         for (const key in this.routerStatusValue.data) {
                             if (result.item[0].type === this.routerStatusValue.data[key].type) {
+                                console.warn(this.routerStatusValue.data[key].routerNav);
                                 this.router.navigateByUrl('/' + this.routerStatusValue.data[key].routerNav);
                                 this.loader = 0; // navigate to dashboard url 
                                 console.log(this.loader);

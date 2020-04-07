@@ -849,6 +849,7 @@
              */ function (routerStatusval) {
                 this.routerStatusValue = (routerStatusval) || '<no name set>';
                 this.routerStatusValue = routerStatusval;
+                console.log(this.routerStatusValue);
             },
             enumerable: true,
             configurable: true
@@ -923,6 +924,7 @@
                             if (_this.router.url == _this.defaultUrlValue) {
                                 for (var key in _this.routerStatusValue.data) {
                                     if (result.item[0].type === _this.routerStatusValue.data[key].type) {
+                                        console.warn(_this.routerStatusValue.data[key].routerNav);
                                         _this.router.navigateByUrl('/' + _this.routerStatusValue.data[key].routerNav);
                                         _this.loader = 0; // navigate to dashboard url 
                                         console.log(_this.loader);

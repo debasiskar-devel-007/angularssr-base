@@ -11,7 +11,7 @@ export class LoginComponent implements OnInit {
 
   public logo: any = '../../assets/favicon.ico';
   public fromTitle: any = "Login Form";    // This is a From Title 
-  public fullUrl: any = "https://9ozbyvv5v0.execute-api.us-east-1.amazonaws.com/production/api/";  // server url
+  public fullUrl: any = "https://v2xhu4uyed.execute-api.us-east-1.amazonaws.com/dev/api/";  // server url
   public endpoint: any = "login";
   public buttonName:any= 'Login Button';
   public signUpRouteingUrl: any = { 
