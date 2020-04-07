@@ -24,6 +24,7 @@ export declare class LoginComponent implements OnInit {
     buttonNameValue: any;
     defaultUrlValue: string;
     private loader;
+    secret: any;
     forLoader: any;
     fromTitle: any;
     logo: any;
@@ -42,6 +43,7 @@ export declare class LoginComponent implements OnInit {
     private currentUrl;
     constructor(fb: FormBuilder, http: HttpClient, router: Router, apiService: ApiService, cookieService: CookieService, route: ActivatedRoute);
     ngOnInit(): void;
+    randomString(length: any, chars: any): string;
     /********* Login Form Submit start here*********/
     loginFormSubmit(): void;
     inputUntouched(val: any): void;

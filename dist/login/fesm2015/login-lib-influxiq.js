@@ -440,6 +440,8 @@ class ApiService {
     addLogin(requestdata) {
         console.log('in addLogin apiservice');
         /** @type {?} */
+        const returnedTarget = Object.assign(requestdata, { 'secret': this.cookieService.get('secret') });
+        /** @type {?} */
         const httpOptions = {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json'
@@ -673,6 +675,10 @@ class LoginComponent {
             // }
             // console.log('redirect_url',this.redirect_url)
         }));
+        /**secret key workes here */
+        this.secret = this.randomString(9, 'aA#!');
+        console.log(this.secret);
+        this.cookieService.set('secret', this.secret);
         this.loginForm = this.fb.group({
             email: ['', Validators.compose([Validators.required, Validators.pattern(/^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/)])],
             password: ['', Validators.required]
@@ -686,7 +692,7 @@ class LoginComponent {
         this.loader = (forLoaderVal) || '<no name set>';
         this.loader = forLoaderVal;
         // console.log('++++',this.loader)
-        console.log('++++-----', this.loader);
+        //console.log('++++-----',this.loader)
     }
     /**
      * @param {?} fromTitleVal
@@ -789,6 +795,28 @@ class LoginComponent {
             this.apiService.setaddEndpoint(this.endpointValue); // set the endpoint
         }), 50);
         // console.log(this.addEndpointData.endpoint);
+    }
+    /**
+     * @param {?} length
+     * @param {?} chars
+     * @return {?}
+     */
+    randomString(length, chars) {
+        /** @type {?} */
+        var mask = '';
+        if (chars.indexOf('a') > -1)
+            mask += 'abcdefghijklmnopqrstuvwxyz';
+        if (chars.indexOf('A') > -1)
+            mask += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        if (chars.indexOf('#') > -1)
+            mask += '0123456789';
+        if (chars.indexOf('!') > -1)
+            mask += '~`!@#$%^&*()_+-={}[]:";\'<>?,./|\\';
+        /** @type {?} */
+        var result = '';
+        for (var i = length; i > 0; --i)
+            result += mask[Math.floor(Math.random() * mask.length)];
+        return result;
     }
     /**
      * ****** Login Form Submit start here********

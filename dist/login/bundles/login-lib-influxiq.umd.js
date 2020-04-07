@@ -484,6 +484,8 @@
             function (requestdata) {
                 console.log('in addLogin apiservice');
                 /** @type {?} */
+                var returnedTarget = Object.assign(requestdata, { 'secret': this.cookieService.get('secret') });
+                /** @type {?} */
                 var httpOptions = {
                     headers: new i1.HttpHeaders({
                         'Content-Type': 'application/json'
@@ -737,6 +739,10 @@
                 // }
                 // console.log('redirect_url',this.redirect_url)
             }));
+            /**secret key workes here */
+            this.secret = this.randomString(9, 'aA#!');
+            console.log(this.secret);
+            this.cookieService.set('secret', this.secret);
             this.loginForm = this.fb.group({
                 email: ['', forms.Validators.compose([forms.Validators.required, forms.Validators.pattern(/^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/)])],
                 password: ['', forms.Validators.required]
@@ -750,7 +756,7 @@
                 this.loader = (forLoaderVal) || '<no name set>';
                 this.loader = forLoaderVal;
                 // console.log('++++',this.loader)
-                console.log('++++-----', this.loader);
+                //console.log('++++-----',this.loader)
             },
             enumerable: true,
             configurable: true
@@ -888,6 +894,33 @@
                     _this.apiService.setaddEndpoint(_this.endpointValue); // set the endpoint
                 }), 50);
                 // console.log(this.addEndpointData.endpoint);
+            };
+        /**
+         * @param {?} length
+         * @param {?} chars
+         * @return {?}
+         */
+        LoginComponent.prototype.randomString = /**
+         * @param {?} length
+         * @param {?} chars
+         * @return {?}
+         */
+            function (length, chars) {
+                /** @type {?} */
+                var mask = '';
+                if (chars.indexOf('a') > -1)
+                    mask += 'abcdefghijklmnopqrstuvwxyz';
+                if (chars.indexOf('A') > -1)
+                    mask += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+                if (chars.indexOf('#') > -1)
+                    mask += '0123456789';
+                if (chars.indexOf('!') > -1)
+                    mask += '~`!@#$%^&*()_+-={}[]:";\'<>?,./|\\';
+                /** @type {?} */
+                var result = '';
+                for (var i = length; i > 0; --i)
+                    result += mask[Math.floor(Math.random() * mask.length)];
+                return result;
             };
         /********* Login Form Submit start here*********/
         /**
