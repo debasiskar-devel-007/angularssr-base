@@ -14,8 +14,8 @@ export class ListingBlogmanagementComponent implements OnInit {
   public blogListConfig: any = {
 
     apiBaseUrl: "https://hntm6xe6of.execute-api.us-east-1.amazonaws.com/dev/api1/",
-    endpoint: "https://hntm6xe6of.execute-api.us-east-1.amazonaws.com/dev/api1/getbloglistdata",
-    endpointc: "https://hntm6xe6of.execute-api.us-east-1.amazonaws.com/dev/api1/getbloglistdata-count",
+    endpoint: "https://hntm6xe6of.execute-api.us-east-1.amazonaws.com/dev/api1/getblogmanagementlistdata",
+    endpointc: "https://hntm6xe6of.execute-api.us-east-1.amazonaws.com/dev/api1/getblogmanagementlistdata-count",
 
     // apiBaseUrl: environment.apiBaseUrl,
 
@@ -33,13 +33,13 @@ export class ListingBlogmanagementComponent implements OnInit {
 
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute, private cookieService: CookieService) {
-
   }
 
   ngOnInit() {
     this.activatedRoute.data.subscribe((resolveData:any) => {
        this.blogListConfig.datasource = resolveData.blogList.res;
-      this.blogListConfig.jwtToken = this.cookieService.get('jwtToken');
+      // this.blogListConfig.jwtToken = this.cookieService.get('jwtToken');
+      this.blogListConfig.jwtToken ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJleHAiOjE1ODYxNzk3MzcsImlhdCI6MTU4NjA5MzMzN30.62F_1FAIekcBiBYaVnAFvEMeLN1Z5_CP3lJZcgEnfe4"
 
     });
   }

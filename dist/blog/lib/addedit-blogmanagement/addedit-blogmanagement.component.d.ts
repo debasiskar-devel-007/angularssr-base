@@ -5,6 +5,10 @@ import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { ApiService } from '../api.service';
 import { Observable } from 'rxjs';
 import { MatDialogRef, MatDialog, MatSnackBar } from "@angular/material";
+interface Websites {
+    value: number;
+    viewValue: string;
+}
 export interface DialogData {
     msg: any;
     videourl: any;
@@ -17,8 +21,7 @@ export declare class AddeditBlogmanagementComponent implements OnInit {
     private formBuilder;
     dialog: MatDialog;
     snackBar: MatSnackBar;
-    /**ckeditor start here*/
-    /**ckeditor end here*/
+    websites: Websites[];
     headerText: any;
     buttonText: any;
     blogCategoryArray: any;
@@ -52,6 +55,7 @@ export declare class AddeditBlogmanagementComponent implements OnInit {
     file_array_edit: any;
     action2: any;
     editorconfig: any;
+    statuschecked: boolean;
     config: any;
     serverUrl: any;
     getDataEndpoint: any;
@@ -91,3 +95,4 @@ export declare class Modal {
 }
 export declare class YoutubeComponent {
 }
+export {};

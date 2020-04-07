@@ -8,7 +8,10 @@ import { MAT_DIALOG_DATA, MatDialogRef, MatDialog, MatSnackBar } from "@angular/
 import { map, startWith } from 'rxjs/operators';
 
 
-
+interface  Websites {
+  value: number;
+  viewValue: string;
+}
 
 export interface DialogData {
   msg: any;
@@ -24,20 +27,11 @@ export interface DialogData {
 })
 
 export class AddeditBlogmanagementComponent implements OnInit {
-  /**ckeditor start here*/
-  // public Editor = ClassicEditor;  //for ckeditor
-  // editorConfig = {
-  //   placeholder: 'Description*',
-  // };
-  // public model = {
-  //   editorData: ''
-  // };
-  /**ckeditor end here*/
-
-
-
-
-
+  websites: Websites[] = [
+    {value: 1, viewValue: 'Mask Blog 1'},
+    {value: 2, viewValue: 'Mask Blog 2'},
+    {value: 3, viewValue: 'Mask Blog 3'}
+  ];
   // ---------------------declarations-------------------------------------
   public headerText: any = 'Add Blog Management Data';
   public buttonText: any = 'SUBMIT';
@@ -72,6 +66,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
   file_array_edit: any = [];
   action2:any;
   editorconfig:any={};
+  public statuschecked:boolean = true;
   // -----------------------------------------------------------------------
 
 
@@ -124,8 +119,10 @@ export class AddeditBlogmanagementComponent implements OnInit {
       blogtitle: ['', [Validators.required]],
       blogcat: ['', ],
       description: ['', [Validators.required]],
+      website:[],
+      featured:[''],
       priority: ['', [Validators.required]],
-      status: ['true',],
+      status: [''],
       // metatitle: ['', [Validators.required]],
       // metadesc: ['', [Validators.required]],
       author:['',[Validators.required]],
@@ -135,6 +132,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
       blogs_file: ['']
     });
     this.editorconfig.extraAllowedContent = '*[class](*),span;ul;li;table;td;style;*[id];*(*);*{*}';
+    
   }
 
 
@@ -177,6 +175,10 @@ export class AddeditBlogmanagementComponent implements OnInit {
       this.blogManagementForm.controls['blogtitle'].patchValue(this.setData.blogtitle);
       this.blogManagementForm.controls['blogcat'].patchValue(this.setData.blogcat);
       this.blogManagementForm.controls['description'].patchValue(this.setData.description);
+
+      this.blogManagementForm.controls['website'].patchValue(this.setData.website);
+      this.blogManagementForm.controls['featured'].patchValue(this.setData.featured);
+
       this.blogManagementForm.controls['priority'].patchValue(this.setData.priority);
       this.blogManagementForm.controls['status'].patchValue(this.setData.status);  
       this.blogManagementForm.controls['blogs_image'].patchValue(this.setData.blogs_image);
@@ -428,10 +430,22 @@ export class AddeditBlogmanagementComponent implements OnInit {
     this.blogManagementForm.controls['blogtitle'].markAsTouched();
 
     if (this.blogManagementForm.valid) {
+      console.log("values",this.blogManagementForm.value);
+
+      //status
       if (this.blogManagementForm.value.status)
         this.blogManagementForm.value.status =1;
       else
         this.blogManagementForm.value.status =0;
+// featured
+      if (this.blogManagementForm.value.featured)
+        this.blogManagementForm.value.featured = parseInt("1");
+      else
+        this.blogManagementForm.value.featured = parseInt("0");
+
+
+
+
       if (this.params_id!= null) {    //update part
         this.messageText = "One row updated!!!";
         this.blogManagementForm.value.tags = this.tags_array;
@@ -442,6 +456,8 @@ export class AddeditBlogmanagementComponent implements OnInit {
             "blogtitle": this.blogManagementForm.value.blogtitle,
             "blogcat": this.blogManagementForm.value.blogcat,
             "description": this.blogManagementForm.value.description,
+            "website": this.blogManagementForm.value.website,
+            "featured": this.blogManagementForm.value.featured,
             "priority": this.blogManagementForm.value.priority,
             "status": this.blogManagementForm.value.status, 
             "tags": this.blogManagementForm.value.tags,

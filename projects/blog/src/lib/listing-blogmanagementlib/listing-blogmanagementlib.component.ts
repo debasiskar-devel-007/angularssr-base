@@ -10,7 +10,7 @@ import { ApiService } from '../api.service';
 })
 export class ListingBlogmanagementlibComponent implements OnInit {
 
-public value:any;
+public value:any=[];
 
   // ===========================================declaration================================
   blogListConfig: any;
@@ -20,10 +20,10 @@ public value:any;
  sortdata:any={
   "type":'desc',
   "field":'priority',
-  "options":['blog_title','author','category','blogtitle']
+  "options":['author','blogcategory','blogtitle','priority']
 };
 // datacollection
-datacollection: any='getadminbloglistdata';
+datacollection: any='getblogmanagementlistdata';
 date_search_source_count: any=0;
 // send basic limit data
 limitcond:any={
@@ -34,8 +34,15 @@ limitcond:any={
   // ================================================Input For Lib Listing================================
   @Input()
   set config(receivedData: any) {
+console.log("hgshj",receivedData);
+for (let i in receivedData.datasource) {
+  this.value.push(
+    { 'name': receivedData.datasource[i].blogcategory, val: receivedData.datasource[i].blogcategory }
+    );
+    console.log("free",this.value);
 
-   this.value = receivedData;
+}
+  //  this.value = receivedData;
     this.blogListConfig = {
       apiUrl: receivedData.apiBaseUrl,
       endpoint :receivedData.endpoint,
@@ -43,11 +50,11 @@ limitcond:any={
       listEndPoint: receivedData.listEndPoint,
       datasource: receivedData.datasource,
       tableName: receivedData.tableName,
-      listArray_skip: ["_id", "userId", "created_at", "updated_at", "image", "metatitle", "metadesc", "description_html", "credentials", "blogs_file", "blogs_image","blogtitle_search","author_search"],
+      listArray_skip: ["_id", "userId", "created_at", "updated_at", "image", "metatitle", "metadesc", "description_html", "credentials", "blogs_file", "blogs_image","blogtitle_search","author_search","video","blogcat","profile_picture","tagsearch"],
       listArray_modify_header: {
         "blogtitle": "Blog Title", "description": "Description","date added":"Date","profile picture":"Profile Picture","tags":"Tags",
         "priority": "Priority", "status": "Status", "parentcategoryname": "Parent Category Name",
-        "author": "Author","blogcat":"Blog Category","date":"Date"
+        "author": "Author","blogcat":"Blog Category","date":"Date","blogcategory":"Blog Category"
       },
       admintablenameTableName: "admin",
       statusarr: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }],
@@ -57,8 +64,18 @@ limitcond:any={
       deleteEndPoint: receivedData.deleteEndPoint,
       view: receivedData.view,
       search_settings: {
-        textsearch: [{ label: "blog title...", field: 'blogtitle_search' },{ label: "author...", field: 'author_search' }],
-        selectsearch: [{ label: 'status...', field: 'status', values: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }] }],
+        textsearch: [{ label: "Blog Title", field: 'blogtitle' },{ label: "Search By Author", field: 'author' },{ label: "Search By Tags", field: 'tagsearch' }],
+
+        selectsearch: [
+          { label: 'Status', field: 'status', values: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }]},{label:"Search By Blog Category",field:'blogcategory',values:this.value},
+          {
+            label: 'Search By Blog Featured', field: 'featured', values: [{ val: 1, name: "Yes" }, { val: 0, name: 'No' }]
+          },
+          {
+            label: 'Search By Blog Website', field: 'website', values: [{ val: 1, name: "Mask Blog 1" }, { val: 2, name: 'Mask Blog 2' },{val:3,name:"Mask Blog 3"}]
+          }
+        ]
+
         // datesearch:[{startdatelabel:"Start Date",enddatelabel:"End Date",submit:"Search By Date",  field:"created_at"}],
       },
       //  /*Showing Image in the Modal*/
@@ -88,7 +105,7 @@ limitcond:any={
         },
     sort:{
         "type":'desc',
-        "field":'blog title'
+        "field":'priority'
     }
 
     }

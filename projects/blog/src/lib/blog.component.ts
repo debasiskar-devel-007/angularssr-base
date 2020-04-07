@@ -11,11 +11,12 @@ import { ApiService } from './api.service';
   styleUrls: ['style.css']
 })
 export class BlogComponent implements OnInit {
+  public blodata:any=[];
  // send basic sort data
  sortdata:any={
   "type":'desc',
   "field":'priority',
-  "options":['priority','author','category','blogtitle']
+  "options":['priority','parentcategoryname','blogtitle']
 };
 // datacollection
 datacollection: any='getbloglistdata';
@@ -32,9 +33,17 @@ limitcond:any={
   // ======================================================================================
 
   // ================================================Input For Lib Listing================================
+  // public value:any=[{val:'','name':''}];
+  public value:any=[];
   @Input()
   set config(receivedData: any) {
-   
+     for (let i in receivedData.datasource) {
+       this.value.push(
+         { 'name': receivedData.datasource[i].parentcategoryname, val: receivedData.datasource[i].parentcategoryname }
+         );
+  
+   }
+
     this.blogListConfig = {
       apiUrl: receivedData.apiBaseUrl,
       endpoint :receivedData.endpoint,
@@ -51,9 +60,16 @@ limitcond:any={
       jwtToken: receivedData.jwtToken,
       deleteEndPoint: receivedData.deleteEndPoint,
       view: receivedData.view,
+
       search_settings:{
-        textsearch: [{ label: "Search by blog title...", field: 'blogtitle' },{ label: "Search by parent category...", field: 'parentcategoryname_search' }],
-        selectsearch: [{ label: 'Search By status', field: 'status', values: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }] }]
+        textsearch: [{ label: "Search by Blog Category Name", field: 'blogtitle' }],
+        selectsearch: [
+          { label: 'Search By Status', field: 'status',values: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }]
+        },
+          {label:"Search By Parent Category",field:'parentcategoryname',values:this.value}
+        ]
+
+        // search:[{label:"Search By Parent Category",field:'parentcategoryname',values:this.value}]
       }
       //  /*Showing Image in the Modal*/
       //  pendingmodelapplicationarray_detail_datatype: [{

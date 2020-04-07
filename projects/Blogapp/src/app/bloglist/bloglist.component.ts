@@ -35,8 +35,9 @@ export class BloglistComponent implements OnInit {
       this.activatedRoute.data.subscribe(resolveData => {
         console.warn(resolveData);
         this.blogListConfig.datasource = resolveData.blogCatList.res;
-        this.blogListConfig.jwtToken = this.cookieService.get('jwtToken');
-        
+        // this.blogListConfig.jwtToken = this.cookieService.get('jwtToken');
+       
+        this.blogListConfig.jwtToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJleHAiOjE1ODYzMzM5OTgsImlhdCI6MTU4NjI0NzU5OH0.2tQPenabWix0l8S4er5xHmXkH-duoE-W6CHNWAPmT7o"
       });
     }
   ngOnInit() {
