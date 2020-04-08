@@ -820,8 +820,8 @@ class BlogComponent {
             listEndPoint: receivedData.listEndPoint,
             datasource: receivedData.datasource,
             tableName: receivedData.tableName,
-            listArray_skip: ["_id", "userId", "created_at", "updated_at", "image", "description_html", "parentcategoryname_search", "blogtitle_search"],
-            listArray_modify_header: { "blogtitle": "Blog Title", "description": "Description", "priority": "Priority", "status": "Status", "parentcategoryname": "Parent Category Name", "blogcat": "Blog Category", "date": "Date" },
+            listArray_skip: ["_id", "userId", "created_at", "updated_at", "image", "description", "parentcategoryname_search", "blogtitle_search"],
+            listArray_modify_header: { "blogtitle": "Blog Title", "description html": "Description", "priority": "Priority", "status": "Status", "parentcategoryname": "Parent Category Name", "blogcat": "Blog Category", "date": "Date" },
             admintablenameTableName: "admin",
             statusarr: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }],
             updateurl: receivedData.updateEndpoint,
@@ -1583,6 +1583,7 @@ class AddeditBlogmanagementComponent {
     onSubmit() {
         /*__________________________IMAGE UPLOADER________________________________________*/
         if (this.imageConfigData) {
+            console.log("image path", this.imageConfigData);
             for (const loop in this.imageConfigData.files) {
                 this.images_array =
                     this.images_array.concat({
@@ -1903,10 +1904,8 @@ class ListingBlogmanagementlibComponent {
      * @return {?}
      */
     set config(receivedData) {
-        console.log("hgshj", receivedData);
         for (let i in receivedData.datasource) {
             this.value.push({ 'name': receivedData.datasource[i].blogcategory, val: receivedData.datasource[i].blogcategory });
-            console.log("free", this.value);
         }
         //  this.value = receivedData;
         this.blogListConfig = {
@@ -1916,9 +1915,9 @@ class ListingBlogmanagementlibComponent {
             listEndPoint: receivedData.listEndPoint,
             datasource: receivedData.datasource,
             tableName: receivedData.tableName,
-            listArray_skip: ["_id", "userId", "created_at", "updated_at", "image", "metatitle", "metadesc", "description_html", "credentials", "blogs_file", "blogs_image", "blogtitle_search", "author_search", "video", "blogcat", "profile_picture", "tagsearch"],
+            listArray_skip: ["_id", "userId", "created_at", "updated_at", "image", "metatitle", "metadesc", "description", "credentials", "blogs_file", "blogs_image", "blogtitle_search", "author_search", "video", "blogcat", "profile_picture", "tagsearch"],
             listArray_modify_header: {
-                "blogtitle": "Blog Title", "description": "Description", "date added": "Date", "profile picture": "Profile Picture", "tags": "Tags",
+                "blogtitle": "Blog Title", "description html": "Description", "date added": "Date", "profile picture": "Profile Picture", "tags": "Tags",
                 "priority": "Priority", "status": "Status", "parentcategoryname": "Parent Category Name",
                 "author": "Author", "blogcat": "Blog Category", "date": "Date", "blogcategory": "Blog Category"
             },

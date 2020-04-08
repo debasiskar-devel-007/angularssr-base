@@ -390,6 +390,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
      
     /*__________________________IMAGE UPLOADER________________________________________*/
     if (this.imageConfigData) {
+      console.log("image path",this.imageConfigData);
       for (const loop in this.imageConfigData.files) {
         this.images_array =
           this.images_array.concat({
