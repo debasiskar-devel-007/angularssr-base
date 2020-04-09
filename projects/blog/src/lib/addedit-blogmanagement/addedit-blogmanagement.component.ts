@@ -257,6 +257,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
   @Input()
   set imageUpload(getConfig: any) {
     this.imageConfigData = getConfig;
+    console.log("image config",this.imageConfigData);
   }
 
   @Input()

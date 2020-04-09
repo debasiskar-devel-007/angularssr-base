@@ -51,8 +51,8 @@ limitcond:any={
       listEndPoint: receivedData.listEndPoint,
       datasource: receivedData.datasource,
       tableName: receivedData.tableName,
-      listArray_skip: ["_id", "userId", "created_at", "updated_at","image","description","parentcategoryname_search","blogtitle_search"],
-      listArray_modify_header: { "blogtitle":"Blog Title", "description html": "Description", "priority": "Priority", "status": "Status" ,"parentcategoryname":"Parent Category Name","blogcat":"Blog Category","date":"Date"},
+      listArray_skip: ["_id", "userId", "created_at", "updated_at","image","description","parentcategoryname_search","blogtitle_search","blogtitlesearch"],
+      listArray_modify_header: { "blogtitle":"Category Name", "description html": "Description", "priority": "Priority", "status": "Status" ,"parentcategoryname":"Parent Category Name","blogcat":"Blog Category","date":"Date"},
       admintablenameTableName: "admin",
       statusarr: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }],
       updateurl: receivedData.updateEndpoint,
@@ -62,11 +62,11 @@ limitcond:any={
       view: receivedData.view,
 
       search_settings:{
-        textsearch: [{ label: "Search by Blog Category Name", field: 'blogtitle' }],
+        textsearch: [{ label: "Search by Blog Category Name", field: 'blogtitlesearch' }],
         selectsearch: [
           { label: 'Search By Status', field: 'status',values: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }]
         },
-          {label:"Search By Parent Category",field:'parentcategoryname',values:this.value}
+          {label:"Search By Parent Category Name",field:'parentcategoryname',values:this.value}
         ]
 
         // search:[{label:"Search By Parent Category",field:'parentcategoryname',values:this.value}]

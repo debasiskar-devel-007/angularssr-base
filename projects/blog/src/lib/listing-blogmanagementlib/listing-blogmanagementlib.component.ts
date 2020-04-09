@@ -48,12 +48,14 @@ for (let i in receivedData.datasource) {
       listEndPoint: receivedData.listEndPoint,
       datasource: receivedData.datasource,
       tableName: receivedData.tableName,
-      listArray_skip: ["_id", "userId", "created_at", "updated_at", "image", "metatitle", "metadesc", "description", "credentials", "blogs_file", "blogs_image","blogtitle_search","author_search","video","blogcat","profile_picture","tagsearch"],
+      listArray_skip: ["_id", "userId", "created_at", "updated_at", "image", "metatitle", "metadesc", "description", "credentials", "blogs_file", "blogs_image","blogtitle_search","author_search","video","blogcat","profile_picture","tagsearch","featured"],
       listArray_modify_header: {
         "blogtitle": "Blog Title", "description html": "Description","date added":"Date","profile picture":"Profile Picture","tags":"Tags",
         "priority": "Priority", "status": "Status", "parentcategoryname": "Parent Category Name",
-        "author": "Author","blogcat":"Blog Category","date":"Date","blogcategory":"Blog Category"
+        "author": "Author","blogcat":"Blog Category","date":"Date","blogcategory":"Blog Category",
+        "featured search":"Featured","website":"Website"
       },
+      adminDataList_detail_skip:['_id','password','updated_at','id',"description_html","blogcat","created_at","profile_picture","tagsearch"],
       admintablenameTableName: "admin",
       statusarr: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }],
       updateurl: receivedData.updateEndpoint,
@@ -62,7 +64,7 @@ for (let i in receivedData.datasource) {
       deleteEndPoint: receivedData.deleteEndPoint,
       view: receivedData.view,
       search_settings: {
-        textsearch: [{ label: "Blog Title", field: 'blogtitle' },{ label: "Search By Author", field: 'author' },{ label: "Search By Tags", field: 'tagsearch' }],
+        textsearch: [{ label: "Search By Blog Title", field: 'blogtitle_search' },{ label: "Search By Author", field: 'author_search' },{ label: "Search By Tags", field: 'tagsearch' }],
 
         selectsearch: [
           { label: 'Status', field: 'status', values: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }]},{label:"Search By Blog Category",field:'blogcategory',values:this.value},
@@ -70,11 +72,10 @@ for (let i in receivedData.datasource) {
             label: 'Search By Blog Featured', field: 'featured', values: [{ val: 1, name: "Yes" }, { val: 0, name: 'No' }]
           },
           {
-            label: 'Search By Blog Website', field: 'website', values: [{ val: 1, name: "Mask Blog 1" }, { val: 2, name: 'Mask Blog 2' },{val:3,name:"Mask Blog 3"}]
+            label: 'Search By Blog Website', field: 'website', values: [{ val: "Mask Blog 1", name: "Mask Blog 1" }, { val: "Mask Blog 2", name: 'Mask Blog 2' },{val:"Mask Blog 3",name:"Mask Blog 3"}]
           }
         ]
 
-        // datesearch:[{startdatelabel:"Start Date",enddatelabel:"End Date",submit:"Search By Date",  field:"created_at"}],
       },
       //  /*Showing Image in the Modal*/
       //  pendingmodelapplicationarray_detail_datatype: [{
@@ -87,7 +88,7 @@ for (let i in receivedData.datasource) {
   }
   // ====================================================================================================
 
-
+  
 
   constructor(private apiService: ApiService) {
    
