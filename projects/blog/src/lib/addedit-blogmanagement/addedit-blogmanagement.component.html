@@ -210,12 +210,19 @@
 
                 <ng-container *ngIf="flag==true">
                     <!-- CARD VIEW  -->
-                    <mat-card-content class="files-view" *ngFor="let img of images_array_edit; let i2 = index">
-                        <mat-card class="example-card">
-                            <img mat-card-image [src]="img.img_var">
-                            <mat-card-title>{{ img.image_name }}</mat-card-title>
-                            <mat-card-subtitle>{{img.image_type}}</mat-card-subtitle>
+                    <mat-card-content class="files-view" >
+                        <mat-card class="example-card" *ngFor="let img of images_array_edit; let i2 = index">
+
+                            <span class="viewUrlwrapper">
+                             <img mat-card-image [src]="img.img_var">
+                            </span>
+                            <span class="viewUrlcontent">
+                             <mat-card-title>{{ img.image_name }}</mat-card-title>
+                             <mat-card-subtitle>{{img.image_type}}</mat-card-subtitle>
+                            </span>
+
                             <span class="closecard" (click)="clear_image(i2)"><i class="material-icons">clear</i></span>
+                            
 
                         </mat-card>
                     </mat-card-content>
