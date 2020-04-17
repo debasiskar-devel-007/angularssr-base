@@ -16,10 +16,11 @@
                 <mat-error
                     *ngIf="!loginForm.controls['email'].valid && loginForm.controls['email'].errors.required && loginForm.controls['email'].touched">
                     Email can not be blank</mat-error>
+                    <mat-error *ngIf="!loginForm.controls['email'].valid && !loginForm.controls['email'].errors.required">
+                        Please enter a valid email</mat-error>
             </mat-form-field>
             
-            <mat-error *ngIf="!loginForm.controls['email'].valid && !loginForm.controls['email'].errors.required">
-                Please enter a valid email</mat-error>
+          
 
             <mat-form-field>
                 <input matInput placeholder="Password" type="password" formControlName="password"

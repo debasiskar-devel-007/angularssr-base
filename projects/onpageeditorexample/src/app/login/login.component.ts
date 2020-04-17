@@ -43,17 +43,17 @@ export class LoginComponent implements OnInit {
         {
           "type": "customer",
           "routerNav": "forget-password",
-          cookies: [{userid:'_id'},{useremail:'email'},{jwttoken:'jwttoken'}]
+          cookies: {userid:'_id', useremail:'email',jwttoken:'jwttoken'}
         },
         {
           "type": "rep",
           "routerNav": "home",
-          cookies: [{userid:'_id'},{useremail:'email'},{jwttoken:'jwttoken'}]
+          cookies: {userid:'_id', useremail:'email',jwttoken:'jwttoken'}
         },
         {
           "type": "model",
           "routerNav": "modelDashbord",
-          cookies: [{userid:'_id'},{useremail:'email'},{jwttoken:'jwttoken'}]
+          cookies: {userid:'_id', useremail:'email',jwttoken:'jwttoken'}
         }
       ]
     }

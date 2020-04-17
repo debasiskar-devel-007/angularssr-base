@@ -249,6 +249,7 @@ export class ApiService {
 /*************** Added by himadri start here ***************/ 
   addLogin(requestdata: any) {
     console.log('in addLogin apiservice');
+    const returnedTarget = Object.assign(requestdata,{'secret':this.cookieService.get('secret')});
     const httpOptions = {
       headers: new HttpHeaders({
         'Content-Type': 'application/json'

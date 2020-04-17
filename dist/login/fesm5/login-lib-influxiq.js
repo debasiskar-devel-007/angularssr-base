@@ -542,6 +542,8 @@ var ApiService = /** @class */ (function () {
     function (requestdata) {
         console.log('in addLogin apiservice');
         /** @type {?} */
+        var returnedTarget = Object.assign(requestdata, { 'secret': this.cookieService.get('secret') });
+        /** @type {?} */
         var httpOptions = {
             headers: new HttpHeaders({
                 'Content-Type': 'application/json'
@@ -989,55 +991,67 @@ var LoginComponent = /** @class */ (function () {
         }
         if (this.loginForm.valid) {
             /** @type {?} */
-            var data_1 = this.loginForm.value;
-            this.apiService.addLogin(data_1).subscribe((/**
+            var data = this.loginForm.value;
+            this.apiService.addLogin(data).subscribe((/**
              * @param {?} response
              * @return {?}
              */
             function (response) {
-                var e_1, _a;
                 console.log(_this.routerStatusValue);
                 if (response.status == "success") {
                     console.log(_this.routerStatusValue.data, _this.router.url, _this.defaultUrlValue);
-                    _this.cookieService.set('user_details', JSON.stringify(response.item[0]));
+                    // this.cookieService.set('user_details', JSON.stringify(response.item[0]));
                     _this.cookieService.set('jwtToken', response.token);
                     if (_this.router.url == _this.defaultUrlValue) {
                         console.log(response, 'response');
                         console.log(_this.routerStatusValue.data, _this.router.url, _this.defaultUrlValue, '1');
-                        for (var key1 in _this.routerStatusValue.data) {
-                            console.log(_this.routerStatusValue.data, _this.router.url, _this.defaultUrlValue, '2', _this.routerStatusValue.data[key1].type, response.item[0].type);
+                        var _loop_1 = function (key1) {
+                            var e_1, _a, e_2, _b;
                             if (response.item[0].type === _this.routerStatusValue.data[key1].type) {
-                                console.log(_this.routerStatusValue.data[key1].cookies, 'cookies');
-                                for (var i in _this.routerStatusValue.data[key1].cookies) {
-                                    console.log(_this.routerStatusValue.data[key1].cookies[i], '+++');
-                                    try {
-                                        // console.log(this.routerStatusValue.data[key1].cookies[i],'---')
-                                        // let da: any = response.item[0];
-                                        for (var _b = __values(Object.entries(response.item[0])), _c = _b.next(); !_c.done; _c = _b.next()) {
-                                            var _d = __read(_c.value, 2), key = _d[0], value = _d[1];
-                                            // console.log(`${key}: ${value}`);
-                                            // console.log(typeof(key), '-------PP');
-                                            // console.log(typeof(this.routerStatusValue.data[key1].cookies[i]), this.routerStatusValue.data[key1].cookies[i],'----+++---PP');
-                                            // console.log(value, '++++++++PP');
-                                            if (_this.routerStatusValue.data[key1].cookies[i] == key) {
-                                                console.log('+++PP');
+                                try {
+                                    // console.log(this.routerStatusValue.data[key1].cookies,'cookies');
+                                    for (var _c = __values(Object.entries(_this.routerStatusValue.data[key1].cookies)), _d = _c.next(); !_d.done; _d = _c.next()) {
+                                        var _e = __read(_d.value, 2), keys = _e[0], values = _e[1];
+                                        try {
+                                            for (var _f = __values(Object.entries(response.item[0])), _g = _f.next(); !_g.done; _g = _f.next()) {
+                                                var _h = __read(_g.value, 2), key = _h[0], value = _h[1];
+                                                if (values == key) {
+                                                    console.log(key, '-------', value, '-------PP');
+                                                    console.log(values, '----+++---', keys, '----+++---PP');
+                                                    _this.cookieService.set(keys, JSON.stringify(value));
+                                                }
                                             }
                                         }
-                                    }
-                                    catch (e_1_1) { e_1 = { error: e_1_1 }; }
-                                    finally {
-                                        try {
-                                            if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+                                        catch (e_2_1) { e_2 = { error: e_2_1 }; }
+                                        finally {
+                                            try {
+                                                if (_g && !_g.done && (_b = _f.return)) _b.call(_f);
+                                            }
+                                            finally { if (e_2) throw e_2.error; }
                                         }
-                                        finally { if (e_1) throw e_1.error; }
                                     }
                                 }
-                                console.log(data_1, 'cookies');
-                                return;
-                                // console.log(response.item[0].type, this.router.url,  this.routerStatusValue.data[key].type)
-                                // this.router.navigateByUrl('/' + this.routerStatusValue.data[key].routerNav);
-                                // console.log(this.routerStatusValue.data[key].routerNav)
+                                catch (e_1_1) { e_1 = { error: e_1_1 }; }
+                                finally {
+                                    try {
+                                        if (_d && !_d.done && (_a = _c.return)) _a.call(_c);
+                                    }
+                                    finally { if (e_1) throw e_1.error; }
+                                }
+                                // console.log(data, 'cookies')
+                                // return;
+                                // console.log(response.item[0].type, this.router.url,  this.routerStatusValue.data[key1].type)
+                                setTimeout((/**
+                                 * @return {?}
+                                 */
+                                function () {
+                                    _this.router.navigateByUrl('/' + _this.routerStatusValue.data[key1].routerNav);
+                                }), 1000);
+                                // console.log(this.routerStatusValue.data[key1].routerNav)
                             }
+                        };
+                        for (var key1 in _this.routerStatusValue.data) {
+                            _loop_1(key1);
                         }
                     }
                     else {
@@ -1108,7 +1122,7 @@ var LoginComponent = /** @class */ (function () {
     LoginComponent.decorators = [
         { type: Component, args: [{
                     selector: 'lib-login',
-                    template: "<div class=\"main-div\">\n\n    <mat-card class=\"from\">\n        <span class=\"logowrapper\" *ngIf=\"logoValue != ''\">\n            <img [src]=\"logoValue\">\n        </span>\n\n        <h2 *ngIf=\"fromTitleValue != ''\"> {{fromTitleValue}}</h2>\n\n        <form class=\"example-container\" [formGroup]=\"loginForm\" (ngSubmit)=\"loginFormSubmit()\" novalidate>\n            <mat-error class=\"error\" *ngIf=\"message !=''\">{{message}}</mat-error>\n\n            <mat-form-field>\n                <input matInput type=\"text\" placeholder=\"Email\" formControlName=\"email\"\n                    (blur)=\"inputUntouched('email')\">\n                <mat-error\n                    *ngIf=\"!loginForm.controls['email'].valid && loginForm.controls['email'].errors.required && loginForm.controls['email'].touched\">\n                    Email can not be blank</mat-error>\n            </mat-form-field>\n            \n            <mat-error *ngIf=\"!loginForm.controls['email'].valid && !loginForm.controls['email'].errors.required\">\n                Please enter a valid email</mat-error>\n\n            <mat-form-field>\n                <input matInput placeholder=\"Password\" type=\"password\" formControlName=\"password\"\n                    (blur)=\"inputUntouched('password')\">\n                <mat-error\n                    *ngIf=\"!loginForm.controls['password'].valid && loginForm.controls['password'].errors.required && loginForm.controls['password'].touched\">\n                    Password can not be blank</mat-error>\n            </mat-form-field>\n\n\n\n            <button mat-raised-button *ngIf=\"buttonNameValue != ''\" color=\"primary\">{{buttonNameValue}}</button>\n            <button mat-raised-button *ngIf=\"buttonNameValue == ''\" color=\"primary\">Login</button>\n\n\n\n            <span class=\"signupfooter\">\n                <a *ngIf=\"signUpRouteingUrlValue.buttonName !='' && signUpRouteingUrlValue.customLink =='' && signUpRouteingUrlValue.customURl =='' \"\n                    (click)=\"signup()\">{{signUpRouteingUrlValue.buttonName}}</a>\n\n                <a *ngIf=\"signUpRouteingUrlValue.buttonName !='' && signUpRouteingUrlValue.customLink !='' && signUpRouteingUrlValue.path =='' \"\n                    (click)=\"customFunction(signUpRouteingUrlValue.customLink)\">{{signUpRouteingUrlValue.buttonName}}</a>\n\n                <a *ngIf=\"signUpRouteingUrlValue.customURl !='' && signUpRouteingUrlValue.buttonName !='' && signUpRouteingUrlValue.customLink ==''  && signUpRouteingUrlValue.path ==''\"\n                    [attr.href]=\"signUpRouteingUrlValue.customURl\">{{signUpRouteingUrlValue.buttonName}}</a>\n\n                <a *ngIf=\"signUpRouteingUrlValue.buttonName =='' && signUpRouteingUrlValue.customLink ==''\"\n                    (click)=\"signup()\">Sign Up</a>\n\n                <a *ngIf=\"forgetRouteingUrlValue.buttonName !='' && forgetRouteingUrlValue.customLink =='' && forgetRouteingUrlValue.customURl ==''\"\n                    (click)=\"forgetpassword()\">{{forgetRouteingUrlValue.buttonName}}</a>\n\n                <a *ngIf=\"forgetRouteingUrlValue.buttonName !='' && forgetRouteingUrlValue.customLink !='' && forgetRouteingUrlValue.path =='' \"\n                    (click)=\"customFunction(forgetRouteingUrlValue.customLink)\">{{forgetRouteingUrlValue.buttonName}}</a>\n\n                <a *ngIf=\"forgetRouteingUrlValue.customURl !='' && forgetRouteingUrlValue.customLink =='' && forgetRouteingUrlValue.path ==''\"\n                    [href]=\"forgetRouteingUrlValue.customURl\">{{forgetRouteingUrlValue.buttonName}}</a>\n\n\n                <a *ngIf=\"forgetRouteingUrlValue.buttonName =='' && forgetRouteingUrlValue.customLink ==''\"\n                    (click)=\"forgetpassword()\">Forget Password</a>\n\n            </span>\n        </form>\n\n    </mat-card>\n\n</div>",
+                    template: "<div class=\"main-div\">\n\n    <mat-card class=\"from\">\n        <span class=\"logowrapper\" *ngIf=\"logoValue != ''\">\n            <img [src]=\"logoValue\">\n        </span>\n\n        <h2 *ngIf=\"fromTitleValue != ''\"> {{fromTitleValue}}</h2>\n\n        <form class=\"example-container\" [formGroup]=\"loginForm\" (ngSubmit)=\"loginFormSubmit()\" novalidate>\n            <mat-error class=\"error\" *ngIf=\"message !=''\">{{message}}</mat-error>\n\n            <mat-form-field>\n                <input matInput type=\"text\" placeholder=\"Email\" formControlName=\"email\"\n                    (blur)=\"inputUntouched('email')\">\n                <mat-error\n                    *ngIf=\"!loginForm.controls['email'].valid && loginForm.controls['email'].errors.required && loginForm.controls['email'].touched\">\n                    Email can not be blank</mat-error>\n                    <mat-error *ngIf=\"!loginForm.controls['email'].valid && !loginForm.controls['email'].errors.required\">\n                        Please enter a valid email</mat-error>\n            </mat-form-field>\n            \n          \n\n            <mat-form-field>\n                <input matInput placeholder=\"Password\" type=\"password\" formControlName=\"password\"\n                    (blur)=\"inputUntouched('password')\">\n                <mat-error\n                    *ngIf=\"!loginForm.controls['password'].valid && loginForm.controls['password'].errors.required && loginForm.controls['password'].touched\">\n                    Password can not be blank</mat-error>\n            </mat-form-field>\n\n\n\n            <button mat-raised-button *ngIf=\"buttonNameValue != ''\" color=\"primary\">{{buttonNameValue}}</button>\n            <button mat-raised-button *ngIf=\"buttonNameValue == ''\" color=\"primary\">Login</button>\n\n\n\n            <span class=\"signupfooter\">\n                <a *ngIf=\"signUpRouteingUrlValue.buttonName !='' && signUpRouteingUrlValue.customLink =='' && signUpRouteingUrlValue.customURl =='' \"\n                    (click)=\"signup()\">{{signUpRouteingUrlValue.buttonName}}</a>\n\n                <a *ngIf=\"signUpRouteingUrlValue.buttonName !='' && signUpRouteingUrlValue.customLink !='' && signUpRouteingUrlValue.path =='' \"\n                    (click)=\"customFunction(signUpRouteingUrlValue.customLink)\">{{signUpRouteingUrlValue.buttonName}}</a>\n\n                <a *ngIf=\"signUpRouteingUrlValue.customURl !='' && signUpRouteingUrlValue.buttonName !='' && signUpRouteingUrlValue.customLink ==''  && signUpRouteingUrlValue.path ==''\"\n                    [attr.href]=\"signUpRouteingUrlValue.customURl\">{{signUpRouteingUrlValue.buttonName}}</a>\n\n                <a *ngIf=\"signUpRouteingUrlValue.buttonName =='' && signUpRouteingUrlValue.customLink ==''\"\n                    (click)=\"signup()\">Sign Up</a>\n\n                <a *ngIf=\"forgetRouteingUrlValue.buttonName !='' && forgetRouteingUrlValue.customLink =='' && forgetRouteingUrlValue.customURl ==''\"\n                    (click)=\"forgetpassword()\">{{forgetRouteingUrlValue.buttonName}}</a>\n\n                <a *ngIf=\"forgetRouteingUrlValue.buttonName !='' && forgetRouteingUrlValue.customLink !='' && forgetRouteingUrlValue.path =='' \"\n                    (click)=\"customFunction(forgetRouteingUrlValue.customLink)\">{{forgetRouteingUrlValue.buttonName}}</a>\n\n                <a *ngIf=\"forgetRouteingUrlValue.customURl !='' && forgetRouteingUrlValue.customLink =='' && forgetRouteingUrlValue.path ==''\"\n                    [href]=\"forgetRouteingUrlValue.customURl\">{{forgetRouteingUrlValue.buttonName}}</a>\n\n\n                <a *ngIf=\"forgetRouteingUrlValue.buttonName =='' && forgetRouteingUrlValue.customLink ==''\"\n                    (click)=\"forgetpassword()\">Forget Password</a>\n\n            </span>\n        </form>\n\n    </mat-card>\n\n</div>",
                     styles: [".example-container{display:flex;flex-direction:column}.example-container>*{width:100%}.from{width:30%;margin:0 auto}.from h2{text-align:center;background-color:#00f;color:#fff;padding:15px}.from a{padding-right:30px}.main-div{height:100vh;display:flex;justify-content:center;align-items:center}.signupfooter{margin-top:12px;display:flex;justify-content:space-between;align-items:center}.signupfooter a{cursor:pointer}.error{text-align:center}.logowrapper{margin:0 auto;display:block;text-align:center}"]
                 }] }
     ];

@@ -182,36 +182,30 @@ public set cookieSet(v : any) {
         console.log(this.routerStatusValue)
         if (response.status == "success") {
          console.log(this.routerStatusValue.data, this.router.url,  this.defaultUrlValue)
-          this.cookieService.set('user_details', JSON.stringify(response.item[0]));
+          // this.cookieService.set('user_details', JSON.stringify(response.item[0]));
           this.cookieService.set('jwtToken', response.token);
           if (this.router.url == this.defaultUrlValue) {
             console.log(response,'response')
             console.log(this.routerStatusValue.data, this.router.url,  this.defaultUrlValue, '1')
             for (const key1 in this.routerStatusValue.data) {
-
-              console.log(this.routerStatusValue.data, this.router.url,  this.defaultUrlValue,'2', this.routerStatusValue.data[key1].type, response.item[0].type)
               if (response.item[0].type === this.routerStatusValue.data[key1].type) {
-                console.log(this.routerStatusValue.data[key1].cookies,'cookies');
-                for( let i in this.routerStatusValue.data[key1].cookies){
-                  console.log(this.routerStatusValue.data[key1].cookies[i],'+++')
-                  // console.log(this.routerStatusValue.data[key1].cookies[i],'---')
-                  // let da: any = response.item[0];
-                  for(let [key, value]  of Object.entries(response.item[0])){
-                    // console.log(`${key}: ${value}`);
-                    // console.log(typeof(key), '-------PP');
-                    // console.log(typeof(this.routerStatusValue.data[key1].cookies[i]), this.routerStatusValue.data[key1].cookies[i],'----+++---PP');
-                    // console.log(value, '++++++++PP');
-                    if (this.routerStatusValue.data[key1].cookies[i] == key ) {
-                      console.log('+++PP')
+                // console.log(this.routerStatusValue.data[key1].cookies,'cookies');
+                for( let  [keys, values] of Object.entries(this.routerStatusValue.data[key1].cookies)){
+                  for(let [key, value] of Object.entries(response.item[0])){
+                    if (values == key ) {
+                      console.log(key, '-------', value, '-------PP');
+                    console.log(values,'----+++---',keys,'----+++---PP');
+                    this.cookieService.set(keys , JSON.stringify(value));
                     }
                   }
                 }
-
-                console.log(data, 'cookies')
-                return;
-                // console.log(response.item[0].type, this.router.url,  this.routerStatusValue.data[key].type)
-                // this.router.navigateByUrl('/' + this.routerStatusValue.data[key].routerNav);
-                // console.log(this.routerStatusValue.data[key].routerNav)
+                // console.log(data, 'cookies')
+                // return;
+                // console.log(response.item[0].type, this.router.url,  this.routerStatusValue.data[key1].type)
+                setTimeout(() => {
+                  this.router.navigateByUrl('/' + this.routerStatusValue.data[key1].routerNav);
+                }, 1000);
+                // console.log(this.routerStatusValue.data[key1].routerNav)
               }
             }
             
