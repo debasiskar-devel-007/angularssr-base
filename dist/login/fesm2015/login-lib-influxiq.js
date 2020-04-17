@@ -758,6 +758,7 @@ class LoginComponent {
     set routerStatus(routerStatusval) {
         this.routerStatusValue = (routerStatusval) || '<no name set>';
         this.routerStatusValue = routerStatusval;
+        console.log(this.routerStatusValue);
     }
     /**
      * @param {?} defaultUrlVal
@@ -766,7 +767,7 @@ class LoginComponent {
     set defaultLoginUrl(defaultUrlVal) {
         this.defaultUrlValue = (defaultUrlVal) || '<no name set>';
         this.defaultUrlValue = defaultUrlVal;
-        // console.log(this.defaultUrlValue)
+        console.log(this.defaultUrlValue);
     }
     /**
      * @return {?}
@@ -810,23 +811,42 @@ class LoginComponent {
              * @return {?}
              */
             (response) => {
-                /** @type {?} */
-                let result = {};
-                result = response;
-                if (result.status == "success") {
-                    this.cookieService.set('user_details', JSON.stringify(result.item[0]));
-                    this.cookieService.set('jwtToken', result.token);
+                console.log(this.routerStatusValue);
+                if (response.status == "success") {
+                    console.log(this.routerStatusValue.data, this.router.url, this.defaultUrlValue);
+                    this.cookieService.set('user_details', JSON.stringify(response.item[0]));
+                    this.cookieService.set('jwtToken', response.token);
                     if (this.router.url == this.defaultUrlValue) {
-                        for (const key in this.routerStatusValue.data) {
-                            if (result.item[0].type === this.routerStatusValue.data[key].type) {
-                                this.router.navigateByUrl('/' + this.routerStatusValue.data[key].routerNav);
-                                this.loader = 0; // navigate to dashboard url 
-                                console.log(this.loader);
+                        console.log(response, 'response');
+                        console.log(this.routerStatusValue.data, this.router.url, this.defaultUrlValue, '1');
+                        for (const key1 in this.routerStatusValue.data) {
+                            console.log(this.routerStatusValue.data, this.router.url, this.defaultUrlValue, '2', this.routerStatusValue.data[key1].type, response.item[0].type);
+                            if (response.item[0].type === this.routerStatusValue.data[key1].type) {
+                                console.log(this.routerStatusValue.data[key1].cookies, 'cookies');
+                                for (let i in this.routerStatusValue.data[key1].cookies) {
+                                    console.log(this.routerStatusValue.data[key1].cookies[i], '+++');
+                                    // console.log(this.routerStatusValue.data[key1].cookies[i],'---')
+                                    // let da: any = response.item[0];
+                                    for (let [key, value] of Object.entries(response.item[0])) {
+                                        // console.log(`${key}: ${value}`);
+                                        // console.log(typeof(key), '-------PP');
+                                        // console.log(typeof(this.routerStatusValue.data[key1].cookies[i]), this.routerStatusValue.data[key1].cookies[i],'----+++---PP');
+                                        // console.log(value, '++++++++PP');
+                                        if (this.routerStatusValue.data[key1].cookies[i] == key) {
+                                            console.log('+++PP');
+                                        }
+                                    }
+                                }
+                                console.log(data, 'cookies');
+                                return;
+                                // console.log(response.item[0].type, this.router.url,  this.routerStatusValue.data[key].type)
+                                // this.router.navigateByUrl('/' + this.routerStatusValue.data[key].routerNav);
+                                // console.log(this.routerStatusValue.data[key].routerNav)
                             }
                         }
                     }
                     else {
-                        this.loader = 0;
+                        // this.loader = 0; 
                         // console.log('++++++ redirect_url//',this.redirect_url);
                         this.router.navigateByUrl(this.redirect_url);
                     }
@@ -837,7 +857,7 @@ class LoginComponent {
                 }
                 else {
                     // display error message on html
-                    this.message = result.msg;
+                    this.message = response.msg;
                 }
             }));
         }

@@ -11,7 +11,7 @@ export class LoginComponent implements OnInit {
 
   public logo: any = '../../assets/favicon.ico';
   public fromTitle: any = "Login Form";    // This is a From Title 
-  public fullUrl: any = "https://9ozbyvv5v0.execute-api.us-east-1.amazonaws.com/production/api/";  // server url
+  public fullUrl: any = "https://api.influxhostserver.com/";  // server url
   public endpoint: any = "login";
   public buttonName:any= 'Login Button';
   public signUpRouteingUrl: any = { 
@@ -41,16 +41,19 @@ export class LoginComponent implements OnInit {
     this.routerStatus = {           // this is use for if login succcess then navigate which page 
       "data": [
         {
-          "type": "admin",
-          "routerNav": "forget-password"
+          "type": "customer",
+          "routerNav": "forget-password",
+          cookies: [{userid:'_id'},{useremail:'email'},{jwttoken:'jwttoken'}]
         },
         {
           "type": "rep",
-          "routerNav": "home"
+          "routerNav": "home",
+          cookies: [{userid:'_id'},{useremail:'email'},{jwttoken:'jwttoken'}]
         },
         {
           "type": "model",
-          "routerNav": "modelDashbord"
+          "routerNav": "modelDashbord",
+          cookies: [{userid:'_id'},{useremail:'email'},{jwttoken:'jwttoken'}]
         }
       ]
     }

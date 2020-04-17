@@ -1,3 +1,4 @@
+import { __values, __read } from 'tslib';
 import { map } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { CookieService } from 'ngx-cookie-service';
@@ -924,6 +925,7 @@ var LoginComponent = /** @class */ (function () {
         function (routerStatusval) {
             this.routerStatusValue = (routerStatusval) || '<no name set>';
             this.routerStatusValue = routerStatusval;
+            console.log(this.routerStatusValue);
         },
         enumerable: true,
         configurable: true
@@ -936,7 +938,7 @@ var LoginComponent = /** @class */ (function () {
         function (defaultUrlVal) {
             this.defaultUrlValue = (defaultUrlVal) || '<no name set>';
             this.defaultUrlValue = defaultUrlVal;
-            // console.log(this.defaultUrlValue)
+            console.log(this.defaultUrlValue);
         },
         enumerable: true,
         configurable: true
@@ -987,29 +989,59 @@ var LoginComponent = /** @class */ (function () {
         }
         if (this.loginForm.valid) {
             /** @type {?} */
-            var data = this.loginForm.value;
-            this.apiService.addLogin(data).subscribe((/**
+            var data_1 = this.loginForm.value;
+            this.apiService.addLogin(data_1).subscribe((/**
              * @param {?} response
              * @return {?}
              */
             function (response) {
-                /** @type {?} */
-                var result = {};
-                result = response;
-                if (result.status == "success") {
-                    _this.cookieService.set('user_details', JSON.stringify(result.item[0]));
-                    _this.cookieService.set('jwtToken', result.token);
+                var e_1, _a;
+                console.log(_this.routerStatusValue);
+                if (response.status == "success") {
+                    console.log(_this.routerStatusValue.data, _this.router.url, _this.defaultUrlValue);
+                    _this.cookieService.set('user_details', JSON.stringify(response.item[0]));
+                    _this.cookieService.set('jwtToken', response.token);
                     if (_this.router.url == _this.defaultUrlValue) {
-                        for (var key in _this.routerStatusValue.data) {
-                            if (result.item[0].type === _this.routerStatusValue.data[key].type) {
-                                _this.router.navigateByUrl('/' + _this.routerStatusValue.data[key].routerNav);
-                                _this.loader = 0; // navigate to dashboard url 
-                                console.log(_this.loader);
+                        console.log(response, 'response');
+                        console.log(_this.routerStatusValue.data, _this.router.url, _this.defaultUrlValue, '1');
+                        for (var key1 in _this.routerStatusValue.data) {
+                            console.log(_this.routerStatusValue.data, _this.router.url, _this.defaultUrlValue, '2', _this.routerStatusValue.data[key1].type, response.item[0].type);
+                            if (response.item[0].type === _this.routerStatusValue.data[key1].type) {
+                                console.log(_this.routerStatusValue.data[key1].cookies, 'cookies');
+                                for (var i in _this.routerStatusValue.data[key1].cookies) {
+                                    console.log(_this.routerStatusValue.data[key1].cookies[i], '+++');
+                                    try {
+                                        // console.log(this.routerStatusValue.data[key1].cookies[i],'---')
+                                        // let da: any = response.item[0];
+                                        for (var _b = __values(Object.entries(response.item[0])), _c = _b.next(); !_c.done; _c = _b.next()) {
+                                            var _d = __read(_c.value, 2), key = _d[0], value = _d[1];
+                                            // console.log(`${key}: ${value}`);
+                                            // console.log(typeof(key), '-------PP');
+                                            // console.log(typeof(this.routerStatusValue.data[key1].cookies[i]), this.routerStatusValue.data[key1].cookies[i],'----+++---PP');
+                                            // console.log(value, '++++++++PP');
+                                            if (_this.routerStatusValue.data[key1].cookies[i] == key) {
+                                                console.log('+++PP');
+                                            }
+                                        }
+                                    }
+                                    catch (e_1_1) { e_1 = { error: e_1_1 }; }
+                                    finally {
+                                        try {
+                                            if (_c && !_c.done && (_a = _b.return)) _a.call(_b);
+                                        }
+                                        finally { if (e_1) throw e_1.error; }
+                                    }
+                                }
+                                console.log(data_1, 'cookies');
+                                return;
+                                // console.log(response.item[0].type, this.router.url,  this.routerStatusValue.data[key].type)
+                                // this.router.navigateByUrl('/' + this.routerStatusValue.data[key].routerNav);
+                                // console.log(this.routerStatusValue.data[key].routerNav)
                             }
                         }
                     }
                     else {
-                        _this.loader = 0;
+                        // this.loader = 0; 
                         // console.log('++++++ redirect_url//',this.redirect_url);
                         _this.router.navigateByUrl(_this.redirect_url);
                     }
@@ -1020,7 +1052,7 @@ var LoginComponent = /** @class */ (function () {
                 }
                 else {
                     // display error message on html
-                    _this.message = result.msg;
+                    _this.message = response.msg;
                 }
             }));
         }
