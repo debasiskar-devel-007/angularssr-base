@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
   public buttonNameValue: any = '';
   public defaultUrlValue = '';
   private loader: any = null;
-
+  public secret:any;
   @Input()
   set forLoader(forLoaderVal: any) {
     this.loader = (forLoaderVal) || '<no name set>';
@@ -138,7 +138,10 @@ public set cookieSet(v : any) {
       // }
       // console.log('redirect_url',this.redirect_url)
     });
-
+        /**secret key workes here */
+        this.secret=this.randomString(9,'aA#!');
+        console.log(this.secret);
+        this.cookieService.set('secret',this.secret);
     this.loginForm = this.fb.group({
       email: ['', Validators.compose([Validators.required, Validators.pattern(/^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/)])],
       password: ['', Validators.required]
@@ -160,7 +163,16 @@ public set cookieSet(v : any) {
     // console.log(this.addEndpointData.endpoint);
 
   }
-
+  randomString(length, chars) {
+    var mask = '';
+    if (chars.indexOf('a') > -1) mask += 'abcdefghijklmnopqrstuvwxyz';
+    if (chars.indexOf('A') > -1) mask += 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    if (chars.indexOf('#') > -1) mask += '0123456789';
+    if (chars.indexOf('!') > -1) mask += '~`!@#$%^&*()_+-={}[]:";\'<>?,./|\\';
+    var result = '';
+    for (var i = length; i > 0; --i) result += mask[Math.floor(Math.random() * mask.length)];
+    return result;
+  }
  
 /********* Login Form Submit start here*********/ 
   loginFormSubmit() {
