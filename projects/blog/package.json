@@ -1,6 +1,6 @@
 {
   "name": "blog-lib-influxiq",
-  "version": "0.0.20",
+  "version": "0.0.22",
   "bugs": "https://github.com/debasiskar-devel-007/blog/issues",
   "repository": {
     "type": "git",
@@ -18,6 +18,6 @@
     "ckeditor4-angular": "^1.0.0-beta.2",
      "@angular/animations":"~7.3.7",
      "file-upload-lib-influxiq": "0.0.19",
-    "listing-angular7": "0.0.96"
+    "listing-angular7": "0.1.7"
   }
 }

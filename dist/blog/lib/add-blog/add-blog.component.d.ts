@@ -31,6 +31,7 @@ export declare class AddBlogComponent implements OnInit {
     config: any;
     openDialog(x: any): void;
     getParentData(): void;
+    redirectToListingPage(): void;
     onSubmit(): void;
     inputBlur(val: any): void;
 }

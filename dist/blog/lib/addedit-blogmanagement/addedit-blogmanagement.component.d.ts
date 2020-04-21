@@ -63,6 +63,7 @@ export declare class AddeditBlogmanagementComponent implements OnInit {
     listRoute: any;
     constructor(http: HttpClient, apiservice: ApiService, activatedRoute: ActivatedRoute, router: Router, formBuilder: FormBuilder, dialog: MatDialog, snackBar: MatSnackBar);
     ngOnInit(): void;
+    redirectToListingPage(): void;
     private _filter;
     action: any;
     imageUpload: any;

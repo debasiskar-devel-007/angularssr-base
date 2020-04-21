@@ -10,7 +10,9 @@ export declare class ListingBlogmanagementlibComponent implements OnInit {
     datacollection: any;
     date_search_source_count: any;
     limitcond: any;
+    wesitesVal: any;
     config: any;
+    libdata: any;
     constructor(apiService: ApiService);
     ngOnInit(): void;
 }

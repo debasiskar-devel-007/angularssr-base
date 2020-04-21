@@ -135,7 +135,9 @@ export class AddBlogComponent implements OnInit {
     })
   }
 
-
+  redirectToListingPage(){
+    this.router.navigateByUrl(this.configData.callBack);
+}
 
 
 

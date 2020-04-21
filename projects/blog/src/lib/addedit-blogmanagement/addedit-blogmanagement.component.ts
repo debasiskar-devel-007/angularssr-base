@@ -107,7 +107,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
   set listRoute(listval: any) {
     this.listUrl = (listval) || '<no name set>';
     this.listUrl = listval;
-
+    console.log(this.listUrl);
   }
   // -----------------------------------------------------------------------------------------
 
@@ -238,7 +238,9 @@ export class AddeditBlogmanagementComponent implements OnInit {
     );
     // ------------------------------------------------------------------------------------------
   }
-
+  redirectToListingPage(){
+      this.router.navigateByUrl('/' + this.listUrl);
+  }
 
   // ------------------------------------_Filter FUnction----------------------------------
   private _filter(value: string): string[] {
@@ -257,7 +259,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
   @Input()
   set imageUpload(getConfig: any) {
     this.imageConfigData = getConfig;
-    console.log("image config",this.imageConfigData);
+    // console.log("image config",this.imageConfigData);
   }
 
   @Input()
@@ -391,7 +393,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
      
     /*__________________________IMAGE UPLOADER________________________________________*/
     if (this.imageConfigData) {
-      console.log("image path",this.imageConfigData);
+      // console.log("image path",this.imageConfigData);
       for (const loop in this.imageConfigData.files) {
         this.images_array =
           this.images_array.concat({
@@ -499,6 +501,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
     console.log("Form is invalid");
     
   }
+  
 
 
   // -----------------------------------------------------------------------------------
@@ -569,7 +572,9 @@ export class AddeditBlogmanagementComponent implements OnInit {
     this.file_array_edit.splice(index, 1);
   }
   // ------------------------------------------------------------------------------------
+  
 }
+
 
 
 

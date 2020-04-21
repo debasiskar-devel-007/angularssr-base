@@ -245,8 +245,11 @@
                 </mat-chip-list>
 
 
-                <button class="submitbtn" mat-raised-button color="primary" type="button"
+                <button class="submitbtn" mat-raised-button color="primary" type="submit"
                     (click)="onSubmit()">{{buttonText}}</button>
+
+                <button class="submitbtn" mat-raised-button color="primary" type="button"
+                (click)="redirectToListingPage()">Cancel</button>
 
             </form>
         </mat-card-content>
@@ -255,4 +258,3 @@
 
 
 
-<!-- <mat-checkbox formControlName="featured" color="primary">Featured</mat-checkbox><br> -->

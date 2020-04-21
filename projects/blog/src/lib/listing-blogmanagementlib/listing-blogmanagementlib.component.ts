@@ -31,6 +31,7 @@ limitcond:any={
   "skip":0,
   "pagecount":1
 }; 
+public wesitesVal:any;
   // ================================================Input For Lib Listing================================
   @Input()
   set config(receivedData: any) {
@@ -40,7 +41,8 @@ for (let i in receivedData.datasource) {
     );
 
 }
-  //  this.value = receivedData;
+   this.wesitesVal = receivedData.datasource.website;
+  //  console.log("+++++++++++++++++",this.wesitesVal);
     this.blogListConfig = {
       apiUrl: receivedData.apiBaseUrl,
       endpoint :receivedData.endpoint,
@@ -48,14 +50,14 @@ for (let i in receivedData.datasource) {
       listEndPoint: receivedData.listEndPoint,
       datasource: receivedData.datasource,
       tableName: receivedData.tableName,
-      listArray_skip: ["_id", "userId", "created_at", "updated_at", "image", "metatitle", "metadesc", "description", "credentials", "blogs_file", "blogs_image","blogtitle_search","author_search","video","blogcat","profile_picture","tagsearch","featured"],
+      listArray_skip: ["_id", "userId", "created_at", "updated_at", "image", "metatitle", "metadesc", "description", "credentials", "blogs_file", "blogs_image","blogtitle_search","author_search","video","blogcat","profile_picture","tagsearch","featured","masblog1","masblog2","masblog3"],
       listArray_modify_header: {
         "blogtitle": "Blog Title", "description html": "Description","date added":"Date","profile picture":"Profile Picture","tags":"Tags",
         "priority": "Priority", "status": "Status", "parentcategoryname": "Parent Category Name",
         "author": "Author","blogcat":"Blog Category","date":"Date","blogcategory":"Blog Category",
         "featured search":"Featured","website":"Website"
       },
-      adminDataList_detail_skip:['_id','password','updated_at','id',"description_html","blogcat","created_at","profile_picture","tagsearch"],
+      adminDataList_detail_skip:['_id','password','updated_at','id',"description_html","blogcat","created_at","profile_picture","tagsearch","masblog1","masblog2","masblog3"],
       admintablenameTableName: "admin",
       statusarr: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }],
       updateurl: receivedData.updateEndpoint,
@@ -87,7 +89,42 @@ for (let i in receivedData.datasource) {
     this.loader = false;
   }
   // ====================================================================================================
-
+  libdata:any={
+    basecondition:{status:1},
+    // updateendpoint:'statusupdate1',
+    hideeditbutton:true,// all these button options are optional not mandatory
+    
+    // tableheaders:['author','priority','blogtitle','status','wrongone'], //not required
+    custombuttons:[
+        {
+            label:"Preview Blog 1",
+            link:"https://mask-blog1.influxiq.com/blog-details",
+            type:'externallink',
+            paramtype:'angular',
+            param:['blogtitle','_id'],
+            cond:'masblog1',
+            condval: 1
+        },
+        {
+          label:"Preview Blog 2",
+          link:"https://mask-blog2.influxiq.com/blog-details",
+          type:'externallink',
+          paramtype:'angular',
+          param:['blogtitle','_id'],
+          cond:'masblog2',
+          condval: 1
+      },
+      {
+        label:"Preview Blog 3",
+        link:"https://mask-blog3.influxiq.com/blog-details",
+        type:'externallink',
+        paramtype:'angular',
+        param:['blogtitle','_id'],
+        cond:'masblog3',
+        condval: 1
+    }
+    ]
+}
   
 
   constructor(private apiService: ApiService) {
