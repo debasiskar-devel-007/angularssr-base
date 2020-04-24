@@ -66,7 +66,9 @@ export class AddeditServiceComponent implements OnInit {
   ErrCode2:boolean = false;
   img_missing: boolean = false;
   public editorconfig : any = {};
-  
+  public images_array:any=[];
+  public setData: any;
+  public images_array_edit:any=[];
   // ==============================================================================================
 
 
@@ -164,9 +166,23 @@ export class AddeditServiceComponent implements OnInit {
       additional_img: defaultValue.additional_img,
     });
     /** Service image **/
-    this.img_var = defaultValue.service_img.basepath + defaultValue.service_img.image;
-    this.image_name = defaultValue.service_img.name;
-    this.image_type = defaultValue.service_img.type
+    // this.img_var = defaultValue.service_img.basepath + defaultValue.service_img.image;
+    // this.image_name = defaultValue.service_img.name;
+    // this.image_type = defaultValue.service_img.type
+
+    /*Image works*/
+        for (let i = 0; i < this.setData.service_img.length; i++) {
+          this.img_var = this.setData.service_img[i].basepath + this.setData.service_img[i].image;
+          this.image_name = this.setData.service_img[i].name;
+          this.image_type = this.setData.service_img[i].type;
+          this.images_array_edit.push({ 'img_var': this.img_var, 'image_name': this.image_name, 'image_type': this.image_type });
+          this.images_array.push({
+            "basepath": this.setData.service_img[i].basepath,
+            "image": this.setData.service_img[i].image,
+            "name": this.setData.service_img[i].name,
+            "type": this.setData.service_img[i].type
+          });
+        }
 
     /** Additional image **/
     this.img_var2 = defaultValue.additional_img.basepath + defaultValue.additional_img.image;
@@ -217,26 +233,49 @@ export class AddeditServiceComponent implements OnInit {
 
  
     // Service File Upload Works 
-    if (this.imageConfigData.files) {
+    // if (this.imageConfigData.files) {
 
-      if (this.imageConfigData.files.length > 1) { this.ErrCode = true;this.img_missing = false; return; }
+    //   if (this.imageConfigData.files.length > 1) { this.ErrCode = true;this.img_missing = false; return; }
 
-      this.serviceForm.value.service_img =
-        {
-          "basepath": this.imageConfigData.files[0].upload.data.basepath + '/' + this.imageConfigData.path + '/',
-          "image": this.imageConfigData.files[0].upload.data.data.fileservername,
-          "name": this.imageConfigData.files[0].name,
-          "type": this.imageConfigData.files[0].type
-        };
-        this.img_missing = false;
-    } else {
+    //   this.serviceForm.value.service_img =
+    //     {
+    //       "basepath": this.imageConfigData.files[0].upload.data.basepath + '/' + this.imageConfigData.path + '/',
+    //       "image": this.imageConfigData.files[0].upload.data.data.fileservername,
+    //       "name": this.imageConfigData.files[0].name,
+    //       "type": this.imageConfigData.files[0].type
+    //     };
+    //     this.img_missing = false;
+    // } else {
 
-      if( this.serviceForm.value.service_img == null ||  this.serviceForm.value.service_img == '')
-      {
-      this.img_missing = true;
-      this.ErrCode = false;
+    //   if( this.serviceForm.value.service_img == null ||  this.serviceForm.value.service_img == '')
+    //   {
+    //   this.img_missing = true;
+    //   this.ErrCode = false;
+    //   }
+    // }
+
+    /*__________________________IMAGE UPLOADER________________________________________*/
+    if (this.imageConfigData) {
+      // console.log("image path",this.imageConfigData);
+      for (const loop in this.imageConfigData.files) {
+        this.images_array =
+          this.images_array.concat({
+            "basepath": this.imageConfigData.files[loop].upload.data.basepath + '/' + this.imageConfigData.path + '/',
+            "image": this.imageConfigData.files[loop].upload.data.data.fileservername,
+            "name": this.imageConfigData.files[loop].name,
+            "type": this.imageConfigData.files[loop].type
+          });
       }
+      this.serviceForm.value.service_img = this.images_array;
+    } else {
+      this.serviceForm.value.service_img = false;
     }
+
+
+
+
+
+
 
     /** Additional Image  **/
     if (this.imageConfigData2.files) {
@@ -316,9 +355,13 @@ export class AddeditServiceComponent implements OnInit {
   }
 
   // ================================================================================================
-  clear_image() {
-    this.flag = false;
-    this.img_missing = true;
+  // clear_image() {
+  //   this.flag = false;
+  //   this.img_missing = true;
+  // }
+  clear_image(index) {
+    this.images_array.pop(this.setData.service_img[index]);
+    this.images_array_edit.splice(index, 1);
   }
 
   clear_image2() {

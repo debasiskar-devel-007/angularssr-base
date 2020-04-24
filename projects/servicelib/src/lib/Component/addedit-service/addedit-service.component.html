@@ -96,6 +96,8 @@
         </div>
         <!-- __________________________________________________________________________________________________________ -->
 
+
+        <!-- service image  -->
         <h1>Image:</h1>
 
         <!-- <div class="warning_reso">
@@ -115,15 +117,37 @@
         </div>
 
 
+        <ng-container *ngIf="flag==true">
+          <!-- CARD VIEW  -->
+          <mat-card-content class="files-view" >
+              <mat-card class="example-card" *ngFor="let img of images_array_edit; let i2 = index">
 
-        <mat-card-content class="files-view" *ngIf="flag==true">
+                  <span class="viewUrlwrapper">
+                   <img mat-card-image [src]="img.img_var">
+                  </span>
+                  <span class="viewUrlcontent">
+                   <mat-card-title>{{ img.image_name }}</mat-card-title>
+                   <mat-card-subtitle>{{img.image_type}}</mat-card-subtitle>
+                  </span>
+
+                  <span class="closecard" (click)="clear_image(i2)"><i class="material-icons">clear</i></span>
+                  
+
+              </mat-card>
+          </mat-card-content>
+          <!-- ---------  -->
+      </ng-container>
+
+
+
+        <!-- <mat-card-content class="files-view" *ngIf="flag==true">
           <mat-card class="example-card">
             <img mat-card-image [attr.src]="img_var">
             <mat-card-title>{{ image_name }}</mat-card-title>
             <mat-card-subtitle>{{ image_type }}</mat-card-subtitle>
             <span class="closecard" (click)="clear_image()"><i class="material-icons">clear</i></span>
           </mat-card>
-        </mat-card-content>
+        </mat-card-content> -->
 
         <!-- ______________________________________________________________________________________________________________ -->
         <!-- Additional Image  -->

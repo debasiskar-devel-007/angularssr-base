@@ -16,7 +16,7 @@ export class ListingServiceComponent implements OnInit {
     /************** lib list setup start here *************/
     public serviceListConfig:any = {
       apiBaseUrl: "https://9v41bpikik.execute-api.us-east-1.amazonaws.com/dev/api/",
-      listEndPoint: "https://9v41bpikik.execute-api.us-east-1.amazonaws.com/dev/api/datalist",
+      listEndPoint: "datalist",
       datasource: this.dataList,
       tableName: "service",
       updateurl: "addorupdatedata",

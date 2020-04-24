@@ -39,6 +39,9 @@ export declare class AddeditServiceComponent implements OnInit {
     ErrCode2: boolean;
     img_missing: boolean;
     editorconfig: any;
+    images_array: any;
+    setData: any;
+    images_array_edit: any;
     constructor(formBuilder: FormBuilder, servicehttp: ServicelibService, router: Router, dialog: MatDialog, cookieService: CookieService);
     ngOnInit(): void;
     config: any;
@@ -54,7 +57,7 @@ export declare class AddeditServiceComponent implements OnInit {
     openDialog(x: any): void;
     resetserviceForm(): void;
     inputBlur(val: any): void;
-    clear_image(): void;
+    clear_image(index: any): void;
     clear_image2(): void;
 }
 export declare class Modal {
