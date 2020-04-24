@@ -16,8 +16,8 @@ export class AddComponent implements OnInit {
 
   public configAddEdit: any = {
     action: "add",
-    endpoint: "https://9ozbyvv5v0.execute-api.us-east-1.amazonaws.com/production/api/addorupdatedata",
-    endpoint2:"https://9ozbyvv5v0.execute-api.us-east-1.amazonaws.com/production/api/",
+    endpoint: "https://hntm6xe6of.execute-api.us-east-1.amazonaws.com/dev/api1/addorupdatedata",
+    endpoint2:"https://hntm6xe6of.execute-api.us-east-1.amazonaws.com/dev/api1/",
 
     source: "blog_category",
     condition: {},

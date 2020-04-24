@@ -52,7 +52,8 @@
                 <!-- ------------------------------------Blog Content------------------ -->
 
                 <!-- <ckeditor [editor]="Editor" [config]="editorConfig" formControlName="description"
-                  ></ckeditor> -->
+                  ></ckeditor> -->  
+                  <mat-label>Description :-</mat-label>
                   <ck-editor formControlName="description" [config]="editorconfig">
                 </ck-editor>
                 <mat-error
@@ -64,8 +65,19 @@
                 <br>
                 <!-- -----------------------------------------------------------------  -->
 
-
-
+                <!-- website -->
+                <mat-form-field>
+                    <mat-label>Website</mat-label>
+                    <mat-select [formControl]="blogManagementForm.controls['website']" multiple
+                    >
+                      <mat-option *ngFor="let item of websites" [value]="item.value" >
+                        {{item.viewValue}}
+                      </mat-option>
+                    </mat-select>
+                  </mat-form-field> 
+                <!--Features  -->
+                <mat-checkbox [formControl]="blogManagementForm.controls['featured']" color="primary">Featured</mat-checkbox><br>
+ 
 
                 <!-- -----------------------------------Priority------------------------ -->
                 <mat-form-field>
@@ -81,7 +93,9 @@
 
 
                 <!-- ----------------------------------Status---------------------------- -->
-                <mat-checkbox formControlName="status" color="primary">Active</mat-checkbox><br>
+                <!-- <mat-checkbox formControlName="status" color="primary">Active</mat-checkbox><br> -->
+                <mat-checkbox [formControl]="blogManagementForm.controls['status']" [(ngModel)]="statuschecked">Active</mat-checkbox><br>
+
                 <!-- -------------------------------------------------------------------- -->
 
 
@@ -196,12 +210,19 @@
 
                 <ng-container *ngIf="flag==true">
                     <!-- CARD VIEW  -->
-                    <mat-card-content class="files-view" *ngFor="let img of images_array_edit; let i2 = index">
-                        <mat-card class="example-card">
-                            <img mat-card-image [src]="img.img_var">
-                            <mat-card-title>{{ img.image_name }}</mat-card-title>
-                            <mat-card-subtitle>{{img.image_type}}</mat-card-subtitle>
+                    <mat-card-content class="files-view" >
+                        <mat-card class="example-card" *ngFor="let img of images_array_edit; let i2 = index">
+
+                            <span class="viewUrlwrapper">
+                             <img mat-card-image [src]="img.img_var">
+                            </span>
+                            <span class="viewUrlcontent">
+                             <mat-card-title>{{ img.image_name }}</mat-card-title>
+                             <mat-card-subtitle>{{img.image_type}}</mat-card-subtitle>
+                            </span>
+
                             <span class="closecard" (click)="clear_image(i2)"><i class="material-icons">clear</i></span>
+                            
 
                         </mat-card>
                     </mat-card-content>
@@ -224,10 +245,16 @@
                 </mat-chip-list>
 
 
-                <button class="submitbtn" mat-raised-button color="primary" type="button"
+                <button class="submitbtn" mat-raised-button color="primary" type="submit"
                     (click)="onSubmit()">{{buttonText}}</button>
+
+                <button class="submitbtn" mat-raised-button color="primary" type="button"
+                (click)="redirectToListingPage()">Cancel</button>
 
             </form>
         </mat-card-content>
     </span>
 </mat-card>
+
+
+

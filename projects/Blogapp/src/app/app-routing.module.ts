@@ -35,8 +35,7 @@ const appRoutes: Routes = [
     path: 'blog-management/list',
     component: ListingBlogmanagementComponent,
     resolve: { blogList: ResolveService },
-    data: { requestcondition: { source: '', condition: { "limit": 3,
-    "skip":0} }, endpoint: 'getadminbloglistdata' }
+    data: { requestcondition: { source: 'blogs_desc_priority', condition: {} }, endpoint: 'datalist' }
   },
   {
     path: 'blog-management/edit/:_id',
