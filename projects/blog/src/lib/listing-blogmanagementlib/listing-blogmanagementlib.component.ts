@@ -31,6 +31,8 @@ limitcond:any={
   "skip":0,
   "pagecount":1
 }; 
+public tag_data:any=[];
+public authval:any=[];
 public wesitesVal:any;
   // ================================================Input For Lib Listing================================
   @Input()
@@ -39,6 +41,14 @@ for (let i in receivedData.datasource) {
   this.value.push(
     { 'name': receivedData.datasource[i].blogcategory, val: receivedData.datasource[i].blogcategory }
     );
+}
+for (let i in receivedData.datasource) {
+  for (let val in receivedData.datasource[i].tags) {
+    this.authval.push(
+      { 'name': receivedData.datasource[i].tags[val], val: receivedData.datasource[i].tags[val] }
+    );
+  }
+  
 
 }
    this.wesitesVal = receivedData.datasource.website;
@@ -50,14 +60,14 @@ for (let i in receivedData.datasource) {
       listEndPoint: receivedData.listEndPoint,
       datasource: receivedData.datasource,
       tableName: receivedData.tableName,
-      listArray_skip: ["_id", "userId", "created_at", "updated_at", "image", "metatitle", "metadesc", "description", "credentials", "blogs_file", "blogs_image","blogtitle_search","author_search","video","blogcat","profile_picture","tagsearch","featured","masblog1","masblog2","masblog3"],
+      listArray_skip: ["_id", "userId", "created_at", "updated_at", "image", "metatitle", "metadesc", "description", "credentials", "blogs_file", "blogs_image","blogtitle_search","author_search","video","blogcat","profile_picture","tagsearch","featured","maskblog1","maskblog2","maskblog3","tags_search","website"],
       listArray_modify_header: {
         "blogtitle": "Blog Title", "description html": "Description","date added":"Date","profile picture":"Profile Picture","tags":"Tags",
         "priority": "Priority", "status": "Status", "parentcategoryname": "Parent Category Name",
         "author": "Author","blogcat":"Blog Category","date":"Date","blogcategory":"Blog Category",
-        "featured search":"Featured","website":"Website"
+        "featured search":"Featured"
       },
-      adminDataList_detail_skip:['_id','password','updated_at','id',"description_html","blogcat","created_at","profile_picture","tagsearch","masblog1","masblog2","masblog3"],
+      adminDataList_detail_skip:['_id','password','updated_at','id',"description_html","blogcat","created_at","profile_picture","tagsearch","maskblog1","maskblog2","maskblog3","tags_search"],
       admintablenameTableName: "admin",
       statusarr: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }],
       updateurl: receivedData.updateEndpoint,
@@ -66,17 +76,18 @@ for (let i in receivedData.datasource) {
       deleteEndPoint: receivedData.deleteEndPoint,
       view: receivedData.view,
       search_settings: {
-        textsearch: [{ label: "Search By Blog Title", field: 'blogtitle_search' },{ label: "Search By Author", field: 'author_search' },{ label: "Search By Tags", field: 'tagsearch' }],
+        textsearch: [{ label: "Search By Blog Title", field: 'blogtitle_search' },{ label: "Search By Author", field: 'author_search' }],
 
         selectsearch: [
           { label: 'Status', field: 'status', values: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }]},{label:"Search By Blog Category",field:'blogcategory',values:this.value},
           {
             label: 'Search By Blog Featured', field: 'featured', values: [{ val: 1, name: "Yes" }, { val: 0, name: 'No' }]
           },
-          {
-            label: 'Search By Blog Website', field: 'website', values: [{ val: "Mask Blog 1", name: "Mask Blog 1" }, { val: "Mask Blog 2", name: 'Mask Blog 2' },{val:"Mask Blog 3",name:"Mask Blog 3"}]
-          }
-        ]
+          // {
+          //   label: 'Search By Blog Website', field: 'website', values: [{ val: "Mask Blog 1", name: "Mask Blog 1" }, { val: "Mask Blog 2", name: 'Mask Blog 2' },{val:"Mask Blog 3",name:"Mask Blog 3"}]
+          // }
+        ],
+        search:[{label:"Search By Tags",field:'tags_search',values:this.authval}]
 
       },
       //  /*Showing Image in the Modal*/
@@ -102,7 +113,7 @@ for (let i in receivedData.datasource) {
             type:'externallink',
             paramtype:'angular',
             param:['blogtitle','_id'],
-            cond:'masblog1',
+            cond:'maskblog1',
             condval: 1
         },
         {
@@ -111,7 +122,7 @@ for (let i in receivedData.datasource) {
           type:'externallink',
           paramtype:'angular',
           param:['blogtitle','_id'],
-          cond:'masblog2',
+          cond:'maskblog2',
           condval: 1
       },
       {
@@ -120,7 +131,7 @@ for (let i in receivedData.datasource) {
         type:'externallink',
         paramtype:'angular',
         param:['blogtitle','_id'],
-        cond:'masblog3',
+        cond:'maskblog3',
         condval: 1
     }
     ]

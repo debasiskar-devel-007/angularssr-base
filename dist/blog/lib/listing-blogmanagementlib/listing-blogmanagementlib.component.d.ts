@@ -10,6 +10,8 @@ export declare class ListingBlogmanagementlibComponent implements OnInit {
     datacollection: any;
     date_search_source_count: any;
     limitcond: any;
+    tag_data: any;
+    authval: any;
     wesitesVal: any;
     config: any;
     libdata: any;

@@ -8,10 +8,10 @@ import { MAT_DIALOG_DATA, MatDialogRef, MatDialog, MatSnackBar } from "@angular/
 import { map, startWith } from 'rxjs/operators';
 
 
-interface  Websites {
-  value: number;
-  viewValue: string;
-}
+// interface  Websites {
+//   value: number;
+//   viewValue: string;
+// }
 
 export interface DialogData {
   msg: any;
@@ -27,11 +27,11 @@ export interface DialogData {
 })
 
 export class AddeditBlogmanagementComponent implements OnInit {
-  websites: Websites[] = [
-    {value: 1, viewValue: 'Mask Blog 1'},
-    {value: 2, viewValue: 'Mask Blog 2'},
-    {value: 3, viewValue: 'Mask Blog 3'}
-  ];
+  // websites: Websites[] = [
+  //   {value: 1, viewValue: 'Mask Blog 1'},
+  //   {value: 2, viewValue: 'Mask Blog 2'},
+  //   {value: 3, viewValue: 'Mask Blog 3'}
+  // ];
   // ---------------------declarations-------------------------------------
   public headerText: any = 'Add Blog Management Data';
   public buttonText: any = 'SUBMIT';
@@ -119,7 +119,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
       blogtitle: ['', [Validators.required]],
       blogcat: ['', ],
       description: ['', [Validators.required]],
-      website:[],
+      // website:[],
       featured:[''],
       priority: ['', [Validators.required]],
       status: [''],
@@ -176,7 +176,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
       this.blogManagementForm.controls['blogcat'].patchValue(this.setData.blogcat);
       this.blogManagementForm.controls['description'].patchValue(this.setData.description);
 
-      this.blogManagementForm.controls['website'].patchValue(this.setData.website);
+      // this.blogManagementForm.controls['website'].patchValue(this.setData.website);
       this.blogManagementForm.controls['featured'].patchValue(this.setData.featured);
 
       this.blogManagementForm.controls['priority'].patchValue(this.setData.priority);
@@ -460,7 +460,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
             "blogtitle": this.blogManagementForm.value.blogtitle,
             "blogcat": this.blogManagementForm.value.blogcat,
             "description": this.blogManagementForm.value.description,
-            "website": this.blogManagementForm.value.website,
+            // "website": this.blogManagementForm.value.website,
             "featured": this.blogManagementForm.value.featured,
             "priority": this.blogManagementForm.value.priority,
             "status": this.blogManagementForm.value.status, 
