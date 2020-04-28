@@ -23,7 +23,7 @@ const appRoutes: Routes = [
     path: 'blog-category/edit/:_id',
     component: AddComponent,
     resolve: { blogCatList: ResolveService },
-    data: { requestcondition: { source: 'blog_category', condition: {} }, endpoint: 'datalist' }
+    data: { requestcondition: { source: '', condition: {_id:"_id"} }, endpoint: 'getcategorydata' }
   },
 
 

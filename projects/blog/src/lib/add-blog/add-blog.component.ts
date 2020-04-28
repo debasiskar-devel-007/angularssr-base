@@ -125,13 +125,13 @@ export class AddBlogComponent implements OnInit {
   //Getting the parent category
   getParentData() {
     let postData: any = {
-      source: this.configData.source,
+      // source: this.configData.source,
       token: this.cookieService.get('jwtToken')
 
     };
-    this.blogService.getData(this.configData.endpoint2 + 'datalist', postData).subscribe((response: any) => {
-      this.getParentCatArr = response.res;
-      //console.log('parent category',response.res);
+    this.blogService.getDataByEndpoint(this.configData.endpoint2).subscribe((response: any) => {
+      this.getParentCatArr = response.result;
+      console.log('parent category',this.getParentCatArr);
     })
   }
 

@@ -16,10 +16,10 @@ export class AddComponent implements OnInit {
 
   public configAddEdit: any = {
     action: "add",
-    endpoint: "https://hntm6xe6of.execute-api.us-east-1.amazonaws.com/dev/api1/addorupdatedata",
-    endpoint2:"https://hntm6xe6of.execute-api.us-east-1.amazonaws.com/dev/api1/",
+    endpoint: "http://localhost:3000/dev/addblogcategory", //add endpoint
+    endpoint2:"http://localhost:3000/dev/getcategorydata ", //get blog cat data list by endpoint
 
-    source: "blog_category",
+    // source: "blog_category",
     condition: {},
     defaultData: null,
     jwtToken: this.cookieService.get('jwtToken'),

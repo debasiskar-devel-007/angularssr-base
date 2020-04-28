@@ -31,4 +31,5 @@ export declare class BlogService {
     UpdateStatusForSingleData(endpoint: any, requestdata: any): Observable<Object>;
     UpdateStatusForMultipleData(endpoint: any, requestdata: any): Observable<Object>;
     CustomRequest(endpoint: any, requestdata: any): Observable<Object>;
+    getDataByEndpoint(endpoint: any): Observable<Object>;
 }

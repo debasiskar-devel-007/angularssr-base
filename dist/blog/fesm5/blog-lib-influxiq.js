@@ -293,6 +293,30 @@ var BlogService = /** @class */ (function () {
         function (res) { return res; })));
         return result;
     };
+    /**
+     * @param {?} endpoint
+     * @return {?}
+     */
+    BlogService.prototype.getDataByEndpoint = /**
+     * @param {?} endpoint
+     * @return {?}
+     */
+    function (endpoint) {
+        /** @type {?} */
+        var httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                'Authorization': this.accesstoken
+            })
+        };
+        /** @type {?} */
+        var result = this._http.post(this.serverUrl + endpoint, httpOptions).pipe(map((/**
+         * @param {?} res
+         * @return {?}
+         */
+        function (res) { return res; })));
+        return result;
+    };
     BlogService.decorators = [
         { type: Injectable, args: [{
                     providedIn: 'root'
@@ -1280,16 +1304,16 @@ var AddBlogComponent = /** @class */ (function () {
         var _this = this;
         /** @type {?} */
         var postData = {
-            source: this.configData.source,
+            // source: this.configData.source,
             token: this.cookieService.get('jwtToken')
         };
-        this.blogService.getData(this.configData.endpoint2 + 'datalist', postData).subscribe((/**
+        this.blogService.getDataByEndpoint(this.configData.endpoint2).subscribe((/**
          * @param {?} response
          * @return {?}
          */
         function (response) {
-            _this.getParentCatArr = response.res;
-            //console.log('parent category',response.res);
+            _this.getParentCatArr = response.result;
+            console.log('parent category', _this.getParentCatArr);
         }));
     };
     /**

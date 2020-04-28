@@ -129,4 +129,15 @@ export class BlogService {
     return result;
   }
 
+  getDataByEndpoint(endpoint: any) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': this.accesstoken
+      })
+    };
+    var result = this._http.post(this.serverUrl + endpoint, httpOptions).pipe(map(res => res));
+    return result;
+  }
+
 }

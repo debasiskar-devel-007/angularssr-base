@@ -256,6 +256,26 @@ class BlogService {
         res => res)));
         return result;
     }
+    /**
+     * @param {?} endpoint
+     * @return {?}
+     */
+    getDataByEndpoint(endpoint) {
+        /** @type {?} */
+        const httpOptions = {
+            headers: new HttpHeaders({
+                'Content-Type': 'application/json',
+                'Authorization': this.accesstoken
+            })
+        };
+        /** @type {?} */
+        var result = this._http.post(this.serverUrl + endpoint, httpOptions).pipe(map((/**
+         * @param {?} res
+         * @return {?}
+         */
+        res => res)));
+        return result;
+    }
 }
 BlogService.decorators = [
     { type: Injectable, args: [{
@@ -1079,16 +1099,16 @@ class AddBlogComponent {
     getParentData() {
         /** @type {?} */
         let postData = {
-            source: this.configData.source,
+            // source: this.configData.source,
             token: this.cookieService.get('jwtToken')
         };
-        this.blogService.getData(this.configData.endpoint2 + 'datalist', postData).subscribe((/**
+        this.blogService.getDataByEndpoint(this.configData.endpoint2).subscribe((/**
          * @param {?} response
          * @return {?}
          */
         (response) => {
-            this.getParentCatArr = response.res;
-            //console.log('parent category',response.res);
+            this.getParentCatArr = response.result;
+            console.log('parent category', this.getParentCatArr);
         }));
     }
     /**
