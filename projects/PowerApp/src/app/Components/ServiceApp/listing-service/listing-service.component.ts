@@ -18,13 +18,13 @@ export class ListingServiceComponent implements OnInit {
       apiBaseUrl: "https://9v41bpikik.execute-api.us-east-1.amazonaws.com/dev/api/",
       listEndPoint: "datalist",
       datasource: this.dataList,
-      tableName: "service",
+      tableName: "service_test",
       updateurl: "addorupdatedata",
       editUrl: "service/edit",
       jwtToken: this.cookieService.get('jwtToken'),
       deleteEndPoint: "deletesingledata",
       addLink: "/service/add",
-      view:"service_view"
+      view:"service_test"
     }
   
   constructor( private router: Router, private activatedRoute: ActivatedRoute, private cookieService: CookieService ) { 

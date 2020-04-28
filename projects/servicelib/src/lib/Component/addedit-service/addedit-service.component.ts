@@ -151,6 +151,8 @@ export class AddeditServiceComponent implements OnInit {
 
   // ===============================================Default value======================================
   setDefaultValue(defaultValue) {
+    console.log('>>',defaultValue)
+    this.setData=defaultValue
 
     defaultValue.bulletarr.forEach(element => {
       this.addBulletList(element.bullet_title, element.bullet_desc);
@@ -171,16 +173,16 @@ export class AddeditServiceComponent implements OnInit {
     // this.image_type = defaultValue.service_img.type
 
     /*Image works*/
-        for (let i = 0; i < this.setData.service_img.length; i++) {
-          this.img_var = this.setData.service_img[i].basepath + this.setData.service_img[i].image;
-          this.image_name = this.setData.service_img[i].name;
-          this.image_type = this.setData.service_img[i].type;
+        for (let i = 0; i < defaultValue.service_img.length; i++) {
+          this.img_var = defaultValue.service_img[i].basepath + defaultValue.service_img[i].image;
+          this.image_name = defaultValue.service_img[i].name;
+          this.image_type = defaultValue.service_img[i].type;
           this.images_array_edit.push({ 'img_var': this.img_var, 'image_name': this.image_name, 'image_type': this.image_type });
           this.images_array.push({
-            "basepath": this.setData.service_img[i].basepath,
-            "image": this.setData.service_img[i].image,
-            "name": this.setData.service_img[i].name,
-            "type": this.setData.service_img[i].type
+            "basepath": defaultValue.service_img[i].basepath,
+            "image": defaultValue.service_img[i].image,
+            "name": defaultValue.service_img[i].name,
+            "type": defaultValue.service_img[i].type
           });
         }
 
@@ -359,7 +361,7 @@ export class AddeditServiceComponent implements OnInit {
   //   this.flag = false;
   //   this.img_missing = true;
   // }
-  clear_image(index) {
+  clear_image(index:any) {
     this.images_array.pop(this.setData.service_img[index]);
     this.images_array_edit.splice(index, 1);
   }

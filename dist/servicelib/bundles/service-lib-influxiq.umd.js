@@ -279,9 +279,9 @@
                     listEndPoint: receivedData.listEndPoint,
                     datasource: receivedData.datasource,
                     tableName: receivedData.tableName,
-                    listArray_skip: ["_id", "userId", "id", "updated_at", "service_desc", "additional_img", "description_html", 'service_title_search', 'additional_description'],
+                    listArray_skip: ["_id", "userId", "id", "updated_at", "service_desc", "additional_img", "description", 'service_title_search', 'additional_description', 'image', 'service_img', 'additional_details'],
                     listArray_modify_header: { "service title": "Service title", "priority": "Priority",
-                        "status": "Status", "bulletarr": "Number of Bullets", "date added": "Date Added", "image": "Image" },
+                        "status": "Status", "bulletarr": "Number of Bullets", "date added": "Date", "image": "Image", "description_html": "Description", "description html": "Description" },
                     admintablenameTableName: "admin",
                     statusarr: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }],
                     updateurl: receivedData.updateEndpoint,
@@ -517,6 +517,8 @@
              */
             function (defaultValue) {
                 var _this = this;
+                console.log('>>', defaultValue);
+                this.setData = defaultValue;
                 defaultValue.bulletarr.forEach(( /**
                  * @param {?} element
                  * @return {?}
@@ -537,16 +539,16 @@
                 // this.image_name = defaultValue.service_img.name;
                 // this.image_type = defaultValue.service_img.type
                 /*Image works*/
-                for (var i = 0; i < this.setData.service_img.length; i++) {
-                    this.img_var = this.setData.service_img[i].basepath + this.setData.service_img[i].image;
-                    this.image_name = this.setData.service_img[i].name;
-                    this.image_type = this.setData.service_img[i].type;
+                for (var i = 0; i < defaultValue.service_img.length; i++) {
+                    this.img_var = defaultValue.service_img[i].basepath + defaultValue.service_img[i].image;
+                    this.image_name = defaultValue.service_img[i].name;
+                    this.image_type = defaultValue.service_img[i].type;
                     this.images_array_edit.push({ 'img_var': this.img_var, 'image_name': this.image_name, 'image_type': this.image_type });
                     this.images_array.push({
-                        "basepath": this.setData.service_img[i].basepath,
-                        "image": this.setData.service_img[i].image,
-                        "name": this.setData.service_img[i].name,
-                        "type": this.setData.service_img[i].type
+                        "basepath": defaultValue.service_img[i].basepath,
+                        "image": defaultValue.service_img[i].image,
+                        "name": defaultValue.service_img[i].name,
+                        "type": defaultValue.service_img[i].type
                     });
                 }
                 /** Additional image **/
