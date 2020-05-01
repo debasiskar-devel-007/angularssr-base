@@ -12,12 +12,16 @@ import { environment } from '../../environments/environment';
 export class AddeditBlogmanagementComponent implements OnInit {
 
 
-    server: any ='https://hntm6xe6of.execute-api.us-east-1.amazonaws.com/dev/api1/';
+    server: any ='http://localhost:3000/dev/';
 
 
-    addUrl: any = 'addorupdatedata';
+    addUrl: any = 'addorupdateblogdata'; //endpoint for add blog
+
+    categoryUrl:any='getcategorydata'; //endpoint for list blog  cat  
+
+    tagsViewEndpoint:any='getblogtagsdata'
  
-    getDataUrl: any= 'datalist';
+    getDataUrl: any= '';
     public editdata: any = [];
     action:any="add";
     listURL:any="blog-management/list";
@@ -56,7 +60,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       if (params._id) {
         this.activatedRoute.data.subscribe(resolveData => {         
-          this.editdata= resolveData.blogList.res[0];  
+          this.editdata= resolveData.blogList.result[0];  
           this.action="edit";    
         });
       }

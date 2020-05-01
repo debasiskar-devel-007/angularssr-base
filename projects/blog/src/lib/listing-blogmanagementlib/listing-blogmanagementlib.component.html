@@ -1,30 +1,54 @@
-<mat-card *ngIf="loader==true">
+<!-- <mat-card *ngIf="loader==true">
   <mat-spinner class="spinner"></mat-spinner>
-</mat-card>
+</mat-card> -->
 
 
 
 <!-- ------------------------lib listing being called------------------------ -->
 <mat-card *ngIf="loader==false">
   <lib-listing class="formfilterdiv"
-      *ngIf="blogListConfig.datasource !=null && blogListConfig.datasource.length > 0"
-      [datasource]="blogListConfig.datasource" [skip]="blogListConfig.listArray_skip"
-      [modify_header_array]="blogListConfig.listArray_modify_header" [sourcedata]="blogListConfig.tableName"
-      [statusarr]="blogListConfig.statusarr" [jwttoken]="blogListConfig.jwtToken"
-      [apiurl]="blogListConfig.apiUrl" [editroute]="blogListConfig.editUrl"
+      *ngIf="blogListConfig.datasource !=null"
+
+      [datasource]="blogListConfig.datasource" 
+
+      [skip]="blogListConfig.listArray_skip"
+
+      [modify_header_array]="blogListConfig.listArray_modify_header" 
+
+      [sourcedata]="blogListConfig.tableName"
+
+      [statusarr]="blogListConfig.statusarr" 
+
+      [jwttoken]="blogListConfig.jwtToken"
+
+      [apiurl]="blogListConfig.apiUrl" 
+
+      [editroute]="blogListConfig.editUrl"
+
       [deleteendpoint]="blogListConfig.deleteEndPoint"
+
       [date_search_source]="blogListConfig.view"
+
      [date_search_endpoint]="blogListConfig.listEndPoint"
+
      [search_settings]="blogListConfig.search_settings"
+
      [detail_datatype]="blogListConfig.pendingmodelapplicationarray_detail_datatype"
+
      [sortdata]="sortdata"
-     [datacollection]="datacollection"
+
+     [datacollection]="blogListConfig.datacollection"
+
      [date_search_source_count]="date_search_source_count"
+
      [limitcond]="limitcond"
-     [detail_skip_array]="blogListConfig.adminDataList_detail_skip"
-     [libdata]="libdata">
+
+     [libdata]="libdata"
+     
+     [detail_skip_array]="blogListConfig.blog_detail_skip"
+     >
   </lib-listing>
 <!-- ----------------------------------------------------------------------------->
 
-  <h2 *ngIf="blogListConfig.datasource.length == 0">No record found.</h2>
+  <!-- <h2 *ngIf="blogListConfig.datasource.length == 0">No record found.</h2> -->
 </mat-card>

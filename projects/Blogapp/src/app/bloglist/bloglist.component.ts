@@ -14,30 +14,31 @@ export class BloglistComponent implements OnInit {
     /************** lib list setup start here *************/
     public blogListConfig:any = {
 
-      apiBaseUrl: "https://hntm6xe6of.execute-api.us-east-1.amazonaws.com/dev/api1/",
-    endpoint: "https://hntm6xe6of.execute-api.us-east-1.amazonaws.com/dev/api1/getbloglistdata",
-    endpointc: "https://hntm6xe6of.execute-api.us-east-1.amazonaws.com/dev/api1/getbloglistdata-count",
+      apiBaseUrl: "http://localhost:3000/dev/",
+      endpoint: "http://localhost:3000/dev/getblogcategorylistdata",
+      endpointc: "http://localhost:3000/dev/getblogcategorylistdata-count",
       // apiBaseUrl: environment.apiBaseUrl,
 
-      listEndPoint: "datalist",
-      datasource: "",
-      tableName: "blog_category",
-      updateurl: "addorupdatedata",
+      listEndPoint: "getblogcategorylistdata",
+      tableName: "",
+      updateurl: "",
       editUrl: "blog-category/edit",
       jwtToken: "",
-      deleteEndPoint: "deletesingledata",
+      datasource:'',
+      deleteEndPoint: "deleteforblogcategory",
       addLink: "/blog-category/add",
-      view: "blog_category"
+      date_search_source: "getblogcategorylistdata",
+      datacollection:"getblogcategorylistdata"
       
     }
     constructor( private router: Router, private activatedRoute: ActivatedRoute, private cookieService: CookieService ) { 
 
       this.activatedRoute.data.subscribe(resolveData => {
         console.warn(resolveData);
-        this.blogListConfig.datasource = resolveData.blogCatList.res;
-        // this.blogListConfig.jwtToken = this.cookieService.get('jwtToken');
-       
-        this.blogListConfig.jwtToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJleHAiOjE1ODYzMzM5OTgsImlhdCI6MTU4NjI0NzU5OH0.2tQPenabWix0l8S4er5xHmXkH-duoE-W6CHNWAPmT7o"
+        this.blogListConfig.datasource = resolveData.blogCatList.results.res;
+        
+        console.log( this.blogListConfig.datasource,'====')
+        this.blogListConfig.jwtToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODgyMzExNzgsImRhdGEiOiJXbTFTYldNeVducGFSMXBzWkROS2FWa3pXbWxaTTFwcFdUTmFhUT09IiwiaWF0IjoxNTg4MjI3NTc4fQ.fZRQq_NJ5K_uwluWDC59U-ZjvnQC1nCRufBYzKauDiw"
       });
     }
   ngOnInit() {

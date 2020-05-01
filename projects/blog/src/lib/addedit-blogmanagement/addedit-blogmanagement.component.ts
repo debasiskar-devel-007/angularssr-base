@@ -8,10 +8,10 @@ import { MAT_DIALOG_DATA, MatDialogRef, MatDialog, MatSnackBar } from "@angular/
 import { map, startWith } from 'rxjs/operators';
 
 
-interface  Websites {
-  value: number;
-  viewValue: string;
-}
+// interface  Websites {
+//   value: number;
+//   viewValue: string;
+// }
 
 export interface DialogData {
   msg: any;
@@ -27,11 +27,11 @@ export interface DialogData {
 })
 
 export class AddeditBlogmanagementComponent implements OnInit {
-  websites: Websites[] = [
-    {value: 1, viewValue: 'Mask Blog 1'},
-    {value: 2, viewValue: 'Mask Blog 2'},
-    {value: 3, viewValue: 'Mask Blog 3'}
-  ];
+  // websites: Websites[] = [
+  //   {value: 1, viewValue: 'Mask Blog 1'},
+  //   {value: 2, viewValue: 'Mask Blog 2'},
+  //   {value: 3, viewValue: 'Mask Blog 3'}
+  // ];
   // ---------------------declarations-------------------------------------
   public headerText: any = 'Add Blog Management Data';
   public buttonText: any = 'SUBMIT';
@@ -50,7 +50,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
   dialogRef: any;
   public params_id: any;
   setData: any;
-  messageText: any;
+  messageText: any='Blog Added Successfully.';
   listUrl: any;
   testTag: any = [];
   imageConfigData: any;
@@ -67,6 +67,8 @@ export class AddeditBlogmanagementComponent implements OnInit {
   action2:any;
   editorconfig:any={};
   public statuschecked:boolean = true;
+  public categoryUrlData:any;
+  public tagsEndpointData:any;
   // -----------------------------------------------------------------------
 
 
@@ -88,6 +90,12 @@ export class AddeditBlogmanagementComponent implements OnInit {
     this.serverUrlData = serverUrl;
   }
 
+  @Input()          //setting the server url for category from project
+  set categoryUrl(blogCat: any) {
+    this.categoryUrlData = (blogCat) || '<no name set>';
+    this.categoryUrlData = blogCat;
+  }
+
   @Input()          //setting the server url from project
   set getDataEndpoint(endpointUrlval: any) {
     this.getDataEndpointData = (endpointUrlval) || '<no name set>';
@@ -99,6 +107,13 @@ export class AddeditBlogmanagementComponent implements OnInit {
   set addEndpoint(endpointUrlval: any) {
     this.addEndpointData = (endpointUrlval) || '<no name set>';
     this.addEndpointData = endpointUrlval;
+
+  }
+
+  @Input()          //setting the server url from project
+  set tagsViewEndpoint(endpointUrlval: any) {
+    this.tagsEndpointData = (endpointUrlval) || '<no name set>';
+    this.tagsEndpointData = endpointUrlval;
 
   }
 
@@ -119,7 +134,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
       blogtitle: ['', [Validators.required]],
       blogcat: ['', ],
       description: ['', [Validators.required]],
-      website:[],
+      // website:[],
       featured:[''],
       priority: ['', [Validators.required]],
       status: [''],
@@ -176,7 +191,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
       this.blogManagementForm.controls['blogcat'].patchValue(this.setData.blogcat);
       this.blogManagementForm.controls['description'].patchValue(this.setData.description);
 
-      this.blogManagementForm.controls['website'].patchValue(this.setData.website);
+      // this.blogManagementForm.controls['website'].patchValue(this.setData.website);
       this.blogManagementForm.controls['featured'].patchValue(this.setData.featured);
 
       this.blogManagementForm.controls['priority'].patchValue(this.setData.priority);
@@ -335,19 +350,17 @@ export class AddeditBlogmanagementComponent implements OnInit {
 
 
 
-
-
   // ----------------------------------Get Blog Category Function-------------------
 
   getBlogCategory() {
-    var data: any;
-    data = {
-      'source': 'blog_category'
-    };
-    this.apiservice.getData(data).subscribe(response => {
-      let result: any;
-      result = response;
-      this.blogCategoryArray = result.res;
+    // var data: any;
+    // data = {
+    //   'source': 'blog_category'
+    // };
+    this.apiservice.getDataByEndpoint(this.serverUrlData + this.categoryUrlData).subscribe(response => {
+      let data: any;
+      data = response;
+      this.blogCategoryArray = data.result;
     });
   }
   // ----------------------------------------------------------------------------------
@@ -359,24 +372,21 @@ export class AddeditBlogmanagementComponent implements OnInit {
   // ----------------------------------TAGS view Function-------------------
 
   getTagsCount() {
-    var data: any;
-    data = {
-      'source': 'tags_view'
-    };
-    this.apiservice.getData(data).subscribe(response => {
+    // var data: any;
+    // data = {
+    //   'source': 'tags_view'
+    // };
+    this.apiservice.getDataByEndpoint( this.serverUrlData +  this.tagsEndpointData).subscribe(response => {
       let result: any;
       result = response;
       if (result != null && result.res != null && result.res[0] != null)      
         this.options=result.res[0].tags;
       
-       
-
-
     });
   }
   // ----------------------------------------------------------------------------------
 
-
+  // getDataByEndpoint
 
 
 
@@ -454,13 +464,13 @@ export class AddeditBlogmanagementComponent implements OnInit {
         this.messageText = "One row updated!!!";
         this.blogManagementForm.value.tags = this.tags_array;
         data = {
-          "source": "blogs",
+          // "source": "blogs",
           "data": {
             "id": this.params_id,
             "blogtitle": this.blogManagementForm.value.blogtitle,
             "blogcat": this.blogManagementForm.value.blogcat,
             "description": this.blogManagementForm.value.description,
-            "website": this.blogManagementForm.value.website,
+            // "website": this.blogManagementForm.value.website,
             "featured": this.blogManagementForm.value.featured,
             "priority": this.blogManagementForm.value.priority,
             "status": this.blogManagementForm.value.status, 
@@ -476,8 +486,8 @@ export class AddeditBlogmanagementComponent implements OnInit {
       } else {
         this.isSubmitted = true;
         var data: any;
-        data = {                                         //add part
-          "source": "blogs",
+        data = {          
+          // "source":"blogs"                               //add part
           "data": this.blogManagementForm.value,
           "sourceobj": ["blogcat"]
         };
@@ -486,8 +496,9 @@ export class AddeditBlogmanagementComponent implements OnInit {
       this.apiservice.addData(data).subscribe(response => {
         let result: any;
         result = response;
-
-
+        if(result.status == 'success'){
+          this.snackBar.open(this.messageText,'OK',{duration:3000});
+        }
 
         setTimeout(() => {
           this.router.navigateByUrl('/' + this.listUrl);

@@ -23,7 +23,7 @@ public value:any=[];
   "options":['author','blogcategory','blogtitle','priority']
 };
 // datacollection
-datacollection: any='getblogmanagementlistdata';
+// datacollection: any='getblogmanagementlistdata';
 date_search_source_count: any=0;
 // send basic limit data
 limitcond:any={
@@ -31,6 +31,14 @@ limitcond:any={
   "skip":0,
   "pagecount":1
 }; 
+
+
+
+
+datasource:any;
+
+public tag_data:any=[];
+public authval:any=[];
 public wesitesVal:any;
   // ================================================Input For Lib Listing================================
   @Input()
@@ -39,6 +47,14 @@ for (let i in receivedData.datasource) {
   this.value.push(
     { 'name': receivedData.datasource[i].blogcategory, val: receivedData.datasource[i].blogcategory }
     );
+}
+for (let i in receivedData.datasource) {
+  for (let val in receivedData.datasource[i].tags) {
+    this.authval.push(
+      { 'name': receivedData.datasource[i].tags[val], val: receivedData.datasource[i].tags[val] }
+    );
+  }
+  
 
 }
    this.wesitesVal = receivedData.datasource.website;
@@ -50,33 +66,41 @@ for (let i in receivedData.datasource) {
       listEndPoint: receivedData.listEndPoint,
       datasource: receivedData.datasource,
       tableName: receivedData.tableName,
-      listArray_skip: ["_id", "userId", "created_at", "updated_at", "image", "metatitle", "metadesc", "description", "credentials", "blogs_file", "blogs_image","blogtitle_search","author_search","video","blogcat","profile_picture","tagsearch","featured","masblog1","masblog2","masblog3"],
+      datacollection:receivedData.datacollection,
+      listArray_skip: ["_id", "userId", "created_at", "updated_at", "image", "metatitle", "metadesc", "description", "credentials", "blogs_file", "blogs_image","blogtitle_search","author_search","video","blogcat","profile_picture","tagsearch","featured","maskblog1","maskblog2","maskblog3","tags_search","website"],
       listArray_modify_header: {
-        "blogtitle": "Blog Title", "description html": "Description","date added":"Date","profile picture":"Profile Picture","tags":"Tags",
+        "blogtitle": "Blog Title", "description": "Description","date added":"Date","profile picture":"Profile Picture","tags":"Tags",
         "priority": "Priority", "status": "Status", "parentcategoryname": "Parent Category Name",
         "author": "Author","blogcat":"Blog Category","date":"Date","blogcategory":"Blog Category",
-        "featured search":"Featured","website":"Website"
+        "featured search":"Featured","createdon datetime":"Date","createdon_datetime":"Date","featured":"Featured"
       },
-      adminDataList_detail_skip:['_id','password','updated_at','id',"description_html","blogcat","created_at","profile_picture","tagsearch","masblog1","masblog2","masblog3"],
+      blog_detail_skip:['_id','password','updated_at','id',"description_html","blogcat","created_at","profile_picture","tagsearch","maskblog1","maskblog2","maskblog3","tags_search"],
       admintablenameTableName: "admin",
       statusarr: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }],
-      updateurl: receivedData.updateEndpoint,
+      // updateurl: receivedData.updateEndpoint,
       editUrl: receivedData.editUrl,
       jwtToken: receivedData.jwtToken,
       deleteEndPoint: receivedData.deleteEndPoint,
       view: receivedData.view,
       search_settings: {
-        textsearch: [{ label: "Search By Blog Title", field: 'blogtitle_search' },{ label: "Search By Author", field: 'author_search' },{ label: "Search By Tags", field: 'tagsearch' }],
+
+        datesearch:[{startdatelabel:"Start Date",enddatelabel:"End Date",submit:"Search",  field:"createdon_datetime"}],   // this is use for  date search //created at = field in res which gives date in unix format that changes to ist using moment.js
+
+        textsearch: [{ label: "Search By Blog Title", field: 'blogtitle' },{ label: "Search By Author", field: 'author' }],
 
         selectsearch: [
-          { label: 'Status', field: 'status', values: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }]},{label:"Search By Blog Category",field:'blogcategory',values:this.value},
+          
+          { label: 'Status', field: 'status', values: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }]
+        },
+          // ,{label:"Search By Blog Category",field:'blogcategory',values:this.value},
           {
             label: 'Search By Blog Featured', field: 'featured', values: [{ val: 1, name: "Yes" }, { val: 0, name: 'No' }]
           },
-          {
-            label: 'Search By Blog Website', field: 'website', values: [{ val: "Mask Blog 1", name: "Mask Blog 1" }, { val: "Mask Blog 2", name: 'Mask Blog 2' },{val:"Mask Blog 3",name:"Mask Blog 3"}]
-          }
-        ]
+          // {
+          //   label: 'Search By Blog Website', field: 'website', values: [{ val: "Mask Blog 1", name: "Mask Blog 1" }, { val: "Mask Blog 2", name: 'Mask Blog 2' },{val:"Mask Blog 3",name:"Mask Blog 3"}]
+          // }
+        ],
+        // search:[{label:"Search By Tags",field:'tags_search',values:this.authval}]
 
       },
       //  /*Showing Image in the Modal*/
@@ -90,40 +114,40 @@ for (let i in receivedData.datasource) {
   }
   // ====================================================================================================
   libdata:any={
-    basecondition:{status:1},
-    // updateendpoint:'statusupdate1',
-    hideeditbutton:true,// all these button options are optional not mandatory
+    basecondition:'',
+    updateendpoint:'statusupdateforblog',
+    hideeditbutton:false,// all these button options are optional not mandatory
     
-    // tableheaders:['author','priority','blogtitle','status','wrongone'], //not required
-    custombuttons:[
-        {
-            label:"Preview Blog 1",
-            link:"https://mask-blog1.influxiq.com/blog-details",
-            type:'externallink',
-            paramtype:'angular',
-            param:['blogtitle','_id'],
-            cond:'masblog1',
-            condval: 1
-        },
-        {
-          label:"Preview Blog 2",
-          link:"https://mask-blog2.influxiq.com/blog-details",
-          type:'externallink',
-          paramtype:'angular',
-          param:['blogtitle','_id'],
-          cond:'masblog2',
-          condval: 1
-      },
-      {
-        label:"Preview Blog 3",
-        link:"https://mask-blog3.influxiq.com/blog-details",
-        type:'externallink',
-        paramtype:'angular',
-        param:['blogtitle','_id'],
-        cond:'masblog3',
-        condval: 1
-    }
-    ]
+    tableheaders:['blogtitle','description','author','priority','status','featured','createdon_datetime'], //not required
+    // custombuttons:[
+    //     {
+    //         label:"Preview Blog 1",
+    //         link:"https://mask-blog1.influxiq.com/blog-details",
+    //         type:'externallink',
+    //         paramtype:'angular',
+    //         param:['blogtitle','_id'],
+    //         cond:'maskblog1',
+    //         condval: 1
+    //     },
+    //     {
+    //       label:"Preview Blog 2",
+    //       link:"https://mask-blog2.influxiq.com/blog-details",
+    //       type:'externallink',
+    //       paramtype:'angular',
+    //       param:['blogtitle','_id'],
+    //       cond:'maskblog2',
+    //       condval: 1
+    //   },
+    //   {
+    //     label:"Preview Blog 3",
+    //     link:"https://mask-blog3.influxiq.com/blog-details",
+    //     type:'externallink',
+    //     paramtype:'angular',
+    //     param:['blogtitle','_id'],
+    //     cond:'maskblog3',
+    //     condval: 1
+    // }
+    // ]
 }
   
 
@@ -156,7 +180,7 @@ for (let i in receivedData.datasource) {
     });
 
     this.apiService.getDataWithoutToken(endpoint,data).subscribe((res:any) => {
-        // console.log('in constructor');
+      this.datasource=res.results.res;        // console.log('in constructor');
         // console.log(result);
         // this.pendingmodelapplicationarray =res.results.res;
         //console.warn('blogData',res);

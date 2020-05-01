@@ -16,7 +16,7 @@ export class AddComponent implements OnInit {
 
   public configAddEdit: any = {
     action: "add",
-    endpoint: "http://localhost:3000/dev/addblogcategory", //add endpoint
+    endpoint: "http://localhost:3000/dev/addorupdateblogcategory", //add endpoint
     endpoint2:"http://localhost:3000/dev/getcategorydata ", //get blog cat data list by endpoint
 
     // source: "blog_category",
@@ -33,7 +33,7 @@ export class AddComponent implements OnInit {
     this.activatedRoute.params.subscribe(params => {
       if (params._id) {
         this.activatedRoute.data.subscribe(resolveData => {         
-          this.configAddEdit.defaultData = resolveData.blogCatList.res[0];          
+          this.configAddEdit.defaultData = resolveData.blogCatList.result[0];          
           this.configAddEdit.action = "edit";
           this.configAddEdit.condition = { id: params._id };
         });

@@ -13,22 +13,22 @@ export class ListingBlogmanagementComponent implements OnInit {
   //Blogs Lib List
   public blogListConfig: any = {
 
-    apiBaseUrl: "https://hntm6xe6of.execute-api.us-east-1.amazonaws.com/dev/api1/",
-    endpoint: "https://hntm6xe6of.execute-api.us-east-1.amazonaws.com/dev/api1/getblogmanagementlistdata",
-    endpointc: "https://hntm6xe6of.execute-api.us-east-1.amazonaws.com/dev/api1/getblogmanagementlistdata-count",
+    apiBaseUrl: "http://localhost:3000/dev/",
+    endpoint: "http://localhost:3000/dev/getblogmanagementlistdata",
+    endpointc: "http://localhost:3000/dev/getblogmanagementlistdata-count",
 
     // apiBaseUrl: environment.apiBaseUrl,
 
-    listEndPoint: "datalist",
+    listEndPoint: "getblogmanagementlistdata",
     datasource: "",
-    tableName: "blogs",
-    updateurl: "addorupdatedata",
+    tableName: "",
+    updateurl: "statusupdateforblog",
     editUrl: "blog-management/edit",
     jwtToken: "",
-    deleteEndPoint: "deletesingledata",
+    deleteEndPoint: "deleteforblog",
     addLink: "/blog-management/add",
-    view: "blogs_view"
-
+    view: "getblogmanagementlistdata",
+    datacollection:'getblogmanagementlistdata'
   }
 
 
@@ -37,7 +37,8 @@ export class ListingBlogmanagementComponent implements OnInit {
 
   ngOnInit() {
     this.activatedRoute.data.subscribe((resolveData:any) => {
-       this.blogListConfig.datasource = resolveData.blogList.res;
+      console.log(resolveData)
+       this.blogListConfig.datasource = resolveData.blogList.results.res;
       // this.blogListConfig.jwtToken = this.cookieService.get('jwtToken');
       this.blogListConfig.jwtToken ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJleHAiOjE1ODYxNzk3MzcsImlhdCI6MTU4NjA5MzMzN30.62F_1FAIekcBiBYaVnAFvEMeLN1Z5_CP3lJZcgEnfe4"
 

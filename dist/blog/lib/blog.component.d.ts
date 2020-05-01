@@ -5,9 +5,10 @@ export declare class BlogComponent implements OnInit {
     apiService: ApiService;
     blodata: any;
     sortdata: any;
-    datacollection: any;
     date_search_source_count: any;
     limitcond: any;
+    datasource: any;
+    libdata: any;
     blogListConfig: any;
     loader: boolean;
     value: any;

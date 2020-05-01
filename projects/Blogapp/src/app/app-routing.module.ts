@@ -17,8 +17,18 @@ const appRoutes: Routes = [
     path: 'blog-category/list',
     component: BloglistComponent,
     resolve: { blogCatList: ResolveService },
-    data: { requestcondition: { source: 'blog_category_view', condition: {} }, endpoint: 'datalist' }
+    data: { requestcondition: { source: '', 
+    condition: 
+    {"limit":10,
+    "skip":0,},  
+    sort:{
+      "type":'desc',         
+      "field":'priority'       
+  } 
+}, 
+endpoint: 'getblogcategorylistdata' }
   },
+
   {
     path: 'blog-category/edit/:_id',
     component: AddComponent,
@@ -35,13 +45,22 @@ const appRoutes: Routes = [
     path: 'blog-management/list',
     component: ListingBlogmanagementComponent,
     resolve: { blogList: ResolveService },
-    data: { requestcondition: { source: 'blogs_desc_priority', condition: {} }, endpoint: 'datalist' }
+    data: { requestcondition: { source: '',    condition: 
+    {"limit":10,
+    "skip":0,},  
+    sort:{
+      "type":'desc',         
+      "field":'priority'       
+  }
+  },
+  endpoint: 'getblogmanagementlistdata' 
+}
   },
   {
     path: 'blog-management/edit/:_id',
     component: AddeditBlogmanagementComponent,
     resolve: { blogList: ResolveService },
-    data: { requestcondition: { source: 'blogs', condition: {} }, endpoint: 'datalist' }
+    data: { requestcondition: { source: '', condition: {_id:"_id"} }, endpoint: 'getblogdata' }
   },
 ];
 

@@ -25,14 +25,15 @@
 
                 <!-- -------------------------Blog Category---------------------------- -->
                 <mat-form-field>
-                    <mat-label>Blog Category</mat-label>
-                    <select matNativeControl required formControlName="blogcat"
+                    <mat-label>Select Blog Category</mat-label>
+                    <mat-select matNativeControl required formControlName="blogcat"
                       >
-                        <option *ngFor="let item of blogCategoryArray" value="{{item._id}}">{{ item.blogtitle }}
-                        </option>
-                    </select>
+                        <mat-option *ngFor="let item of blogCategoryArray" [value]="item._id">{{ item.blogtitle }}
+                        </mat-option>
+                    </mat-select>
 
                 </mat-form-field><br>
+
                 <!-- -----------------------------------------------------------------  -->
 
 
@@ -66,7 +67,7 @@
                 <!-- -----------------------------------------------------------------  -->
 
                 <!-- website -->
-                <mat-form-field>
+                <!-- <mat-form-field>
                     <mat-label>Website</mat-label>
                     <mat-select [formControl]="blogManagementForm.controls['website']" multiple
                     >
@@ -74,7 +75,7 @@
                         {{item.viewValue}}
                       </mat-option>
                     </mat-select>
-                  </mat-form-field> 
+                  </mat-form-field>  -->
                 <!--Features  -->
                 <mat-checkbox [formControl]="blogManagementForm.controls['featured']" color="primary">Featured</mat-checkbox><br>
  
@@ -172,35 +173,40 @@
                 <!-- ------------------------------------------------------------------- -->
 
 
-                <!-- -----------------------------Multi Tags---------------------------- -->
-                <div>
-                    <mat-label>Tags:</mat-label>
-                    <mat-form-field class="example-full-width">
-                        <input type="text" placeholder="Tag something" formControlName="tags" matInput
-                            [formControl]="myControl" [matAutocomplete]="auto" (keyup)="showval($event)">
 
-                        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
-                            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
-                                {{option}}
-                            </mat-option>
-                        </mat-autocomplete>
-                        <mat-error *ngIf="!blogManagementForm.controls['tags'].valid
-        && blogManagementForm.controls['tags'].errors.required">
-                            Tags are required.</mat-error>
+                                                <!-- -----------------------------Multi Tags---------------------------- -->
+                                                <div>
+                                                    <mat-label>Tags:</mat-label>
+                                                    <mat-form-field class="example-full-width">
+                                                        <input type="text" placeholder="Tag something" formControlName="tags" matInput
+                                                            [formControl]="myControl" [matAutocomplete]="auto" (keyup)="showval($event)">
+                                
+                                                        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+                                                            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+                                                                {{option}}
+                                                            </mat-option>
+                                                        </mat-autocomplete>
+                                                        <mat-error *ngIf="!blogManagementForm.controls['tags'].valid
+                                                         && blogManagementForm.controls['tags'].errors.required">
+                                                            Tags are required.</mat-error>
+                                                    </mat-form-field>
+                                                    <div>
+                                
+                                                        <mat-chip-list class="mat_chip">
+                                                            <!-- <li *ngFor="let item of tags_array;let j = index">{{ item }}<mat-icon matSuffix class="clickable" (click)="clearTags(j)">clear</mat-icon></li> -->
+                                                            <mat-chip color="primary" selected *ngFor="let item of tags_array;let j = index">{{ item }}
+                                                                <mat-icon matSuffix class="clickable" (click)="clearTags(j)">clear</mat-icon>
+                                                            </mat-chip>
+                                                        </mat-chip-list>
+                                
+                                                    </div>
+                                                </div>
+                                                <!-- ----------------------------------------------------------------- -->
+                                
+                
+                
+                
 
-                    </mat-form-field>
-                    <div>
-
-                        <mat-chip-list class="mat_chip">
-                            <!-- <li *ngFor="let item of tags_array;let j = index">{{ item }}<mat-icon matSuffix class="clickable" (click)="clearTags(j)">clear</mat-icon></li> -->
-                            <mat-chip color="primary" selected *ngFor="let item of tags_array;let j = index">{{ item }}
-                                <mat-icon matSuffix class="clickable" (click)="clearTags(j)">clear</mat-icon>
-                            </mat-chip>
-                        </mat-chip-list>
-
-                    </div>
-                </div>
-                <!-- ----------------------------------------------------------------- -->
 
 
                 <!-- ---------------------------------------------Image Uploader--------------------- -->
@@ -245,7 +251,7 @@
                 </mat-chip-list>
 
 
-                <button class="submitbtn" mat-raised-button color="primary" type="submit"
+                <button class="submitbtn" mat-raised-button color="primary" type="button"
                     (click)="onSubmit()">{{buttonText}}</button>
 
                 <button class="submitbtn" mat-raised-button color="primary" type="button"

@@ -27,7 +27,7 @@
 
         [deleteendpoint]="blogListConfig.deleteEndPoint"
 
-        [date_search_source]="blogListConfig.view"
+        [date_search_source]="blogListConfig.date_search_source"
 
        [date_search_endpoint]="blogListConfig.listEndPoint"
 
@@ -37,10 +37,14 @@
 
        [sortdata]="sortdata"
 
-       [datacollection]="datacollection"
+       [detail_skip_array]="blogListConfig.blogcategory_detail_skip"
+
+       [datacollection]="blogListConfig.datacollection"
 
         [date_search_source_count]="date_search_source_count"
-
+        
+        [libdata]="libdata"
+        
        [limitcond]="limitcond">
        
     </lib-listing>

@@ -93,7 +93,7 @@ export class AddBlogComponent implements OnInit {
       priority: ['', [Validators.required, Validators.maxLength(2)]],
       status: [true,],
       description: ['', [Validators.required, Validators.maxLength(100)]],
-      parent_id: [0,]
+      parent_id: [0]
     });
   }
   // ========================================================================
