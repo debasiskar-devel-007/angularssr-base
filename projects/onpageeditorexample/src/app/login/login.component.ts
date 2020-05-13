@@ -8,7 +8,7 @@ import { AppComponent } from '../app.component';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-
+ public ipinfoid = '9797c42b93078a';
   public logo: any = '../../assets/favicon.ico';
   public fromTitle: any = "Login Form";    // This is a From Title 
   public fullUrl: any = "https://api.influxhostserver.com/";  // server url

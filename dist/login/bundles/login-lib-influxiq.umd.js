@@ -763,6 +763,7 @@
             this.buttonNameValue = '';
             this.defaultUrlValue = '';
             this.loader = null;
+            this.ipinfoidValue = '';
             this.project_name = '';
             this.redirect_url = '';
             this.previousUrl = undefined;
@@ -923,6 +924,17 @@
             enumerable: true,
             configurable: true
         });
+        Object.defineProperty(LoginComponent.prototype, "ipinfoid", {
+            set: /**
+             * @param {?} id
+             * @return {?}
+             */ function (id) {
+                this.ipinfoidValue = id;
+                console.log(this.ipinfoidValue);
+            },
+            enumerable: true,
+            configurable: true
+        });
         /**
          * @return {?}
          */
@@ -931,6 +943,16 @@
          */
             function () {
                 var _this = this;
+                /** @type {?} */
+                var url = "https://ipinfo.io/?format=json&token=" + this.ipinfoidValue;
+                console.log(url);
+                this.http.get(url).subscribe(( /**
+                 * @param {?} res
+                 * @return {?}
+                 */function (res) {
+                    console.log(res);
+                    _this.login_ip_info = res;
+                }));
                 this.apiService.clearServerUrl(); // Clear the server url
                 setTimeout(( /**
                  * @return {?}
@@ -995,6 +1017,9 @@
                 if (this.loginForm.valid) {
                     /** @type {?} */
                     var data = this.loginForm.value;
+                    data.login_data = this.login_ip_info;
+                    data.login_time = new Date().getTime();
+                    console.log(data);
                     this.apiService.addLogin(data).subscribe(( /**
                      * @param {?} response
                      * @return {?}
@@ -1162,7 +1187,8 @@
             signUpRouteingUrl: [{ type: i0.Input }],
             forgetRouteingUrl: [{ type: i0.Input }],
             routerStatus: [{ type: i0.Input }],
-            defaultLoginUrl: [{ type: i0.Input }]
+            defaultLoginUrl: [{ type: i0.Input }],
+            ipinfoid: [{ type: i0.Input }]
         };
         return LoginComponent;
     }());

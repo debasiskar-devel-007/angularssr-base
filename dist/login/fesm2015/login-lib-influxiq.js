@@ -646,6 +646,7 @@ class LoginComponent {
         this.buttonNameValue = '';
         this.defaultUrlValue = '';
         this.loader = null;
+        this.ipinfoidValue = '';
         this.project_name = '';
         this.redirect_url = '';
         this.previousUrl = undefined;
@@ -776,9 +777,28 @@ class LoginComponent {
         console.log(this.defaultUrlValue);
     }
     /**
+     * @param {?} id
+     * @return {?}
+     */
+    set ipinfoid(id) {
+        this.ipinfoidValue = id;
+        console.log(this.ipinfoidValue);
+    }
+    /**
      * @return {?}
      */
     ngOnInit() {
+        /** @type {?} */
+        var url = "https://ipinfo.io/?format=json&token=" + this.ipinfoidValue;
+        console.log(url);
+        this.http.get(url).subscribe((/**
+         * @param {?} res
+         * @return {?}
+         */
+        (res) => {
+            console.log(res);
+            this.login_ip_info = res;
+        }));
         this.apiService.clearServerUrl(); // Clear the server url
         setTimeout((/**
          * @return {?}
@@ -834,6 +854,9 @@ class LoginComponent {
         if (this.loginForm.valid) {
             /** @type {?} */
             let data = this.loginForm.value;
+            data.login_data = this.login_ip_info;
+            data.login_time = new Date().getTime();
+            console.log(data);
             this.apiService.addLogin(data).subscribe((/**
              * @param {?} response
              * @return {?}
@@ -946,7 +969,8 @@ LoginComponent.propDecorators = {
     signUpRouteingUrl: [{ type: Input }],
     forgetRouteingUrl: [{ type: Input }],
     routerStatus: [{ type: Input }],
-    defaultLoginUrl: [{ type: Input }]
+    defaultLoginUrl: [{ type: Input }],
+    ipinfoid: [{ type: Input }]
 };
 
 /**

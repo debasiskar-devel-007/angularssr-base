@@ -102,8 +102,14 @@ public set cookieSet(v : any) {
     this.defaultUrlValue = defaultUrlVal;
     console.log(this.defaultUrlValue)
   }
- 
+  public ipinfoidValue: any = '';
+  @Input()
+  public set ipinfoid(id:any) {
+    this.ipinfoidValue = id;
+    console.log(this.ipinfoidValue)
+  }
 
+  public login_ip_info:any;
 
 
 
@@ -121,6 +127,8 @@ public set cookieSet(v : any) {
      public cookieService: CookieService,
      public route: ActivatedRoute) {
        
+
+
       this.currentUrl = this.router.url;
       router.events.subscribe(event => {
         if (event instanceof NavigationEnd) {
@@ -149,6 +157,13 @@ public set cookieSet(v : any) {
   }
 
   ngOnInit() {
+
+    var url:any = "https://ipinfo.io/?format=json&token="+ this.ipinfoidValue;
+    console.log(url);
+    this.http.get(url).subscribe((res) => {
+      console.log(res);
+      this.login_ip_info = res;
+    });
     this.apiService.clearServerUrl();       // Clear the server url
     setTimeout(() => {
       this.apiService.setServerUrl(this.serverURL);       // set the server url 
@@ -189,6 +204,9 @@ public set cookieSet(v : any) {
 
      
       let data: any = this.loginForm.value;
+      data.login_data = this.login_ip_info;
+      data.login_time = new Date().getTime();
+      console.log(data);
       this.apiService.addLogin(data).subscribe((response:any) => {
 
         console.log(this.routerStatusValue)

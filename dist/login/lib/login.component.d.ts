@@ -36,6 +36,9 @@ export declare class LoginComponent implements OnInit {
     forgetRouteingUrl: any;
     routerStatus: any;
     defaultLoginUrl: any;
+    ipinfoidValue: any;
+    ipinfoid: any;
+    login_ip_info: any;
     loginForm: FormGroup;
     project_name: any;
     redirect_url: any;
