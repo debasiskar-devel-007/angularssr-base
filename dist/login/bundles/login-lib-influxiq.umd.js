@@ -1767,6 +1767,7 @@
                             // this is use for reset the from
                             _this.formDirective.resetForm();
                             _this.message = ''; // clear the from
+                            _this.openSnackBar1(result.msg);
                         }
                         else {
                             // display error message on html
@@ -1793,17 +1794,31 @@
                 });
             };
         /********* openSnackBar function open end here*********/
-        // This is use for navigate this component to sign-Up component 
         /**
          * ****** openSnackBar function open end here********
+         * @param {?} message
          * @return {?}
          */
-        // This is use for navigate this component to sign-Up component 
-        ForgetPasswordComponent.prototype.signup = /**
+        ForgetPasswordComponent.prototype.openSnackBar1 = /**
          * ****** openSnackBar function open end here********
+         * @param {?} message
          * @return {?}
          */
+            function (message) {
+                this.snackBar.open(message, 'ok', {
+                    duration: this.durationInSeconds * 1000,
+                });
+            };
+        // This is use for navigate this component to sign-Up component 
+        // This is use for navigate this component to sign-Up component 
+        /**
+         * @return {?}
+         */
+        ForgetPasswordComponent.prototype.signup =
             // This is use for navigate this component to sign-Up component 
+            /**
+             * @return {?}
+             */
             function () {
                 this.router.navigateByUrl('/' + this.signUpRouteingUrlValue);
             };

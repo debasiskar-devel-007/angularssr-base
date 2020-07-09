@@ -1467,6 +1467,7 @@ class ForgetPasswordComponent {
                     // this is use for reset the from
                     this.formDirective.resetForm();
                     this.message = ''; // clear the from
+                    this.openSnackBar1(result.msg);
                 }
                 else {
                     // display error message on html
@@ -1487,9 +1488,18 @@ class ForgetPasswordComponent {
     }
     /**
      * ****** openSnackBar function open end here********
+     * @param {?} message
      * @return {?}
      */
+    openSnackBar1(message) {
+        this.snackBar.open(message, 'ok', {
+            duration: this.durationInSeconds * 1000,
+        });
+    }
     // This is use for navigate this component to sign-Up component 
+    /**
+     * @return {?}
+     */
     signup() {
         this.router.navigateByUrl('/' + this.signUpRouteingUrlValue);
     }

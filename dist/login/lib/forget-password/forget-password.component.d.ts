@@ -36,6 +36,7 @@ export declare class ForgetPasswordComponent implements OnInit {
     /********* openSnackBar function open start here*********/
     openSnackBar(): void;
     /********* openSnackBar function open end here*********/
+    openSnackBar1(message: string): void;
     signup(): void;
     login(): void;
     inputUntouched(val: any): void;

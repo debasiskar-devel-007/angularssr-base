@@ -141,6 +141,7 @@ set buttonName (buttonNameVal :any){
           // this is use for reset the from
           this.formDirective.resetForm();
           this.message = '';         // clear the from
+          this.openSnackBar1(result.msg);
         } else {
 
           // display error message on html
@@ -163,6 +164,17 @@ set buttonName (buttonNameVal :any){
     });
   }
  /********* openSnackBar function open end here*********/
+
+
+
+
+ openSnackBar1(message: string) {
+  this.snackBar.open(message, 'ok', {
+    duration: this.durationInSeconds * 1000,
+  });
+}
+
+
 
 
   // This is use for navigate this component to sign-Up component 

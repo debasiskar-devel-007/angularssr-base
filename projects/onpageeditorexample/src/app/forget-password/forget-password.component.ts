@@ -27,7 +27,7 @@ export class ForgetPasswordComponent implements OnInit {
   };
   public buttonName: any = 'Update Password';
   public formTitle: any = 'Forget Password';
-  public serverUrl:any = 'http://166.62.39.137:5050/';
+  public serverUrl:any = 'https://x4gcdrxvbh.execute-api.us-east-1.amazonaws.com/dev/';
   public addEndpoint: any = {
     endpoint:'forgetpassword'
   };
