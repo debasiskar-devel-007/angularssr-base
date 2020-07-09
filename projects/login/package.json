@@ -1,6 +1,6 @@
 {
   "name": "login-lib-influxiq",
-  "version": "0.1.8",
+  "version": "0.1.12",
   "bugs": "https://github.com/debasiskar-devel-007/login-lib/issues",
   "repository": {
     "type": "git",

@@ -778,22 +778,15 @@
                     _this.currentUrl = event.url;
                 }
             }));
-            // console.log("++++++++++++++++++++++++++++=________+++++ this.previousUrl",this.previousUrl)
-            // console.log("++++++++++++++++++++++++++++=________+++++ this.currentUrl",this.currentUrl)
             this.route.params.subscribe(( /**
              * @param {?} params
              * @return {?}
              */function (params) {
-                // console.log('++++++',params['id']);
                 _this.redirect_url = params['path'];
-                // if (params['id'] != '' || params['id'] != null) {
-                //   this.redirect_url = params['id'];
-                // }
-                // console.log('redirect_url',this.redirect_url)
+                // console.log('this.redirect_url',this.redirect_url)
             }));
             /**secret key workes here */
             this.secret = this.randomString(9, 'aA#!');
-            console.log(this.secret);
             this.cookieService.set('secret', this.secret);
             this.loginForm = this.fb.group({
                 email: ['', forms.Validators.compose([forms.Validators.required, forms.Validators.pattern(/^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/)])],
@@ -808,7 +801,7 @@
                 this.loader = (forLoaderVal) || '<no name set>';
                 this.loader = forLoaderVal;
                 // console.log('++++',this.loader)
-                console.log('++++-----', this.loader);
+                // console.log('++++-----',this.loader)
             },
             enumerable: true,
             configurable: true
@@ -907,7 +900,7 @@
              */ function (routerStatusval) {
                 this.routerStatusValue = (routerStatusval) || '<no name set>';
                 this.routerStatusValue = routerStatusval;
-                console.log(this.routerStatusValue);
+                // console.log(this.routerStatusValue)
             },
             enumerable: true,
             configurable: true
@@ -919,7 +912,7 @@
              */ function (defaultUrlVal) {
                 this.defaultUrlValue = (defaultUrlVal) || '<no name set>';
                 this.defaultUrlValue = defaultUrlVal;
-                console.log(this.defaultUrlValue);
+                // console.log(this.defaultUrlValue)
             },
             enumerable: true,
             configurable: true
@@ -930,7 +923,7 @@
              * @return {?}
              */ function (id) {
                 this.ipinfoidValue = id;
-                console.log(this.ipinfoidValue);
+                // console.log(this.ipinfoidValue)
             },
             enumerable: true,
             configurable: true
@@ -945,12 +938,10 @@
                 var _this = this;
                 /** @type {?} */
                 var url = "https://ipinfo.io/?format=json&token=" + this.ipinfoidValue;
-                console.log(url);
                 this.http.get(url).subscribe(( /**
                  * @param {?} res
                  * @return {?}
                  */function (res) {
-                    console.log(res);
                     _this.login_ip_info = res;
                 }));
                 this.apiService.clearServerUrl(); // Clear the server url
@@ -959,14 +950,12 @@
                  */function () {
                     _this.apiService.setServerUrl(_this.serverURL); // set the server url 
                 }), 50);
-                // console.log(this.serverURL);
                 this.apiService.clearaddEndpoint(); // clear the endpoint 
                 setTimeout(( /**
                  * @return {?}
                  */function () {
                     _this.apiService.setaddEndpoint(_this.endpointValue); // set the endpoint
                 }), 50);
-                // console.log(this.addEndpointData.endpoint);
             };
         /**
          * @param {?} length
@@ -1007,10 +996,8 @@
             function () {
                 var _this = this;
                 this.loader = 1;
-                console.log(this.loader);
                 /** @type {?} */
                 var x;
-                // use for validation checking
                 for (x in this.loginForm.controls) {
                     this.loginForm.controls[x].markAsTouched();
                 }
@@ -1019,32 +1006,23 @@
                     var data = this.loginForm.value;
                     data.login_data = this.login_ip_info;
                     data.login_time = new Date().getTime();
-                    console.log(data);
                     this.apiService.addLogin(data).subscribe(( /**
                      * @param {?} response
                      * @return {?}
                      */function (response) {
-                        console.log(_this.routerStatusValue);
+                        var e_1, _a, e_2, _b;
                         if (response.status == "success") {
-                            console.log(_this.routerStatusValue.data, _this.router.url, _this.defaultUrlValue);
-                            // this.cookieService.set('user_details', JSON.stringify(response.item[0]));
                             _this.cookieService.set('jwtToken', response.token);
                             if (_this.router.url == _this.defaultUrlValue) {
-                                console.log(response, 'response');
-                                console.log(_this.routerStatusValue.data, _this.router.url, _this.defaultUrlValue, '1');
-                                var _loop_1 = function (key1) {
-                                    var e_1, _a, e_2, _b;
+                                for (var key1 in _this.routerStatusValue.data) {
                                     if (response.item[0].type === _this.routerStatusValue.data[key1].type) {
                                         try {
-                                            // console.log(this.routerStatusValue.data[key1].cookies,'cookies');
                                             for (var _c = __values(Object.entries(_this.routerStatusValue.data[key1].cookies)), _d = _c.next(); !_d.done; _d = _c.next()) {
                                                 var _e = __read(_d.value, 2), keys = _e[0], values = _e[1];
                                                 try {
                                                     for (var _f = __values(Object.entries(response.item[0])), _g = _f.next(); !_g.done; _g = _f.next()) {
                                                         var _h = __read(_g.value, 2), key = _h[0], value = _h[1];
                                                         if (values == key) {
-                                                            console.log(key, '-------', value, '-------PP');
-                                                            console.log(values, '----+++---', keys, '----+++---PP');
                                                             _this.cookieService.set(keys, JSON.stringify(value));
                                                         }
                                                     }
@@ -1077,24 +1055,16 @@
                                                     throw e_1.error;
                                             }
                                         }
-                                        // console.log(data, 'cookies')
-                                        // return;
-                                        // console.log(response.item[0].type, this.router.url,  this.routerStatusValue.data[key1].type)
-                                        setTimeout(( /**
-                                         * @return {?}
-                                         */function () {
+                                        if (_this.cookieService.get('redirectUrl') == null || _this.cookieService.get('redirectUrl') == '' || _this.cookieService.get('redirectUrl') == undefined || _this.cookieService.get('redirectUrl').length < 1) {
                                             _this.router.navigateByUrl('/' + _this.routerStatusValue.data[key1].routerNav);
-                                        }), 1000);
-                                        // console.log(this.routerStatusValue.data[key1].routerNav)
+                                        }
+                                        else {
+                                            _this.router.navigateByUrl(_this.cookieService.get('redirectUrl'));
+                                        }
                                     }
-                                };
-                                for (var key1 in _this.routerStatusValue.data) {
-                                    _loop_1(key1);
                                 }
                             }
                             else {
-                                // this.loader = 0; 
-                                // console.log('++++++ redirect_url//',this.redirect_url);
                                 _this.router.navigateByUrl(_this.redirect_url);
                             }
                             _this.loader = 0;
@@ -2055,6 +2025,9 @@
                         result = response;
                         console.log(result);
                         if (result.status == "success") {
+                            if (_this.addEndpointValue.redirect_url != null) {
+                                _this.router.navigateByUrl(_this.addEndpointValue.redirect_url);
+                            }
                             _this.openSnackBar();
                             _this.formDirective.resetForm(); // Use for reset the form
                             _this.message = '';

@@ -3,7 +3,7 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
-import {OnPageEditorModule} from 'on-page-editor';
+import { OnPageEditorModule } from 'on-page-editor';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import { ContactusComponent } from './contactus/contactus.component';
 import { ContactusModule } from 'contactus';
@@ -21,7 +21,7 @@ import { ResetFromComponent } from './reset-from/reset-from.component';
 import { BlogsModule } from 'blogs';
 import { FromModule } from 'from';
 import { AuthGuard } from './auth.guard';
-import { NewstitleComponent} from './newstitle/newstitle.component';
+import { NewstitleComponent } from './newstitle/newstitle.component';
 // import { NewsTitleModule } from 'news-title';
 
 @NgModule({
@@ -52,7 +52,7 @@ import { NewstitleComponent} from './newstitle/newstitle.component';
   ],
   providers: [AuthGuard],
   bootstrap: [AppComponent],
-  schemas:[CUSTOM_ELEMENTS_SCHEMA]
+  schemas: [CUSTOM_ELEMENTS_SCHEMA]
 
 })
 export class AppModule { }
