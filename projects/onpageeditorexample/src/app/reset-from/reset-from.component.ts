@@ -13,7 +13,8 @@ export class ResetFromComponent implements OnInit {
   public serverUrl: any = 'https://o820cv2lu8.execute-api.us-east-2.amazonaws.com/production/api/';
   public addEndpoint: any = {
     endpoint:'addorupdatedata',
-    source:'usermanagement'
+    source:'usermanagement',
+    redirect_url : '/login'
   };
   
   constructor() { }

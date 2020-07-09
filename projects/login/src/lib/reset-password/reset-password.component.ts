@@ -52,9 +52,9 @@ export class ResetPasswordComponent implements OnInit {
 
   @Input()      // set the from logo
 
-set logo(logoVal : any) {
-  this.logoValue = logoVal;
-}
+  set logo(logoVal: any) {
+    this.logoValue = logoVal;
+  }
 
 
   // @Input()          // setting the navigate By Sign Up Url from project
@@ -65,7 +65,7 @@ set logo(logoVal : any) {
   // }
   public accesscode: string;
 
-  constructor(public fb: FormBuilder, public http: HttpClient, public router: Router, public route: ActivatedRoute, public apiService: ApiService,  private snackBar: MatSnackBar) {
+  constructor(public fb: FormBuilder, public http: HttpClient, public router: Router, public route: ActivatedRoute, public apiService: ApiService, private snackBar: MatSnackBar) {
 
     this.route.params.subscribe(params => {
 
@@ -114,7 +114,7 @@ set logo(logoVal : any) {
 
 
 
-/********* Reset Password Form Submit start here*********/ 
+  /********* Reset Password Form Submit start here*********/
   resetPasswordSubmit() {
     console.log(this.resetPasswordForm.value);
     let x: any;
@@ -136,13 +136,15 @@ set logo(logoVal : any) {
         result = response;
         console.log(result);
         if (result.status == "success") {
+          if (this.addEndpointValue.redirect_url != null) {
+            this.router.navigateByUrl(this.addEndpointValue.redirect_url);
+          }
           this.openSnackBar();
           this.formDirective.resetForm();       // Use for reset the form
           this.message = '';
         } else {
           this.message = result.msg;
         }
-
       })
     }
   }
@@ -155,7 +157,7 @@ set logo(logoVal : any) {
   }
 
 
-/********* Reset Password Form Submit end here*********/ 
+  /********* Reset Password Form Submit end here*********/
 
 
   inputUntouched(val: any) {

@@ -15,7 +15,7 @@ import { NewstitleComponent } from './newstitle/newstitle.component';
 
 const appRoutes: Routes = [
     {
-        path: 'about2', component: AboutusComponent, data: {
+        path: 'about2', component: AboutusComponent, canActivate: [AuthGuard], data: {
             meta: {
                 title: 'About US',
                 description: 'Have you seen my rubber duckie?'
@@ -23,7 +23,7 @@ const appRoutes: Routes = [
         }
     },
     {
-        path: 'about', component: AboutusComponent, data: {
+        path: 'about', component: AboutusComponent, canActivate: [AuthGuard], data: {
             meta: {
                 title: 'About US',
                 description: 'Have you seen my rubber duckie?'
@@ -32,7 +32,7 @@ const appRoutes: Routes = [
     },
 
     {
-        path: 'contact', component: ContactusComponent,
+        path: 'contact', component: ContactusComponent, canActivate: [AuthGuard],
         data: {
             meta: {
                 title: 'Contact Us',
@@ -42,7 +42,7 @@ const appRoutes: Routes = [
     },
 
     {
-        path: 'home', component: HomeComponent,
+        path: 'home', component: HomeComponent, canActivate: [AuthGuard],
         data: {
             meta: {
                 title: 'Home',
@@ -53,7 +53,7 @@ const appRoutes: Routes = [
     },
 
     {
-        path: 'socialMedia', component: SocialMediaComponent,
+        path: 'socialMedia', component: SocialMediaComponent, canActivate: [AuthGuard],
         data: {
             meta: {
                 title: 'Home',
@@ -90,7 +90,7 @@ const appRoutes: Routes = [
         }
     },
     {
-        path: 'newstitle', component: NewstitleComponent,
+        path: 'newstitle', component: NewstitleComponent, canActivate: [AuthGuard],
         data: {
             meta: {
                 title: 'Home',
@@ -100,7 +100,7 @@ const appRoutes: Routes = [
     },
 
     {
-        path: 'sign-up', component: SignUpComponent,
+        path: 'sign-up', component: SignUpComponent, canActivate: [AuthGuard],
         data: {
             meta: {
                 title: 'Home',
@@ -110,7 +110,7 @@ const appRoutes: Routes = [
     },
 
     {
-        path: 'forget-password', component: ForgetPasswordComponent,
+        path: 'forget-password', component: ForgetPasswordComponent, canActivate: [AuthGuard],
         data: {
             meta: {
                 title: 'Home',
@@ -127,7 +127,9 @@ const appRoutes: Routes = [
                 description: 'Have you seen my rubber duckie?'
             }
         }
-    }
+    },
+    { path: '', redirectTo: 'login', pathMatch: 'full' },
+    { path: '**', component: LoginComponent },
 ];
 
 @NgModule({
