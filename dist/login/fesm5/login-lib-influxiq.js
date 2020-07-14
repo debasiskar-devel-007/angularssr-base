@@ -43,7 +43,6 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTreeModule } from '@angular/material/tree';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { FormBuilder, Validators, FormGroupDirective, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpHeaders, HttpClientModule } from '@angular/common/http';
@@ -2232,7 +2231,6 @@ var LoginModule = /** @class */ (function () {
                         DemoMaterialModule,
                         FormsModule,
                         ReactiveFormsModule,
-                        BrowserAnimationsModule,
                         CommonModule,
                         HttpClientModule
                     ],
