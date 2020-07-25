@@ -29,9 +29,9 @@ export class FileUploadComponent implements OnInit {
   public dialogRef: any;
   public loading: boolean = false;
   public num: any=[];
-
+  public filename:any;
   // image cropped section for test 
-
+  filearray: any = [];
   imageChangedEvent: any = [];
   croppedImage: any = [];
 
@@ -67,8 +67,15 @@ export class FileUploadComponent implements OnInit {
   /* Select File Proccess */
   selectFiles(event: any, ev1: any) {
     //this.fileChangeEvent(ev1);,
-    console.log('>>>>event',event)
+    console.log('>>>>event',event);
     console.log('>>>>ev1',ev1)
+
+    // for(let i in ev1){
+    this.filename=ev1;
+    // }
+    // setTimeout(() => {
+    console.log(this.filename,'??')
+    // }, 500);
 
     // this.imageChangedEvent=event;
     this.loading = true;
@@ -164,7 +171,9 @@ export class FileUploadComponent implements OnInit {
   }
 
   /* Upload */
-  uploading(index) {
+  uploading(index:any) {
+
+    console.log(index,'/?',this.filename)
     var postData: any = {
       file: this.files[index],
       type: this.configData.type,
@@ -172,34 +181,87 @@ export class FileUploadComponent implements OnInit {
       prefix: this.configData.prefix,
       uploadType: this.configData.uploadType,
       conversion_needed: this.configData.conversionNeeded,
-      bucketname: this.configData.bucketName
-
+      bucketname: this.configData.bucketName,
+      basepath:this.configData.baseUrl + this.configData.bucketName
     }
 
-    var url: string = this.configData.baseUrl + this.configData.endpoint + '?path=' + this.configData.path + '&prefix=' + this.configData.prefix + '&type=' + this.configData.type + '&rand=' + index;
-    this.fileUploadService.upload(url, postData).subscribe(
-      (response) => {
-        let result: any = response;
-        switch (result.status) {
-          case 'complete':
-            this.files[index].upload = result;
-            this.configData.files = this.files;
-            this.openSnackBar('Successfully Uploaded !!', 'Undo');
-            break;
-          case 'error':
-            this.files[index].upload = result.data;
-            this.openSnackBar(result.data, '');
-            break;
-          default:
-            this.files[index].upload = result;
-            break;
-        }
-      }, (err) => {
-        this.files[index] = { status: 'error' };
-        this.openSnackBar('An error occurred !!', 'Retry');
-      }
-    );
+    //-----------------------old media server upload-------------------//
+    // var url: string = this.configData.baseUrl + this.configData.endpoint + '?path=' + this.configData.path + '&prefix=' + this.configData.prefix + '&type=' + this.configData.type + '&rand=' + index;
+    // this.fileUploadService.upload(url, postData).subscribe(
+    //   (response) => {
+    //     let result: any = response;
+    //     switch (result.status) {
+    //       case 'complete':
+    //         this.files[index].upload = result;
+    //         this.configData.files = this.files;
+    //         this.openSnackBar('Successfully Uploaded !!', 'Undo');
+    //         break;
+    //       case 'error':
+    //         this.files[index].upload = result.data;
+    //         this.openSnackBar(result.data, '');
+    //         break;
+    //       default:
+    //         this.files[index].upload = result;
+    //         break;
+    //     }
+    //   }, (err) => {
+    //     this.files[index] = { status: 'error' };
+    //     this.openSnackBar('An error occurred !!', 'Retry');
+    //   });
+    //-----------------------old-------------------//
+
+
+    //----------------New direct bucket upload------------//
+    const val = this.filename[0];
+
+    console.log(val.name)
+
+    this.filearray.push(val);
+
+    const reader = new FileReader();
+    const file: any = val.name;
+    let temploader = this.filename;
+
+    console.log(reader);
+    console.log(file,'//',this.filename);
+
+    reader.onloadend = (e) => {
+      fetch(this.configData.baseUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          postData
+        })
+      })
+      .then(function(response) {
+        console.log('buck', response);
+        return response.json();
+      })
+      .then(function(json) {
+        return fetch(json.uploadURL, {
+          method: 'PUT',
+          body: new Blob([reader.result], { type: this.configData.type })
+        });
+      })
+      .then(function() {
+        // return 'success';
+        // file.uploaded = 1;
+        file.fileservername = this.configData.prefix + this.filename;
+        // console.log(file.type, 'file.type');
+        // temploader = null;
+        // var uploadedFileNode = document.createElement('div');
+        // uploadedFileNode.innerHTML = '<a href="//s3.amazonaws.com/slsupload/'+ file.name +'">'+ file.name +'</a>';
+        // list.appendChild(uploadedFileNode);
+      });
+    };
+    reader.readAsArrayBuffer(file);
+
   }
+
+
+
 
   /* Remove Files */
   removeFiles(index: any = null) {

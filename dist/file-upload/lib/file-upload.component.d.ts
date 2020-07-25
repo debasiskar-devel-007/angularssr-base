@@ -20,6 +20,8 @@ export declare class FileUploadComponent implements OnInit {
     dialogRef: any;
     loading: boolean;
     num: any;
+    filename: any;
+    filearray: any;
     imageChangedEvent: any;
     croppedImage: any;
     imgResultBeforeCompress: string;

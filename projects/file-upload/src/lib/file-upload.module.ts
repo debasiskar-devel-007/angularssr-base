@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { FileUploadComponent } from './file-upload.component';
-import { BrowserModule } from '@angular/platform-browser';
+// import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MaterialModule } from './Module/material-module';
 import { HttpClientModule } from '@angular/common/http';
@@ -10,7 +10,7 @@ import { AlertMessageComponent } from './component/alert-message/alert-message.c
 import { DialogBoxComponent } from './component/dialog-box/dialog-box.component';
 import { PreviewFilesComponent } from './component/preview-files/preview-files.component';
 import { ImageCropperModule } from 'ngx-image-cropper';
-
+import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [
@@ -21,8 +21,9 @@ import { ImageCropperModule } from 'ngx-image-cropper';
     PreviewFilesComponent
   ],
   imports: [
-    BrowserModule,
+    // BrowserModule,
     MaterialModule,
+    CommonModule,
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
@@ -34,7 +35,6 @@ import { ImageCropperModule } from 'ngx-image-cropper';
   entryComponents: [
     AlertMessageComponent,
     DialogBoxComponent,
-    PreviewFilesComponent
-  ]
+    PreviewFilesComponent]
 })
 export class FileUploadModule { }
