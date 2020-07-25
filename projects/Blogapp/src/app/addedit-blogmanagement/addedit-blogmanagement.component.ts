@@ -12,7 +12,7 @@ import { environment } from '../../environments/environment';
 export class AddeditBlogmanagementComponent implements OnInit {
 
 
-    server: any ='http://localhost:3000/dev/';
+    server: any ='http://localhost:3000/dev/api1/';
 
 
     addUrl: any = 'addorupdateblogdata'; //endpoint for add blog

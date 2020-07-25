@@ -169,7 +169,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
 
     if (this.action2!='edit')
       setTimeout(() => {
-        this.addYoutubeVideo('', '', '');
+        // this.addYoutubeVideo(null, null,null);
       }, 500)
 
     setTimeout(() => {
@@ -228,6 +228,7 @@ export class AddeditBlogmanagementComponent implements OnInit {
 
 
       for (const vid in this.setData.video) {
+        
         this.addYoutubeVideo(this.setData.video[vid].video_url,
           this.setData.video[vid].video_title,
           this.setData.video[vid].video_description);

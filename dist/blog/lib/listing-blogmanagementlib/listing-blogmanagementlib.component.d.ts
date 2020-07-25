@@ -4,6 +4,7 @@ import { ApiService } from '../api.service';
 export declare class ListingBlogmanagementlibComponent implements OnInit {
     private apiService;
     value: any;
+    category_names: any;
     blogListConfig: any;
     loader: boolean;
     sortdata: any;

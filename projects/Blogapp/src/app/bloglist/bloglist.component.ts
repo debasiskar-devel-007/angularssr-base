@@ -10,13 +10,13 @@ import {ActivatedRoute,Router} from '@angular/router';
 })
 export class BloglistComponent implements OnInit {
  
-
+  // https://x4gcdrxvbh.execute-api.us-east-1.amazonaws.com/dev/api1/getblogmanagementlistdata
     /************** lib list setup start here *************/
     public blogListConfig:any = {
 
-      apiBaseUrl: "http://localhost:3000/dev/",
-      endpoint: "http://localhost:3000/dev/getblogcategorylistdata",
-      endpointc: "http://localhost:3000/dev/getblogcategorylistdata-count",
+      apiBaseUrl: "https://x4gcdrxvbh.execute-api.us-east-1.amazonaws.com/dev/api1/",
+      endpoint: "https://x4gcdrxvbh.execute-api.us-east-1.amazonaws.com/dev/api1/getblogcategorylistdata",
+      endpointc: "https://x4gcdrxvbh.execute-api.us-east-1.amazonaws.com/dev/api1/getblogcategorylistdata-count",
       // apiBaseUrl: environment.apiBaseUrl,
 
       listEndPoint: "getblogcategorylistdata",
@@ -38,7 +38,7 @@ export class BloglistComponent implements OnInit {
         this.blogListConfig.datasource = resolveData.blogCatList.results.res;
         
         console.log( this.blogListConfig.datasource,'====')
-        this.blogListConfig.jwtToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODgyMzExNzgsImRhdGEiOiJXbTFTYldNeVducGFSMXBzWkROS2FWa3pXbWxaTTFwcFdUTmFhUT09IiwiaWF0IjoxNTg4MjI3NTc4fQ.fZRQq_NJ5K_uwluWDC59U-ZjvnQC1nCRufBYzKauDiw"
+        this.blogListConfig.jwtToken = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODg3NDQ2NzAsImRhdGEiOiJXbTFTYldNeVducGFSMXBzWkROS2FWa3pXbWxaTTFwcFdUTmFhUT09IiwiaWF0IjoxNTg4NzQxMDcwfQ.iYQz51P545DBGjMJPGdFuQiICgFDnN7eBGPb8oVelWY"
       });
     }
   ngOnInit() {

@@ -26,14 +26,14 @@ const appRoutes: Routes = [
       "field":'priority'       
   } 
 }, 
-endpoint: 'getblogcategorylistdata' }
+endpoint: 'api1/getblogcategorylistdata' }
   },
 
   {
     path: 'blog-category/edit/:_id',
     component: AddComponent,
     resolve: { blogCatList: ResolveService },
-    data: { requestcondition: { source: '', condition: {_id:"_id"} }, endpoint: 'getcategorydata' }
+    data: { requestcondition: { source: '', condition: {_id:"_id"} }, endpoint: 'api1/getcategorydata' }
   },
 
 
@@ -53,14 +53,14 @@ endpoint: 'getblogcategorylistdata' }
       "field":'priority'       
   }
   },
-  endpoint: 'getblogmanagementlistdata' 
+  endpoint: 'api1/getblogmanagementlistdata' 
 }
   },
   {
     path: 'blog-management/edit/:_id',
     component: AddeditBlogmanagementComponent,
     resolve: { blogList: ResolveService },
-    data: { requestcondition: { source: '', condition: {_id:"_id"} }, endpoint: 'getblogdata' }
+    data: { requestcondition: { source: '', condition: {_id:"_id"} }, endpoint: 'api1/getblogdata' }
   },
 ];
 

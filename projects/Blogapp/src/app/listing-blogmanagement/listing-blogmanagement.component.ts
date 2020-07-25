@@ -13,9 +13,9 @@ export class ListingBlogmanagementComponent implements OnInit {
   //Blogs Lib List
   public blogListConfig: any = {
 
-    apiBaseUrl: "http://localhost:3000/dev/",
-    endpoint: "http://localhost:3000/dev/getblogmanagementlistdata",
-    endpointc: "http://localhost:3000/dev/getblogmanagementlistdata-count",
+    apiBaseUrl: "http://localhost:3000/dev/api1/",
+    endpoint: "http://localhost:3000/dev/api1/getblogmanagementlistdata",
+    endpointc: "http://localhost:3000/dev/api1/getblogmanagementlistdata-count",
 
     // apiBaseUrl: environment.apiBaseUrl,
 
@@ -39,8 +39,9 @@ export class ListingBlogmanagementComponent implements OnInit {
     this.activatedRoute.data.subscribe((resolveData:any) => {
       console.log(resolveData)
        this.blogListConfig.datasource = resolveData.blogList.results.res;
+       console.log(this.blogListConfig.datasource)
       // this.blogListConfig.jwtToken = this.cookieService.get('jwtToken');
-      this.blogListConfig.jwtToken ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmb28iOiJiYXIiLCJleHAiOjE1ODYxNzk3MzcsImlhdCI6MTU4NjA5MzMzN30.62F_1FAIekcBiBYaVnAFvEMeLN1Z5_CP3lJZcgEnfe4"
+      this.blogListConfig.jwtToken ="eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE1ODkxMjUwMTYsImRhdGEiOiJXbTFTYldNeVducGFSMXBzWkROS2FWa3pXbWxaTTFwcFdUTmFhUT09IiwiaWF0IjoxNTg5MTIxNDE2fQ.2QYX2-vjdD8ZRuNb2melYURMkrNhOJIfps6wOpfPXpI"
 
     });
   }

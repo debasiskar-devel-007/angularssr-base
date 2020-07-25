@@ -133,10 +133,18 @@
 
                 <!-- --------------------------------------Video URL--------------------- -->
                 <mat-label>Attach Videos:</mat-label>
+
+                <div>
+                    <button type="button" (click)="addYoutubeVideo('','','')">
+                        <mat-icon matSuffix>add_box</mat-icon>
+                    </button>
+                </div>
+                
                 <div formArrayName="video"
                     *ngFor="let creds of blogManagementForm.controls.video?.value; let i = index; trackBy: trackByFn">
                     <ng-container [formGroupName]="i">
                         <mat-form-field class="video_embed">
+
                             <input type="text" matInput formControlName="video_url">
                             <span matPrefix>{{ video_prefix }}</span>
                             <mat-icon matSuffix class="clickable" (click)="preview_video(i)">remove_red_eye</mat-icon>
@@ -162,14 +170,22 @@
                             <mat-icon matSuffix>description</mat-icon>
                         </mat-form-field>
 
-                        <button type="button" (click)="addYoutubeVideo('','','')">
+                        <!-- <button type="button" (click)="addYoutubeVideo('','','')">
                             <mat-icon matSuffix>add_box</mat-icon>
-                        </button>
+                        </button> -->
                         <span *ngIf="i!=0"><button type="button" (click)="deleteCreds()">
                                 <mat-icon matSuffix>delete</mat-icon>
                             </button></span>
                     </ng-container>
+
                 </div><br>
+                <div>
+                    <button type="button" (click)="addYoutubeVideo('','','')">
+                        <mat-icon matSuffix>add_box</mat-icon>
+                    </button>
+                </div>
+                
+
                 <!-- ------------------------------------------------------------------- -->
 
 

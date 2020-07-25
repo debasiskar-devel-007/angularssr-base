@@ -11,7 +11,7 @@
     display: block!important;  }
 
     .mat-card{ background:white!important;}
-    .mat-dialog-content{padding: 10px !important; border-radius: 0; overflow: hidden !important;}
+    .mat-dialog-content{padding: 10px !important; border-radius: 0; overflow: none !important;}
     .mat-dialog-content .mat-dialog-title{
         background-color: #4f4f4f;
         border: 0px;
@@ -96,7 +96,54 @@
         font-size: 16px;
         font-weight: 600;
     }
-    .mat-dialog-content {
+    /* .mat-dialog-content {
         padding: 0 24px !important;
         box-shadow: none !important;
     }
+
+    confirmdialog .mat-dialog-content .mat-card{
+        flex-wrap:wrap;
+    }
+    
+    confirmdialog .mat-dialog-content .mat-card #dialogdatavd_array,
+    confirmdialog .mat-dialog-content .mat-card #dialogdataimg_array,
+    confirmdialog .mat-dialog-content .mat-card #dialogdataTags{
+        flex:1 1 100%;
+    }
+    
+    confirmdialog .mat-dialog-content .mat-card #dialogdatavd_array p br, 
+    confirmdialog .mat-dialog-content .mat-card #dialogdataimg_array p br,
+    confirmdialog .mat-dialog-content .mat-card #dialogdataTags div br{display: none;}
+
+    confirmdialog .mat-dialog-content > div{
+        position: relative;
+        overflow: auto;
+       
+    }
+
+    confirmdialog .mat-dialog-content .mat-card #dialogdatavd_array p, 
+    confirmdialog .mat-dialog-content .mat-card #dialogdataimg_array p
+    {
+        position: relative;
+        padding-bottom: 56.25%;
+        height: 0;
+        overflow-y: scroll;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    
+    confirmdialog .mat-dialog-content .mat-card #dialogdatavd_array p iframe, 
+    confirmdialog .mat-dialog-content .mat-card #dialogdataimg_array p img,
+    confirmdialog .mat-dialog-content .mat-card #dialogdataTags p img{        
+      width: 100%;
+      margin-bottom:10px;
+      height: auto;
+    }
+    confirmdialog .mat-dialog-content .mat-card #dialogdatavd_array p iframe:last-child, 
+    confirmdialog .mat-dialog-content .mat-card #dialogdataimg_array p img:last-child,
+    confirmdialog .mat-dialog-content .mat-card #dialogdataTags p img:last-child{
+        margin-bottom:0;
+    } */
+
+
+    

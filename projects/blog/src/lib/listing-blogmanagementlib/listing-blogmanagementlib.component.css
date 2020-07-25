@@ -1,1 +1,35 @@
 body{ display: none!important;}
+
+/* .modalmainwrapper{
+    max-height: 79vh;
+    overflow: auto;
+}
+
+.terms_modal .mat-dialog-container, .privacy_modal .mat-dialog-container{
+    position: relative;
+    overflow: inherit !important;
+    border: 5px solid #424c56;
+    background: #222a33;
+} */
+.formfilterdiv .mat-dialog-content .mat-card{
+    flex-wrap:wrap;
+}
+
+.formfilterdiv .mat-card-header{
+    flex:1 1 100%;
+}
+
+.formfilterdiv #dialogdatavd_array p{
+    position: relative;
+    padding-bottom: 56.25%;
+    height: 0;
+    overflow-y: scroll;
+}
+
+.formfilterdiv #dialogdatavd_array p iframe{
+    position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}

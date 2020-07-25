@@ -16,8 +16,8 @@ export class AddComponent implements OnInit {
 
   public configAddEdit: any = {
     action: "add",
-    endpoint: "http://localhost:3000/dev/addorupdateblogcategory", //add endpoint
-    endpoint2:"http://localhost:3000/dev/getcategorydata ", //get blog cat data list by endpoint
+    endpoint: "http://localhost:3000/dev/api1/addorupdateblogcategory", //add endpoint
+    endpoint2:"http://localhost:3000/dev/api1/getcategorydata ", //get blog cat data list by endpoint
 
     // source: "blog_category",
     condition: {},

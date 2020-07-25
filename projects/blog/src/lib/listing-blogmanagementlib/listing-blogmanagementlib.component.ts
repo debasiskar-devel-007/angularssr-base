@@ -11,6 +11,7 @@ import { ApiService } from '../api.service';
 export class ListingBlogmanagementlibComponent implements OnInit {
 
 public value:any=[];
+public category_names:any=[];
 
   // ===========================================declaration================================
   blogListConfig: any;
@@ -20,7 +21,7 @@ public value:any=[];
  sortdata:any={
   "type":'desc',
   "field":'priority',
-  "options":['author','blogcategory','blogtitle','priority']
+  "options":['author','blogcategory','blogtitle','priority','createdon_datetime']
 };
 // datacollection
 // datacollection: any='getblogmanagementlistdata';
@@ -44,9 +45,7 @@ public wesitesVal:any;
   @Input()
   set config(receivedData: any) {
 for (let i in receivedData.datasource) {
-  this.value.push(
-    { 'name': receivedData.datasource[i].blogcategory, val: receivedData.datasource[i].blogcategory }
-    );
+  this.value.push(receivedData.datasource[i].blogcategory);
 }
 for (let i in receivedData.datasource) {
   for (let val in receivedData.datasource[i].tags) {
@@ -57,6 +56,22 @@ for (let i in receivedData.datasource) {
   
 
 }
+
+// console.log(this.value,'>>>')
+
+  const arr = this.value;
+  // console.log(arr)
+  const filteredArray = arr.filter(function(item, pos) {
+    return arr.indexOf(item) == pos;
+  });
+  // this.category_name = [];
+  for (const key in filteredArray) {
+    // console.log(filteredArray[key])
+    this.category_names.push({ name: filteredArray[key], val: filteredArray[key] });
+  }
+  // console.log(this.category_names,'++>>>')
+
+
    this.wesitesVal = receivedData.datasource.website;
   //  console.log("+++++++++++++++++",this.wesitesVal);
     this.blogListConfig = {
@@ -67,14 +82,15 @@ for (let i in receivedData.datasource) {
       datasource: receivedData.datasource,
       tableName: receivedData.tableName,
       datacollection:receivedData.datacollection,
-      listArray_skip: ["_id", "userId", "created_at", "updated_at", "image", "metatitle", "metadesc", "description", "credentials", "blogs_file", "blogs_image","blogtitle_search","author_search","video","blogcat","profile_picture","tagsearch","featured","maskblog1","maskblog2","maskblog3","tags_search","website"],
+      listArray_skip: ["_id", "userId", "created_at", "updated_at", "metatitle", "metadesc", "credentials", "blogs_file","blogtitle_search","author_search","video","blogcat","profile_picture","tagsearch","featured","maskblog1","maskblog2","maskblog3","tags_search","website",'description'],
       listArray_modify_header: {
-        "blogtitle": "Blog Title", "description": "Description","date added":"Date","profile picture":"Profile Picture","tags":"Tags",
+        "blogtitle": "Blog Title","date added":"Date","profile picture":"Profile Picture","tags":"Tags",
         "priority": "Priority", "status": "Status", "parentcategoryname": "Parent Category Name",
         "author": "Author","blogcat":"Blog Category","date":"Date","blogcategory":"Blog Category",
-        "featured search":"Featured","createdon datetime":"Date","createdon_datetime":"Date","featured":"Featured"
+        "featured search":"Featured","createdon_datetime":"Added On","featured":"Featured",
+        "description": "Blog Description",'video':'Video','image':'Image','description_html':'Blog Description'
       },
-      blog_detail_skip:['_id','password','updated_at','id',"description_html","blogcat","created_at","profile_picture","tagsearch","maskblog1","maskblog2","maskblog3","tags_search"],
+      blog_detail_skip:['_id','password','updated_at','id',"blogcat","created_at","profile_picture","tags",'vd_array','img_array','image','video','image_array_field','video_array_field','blog_videos','status','featured','Vd_array','vd array','vd_array','Featured'],
       admintablenameTableName: "admin",
       statusarr: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }],
       // updateurl: receivedData.updateEndpoint,
@@ -92,23 +108,25 @@ for (let i in receivedData.datasource) {
           
           { label: 'Status', field: 'status', values: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }]
         },
-          // ,{label:"Search By Blog Category",field:'blogcategory',values:this.value},
-          {
-            label: 'Search By Blog Featured', field: 'featured', values: [{ val: 1, name: "Yes" }, { val: 0, name: 'No' }]
-          },
+          {label:"Search By Category Name",field:'blogcategory',values:this.category_names},
+          // {
+          //   label: 'Search By Blog Featured', field: 'featured', values: [{ val: 1, name: "Yes" }, { val: 0, name: 'No' }]
+          // },
           // {
           //   label: 'Search By Blog Website', field: 'website', values: [{ val: "Mask Blog 1", name: "Mask Blog 1" }, { val: "Mask Blog 2", name: 'Mask Blog 2' },{val:"Mask Blog 3",name:"Mask Blog 3"}]
           // }
         ],
-        // search:[{label:"Search By Tags",field:'tags_search',values:this.authval}]
+        search:[{label:"Search By Tags",field:'tags',values:this.authval}]
 
       },
       //  /*Showing Image in the Modal*/
-      //  pendingmodelapplicationarray_detail_datatype: [{
+       pendingmodelapplicationarray_detail_datatype: [
+      //    {
       //   key: "image",
       //   value: 'image',
-      //   fileurl: 'https://s3.us-east-2.amazonaws.com/crmfiles.influxhostserver/testimonial/'             // Image path 
-      // }],
+      //   fileurl: 'https://s3.us-east-2.amazonaws.com/crmfiles.influxhostserver/blogs/'             // Image path 
+      // }
+    ],
     }
     this.loader = false;
   }
@@ -117,38 +135,71 @@ for (let i in receivedData.datasource) {
     basecondition:'',
     updateendpoint:'statusupdateforblog',
     hideeditbutton:false,// all these button options are optional not mandatory
+    hideviewbutton:true,
+    updateendpointmany: 'blogupdate',
+    deleteendpointmany: 'blogdelete',
+
+    detailview_override:[
+      {key:"blogtitle",val:"Blog Title :"},
+      {key:"description",val:"Description :"},
+      {key:"priority",val:"Priority :"},
+      {key:"status",val:"Status :"},
+      {key:"tagsearch",val:"Tags :"},
+      {key:"createdon_datetime",val:"Added on :"},
+      {key:"blogcategory",val:"Category Name :"},
+      {key:'author',val:'Author :'},
+      // {key:'image',val:'Image'},
+      // {key:'video',val:'Video'},
+      {key:'video_title',val:'Video Title :'},
+      {key:'featured_search',val:'Featured :'},
+      {key:'video_description',val:'Video Description :'},
+      {key:'image_array',val:'Images :'},
+      {key:'video_array',val:'Videos :'},
+      {key:'img_array',val:'Images :'},
+      {key:'vd_array',val:'Videos'}
+
+  ], // optional
+  
     
-    tableheaders:['blogtitle','description','author','priority','status','featured','createdon_datetime'], //not required
-    // custombuttons:[
-    //     {
-    //         label:"Preview Blog 1",
-    //         link:"https://mask-blog1.influxiq.com/blog-details",
-    //         type:'externallink',
-    //         paramtype:'angular',
-    //         param:['blogtitle','_id'],
-    //         cond:'maskblog1',
-    //         condval: 1
-    //     },
-    //     {
-    //       label:"Preview Blog 2",
-    //       link:"https://mask-blog2.influxiq.com/blog-details",
-    //       type:'externallink',
-    //       paramtype:'angular',
-    //       param:['blogtitle','_id'],
-    //       cond:'maskblog2',
-    //       condval: 1
-    //   },
-    //   {
-    //     label:"Preview Blog 3",
-    //     link:"https://mask-blog3.influxiq.com/blog-details",
-    //     type:'externallink',
-    //     paramtype:'angular',
-    //     param:['blogtitle','_id'],
-    //     cond:'maskblog3',
-    //     condval: 1
-    // }
-    // ]
-}
+    tableheaders:['blogtitle','description_html','author','blogcategory','tags','priority','status','createdon_datetime', 'video','image'], //not required
+    custombuttons:[
+  //     {
+  //       label:"Videos",
+  //       type:'action',
+  //       datatype:'local',
+  //       datafields:['vd_array'],
+  //       // cond:'video',
+  //       // condval:''
+
+  //   },
+  //   {
+  //     label:"Images",
+  //     type:'action',
+  //     datatype:'local',
+  //     datafields:['img_array'],
+  //     // cond:'image',
+  //     // condval:''
+  // } ,
+  {
+    label:"Videos",
+    type:'action',
+    datatype:'local',
+    datafields:['vd_array'],
+    cond:'video_array_field',
+    condval:1
+
+},
+{
+  label:"Images",
+  type:'action',
+  datatype:'local',
+  datafields:['img_array'],
+  cond:'image_array_field',
+  condval:1
+} 
+
+    ]
+} 
   
 
   constructor(private apiService: ApiService) {
@@ -173,21 +224,22 @@ for (let i in receivedData.datasource) {
         // console.log('in constructor');
         // console.log(result);
         this.date_search_source_count =res.count;
-        console.warn('blogData c',res);
+        // console.warn('blogData c',res);
 
     }, error => {
-        console.log('Oooops!');
+        // console.log('Oooops!');
     });
 
-    this.apiService.getDataWithoutToken(endpoint,data).subscribe((res:any) => {
-      this.datasource=res.results.res;        // console.log('in constructor');
-        // console.log(result);
-        // this.pendingmodelapplicationarray =res.results.res;
-        //console.warn('blogData',res);
+    // this.apiService.getDataWithoutToken(endpoint,data).subscribe((res:any) => {
+    //   this.datasource=res.results.res;        // console.log('in constructor');
+    //     // console.log(result);
+    //     // this.pendingmodelapplicationarray =res.results.res;
+    //     //console.warn('blogData',res);
 
-    }, error => {
-        console.log('Oooops!');
-    });
+    // }, error => {
+    //     console.log('Oooops!');
+    // });
 
   }
 }
+

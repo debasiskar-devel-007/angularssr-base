@@ -16,7 +16,7 @@ export class BlogComponent implements OnInit {
  sortdata:any={
   "type":'desc',
   "field":'priority',
-  "options":['priority','blogtitle']
+  "options":['priority','blogtitle','blogcat_count','parentcategoryname']
 };
 // datacollection
 // datacollection: any='getbloglistdata';
@@ -35,7 +35,21 @@ libdata:any={
   updateendpoint:'statusupdateforblogcategory',        // update endpoint set
   hideeditbutton:false, // (hide edit button ) all these button options are optional not mandatory
 
-  tableheaders:['blogtitle','description','priority','status','createdon_datetime'], //not required (table header name)
+  updateendpointmany: 'blogcatupdate',
+  deleteendpointmany: 'blogcatdelete',
+
+  tableheaders:['blogtitle','description','priority','status','parentcategoryname','blogcat_count'], //not required (table header name)
+  detailview_override:[
+    {key:"blogtitle",val:"Category Name"},
+    {key:"description",val:"Description"},
+    {key:"priority",val:"Priority"},
+    {key:"status",val:"Status"},
+    {key:"blogcat_count",val:"Category Count"},
+    {key:"parentcategoryname",val:"Parent Category Name"},
+    {key:"blogcat_count",val:"Category Count"}
+], // optional
+
+
 //   custombuttons:[
 //       {
 //           label:"fb search with blog title",        // fb search button name
@@ -121,9 +135,9 @@ libdata:any={
       datacollection:receivedData.datacollection,
       datasource:receivedData.datasource,
       // tableName: receivedData.tableName,
-      blogcategory_detail_skip:["_id","createdon_datetime","parent_id"],
+      blogcategory_detail_skip:["_id","createdon_datetime","parent_id",'id'],
       listArray_skip: ["_id", "userId", "created_at", "updated_at","image","description","parentcategoryname_search","blogtitle_search","blogtitlesearch","createdon_datetime"],
-      listArray_modify_header: { "blogtitle":"Category Name", "description": "Description", "priority": "Priority", "status": "Status" ,"parentcategoryname":"Parent Category Name","blogcat":"Blog Category","date":"Date","createdon_datetime":"Date","createdon datetime":"Date"},
+      listArray_modify_header: { "blogtitle":"Category Name", "priority": "Priority", "status": "Status" ,"parentcategoryname":"Parent Category Name","blogcat_count":"Category Count","date":"Date",'description':'Description'},
       // admintablenameTableName: "admin",
       statusarr: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }],
       updateurl: receivedData.updateEndpoint,
@@ -133,8 +147,8 @@ libdata:any={
       date_search_source: receivedData.date_search_source,
 
       search_settings:{
-        datesearch:[{startdatelabel:"Start Date",enddatelabel:"End Date",submit:"Search",  field:"createdon_datetime"}],
-        textsearch: [{ label: "Search by Category Name", field: 'blogtitle' }],
+        // datesearch:[{startdatelabel:"Start Date",enddatelabel:"End Date",submit:"Search",  field:"createdon_datetime"}],
+        textsearch: [{ label: "Search by Category Name", field: 'blogtitle' },{ label: "Search by Parent Category Name", field: 'parentcategoryname' }],
         selectsearch: [
           { label: 'Search By Status', field: 'status',values: [{ val: 1, name: "Active" }, { val: 0, name: 'Inactive' }]
         },
@@ -180,14 +194,14 @@ libdata:any={
         console.log('Oooops!');
     });
 
-    this.apiService.getDataWithoutToken(endpoint,data).subscribe((res:any) => {
-      this.datasource=res.results.res;
-      // console.log(res,'+++')
+    // this.apiService.getDataWithoutToken(endpoint,data).subscribe((res:any) => {
+    //   this.datasource=res.results.res;
+    //   // console.log(res,'+++')
       
     
-    }, error => {
-        console.log('Oooops!');
-    });
+    // }, error => {
+    //     console.log('Oooops!');
+    // });
 
   }
   
