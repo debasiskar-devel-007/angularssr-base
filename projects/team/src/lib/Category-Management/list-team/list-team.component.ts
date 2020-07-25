@@ -190,7 +190,8 @@ export class ListTeamComponent implements OnInit {
    public team_search_settings: any =
      {
        textsearch: [
-       { label: "Search By Member Name", field: 'membername_search' }],
+       { label: "Search By Member Name", field: 'membername_search' },
+       { label: "Search By Category", field: 'teamsearch' }],
       selectsearch: [{ label: 'Search By Status', field: 'status', values: this.teamStatus }],
       datesearch:[{startdatelabel:"Start Date",enddatelabel:"End Date", submit:"Search By Date",  field:"created_at"}]
       //    

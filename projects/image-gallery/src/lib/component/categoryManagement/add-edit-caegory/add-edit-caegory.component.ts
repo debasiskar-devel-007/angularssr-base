@@ -19,7 +19,7 @@ export class AddEditCaegoryComponent implements OnInit {
   public getDataEndpointData: any;
   public addEndpointData: any;
   public videoStatusArr: any = [];
-  public listUrl: any;
+  public catListUrl: any;
   public listrouteData: any = '';
   public parameter_id: any;
   public VideolistingArray: any = [];
@@ -75,9 +75,9 @@ export class AddEditCaegoryComponent implements OnInit {
     this.addEndpointData = endpointUrlval;
   }
   @Input()          //getting the listing url
-  set listingUrl(Urlval: any) {
-    this.listUrl = (Urlval) || '<no name set>';
-    this.listUrl = Urlval;
+  set catListingUrl(val: any) {
+    this.catListUrl = (val) || '<no name set>';
+    this.catListUrl = val;
 
   }
   @Input()          //getting the listing url
@@ -187,8 +187,8 @@ export class AddEditCaegoryComponent implements OnInit {
         } )
          
       setTimeout(() => {
-        this.router.navigateByUrl('/' + this.listUrl);
-      }, 100);
+        this.router.navigateByUrl('/' + this.catListUrl);
+      }, 500);
     })
 
   }

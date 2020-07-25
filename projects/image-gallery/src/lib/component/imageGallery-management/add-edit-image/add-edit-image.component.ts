@@ -25,7 +25,7 @@ export class AddEditImageComponent implements OnInit {
   public DataList: any = [];
   public images_array: any = [];
   public imageConfigData: any = '';
-  public listUrl: any = '';
+  public imageListUrl: any = '';
   public dataForEdit: any = [];
   public ErrCode: boolean;
   public spinnerLoader: boolean;
@@ -76,9 +76,9 @@ export class AddEditImageComponent implements OnInit {
 
   }
   @Input()          //getting the listing page url from application
-  set listRouteUrl(val: any) {
-    this.listUrl = (val) || '<no name set>';
-    this.listUrl = val;
+  set imageListingUrl(val: any) {
+    this.imageListUrl = (val) || '<no name set>';
+    this.imageListUrl = val;
 
   }
   @Input()
@@ -271,8 +271,8 @@ export class AddEditImageComponent implements OnInit {
       } )
        
       setTimeout(() => {
-        this.router.navigateByUrl('/' + this.listUrl);
-      }, 100);
+        this.router.navigateByUrl('/' + this.imageListUrl);
+      }, 500);
     })
 
   }
