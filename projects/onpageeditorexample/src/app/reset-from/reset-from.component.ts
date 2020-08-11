@@ -14,8 +14,11 @@ export class ResetFromComponent implements OnInit {
   public addEndpoint: any = {
     endpoint:'addorupdatedata',
     source:'usermanagement',
-    redirect_url : '/login'
+    redirect_url : '/login',
+    passwordregex: '/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/',
+    errormsg:'is required'
   };
+  
   
   constructor() { }
 

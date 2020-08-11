@@ -4,15 +4,15 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { AppComponent } from './app.component';
 // import { OnPageEditorModule } from 'on-page-editor';
-import { AboutusComponent } from './aboutus/aboutus.component';
-import { ContactusComponent } from './contactus/contactus.component';
+// import { AboutusComponent } from './aboutus/aboutus.component';
+// import { ContactusComponent } from './contactus/contactus.component';
 // import { ContactusModule } from 'contactus';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
-import { HomeComponent } from './home/home.component';
-import { SocialMediaComponent } from './social-media/social-media.component';
+// import { HomeComponent } from './home/home.component';
+// import { SocialMediaComponent } from './social-media/social-media.component';
 // @ts-ignore
-import { AutoShareModule } from 'auto-share';
+// import { AutoShareModule } from 'auto-share';
 import { LoginModule } from 'login';
 import { LoginComponent } from './login/login.component';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
@@ -21,21 +21,22 @@ import { ResetFromComponent } from './reset-from/reset-from.component';
 // import { BlogsModule } from 'blogs';
 // import { FromModule } from 'from';
 import { AuthGuard } from './auth.guard';
-import { NewstitleComponent } from './newstitle/newstitle.component';
+import { CookieService } from 'ngx-cookie-service';
+// import { NewstitleComponent } from './newstitle/newstitle.component';
 // import { NewsTitleModule } from 'news-title';
 
 @NgModule({
   declarations: [
     AppComponent,
-    AboutusComponent,
-    ContactusComponent,
-    HomeComponent,
-    SocialMediaComponent,
+    // AboutusComponent,
+    // ContactusComponent,
+    // HomeComponent,
+    // SocialMediaComponent,
     LoginComponent,
     ForgetPasswordComponent,
     SignUpComponent,
     ResetFromComponent,
-    NewstitleComponent,
+    // NewstitleComponent,
   ],
   imports: [
     BrowserModule,
@@ -44,13 +45,13 @@ import { NewstitleComponent } from './newstitle/newstitle.component';
     // ContactusModule,
     BrowserAnimationsModule,
     HttpClientModule,
-    AutoShareModule,
+    // AutoShareModule,
     LoginModule,
     // BlogsModule,
     // FromModule,
     // NewsTitleModule
   ],
-  providers: [AuthGuard],
+  providers: [AuthGuard, CookieService],
   bootstrap: [AppComponent],
   schemas: [CUSTOM_ELEMENTS_SCHEMA]
 

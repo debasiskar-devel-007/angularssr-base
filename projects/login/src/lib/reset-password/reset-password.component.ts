@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, ViewChild, Inject } from '@angular/core';
-import { FormBuilder, Validators, FormGroup, FormGroupDirective } from '@angular/forms';
+import { FormBuilder, Validators, FormGroup, FormGroupDirective, AbstractControl, ValidationErrors } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ApiService } from '../api.service';
@@ -70,16 +70,19 @@ export class ResetPasswordComponent implements OnInit {
     this.route.params.subscribe(params => {
 
       this.accesscode = params['token'];
-      console.log(this.accesscode);
+      // console.log(this.accesscode);
     })
 
+
     this.resetPasswordForm = this.fb.group({
-      // password: ['',  Validators.compose([Validators.required, Validators.minLength(4)])],
-      password: ['', Validators.required],
+      password: ['',[Validators.required, this.PasswordStrengthValidator]],
+      // password: ['', Validators.required],
       confirmPassword: ['', Validators.required],
     }, {
       validator: this.machpassword('password', 'confirmPassword')
     })
+
+    console.log('++++++++',this.resetPasswordForm)
   }
 
   ngOnInit() {
@@ -111,6 +114,39 @@ export class ResetPasswordComponent implements OnInit {
       }
     };
   }
+
+
+PasswordStrengthValidator = function (control: AbstractControl): ValidationErrors | null {
+
+  let value: string = control.value || '';
+
+  if (!value) {
+    return null
+  }
+
+  let upperCaseCharacters = /[A-Z]+/g
+  if (upperCaseCharacters.test(value) === false) {
+    return { passwordStrength: `Password has to contine Upper case characters` };
+  }
+
+  let lowerCaseCharacters = /[a-z]+/g
+  if (lowerCaseCharacters.test(value) === false) {
+    return { passwordStrength: `Password has to contine lower case characters` };
+  }
+
+
+  let numberCharacters = /[0-9]+/g
+  if (numberCharacters.test(value) === false) {
+    return { passwordStrength: `Password has to contine number characters` };
+  }
+
+  let specialCharacters = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/
+  if (specialCharacters.test(value) === false) {
+    return { passwordStrength: `Password has to contine special character` };
+  }
+  return null;
+}
+
 
 
 

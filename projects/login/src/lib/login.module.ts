@@ -2,7 +2,6 @@ import { NgModule, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA } from '@angular/cor
 import { LoginComponent } from './login.component';
 import { DemoMaterialModule } from './material-module';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
 import { SignUpComponent, successModalComponent } from './sign-up/sign-up.component';
@@ -27,7 +26,6 @@ import { prevroute } from './prevroute';
     DemoMaterialModule,
     FormsModule,
     ReactiveFormsModule,
-    BrowserAnimationsModule,
     CommonModule,
     HttpClientModule
   ],

@@ -1,5 +1,5 @@
 import { OnInit } from '@angular/core';
-import { FormBuilder, FormGroup, FormGroupDirective } from '@angular/forms';
+import { FormBuilder, FormGroup, FormGroupDirective, AbstractControl, ValidationErrors } from '@angular/forms';
 import { HttpClient } from '@angular/common/http';
 import { Router, ActivatedRoute } from '@angular/router';
 import { ApiService } from '../api.service';
@@ -27,6 +27,7 @@ export declare class ResetPasswordComponent implements OnInit {
     constructor(fb: FormBuilder, http: HttpClient, router: Router, route: ActivatedRoute, apiService: ApiService, snackBar: MatSnackBar);
     ngOnInit(): void;
     machpassword(passwordkye: string, confirmpasswordkye: string): (group: FormGroup) => void;
+    PasswordStrengthValidator: (control: AbstractControl) => ValidationErrors;
     /********* Reset Password Form Submit start here*********/
     resetPasswordSubmit(): void;
     openSnackBar(): void;
