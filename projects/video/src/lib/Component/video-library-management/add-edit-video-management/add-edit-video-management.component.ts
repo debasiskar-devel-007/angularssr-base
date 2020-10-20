@@ -34,6 +34,7 @@ export class AddEditVideoManagementComponent implements OnInit {
   public categorySourceName: any;
   public videoValue: any;
   public alert:any;
+
   public model = {
     editorData: ''
   };
@@ -85,19 +86,17 @@ export class AddEditVideoManagementComponent implements OnInit {
       this.message='Updated Successfully';
 
       this.params_id = this.activeRoute.snapshot.params._id;
-      this.videoManagementForm.controls['title'].patchValue(Videodata[0].title);
-      this.videoManagementForm.controls['description'].patchValue(Videodata[0].description);
-      this.videoManagementForm.controls['youtube_Url'].patchValue(Videodata[0].youtube_Url);
-      this.videoManagementForm.controls['vimeo_url'].patchValue(Videodata[0].vimeo_url);
-      this.videoManagementForm.controls['parent_category'].patchValue(Videodata[0].parent_category);
-      this.videoManagementForm.controls['priority'].patchValue(Videodata[0].priority);
-      this.videoManagementForm.controls['status'].patchValue(Videodata[0].status);
+      this.videoManagementForm.controls['title'].patchValue(Videodata.title);
+      this.videoManagementForm.controls['description'].patchValue(Videodata.description);
+      this.videoManagementForm.controls['youtube_Url'].patchValue(Videodata.youtube_Url);
+      this.videoManagementForm.controls['vimeo_url'].patchValue(Videodata.vimeo_url);
+      this.videoManagementForm.controls['parent_category'].patchValue(Videodata.parent_category);
+      this.videoManagementForm.controls['priority'].patchValue(Videodata.priority);
+      this.videoManagementForm.controls['status'].patchValue(Videodata.status);
       // this.videoManagementForm.controls['status'].patchValue(Videodata[0].status);
       // this.videoManagementForm.controls['type'].patchValue(Videodata[0].type);
-
-
-      
-
+      this.videoValue = Videodata.type;
+     
     }
   }
   constructor(public dialog: MatDialog, public fb: FormBuilder, public apiService: ApiService,
@@ -133,6 +132,13 @@ export class AddEditVideoManagementComponent implements OnInit {
     setTimeout(() => {
       this.getCategoryName();
     }, 50);
+
+    if(this.params_id != null){
+      setTimeout(() => {
+        this.getVideoValue(this.VideoDataArray.type);
+        }, 500);
+    }
+  
   }
   /**for validation purpose**/
   inputUntouch(form: any, val: any) {
@@ -141,8 +147,10 @@ export class AddEditVideoManagementComponent implements OnInit {
   }
   /**for validation purpose**/
   getVideoValue(val: string) {
+    console.log(val)
     this.videoValue = val;
   }
+
   /*modal start here*/
   openDialog(x: any, y: any): void {
     this.dialogRef = this.dialog.open(Dialogtest, {
@@ -159,13 +167,14 @@ export class AddEditVideoManagementComponent implements OnInit {
 
   /**getting all category list**/
   getCategoryName() {
+    var endpoint:any= this.serverUrlData+this.getDataEndpointData;
     let data: any = {
       "source": this.categorySourceName,
       "condition": {
         "status": 1
       },
     }
-    this.apiService.getData(data).subscribe(response => {
+    this.apiService.CustomRequestPost(data,endpoint).subscribe(response => {
       let result: any = response;
       this.allCategoryName = result.res;
 
@@ -225,7 +234,8 @@ export class AddEditVideoManagementComponent implements OnInit {
             'vimeo_url': this.videoManagementForm.value.vimeo_url,
             'status': this.videoManagementForm.value.status,
             'description': this.videoManagementForm.value.description,
-            'type': this.videoValue
+            'type': this.videoValue,
+            'parent_category':this.videoManagementForm.value.parent_category
           },
           "sourceobj": ["parent_category"]
         }
@@ -247,8 +257,8 @@ export class AddEditVideoManagementComponent implements OnInit {
         };
       }
       this.spinnerloader = true;
-
-      this.apiService.addData(data).subscribe((resp) => {
+      var endpoint:any=this.serverUrlData+this.addEndpointData;
+      this.apiService.CustomRequestPost(data,endpoint).subscribe((resp) => {
         this.spinnerloader = false;
         let result: any = resp;
         this.formDirective.resetForm();

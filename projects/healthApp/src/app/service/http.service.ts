@@ -19,7 +19,7 @@ export class HttpService {
   public uploaderror: any = '';
   public accesstoken: any = this.cookieService.get('jwtToken');
   public fileservername: any = [];
-  public serverUrl: any = 'https://9ozbyvv5v0.execute-api.us-east-1.amazonaws.com/production/api/';
+  public serverUrl: any = 'https://ysugrnopw1.execute-api.us-east-1.amazonaws.com/dev/api1/';
   public addendpointUrl: any;
   public updateendpointUrl: any;
   public deletesingle_endpointUrl: any;
@@ -127,5 +127,17 @@ export class HttpService {
     var result = this._http.post(this.serverUrl + endpoint, JSON.stringify(requestdata), httpOptions).pipe(map(res => res));
     return result;
   }
+
+  CustomRequestPost(requestdata: any, endpoint: any) {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Content-Type': 'application/json',
+        'Authorization': this.accesstoken
+      })
+    };
+    var result = this._http.post(endpoint, JSON.stringify(requestdata), httpOptions).pipe(map(res => res));
+    return result;
+  }
+
 
 }

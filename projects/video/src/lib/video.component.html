@@ -1,11 +1,10 @@
-
 <!-- header start here -->
 <!-- <mat-card>
   <mat-toolbar color="primary" style="justify-content: center; align-items: center;">
     <h2 class="headerSpan">Video & Category Management</h2>
   </mat-toolbar>
 </mat-card> -->
-  <!-- <mat-toolbar class="buttonsetToolbar">
+<!-- <mat-toolbar class="buttonsetToolbar">
     <button class="singleButton" mat-raised-button color="primary" (click)="addVideoCategoryButton()" > Add Video Category</button>
 
   <button class="singleButton" mat-raised-button color="primary" (click)="videoManagementButton()" > Video Management</button>
@@ -16,94 +15,75 @@
 
 <div>
 
-<mat-tab-group class="gallery_body">
+  <mat-tab-group class="gallery_body">
 
-  <mat-tab label="Category List"> 
+    <mat-tab label="Category List">
 
-    <mat-card-content class="listing_titlebar"> 
-      <span class="titlewrapper">
-        <h2>Category Management</h2>
-      </span>
-      <span class="buttonwrapper">
-        <button  mat-raised-button color="primary" 
-        (click)="addVideoCategoryButton()" > Add Category</button>
-      </span>
-      
+      <mat-card-content class="listing_titlebar">
+        <span class="titlewrapper">
+          <h2>Category Management</h2>
+        </span>
+        <span class="buttonwrapper">
+          <button mat-raised-button color="primary" (click)="addVideoCategoryButton()"> Add Category</button>
+        </span>
+
       </mat-card-content>
 
-    <!-- <mat-toolbar class="buttonsetToolbar">
+      <!-- <mat-toolbar class="buttonsetToolbar">
       <button class="singleButton" mat-raised-button color="primary" 
       (click)="addVideoCategoryButton()" > Add Category</button>
   
   </mat-toolbar> -->
-    
-     <!--lib-listing start here -->
-  <mat-card-content class="listing-content-admin" 
-  *ngIf="allDataList !=null && allDataList.length > 0">
-    <lib-listing class="formfilterdiv formfilterdivnew"  
-        [datasource]="allDataList"
-        [skip]="allDataList_skip" 
-        [modify_header_array]="allDataList_modify_header" 
-        [detail_skip_array]="previewModal_detail_skip"
-        [sourcedata]="TableNameViaApp"
-        [apiurl]="serverUrlData" 
-        [jwttoken]="tokenViaApp" 
-        [statusarr]="status" 
-        [updateendpoint]="addupdateRouteUrl"
-        [deleteendpoint]="deleteEndpointViaApp"
-        [editroute]="editRouteViaApp" 
-        [date_search_endpoint]="searchEndpointval"
-        [date_search_source]="searchSourceval"
-        [search_settings]="search_settings"
-       >
-    </lib-listing>
-    </mat-card-content>
-        <!--lib-listing end here -->
-    
-  </mat-tab>
+
+      <!--lib-listing start here -->
+      <mat-card-content class="listing-content-admin" *ngIf="allDataList !=null && allDataList.length > 0">
+        <lib-listing class="managementcat"  [datasource]="allDataList" [skip]="allDataList_skip"
+          [modify_header_array]="allDataList_modify_header" [detail_skip_array]="previewModal_detail_skip"
+          [sourcedata]="TableNameViaApp" [apiurl]="serverUrlData" [jwttoken]="tokenViaApp" [statusarr]="status"
+          [updateendpoint]="addupdateRouteUrl" [deleteendpoint]="deleteEndpointViaApp" [editroute]="editRouteViaApp"
+          [date_search_endpoint]="date_search_endpoint" [date_search_source]="searchSourcedata"
+          [search_settings]="search_settings" [searchendpoint]="searchendpoint" [sortdata]="sortdata"
+          [datacollection]="datacollection" [date_search_source_count]="date_search_source_count" [libdata]="libdata"
+          [limitcond]="limitcond">
+        </lib-listing>
+      </mat-card-content>
+      <!--lib-listing end here -->
+
+    </mat-tab>
 
 
-  <mat-tab label="Video List"> 
-    <!-- <mat-toolbar class="buttonsetToolbar">
+    <mat-tab label="Video List">
+      <!-- <mat-toolbar class="buttonsetToolbar">
     
     <button class="singleButton" mat-raised-button color="primary" (click)="videoManagementButton()" > Add Video</button>
   </mat-toolbar> -->
 
-  <mat-card-content class="listing_titlebar"> 
-    <span class="titlewrapper">
-      <h2>Video Management</h2>
-    </span>
-    <span class="buttonwrapper">
-      <button  mat-raised-button color="primary" 
-      (click)="videoManagementButton()" > Add Video </button>
-    </span>
-    
-    </mat-card-content>
+      <mat-card-content class="listing_titlebar">
+        <span class="titlewrapper">
+          <h2>Video Management</h2>
+        </span>
+        <span class="buttonwrapper">
+          <button mat-raised-button color="primary" (click)="videoManagementButton()"> Add Video </button>
+        </span>
+
+      </mat-card-content>
 
 
-<mat-card-content class="listing-content-admin" *ngIf="allVideoDataList !=null && allVideoDataList.length > 0" >
-    <lib-listing class="formfilterdiv formfilterdivnew" 
-        [datasource]="allVideoDataList"
-        [skip]="VideoDataListing_skip" 
-        [modify_header_array]="VideoDataListing_modify_header" 
-        [detail_skip_array]="video_previewModal_detail_skip"
-        [sourcedata]="TableNameVideoViaApp"
-        [apiurl]="serverUrlVideoData" 
-        [jwttoken]="tokenVideoViaApp" 
-        [statusarr]="video_status" 
-        [updateendpoint]="addupdateVideoRouteUrl"
-        [deleteendpoint]="deleteEndpointVideoViaApp"
-        [editroute]="editVideoRouteViaApp" 
-        [date_search_endpoint]="searchVideoEndpointval"
-        [date_search_source]="searchVideoSourceval"
-        [search_settings]="video_search_settings"
-       >
-    </lib-listing>
-    </mat-card-content>
+      <mat-card-content class="listing-content-admin" *ngIf="allVideoDataList !=null && allVideoDataList.length > 0">
+        <lib-listing class="managementvideo" [datasource]="allVideoDataList" [skip]="VideoDataListing_skip"
+          [modify_header_array]="VideoDataListing_modify_header" [detail_skip_array]="video_previewModal_detail_skip"
+          [sourcedata]="TableNameVideoViaApp" [apiurl]="serverUrlVideoData" [jwttoken]="tokenVideoViaApp"
+          [statusarr]="video_status" [updateendpoint]="addupdateVideoRouteUrl"
+          [deleteendpoint]="deleteEndpointVideoViaApp" [editroute]="editVideoRouteViaApp"
+          [date_search_endpoint]="searchVideoEndpointval" [date_search_source]="searchVideoSourceval"
+          [search_settings]="video_search_settings" [searchendpoint]="video_searchendpoint"
+          [sortdata]="video_sortdata" [datacollection]="video_datacollection"
+          [date_search_source_count]="video_date_search_source_count" [libdata]="video_libdata"
+          [limitcond]="video_limitcond">
+        </lib-listing>
+      </mat-card-content>
 
-    
-  </mat-tab>
-  
-</mat-tab-group>
 
-     
+    </mat-tab>
+
+  </mat-tab-group>

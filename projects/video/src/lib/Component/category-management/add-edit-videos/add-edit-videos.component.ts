@@ -71,17 +71,18 @@ export class AddEditVideosComponent implements OnInit {
     this.editedListData = (val) || '<no name set>';
     this.editedListData = val;
 
+    console.log(this.editedListData,'editedListData')
     if (this.activeroute.snapshot.params._id) {
       this.headerText = "Edit Category";
       this.buttonText = "Update";
       this.message='Updated Successfully';
 
       this.parameter_id = this.activeroute.snapshot.params._id;
-      this.videolibAddEditForm.controls['title'].patchValue(val[0].title);
-      this.videolibAddEditForm.controls['priority'].patchValue(val[0].priority);
-      this.videolibAddEditForm.controls['status'].patchValue(val[0].status);
-      this.videolibAddEditForm.controls['description'].patchValue(val[0].description);
-      this.videolibAddEditForm.controls['parent_id'].patchValue(val[0].parent_id);
+      this.videolibAddEditForm.controls['title'].patchValue(val.title);
+      this.videolibAddEditForm.controls['priority'].patchValue(val.priority);
+      this.videolibAddEditForm.controls['status'].patchValue(val.status);
+      this.videolibAddEditForm.controls['description'].patchValue(val.description);
+      this.videolibAddEditForm.controls['parent_id'].patchValue(val.parent_id);
 
     }
   }

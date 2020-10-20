@@ -15,28 +15,29 @@ export class ListVideosComponent implements OnInit {
   // category section 
 
   public videoCatList: any = [];
-  public serverUrl: any = "https://9ozbyvv5v0.execute-api.us-east-1.amazonaws.com/production/api/";
+  public serverUrl: any = "https://ysugrnopw1.execute-api.us-east-1.amazonaws.com/dev/";
   public token: any = this.cookies.get('jwtToken');
   public updatedEndpoint: any = "addorupdatedata";
   public SourceName: any = "video_category";
-  public deleteEndpoint: any = "deletesingledata";
+  public deleteEndpoint: any = "api1/deletevideocat";
   public EditRoute: any = "video-category/edit/";
   public addButtonRoute: any = "video-category/add";
   public videoManagementRoute: any = "video-library-management/list";
   public searchEndpoint: any = "datalist";
-  public searchSourcename: any = "video_category_view";
+  public searchSourceval: any = "video_category_view";
+  public CountEndpoint:any='api1/videocategorydata-count';
+  public dataSourcename: any = "api1/videocategorydata";
 
 
   // video section 
-
   public AddVideoButtonRoute: any = 'video-library-management/add';
   public SearchEndpointForVideo: any = 'datalist';
   public SearchSourceNameForVideo: any = 'video_management_view';
   public listingForVideo: any = [];
   public editRouteForVideo: any = 'video-library-management/edit/';
-  public serverUrlForVideo: any = 'https://9ozbyvv5v0.execute-api.us-east-1.amazonaws.com/production/api/';
+  public serverUrlForVideo: any = 'https://ysugrnopw1.execute-api.us-east-1.amazonaws.com/dev/';
   public TokenForVideo: any = this.cookies.get('jwtToken');
-  public updatedEndpointForVideo: any = 'addorupdatedata';
+  public updatedEndpointForVideo: any = 'addupdatevideo';
   public TableNameForVideo: any = 'video_management';
   public DeleteEndpointForVideo: any = 'deletesingledata';
 
@@ -46,10 +47,9 @@ export class ListVideosComponent implements OnInit {
   ngOnInit() {
     this.activatedRoute.data.forEach(data => {
       let result: any;
-      result = data.videoData.res;
+      result = data.videoData.results.res;
       this.videoCatList = result;
       // console.log("video dataaaa",this.videoList);
-
     })
 
 
@@ -58,13 +58,20 @@ export class ListVideosComponent implements OnInit {
 
     let data: any;
     data = {
-      "source": "video_management_view"
+      "source": "video_management_view",
+      "condition": {
+        "limit": 10,
+        "skip": 0
+      },
+      "sort": {
+        "type": "desc",
+        "field": "title"
+      }
     }
-    this.httpService.CustomRequest(data, 'datalist').subscribe(res => {
-      // console.log(res);
+    this.httpService.CustomRequest(data, 'videogallerydata').subscribe(res => {
       let result: any;
       result = res;
-      this.listingForVideo = result.res;
+      this.listingForVideo = result.results.res;
     })
   }
 

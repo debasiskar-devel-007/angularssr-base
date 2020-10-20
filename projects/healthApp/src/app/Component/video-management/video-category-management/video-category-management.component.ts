@@ -8,9 +8,9 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./video-category-management.component.css']
 })
 export class VideoCategoryManagementComponent implements OnInit {
-public serverUrl:any="https://9ozbyvv5v0.execute-api.us-east-1.amazonaws.com/production/api/";
-public getDataEndpoint:any="datalist";
-public addEndpoint:any="addorupdatedata";
+public serverUrl:any="https://ysugrnopw1.execute-api.us-east-1.amazonaws.com/dev/api1/";
+public getDataEndpoint:any="getvideocategorydata";
+public addEndpoint:any="addupdatevideocategory";
 public listUrl:any="video-category/list";
 public sourceName:any="video_category";
 public dataList:any=[];
@@ -21,16 +21,11 @@ public editedData:any=[];
     if(this.activeRoute.snapshot.params._id){
       this.activeRoute.data.forEach(data=>{
         let result:any;
-        result=data.videoData.res;
+        result=data.videoData.res[0];
         this.editedData=result;
         console.log("okk",this.editedData);
       })
     }
-      
-
-    
-
-
   }
 
 }

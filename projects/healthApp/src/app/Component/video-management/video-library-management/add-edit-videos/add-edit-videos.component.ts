@@ -7,9 +7,9 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./add-edit-videos.component.css']
 })
 export class AddEditVideosComponent implements OnInit {
-  public serverUrl: any = "https://9ozbyvv5v0.execute-api.us-east-1.amazonaws.com/production/api/";
-  public addUpdateEndpoint: any = "addorupdatedata";
-  public getDataEndpoint:any="datalist";
+  public serverUrl: any = "https://ysugrnopw1.execute-api.us-east-1.amazonaws.com/dev/";
+  public addUpdateEndpoint: any = "api1/addupdatevideo";
+  public getDataEndpoint:any="api1/getvideocategorydata";
   public listingRoute: any = "video-category/list";
   public sourceName:any ="video_management";
   public categorySourceName = "video_category";
@@ -20,7 +20,7 @@ export class AddEditVideosComponent implements OnInit {
     if (this.activeRoute.snapshot.params._id) {
       this.activeRoute.data.forEach(data => {
         let result: any;
-        result = data.videodata.res;
+        result = data.videodata.res[0];
         this.SingleVideoData = result;
       })
     }
