@@ -27,6 +27,11 @@ export class ListVideosComponent implements OnInit {
   public searchSourceval: any = "video_category_view";
   public CountEndpoint:any='api1/videocategorydata-count';
   public dataSourcename: any = "api1/videocategorydata";
+  public catupdatedeleteendpoint:any={
+    updateendpoint: 'api1/videocatstatusupdate',
+    updateendpointmany: 'api1/videocatstatusupdate',
+    deleteendpointmany: 'api1/deletevideocat',
+  }
 
 
   // video section 
@@ -40,7 +45,13 @@ export class ListVideosComponent implements OnInit {
   public updatedEndpointForVideo: any = 'addupdatevideo';
   public TableNameForVideo: any = 'video_management';
   public DeleteEndpointForVideo: any = 'deletesingledata';
-
+  public videodataSourcename:any='api1/videogallerydata';
+  public CountvideoEndpoint:any='api1/videogallerydata-count';
+  public videoupdatedeleteendpoint:any={
+    updateendpoint: 'api1/videostatusupdate',
+    updateendpointmany: 'api1/videostatusupdate',
+    deleteendpointmany: 'api1/deletevideo',
+  }
 
   constructor(public activatedRoute: ActivatedRoute, public cookies: CookieService, public httpService: HttpService) { }
 

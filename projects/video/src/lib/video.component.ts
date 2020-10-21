@@ -22,7 +22,7 @@ export class VideoComponent implements OnInit {
   public dataSourceval: any = '';
   public datacountendpoint: any;
   public searchSourcedata: any;
-
+  public catupateDeletEendpoint:any;
 
   // video section 
   public AddVideoButtonRouteViaApp: any = '';
@@ -35,13 +35,16 @@ export class VideoComponent implements OnInit {
   public addupdateVideoRouteUrl: any = '';
   public TableNameVideoViaApp: any = '';
   public deleteEndpointVideoViaApp: any = '';
+  public countDataVideoViaApp:any;
+  public VideoDataViaApp:any;
+  public videoUpdateDeleteEndpoint:any;
 
   ;  /**lib-listing start here **/
   public allDataList: any = [];
   public allDataList_skip: any = ["_id", "parent_id", "title_search", "parentvideocategory_search", "date_unix", '_v', 'v'];
   public allDataList_modify_header: any = {
     'title': "Title", 'description': "Description",
-    "status": "Status", "priority": "Priority", "parentvideocategory": "Parent Category", "date added": "Date"
+    "status": "Status", "priority": "Priority", "parentvideocategory": "Parent Category",'createdatetime':'Date'
   };
   public status: any = [{ val: 1, 'name': 'Active' }, { val: 0, 'name': 'Inactive' }];
   public search_settings: any =
@@ -66,9 +69,9 @@ export class VideoComponent implements OnInit {
   public date_search_source_count: '';
 
   public libdata: any = {
-    updateendpoint: 'api1/videocatstatusupdate',
-    updateendpointmany: 'api1/videocatstatusupdate',
-    deleteendpointmany: 'api1/deletevideocat',
+    updateendpoint: '',
+    updateendpointmany: '',
+    deleteendpointmany: '',
     hideviewbutton: true,
   };
 
@@ -155,8 +158,12 @@ export class VideoComponent implements OnInit {
     this.searchSourcedata = (val) || '<no name set>';
     this.searchSourcedata = val;
   }
-
-
+  
+  @Input()
+  set catupdatedeleteendpoint(val: any) {
+    this.catupateDeletEendpoint = (val) || '<no name set>';
+    this.catupateDeletEendpoint = val;
+  }
 
 
 
@@ -223,13 +230,34 @@ export class VideoComponent implements OnInit {
     this.deleteEndpointVideoViaApp = val;
   }
 
+  @Input()
+  set CountvideoEndpoint(val: any) {
+    this.countDataVideoViaApp = (val) || '<no name set>';
+    this.countDataVideoViaApp = val;
+  }
 
 
-  public VideoDataListing_skip: any = ["_id", "description", "created_at", "updated_at", "id", "description_html", "parent_category_search", "title_search,video_type", "date_unix", "title_search"];
+  @Input()
+  set videodataSourcename(val: any) {
+    this.VideoDataViaApp = (val) || '<no name set>';
+    this.VideoDataViaApp = val;
+  }
+  @Input()
+  set videoupdatedeleteendpoint(val: any) {
+    this.videoUpdateDeleteEndpoint = (val) || '<no name set>';
+    this.videoUpdateDeleteEndpoint = val;
+  }
+
+
+
+
+  public VideoDataListing_skip: any = ["_id", "created_at", "updated_at", "id", "description_html", "parent_category_search", "title_search,video_type", "date_unix", "title_search"];
+
   public VideoDataListing_modify_header: any = {
-    "title": "Title", "priority": "Priority",
-    "status": "Status", "videoUrl": "Video Url", "parent category": "Parent Category", "vimeo url": "Vimeo Url", "date added": "Date"
+    "title": "Title",'description':'Description', "priority": "Priority",
+    "status": "Status", "videoid": "Video ID", "parent_category": "Parent Category", "vimeo url": "Vimeo Url", "date added": "Date",'type':'Type','video':'Video','createdatetime':'Date'
   };
+
   public video_previewModal_detail_skip: any = ['_id', 'created_at', 'id', 'updated_at', 'title_search', 'parent_category_search', "date_unix"];
   public video_status: any = [{ val: 1, 'name': 'Active' }, { val: 0, 'name': 'Inactive' }];
   public video_search_settings: any =
@@ -253,9 +281,9 @@ export class VideoComponent implements OnInit {
   public video_date_search_source_count: any;
 
   public video_libdata: any = {
-    updateendpoint: 'api1/videocatstatusupdate',
-    updateendpointmany: 'api1/videocatstatusupdate',
-    deleteendpointmany: 'api1/deletevideocat',
+    updateendpoint: 'api1/videostatusupdate',
+    updateendpointmany: 'api1/videostatusupdate',
+    deleteendpointmany: 'api1/deletevideo',
     hideviewbutton: true,
   };
 
@@ -269,6 +297,15 @@ export class VideoComponent implements OnInit {
   constructor(public activeRoute: ActivatedRoute, public router: Router, public apiService: ApiService) {
     // for cat count      
     setTimeout(() => {
+
+      this.libdata={
+        hideviewbutton: true,
+        updateendpoint: this.catupateDeletEendpoint.updateendpoint,
+        updateendpointmany: this.catupateDeletEendpoint.updateendpointmany,
+        deleteendpointmany:  this.catupateDeletEendpoint.deleteendpointmany,
+        tableheaders:['title','description','priority','status','parentvideocategory','createdatetime']
+      }
+
       this.datacollection = this.dataSourceval;
       let catendpoint: any = this.serverUrlData + this.datacountendpoint;
       console.log(catendpoint, 'catendpoint')
@@ -291,9 +328,17 @@ export class VideoComponent implements OnInit {
 
     //for video
     setTimeout(() => {
-      this.video_datacollection = 'api1/videogallerydata';
-      let catendpoint: any = this.serverUrlData + 'api1/videogallerydata-count';
-      console.log(catendpoint, 'catendpoint')
+      this.video_libdata={
+        hideviewbutton: true,
+        updateendpoint: this.videoUpdateDeleteEndpoint.updateendpoint,
+        updateendpointmany: this.videoUpdateDeleteEndpoint.updateendpointmany,
+        deleteendpointmany:  this.videoUpdateDeleteEndpoint.deleteendpointmany,
+        tableheaders:['title','description','priority','status','parent_category','createdatetime','type','videoid','video']
+      }
+
+      this.video_datacollection = this.VideoDataViaApp;
+      let catendpoint: any = this.serverUrlData + this.countDataVideoViaApp;
+      // console.log(catendpoint, 'catendpoint')
       const data: any = {
         condition: {
           limit: 10,
@@ -309,7 +354,7 @@ export class VideoComponent implements OnInit {
           this.video_date_search_source_count = response.count;
         });
 
-    }, 500);
+    }, 1000);
 
   }
 
