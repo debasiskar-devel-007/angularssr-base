@@ -62,9 +62,6 @@ export class ListVideosComponent implements OnInit {
       this.videoCatList = result;
       // console.log("video dataaaa",this.videoList);
     })
-
-
-
     //for video
 
     let data: any;
