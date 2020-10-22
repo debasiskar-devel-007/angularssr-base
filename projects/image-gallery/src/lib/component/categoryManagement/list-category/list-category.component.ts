@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { ApiService } from '../../../Service/api.service';
 
 @Component({
   selector: 'lib-list-category',
@@ -28,19 +29,47 @@ export class ListCategoryComponent implements OnInit {
   public imageAddupdateRouteUrlViaApp: any = '';
   public imageSearchSourcevalViaApp: any = '';
   public imageSearchEndpointval: any = '';
-
+  public date_search_source_count: any ='';
+  public datacollection: any = '';
+  public dataSourceval: any = '';
+  public datacountendpoint: any = '';
+  public catupateDeletEendpoint:any;
   // for image 
   public allDataList: any = [];
   public dataListForImage: any = [];
   public tokenForImageViaApp: any;
+  public image_date_search_source_count: any;
+  public image_datacollection: any;
+  public ImageDataViaApp:any;
+  public countDataimageViaApp: any;
+  public imageUpdateDeleteEndpoint: any;
 
   public data_skip: any = ["_id", "description", "title_search", "parent_category_search",
   "date_unix"];
+  public previewModal_detail_skip: any = ["_id", "title_search", "parent_category_search","date_unix","status","date_added"];
   public data_modify_header: any = {
-    "parent category": "Parent Category", "title": "Title",
-    "priority": "Priority", "status": "Status","date added": "Date"
+    "parent_category": "Parent Category", 
+    "title": "Title",
+    "priority": "Priority", 
+    "status": "Status",
+    "createdatetime": "Date"
   };
-  public previewModal_detail_skip: any = ["_id", "title_search", "parent_category_search","date_unix"];
+  public limitcond: any = {                                 
+    'limit': 10,
+    'skip': 0,
+    'pagecount': 1
+  };
+  public sortdata: any = {
+    'type': 'asc',                                              
+    'field': 'title',                                      
+    'options': [ 'title','priority','createdatetime' ]  
+  };
+  public libdata: any ={
+    // updateendpoint: '',
+    // updateendpointmany: '',
+    // deleteendpointmany: '',
+  };
+ 
 
   public status: any = [{ val: 1, 'name': 'Active' }, { val: 0, 'name': 'Inactive' }];
   public search_settings: any =
@@ -49,8 +78,8 @@ export class ListCategoryComponent implements OnInit {
       textsearch: [{
         label: "Search By Title", field: 'title_search'
       },
-      { label: "Search By Parent Category", field: 'parent_category' }],
-      datesearch:[{startdatelabel:"Start Date",enddatelabel:"End Date", submit:"Search By Date",  field:"date_unix"}]
+      { label: "Search By Parent Category", field: 'parent_category_search' }],
+      datesearch:[{startdatelabel:"Start Date",enddatelabel:"End Date", submit:"Search By Date",  field:"createdatetime"}]
     };
 
 
@@ -60,6 +89,7 @@ export class ListCategoryComponent implements OnInit {
   set SearchEndpoint(Val: any) {
     this.searchEndpointval = (Val) || '<no name set>';
     this.searchEndpointval = Val;
+   
   }
   @Input()          //getting search sourcename 
   set SearchSourceName(Val: any) {
@@ -114,23 +144,43 @@ export class ListCategoryComponent implements OnInit {
     this.DeleteendpointViaApp = val;
   }
 
+  // count endpoint
+  @Input()
+  set CountEndpoint(val: any) {
+    this.datacountendpoint = (val) || '<no name set>';
+    this.datacountendpoint = val;
+  }
 
+  @Input()
+  set catupdatedeleteendpoint(val: any) {
+    this.catupateDeletEendpoint = (val) || '<no name set>';
+    this.catupateDeletEendpoint = val;
+  }
 
   // ------------------------image section---------------------- //
-
-  public image_data_skip: any = ["_id", "category_name_search",'images',"date_unix", "title_search","aspectratio","croppedfiles","basepath","imagepath"];
+public image_libdata: any ={};
+  public image_data_skip: any = ["_id", "category_name_search","date_unix", "title_search","aspectratio","croppedfiles","basepath","imagepath"];
   public image_data_modify_header: any = {
 
-    'category name': "Category Name",
-   
-    'date added': "Date",
+    'category_name': "Category Name",
+    'createdatetime': "Date",
     'title': "Title",
-    'decription': "Decription",
-    'status': "Status"
+    'status': "Status",
+    'image': "Image"
 
   };
-  public image_previewModal_detail_skip: any = ["_id",'category_name_search','images',"date_unix", "title_search","aspectratio","croppedfiles","basepath","imagepath"];
+  public image_previewModal_detail_skip: any = ["_id",'category_name_search','image',"date_unix", "title_search","aspectratio","croppedfiles","basepath","imagepath","status"];
 
+  public image_sortdata: any = {
+    'type': 'asc',                                              
+    'field': 'title',                                      
+    'options': [ 'title','priority','createdatetime' ]  
+  };
+  public img_limitcond: any = {                                 
+    'limit': 10,
+    'skip': 0,
+    'pagecount': 1
+  };
   public image_status: any = [{ val: 1, 'name': 'Active' }, { val: 0, 'name': 'Inactive' }];
 
   public image_search_settings: any =
@@ -140,7 +190,7 @@ export class ListCategoryComponent implements OnInit {
         { label: "Search By Title", field: 'title_search' },
         { label: "Search By Category", field: 'category_name_search' }
         ],
-        datesearch:[{startdatelabel:"Start Date",enddatelabel:"End Date", submit:"Search By Date",  field:"date_unix"}]
+        datesearch:[{startdatelabel:"Start Date",enddatelabel:"End Date", submit:"Search By Date",  field:"createdatetime"}]
         
     };
 
@@ -205,14 +255,102 @@ export class ListCategoryComponent implements OnInit {
     this.imageSearchEndpointval = (val) || '< no name set>';
     this.imageSearchEndpointval = val
   }
+  @Input()
+  set CountimageEndpoint(val: any) {
+    this.countDataimageViaApp = (val) || '<no name set>';
+    this.countDataimageViaApp = val;
+  }
+
+  @Input()
+  set imageupdatedeleteendpoint(val: any) {
+    this.imageUpdateDeleteEndpoint = (val) || '<no name set>';
+    this.imageUpdateDeleteEndpoint = val;
+  }
 
 
+  constructor(public router: Router,public apiService: ApiService) {
+  //  console.log(';;;', this.searchEndpointval)
+  setTimeout(() => {
 
-  constructor(public router: Router) { }
+    this.libdata={
+    hidedeletemany: false,
+     updateendpoint: this.catupateDeletEendpoint.updateendpoint,
+     updateendpointmany: this.catupateDeletEendpoint.updateendpointmany,
+     deleteendpointmany:  this.catupateDeletEendpoint.deleteendpointmany,
+      tableheaders: ['title','parent_category','priority','status','createdatetime'], 
+      detailview_override:[
+        { key: "title", val: "Title" },
+        { key: "parent_category", val: "Parent Category" },
+        { key: "priority", val: "Priority" },
+        { key: "description", val: "Description"},
+        { key: "createdatetime", val: "Created date" }
+      ],
+    }
+
+    this.datacollection = this.dataSourceval;
+    let catendpoint: any = this.serverUrlData + this.datacountendpoint;
+    console.log(catendpoint, 'catendpoint')
+    const data: any = {
+      condition: {
+        limit: 10,
+        skip: 0
+      },
+      sort: {
+        type: 'desc',                                           // defalut field sort type
+        field: 'title'                                         // default sort field
+      }
+    };
+    this.apiService.CustomRequestPost(data, catendpoint)
+      .subscribe((response: any) => {
+        this.date_search_source_count = response.count;
+        
+      });
+      console.log('cnt',this.date_search_source_count);
+  }, 500);
+
+
+  // For Images
+
+  setTimeout(() => {
+    this.image_libdata={
+      updateendpoint: this.imageUpdateDeleteEndpoint.updateendpoint,
+      updateendpointmany: this.imageUpdateDeleteEndpoint.updateendpointmany,
+      deleteendpointmany:  this.imageUpdateDeleteEndpoint.deleteendpointmany,
+      tableheaders:['image','title','status','category_name','createdatetime'],
+      detailview_override:[
+        { key: "title", val: "Title" },
+        { key: "category_name", val: "Category Name" },
+        { key: "priority", val: "Priority" },
+        { key: "decription", val: "Description"},
+        { key: "createdatetime", val: "Created date" }
+      ],
+    }
+
+    this.image_datacollection = this.ImageDataViaApp;
+    let catendpoint: any = this.serverUrlData + this.countDataimageViaApp;
+    // console.log(catendpoint, 'catendpoint')
+    const data: any = {
+      condition: {
+        limit: 10,
+        skip: 0
+      },
+      sort: {
+        type: 'desc',                                           // defalut field sort type
+        field: 'priority'                                         // default sort field
+      }
+    };
+    this.apiService.CustomRequestPost(data, catendpoint)
+      .subscribe((response: any) => {
+        this.image_date_search_source_count = response.count;
+      });
+
+  }, 1000);
+
+   }
 
 
   ngOnInit() {
-    
+    console.log(';;;', this.addupdateRouteUrl)
    
   }
   

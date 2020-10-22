@@ -7,11 +7,11 @@ import { ActivatedRoute, Router } from '@angular/router';
   styleUrls: ['./addedit-image-category.component.css']
 })
 export class AddeditImageCategoryComponent implements OnInit {
-  public serverUrl:any="https://9ozbyvv5v0.execute-api.us-east-1.amazonaws.com/production/api/";
-  public getDataEndpoint:any="datalist";
-  public addEndpoint:any="addorupdatedata";
+  public serverUrl:any="https://ysugrnopw1.execute-api.us-east-1.amazonaws.com/dev/";
+  public getDataEndpoint:any="api1/getimagecategorydata";
+  public addEndpoint:any="api1/addorupdateimagecat";
   public catListingUrl:any="image-gallery/category-management/list";
-  public sourceName:any="imageGallery_category";
+  public sourceName:any="imagegallery_category";
   public dataList:any=[];
   public editedData:any=[];
   constructor(public activeRoute :ActivatedRoute) { }
