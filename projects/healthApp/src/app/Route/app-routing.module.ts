@@ -201,13 +201,20 @@ const appRoutes: Routes = [
     path: 'image-gallery/category-management/edit/:_id',
     component: AddeditImageCategoryComponent,
     resolve: { ImageData: ResolveService },
-    data: { requestcondition: { source: 'imageGallery_category', condition: {} }, endpoint: 'datalist' },
+    data: { requestcondition: { source: 'imageGallery_category', condition: {} }, endpoint: 'getimagecategorydata' },
   },
   {
     path: 'image-gallery/category-management/list',
     component: ListingCategoryComponent,
     resolve: { ImageData: ResolveService },
-    data: { requestcondition: { source: 'imageGallery_category_view', condition: {} }, endpoint: 'datalist' }
+    data: { requestcondition: { source: 'imageGallery_category_view', condition: {
+      limit: 10,
+      skip: 0
+    },
+    sort: {
+      type: 'desc',                                       
+      field: 'title' 
+    } }, endpoint: 'imagecategorydata' }
   },
   {
     path: 'image-gallery/add',
@@ -217,7 +224,7 @@ const appRoutes: Routes = [
     path: 'image-gallery/edit/:_id',
     component: AddeditImageComponent,
     resolve: { ImageData: ResolveService },
-    data: { requestcondition: { source: 'imageGallery_management', condition: {} }, endpoint: 'datalist' }
+    data: { requestcondition: { source: 'imageGallery_management', condition: {} }, endpoint: 'getimagedata' }
   },
   {
     path: 'image-gallery/list',

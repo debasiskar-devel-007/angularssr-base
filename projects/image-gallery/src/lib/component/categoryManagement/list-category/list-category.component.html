@@ -51,10 +51,16 @@
         [deleteendpoint]="DeleteendpointViaApp"
         [editroute]="editRouteViaApp"
         [updateendpoint]="addupdateRouteUrl"
+        [sortdata]="sortdata"
         [sourcedata]="TableNameViaApp"
+        [searchendpoint]="searchEndpointval"
         [date_search_source]="searchSourceval"
         [date_search_endpoint]="searchEndpointval"
+        [datacollection]="searchEndpointval"
         [search_settings]="search_settings"
+        [date_search_source_count]="date_search_source_count"
+        [libdata]="libdata"
+        [limitcond]="limitcond"
        >
     </lib-listing>
     </mat-card-content>
@@ -88,15 +94,21 @@
       [statusarr]="image_status" 
       [modify_header_array]="image_data_modify_header" 
       [apiurl]="serverUrlData" 
+      [sortdata]="image_sortdata"
+      [searchendpoint]="imageSearchEndpointval"
       [detail_skip_array]="image_previewModal_detail_skip"
       [deleteendpoint]="imageDeleteendpointViaApp"
+      [datacollection]="imageSearchEndpointval"
       [editroute]="imageEditRouteViaApp"
       [updateendpoint]="imageAddupdateRouteUrl"
       [sourcedata]="tableNameImageViaApp"
       [date_search_source]="imageSearchSourcevalViaApp"
-      [date_search_endpoint]="searchEndpointval"
+      [date_search_endpoint]="imageSearchEndpointval"
       [search_settings]="image_search_settings"
       [detail_datatype]="pendingmodelapplicationarray_detail_datatype"
+      [date_search_source_count]="image_date_search_source_count"
+      [libdata]="image_libdata"
+      [limitcond]="img_limitcond"
      >
   </lib-listing>
   </mat-card-content>
