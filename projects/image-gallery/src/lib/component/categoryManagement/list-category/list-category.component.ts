@@ -43,6 +43,7 @@ export class ListCategoryComponent implements OnInit {
   public ImageDataViaApp:any;
   public countDataimageViaApp: any;
   public imageUpdateDeleteEndpoint: any;
+  public paramsuserid: any='';
 
   public data_skip: any = ["_id", "description", "title_search", "parent_category_search",
   "date_unix"];
@@ -159,7 +160,7 @@ export class ListCategoryComponent implements OnInit {
 
   // ------------------------image section---------------------- //
 public image_libdata: any ={};
-  public image_data_skip: any = ["_id", "category_name_search","date_unix", "title_search","aspectratio","croppedfiles","basepath","imagepath"];
+  public image_data_skip: any = ["_id", "category_name_search","date_unix", "title_search","aspectratio","croppedfiles","basepath","imagepath","userid"];
   public image_data_modify_header: any = {
 
     'category_name': "Category Name",
@@ -169,7 +170,7 @@ public image_libdata: any ={};
     'image': "Image"
 
   };
-  public image_previewModal_detail_skip: any = ["_id",'category_name_search','image',"date_unix", "title_search","aspectratio","croppedfiles","basepath","imagepath","status"];
+  public image_previewModal_detail_skip: any = ["_id",'category_name_search','image',"date_unix", "title_search","aspectratio","croppedfiles","basepath","imagepath","status","userid"];
 
   public image_sortdata: any = {
     'type': 'asc',                                              
@@ -255,6 +256,8 @@ public image_libdata: any ={};
     this.imageSearchEndpointval = (val) || '< no name set>';
     this.imageSearchEndpointval = val
   }
+
+
   @Input()
   set CountimageEndpoint(val: any) {
     this.countDataimageViaApp = (val) || '<no name set>';
@@ -265,8 +268,14 @@ public image_libdata: any ={};
   set imageupdatedeleteendpoint(val: any) {
     this.imageUpdateDeleteEndpoint = (val) || '<no name set>';
     this.imageUpdateDeleteEndpoint = val;
+   
   }
 
+  @Input()
+  set UserId(val: any) {
+    this.paramsuserid = (val) || '<no name set>';
+    this.paramsuserid = val;
+  }
 
   constructor(public router: Router,public apiService: ApiService) {
   //  console.log(';;;', this.searchEndpointval)
@@ -312,7 +321,10 @@ public image_libdata: any ={};
   // For Images
 
   setTimeout(() => {
+   // console.log('userid>>>>>',this.imageUpdateDeleteEndpoint);
+  //  console.log('check>>',this.paramsuserid);
     this.image_libdata={
+      basecondition:{},
       updateendpoint: this.imageUpdateDeleteEndpoint.updateendpoint,
       updateendpointmany: this.imageUpdateDeleteEndpoint.updateendpointmany,
       deleteendpointmany:  this.imageUpdateDeleteEndpoint.deleteendpointmany,
@@ -326,19 +338,24 @@ public image_libdata: any ={};
       ],
     }
 
+
     this.image_datacollection = this.ImageDataViaApp;
     let catendpoint: any = this.serverUrlData + this.countDataimageViaApp;
     // console.log(catendpoint, 'catendpoint')
     const data: any = {
       condition: {
         limit: 10,
-        skip: 0
+        skip: 0,
       },
       sort: {
         type: 'desc',                                           // defalut field sort type
         field: 'priority'                                         // default sort field
       }
     };
+    if(this.paramsuserid != null && this.paramsuserid != ''){
+      data.condition={ limit: 10,skip: 0, userid: this.paramsuserid} 
+      this.image_libdata.basecondition = {userid: this.paramsuserid}
+    }
     this.apiService.CustomRequestPost(data, catendpoint)
       .subscribe((response: any) => {
         this.image_date_search_source_count = response.count;
@@ -351,6 +368,7 @@ public image_libdata: any ={};
 
   ngOnInit() {
     console.log(';;;', this.addupdateRouteUrl)
+    console.log('userid>>>>>',this.imageUpdateDeleteEndpoint);
    
   }
   

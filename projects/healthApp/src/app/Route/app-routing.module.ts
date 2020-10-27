@@ -106,6 +106,26 @@ const appRoutes: Routes = [
     }
 
   },
+
+  {
+    path: 'video-category/list/:userid',
+    component: ListVideosComponent,
+    resolve: { videoData: ResolveService },
+    data: {
+      requestcondition: {
+        source: 'video_category_view', 
+        "condition": {
+          "limit": 10,
+          "skip": 0
+        },
+        "sort": {
+          "type": "desc",
+          "field": "title"
+        }
+      }, endpoint: 'videocategorydata'
+    }
+
+  },
   {
     path: 'video-category/add',
     component: VideoCategoryManagementComponent,
@@ -128,6 +148,12 @@ const appRoutes: Routes = [
   },
 
   {
+    path: 'video-library-management/add/:userid',
+    component: AddEditVideosComponent
+
+  },
+
+  {
     path: 'video-library-management/edit/:_id',
     component: AddEditVideosComponent,
     resolve: { videodata: ResolveService },
@@ -140,6 +166,8 @@ const appRoutes: Routes = [
     resolve: { videoData: ResolveService },
     data: { requestcondition: { source: 'video_management_view', condition: {} }, endpoint: 'videogallerydata' }
   },
+
+
 
   /**Team Library start here**/
 
@@ -216,10 +244,32 @@ const appRoutes: Routes = [
       field: 'title' 
     } }, endpoint: 'imagecategorydata' }
   },
+
+  {
+    path: 'image-gallery/category-management/list/:userid',
+    component: ListingCategoryComponent,
+    resolve: { ImageData: ResolveService },
+    data: { requestcondition: { source: 'imageGallery_category_view', condition: {
+      limit: 10,
+      skip: 0
+    },
+    sort: {
+      type: 'desc',                                       
+      field: 'title' 
+    } }, endpoint: 'imagecategorydata' }
+  },
+
+
   {
     path: 'image-gallery/add',
     component: AddeditImageComponent
   },
+
+  {
+    path: 'image-gallery/add/:userid',
+    component: AddeditImageComponent
+  },
+
   {
     path: 'image-gallery/edit/:_id',
     component: AddeditImageComponent,

@@ -45,6 +45,7 @@ export class ListingCategoryComponent implements OnInit {
   public imageSearchSourceval:any='imageGallery_management_view';
   public CountimageEndpoint:any='api1/imagedata-count';
   public imageSearchEndpoint:any='api1/imagedata';
+  public UserId:any='';
   public imageupdatedeleteendpoint:any={
     updateendpoint: 'api1/imagestatusupdate',
     updateendpointmany: 'api1/updateimage',
@@ -60,12 +61,17 @@ export class ListingCategoryComponent implements OnInit {
       console.log("kk",this.imageGalleryList)
     })
 
+    if(this.activatedRoute.snapshot.params.userid != null){
+  this.UserId = this.activatedRoute.snapshot.params.userid;
+  console.log('ddd',this.UserId)
+}
     let data:any;
     data = {
       "source": "imageGallery_management_view",
       "condition": {
         "limit": 10,
-        "skip": 0
+        "skip": 0,
+        "userid": this.UserId,
       },
       "sort": {
         "type": "desc",

@@ -14,6 +14,7 @@ export class AddEditVideosComponent implements OnInit {
   public sourceName:any ="video_management";
   public categorySourceName = "video_category";
   public SingleVideoData: any = [];
+  public userid:any='';
   constructor(public activeRoute: ActivatedRoute) { }
 
   ngOnInit() {
@@ -23,6 +24,10 @@ export class AddEditVideosComponent implements OnInit {
         result = data.videodata.res[0];
         this.SingleVideoData = result;
       })
+    }
+    if(this.activeRoute.snapshot.params.userid != null){
+      this.userid = this.activeRoute.snapshot.params.userid;
+      console.log(this.userid,'userid');
     }
   }
 

@@ -38,7 +38,7 @@ export class VideoComponent implements OnInit {
   public countDataVideoViaApp:any;
   public VideoDataViaApp:any;
   public videoUpdateDeleteEndpoint:any;
-
+  public paramsuserid: any='';
   ;  /**lib-listing start here **/
   public allDataList: any = [];
   public allDataList_skip: any = ["_id", "parent_id", "title_search", "parentvideocategory_search", "date_unix", '_v', 'v'];
@@ -248,17 +248,22 @@ export class VideoComponent implements OnInit {
     this.videoUpdateDeleteEndpoint = val;
   }
 
+  @Input()
+  set UserId(val: any) {
+    this.paramsuserid = (val) || '<no name set>';
+    this.paramsuserid = val;
+    console.log('Userid',this.paramsuserid)
+  }
 
 
-
-  public VideoDataListing_skip: any = ["_id", "created_at", "updated_at", "id", "description_html", "parent_category_search", "title_search,video_type", "date_unix", "title_search"];
+  public VideoDataListing_skip: any = ["_id", "created_at", "updated_at", "id", "description_html", "parent_category_search", "title_search,video_type", "date_unix", "title_search",'userid'];
 
   public VideoDataListing_modify_header: any = {
     "title": "Title",'description':'Description', "priority": "Priority",
     "status": "Status", "videoid": "Video ID", "parent_category": "Parent Category", "vimeo url": "Vimeo Url", "date added": "Date",'type':'Type','video':'Video','createdatetime':'Date'
   };
 
-  public video_previewModal_detail_skip: any = ['_id', 'created_at', 'id', 'updated_at', 'title_search', 'parent_category_search', "date_unix"];
+  public video_previewModal_detail_skip: any = ['_id', 'created_at', 'id', 'updated_at', 'title_search', 'parent_category_search', "date_unix",'userid'];
   public video_status: any = [{ val: 1, 'name': 'Active' }, { val: 0, 'name': 'Inactive' }];
   public video_search_settings: any =
     {
@@ -329,6 +334,7 @@ export class VideoComponent implements OnInit {
     //for video
     setTimeout(() => {
       this.video_libdata={
+        basecondition:{},
         hideviewbutton: true,
         updateendpoint: this.videoUpdateDeleteEndpoint.updateendpoint,
         updateendpointmany: this.videoUpdateDeleteEndpoint.updateendpointmany,
@@ -349,6 +355,10 @@ export class VideoComponent implements OnInit {
           field: 'priority'                                         // default sort field
         }
       };
+      if(this.paramsuserid != null && this.paramsuserid != ''){
+        data.condition={ limit: 10,skip: 0, userid: this.paramsuserid} 
+        this.video_libdata.basecondition = {userid: this.paramsuserid}
+      }
       this.apiService.CustomRequestPost(data, catendpoint)
         .subscribe((response: any) => {
           this.video_date_search_source_count = response.count;
