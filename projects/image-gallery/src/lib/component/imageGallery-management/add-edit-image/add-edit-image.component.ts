@@ -37,6 +37,7 @@ export class AddEditImageComponent implements OnInit {
   public imageType:any;
   public img_flag:any=false;
   public message:any='Submitted Successfully';
+  public paramsuserid: any='';
 
   @ViewChild(FormGroupDirective, { static: false }) formDirective: FormGroupDirective;
 
@@ -81,6 +82,15 @@ export class AddEditImageComponent implements OnInit {
     this.imageListUrl = val;
 
   }
+
+  // UserId
+  @Input()          
+  set UserId(val: any) {
+    this.paramsuserid = (val) || '<no name set>';
+    this.paramsuserid = val;
+    console.log(this.paramsuserid,'idddd')
+  }
+
   @Input()
   set singleData(val: any) {
     this.dataForEdit = (val) || '<no name set>';
@@ -135,6 +145,7 @@ export class AddEditImageComponent implements OnInit {
   }
 
   ngOnInit() {
+
     /**Observable start here**/
     this.apiService.clearServerUrl();
     setTimeout(() => {
@@ -252,12 +263,23 @@ export class AddEditImageComponent implements OnInit {
           "sourceobj": ["category_name"]
         }
       } else {
-
         data = {                                         //add part
           "source": this.sourceName,
-          "data": this.imageGalleryManagementForm.value,
+          "data":{
+            "category_name": this.imageGalleryManagementForm.value.category_name,
+            "img_gallery": this.imageGalleryManagementForm.value.img_gallery,
+            "title": this.imageGalleryManagementForm.value.title,
+            "decription":this.imageGalleryManagementForm.value.decription,
+            "status":this.imageGalleryManagementForm.value.status,
+           
+          },
           "sourceobj": ["category_name"]
         }
+        if(this.paramsuserid != null && this.paramsuserid != ''){
+        data.data.userid = this.paramsuserid;
+        }
+
+      
       }
     }
     

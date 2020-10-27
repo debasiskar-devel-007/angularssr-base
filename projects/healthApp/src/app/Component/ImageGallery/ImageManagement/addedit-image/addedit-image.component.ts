@@ -14,6 +14,7 @@ export class AddeditImageComponent implements OnInit {
   public addEndpoint:any="api1/addorupdateimage";
   public imageListingUrl:any="image-gallery/category-management/list";
   public editedData:any=[];
+  public userid:any='';
 
   public configData: any = {
     baseUrl: "https://fileupload.influxhostserver.com/",
@@ -39,6 +40,10 @@ export class AddeditImageComponent implements OnInit {
         this.editedData=result;
        
       })
+    }
+    if(this.activeRoute.snapshot.params.userid != null){
+      this.userid = this.activeRoute.snapshot.params.userid;
+      console.log(this.userid,'userid');
     }
     
   }

@@ -47,6 +47,7 @@ export class ListVideosComponent implements OnInit {
   public DeleteEndpointForVideo: any = 'deletesingledata';
   public videodataSourcename:any='api1/videogallerydata';
   public CountvideoEndpoint:any='api1/videogallerydata-count';
+  public UserId:any='';
   public videoupdatedeleteendpoint:any={
     updateendpoint: 'api1/videostatusupdate',
     updateendpointmany: 'api1/videostatusupdate',
@@ -66,13 +67,17 @@ export class ListVideosComponent implements OnInit {
 
 
     //for video
-
+    if(this.activatedRoute.snapshot.params.userid != null){
+      this.UserId = this.activatedRoute.snapshot.params.userid;
+      console.log('ddd',this.UserId)
+    }
     let data: any;
     data = {
       "source": "video_management_view",
       "condition": {
         "limit": 10,
-        "skip": 0
+        "skip": 0,
+        "userid": this.UserId,
       },
       "sort": {
         "type": "desc",

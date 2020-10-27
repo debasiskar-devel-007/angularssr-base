@@ -34,7 +34,7 @@ export class AddEditVideoManagementComponent implements OnInit {
   public categorySourceName: any;
   public videoValue: any;
   public alert:any;
-
+  public paramsuserid: any='';
   public model = {
     editorData: ''
   };
@@ -77,6 +77,13 @@ export class AddEditVideoManagementComponent implements OnInit {
     this.categorySourceName = (val) || 'no name set';
     this.categorySourceName = val;
   }
+
+  @Input()
+  set UserId(val: any) {
+    this.paramsuserid = (val) || 'no name set';
+    this.paramsuserid = val;
+  }
+
   @Input()          //getting single video data from application
   set EditVideoData(Videodata: any) {
     this.VideoDataArray = Videodata;
@@ -255,6 +262,9 @@ export class AddEditVideoManagementComponent implements OnInit {
           },
           "sourceobj": ["parent_category"]
         };
+        if(this.paramsuserid != null && this.paramsuserid != ''){
+          data.data.userid = this.paramsuserid;
+        }
       }
       this.spinnerloader = true;
       var endpoint:any=this.serverUrlData+this.addEndpointData;
