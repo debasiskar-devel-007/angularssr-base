@@ -63,9 +63,6 @@ export class ListVideosComponent implements OnInit {
       this.videoCatList = result;
       // console.log("video dataaaa",this.videoList);
     })
-
-
-
     //for video
     if(this.activatedRoute.snapshot.params.userid != null){
       this.UserId = this.activatedRoute.snapshot.params.userid;
