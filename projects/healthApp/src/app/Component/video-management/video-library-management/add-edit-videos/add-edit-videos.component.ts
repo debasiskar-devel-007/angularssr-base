@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-add-edit-videos',
@@ -15,7 +16,11 @@ export class AddEditVideosComponent implements OnInit {
   public categorySourceName = "video_category";
   public SingleVideoData: any = [];
   public userid:any='';
-  constructor(public activeRoute: ActivatedRoute) { }
+  public parentid:any='';
+  constructor(public activeRoute: ActivatedRoute, public cookies :CookieService) {
+    this.parentid = JSON.parse(this.cookies.get('userid'));
+    console.log('Parent Id>>>', this.parentid);
+   }
 
   ngOnInit() {
     if (this.activeRoute.snapshot.params._id) {

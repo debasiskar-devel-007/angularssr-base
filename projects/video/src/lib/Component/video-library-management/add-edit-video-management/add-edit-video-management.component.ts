@@ -35,6 +35,7 @@ export class AddEditVideoManagementComponent implements OnInit {
   public videoValue: any;
   public alert:any;
   public paramsuserid: any='';
+  public parentuserid: any='';
   public model = {
     editorData: ''
   };
@@ -82,6 +83,12 @@ export class AddEditVideoManagementComponent implements OnInit {
   set UserId(val: any) {
     this.paramsuserid = (val) || 'no name set';
     this.paramsuserid = val;
+  }
+
+  @Input()
+  set ParentId(val: any) {
+    this.parentuserid = (val) || 'no name set';
+    this.parentuserid = val;
   }
 
   @Input()          //getting single video data from application
@@ -264,6 +271,9 @@ export class AddEditVideoManagementComponent implements OnInit {
         };
         if(this.paramsuserid != null && this.paramsuserid != ''){
           data.data.userid = this.paramsuserid;
+        }
+        if(this.parentuserid != null && this.parentuserid != ''){
+          data.data.video_add_by = this.parentuserid;
         }
       }
       this.spinnerloader = true;

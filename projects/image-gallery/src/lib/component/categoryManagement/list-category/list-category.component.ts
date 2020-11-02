@@ -160,7 +160,7 @@ export class ListCategoryComponent implements OnInit {
 
   // ------------------------image section---------------------- //
 public image_libdata: any ={};
-  public image_data_skip: any = ["_id", "category_name_search","date_unix", "title_search","aspectratio","croppedfiles","basepath","imagepath","userid"];
+  public image_data_skip: any = ["_id", "category_name_search","date_unix", "title_search","aspectratio","croppedfiles","basepath","imagepath","userid","user_type"];
   public image_data_modify_header: any = {
 
     'category_name': "Category Name",
@@ -170,7 +170,7 @@ public image_libdata: any ={};
     'image': "Image"
 
   };
-  public image_previewModal_detail_skip: any = ["_id",'category_name_search','image',"date_unix", "title_search","aspectratio","croppedfiles","basepath","imagepath","status","userid"];
+  public image_previewModal_detail_skip: any = ["_id",'category_name_search','image',"date_unix", "title_search","aspectratio","croppedfiles","basepath","imagepath","status","userid","user_type"];
 
   public image_sortdata: any = {
     'type': 'asc',                                              

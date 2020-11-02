@@ -38,6 +38,7 @@ export class AddEditImageComponent implements OnInit {
   public img_flag:any=false;
   public message:any='Submitted Successfully';
   public paramsuserid: any='';
+  public parentuserid: any='';
 
   @ViewChild(FormGroupDirective, { static: false }) formDirective: FormGroupDirective;
 
@@ -90,6 +91,14 @@ export class AddEditImageComponent implements OnInit {
     this.paramsuserid = val;
     console.log(this.paramsuserid,'idddd')
   }
+
+    // Cookie UserId
+    @Input()          
+    set ParentId(val: any) {
+      this.parentuserid = (val) || '<no name set>';
+      this.parentuserid = val;
+      console.log(this.parentuserid,'cookie idddd')
+    }
 
   @Input()
   set singleData(val: any) {
@@ -278,6 +287,9 @@ export class AddEditImageComponent implements OnInit {
         if(this.paramsuserid != null && this.paramsuserid != ''){
         data.data.userid = this.paramsuserid;
         }
+        if(this.parentuserid != null && this.parentuserid != ''){
+          data.data.image_add_by = this.parentuserid;
+          }
 
       
       }

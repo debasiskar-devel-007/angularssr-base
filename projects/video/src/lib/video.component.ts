@@ -256,14 +256,14 @@ export class VideoComponent implements OnInit {
   }
 
 
-  public VideoDataListing_skip: any = ["_id", "created_at", "updated_at", "id", "description_html", "parent_category_search", "title_search,video_type", "date_unix", "title_search",'userid'];
+  public VideoDataListing_skip: any = ["_id", "created_at", "updated_at", "id", "description_html", "parent_category_search", "title_search,video_type", "date_unix", "title_search",'userid',"user_type"];
 
   public VideoDataListing_modify_header: any = {
     "title": "Title",'description':'Description', "priority": "Priority",
     "status": "Status", "videoid": "Video ID", "parent_category": "Parent Category", "vimeo url": "Vimeo Url", "date added": "Date",'type':'Type','video':'Video','createdatetime':'Date'
   };
 
-  public video_previewModal_detail_skip: any = ['_id', 'created_at', 'id', 'updated_at', 'title_search', 'parent_category_search', "date_unix",'userid'];
+  public video_previewModal_detail_skip: any = ['_id', 'created_at', 'id', 'updated_at', 'title_search', 'parent_category_search', "date_unix",'userid','user_type'];
   public video_status: any = [{ val: 1, 'name': 'Active' }, { val: 0, 'name': 'Inactive' }];
   public video_search_settings: any =
     {

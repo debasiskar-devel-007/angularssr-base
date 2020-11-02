@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-addedit-image',
@@ -15,6 +16,7 @@ export class AddeditImageComponent implements OnInit {
   public imageListingUrl:any="image-gallery/category-management/list";
   public editedData:any=[];
   public userid:any='';
+  public parentid:any='';
 
   public configData: any = {
     baseUrl: "https://fileupload.influxhostserver.com/",
@@ -30,7 +32,10 @@ export class AddeditImageComponent implements OnInit {
     bucketName: "image-gallery-bucket"
   }
 
-  constructor(public activeRoute :ActivatedRoute) { }
+  constructor(public activeRoute :ActivatedRoute, public cookieService: CookieService) {
+    this.parentid =JSON.parse(this.cookieService.get('userid'));
+    console.log('cookie>>>',this.parentid);
+   }
 
   ngOnInit() {
     if(this.activeRoute.snapshot.params._id){
@@ -45,6 +50,7 @@ export class AddeditImageComponent implements OnInit {
       this.userid = this.activeRoute.snapshot.params.userid;
       console.log(this.userid,'userid');
     }
+
     
   }
 
