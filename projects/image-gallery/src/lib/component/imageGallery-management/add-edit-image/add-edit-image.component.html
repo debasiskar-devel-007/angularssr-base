@@ -76,6 +76,13 @@
           </ng-container>
           <!-- <mat-label class="label">Status :</mat-label> -->
           <mat-checkbox formControlName="status">Active</mat-checkbox>
+
+          <span *ngIf="addcheckfield != null && addcheckfield == 'true'">
+  <mat-checkbox  [(ngModel)]="community_expo"
+  [ngModelOptions]="{standalone: true}">Is This Eligible For The Community Expo Page?
+  </mat-checkbox>
+</span>
+         
           
           <span class="buttonclsnew"> 
             <button class="submitbtn" mat-raised-button color="primary" type="submit">{{buttonText}}</button>

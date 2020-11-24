@@ -17,6 +17,7 @@ export class AddeditImageComponent implements OnInit {
   public editedData:any=[];
   public userid:any='';
   public parentid:any='';
+  public addCommunityCheckField:any='true'
 
   public configData: any = {
     baseUrl: "https://fileupload.influxhostserver.com/",
@@ -33,8 +34,8 @@ export class AddeditImageComponent implements OnInit {
   }
 
   constructor(public activeRoute :ActivatedRoute, public cookieService: CookieService) {
-    this.parentid =JSON.parse(this.cookieService.get('userid'));
-    console.log('cookie>>>',this.parentid);
+   // this.parentid =JSON.parse(this.cookieService.get('userid'));
+    console.log('cookie>>>',this.cookieService.get('userid'));
    }
 
   ngOnInit() {

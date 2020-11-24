@@ -36,6 +36,8 @@ export class AddEditVideoManagementComponent implements OnInit {
   public alert:any;
   public paramsuserid: any='';
   public parentuserid: any='';
+  public addcheckfield: any='';
+  public community_expo:boolean= false;
   public model = {
     editorData: ''
   };
@@ -89,6 +91,13 @@ export class AddEditVideoManagementComponent implements OnInit {
   set ParentId(val: any) {
     this.parentuserid = (val) || 'no name set';
     this.parentuserid = val;
+  }
+
+  @Input()          
+  set addCommunityCheckField(val: any) {
+    this.addcheckfield = (val) || '<no name set>';
+    this.addcheckfield = val;
+    console.log(this.addcheckfield,'field Condition')
   }
 
   @Input()          //getting single video data from application
@@ -274,6 +283,10 @@ export class AddEditVideoManagementComponent implements OnInit {
         }
         if(this.parentuserid != null && this.parentuserid != ''){
           data.data.video_add_by = this.parentuserid;
+        }
+        if(this.addcheckfield != null && this.addcheckfield == 'true'){
+          data.data.community_expo = this.community_expo
+          
         }
       }
       this.spinnerloader = true;

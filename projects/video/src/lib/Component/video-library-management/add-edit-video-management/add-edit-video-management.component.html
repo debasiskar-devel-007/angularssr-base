@@ -83,6 +83,12 @@
 
           <mat-checkbox [formControl]="videoManagementForm.controls['status']">Active</mat-checkbox><br>
 
+          <span *ngIf="addcheckfield != null && addcheckfield == 'true'">
+            <mat-checkbox  [(ngModel)]="community_expo"
+            [ngModelOptions]="{standalone: true}">Is This Eligible For The Community Expo Page?
+            </mat-checkbox>
+          </span>
+
           
           <button class="submitbtn" mat-raised-button color="primary" type="submit">{{buttonText}}</button>
           <button class="submitbtn" mat-raised-button color="primary" type="reset" >Reset</button>

@@ -39,6 +39,8 @@ export class AddEditImageComponent implements OnInit {
   public message:any='Submitted Successfully';
   public paramsuserid: any='';
   public parentuserid: any='';
+  public addcheckfield: any='';
+  public community_expo:boolean= false;
 
   @ViewChild(FormGroupDirective, { static: false }) formDirective: FormGroupDirective;
 
@@ -99,6 +101,15 @@ export class AddEditImageComponent implements OnInit {
       this.parentuserid = val;
       console.log(this.parentuserid,'cookie idddd')
     }
+
+    // Cookie UserId
+    @Input()          
+    set addCommunityCheckField(val: any) {
+      this.addcheckfield = (val) || '<no name set>';
+      this.addcheckfield = val;
+      console.log(this.addcheckfield,'field Condition')
+    }
+
 
   @Input()
   set singleData(val: any) {
@@ -290,6 +301,13 @@ export class AddEditImageComponent implements OnInit {
         if(this.parentuserid != null && this.parentuserid != ''){
           data.data.image_add_by = this.parentuserid;
           }
+        if(this.addcheckfield != null && this.addcheckfield == 'true'){
+          // if(this.community_expo){
+          //   this.community_expo = parseInt("1")
+          // }
+          data.data.community_expo = this.community_expo
+          //console.log('cm>>>',this.imageGalleryManagementForm)
+        }
 
       
       }

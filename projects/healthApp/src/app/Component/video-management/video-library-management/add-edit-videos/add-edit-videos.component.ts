@@ -17,8 +17,9 @@ export class AddEditVideosComponent implements OnInit {
   public SingleVideoData: any = [];
   public userid:any='';
   public parentid:any='';
+  public addCommunityCheckField:any='true'
   constructor(public activeRoute: ActivatedRoute, public cookies :CookieService) {
-    this.parentid = JSON.parse(this.cookies.get('userid'));
+    //this.parentid = JSON.parse(this.cookies.get('userid'));
     console.log('Parent Id>>>', this.parentid);
    }
 
