@@ -73,24 +73,22 @@
                         {{ file.size / 1000 | number: '.1-2' }} KB
                     </ng-container>
                 </mat-card-subtitle>
-                <mat-card-subtitle class="error" *ngIf="file.valid.status == false">{{ file.valid.message }}
+                <mat-card-subtitle class="error" *ngIf="file?.valid?.status == false">{{ file.valid.message }}
                 </mat-card-subtitle>
             </mat-card-header>
 
             <mat-card-content>
-                <mat-progress-bar mode="determinate" *ngIf="file.upload.status == 'progress'"
-                    value="{{ file.upload.data.percentage }}"></mat-progress-bar>
-                <mat-progress-bar mode="indeterminate" *ngIf="file.upload.status == 'waiting'"></mat-progress-bar>
+                <mat-progress-bar mode="determinate" *ngIf="file?.upload?.status == 'progress'"
+                    value="{{ file.upload?.data?.percentage }}"></mat-progress-bar>
+                <mat-progress-bar mode="indeterminate" *ngIf="file?.upload?.status == 'waiting'"></mat-progress-bar>
 
-                <ng-container *ngIf="configData.aspectratio !=null && configData.aspectratio.length>0" >
+                <ng-container *ngIf="configData?.aspectratio !=null && configData?.aspectratio?.length>0" >
                     <h2> Croped Images :</h2>
                     <!-- <span>ddd {{configData.aspectratio}}----{{configData.aspectratio.length}}
-
                     </span>  -->
 
                     <ng-container *ngFor="let c of configData.aspectratio;let ci=index">
                         <!-- <span>00aspectratio---{{c}}</span> -->
-
 
                         <br/>
                         <span>Croped Image (Asepect Ratio) :{{num[ci]}}</span><br>
@@ -112,19 +110,16 @@
                     </ng-container>
 
                 </ng-container>
-
-                
-
-
             </mat-card-content>
 
             <mat-card-actions>
                 <!-- <button mat-raised-button matTooltip="Preview" *ngIf="file.valid.status == true" aria-label="Preview" (click)="previewFiles(i);">Preview</button> -->
 
                 <button mat-raised-button color="primary" type="button"
-                    *ngIf="file.valid.status == true && file.upload.status != 'complete'" matTooltip="Upload"
+                    *ngIf="file?.valid?.status == true && file?.upload?.status != 'complete'" matTooltip="Upload"
                     aria-label="Upload" (click)="uploading(i);">Upload</button>
-                <button mat-raised-button type="button" disabled *ngIf="file.upload.status == 'complete'">Upload Complete</button>
+                    
+                <button mat-raised-button type="button" disabled *ngIf="file?.upload?.status == 'complete'">Upload Complete</button>
 
                 <button mat-raised-button type="button" color="warn" matTooltip="Remove" aria-label="Remove"
                     (click)="removeFiles(i);">Remove</button>
@@ -133,8 +128,6 @@
                     <!-- <button mat-raised-button type="button" color="warn"
                     (click)="getdata();">get data</button> -->
             </mat-card-actions>
-
-
         </span>
     </mat-card>
 <!-- </div> -->

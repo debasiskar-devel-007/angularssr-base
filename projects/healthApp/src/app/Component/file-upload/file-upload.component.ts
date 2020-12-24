@@ -10,10 +10,10 @@ import { CookieService } from 'ngx-cookie-service';
 export class FileUploadComponent implements OnInit {
 
   public configData: any = {
-    baseUrl: "https://tge24bc2ne.execute-api.us-east-1.amazonaws.com/dev/requestUploadURL",
+    baseUrl: "https://fileupload.influxhostserver.com/",
     endpoint: "uploads",
     size: "51200", // kb
-    format: ["jpg", "jpeg", "png", "bmp", "zip", 'html'], // use all small font
+    format: ["jpg", "jpeg", "png", "bmp", "zip", 'html', 'mp3','mp4','txt', 'mpeg', 'doc', 'ppt', 'pptx', 'pdf', 'docx','xlsx','ods','csv'], // use all small font
     type: "profile-picture",
     path: "files",
     prefix: "profile_picture_",

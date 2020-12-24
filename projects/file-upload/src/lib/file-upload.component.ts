@@ -28,8 +28,8 @@ export class FileUploadComponent implements OnInit {
   public totalFile: number = 0;
   public dialogRef: any;
   public loading: boolean = false;
-  public num: any=[];
-  public filename:any;
+  public num: any = [];
+  public filename: any;
   // image cropped section for test 
   filearray: any = [];
   imageChangedEvent: any = [];
@@ -46,7 +46,7 @@ export class FileUploadComponent implements OnInit {
     for (let c in this.configData.aspectratio) {
       // console.log(this.configData.aspectratio[c])
       let val = this.configData.aspectratio[c];
-      this.num[c] = val.toFixed(2); 
+      this.num[c] = val.toFixed(2);
       // console.log(this.num)
 
 
@@ -67,14 +67,14 @@ export class FileUploadComponent implements OnInit {
   /* Select File Proccess */
   selectFiles(event: any, ev1: any) {
     //this.fileChangeEvent(ev1);,
-    console.log('>>>>event',event);
-    console.log('>>>>ev1',ev1)
+    console.log('>>>>event', event);
+    console.log('>>>>ev1', ev1)
 
     // for(let i in ev1){
-    this.filename=ev1;
+    this.filename = ev1;
     // }
     // setTimeout(() => {
-    console.log(this.filename,'??')
+    console.log(this.filename, '??')
     // }, 500);
 
     // this.imageChangedEvent=event;
@@ -85,14 +85,14 @@ export class FileUploadComponent implements OnInit {
       const element = event[index];
       // console.log('>>>>count element',element)
 
-      for(let cc in this.configData.aspectratio){
+      for (let cc in this.configData.aspectratio) {
 
         // console.log('ev1',cc,ev1);
-        if(this.imageChangedEvent[index]==null)
-        this.imageChangedEvent[index]=[]; 
-        this.imageChangedEvent[index][cc] = ev1; 
+        if (this.imageChangedEvent[index] == null)
+          this.imageChangedEvent[index] = [];
+        this.imageChangedEvent[index][cc] = ev1;
       }
-      
+
       // console.log(event, this.imageChangedEvent, 'img', ev1);
 
       /* Checking Validation */
@@ -107,8 +107,13 @@ export class FileUploadComponent implements OnInit {
         element.valid = { status: false, message: validate.message };
         element.upload = { status: 'selected' };
         element.viewUrl = null;
-
         let format = element.type.split("/");
+        // format[1] = element.name.split('.')[1];
+
+        let file_name = element.name;
+        let str_no = element.name.lastIndexOf('.') + 1;
+        format[1] = file_name.substring(file_name.indexOf(file_name) + str_no);
+
         element.viewText = format[1];
         this.files.push(element);
       }
@@ -130,16 +135,34 @@ export class FileUploadComponent implements OnInit {
       }
     } else {
       this.files[count].viewUrl = null;
+      // format[1] = element.name.split('.')[1];
+      
+      let file_name = element.name;
+      let str_no = element.name.lastIndexOf('.') + 1;
+      format[1] = file_name.substring(file_name.indexOf(file_name) + str_no);
+
       this.files[count].viewText = format[1];
     }
   }
 
   /* Checking Validation */
   checkingValidation(element) {
+    console.log(element, 'element++')
     let valid: any = { status: true, message: null };
 
     /* Checking File Format */
+    // let format = element.type.split("/");
     let format = element.type.split("/");
+    // format[1] = element.name.split('.')[1];
+
+    let file_name = element.name;
+    let str_no = element.name.lastIndexOf('.') + 1;
+    format[1] = file_name.substring(file_name.indexOf(file_name) + str_no);
+    console.log(file_name, 'file_name>>>')
+
+    console.log(element.name, '??++f')
+
+    console.log(format, 'format++')
     let check = this.configData.format.includes(format[1]);
     if (check == false) {
       valid.status = false;
@@ -170,10 +193,12 @@ export class FileUploadComponent implements OnInit {
     }
   }
 
-  /* Upload */
-  uploading(index:any) {
 
-    console.log(index,'/?',this.filename)
+
+  /* Upload */
+  uploading(index: any) {
+
+    console.log(index, '/?', this.filename)
     var postData: any = {
       file: this.files[index],
       type: this.configData.type,
@@ -182,81 +207,81 @@ export class FileUploadComponent implements OnInit {
       uploadType: this.configData.uploadType,
       conversion_needed: this.configData.conversionNeeded,
       bucketname: this.configData.bucketName,
-      basepath:this.configData.baseUrl + this.configData.bucketName
+      basepath: this.configData.baseUrl + this.configData.bucketName
     }
 
     //-----------------------old media server upload-------------------//
-    // var url: string = this.configData.baseUrl + this.configData.endpoint + '?path=' + this.configData.path + '&prefix=' + this.configData.prefix + '&type=' + this.configData.type + '&rand=' + index;
-    // this.fileUploadService.upload(url, postData).subscribe(
-    //   (response) => {
-    //     let result: any = response;
-    //     switch (result.status) {
-    //       case 'complete':
-    //         this.files[index].upload = result;
-    //         this.configData.files = this.files;
-    //         this.openSnackBar('Successfully Uploaded !!', 'Undo');
-    //         break;
-    //       case 'error':
-    //         this.files[index].upload = result.data;
-    //         this.openSnackBar(result.data, '');
-    //         break;
-    //       default:
-    //         this.files[index].upload = result;
-    //         break;
-    //     }
-    //   }, (err) => {
-    //     this.files[index] = { status: 'error' };
-    //     this.openSnackBar('An error occurred !!', 'Retry');
-    //   });
+    var url: string = this.configData.baseUrl + this.configData.endpoint + '?path=' + this.configData.path + '&prefix=' + this.configData.prefix + '&type=' + this.configData.type + '&rand=' + index;
+    this.fileUploadService.upload(url, postData).subscribe(
+      (response) => {
+        let result: any = response;
+        switch (result.status) {
+          case 'complete':
+            this.files[index].upload = result;
+            this.configData.files = this.files;
+            this.openSnackBar('Successfully Uploaded !!', 'Undo');
+            break;
+          case 'error':
+            this.files[index].upload = result.data;
+            this.openSnackBar(result.data, '');
+            break;
+          default:
+            this.files[index].upload = result;
+            break;
+        }
+      }, (err) => {
+        this.files[index] = { status: 'error' };
+        this.openSnackBar('An error occurred !!', 'Retry');
+      });
     //-----------------------old-------------------//
 
 
     //----------------New direct bucket upload------------//
-    const val = this.filename[0];
+    //   const val = this.filename[0];
 
-    console.log(val.name)
+    //   console.log(val.name)
 
-    this.filearray.push(val);
+    //   this.filearray.push(val);
 
-    const reader = new FileReader();
-    const file: any = val.name;
-    let temploader = this.filename;
+    //   const reader = new FileReader();
+    //   const file: any = val.name;
+    //   let temploader = this.filename;
 
-    console.log(reader);
-    console.log(file,'//',this.filename);
+    //   console.log(reader);
+    //   console.log(file,'//',this.filename);
 
-    reader.onloadend = (e) => {
-      fetch(this.configData.baseUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          postData
-        })
-      })
-      .then(function(response) {
-        console.log('buck', response);
-        return response.json();
-      })
-      .then(function(json) {
-        return fetch(json.uploadURL, {
-          method: 'PUT',
-          body: new Blob([reader.result], { type: this.configData.type })
-        });
-      })
-      .then(function() {
-        // return 'success';
-        // file.uploaded = 1;
-        file.fileservername = this.configData.prefix + this.filename;
-        // console.log(file.type, 'file.type');
-        // temploader = null;
-        // var uploadedFileNode = document.createElement('div');
-        // uploadedFileNode.innerHTML = '<a href="//s3.amazonaws.com/slsupload/'+ file.name +'">'+ file.name +'</a>';
-        // list.appendChild(uploadedFileNode);
-      });
-    };
-    reader.readAsArrayBuffer(file);
+    //   reader.onloadend = (e) => {
+    //     fetch(this.configData.baseUrl, {
+    //       method: 'POST',
+    //       headers: {
+    //         'Content-Type': 'application/json'
+    //       },
+    //       body: JSON.stringify({
+    //         postData
+    //       })
+    //     })
+    //     .then(function(response) {
+    //       console.log('buck', response);
+    //       return response.json();
+    //     })
+    //     .then(function(json) {
+    //       return fetch(json.uploadURL, {
+    //         method: 'PUT',
+    //         body: new Blob([reader.result], { type: this.configData.type })
+    //       });
+    //     })
+    //     .then(function() {
+    //       // return 'success';
+    //       // file.uploaded = 1;
+    //       file.fileservername = this.configData.prefix + this.filename;
+    //       // console.log(file.type, 'file.type');
+    //       // temploader = null;
+    //       // var uploadedFileNode = document.createElement('div');
+    //       // uploadedFileNode.innerHTML = '<a href="//s3.amazonaws.com/slsupload/'+ file.name +'">'+ file.name +'</a>';
+    //       // list.appendChild(uploadedFileNode);
+    //     });
+    //   };
+    //   // reader.readAsArrayBuffer(file);
 
   }
 
@@ -336,8 +361,8 @@ export class FileUploadComponent implements OnInit {
   imageCropped(event: ImageCroppedEvent, i: any) {
     // console.log('>>>>>>>>>',event,i)
     this.croppedImage[i] = event.base64;
-    console.log('imageCropped', this.croppedImage);  
-    this.configData.croppedfiles=this.croppedImage;
+    console.log('imageCropped', this.croppedImage);
+    this.configData.croppedfiles = this.croppedImage;
     // console.log('imageCr..> ',   this.configData.croppedfiles);
 
   }
