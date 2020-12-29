@@ -119,6 +119,10 @@ export class AddEditVideoManagementComponent implements OnInit {
       // this.videoManagementForm.controls['status'].patchValue(Videodata[0].status);
       // this.videoManagementForm.controls['type'].patchValue(Videodata[0].type);
       this.videoValue = Videodata.type;
+      if(this.addcheckfield != null && this.addcheckfield == 'true'){
+      this.community_expo = Videodata.community_expo;
+        
+      }
      
     }
   }
@@ -261,6 +265,10 @@ export class AddEditVideoManagementComponent implements OnInit {
             'parent_category':this.videoManagementForm.value.parent_category
           },
           "sourceobj": ["parent_category"]
+        }
+        if(this.addcheckfield != null && this.addcheckfield == 'true'){
+          data.data.community_expo = this.community_expo
+          
         }
       } else {
         data = {                                         //add part

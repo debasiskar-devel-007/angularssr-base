@@ -150,6 +150,11 @@ export class AddEditImageComponent implements OnInit {
       this.imageName=val[0].img_gallery.name;
       this.imageType=val[0].img_gallery.type;
 
+      if(this.addcheckfield != null && this.addcheckfield == 'true'){
+      this.community_expo = val[0].community_expo;
+        
+      }
+
     }
 
   }
@@ -282,6 +287,14 @@ export class AddEditImageComponent implements OnInit {
           },
           "sourceobj": ["category_name"]
         }
+        if(this.addcheckfield != null && this.addcheckfield == 'true'){
+          // if(this.community_expo){
+          //   this.community_expo = parseInt("1")
+          // }
+        console.log('community_expo_test ----->>>' , this.community_expo)
+          data.data.community_expo = this.community_expo
+          //console.log('cm>>>',this.imageGalleryManagementForm)
+        }
       } else {
         data = {                                         //add part
           "source": this.sourceName,
@@ -305,6 +318,7 @@ export class AddEditImageComponent implements OnInit {
           // if(this.community_expo){
           //   this.community_expo = parseInt("1")
           // }
+        console.log('community_expo_test ----->>>' , this.community_expo)
           data.data.community_expo = this.community_expo
           //console.log('cm>>>',this.imageGalleryManagementForm)
         }
