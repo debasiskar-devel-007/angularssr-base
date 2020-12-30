@@ -127,13 +127,13 @@ const appRoutes: Routes = [
 
   },
   {
-    path: 'video-category/add',
+    path: 'video-category/add/:userid',
     component: VideoCategoryManagementComponent,
 
   },
   {
 
-    path: 'video-category/edit/:_id',
+    path: 'video-category/edit/:_id/:userid',
     component: VideoCategoryManagementComponent,
     resolve: { videoData: ResolveService },
     data: { requestcondition: { source: 'video_category', condition: {} }, endpoint: 'getvideocategorydata' }

@@ -15,6 +15,7 @@ public listUrl:any="video-category/list";
 public sourceName:any="video_category";
 public dataList:any=[];
 public editedData:any=[];
+public userid:any ='';
   constructor(public activeRoute:ActivatedRoute) { }
 
   ngOnInit() {
@@ -25,6 +26,10 @@ public editedData:any=[];
         this.editedData=result;
         console.log("okk",this.editedData);
       })
+    }
+    if(this.activeRoute.snapshot.params.userid != null){
+      this.userid = this.activeRoute.snapshot.params.userid;
+      console.log(this.userid,'userid');
     }
   }
 

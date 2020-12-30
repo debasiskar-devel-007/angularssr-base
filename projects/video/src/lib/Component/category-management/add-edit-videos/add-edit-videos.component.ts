@@ -31,6 +31,7 @@ export class AddEditVideosComponent implements OnInit {
   public allCategoryName: any = [];
   public spinnerloader: boolean; // for spinner loader
   public editorconfig: any = {};
+  public paramsuserid: any='';
   public message:any='Submitted Successfully';
 
   @ViewChild(FormGroupDirective, { static: false }) formDirective: FormGroupDirective;
@@ -61,6 +62,12 @@ export class AddEditVideosComponent implements OnInit {
     this.listUrl = Urlval;
 
   }
+  @Input()
+  set UserId(val: any) {
+    this.paramsuserid = (val) || 'no name set';
+    this.paramsuserid = val;
+  }
+
   @Input()
   set SourceName(val: any) {
     this.getSourceName = (val) || '<no name set>';
@@ -132,6 +139,10 @@ export class AddEditVideosComponent implements OnInit {
       "condition": {
         "status": 1
       },
+     
+    }
+    if(this.paramsuserid != null && this.paramsuserid != ''){
+      data.condition.userid = this.paramsuserid;
     }
     this.apiService.getData(data).subscribe(response => {
       let result: any = response;
@@ -175,6 +186,9 @@ export class AddEditVideosComponent implements OnInit {
             "parent_id": this.videolibAddEditForm.value.parent_id
           },
           "sourceobj": ["parent_id"]
+        }
+        if(this.paramsuserid != null && this.paramsuserid != ''){
+          data.data.userid = this.paramsuserid;
         }
       }
       this.spinnerloader = true;

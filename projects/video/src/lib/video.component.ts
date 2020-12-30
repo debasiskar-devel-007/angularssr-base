@@ -260,7 +260,7 @@ export class VideoComponent implements OnInit {
 
   public VideoDataListing_modify_header: any = {
     "title": "Title",'description':'Description', "priority": "Priority",
-    "status": "Status", "videoid": "Video ID", "parent_category": "Parent Category", "vimeo url": "Vimeo Url", "date added": "Date",'type':'Type','video':'Video','createdatetime':'Date'
+    "status": "Status", "videoid": "Video ID", "parent_category": "Parent Category", "vimeo url": "Vimeo Url", "date added": "Date",'type':'Type','video':'Video','createdatetime':'Date','community':"Eligible For Expo ?"
   };
 
   public video_previewModal_detail_skip: any = ['_id', 'created_at', 'id', 'updated_at', 'title_search', 'parent_category_search', "date_unix",'userid','user_type'];
@@ -339,7 +339,7 @@ export class VideoComponent implements OnInit {
         updateendpoint: this.videoUpdateDeleteEndpoint.updateendpoint,
         updateendpointmany: this.videoUpdateDeleteEndpoint.updateendpointmany,
         deleteendpointmany:  this.videoUpdateDeleteEndpoint.deleteendpointmany,
-        tableheaders:['title','description','priority','status','parent_category','createdatetime','type','videoid','video']
+        tableheaders:['video','title','description','parent_category','type','videoid','priority','community','status','createdatetime']
       }
 
       this.video_datacollection = this.VideoDataViaApp;

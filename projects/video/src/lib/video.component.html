@@ -49,6 +49,12 @@
       </mat-card-content>
       <!--lib-listing end here -->
 
+      <div class="noFoundText" *ngIf="allDataList.length == 0">
+                    <div class="noFoundTextinner">
+                        <span></span>
+                    </div>
+                </div>
+
     </mat-tab>
 
 
@@ -82,7 +88,11 @@
           [limitcond]="video_limitcond">
         </lib-listing>
       </mat-card-content>
-
+      <div class="noFoundText" *ngIf="allVideoDataList.length == 0">
+        <div class="noFoundTextinner">
+            <span></span>
+        </div>
+    </div>
 
     </mat-tab>
 
