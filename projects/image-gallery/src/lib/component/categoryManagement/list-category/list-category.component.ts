@@ -46,8 +46,8 @@ export class ListCategoryComponent implements OnInit {
   public paramsuserid: any='';
 
   public data_skip: any = ["_id", "description", "title_search", "parent_category_search",
-  "date_unix"];
-  public previewModal_detail_skip: any = ["_id", "title_search", "parent_category_search","date_unix","status","date_added"];
+  "date_unix","userid"];
+  public previewModal_detail_skip: any = ["_id", "title_search", "parent_category_search","date_unix","status","date_added","userid",];
   public data_modify_header: any = {
     "parent_category": "Parent Category", 
     "title": "Title",
@@ -167,15 +167,16 @@ public image_libdata: any ={};
     'createdatetime': "Date",
     'title': "Title",
     'status': "Status",
-    'image': "Image"
+    'image': "Image",
+    'community': "Eligible For Expo ?"
 
   };
-  public image_previewModal_detail_skip: any = ["_id",'category_name_search','image',"date_unix", "title_search","aspectratio","croppedfiles","basepath","imagepath","status","userid","user_type"];
+  public image_previewModal_detail_skip: any = ["_id",'category_name_search','image',"date_unix", "title_search","aspectratio","croppedfiles","basepath","imagepath","status","userid","user_type","community"];
 
   public image_sortdata: any = {
     'type': 'asc',                                              
     'field': 'title',                                      
-    'options': [ 'title','priority','createdatetime' ]  
+    'options': [ 'title','priority','createdatetime','community' ]  
   };
   public img_limitcond: any = {                                 
     'limit': 10,
@@ -328,7 +329,7 @@ public image_libdata: any ={};
       updateendpoint: this.imageUpdateDeleteEndpoint.updateendpoint,
       updateendpointmany: this.imageUpdateDeleteEndpoint.updateendpointmany,
       deleteendpointmany:  this.imageUpdateDeleteEndpoint.deleteendpointmany,
-      tableheaders:['image','title','status','category_name','createdatetime'],
+      tableheaders:['image','title','community','status','category_name','createdatetime'],
       detailview_override:[
         { key: "title", val: "Title" },
         { key: "category_name", val: "Category Name" },

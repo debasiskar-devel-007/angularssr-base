@@ -195,6 +195,9 @@ export class AddEditImageComponent implements OnInit {
         "status": 1
       },
     }
+    if(this.paramsuserid != null && this.paramsuserid != ''){
+      data.condition.userid = this.paramsuserid;
+      }
     this.apiService.getData(data).subscribe(response => {
       let result: any = response;
       this.DataList = result.res;

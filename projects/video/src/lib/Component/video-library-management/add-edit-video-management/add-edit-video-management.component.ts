@@ -201,6 +201,9 @@ export class AddEditVideoManagementComponent implements OnInit {
         "status": 1
       },
     }
+    if(this.paramsuserid != null && this.paramsuserid != ''){
+      data.condition.userid = this.paramsuserid;
+    }
     this.apiService.CustomRequestPost(data,endpoint).subscribe(response => {
       let result: any = response;
       this.allCategoryName = result.res;

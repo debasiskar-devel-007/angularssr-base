@@ -29,6 +29,7 @@ export class AddEditCaegoryComponent implements OnInit {
   public singleDatalist: any = [];
   public editorconfig:any={};
   public sourceName:any='';
+  public paramsuserid: any='';
   public message:any='Submitted Successfully';
   @ViewChild(FormGroupDirective, { static: false }) formDirective: FormGroupDirective;
 
@@ -80,6 +81,14 @@ export class AddEditCaegoryComponent implements OnInit {
     this.catListUrl = val;
 
   }
+
+  @Input()          
+  set UserId(val: any) {
+    this.paramsuserid = (val) || '<no name set>';
+    this.paramsuserid = val;
+    console.log(this.paramsuserid,'idddd')
+  }
+
   @Input()          //getting the listing url
   set dataListViaResolve(val: any) {
     this.VideolistingArray = (val) || '<no name set>';
@@ -137,6 +146,9 @@ export class AddEditCaegoryComponent implements OnInit {
         "status": 1
       },
     }
+    if(this.paramsuserid != null && this.paramsuserid != ''){
+      data.condition.userid = this.paramsuserid;
+      }
     this.apiService.getData(data).subscribe(response => {
       let result: any = response;
       this.allCategoryData = result.res;
@@ -171,9 +183,18 @@ export class AddEditCaegoryComponent implements OnInit {
         var data: any;
         data = {                                         //add part
           "source": this.sourceName,
-          "data": this.imageGalleryAddEditForm.value,
+          'data': {
+            "title": this.imageGalleryAddEditForm.value.title,
+            "description": this.imageGalleryAddEditForm.value.description,
+            "priority": this.imageGalleryAddEditForm.value.priority,
+            "status": this.imageGalleryAddEditForm.value.status,
+            "parent_category": this.imageGalleryAddEditForm.value.parent_category
+          },
           "sourceobj": ["parent_category"]
         }
+        if(this.paramsuserid != null && this.paramsuserid != ''){
+          data.data.userid = this.paramsuserid;
+          }
       }
     }
     this.spinnerloader = true;

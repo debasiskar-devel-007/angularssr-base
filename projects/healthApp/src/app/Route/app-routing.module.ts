@@ -154,6 +154,13 @@ const appRoutes: Routes = [
   },
 
   {
+    path: 'video-library-management/edit/:_id/:userid',
+    component: AddEditVideosComponent,
+    resolve: { videodata: ResolveService },
+    data: { requestcondition: { source: 'video_management', condition: {} }, endpoint: 'getvideodata' }
+
+  },
+  {
     path: 'video-library-management/edit/:_id',
     component: AddEditVideosComponent,
     resolve: { videodata: ResolveService },
@@ -226,7 +233,17 @@ const appRoutes: Routes = [
     component: AddeditImageCategoryComponent
   },
   {
+    path: 'image-gallery/category-management/add/:userid',
+    component: AddeditImageCategoryComponent
+  },
+  {
     path: 'image-gallery/category-management/edit/:_id',
+    component: AddeditImageCategoryComponent,
+    resolve: { ImageData: ResolveService },
+    data: { requestcondition: { source: 'imageGallery_category', condition: {} }, endpoint: 'getimagecategorydata' },
+  },
+  {
+    path: 'image-gallery/category-management/edit/:_id/:userid',
     component: AddeditImageCategoryComponent,
     resolve: { ImageData: ResolveService },
     data: { requestcondition: { source: 'imageGallery_category', condition: {} }, endpoint: 'getimagecategorydata' },

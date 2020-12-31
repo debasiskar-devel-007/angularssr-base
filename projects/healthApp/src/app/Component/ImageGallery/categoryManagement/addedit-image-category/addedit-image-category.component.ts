@@ -13,6 +13,7 @@ export class AddeditImageCategoryComponent implements OnInit {
   public catListingUrl:any="image-gallery/category-management/list";
   public sourceName:any="imagegallery_category";
   public dataList:any=[];
+  public userid:any='';
   public editedData:any=[];
   constructor(public activeRoute :ActivatedRoute) { }
 
@@ -23,6 +24,10 @@ export class AddeditImageCategoryComponent implements OnInit {
         result=data.ImageData.res;
         this.editedData=result;
       })
+    }
+    if(this.activeRoute.snapshot.params.userid != null){
+      this.userid = this.activeRoute.snapshot.params.userid;
+      console.log(this.userid,'userid');
     }
   }
 
