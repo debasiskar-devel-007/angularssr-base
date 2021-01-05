@@ -44,6 +44,7 @@ export declare class LoginComponent implements OnInit {
     redirect_url: any;
     private previousUrl;
     private currentUrl;
+    loginflag: boolean;
     constructor(fb: FormBuilder, http: HttpClient, router: Router, apiService: ApiService, cookieService: CookieService, route: ActivatedRoute);
     ngOnInit(): void;
     randomString(length: any, chars: any): string;
@@ -53,4 +54,5 @@ export declare class LoginComponent implements OnInit {
     forgetpassword(): void;
     signup(): void;
     customFunction(link: any): void;
+    ngOnDestroy(): void;
 }

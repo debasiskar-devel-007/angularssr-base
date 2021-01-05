@@ -25,14 +25,13 @@ export class ResetPasswordComponent implements OnInit {
   public logoValue: any = '';
   // public signUpRouteingUrlValue: any = '';
   public durationInSeconds = 5;             // This is SnackBar set time
-
+  public validationMessageValue: any ='';
 
   @Input()         // Set the Form name
   set fromTitleName(fromTitleNameVal: any) {
     this.fromTitleNameValue = (fromTitleNameVal) || '<no name set>';
     this.fromTitleNameValue = fromTitleNameVal;
     console.log(this.fromTitleNameValue);
-
   }
 
 
@@ -56,12 +55,18 @@ export class ResetPasswordComponent implements OnInit {
     this.logoValue = logoVal;
   }
 
+  @Input()      // set the from logo
+
+  set validationMessage(validationMessageVal: any) {
+    this.validationMessageValue = validationMessageVal;
+  } 
+
 
   // @Input()          // setting the navigate By Sign Up Url from project
-  // set signUpRouteingUrl(routeingUrlval: any) {
-  //   this.signUpRouteingUrlValue = (routeingUrlval) || '<no name set>';
-  //   this.signUpRouteingUrlValue = routeingUrlval;
-  //   console.log(this.signUpRouteingUrlValue);
+  // set validationMessage(validationMessageval: any) {
+  //   this.validationMessageValue = (validationMessageval) || '<no name set>';
+  //   this.validationMessageValue = validationMessageval;
+  //   console.log(this.validationMessageValue);
   // }
   public accesscode: string;
 
@@ -75,14 +80,14 @@ export class ResetPasswordComponent implements OnInit {
 
 
     this.resetPasswordForm = this.fb.group({
-      password: ['',[Validators.required, this.PasswordStrengthValidator]],
+      password: ['', [Validators.required, this.PasswordStrengthValidator]],
       // password: ['', Validators.required],
       confirmPassword: ['', Validators.required],
     }, {
       validator: this.machpassword('password', 'confirmPassword')
     })
 
-    console.log('++++++++',this.resetPasswordForm)
+    console.log('++++++++', this.resetPasswordForm)
   }
 
   ngOnInit() {
@@ -116,36 +121,76 @@ export class ResetPasswordComponent implements OnInit {
   }
 
 
-PasswordStrengthValidator = function (control: AbstractControl): ValidationErrors | null {
+  PasswordStrengthValidator = function (control: AbstractControl): ValidationErrors  | null {
+    let value: string = control.value || '';
+    if (!value) {
+      return null
+    }
+console.log(control)
+    // Upper Case Validation
+    // if (typeof (this.validationMessageValue) != 'undefined' && this.validationMessageValue.upperCaseCharacters != null && typeof (this.validationMessageValue.upperCaseCharacters) != 'undefined' && this.validationMessageValue.upperCaseCharacters.test(value) === false) {
+    //   return { passwordStrength: this.validationMessageValue.upperCaseCharactersMessage };
+    // }
 
-  let value: string = control.value || '';
 
-  if (!value) {
-    return null
+    // // Lower Case Validation
+    // if (typeof (this.validationMessageValue) != 'undefined' && this.validationMessageValue.lowerCaseCharacters != null && typeof (this.validationMessageValue.lowerCaseCharacters) != 'undefined' && this.validationMessageValue.lowerCaseCharacters.test(value) === false) {
+    //   return { passwordStrength: this.validationMessageValue.lowerCaseCharactersMessage };
+    // }
+
+    // // Number of Characters Validation
+    // if (typeof (this.validationMessageValue) != 'undefined' && this.validationMessageValue.numberCharacters != null && typeof (this.validationMessageValue.numberCharacters) != 'undefined' && this.validationMessageValue.numberCharacters.test(value) === false) {
+    //   console.log(value, '+++')
+    //   return { passwordStrength: this.validationMessageValue.numberCharactersMessage };
+    // }
+
+
+    // // Psecial Case Validation
+    // if (typeof (this.validationMessageValue) != 'undefined' && this.validationMessageValue.specialCharacters != null && typeof (this.validationMessageValue.specialCharacters) != 'undefined' && this.validationMessageValue.specialCharacters.test(value) === false) {
+    //   console.log(value, '+++')
+    //   return { passwordStrength: this.validationMessageValue.specialCharactersMessage };
+    // }
+
+    // // Min Number Validation
+    // if (typeof (this.validationMessageValue) != 'undefined' && this.validationMessageValue.minLengthOfCharacters != null && typeof (this.validationMessageValue.minLengthOfCharacters) != 'undefined' && value.length <= this.validationMessageValue.minLengthOfCharacters) {
+    //   console.log(value, '+++')
+    //   return { passwordStrength: this.validationMessageValue.minLengthOfCharactersMessage };
+    // }
+
+
+    // // Max Number Validation
+    // if (typeof (this.validationMessageValue) != 'undefined' && this.validationMessageValue.maxLengthOfCharacters != null && typeof (this.validationMessageValue.maxLengthOfCharacters) != 'undefined' && value.length >= this.validationMessageValue.maxLengthOfCharacters) {
+    //   console.log(value, '+++')
+    //   return { passwordStrength: this.validationMessageValue.maxLengthOfCharactersMessage };
+    // }
+
+    let upperCaseCharacters = /[A-Z]+/g
+    if (upperCaseCharacters.test(value) === false) {
+      return { passwordStrength: `Password at least one Upper case character` };
+    }
+
+    let lowerCaseCharacters = /[a-z]+/g
+    if (lowerCaseCharacters.test(value) === false) {
+      return { passwordStrength: `Password at least one lower case character` };
+    }
+
+
+    let numberCharacters = /[0-9]+/g
+    if (numberCharacters.test(value) === false) {
+      return { passwordStrength: `Password at least one number characters` };
+    }
+
+    let specialCharacters = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/
+    if (specialCharacters.test(value) === false) {
+      return { passwordStrength: `Password at least one special character` };
+    }
+
+if (value.length <=6 ) {
+      return { passwordStrength: `Password must contain 6 character` };
+    }
+    
+    return null;
   }
-
-  let upperCaseCharacters = /[A-Z]+/g
-  if (upperCaseCharacters.test(value) === false) {
-    return { passwordStrength: `Password has to contine Upper case characters` };
-  }
-
-  let lowerCaseCharacters = /[a-z]+/g
-  if (lowerCaseCharacters.test(value) === false) {
-    return { passwordStrength: `Password has to contine lower case characters` };
-  }
-
-
-  let numberCharacters = /[0-9]+/g
-  if (numberCharacters.test(value) === false) {
-    return { passwordStrength: `Password has to contine number characters` };
-  }
-
-  let specialCharacters = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/
-  if (specialCharacters.test(value) === false) {
-    return { passwordStrength: `Password has to contine special character` };
-  }
-  return null;
-}
 
 
 

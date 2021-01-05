@@ -14,11 +14,22 @@ export class ResetFromComponent implements OnInit {
   public addEndpoint: any = {
     endpoint:'addorupdatedata',
     source:'usermanagement',
-    redirect_url : '/login',
-    passwordregex: '/^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.{8,})/',
-    errormsg:'is required'
+    redirect_url : '/login'
   };
-  
+  validationMessage = {
+    'upperCaseCharacters':/[A-Z]+/g,
+    'upperCaseCharactersMessage':'Password has to continue Upper case characters',
+    'lowerCaseCharacters':/[a-z]+/g,
+    'lowerCaseCharactersMessage':'Password has to continue Lower case characters',
+    'numberCharacters':/[0-9]+/g,
+    'numberCharactersMessage':'Password has to continue number characters',
+    'specialCharacters':/[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/,
+    'specialCharactersMessage':'Password has to continue special characters',
+    'minLengthOfCharacters':6,
+    'minLengthOfCharactersMessage':'Password has to continue Min characters',
+    'maxLengthOfCharacters':12,
+    'maxLengthOfCharactersMessage':'Password has to continue Max characters',
+  };
   
   constructor() { }
 

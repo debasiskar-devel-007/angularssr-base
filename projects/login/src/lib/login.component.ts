@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
   public buttonNameValue: any = '';
   public defaultUrlValue = '';
   private loader: any = null;
-  public secret:any;
+  public secret: any;
   @Input()
   set forLoader(forLoaderVal: any) {
     this.loader = (forLoaderVal) || '<no name set>';
@@ -45,14 +45,14 @@ export class LoginComponent implements OnInit {
 
   }
   @Input()      // set the from logo
-  set logo(logoVal : any) {
+  set logo(logoVal: any) {
     this.logoValue = logoVal;
   }
-@Input()
-set buttonName (buttonNameVal :any){
-  this.buttonNameValue = (buttonNameVal) || '<no name set>';
-  this.buttonNameValue = buttonNameVal
-}
+  @Input()
+  set buttonName(buttonNameVal: any) {
+    this.buttonNameValue = (buttonNameVal) || '<no name set>';
+    this.buttonNameValue = buttonNameVal
+  }
 
   @Input()        // setting the server url from project
   set fullUrl(fullUrlVal: any) {
@@ -66,11 +66,11 @@ set buttonName (buttonNameVal :any){
     this.endpointValue = endpointVal;
   }
 
-@Input()
+  @Input()
 
-public set cookieSet(v : any) {
-  this.cookieSetValue = v;
-}
+  public set cookieSet(v: any) {
+    this.cookieSetValue = v;
+  }
 
 
 
@@ -104,45 +104,43 @@ public set cookieSet(v : any) {
   }
   public ipinfoidValue: any = '';
   @Input()
-  public set ipinfoid(id:any) {
+  public set ipinfoid(id: any) {
     this.ipinfoidValue = id;
     // console.log(this.ipinfoidValue)
   }
 
-  public login_ip_info:any;
+  public login_ip_info: any;
 
 
 
   public loginForm: FormGroup;
   public project_name: any = '';
-  public redirect_url:any = '';
+  public redirect_url: any = '';
   private previousUrl: string = undefined;
   private currentUrl: string = undefined;
-
+  public loginflag:boolean = false;
 
   constructor(public fb: FormBuilder,
-     public http: HttpClient,
-     public router: Router,
-     public apiService: ApiService,
-     public cookieService: CookieService,
-     public route: ActivatedRoute) {
-       
+    public http: HttpClient,
+    public router: Router,
+    public apiService: ApiService,
+    public cookieService: CookieService,
+    public route: ActivatedRoute) {
 
 
-      this.currentUrl = this.router.url;
-      router.events.subscribe(event => {
-        if (event instanceof NavigationEnd) {
-          this.previousUrl = this.currentUrl;
-          this.currentUrl = event.url;
-        };
-      });
-    this.route.params.subscribe(params=>{
+
+    this.currentUrl = this.router.url;
+    router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        this.previousUrl = this.currentUrl;
+        this.currentUrl = event.url;
+      };
+    });
+    this.route.params.subscribe(params => {
       this.redirect_url = params['path'];
       // console.log('this.redirect_url',this.redirect_url)
     });
-        /**secret key workes here */
-        this.secret=this.randomString(9,'aA#!');
-        this.cookieService.set('secret',this.secret);
+
     this.loginForm = this.fb.group({
       email: ['', Validators.compose([Validators.required, Validators.pattern(/^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/)])],
       password: ['', Validators.required]
@@ -151,7 +149,7 @@ public set cookieSet(v : any) {
 
   ngOnInit() {
 
-    var url:any = "https://ipinfo.io/?format=json&token="+ this.ipinfoidValue;
+    var url: any = "https://ipinfo.io/?format=json&token=" + this.ipinfoidValue;
     this.http.get(url).subscribe((res) => {
       this.login_ip_info = res;
     });
@@ -177,9 +175,22 @@ public set cookieSet(v : any) {
     for (var i = length; i > 0; --i) result += mask[Math.floor(Math.random() * mask.length)];
     return result;
   }
- 
-/********* Login Form Submit start here*********/ 
+
+  /********* Login Form Submit start here*********/
   loginFormSubmit() {
+    this.loginflag = true;
+
+
+    /**secret key workes here */
+    this.secret = this.randomString(9, 'aA#!');
+    this.cookieService.set('secret', this.secret);
+    localStorage.setItem('secret', this.secret);
+    // this.stateGroup = this.myControl.valueChanges
+    // .pipe(
+    //   startWith(''),
+    //   map(value => this._filter(value))
+    // );
+
     this.loader = 1;
     let x: any;
 
@@ -191,31 +202,33 @@ public set cookieSet(v : any) {
       let data: any = this.loginForm.value;
       data.login_data = this.login_ip_info;
       data.login_time = new Date().getTime();
-      this.apiService.addLogin(data).subscribe((response:any) => {
+      this.apiService.addLogin(data).subscribe((response: any) => {
         if (response.status == "success") {
           this.cookieService.set('jwtToken', response.token);
+          localStorage.setItem('jwtToken', response.token);
           if (this.router.url == this.defaultUrlValue) {
             for (const key1 in this.routerStatusValue.data) {
               if (response.item[0].type === this.routerStatusValue.data[key1].type) {
-                for( let  [keys, values] of Object.entries(this.routerStatusValue.data[key1].cookies)){
-                  for(let [key, value] of Object.entries(response.item[0])){
-                    if (values == key ) {
-                    this.cookieService.set(keys , JSON.stringify(value));
+                for (let [keys, values] of Object.entries(this.routerStatusValue.data[key1].cookies)) {
+                  for (let [key, value] of Object.entries(response.item[0])) {
+                    if (values == key) {
+                      this.cookieService.set(keys, JSON.stringify(value));
+                      localStorage.setItem(keys, JSON.stringify(value));
                     }
                   }
                 }
-                if (this.cookieService.get('redirectUrl') == null || this.cookieService.get('redirectUrl') == '' || this.cookieService.get('redirectUrl') == undefined || this.cookieService.get('redirectUrl').length <1 ) {
+                if (this.cookieService.get('redirectUrl') == null || this.cookieService.get('redirectUrl') == '' || this.cookieService.get('redirectUrl') == undefined || this.cookieService.get('redirectUrl').length < 1) {
                   this.router.navigateByUrl('/' + this.routerStatusValue.data[key1].routerNav);
                 } else {
-                  this.router.navigateByUrl( this.cookieService.get('redirectUrl'));
+                  this.router.navigateByUrl(this.cookieService.get('redirectUrl'));
                 }
               }
             }
-            
+
           } else {
             this.router.navigateByUrl(this.redirect_url);
-        }
-        this.loader = 0;
+          }
+          // this.loader = 0;
 
 
           // this is use for reset the from
@@ -223,6 +236,8 @@ public set cookieSet(v : any) {
           this.message = '';
         } else {
           // display error message on html
+          this.loginflag = false;
+
           this.message = response.msg;
         }
       });
@@ -246,7 +261,13 @@ public set cookieSet(v : any) {
   }
 
   customFunction(link: any) {
-    this.router.navigateByUrl('/'+ link);
+    this.router.navigateByUrl('/' + link);
+  }
+
+
+  ngOnDestroy() {
+    console.log("AppComponent:OnDestroy");
+    this.loginflag = false;
   }
 
 }

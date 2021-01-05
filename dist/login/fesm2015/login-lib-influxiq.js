@@ -650,6 +650,7 @@ class LoginComponent {
         this.redirect_url = '';
         this.previousUrl = undefined;
         this.currentUrl = undefined;
+        this.loginflag = false;
         this.currentUrl = this.router.url;
         router.events.subscribe((/**
          * @param {?} event
@@ -669,9 +670,6 @@ class LoginComponent {
             this.redirect_url = params['path'];
             // console.log('this.redirect_url',this.redirect_url)
         }));
-        /**secret key workes here */
-        this.secret = this.randomString(9, 'aA#!');
-        this.cookieService.set('secret', this.secret);
         this.loginForm = this.fb.group({
             email: ['', Validators.compose([Validators.required, Validators.pattern(/^\s*[\w\-\+_]+(\.[\w\-\+_]+)*\@[\w\-\+_]+\.[\w\-\+_]+(\.[\w\-\+_]+)*\s*$/)])],
             password: ['', Validators.required]
@@ -831,6 +829,16 @@ class LoginComponent {
      * @return {?}
      */
     loginFormSubmit() {
+        this.loginflag = true;
+        /**secret key workes here */
+        this.secret = this.randomString(9, 'aA#!');
+        this.cookieService.set('secret', this.secret);
+        localStorage.setItem('secret', this.secret);
+        // this.stateGroup = this.myControl.valueChanges
+        // .pipe(
+        //   startWith(''),
+        //   map(value => this._filter(value))
+        // );
         this.loader = 1;
         /** @type {?} */
         let x;
@@ -849,6 +857,7 @@ class LoginComponent {
             (response) => {
                 if (response.status == "success") {
                     this.cookieService.set('jwtToken', response.token);
+                    localStorage.setItem('jwtToken', response.token);
                     if (this.router.url == this.defaultUrlValue) {
                         for (const key1 in this.routerStatusValue.data) {
                             if (response.item[0].type === this.routerStatusValue.data[key1].type) {
@@ -856,6 +865,7 @@ class LoginComponent {
                                     for (let [key, value] of Object.entries(response.item[0])) {
                                         if (values == key) {
                                             this.cookieService.set(keys, JSON.stringify(value));
+                                            localStorage.setItem(keys, JSON.stringify(value));
                                         }
                                     }
                                 }
@@ -871,13 +881,14 @@ class LoginComponent {
                     else {
                         this.router.navigateByUrl(this.redirect_url);
                     }
-                    this.loader = 0;
+                    // this.loader = 0;
                     // this is use for reset the from
                     this.formDirective.resetForm();
                     this.message = '';
                 }
                 else {
                     // display error message on html
+                    this.loginflag = false;
                     this.message = response.msg;
                 }
             }));
@@ -911,11 +922,18 @@ class LoginComponent {
     customFunction(link) {
         this.router.navigateByUrl('/' + link);
     }
+    /**
+     * @return {?}
+     */
+    ngOnDestroy() {
+        console.log("AppComponent:OnDestroy");
+        this.loginflag = false;
+    }
 }
 LoginComponent.decorators = [
     { type: Component, args: [{
                 selector: 'lib-login',
-                template: "<div class=\"main-div\">\n\n    <mat-card class=\"from\">\n        <span class=\"logowrapper\" *ngIf=\"logoValue != ''\">\n            <img [src]=\"logoValue\">\n        </span>\n\n        <h2 *ngIf=\"fromTitleValue != ''\"> {{fromTitleValue}}</h2>\n\n        <form class=\"example-container\" [formGroup]=\"loginForm\" (ngSubmit)=\"loginFormSubmit()\" novalidate>\n            <mat-error class=\"error\" *ngIf=\"message !=''\">{{message}}</mat-error>\n\n            <mat-form-field>\n                <input matInput type=\"text\" placeholder=\"Email\" formControlName=\"email\"\n                    (blur)=\"inputUntouched('email')\">\n                <mat-error\n                    *ngIf=\"!loginForm.controls['email'].valid && loginForm.controls['email'].errors.required && loginForm.controls['email'].touched\">\n                    Email can not be blank</mat-error>\n                    <mat-error *ngIf=\"!loginForm.controls['email'].valid && !loginForm.controls['email'].errors.required\">\n                        Please enter a valid email</mat-error>\n            </mat-form-field>\n            \n          \n\n            <mat-form-field>\n                <input matInput placeholder=\"Password\" type=\"password\" formControlName=\"password\"\n                    (blur)=\"inputUntouched('password')\">\n                <mat-error\n                    *ngIf=\"!loginForm.controls['password'].valid && loginForm.controls['password'].errors.required && loginForm.controls['password'].touched\">\n                    Password can not be blank</mat-error>\n            </mat-form-field>\n\n\n\n            <button mat-raised-button *ngIf=\"buttonNameValue != ''\" color=\"primary\">{{buttonNameValue}}</button>\n            <button mat-raised-button *ngIf=\"buttonNameValue == ''\" color=\"primary\">Login</button>\n\n\n\n            <span class=\"signupfooter\">\n                <a *ngIf=\"signUpRouteingUrlValue.buttonName !='' && signUpRouteingUrlValue.customLink =='' && signUpRouteingUrlValue.customURl =='' \"\n                    (click)=\"signup()\">{{signUpRouteingUrlValue.buttonName}}</a>\n\n                <a *ngIf=\"signUpRouteingUrlValue.buttonName !='' && signUpRouteingUrlValue.customLink !='' && signUpRouteingUrlValue.path =='' \"\n                    (click)=\"customFunction(signUpRouteingUrlValue.customLink)\">{{signUpRouteingUrlValue.buttonName}}</a>\n\n                <a *ngIf=\"signUpRouteingUrlValue.customURl !='' && signUpRouteingUrlValue.buttonName !='' && signUpRouteingUrlValue.customLink ==''  && signUpRouteingUrlValue.path ==''\"\n                    [attr.href]=\"signUpRouteingUrlValue.customURl\">{{signUpRouteingUrlValue.buttonName}}</a>\n\n                <a *ngIf=\"signUpRouteingUrlValue.buttonName =='' && signUpRouteingUrlValue.customLink ==''\"\n                    (click)=\"signup()\">Sign Up</a>\n\n                <a *ngIf=\"forgetRouteingUrlValue.buttonName !='' && forgetRouteingUrlValue.customLink =='' && forgetRouteingUrlValue.customURl ==''\"\n                    (click)=\"forgetpassword()\">{{forgetRouteingUrlValue.buttonName}}</a>\n\n                <a *ngIf=\"forgetRouteingUrlValue.buttonName !='' && forgetRouteingUrlValue.customLink !='' && forgetRouteingUrlValue.path =='' \"\n                    (click)=\"customFunction(forgetRouteingUrlValue.customLink)\">{{forgetRouteingUrlValue.buttonName}}</a>\n\n                <a *ngIf=\"forgetRouteingUrlValue.customURl !='' && forgetRouteingUrlValue.customLink =='' && forgetRouteingUrlValue.path ==''\"\n                    [href]=\"forgetRouteingUrlValue.customURl\">{{forgetRouteingUrlValue.buttonName}}</a>\n\n\n                <a *ngIf=\"forgetRouteingUrlValue.buttonName =='' && forgetRouteingUrlValue.customLink ==''\"\n                    (click)=\"forgetpassword()\">Forget Password</a>\n\n            </span>\n        </form>\n\n    </mat-card>\n\n</div>",
+                template: "<div class=\"main-div\">\n\n    <mat-card class=\"from\">\n        <span class=\"logowrapper\" *ngIf=\"logoValue != ''\">\n            <img [src]=\"logoValue\">\n        </span>\n\n        <h2 *ngIf=\"fromTitleValue != ''\"> {{fromTitleValue}}</h2>\n\n        <form class=\"example-container\" [formGroup]=\"loginForm\" (ngSubmit)=\"loginFormSubmit()\" novalidate>\n            <mat-error class=\"error\" *ngIf=\"message !=''\">{{message}}</mat-error>\n\n            <mat-form-field>\n                <input matInput type=\"text\" placeholder=\"Email\" formControlName=\"email\" (blur)=\"inputUntouched('email')\">\n                <mat-error *ngIf=\"!loginForm.controls['email'].valid && loginForm.controls['email'].errors.required && loginForm.controls['email'].touched\">\n                    Email can not be blank</mat-error>\n                <mat-error *ngIf=\"!loginForm.controls['email'].valid && !loginForm.controls['email'].errors.required\">\n                    Please enter a valid email</mat-error>\n            </mat-form-field>\n\n\n\n            <mat-form-field>\n                <input matInput placeholder=\"Password\" type=\"password\" formControlName=\"password\" (blur)=\"inputUntouched('password')\">\n                <mat-error *ngIf=\"!loginForm.controls['password'].valid && loginForm.controls['password'].errors.required && loginForm.controls['password'].touched\">\n                    Password can not be blank</mat-error>\n            </mat-form-field>\n\n\n            <button mat-raised-button *ngIf=\"buttonNameValue != ''\" color=\"primary\" [attr.disabled]=\"loginflag\">{{buttonNameValue}}</button>\n            <button mat-raised-button *ngIf=\"buttonNameValue == ''\" color=\"primary\" [attr.disabled]=\"loginflag\">Login</button>\n            <mat-progress-bar mode=\"indeterminate\" *ngIf=\"loginflag\"></mat-progress-bar>\n\n            <span class=\"signupfooter\">\n                <a *ngIf=\"signUpRouteingUrlValue.buttonName !='' && signUpRouteingUrlValue.customLink =='' && signUpRouteingUrlValue.customURl =='' \"\n                    (click)=\"signup()\">{{signUpRouteingUrlValue.buttonName}}</a>\n\n                <a *ngIf=\"signUpRouteingUrlValue.buttonName !='' && signUpRouteingUrlValue.customLink !='' && signUpRouteingUrlValue.path =='' \"\n                    (click)=\"customFunction(signUpRouteingUrlValue.customLink)\">{{signUpRouteingUrlValue.buttonName}}</a>\n\n                <a *ngIf=\"signUpRouteingUrlValue.customURl !='' && signUpRouteingUrlValue.buttonName !='' && signUpRouteingUrlValue.customLink ==''  && signUpRouteingUrlValue.path ==''\"\n                    [attr.href]=\"signUpRouteingUrlValue.customURl\">{{signUpRouteingUrlValue.buttonName}}</a>\n\n                <a *ngIf=\"signUpRouteingUrlValue.buttonName =='' && signUpRouteingUrlValue.customLink ==''\"\n                    (click)=\"signup()\">Sign Up</a>\n\n                <a *ngIf=\"forgetRouteingUrlValue.buttonName !='' && forgetRouteingUrlValue.customLink =='' && forgetRouteingUrlValue.customURl ==''\"\n                    (click)=\"forgetpassword()\">{{forgetRouteingUrlValue.buttonName}}</a>\n\n                <a *ngIf=\"forgetRouteingUrlValue.buttonName !='' && forgetRouteingUrlValue.customLink !='' && forgetRouteingUrlValue.path =='' \"\n                    (click)=\"customFunction(forgetRouteingUrlValue.customLink)\">{{forgetRouteingUrlValue.buttonName}}</a>\n\n                <a *ngIf=\"forgetRouteingUrlValue.customURl !='' && forgetRouteingUrlValue.customLink =='' && forgetRouteingUrlValue.path ==''\"\n                    [href]=\"forgetRouteingUrlValue.customURl\">{{forgetRouteingUrlValue.buttonName}}</a>\n\n\n                <a *ngIf=\"forgetRouteingUrlValue.buttonName =='' && forgetRouteingUrlValue.customLink ==''\"\n                    (click)=\"forgetpassword()\">Forget Password</a>\n\n            </span>\n        </form>\n\n    </mat-card>\n\n</div>",
                 styles: [".example-container{display:flex;flex-direction:column}.example-container>*{width:100%}.from{width:30%;margin:0 auto}.from h2{text-align:center;background-color:#00f;color:#fff;padding:15px}.from a{padding-right:30px}.main-div{height:100vh;display:flex;justify-content:center;align-items:center}.signupfooter{margin-top:12px;display:flex;justify-content:space-between;align-items:center}.signupfooter a{cursor:pointer}.error{text-align:center}.logowrapper{margin:0 auto;display:block;text-align:center}"]
             }] }
 ];
@@ -1563,6 +1581,8 @@ class ResetPasswordComponent {
         this.logoValue = '';
         // public signUpRouteingUrlValue: any = '';
         this.durationInSeconds = 5; // This is SnackBar set time
+        // This is SnackBar set time
+        this.validationMessageValue = '';
         this.PasswordStrengthValidator = (/**
          * @param {?} control
          * @return {?}
@@ -1573,25 +1593,57 @@ class ResetPasswordComponent {
             if (!value) {
                 return null;
             }
+            console.log(control);
+            // Upper Case Validation
+            // if (typeof (this.validationMessageValue) != 'undefined' && this.validationMessageValue.upperCaseCharacters != null && typeof (this.validationMessageValue.upperCaseCharacters) != 'undefined' && this.validationMessageValue.upperCaseCharacters.test(value) === false) {
+            //   return { passwordStrength: this.validationMessageValue.upperCaseCharactersMessage };
+            // }
+            // // Lower Case Validation
+            // if (typeof (this.validationMessageValue) != 'undefined' && this.validationMessageValue.lowerCaseCharacters != null && typeof (this.validationMessageValue.lowerCaseCharacters) != 'undefined' && this.validationMessageValue.lowerCaseCharacters.test(value) === false) {
+            //   return { passwordStrength: this.validationMessageValue.lowerCaseCharactersMessage };
+            // }
+            // // Number of Characters Validation
+            // if (typeof (this.validationMessageValue) != 'undefined' && this.validationMessageValue.numberCharacters != null && typeof (this.validationMessageValue.numberCharacters) != 'undefined' && this.validationMessageValue.numberCharacters.test(value) === false) {
+            //   console.log(value, '+++')
+            //   return { passwordStrength: this.validationMessageValue.numberCharactersMessage };
+            // }
+            // // Psecial Case Validation
+            // if (typeof (this.validationMessageValue) != 'undefined' && this.validationMessageValue.specialCharacters != null && typeof (this.validationMessageValue.specialCharacters) != 'undefined' && this.validationMessageValue.specialCharacters.test(value) === false) {
+            //   console.log(value, '+++')
+            //   return { passwordStrength: this.validationMessageValue.specialCharactersMessage };
+            // }
+            // // Min Number Validation
+            // if (typeof (this.validationMessageValue) != 'undefined' && this.validationMessageValue.minLengthOfCharacters != null && typeof (this.validationMessageValue.minLengthOfCharacters) != 'undefined' && value.length <= this.validationMessageValue.minLengthOfCharacters) {
+            //   console.log(value, '+++')
+            //   return { passwordStrength: this.validationMessageValue.minLengthOfCharactersMessage };
+            // }
+            // // Max Number Validation
+            // if (typeof (this.validationMessageValue) != 'undefined' && this.validationMessageValue.maxLengthOfCharacters != null && typeof (this.validationMessageValue.maxLengthOfCharacters) != 'undefined' && value.length >= this.validationMessageValue.maxLengthOfCharacters) {
+            //   console.log(value, '+++')
+            //   return { passwordStrength: this.validationMessageValue.maxLengthOfCharactersMessage };
+            // }
             /** @type {?} */
             let upperCaseCharacters = /[A-Z]+/g;
             if (upperCaseCharacters.test(value) === false) {
-                return { passwordStrength: `Password has to contine Upper case characters` };
+                return { passwordStrength: `Password at least one Upper case character` };
             }
             /** @type {?} */
             let lowerCaseCharacters = /[a-z]+/g;
             if (lowerCaseCharacters.test(value) === false) {
-                return { passwordStrength: `Password has to contine lower case characters` };
+                return { passwordStrength: `Password at least one lower case character` };
             }
             /** @type {?} */
             let numberCharacters = /[0-9]+/g;
             if (numberCharacters.test(value) === false) {
-                return { passwordStrength: `Password has to contine number characters` };
+                return { passwordStrength: `Password at least one number characters` };
             }
             /** @type {?} */
             let specialCharacters = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
             if (specialCharacters.test(value) === false) {
-                return { passwordStrength: `Password has to contine special character` };
+                return { passwordStrength: `Password at least one special character` };
+            }
+            if (value.length <= 6) {
+                return { passwordStrength: `Password must contain 6 character` };
             }
             return null;
         });
@@ -1612,7 +1664,6 @@ class ResetPasswordComponent {
         });
         console.log('++++++++', this.resetPasswordForm);
     }
-    // This is SnackBar set time
     /**
      * @param {?} fromTitleNameVal
      * @return {?}
@@ -1644,6 +1695,13 @@ class ResetPasswordComponent {
      */
     set logo(logoVal) {
         this.logoValue = logoVal;
+    }
+    /**
+     * @param {?} validationMessageVal
+     * @return {?}
+     */
+    set validationMessage(validationMessageVal) {
+        this.validationMessageValue = validationMessageVal;
     }
     /**
      * @return {?}
@@ -1755,7 +1813,7 @@ class ResetPasswordComponent {
 ResetPasswordComponent.decorators = [
     { type: Component, args: [{
                 selector: 'lib-reset-password',
-                template: "<div class=\"main-div\">\n\n    <mat-card class=\"from\">\n        <span class=\"logowrapper\" *ngIf=\"logoValue != ''\">\n          <img  [src]=\"logoValue\">\n      </span>\n\n        <h2 *ngIf=\"fromTitleNameValue != ''\"> {{fromTitleNameValue}}</h2>\n\n\n        <form class=\"example-container\" [formGroup]=\"resetPasswordForm\" (ngSubmit)=\"resetPasswordSubmit()\" novalidate>\n            <mat-error class=\"error\" *ngIf=\"message !=''\">{{message}}</mat-error>\n\n            <mat-form-field>\n                <input matInput placeholder=\"Enter New Password\" type=\"password\" formControlName=\"password\" (blur)=\"inputUntouched('password')\">\n                <mat-error *ngIf=\"!resetPasswordForm.controls['password'].valid && resetPasswordForm.controls['password'].errors.required && resetPasswordForm.controls['password'].touched\">\n                    Password field can not be blank</mat-error>\n\n                <mat-error *ngIf=\"resetPasswordForm.get('password').hasError('passwordStrength')\">\n                    {{resetPasswordForm.get('password').errors['passwordStrength']}}\n                </mat-error>\n\n            </mat-form-field>\n\n            <mat-form-field>\n                <input matInput placeholder=\"Confirm New Password\" type=\"password\" formControlName=\"confirmPassword\" (blur)=\"inputUntouched('confirmPassword')\">\n                <mat-error *ngIf=\"!resetPasswordForm.controls['confirmPassword'].valid && resetPasswordForm.controls['confirmPassword'].errors.required && resetPasswordForm.controls['confirmPassword'].touched\">\n                    Confirm Password field can not be blank</mat-error>\n                <!-- <mat-error *ngIf=\"f.confirmPassword.errors.mustMatch\">Confirm Password is not valid</mat-error> -->\n                <mat-error *ngIf=\"!resetPasswordForm.controls['confirmPassword'].valid && resetPasswordForm.controls['confirmPassword'].touched\">Password does not match </mat-error>\n            </mat-form-field>\n\n            <button mat-raised-button color=\"primary\">Update Password</button>\n\n        </form>\n    </mat-card>\n</div>\n\n<!-- <button (click)=\"openSnackBar('succes', 'ok')\"> ok</button> -->",
+                template: "<div class=\"main-div\">\n\n    <mat-card class=\"from\">\n        <span class=\"logowrapper\" *ngIf=\"logoValue != ''\">\n          <img  [src]=\"logoValue\">\n      </span>\n\n        <h2 *ngIf=\"fromTitleNameValue != ''\"> {{fromTitleNameValue}}</h2>\n\n\n        <form class=\"example-container\" [formGroup]=\"resetPasswordForm\" (ngSubmit)=\"resetPasswordSubmit()\" novalidate>\n            <mat-error class=\"error\" *ngIf=\"message !=''\">{{message}}</mat-error>\n\n            <mat-form-field>\n                <mat-hint align=\"end\">Your password must contain 6 characters with at least one lower caser, upper case alphabets and special character</mat-hint>\n                <input matInput placeholder=\"Enter New Password\" type=\"password\" formControlName=\"password\" (blur)=\"inputUntouched('password')\">\n                <mat-error *ngIf=\"!resetPasswordForm.controls['password'].valid && resetPasswordForm.controls['password'].errors.required && resetPasswordForm.controls['password'].touched\">\n                    Password field can not be blank</mat-error>\n\n                <mat-error *ngIf=\"resetPasswordForm.get('password').hasError('passwordStrength')\">\n                    {{resetPasswordForm.get('password').errors['passwordStrength']}}\n                </mat-error>\n\n            </mat-form-field>\n\n            <mat-form-field>\n                <input matInput placeholder=\"Confirm New Password\" type=\"password\" formControlName=\"confirmPassword\" (blur)=\"inputUntouched('confirmPassword')\">\n                <mat-error *ngIf=\"!resetPasswordForm.controls['confirmPassword'].valid && resetPasswordForm.controls['confirmPassword'].errors.required && resetPasswordForm.controls['confirmPassword'].touched\">\n                    Confirm Password field can not be blank</mat-error>\n                <!-- <mat-error *ngIf=\"f.confirmPassword.errors.mustMatch\">Confirm Password is not valid</mat-error> -->\n                <mat-error *ngIf=\"!resetPasswordForm.controls['confirmPassword'].valid && resetPasswordForm.controls['confirmPassword'].touched\">Password does not match </mat-error>\n            </mat-form-field>\n\n            <button mat-raised-button color=\"primary\">Update Password</button>\n\n        </form>\n    </mat-card>\n</div>\n\n<!-- <button (click)=\"openSnackBar('succes', 'ok')\"> ok</button> -->",
                 styles: [".example-container{display:flex;flex-direction:column}.example-container>*{width:100%}.from{width:30%;margin:0 auto}.from h2{text-align:center;background-color:#00f;color:#fff;padding:15px}.from a{padding-right:30px}.main-div{height:100vh;display:flex;justify-content:center;align-items:center}.signupfooter{margin-top:12px;display:flex;justify-content:space-between;align-items:center}.signupfooter a{cursor:pointer}.error{text-align:center}.logowrapper{margin:0 auto;display:block;text-align:center}"]
             }] }
 ];
@@ -1773,7 +1831,8 @@ ResetPasswordComponent.propDecorators = {
     fromTitleName: [{ type: Input }],
     serverUrl: [{ type: Input }],
     addEndpoint: [{ type: Input }],
-    logo: [{ type: Input }]
+    logo: [{ type: Input }],
+    validationMessage: [{ type: Input }]
 };
 class snackBarResetComponent {
 }
