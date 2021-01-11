@@ -27,8 +27,8 @@
             </mat-form-field>
 
 
-            <button mat-raised-button *ngIf="buttonNameValue != ''" color="primary" [attr.disabled]="loginflag">{{buttonNameValue}}</button>
-            <button mat-raised-button *ngIf="buttonNameValue == ''" color="primary" [attr.disabled]="loginflag">Login</button>
+            <button mat-raised-button *ngIf="buttonNameValue != ''" color="primary" [ngClass]="{'disabled': loginflag}">{{buttonNameValue}}</button>
+            <button mat-raised-button *ngIf="buttonNameValue == ''" color="primary" [attr.disabled]="loginflag ? 'disabled' : ''">Login</button>
             <mat-progress-bar mode="indeterminate" *ngIf="loginflag"></mat-progress-bar>
 
             <span class="signupfooter">

@@ -1,57 +1,64 @@
 .example-container {
     display: flex;
     flex-direction: column;
-  }
-  
-  .example-container > * {
+}
+
+.example-container>* {
     width: 100%;
-  }
+}
 
-  .from {
-    width: 30%; margin: 0 auto;
-  }
+.from {
+    width: 30%;
+    margin: 0 auto;
+}
 
-  .from h2 {
+.from h2 {
     text-align: center;
     background-color: blue;
     color: white;
     padding: 15px;
-  }
+}
 
-  .from a {
+.from a {
     padding-right: 30px;
-  }
+}
 
 
-  /* .from button {
+/* .from button {
     width: 60px;
     height: 40px;
     text-align: center;
     margin: 0 auto;
   } */
 
-  .main-div{
+.main-div {
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-  }
+}
 
-  .signupfooter {
+.signupfooter {
     margin-top: 12px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-  }
+}
+
 .signupfooter a {
-  cursor: pointer;
+    cursor: pointer;
 }
 
 .error {
-  text-align: center;
+    text-align: center;
 }
+
 .logowrapper {
-  margin: 0px auto;
-  display: block;
-  text-align: center;
+    margin: 0px auto;
+    display: block;
+    text-align: center;
+}
+
+.disabled {
+    background: #dddddd;
 }
