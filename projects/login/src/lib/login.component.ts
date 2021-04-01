@@ -178,7 +178,6 @@ export class LoginComponent implements OnInit {
 
   /********* Login Form Submit start here*********/
   loginFormSubmit() {
-    this.loginflag = true;
 
 
     /**secret key workes here */
@@ -199,6 +198,7 @@ export class LoginComponent implements OnInit {
     }
 
     if (this.loginForm.valid) {
+      this.loginflag = true;
       let data: any = this.loginForm.value;
       data.login_data = this.login_ip_info;
       data.login_time = new Date().getTime();

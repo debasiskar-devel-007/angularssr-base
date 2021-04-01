@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { CookieService } from 'ngx-cookie-service';
 import { AppComponent } from '../app.component';
 
 @Component({
@@ -30,11 +31,14 @@ export class LoginComponent implements OnInit {
   };
   public defaultLoginUrl = '/login';
   public routerStatus: any;
-  constructor(public route: ActivatedRoute, public router: Router, public appLoder: AppComponent) {
+  constructor(public route: ActivatedRoute, public router: Router, public appLoder: AppComponent, 
+    public cookieService: CookieService) {
 
-    console.log("++++++++++++++++++++++++++++=________", router.url)
+    console.log("++++++++++++++++++++++++++++=________", router.url);
+    this.cookieService.set('redirectUrl', router.url);
+    
     this.route.params.subscribe(params => {
-      console.log('++++++', params['id']);
+      console.log('++++++', params['id'],'+++++++');
     });
 
 

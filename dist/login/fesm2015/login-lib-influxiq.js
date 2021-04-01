@@ -46,7 +46,7 @@ import { CommonModule } from '@angular/common';
 import { FormBuilder, Validators, FormGroupDirective, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClient, HttpHeaders, HttpClientModule } from '@angular/common/http';
 import { MAT_DIALOG_DATA, MatDialogRef, MatDialog, MatSnackBar } from '@angular/material';
-import { Injectable, NgModule, Component, Input, Inject, ViewChild, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA, defineInjectable, inject } from '@angular/core';
+import { Injectable, NgModule, Component, Input, ViewChild, Inject, CUSTOM_ELEMENTS_SCHEMA, NO_ERRORS_SCHEMA, defineInjectable, inject } from '@angular/core';
 import { Router, ActivatedRoute, NavigationEnd } from '@angular/router';
 
 /**
@@ -829,7 +829,6 @@ class LoginComponent {
      * @return {?}
      */
     loginFormSubmit() {
-        this.loginflag = true;
         /**secret key workes here */
         this.secret = this.randomString(9, 'aA#!');
         this.cookieService.set('secret', this.secret);
@@ -846,6 +845,7 @@ class LoginComponent {
             this.loginForm.controls[x].markAsTouched();
         }
         if (this.loginForm.valid) {
+            this.loginflag = true;
             /** @type {?} */
             let data = this.loginForm.value;
             data.login_data = this.login_ip_info;

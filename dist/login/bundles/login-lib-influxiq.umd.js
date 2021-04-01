@@ -993,7 +993,6 @@
          */
             function () {
                 var _this = this;
-                this.loginflag = true;
                 /**secret key workes here */
                 this.secret = this.randomString(9, 'aA#!');
                 this.cookieService.set('secret', this.secret);
@@ -1010,6 +1009,7 @@
                     this.loginForm.controls[x].markAsTouched();
                 }
                 if (this.loginForm.valid) {
+                    this.loginflag = true;
                     /** @type {?} */
                     var data = this.loginForm.value;
                     data.login_data = this.login_ip_info;
