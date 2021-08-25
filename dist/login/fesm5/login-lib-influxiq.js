@@ -1024,7 +1024,7 @@ var LoginComponent = /** @class */ (function () {
         var _this = this;
         /**secret key workes here */
         this.secret = this.randomString(9, 'aA#!');
-        this.cookieService.set('secret', this.secret);
+        this.cookieService.set('secret', this.secret, undefined, '/');
         localStorage.setItem('secret', this.secret);
         // this.stateGroup = this.myControl.valueChanges
         // .pipe(
@@ -1050,7 +1050,7 @@ var LoginComponent = /** @class */ (function () {
             function (response) {
                 var e_1, _a, e_2, _b;
                 if (response.status == "success") {
-                    _this.cookieService.set('jwtToken', response.token);
+                    _this.cookieService.set('jwtToken', response.token, undefined, '/');
                     localStorage.setItem('jwtToken', response.token);
                     if (_this.router.url == _this.defaultUrlValue) {
                         for (var key1 in _this.routerStatusValue.data) {
@@ -1062,7 +1062,7 @@ var LoginComponent = /** @class */ (function () {
                                             for (var _f = __values(Object.entries(response.item[0])), _g = _f.next(); !_g.done; _g = _f.next()) {
                                                 var _h = __read(_g.value, 2), key = _h[0], value = _h[1];
                                                 if (values == key) {
-                                                    _this.cookieService.set(keys, JSON.stringify(value));
+                                                    _this.cookieService.set(keys, JSON.stringify(value), undefined, '/');
                                                     localStorage.setItem(keys, JSON.stringify(value));
                                                 }
                                             }

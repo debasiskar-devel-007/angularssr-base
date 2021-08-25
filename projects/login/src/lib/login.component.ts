@@ -182,7 +182,7 @@ export class LoginComponent implements OnInit {
 
     /**secret key workes here */
     this.secret = this.randomString(9, 'aA#!');
-    this.cookieService.set('secret', this.secret);
+    this.cookieService.set('secret', this.secret, undefined,'/');
     localStorage.setItem('secret', this.secret);
     // this.stateGroup = this.myControl.valueChanges
     // .pipe(
@@ -204,7 +204,7 @@ export class LoginComponent implements OnInit {
       data.login_time = new Date().getTime();
       this.apiService.addLogin(data).subscribe((response: any) => {
         if (response.status == "success") {
-          this.cookieService.set('jwtToken', response.token);
+          this.cookieService.set('jwtToken', response.token, undefined,'/');
           localStorage.setItem('jwtToken', response.token);
           if (this.router.url == this.defaultUrlValue) {
             for (const key1 in this.routerStatusValue.data) {
@@ -212,7 +212,7 @@ export class LoginComponent implements OnInit {
                 for (let [keys, values] of Object.entries(this.routerStatusValue.data[key1].cookies)) {
                   for (let [key, value] of Object.entries(response.item[0])) {
                     if (values == key) {
-                      this.cookieService.set(keys, JSON.stringify(value));
+                      this.cookieService.set(keys, JSON.stringify(value), undefined,'/');
                       localStorage.setItem(keys, JSON.stringify(value));
                     }
                   }
