@@ -60,7 +60,7 @@
     "karma-jasmine-html-reporter": "^0.2.2",
     "listing-angular7": "^0.1.1",
     "mat-video": "^2.7.2",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "news-title-lib-influxiq": "0.0.1",
     "ng-packagr": "^4.2.0",
     "ngx-ckeditor": "^8.0.0",
