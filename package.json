@@ -17,7 +17,7 @@
   },
   "private": true,
   "dependencies": {
-    "@angular-devkit/build-angular": "~0.13.0",
+    "@angular-devkit/build-angular": "~15.0.0",
     "@angular-devkit/build-ng-packagr": "~0.13.0",
     "@angular-material-extensions/link-preview": "^1.1.1",
     "@angular/animations": "^7.2.15",
@@ -78,7 +78,7 @@
     "zone.js": "~0.8.26"
   },
   "devDependencies": {
-    "@angular-devkit/build-angular": "~0.13.0",
+    "@angular-devkit/build-angular": "~15.0.0",
     "@angular-devkit/build-ng-packagr": "~0.13.0",
     "@angular/cli": "^7.3.9",
     "@angular/compiler-cli": "~7.2.0",
@@ -101,7 +101,7 @@
     "tslib": "^1.9.0",
     "tslint": "~5.11.0",
     "typescript": "~3.2.2",
-    "webpack-cli": "^3.3.10"
+    "webpack-cli": "^3.3.12"
   },
   "description": "This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 7.3.1.",
   "main": "webpack.server.config.js",
